@@ -95,21 +95,21 @@ public class CommuityController {
 
 			System.out.println("community/addReport: GET");
 			
-			return "forward: .jsp";
+			return "forward:/community/addReport.jsp";
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
 		public String addReport( @ModelAttribute("report") Report report, @RequestParam("userId") int userId) throws Exception {
 
 			System.out.println("community/addContent: POST");
-			User user = userService.getUser("userId");
+			//User user = userService.getUser("userId");
 			
 			
 			communityService.addReport(report);
-			report.getBlackId();
+			//report.getBlackId();
 			//userService.addBlacklist();
 
-			return "forward:/community/addBlackList";
+			return "forward:/community/getReportList";
 		}
 		
 		@RequestMapping(value="addReply", method=RequestMethod.GET)
@@ -147,9 +147,8 @@ public class CommuityController {
 		@RequestMapping(value="updateContent" , method= RequestMethod.GET)
 		public String updateContent( @RequestParam("contentNo") int contentNo , Model model) throws Exception{
 
-			System.out.println("/community/updateContent: POST");
+			System.out.println("/community/updateContent: GET");
 			//Business Logic			
-			
 			
 			model.addAttribute("content", communityService.getContent(contentNo));
 			
@@ -157,15 +156,13 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="updateContent" , method= RequestMethod.POST)
-		public String updateContent( @ModelAttribute("content") Content content , Model model) throws Exception{
+		public String updateContent( @ModelAttribute("content") Content content) throws Exception{
 
 			System.out.println("/community/updateContent: POST");
 			//Business Logic			
+			communityService.updateContent(content);
 			
-			
-			//model.addAttribute("content", communityService.getContent(contentNo));
-			
-			return "forward:/community/updateContent.jsp";
+			return "forward:/community/getContent.jsp";
 		}
 		
 		@RequestMapping(value="updateReply", method=RequestMethod.POST)

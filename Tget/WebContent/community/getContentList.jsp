@@ -60,11 +60,15 @@
 		 });
 		
 		
-		//============= userId 에 회원정보보기  Event  처리(Click) =============	
+	
 		 $(function() {
 			
-			 $( "button.btn.btn-danger:contains('등록')" ).on("click" , function() {
+			 $( "button.btn.btn-danger:contains('등록하기')" ).on("click" , function() {
 					self.location="/community/addContent"	
+				});
+			 
+			 $( "button.btn.btn-warning:contains('신고')" ).on("click" , function() {	
+				 	self.location="/community/addReport"
 				});
 				
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -122,7 +126,7 @@
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 			    
-			    <button type="button" class="btn btn-danger">등록</button>
+			    <button type="button" class="btn btn-danger">등록하기</button>
 			    
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
@@ -158,8 +162,11 @@
             <th align="left" >글 제목</th>
             <th align="left">글 내용</th>
             <th align="left">작성자</th>
-            <th align="left">작성일</th>
+            <th align="left">비고</th>
             
+			
+			
+			
           </tr>
         </thead>
        
@@ -175,9 +182,9 @@
 			  <td align="left">${content.contentBody}</td>
 			  <td align="left">${content.userId}</td>
 			  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
-			  <td align="left">${content.regDate}</td>
-			  <!-- <span class="glyphicon glyphicon-search" id="${content.userId}"></span>
-			  </td> --> 
+			  <td align="left">${content.regDate} <button type="button" class="btn btn-warning">신고</button></td>
+			  
+			  <!-- <span class="glyphicon glyphicon-search" id="${content.userId}"></span>-->
 			  
 			</tr>
           <tr>

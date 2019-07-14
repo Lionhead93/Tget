@@ -93,10 +93,10 @@
 	 <update	id="updateContent"	parameterType="content"  >
 	   	UPDATE content
 	   	<set>
-			content_name	= #{contentName},
-			content_Body = #{contentBody},
-			file_name	= #{fileName},
-			video_name = #{videoName}
+			content_name	= #{contentName:VARCHAR},
+			content_Body = #{contentBody:VARCHAR},
+			file_name	= #{fileName:VARCHAR},
+			video_name = #{videoName:VARCHAR}
 	   	</set>
 	   	WHERE content_no = #{contentNo}
 	 </update>

@@ -39,10 +39,10 @@
 	<script type="text/javascript">
 	
 		//============= "수정"  Event 연결 =============
-		function fncUpdateProduct() {
+		function fncUpdateContent() {
 	// Form 유효성 검증
 	
-			$("form").attr("method" , "POST").attr("action" , "/product/updateContent").submit();
+			$("form").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
 }//===========================================//
 //==> 추가된부분 : "수정"  Event 연결
  $(function() {
@@ -105,7 +105,7 @@ $(function() {
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">작성일</label>
+		    <label for="regDate" class="col-sm-offset-1 col-sm-3 control-label">작성일</label>
 		    <div class="col-sm-4">
 		       <input type="text" class="form-control" id="regDate" name="regDate" value="${content.regDate }" placeholder="수정 불가합니다"  readonly>
 		       <span id="helpBlock" class="help-block">
