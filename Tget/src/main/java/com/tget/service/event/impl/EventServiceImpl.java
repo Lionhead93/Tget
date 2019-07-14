@@ -12,6 +12,7 @@ import com.tget.common.domain.Search;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
+import com.tget.service.event.domain.StubhubEvent;
 import com.tget.service.user.domain.User;
 import com.tget.service.event.EventDao;
 import com.tget.service.event.EventService;
@@ -25,7 +26,7 @@ public class EventServiceImpl implements EventService{
 	private EventDao eventDao;
 	
 
-	public void addEvent(Event event) throws Exception{
+	public void addEvent(StubhubEvent event) throws Exception{
 		eventDao.insertEvent(event);
 	}
 	
@@ -156,8 +157,8 @@ public class EventServiceImpl implements EventService{
 	}
 	
 	
-	public void addInterestedCategory(int categoryTwoNo, String userId) throws Exception{
-		eventDao.insertInterestedCategory(categoryTwoNo, userId);
+	public void addInterestedCategory(String categoryTwoEng, String userId) throws Exception{
+		eventDao.insertInterestedCategory(categoryTwoEng, userId);
 	}
 	
 	

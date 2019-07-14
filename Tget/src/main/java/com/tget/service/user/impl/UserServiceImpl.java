@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService{
 		
 		String bc = user.getBlacklistCode();
 		
-		if(bc==null) {
+		if(bc=="0") {
 			user.setBlacklistCode("1");
 			user.setBlacklistStartDate(today);
 			user.setBlacklistEndDate(b1);

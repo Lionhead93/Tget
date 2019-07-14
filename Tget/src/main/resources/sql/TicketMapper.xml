@@ -75,6 +75,9 @@
 												<when test="searchCondition == 1 and searchKeyword !='' ">
 													seller_id = #{searchKeyword}
 												</when>
+												<when test="searchCondition == 2 ">
+													ticket_code = '0'
+												</when>
 												</choose>
 												</if>												
 											</where>
@@ -96,7 +99,7 @@
 		
 		max(ticket_price) high_price, 
 		min(ticket_price) low_price,
-		round(avg(ticket_price),0) avg_price ,
+		round(sum(ticket_amount*ticket_price)/sum(ticket_amount), 0) avg_price ,
 		count(*) total_count 
 		
 		from ticket	
@@ -108,6 +111,9 @@
 			</when>
 			<when test="searchCondition == 1 and searchKeyword !='' ">
 				seller_id = #{searchKeyword}
+			</when>
+			<when test="searchCondition == 2 ">
+				ticket_code = '0'
 			</when>
 			</choose>
 			</if>												

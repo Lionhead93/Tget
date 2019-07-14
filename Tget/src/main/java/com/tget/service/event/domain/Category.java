@@ -6,7 +6,7 @@ public class Category {
 
 	///F
 	private int categoryTwoNo;
-	private char categoryOneCode;
+	private String categoryOneCode;
 	private String categoryTwoName;
 	private String categoryTwoEng;
 	private String userId;
@@ -25,11 +25,11 @@ public class Category {
 		this.categoryTwoNo = categoryTwoNo;
 	}
 
-	public char getCategoryOneCode() {
+	public String getCategoryOneCode() {
 		return categoryOneCode;
 	}
 
-	public void setCategoryOneCode(char categoryOneCode) {
+	public void setCategoryOneCode(String categoryOneCode) {
 		this.categoryOneCode = categoryOneCode;
 	}
 

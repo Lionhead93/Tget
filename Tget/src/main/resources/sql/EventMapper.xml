@@ -10,7 +10,7 @@
 	<resultMap id="eventSelectMap" type="event">
 		<result property="eventId" 			column="event_id" 			jdbcType="VARCHAR"/>
 		<result property="viewCount"	column="view_count" 		jdbcType="NUMERIC" />
-		<result property="categoryTwoNo" 	column="category_two_no" 		jdbcType="NUMERIC" />
+		<result property="categoryTwoEng" 	column="category_two_eng" 		jdbcType="VARCHAR" />
 		<result property="eventImage" 				column="event_image" 					jdbcType="VARCHAR" />
 		<result property="eventName" 				column="event_name" 					jdbcType="VARCHAR" />
 		<result property="eventLocation" 			column="event_location" 		jdbcType="VARCHAR" />
@@ -36,28 +36,28 @@
 	</resultMap>
 	
 	
-	<insert 	id="insertEvent"		parameterType="event" >
+	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
-		INTO event( event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time) 
-		VALUES	 (	#{eventId} , 1 , #{categoryTwoNo} , #{eventImage:VARCHAR} , 
-							#{eventName} , #{eventLocation:VARCHAR} , #{eventDate} , #{eventTime} )
+		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time) 
+		VALUES	 (	#{id} , 1 , #{categoryTwoEng} , NULL , 
+							#{name} , #{venueName:VARCHAR} , #{eventDate} , #{eventTime} )
 	 </insert>
 	 
 	  <select 	id="selectEventByName"	 parameterType="string" 	resultMap="eventSelectMap">
-		 SELECT event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time
+		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 FROM event
 		 WHERE event_name = #{eventName}
 	 </select>
 	 
 	 <select 	id="selectEventById"	 parameterType="string" 	resultMap="eventSelectMap">
-		 SELECT event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time
+		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 FROM event
 		 WHERE event_id = #{eventId}		 
 	 </select>
 	 
 	 <select 	id="selectEventCount"	parameterType="map"	 resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time
+	  	FROM( SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 				FROM event
 						<if test="searchKeyword == 'eventId'">WHERE event_id = #{eventId}</if>
 		 				<if test="searchKeyword == 'eventName'">WHERE event_name = #{eventName}</if>)  countTable	
@@ -84,7 +84,7 @@
 	 </update>
 	 
 	 <select 	id="selectListInterestedEvent"	parameterType="string"	resultMap="eventSelectMap">
-		 SELECT u.interested_category_no, u.user_id, u.category_two_no, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
+		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
 		 FROM user_interested u, event e
 		 WHERE u.event_id = e.event_id
 		 AND user_id = #{userId} 
@@ -92,7 +92,7 @@
 	 
 	 <select 	id="selectListInterestedEventCount"	parameterType="string"	resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_no, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
+	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
 		 				FROM user_interested u, event e
 		 				WHERE u.event_id = e.event_id
 						AND user_id = #{userId} )  countTable	
@@ -100,8 +100,8 @@
 	 
 	 <insert 	id="insertInterestedEvent"		parameterType="event" >
 	 	INSERT
-		INTO user_interested(interested_category_no, user_id, category_two_no, event_id) 
-		VALUES	 (	seq_user_Interested_no.nextval , #{userId} , #{categoryTwoNo:NUMERIC} , #{eventId:VARCHAR}  )
+		INTO user_interested(interested_category_no, user_id, category_two_eng, event_id) 
+		VALUES	 (	seq_user_Interested_no.nextval , #{userId} , #{categoryTwoEng:VARCHAR} , #{eventId:VARCHAR}  )
 	 </insert>
 	 
 	 <delete id="deleteInterestedEvent" parameterType="event">
@@ -201,14 +201,15 @@
 	 <select 	id="selectCategory"	parameterType="string"	resultMap="categorySelectMap">
 		 SELECT category_one_code, category_two_name, category_two_eng, category_two_no
 		 FROM category_two
-		 <if test="value != null" >WHERE category_two_eng = #{categoryTwoEng}</if>
+<!-- 		 WHERE category_two_eng = #{categoryTwoEng:NUMERIC} -->
+		 <if test="value != null and value != '' "  >WHERE category_two_eng = #{categoryTwoEng}</if>
 	 </select>
 	 
-	 <select 	id="selectCategoryCount"	 parameterType="string"	resultType="int">
+	 <select 	id="selectListCategoryCount"	resultType="int">
 		SELECT COUNT(*)
 	  	FROM( SELECT category_one_code,category_two_name,category_two_eng 
-		 				FROM category_two
-		 				<if test="categoryTwoEng != null" >WHERE category_two_eng = #{categoryTwoEng}</if>)  countTable	
+		 				FROM category_two  
+		 				ORDER BY category_two_no)  countTable	
 	 </select>
 	 
 	 <delete id="deleteCategoryTwo" parameterType="string">
@@ -220,7 +221,7 @@
   	<select 	id="selectInterestedByUser"	parameterType="search"	 resultType="string">
 		 SELECT  user_id 
 		 FROM  user_interested 
-		 <if test="searchCondition == 0" >WHERE category_two_no = #{searchKeyword}</if>
+		 <if test="searchCondition == 0" >WHERE category_two_eng = #{searchKeyword}</if>
 		 <if test="searchCondition == 1" >WHERE event_id = #{searchKeyword}</if>
 	 </select>
 	 
@@ -228,7 +229,7 @@
 		 SELECT COUNT(*)
 	  	FROM( SELECT user_id 
 		 				FROM user_interested 
-		 				<if test="searchCondition == 0" >WHERE category_two_no = #{searchKeyword}</if>
+		 				<if test="searchCondition == 0" >WHERE category_two_eng = #{searchKeyword}</if>
 		 				<if test="searchCondition == 1" >WHERE event_id = #{searchKeyword}</if>)  countTable	
 	 </select>
 	 

@@ -18,7 +18,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
+	<script src="/resources/javascript/common.js" ></script>
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
@@ -45,21 +45,33 @@
 	function fncAddTicketPrice(){
 		//Form 유효성 검증
 	 	var price = $("input[name='price']").val();
+	 	var result = numberWithOutCommas(price);
+	 	
+		if(result == null || result.length<4){
+			alert("가격은 1,000원 이상으로 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(isNaN(result)==true) {
+			alert("가격에 숫자입력 바랍니다. 입력 값 :"+result);
+			return;
+		}
 		
-		if(price == null || price.length<1){
-			alert("가격은 반드시 입력하여야 합니다.");
-			return;
-		}
-		if(isNaN(price)==true) {
-			alert("가격에 숫자입력 바랍니다.");
-			return;
-		}
-	
+		$("input[name='price']").val(result);
 		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketPrice").submit();
 	}		
 	
+	
 	$(function(){
 	    
+		var lowPrice = numberWithCommas(${sellProb.lowPrice});
+		$("#lowPrice").html(""+lowPrice);
+		
+		var highPrice = numberWithCommas(${sellProb.highPrice});
+		$("#highPrice").html(""+highPrice);
+		
+		var avgPrice = numberWithCommas(${sellProb.avgPrice});
+		$("#avgPrice").html(""+avgPrice);
+		
 	    $("button").on("click",function(){
 	    	
 	    	fncAddTicketPrice();
@@ -74,10 +86,20 @@
 	    
 	    $("input[name='price']").on("keyup", function(){
 	    	
-	    	var price = $(this).val();
-	    	if(price == "" || isNaN(price)==true){
+	    	var price = numberWithOutCommas($(this).val());
+	    	
+	    	if(price.length>9){
+	    		$(this).val("999,999,999");
 	    		return;
 	    	}
+	    	
+	    	if(price == "" || isNaN(price)==true || price.length<4){
+	    		$("#sellProb").html("");
+	    		return;
+	    	}else{
+	    		var num = numberWithCommas(price);
+	    		$(this).val(num);
+	    	}	    	
 	    	$.ajax(
 					{
 						url : "/ticket/rest/getTicketSellProb/"+price+"/${sellticketInfo.event.eventId}" ,
@@ -119,19 +141,25 @@
 		  <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">희망 가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="price" name="price" placeholder="판매가격입력">
+		     <input type="text" class="form-control" id="price" name="price" placeholder="판매가격입력">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		  <label for="lowPrice" class="col-sm-offset-1 col-sm-3 control-label">등록 최저가</label>
 		  <div class="col-sm-4">
-		  ${sellProb.lowPrice}
+		  	<span id="lowPrice"></span>
 		  </div>
 		  </div>
 		  <div class="form-group">
 		  <label for="highPrice" class="col-sm-offset-1 col-sm-3 control-label">등록 최고가</label>
 		  <div class="col-sm-4">
-		   ${sellProb.highPrice}
+		  	<span id="highPrice"></span>
+		  </div>
+		  </div>
+		  <div class="form-group">
+		  <label for="avgPrice" class="col-sm-offset-1 col-sm-3 control-label">평균 가</label>
+		  <div class="col-sm-4">
+		  	<span id="avgPrice"></span>
 		  </div>
 		  </div>
 		  <div class="form-group">

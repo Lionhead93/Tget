@@ -1,5 +1,7 @@
 package com.tget.service.ticket.test;
 
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class TicketServiceTestApp {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 	
-	@Test	
+	//@Test	
 	public void addTicket() throws Exception {
 		
 		Ticket ticket = new Ticket();
@@ -149,6 +151,7 @@ public class TicketServiceTestApp {
 		Alarm alarm = new Alarm();
 		
 		alarm.setAlarmCode(8);
+		alarm.setAlarmKeyword("admin");
 		alarm.setUserId("admin");
 		
 		alarmService.addAlarm(alarm);

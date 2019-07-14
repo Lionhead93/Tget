@@ -8,12 +8,13 @@ import com.tget.common.domain.Search;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
+import com.tget.service.event.domain.StubhubEvent;
 import com.tget.service.user.domain.User;
 
 
 public interface EventService {
 	
-	public void addEvent(Event event) throws Exception;
+	public void addEvent(StubhubEvent event) throws Exception;
 	public Event getEvent(String eventId) throws Exception;//return event도메인; 
 	public  List<Event> getEventByName(String eventName) throws Exception;//return event도메인 리스트; 
 	public void updateEventViewCount(int viewCount,String eventName) throws Exception;
@@ -37,7 +38,7 @@ public interface EventService {
 	public Category getCategory(String categoryTwoEng) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
 	public List<User> getInterestedByUser(Search search) throws Exception;
-	public void addInterestedCategory(int categoryTwoNo, String userId) throws Exception;
+	public void addInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;
 }

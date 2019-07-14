@@ -9,7 +9,7 @@ public class User {
 	private String userId;
 	private String userName;
 	private String password;
-	private int phone;
+	private String phone;
 	private String nickName;
 	private String address;
 	private int postalCode;
@@ -66,12 +66,12 @@ public class User {
 	}
 
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

@@ -2,7 +2,6 @@ package com.tget.service.user.impl;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public List<User> selectUserList(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return  sqlSession.selectList("UserMapper.selectUserList", search);
+		return  sqlSession.selectList("UserMapper.getUserList", search);
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public int selectTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("UserMapper.selectTotalCount", search);
+		return sqlSession.selectOne("UserMapper.getTotalCount", search);
 	}
 
 	@Override

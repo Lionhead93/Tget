@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
+import com.tget.service.event.domain.StubhubEvent;
 import com.tget.service.user.domain.User;
 import com.tget.common.domain.Search;
 
@@ -14,7 +15,7 @@ import com.tget.common.domain.Search;
 //==> 회원관리에서 CRUD 추상화/캡슐화한 DAO Interface Definition
 public interface EventDao {
 
-	public void insertEvent(Event event) throws Exception;
+	public void insertEvent(StubhubEvent event) throws Exception;
 	public Event selectEvent(String eventId) throws Exception;
 	public List<Event> selectListEvent(String eventName) throws Exception;
 	public void updateEvent(Search search,String eventName) throws Exception;
@@ -36,7 +37,7 @@ public interface EventDao {
 	public Category selectCategory(String categoryTwoEng) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
 	public List<User> selectInterestedByUser(Search search) throws Exception;
-	public void insertInterestedCategory(int categoryTwoNo, String userId) throws Exception;
+	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;
 	

@@ -33,46 +33,48 @@ public class UserServiceTest {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 
-	//@Test
+	@Test
 	public void testAddUser() throws Exception {
-		
+		Date today = new Date();
 		User user = new User();
-		user.setUserId("testUserId2");
-		user.setUserName("testUserName2");
+		user.setUserId("111");
+		user.setUserName("111");
 		user.setPassword("testPasswd");
-		user.setPhone(123);
-		user.setNickName("1");
+		user.setPhone("123");
+		user.setNickName("111");
 		user.setAddress("1");
 		user.setPostalCode(1);
 		user.setRole("1");
 		user.setLocal("1");
 		user.setPoint(1);
 		user.setUserStatement("1");
+		user.setLastConnDate(today);
+		user.setBlacklistCode("0");
 	/*	user.setKakaoId("1");
 		user.setNaverId("1");
 		user.setFacebookId("1");*/
 		
 		userService.addUser(user);
 		
-		user = userService.getUser("testUserId2");
+		user = userService.getUser("111");
 
 	
 		//System.out.println(user);
 		
 
-		Assert.assertEquals("testUserId2", user.getUserId());
-		Assert.assertEquals("testUserName2", user.getUserName());
+		Assert.assertEquals("3", user.getUserId());
+		Assert.assertEquals("3", user.getUserName());
 		Assert.assertEquals("testPasswd", user.getPassword());
-		Assert.assertEquals(123, user.getPhone());
-		Assert.assertEquals("1", user.getNickName());
+		Assert.assertEquals("123", user.getPhone());
+		Assert.assertEquals("3", user.getNickName());
 		Assert.assertEquals("1", user.getAddress());
 		Assert.assertEquals(1, user.getPostalCode());
 		Assert.assertEquals("1", user.getRole());
 		Assert.assertEquals("1", user.getLocal());
 		Assert.assertEquals(1, user.getPoint());
 		Assert.assertEquals("1", user.getUserStatement());
-
-	
+		Assert.assertEquals(today, user.getLastConnDate());
+		Assert.assertEquals("0", user.getBlacklistCode());
 	}
 	
 	//@Testasd
@@ -260,27 +262,27 @@ public class UserServiceTest {
 	 	System.out.println(totalCount);
 	 }	 */
 
-@Test
+//@Test
 	public void testAddBlacklist() throws Exception {
 		
-		User user = userService.getUser("admin");
+		User user = userService.getUser("manager");
 		
 		Assert.assertNotNull(user);
 		
-		Assert.assertEquals("admin", user.getUserId());
+		Assert.assertEquals("manager", user.getUserId());
 		
 		user.setBlacklistCode("1");
 
 
 		userService.addBlacklist(user);
 		
-		user = userService.getUser("admin");
+		user = userService.getUser("manager");
 		Assert.assertNotNull(user);
 		
 		System.out.println(user);
 			
-		Assert.assertEquals("admin", user.getUserId());
-		Assert.assertEquals("1", user.getBlacklistCode());
+		Assert.assertEquals("manager", user.getUserId());
+		Assert.assertEquals("2", user.getBlacklistCode());
 	
 		
 	}

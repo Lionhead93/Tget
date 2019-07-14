@@ -11,7 +11,7 @@
 		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
 		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
 		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
-		<result property="phone" 				column="phone" 					jdbcType="NUMERIC" />
+		<result property="phone" 				column="phone" 					jdbcType="VARCHAR" />
 		<result property="nickName" 				column="nickname" 					jdbcType="VARCHAR" />
 		<result property="address" 			column="address" 		jdbcType="VARCHAR" />
 		<result property="postalCode" 				column="postal_code" 					jdbcType="VARCHAR" />
@@ -42,7 +42,7 @@
 		blacklist_end_date, seller_code, sales_amount, sales_count, account_bank, account_no) 
 		VALUES	 (	#{userId} , #{userName} , #{password} , #{phone} , #{nickName} , #{address}, 
 					#{postalCode} , #{role} , #{local} , #{point} , #{userStatement} , SYSDATE ,
-					#{kakaoId:VARCHAR}, #{naverId:VARCHAR}, #{facebookId:VARCHAR} , #{blacklistCode:CHAR}, SYSDATE , SYSDATE ,
+					#{kakaoId:VARCHAR}, #{naverId:VARCHAR}, #{facebookId:VARCHAR} , #{blacklistCode:CHAR}, #{blacklistStartDate:DATE} , #{blacklistEndDate:DATE} ,
 					#{sellerCode:CHAR}, #{salesAmount:NUMERIC}, #{salesCount:NUMERIC}, #{accountBank:VARCHAR}, #{accountNo:VARCHAR} )
 	 </insert>
 	 
@@ -80,9 +80,9 @@
 	 <update 	id="insertBlacklist"		parameterType="user" >
 	 	UPDATE users
 	 	<set>
-	 	        blacklist_code = #{blacklistCode} ,
-	 	        blacklist_start_date = #{blacklistStartDate} ,
-	 	        blacklist_end_date = #{blacklistEndDate}    
+	 	        blacklist_code = #{blacklistCode:CHAR} ,
+	 	        blacklist_start_date = #{blacklistStartDate:DATE} ,
+	 	        blacklist_end_date = #{blacklistEndDate:DATE}    
 					
 	 	</set>
 	 	WHERE user_id = #{userId}
@@ -93,7 +93,9 @@
 	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT user_id , user_name , nickname
+	  					FROM		(	SELECT user_id , user_name , password , phone , nickname, address, postal_code, role, 
+		local, point, user_statement, last_conn_date, kakao_Id, naver_Id, facebook_Id, blacklist_code, blacklist_start_date,
+		blacklist_end_date, seller_code, sales_amount, sales_count, account_bank, account_no
 											FROM users
 											<if test="searchCondition != null">
 												<where>
@@ -119,7 +121,22 @@
 
 </select>
 	
-
+<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT user_id , user_name , nickName
+						FROM users
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			user_id = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		user_name = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
 	
 	
 	
