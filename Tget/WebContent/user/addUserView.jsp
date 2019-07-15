@@ -181,7 +181,7 @@
 
 			$("input:hidden[name='phone']").val( value );
 			
-			$("form").attr("method" , "POST").attr("action" , "Tget/user/addUser").submit();
+			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
 		
 

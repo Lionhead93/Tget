@@ -56,7 +56,7 @@ CREATE TABLE event(
 	view_count	NUMBER(10) 	DEFAULT 1,
 	category_two_eng	VARCHAR2(30) 	NOT NULL REFERENCES category_two(category_two_eng),
 	event_image	VARCHAR2(100),
-	event_name	VARCHAR2(10) 	NOT NULL,
+	event_name	VARCHAR2(50) 	NOT NULL,
 	event_location	VARCHAR2(50) 	NOT NULL,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE event(
 
 CREATE TABLE recommended_event(
 	recomm_event_no		NUMBER(5) 	NOT NULL,
-	event_name		VARCHAR2(10) 	NOT NULL,
+	event_name		VARCHAR2(50) 	NOT NULL,
 	video_name		VARCHAR2(100) 	NOT NULL,
 	recomm_event_name	VARCHAR2(20) 	NOT NULL,
 	recomm_event_detail	VARCHAR2(50),
@@ -74,8 +74,8 @@ CREATE TABLE recommended_event(
 
 CREATE TABLE youtube(
 	youtube_no	NUMBER(5) 	NOT NULL,
-	youtube_id	VARCHAR2(10) 	NOT NULL,
-	event_name	VARCHAR2(10) 	NOT NULL,
+	youtube_id	VARCHAR2(20) 	NOT NULL,
+	event_name	VARCHAR2(50) 	NOT NULL,
 	PRIMARY KEY(youtube_no)
 );
 
@@ -203,7 +203,7 @@ CREATE TABLE transaction (
 	tran_no 			NUMBER(5) 		NOT NULL,
 	ticket_no 		NUMBER(5)		NOT NULL REFERENCES ticket(ticket_no),
 	event_id			VARCHAR2(10)		NOT NULL REFERENCES event(event_id),
-	event_name 		VARCHAR2(110)		NOT NULL ,
+	event_name 		VARCHAR2(50)		NOT NULL ,
 	seller_id			VARCHAR2(30)		NOT NULL REFERENCES users(user_id),
 	seller_nickname		VARCHAR2(20)		NOT NULL ,
 	buyer_id			VARCHAR2(30)		NOT NULL REFERENCES users(user_id),
