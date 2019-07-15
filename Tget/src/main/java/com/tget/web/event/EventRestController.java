@@ -312,6 +312,25 @@ public class EventRestController {
 		return map;
 	}
 	
+	@RequestMapping(value="rest/getInterestedEventList/{eventId}")
+	public Map<String,Object> isInterestedEvent(@PathVariable String eventId,HttpSession session) throws Exception {
+		System.out.println("===============rest/getInterestedEventList/{eventId}===============");
+
+		Map<String,Object> map = this.getInterestedEventList(session);
+		List<String> eventIdList = (List<String>)map.get("interestedEventList");
+		boolean isInterestedEvent = false;
+		
+		for (String string : eventIdList) {
+			if (eventId.equals(string)) {
+				isInterestedEvent = true;
+			}
+		}
+		System.out.println("isInterestedEvent : "+isInterestedEvent);
+		map.put("isInterestedEvent", isInterestedEvent);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="rest/addEventImage")
 	public Map<String,Object> addEventImage(@RequestBody Event event) throws Exception {
 		System.out.println("===============addEventImage===============");

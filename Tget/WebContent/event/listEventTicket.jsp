@@ -39,19 +39,21 @@
 	var videoList = [];
 	$(function(){
 		
-// 		$.ajax(
-// 				{
-// 					url : "/event/rest/getInterestedEvent",
-// 					method : "POST",
-// 					dataType : "json",
-// 					success : function(JSONData, status){
-// 						alert("JSONData : \n"+JSONData.stringify());			
-// 						alert(JSONData.interestedEventList);
-// 					},
-// 					error : function(request, status, error ) {   
-// 					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 					}			
-// 			});	
+		$.ajax(
+				{
+					url : "/event/rest/getInterestedEventList/"+$("#eventId").val(),
+					method : "POST",
+					dataType : "json",
+					success : function(JSONData, status){
+ 						if (JSONData.isInterestedEvent == true) {
+							$(".interested").html('<input type="hidden"  value="heart">'
+									+'<ion-icon name="heart" size="large"></ion-icon>');
+						}								
+					},
+					error : function(request, status, error ) {   
+					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}			
+			});	
 
 		$(".addTran").on("click",function(){
 // 			alert($(this).val());
@@ -190,6 +192,10 @@
 			 background-image: -o-linear-gradient(top, #646464, #282828);
 			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 		}
+		
+		.interested{
+			color : red;
+		}
     </style>
 </head>
 
@@ -218,14 +224,14 @@
 		
 		<div class="row">
 			<div class="col-md-1"></div>
-			<div class="col-md-4">
+			<div class="col-md-4" >
 				<h1>${event.eventName }</h1><br/>
-				<div id="player"></div> <br/><br/>
+				<div id="player"></div> <br/>
+				<div><button class="button_black" id="" name=""  value="">동영상 등록</button><br/><br/></div>
 <%-- 				이벤트ID : ${event.eventId}<br/> --%>
 				${event.eventLocation }<br/>
 				${event.eventDate } &nbsp; 
-				${event.eventTime}<br/>
-				티켓최저가 : ${ticketLowestPrice }<br/><br/>
+				${event.eventTime}<br/><br/><br/>
 			</div>
 			<div class="col-md-5">
 				총 ${totalTicketCount }건
@@ -261,7 +267,6 @@
 			<div class="col-md-2"></div>
 		</div>
 		
-<%-- 	<input type="hidden" id="currentPage" name="currentPage" value="${!empty search.currentPage? search.currentPage: ''}"/> --%>
 	<input type="hidden" id="searchCondition" name="searchCondition" value="1"/>
 	<input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 	<button type="submit" id="searchSubmit" >검색</button>

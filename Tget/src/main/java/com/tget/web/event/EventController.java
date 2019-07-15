@@ -173,6 +173,7 @@ public class EventController {
 		model.addAttribute("ticketList", ticketList);
 		model.addAttribute("ticketLowestPrice", sellProb.getLowPrice());
 		model.addAttribute("totalTicketCount",sellProb.getTotalCount());
+		model.addAttribute("videoId", "-iDOez7D1tY");
 		
 		return "forward:/event/listEventTicket.jsp";		
 	}

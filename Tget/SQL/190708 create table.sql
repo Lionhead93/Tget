@@ -74,7 +74,7 @@ CREATE TABLE recommended_event(
 
 CREATE TABLE youtube(
 	youtube_no	NUMBER(5) 	NOT NULL,
-	youtube_id	VARCHAR2(10) 	NOT NULL,
+	youtube_id	VARCHAR2(20) 	NOT NULL,
 	event_name	VARCHAR2(50) 	NOT NULL,
 	PRIMARY KEY(youtube_no)
 );
