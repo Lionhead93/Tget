@@ -80,12 +80,12 @@
 	 <update 	id="insertBlacklist"		parameterType="user" >
 	 	UPDATE users
 	 	<set>
-	 	        blacklist_code = #{blacklistCode:CHAR} ,
+	 	       blacklist_code = #{blacklistCode:CHAR} ,
 	 	        blacklist_start_date = #{blacklistStartDate:DATE} ,
-	 	        blacklist_end_date = #{blacklistEndDate:DATE}    
+	 	        blacklist_end_date = #{blacklistEndDate:DATE}  
 					
 	 	</set>
-	 	WHERE user_id = #{userId}
+	 	WHERE user_id = #{userId:VARCHAR}
 	 </update>
 	 
 	 
