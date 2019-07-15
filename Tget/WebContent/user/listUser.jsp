@@ -43,12 +43,18 @@
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-		
-	function button1_click() {
-		alert("버튼1을 누르셨습니다.");
-		$("form").attr("method" , "POST").attr("action" , "/Tget/user/addblacklist").submit();
-	}
 	
+	 $(function() {
+			$("button").on("click" , function() {
+				 
+				
+				var userId = $(this).next().val();
+			 
+				$("form").attr("method" , "POST").attr("action" , "/user/addblacklist?userId="+userId).submit();
+				  
+				
+			});
+	 }
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetUserList(currentPage) {
 			$("#currentPage").val(currentPage)
@@ -126,7 +132,7 @@
 </head>
 
 <body>
-
+<form class="form-inline" name="detailForm">
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -144,7 +150,7 @@
 		    </div>
 		    
 		    <div class="col-md-6 text-right">
-			    <form class="form-inline" name="detailForm">
+			    
 			    
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
@@ -164,7 +170,7 @@
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
-				</form>
+				
 	    	</div>
 	    	
 		</div>
@@ -199,7 +205,7 @@
 			  <td align="left">신고사유?</td>
 			  <td align="left">${user.blacklistStartDate}</td>
 			  <td align="left">${user.blacklistEndDate}
-			  	<button type="button" id="button1" onclick="button1_click();" class="btn btn-default">확인</button>
+			  	<button type="button" id="button" class="btn btn-default">확인</button>
 			  	<input type="hidden" value="${user.userId}">
 			
 			  </td>
@@ -219,7 +225,7 @@
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
-	
+</form>	
 </body>
 
 </html>

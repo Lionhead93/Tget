@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tget.common.domain.Page;
@@ -54,13 +55,17 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addblacklist", method=RequestMethod.POST )
-	public String addBlacklist( @ModelAttribute("user") User user , HttpServletRequest request) throws Exception {
+	public String addBlacklist( @RequestParam("userId") String userId , HttpServletRequest request) throws Exception {
 
-		System.out.println("/user/addblacklist : POST");
-		//Business Logic
-		userService.addBlacklist(user);
+		System.out.println("/user/addblacklist : GET");
 		
-		return "redirect://user/listUser.jsp";
+		User user = userService.getUser(userId);
+		
+		System.out.println(user.getUserId());
+		System.out.println(user+";;'");
+		userService.addBlacklist(user);
+
+		return "redirect:/user/listUser.jsp";
 		
 	}
 	

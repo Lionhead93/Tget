@@ -71,10 +71,10 @@ public class EventController {
 	
 
 	///Method
-	@RequestMapping(value="test")
-	public String test(Model model) throws Exception {
-		System.out.println("===============test===============");
-		
+//	@RequestMapping(value="test")
+//	public String test(Model model) throws Exception {
+//		System.out.println("===============test===============");
+//		
 //		List<Category> categorylist = eventService.getCategoryList();
 //		List<Category> tempList = new ArrayList<Category>();
 //		for (int i = 0; i < 3; i++) {
@@ -88,11 +88,11 @@ public class EventController {
 //			System.out.println("categorylist"+i+" : "+tempList);
 //			tempList.clear();
 //		}			
-		return "forward:/event/test.jsp";
-	}
+//		return "forward:/event/test.jsp";
+//	}
 	
 	@RequestMapping(value="getEventList")
-	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,Model model) throws Exception {
+	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken, Model model) throws Exception {
 		System.out.println("===============getEventList===============");
 		System.out.println("search:"+search);
 		
@@ -101,8 +101,8 @@ public class EventController {
 		}
 		
 		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
-//		//(List<StubhubEvent>)map.get("eventList")
-//		//int totalResults = (Integer)map.get("totalResults");
+		//(List<StubhubEvent>)map.get("eventList")
+		//int totalResults = (Integer)map.get("totalResults");
 		model.addAttribute("search", search);
 		model.addAttribute("requestPageToken",requestPageToken);
 		model.addAttribute("eventList",(List<StubhubEvent>)map.get("eventList"));
@@ -163,13 +163,17 @@ public class EventController {
 		
 		List<Ticket> ticketList = (List<Ticket>)map.get("list");
 		SellProb sellProb = (SellProb)map.get("sellProb");
+
+		System.out.println(ticketList);
+		System.out.println(sellProb);
 		
 		Event event = eventService.getEvent(eventId);
 		
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
-		model.addAttribute("lowPrice", sellProb.getLowPrice());
+		model.addAttribute("ticketLowestPrice", sellProb.getLowPrice());
 		model.addAttribute("totalTicketCount",sellProb.getTotalCount());
+		model.addAttribute("videoId", "-iDOez7D1tY");
 		
 		return "forward:/event/listEventTicket.jsp";		
 	}
@@ -222,9 +226,6 @@ public class EventController {
 		
 		return "forward:/event/getYoutubePlayer.jsp";
 	}
-	
-	
-	
 	
 	
 }

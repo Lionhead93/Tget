@@ -65,7 +65,7 @@ CREATE TABLE event(
 
 CREATE TABLE recommended_event(
 	recomm_event_no		NUMBER(5) 	NOT NULL,
-	event_name		VARCHAR2(10) 	NOT NULL,
+	event_name		VARCHAR2(50) 	NOT NULL,
 	video_name		VARCHAR2(100) 	NOT NULL,
 	recomm_event_name	VARCHAR2(20) 	NOT NULL,
 	recomm_event_detail	VARCHAR2(50),
@@ -74,8 +74,8 @@ CREATE TABLE recommended_event(
 
 CREATE TABLE youtube(
 	youtube_no	NUMBER(5) 	NOT NULL,
-	youtube_id	VARCHAR2(10) 	NOT NULL,
-	event_name	VARCHAR2(10) 	NOT NULL,
+	youtube_id	VARCHAR2(20) 	NOT NULL,
+	event_name	VARCHAR2(50) 	NOT NULL,
 	PRIMARY KEY(youtube_no)
 );
 
