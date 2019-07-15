@@ -37,7 +37,7 @@
 		<result property="reportReasonCode" column="report_reason_code" jdbcType="CHAR"/>
 		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
 		<result property="reportCode" 		column="report_code" 		jdbcType="CHAR"/>
-		<result property="check" 			column="check" 				jdbcType="CHAR"/>
+		<result property="check" 			column="check_yn" 				jdbcType="CHAR"/>
 			
 	</resultMap>
 	
@@ -66,8 +66,9 @@
 	 <insert 	id="insertReport"		parameterType="report">
 	 	INSERT
 	 	INTO report
-	 	VALUES	(	seq_report_report_no.nextval, #{whiteId}, #{whiteNickName}, #{blackId}, #{reportReasonCode},
-	 				SYSDATE, #{contentNo}, #{replyNo}, #{check}, #{reportCode})
+	 	VALUES	(	seq_report_report_no.nextval, #{whiteId: VARCHAR}, #{whiteNickName: VARCHAR}, #{blackId: VARCHAR},
+	 				 #{reportReasonCode:CHAR},
+	 				SYSDATE, #{contentNo}, #{replyNo}, '1', #{reportCode:CHAR})
 	 </insert>
 	 
 	 <insert	id="insertReply"		parameterType="reply">
@@ -93,10 +94,10 @@
 	 <update	id="updateContent"	parameterType="content"  >
 	   	UPDATE content
 	   	<set>
-			content_name	= #{contentName},
-			content_Body = #{contentBody},
-			file_name	= #{fileName},
-			video_name = #{videoName}
+			content_name	= #{contentName:VARCHAR},
+			content_Body = #{contentBody:VARCHAR},
+			file_name	= #{fileName:VARCHAR},
+			video_name = #{videoName:VARCHAR}
 	   	</set>
 	   	WHERE content_no = #{contentNo}
 	 </update>
@@ -115,7 +116,7 @@
 	  					FROM		(	
 	  									SELECT content_no, user_id, user_nickName
 	  										, content_name, content_body , file_name
-	  										, video_name , SYSDATE , view_count, board_code
+	  										, video_name , reg_date , view_count, board_code
 	  										, content_code , open , good_count , bad_count
 	  										, refund_tran_no, refund_check
 											FROM content
@@ -138,7 +139,7 @@
 	  	SELECT COUNT(*)
 	  					FROM(			SELECT content_no, user_id, user_nickName
 	  										, content_name, content_body , file_name
-	  										, video_name , SYSDATE , view_count, board_code
+	  										, video_name , reg_date , view_count, board_code
 	  										, content_code , open , good_count , bad_count
 	  										, refund_tran_no, refund_check
 											FROM content
@@ -154,19 +155,45 @@
 									</if>) countTable
 	</select>
 	 
-	 <!-- <select  id="selectListReport"  parameterType="search"	resultMap="reportSelectMap">
+	  <select  id="selectListReport"  parameterType="search"	resultMap="reportSelectMap">
 	 	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	
-	  									SELECT report_no, white_id, white_nickname
-	  										, black_id, content_no , reply_no
-	  										, report_reason_code , SYSDATE , report_code, check
+	  									SELECT report_no, white_id, white_nickname, black_id,
+	  									 content_no, reply_no, report_reason_code , reg_date, 
+	  									 report_code, check_yn
 											FROM report
-											
-											) inner_table
-			)		
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				report_no = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				and LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+													</if>
+												</where>
+											</if>
+											ORDER BY report_no ) inner_table)		
 	 </select>
 	 
+	 <select  id="selectTotalCountReport"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  					FROM(			SELECT report_no, white_id, white_nickname, black_id,
+	  									 content_no, reply_no, report_reason_code , reg_date, 
+	  									 report_code, check_yn
+											FROM report
+											<!-- <if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				report_no = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				and LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+													</if>
+													</where>
+									</if> -->) countTable
+	</select>
+	 <!-- 
 	 <select  id="selectListReply"  parameterType="search"	resultMap="replySelectMap">
 	 	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq

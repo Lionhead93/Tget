@@ -31,118 +31,129 @@
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
-	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		
+		body {
+            padding-top : 30px;
+        }
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+		
+		///////////////////////////////////////////////////////////////////////
+	function fncAddReport(){
+	//Form 유효성 검증
+ 	//var name = document.detailForm.prodName.value;
+	//var detail = document.detailForm.prodDetail.value;
+	//var manuDate = document.detailForm.manuDate.value;
+	//var price = document.detailForm.price.value;
 	
-		//============= "수정"  Event 연결 =============
-		function fncUpdateContent() {
-	// Form 유효성 검증
+	//var name= $("input[content='contentName']").val();
 	
-			$("form").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
-	}//===========================================//
-	//==> 추가된부분 : "수정"  Event 연결
-	 $(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	 $( "button.btn.btn-warning" ).on("click" , function() {
-		 fncUpdateContent();
-	 });
-});
+		
+		$("form").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
+	}
 
-$(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	 $("button.btn.btn-primary").on("click" , function() {
-		//Debug..
-		//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
-		history.go(-1);
-	});
-});
+		
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$( "button.btn.btn-danger" ).on("click" , function() {
+			alert("신고 접수되었습니다.")
+			fncAddReport();
+		});
+	});	
 	
+	
+	//============= "취소"  Event 처리 및  연결 =============
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("a[href='#' ]:contains('취 &nbsp;소')").on("click" , function() {
+			history.go(-1);
+		});
+	});	
+		
+		
+		
 	</script>
 	
 </head>
 
 <body>
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar Start /////////////////////////////////////-->
 
-   	<!-- ToolBar End /////////////////////////////////////-->
 	
+	<jsp:include page="/layout/toolbar.jsp" />
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-	
+		
 		<div class="page-header text-center">
-	       <h3 class=" text-info">게시글 수정</h3>
-	       <!-- <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5> -->
+	       <h3 class=" text-info">신고 하기</h3>
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		
-		   <div class="form-group">
+		<form class="form-horizontal" >
+		<!-- enctype="multipart/form-data" -->
+		<input type="hidden" class="form-control" id="reportCode" name="reportCode" value="0">
+		<div class="form-group">
 		    <label for="contentNo" class="col-sm-offset-1 col-sm-3 control-label">게시글 번호</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentNo" name="contentNo" value="${content.contentNo }" placeholder="수정 불가합니다"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      </span>
+		      <input type="text" class="form-control" id="contentNo" name="contentNo" value="${content.contentNo}" readonly>
+		      
 		    </div>
-		  </div> 
-		  
+		  </div>
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">작성자</label>
+		    <label for="whiteId" class="col-sm-offset-1 col-sm-3 control-label">신고자</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" value="${content.userId }" placeholder="수정 불가합니다"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      </span>
+		      <input type="text" class="form-control" id="whiteId" name="whiteId" value="admin" readonly>  
 		    </div>
 		  </div>
 		  
+		  <div class="form-group">
+		    <label for="whiteNickName" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="whiteNickName" name="whiteNickName" value="나관리자얌" readonly>
+		      
+		    </div>
+		  </div>
+		<div class="form-group">
+		    <label for="blackId" class="col-sm-offset-1 col-sm-3 control-label">신고 당한 사람</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="blackId" name="blackId" value="${content.userId}" readonly>
+		      
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">신고글 내용</label>
+		    <div class="col-sm-4">
+		      ${content.contentBody}
+			 </div>
+		  </div>
+		
+		 
+		<div class="col-xs-4 col-md-2 "><strong>신고 사유</strong></div>
+	  	<div class="col-xs-8 col-md-4">
+		<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
+		<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
+		<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
+		<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
+		</div>
+		
+		
 		  <div class="form-group">
 		    <label for="regDate" class="col-sm-offset-1 col-sm-3 control-label">작성일</label>
 		    <div class="col-sm-4">
-		       <input type="text" class="form-control" id="regDate" name="regDate" value="${content.regDate }" placeholder="수정 불가합니다"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      </span>
+		      ${content.regDate}
+		      
 		    </div>
-		  </div>
-		 
+		  </div> 
 		
-		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">게시글 제목</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentName" name="contentName" value="${content.contentName }">
-		    </div>
-		  </div>
+			<br/>  
 		  
-		  <div class="form-group">
-		    <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">게시글 내용</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentBody" name="contentBody" value="${content.contentBody}">
-		    </div>
-		  </div>
-		  
-		  
-		  
-		   
-		  <!-- 
-		  <div class="form-group">
-		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품 이미지</label>
-		    <div class="col-sm-4">
-		       <input type="file" multiple="multiple" class="form-control" id="fileName" name="fileName" value="" placeholder="file input...">
-		    </div>
-		  </div> -->
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-warning"  >수&nbsp;정</button>
-		      <button type="button" class="btn btn-primary"  >취&nbsp;소</button>
-			  <!-- <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a> -->
+		      <button type="button" class="btn btn-danger"  >신고하기</button>
+			  <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a>
 		    </div>
 		  </div>
 		</form>
