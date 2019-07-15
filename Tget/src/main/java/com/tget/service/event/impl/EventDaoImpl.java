@@ -208,11 +208,13 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&q="+search.getSearchKeyword();
+//				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&name="+search.getSearchKeyword();
+				//url+="&name="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
 		url+="&start=0";
@@ -260,12 +262,12 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
 //				url+="&name="+search.getSearchKeyword();
-				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
 		
