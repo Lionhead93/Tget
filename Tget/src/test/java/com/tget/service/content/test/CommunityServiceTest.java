@@ -42,7 +42,7 @@ public class CommunityServiceTest {
 	private CommunityService communityService;
 
 /////////////////testaddContent////////////////////////////////
-	@Test
+	//@Test
 	public void testAddContent() throws Exception {
 		
 		
@@ -65,7 +65,7 @@ public class CommunityServiceTest {
 }
 //////////////////////////////////////////////////////////////////	
 ///////////////////testAddReport//////////////////////////
-//	@Test
+	@Test
 	public void testAddReport() throws Exception{
 		
 		Report report = new Report();

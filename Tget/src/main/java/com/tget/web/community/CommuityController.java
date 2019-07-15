@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tget.common.domain.Page;
 import com.tget.common.domain.Search;
 import com.tget.service.community.CommunityService;
 import com.tget.service.community.domain.Content;
@@ -91,24 +92,27 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.GET)
-		public String addReport() throws Exception {
+		public String addReport(@RequestParam("contentNo") int contentNo, @ModelAttribute("content") Content content, Model model) throws Exception {
 
 			System.out.println("community/addReport: GET");
+			
+			Content content1 = communityService.getContent(contentNo);
+			
+			model.addAttribute("content", content1);
 			
 			return "forward:/community/addReport.jsp";
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
-		public String addReport( @ModelAttribute("report") Report report, @RequestParam("userId") int userId) throws Exception {
+		public String addReport(@ModelAttribute("report") Report report) throws Exception {
 
 			System.out.println("community/addContent: POST");
 			//User user = userService.getUser("userId");
 			
-			
 			communityService.addReport(report);
 			//report.getBlackId();
 			//userService.addBlacklist();
-
+			
 			return "forward:/community/getReportList";
 		}
 		
@@ -143,6 +147,16 @@ public class CommuityController {
 			
 			return "forward:/community/getContent.jsp";
 		}
+		
+//		@RequestMapping(value="getJsonContent/{contentNo}")
+//		public void getJsonProduct(@PathVariable int contentNo, @ModelAttribute("content") Content content01, Model model ) throws Exception{
+//			
+//			System.out.println("/getJsonProduct/getProduct : GET");
+//			
+//			Content content = communityService.getContent(contentNo);
+//			
+//			model.addAttribute("content", content);
+//		}
 	
 		@RequestMapping(value="updateContent" , method= RequestMethod.GET)
 		public String updateContent( @RequestParam("contentNo") int contentNo , Model model) throws Exception{
@@ -162,7 +176,7 @@ public class CommuityController {
 			//Business Logic			
 			communityService.updateContent(content);
 			
-			return "forward:/community/getContent.jsp";
+			return "forward:/community/getContent";
 		}
 		
 		@RequestMapping(value="updateReply", method=RequestMethod.POST)
@@ -203,13 +217,10 @@ public class CommuityController {
 			
 			// Business logic
 			Map<String , Object> map=communityService.getContentList(search);
-			/////수정필요....
-			//Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			//System.out.println(resultPage);
 			
 			// Model and View 
 			model.addAttribute("list", map.get("list"));
-			//model.addAttribute("resultPage", resultPage);
+			model.addAttribute("totalCount", map.get("totalCount"));
 			model.addAttribute("search", search);
 			
 			return "forward:/community/getContentList.jsp";
@@ -230,7 +241,7 @@ public class CommuityController {
 			/////수정필요....
 			//Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 			//System.out.println(resultPage);
-			
+			System.out.println( map.get("list"));
 			// Model and View 
 			model.addAttribute("list", map.get("list"));
 			//model.addAttribute("resultPage", resultPage);

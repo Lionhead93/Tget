@@ -13,16 +13,19 @@
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
    
     <!-- Bootstrap Dropdown Hover JS -->
@@ -30,9 +33,7 @@
    
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		body {
-            padding-top : 50px;
-        }
+		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -43,22 +44,20 @@
 	// Form 유효성 검증
 	
 			$("form").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
-}//===========================================//
-//==> 추가된부분 : "수정"  Event 연결
- $(function() {
+	}//===========================================//
+	//==> 추가된부분 : "수정"  Event 연결
+	 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	 $( "button.btn.btn-primary" ).on("click" , function() {
-		
+	 $( "button.btn.btn-warning" ).on("click" , function() {
 		 fncUpdateContent();
-		
 	 });
 });
 
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	 $( "a[href='#' ]" ).on("click" , function() {
+	 $("button.btn.btn-primary").on("click" , function() {
 		//Debug..
 		//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
 		history.go(-1);
@@ -70,7 +69,7 @@ $(function() {
 </head>
 
 <body>
-
+	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar Start /////////////////////////////////////-->
 
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -141,8 +140,9 @@ $(function() {
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >수 &nbsp;정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a>
+		      <button type="button" class="btn btn-warning"  >수&nbsp;정</button>
+		      <button type="button" class="btn btn-primary"  >취&nbsp;소</button>
+			  <!-- <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a> -->
 		    </div>
 		  </div>
 		</form>
