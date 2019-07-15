@@ -34,7 +34,7 @@ public class ReviewAndPointController {
 			
 			rNPService.getPointHistory(request.getParameter("userId"));
 			
-			return "forward:/purchase/getPointHistory.jsp";
+			return "forward:/rnp/getPointHistory.jsp";
 			
 		}
 		
@@ -44,7 +44,7 @@ public class ReviewAndPointController {
 			
 			rNPService.getReviewList(request.getParameter("buyerId"));
 			
-			return "forward:/purchase/listReview.jsp";
+			return "forward:/rnp/listReview.jsp";
 			
 		}
 		
@@ -52,9 +52,9 @@ public class ReviewAndPointController {
 		public String getSellerEstimationList(HttpServletRequest request, Model model) throws Exception {
 			System.out.println("===============getSellerEstimationList===============");
 			
-			rNPService.getSellerEstimationList(request.getParameter("sellerId"));
+			model.addAttribute("sellerEstimationList", rNPService.getSellerEstimationList(request.getParameter("sellerId")));
 			
-			return "forward:/purchase/listSellerEstimation.jsp";
+			return "forward:/rnp/listSellerEstimation.jsp";
 			
 		}
 }

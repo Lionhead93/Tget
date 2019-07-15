@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +30,7 @@ import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
 import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.user.UserService;
+import com.tget.service.user.domain.User;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
@@ -69,8 +70,13 @@ public class EventRestController {
 	
 	///Method
 	@RequestMapping(value="rest/addInterestedEvent/{eventId}")
-	public Map<String,Object> addInterestedEvent(@PathVariable String eventId, @RequestBody String userId) throws Exception {
+	public Map<String,Object> addInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {
 		System.out.println("===============rest/addInterestedEvent/{eventId}===============");
+		
+//		User user = (User)session.getAttribute("user");
+//		String userId = user.getUserId();
+		String userId = "admin";
+		System.out.println("userId : "+userId);
 		
 		eventService.addInterestedEvent(eventId, userId);
 		
@@ -121,13 +127,16 @@ public class EventRestController {
 //	}
 	
 	@RequestMapping(value="rest/deleteInterestedEvent/{eventId}")
-	public Map<String,Object> deleteInterestedEvent(@PathVariable String eventId, @RequestBody String userId) throws Exception {
+	public Map<String,Object> deleteInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {
 		System.out.println("===============rest/deleteInterestedEvent/{eventId}===============");
 		
+//		User user = (User)session.getAttribute("user");
+//		String userId = user.getUserId();
+		String userId = "admin";
 		eventService.deleteInterestedEvent(eventId, userId);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("interestedEventList", eventService.getInterestedEventList(userId));
+//		map.put("interestedEventList", eventService.getInterestedEventList(userId));
 		
 		return map;
 	}
@@ -272,11 +281,33 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getInterestedEventList")
-	public Map<String,Object> getInterestedEventList(@RequestBody String userId) throws Exception {
+	public Map<String,Object> getInterestedEventList(HttpSession session) throws Exception {
 		System.out.println("===============rest/getInterestedEventList===============");
 		
+//		User user = (User)session.getAttribute("user");
+//		String userId = user.getUserId();
+		String userId = "admin";
+		
+		List<Event> list = eventService.getInterestedEventList(userId);
+		List<String> eventIdList = new ArrayList<String>();
+		
+		for (Event event : list) {
+			if (eventIdList.size()==0) {
+				eventIdList.add(event.getEventId());
+			}else {
+				for (int i = 0; i < eventIdList.size(); i++) {
+					if (eventIdList.get(i).equals(event.getEventId())) {
+						break;
+					} else if ((i==eventIdList.size()-1) &&( ! eventIdList.get(i).equals(event.getEventId()))) {
+						eventIdList.add(event.getEventId());
+					}
+				}
+			}
+		}
+		System.out.println(eventIdList);
+		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("interestedEventList", eventService.getInterestedEventList(userId) );
+		map.put("interestedEventList", eventIdList);
 		
 		return map;
 	}
