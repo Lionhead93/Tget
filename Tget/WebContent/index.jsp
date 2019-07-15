@@ -36,6 +36,15 @@
 			$("a:contains('티켓판매')").on("click",function(){
 				self.location = "/ticket/addTicketInfo?eventId=104175822";
 			});
+			$("a:contains('getTicket')").on("click",function(){
+				self.location = "/ticket/getTicket?ticketNo=10014";
+			});
+			$("a:contains('내 티켓목록')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=seller";
+			});
+			$("a:contains('검증 티켓목록')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
 		
 			
 			
@@ -123,9 +132,10 @@
 				           <span class="caret"></span>
 				        </a>
 				        <ul class="dropdown-menu">
-				           <li><a href="#">티켓구매</a></li>
+				           <li><a href="#">getTicket</a></li>
 				           <li><a href="#">티켓판매</a></li>
-				           <li><a href="#">티켓목록</a></li>
+				           <li><a href="#">내 티켓목록</a></li>
+				           <li><a href="#">검증 티켓목록</a></li>
 				           <li class="divider"></li>
 				        </ul>
 				    </li>
