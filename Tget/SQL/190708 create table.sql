@@ -164,7 +164,6 @@ CREATE TABLE user_Interested(
 CREATE TABLE alarm ( 
 	alarm_no 		NUMBER(5)		NOT NULL ,
 	alarm_body		VARCHAR2(500)		NOT NULL ,
-
 	alarm_date		DATE			NOT NULL ,         
 	user_id			VARCHAR2(30)		NOT NULL 	REFERENCES users(user_id) ,
 	alarm_keyword			VARCHAR2(50)			NOT NULL ,

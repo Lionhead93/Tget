@@ -154,6 +154,12 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
+
+	@Override
+	public User getCode(String code) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.selectCode(code);
+	}
 	
 	
 	

@@ -11,7 +11,9 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	
+ 
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -28,6 +30,7 @@
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+
 	
 	 $(function() {
 	
@@ -172,14 +175,14 @@
 				return;
 			}
 				
-			var value = "";	
+			/* var value = "";	
 			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 				var value = $("option:selected").val() + "-" 
 									+ $("input[name='phone2']").val() + "-" 
 									+ $("input[name='phone3']").val();
 			}
 
-			$("input:hidden[name='phone']").val( value );
+			$("input:hidden[name='phone']").val( value ); */
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
@@ -277,6 +280,61 @@
 			<span class="msg">닉네임을 확인해주세요</span>
 		</p>
 		
+		
+		<input type="text" name="phone" id="phone" 
+  placeholder="받는 사람 번호" />
+   <button onclick="sendSms();">전송</button>
+    <br />
+     <br /> 
+   <input type="text" name="sms" id="sms" 
+   placeholder="인증 번호 입력" /> 
+   <button onclick="phoneCheck();">인증</button> 
+		  
+	<script>
+	
+	function sendSms(){ 
+		  
+		alert("인증번호 전송."); 
+		   <%-- <%=request.getContextPath()%>/sendSms" --%>
+		   $.ajax({ 
+			   url: "/user/sendSms",
+			   data: { 
+				   receiver: $("#phone").val() 
+				   }, 
+				   type: "post", 
+				
+	   success: function(result) { 
+		
+		   if (result == "true") { 
+			   console.log(result);
+			   }  else { 
+				   alert("인증번호 전송 실패");
+				   } 
+		   }
+			 });
+		   }
+	   function phoneCheck() {
+			alert("인증번호 ㅇㅋㅇ."); 
+		   $.ajax({ 
+			   url: "/user/smsCheck",
+		   data: { 
+			   code: $("#sms").val() 
+			   }, 
+			   type: "post", 
+		   success: function(result){ 
+			   if (result == "ok") { 
+		   }
+			   alert("번호 인증 성공"); 
+		   } else { 
+			   alert("번호 인증 실패"); 
+		  	 	} 
+		 	  } 
+		   }); 
+		   } 
+	
+	</script>	  
+		  
+		  
 		  
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
@@ -324,8 +382,8 @@
 			<input type="checkbox" name="chbox" value="balad">발라드<br><br>
 		    </div>
 		  </div>
-		  ㄴ
-		  <div class="form-group">
+
+		  <!-- <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
@@ -343,7 +401,7 @@
 		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
 		    </div>
 		    <input type="hidden" name="phone"  />
-		  </div>
+		  </div> -->
 		  
 		   <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
@@ -375,6 +433,9 @@
 		  	<input type="submit" class="btn btn-info" value="Submit">
 		  	</form>
 		  </div> -->
+		  
+		  
+		  		   
 		  
 		  
 		  <div class="form-group">
