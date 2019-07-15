@@ -51,7 +51,7 @@ public class EventServiceTest {
 		
 		Event event = new Event();
 		event.setEventId("testEvent");
-		event.setCategoryTwoNo(10000);
+//		event.setCategoryTwoNo(10000);
 		event.setEventDate(new Date(2012-1900, 4-1, 8));
 		event.setEventLocation("서울");
 		event.setEventName("EXO");
@@ -66,7 +66,7 @@ public class EventServiceTest {
 //		event2.setEventName("EXO");
 //		event2.setEventTime(1248);
 
-		eventService.addEvent(event);
+//		eventService.addEvent(event);
 		//==> API 확인
 		
 	}

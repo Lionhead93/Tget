@@ -29,6 +29,7 @@
 		<typeAlias alias="coupon" type="com.tget.service.coupon.domain.Coupon" />
 		<typeAlias alias="sellProb" type="com.tget.service.ticket.domain.SellProb" />
 		<typeAlias alias="alarm" type="com.tget.service.alarm.domain.Alarm" />		
+		<typeAlias alias="stubhubEvent" type="com.tget.service.event.domain.StubhubEvent" />		
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->

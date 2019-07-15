@@ -49,7 +49,7 @@ public class EventDaoImpl implements EventDao {
 
 
 	///M
-	public void insertEvent(Event event) throws Exception{
+	public void insertEvent(StubhubEvent event) throws Exception{
 		sqlSession.insert("EventMapper.insertEvent", event);
 	}
 	
@@ -165,7 +165,7 @@ public class EventDaoImpl implements EventDao {
 	
 	
 	public List<Category> selectListCategory() throws Exception{
-		return sqlSession.selectList("EventMapper.selectCategory",null);
+		return sqlSession.selectList("EventMapper.selectCategory");
 	}
 	
 	
@@ -187,9 +187,9 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	
-	public void insertInterestedCategory(int categoryTwoNo, String userId) throws Exception{
+	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception{
 		Event event = new Event();
-		event.setCategoryTwoNo(categoryTwoNo);
+		event.setCategoryTwoEng(categoryTwoEng);
 		event.setUserId(userId);
 		
 		sqlSession.insert("EventMapper.insertInterestedEvent", event);
@@ -200,7 +200,7 @@ public class EventDaoImpl implements EventDao {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://api.stubhub.com/sellers/search/events/v3?country=KR&start=0";
+		String url= 	"https://api.stubhub.com/sellers/search/events/v3?country=KR";
 		
 		if (search.getSearchCondition().equals("0")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
@@ -210,10 +210,12 @@ public class EventDaoImpl implements EventDao {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
 				url+="&q="+search.getSearchKeyword();
 			}
+		}else if(search.getSearchCondition().equals("2")) {
+			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+				url+="&name="+search.getSearchKeyword();
+			}
 		}
-		if (requestPageToken !=null && requestPageToken !="") {
-			url+="&start="+requestPageToken;
-		}
+		url+="&start=0";
 		
 		System.out.println("getEventList URL - "+url+"\n");
 
@@ -244,12 +246,12 @@ public class EventDaoImpl implements EventDao {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://api.stubhub.com/sellers/search/events/v3?country=KR";
+		String url= 	"https://api.stubhub.com/sellers/search/events/v3?";
 		
 		if (totalEventCount > 500) {
-			url += "&rows="+500;
+			url += "rows="+500;
 		}else {
-			url += "&rows="+totalEventCount;
+			url += "rows="+totalEventCount;
 		}
 		
 		if (search.getSearchCondition().equals("0")) {
@@ -260,12 +262,18 @@ public class EventDaoImpl implements EventDao {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
 				url+="&q="+search.getSearchKeyword();
 			}
+		}else if(search.getSearchCondition().equals("2")) {
+			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+//				url+="&name="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword();
+			}
 		}
 		
 		if (requestPageToken !=null && requestPageToken !="") {
 			url+="&start="+requestPageToken;
 		}
 		
+		url+="&country=KR";
 		System.out.println("#####getEventList URL - "+url+"\n");
 
 		HttpGet httpGet = new HttpGet(url);

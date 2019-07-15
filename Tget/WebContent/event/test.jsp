@@ -16,6 +16,7 @@
 	$(function(){
 		
 		$("li").on("click",function(){
+			//alert($(this).text());
 			$("#searchCondition").val("0");
 			 $.ajax(
 						{
@@ -28,6 +29,7 @@
 							success : function(JSONData, status){
 // 								str = JSONData.categoryTwoEng;
 								$("#searchKeyword").val(JSONData.categoryTwoEng);
+								alert(JSONData.categoryTwoEng);
 								$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 							}
 						});
@@ -50,19 +52,16 @@
 	    <div class="btn-group btn-group-justified" role="group" aria-label="...">
 	    
 		  <div class="btn-group" role="group" >
-		 	 <input type="hidden" name="category1" value="categorylist0">
 		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    	음악공연<span class="caret"></span>
 		    </button>
 			 <ul class="dropdown-menu">
 			    <li>콘서트</li>
-			    <li>뮤지컬</li>
-			    <li>오페라</li>
+			    <li>페스티벌</li>
 			  </ul>
 		  </div>
 		  
 		  <div class="btn-group" role="group" >
-		  	<input type="hidden" name="category1" value="categorylist1">
 		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    	스포츠<span class="caret"></span>
 		    </button>
@@ -74,13 +73,12 @@
 		  </div>
 		  
 		  <div class="btn-group" role="group" >
-		  	 <input type="hidden" name="category1" value="categorylist2">
 		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    	기타예술공연<span class="caret"></span>
 		    </button>
 			 <ul class="dropdown-menu">
-			    <li>댄스</li>
-			    <li>페스티벌</li>
+			    <li>뮤지컬</li>
+			    <li>클래식/오페라</li>
 			  </ul>
 		  </div>
 		  
@@ -89,11 +87,7 @@
 		<br/>	  
 		<br/>	  
 		
-		<div class="container-fluid">
-	<c:forEach items="${categorylist0}" var="i">
-			 ${i.categoryTwoName}
-<%-- 			 	<li>${i.categoryTwoName}</li> --%>
-			 </c:forEach>
+	<div class="container-fluid">
 	<br/><br/><br/>
 	searchCondition이 0이면 카테고리 검색<br/>
 	searchCondition이 1이면 키워드 검색<br/><br/>

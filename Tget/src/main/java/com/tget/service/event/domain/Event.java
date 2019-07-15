@@ -7,7 +7,7 @@ public class Event {
 	///F
 	private String eventId;
 	private int viewCount;
-	private int categoryTwoNo;
+	private String categoryTwoEng;
 	private String eventImage;
 	private String eventName;
 	private String eventLocation;
@@ -37,11 +37,11 @@ public class Event {
 		this.viewCount = viewCount;
 	}
 
-	public int getCategoryTwoNo() {
-		return categoryTwoNo;
+	public String getCategoryTwoEng() {
+		return categoryTwoEng;
 	}
-	public void setCategoryTwoNo(int categoryTwoNo) {
-		this.categoryTwoNo = categoryTwoNo;
+	public void setCategoryTwoEng(String categoryTwoEng) {
+		this.categoryTwoEng = categoryTwoEng;
 	}
 
 	public String getEventImage() {
@@ -109,7 +109,7 @@ public class Event {
 
 	public String toString() {
 		return "[Event] eventId : "+eventId+"\n viewCount : "+viewCount+"\n" + 
-				"categoryTwoNo : "+categoryTwoNo+"\n" +"eventImage : "+eventImage+"\n" + 
+				"categoryTwoEng : "+categoryTwoEng+"\n" +"eventImage : "+eventImage+"\n" + 
 				"eventName : "+eventName+"\n eventLocation : "+eventLocation+"\n" +
 				"eventDate : "+eventDate+"\n eventTime : "+eventTime+
 				"\n ticketLowestPrice : "+ticketLowestPrice+"\n totalTicketCount : "+totalTicketCount;

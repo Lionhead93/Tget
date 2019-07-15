@@ -96,6 +96,10 @@ public class EventController {
 		System.out.println("===============getEventList===============");
 		System.out.println("search:"+search);
 		
+		if (search.getSearchCondition().equals("0")) {
+			model.addAttribute("category", search.getSearchKeyword());
+		}
+		
 		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
 //		//(List<StubhubEvent>)map.get("eventList")
 //		//int totalResults = (Integer)map.get("totalResults");
@@ -105,33 +109,43 @@ public class EventController {
 		model.addAttribute("totalResults",(Integer)map.get("totalResults"));
 
 		return "forward:/event/listEvent.jsp";
-		
 	}
 	
 	@RequestMapping(value="getEvent")
-	public String getEvent(@RequestParam String eventName, Model model) throws Exception {
+	public String getEvent(@RequestParam String category, @RequestParam String eventName, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
 		
 		Search search = new Search();
-		search.setSearchCondition("0");
 		
 		List<Event> eventListByName = eventService.getEventByName(eventName);
 		System.out.println(eventListByName);
 		
 		if (eventListByName.isEmpty()) {
 			System.out.println("================eventListByName.isEmpty()================");
-			//eventService.addEvent(event);
+			search.setSearchCondition("2");
+			search.setSearchKeyword(eventName);
+//			Map<String,Object> map = eventService.getEventList(search, "0", stubhubKey);
+			List<StubhubEvent> list = (List<StubhubEvent>)eventService.getEventList(search, "0", stubhubKey).get("eventList");
+			for (StubhubEvent stubhubEvent : list) {
+				stubhubEvent.setCategoryTwoEng(category.toLowerCase());
+				eventService.addEvent(stubhubEvent);
+			}
+			eventListByName = eventService.getEventByName(eventName);
+		}else {
+			for (Event event : eventListByName) {
+				search.setSearchCondition("0");
+				search.setSearchKeyword(event.getEventId());
+				int ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
+				event.setTicketLowestPrice(ticketLowestPrice);
+				event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
+			}			
 		}
 		
-		for (Event event : eventListByName) {
-			search.setSearchKeyword(event.getEventId());
-			int ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
-			event.setTicketLowestPrice(ticketLowestPrice);
-			event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
-		}
 		System.out.println(eventListByName);
 		
 		model.addAttribute("eventListByName", eventListByName);
+		model.addAttribute("totalResults", eventListByName.size());
+		model.addAttribute("eventName", eventName);
 		
 		return "forward:/event/getEvent.jsp";
 	}

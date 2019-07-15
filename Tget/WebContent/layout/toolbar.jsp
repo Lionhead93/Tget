@@ -14,14 +14,19 @@
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
 	<style>
 	</style>
    	
@@ -35,6 +40,17 @@
 			
 			$("a:contains('티켓판매')").on("click",function(){
 				self.location = "/ticket/addTicketInfo?eventId=104175822";
+			});
+			
+			$("a:contains('getTicket')").on("click",function(){
+				self.location = "/ticket/getTicket?ticketNo=10007";
+			});
+			
+			$("a:contains('내 티켓목록')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=seller";
+			});
+			$("a:contains('검증 티켓목록')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
 			});
 		
 			
@@ -70,6 +86,29 @@
 			});
 		});
 		
+		$( function(){			
+			//onload시 읽지않은 알람 표시 
+			$.ajax(
+					{
+						url : "/alarm/rest/getNoReadAlarm/admin" ,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(data) {
+							$("#noReadAlarmCount").html(data.NoReadAlarmCount);
+						}					
+			}); 
+			
+			//알람리스트 madal 출력
+			$("button:contains('Alarm')").on("click", function(){
+				getAlarmModal();				
+			});
+		});
+		
+
 		
 	</script>	
 	
@@ -77,68 +116,94 @@
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-		
-        <div class="container">
-        	
-        	<a class="navbar-brand" href="#"><img src="/resources/images/logo.png" width="100" height="50"></img></a>
-			
-			
-			<div class="collapse navbar-collapse"  id="target" >
 
-				 <ul class="nav navbar-nav navbar-right">
-	            	<li><a href="#">채팅</a></li>
-	            </ul>
-	            <ul class="nav navbar-nav navbar-right">
-		            <li class="dropdown">
-			        	<a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				           <span >게시판</span>
-				           <span class="caret"></span>
-				        </a>
-				        <ul class="dropdown-menu">
-				           <li><a href="#">공지 게시판</a></li>
-				           <li><a href="#">자유 게시판</a></li>
-		           		</ul>
-	           		</li>
-				 </ul>
-				 <ul class="nav navbar-nav navbar-right">
-		            <li class="dropdown">
-				        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				           <span >회원관리</span>
-				           <span class="caret"></span>
-				        </a>
-				        <ul class="dropdown-menu">
-				           <li><a href="#">로 그 인</a></li>
-				           <li><a href="#">회원가입</a></li>
-				           <li><a href="#">블랙리스트관리</a></li>
-				           <li class="divider"></li>
-				        </ul>
-				    </li>
-				 </ul>
-				 <ul class="nav navbar-nav navbar-right">
-		            <li class="dropdown">
-				        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				           <span >티켓</span>
-				           <span class="caret"></span>
-				        </a>
-				        <ul class="dropdown-menu">
-				           <li><a href="#">티켓구매</a></li>
-				           <li><a href="#">티켓판매</a></li>
-				           <li><a href="#">티켓목록</a></li>
-				           <li class="divider"></li>
-				        </ul>
-				    </li>
-				 </ul>
-				 <ul class="nav navbar-nav navbar-right">
-	            	<li><a href="#">이벤트검색</a></li>
-	            </ul>			 
+
+ 
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
+ 	
+<div class="container">	
+ 	<a class="navbar-brand" href="#"><i class="fas fa-running"></i> T-GET</a>			
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+  	</button>	
+			
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				 
-	       </div>
-   		
-   		</div>
-   	</div>
-   	
+				 
+				 
+				 <ul class="nav navbar-nav">           	
+	            	
+	            	
+	            	<li class="nav-item active">
+			              <a class="nav-link" href="#">이벤트검색</a>
+			        </li> 
+			        
+			        <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	User
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">로 그 인</a>
+				          <a class="dropdown-item" href="#">회원가입</a>
+				          <a class="dropdown-item" href="#">블랙리스트관리</a>
+				        </div>
+				    </li>
+	            	
+	            	<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	Ticket
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">getTicket</a>
+				          <a class="dropdown-item" href="#">티켓판매</a>
+				          <a class="dropdown-item" href="#">내 티켓목록</a>
+				          <a class="dropdown-item" href="#">검증 티켓목록</a>
+				        </div>
+				    </li>
+	            	
+	            	<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	Community
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">공지 게시판</a>
+				          <a class="dropdown-item" href="#">자유 게시판</a>
+				        </div>
+				    </li>  
+				    
+				    
+				    <li class="nav-item active">
+						    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">
+							 Alarm <span class="badge badge-light" id="noReadAlarmCount"></span>
+							</button> 		            	
+	            	</li>
+	            	
+	            					   
+	          </ul>
+	 </div>
+	 </div>
+ 
+</nav>
+			<!-- 알림내역 모달창  -->
+					<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-md" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">My Alarm</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Save changes</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+	  	
 </body>
 
 </html>

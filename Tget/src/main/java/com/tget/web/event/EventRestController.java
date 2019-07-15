@@ -341,7 +341,7 @@ public class EventRestController {
 			if (category.getCategoryTwoName().equals(categoryTwoName)) {
 				map.put("categoryTwoEng", category.getCategoryTwoEng());
 			}
-		}			
+		}	
 		System.out.println("rest/getCategory map - "+map);
 		return map;		
 	}

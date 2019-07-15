@@ -40,12 +40,20 @@ public class StubhubEvent {
 	private String currencyCode;
 	private Map<String,String> ticketInfo;
 	
+	
+	private String getCategoryTwoEng;
+	private String eventDate;
+	private String eventTime;
+	
 	///C
 	public StubhubEvent() {
 	}
 
 	///M
 	public String getId() {
+		if (id != null) {
+			return id.trim();
+		}
 		return id;
 	}
 	public void setId(String id) {
@@ -80,6 +88,10 @@ public class StubhubEvent {
 	}
 	public void setEventDateLocal(String eventDateLocal) {
 		this.eventDateLocal = eventDateLocal;
+		String[] arr = eventDateLocal.split("T");
+		setEventDate(arr[0]);
+		arr = arr[1].split(":");
+		setEventTime(arr[0]+arr[1]);
 	}
 	public String getEventDateUTC() {
 		return eventDateUTC;
@@ -203,10 +215,20 @@ public class StubhubEvent {
 	}
 	public void setAncestors(Map<String, Object> ancestors) {
 		this.ancestors = ancestors;
-		setAncestorsCategory((String)((Map<String,Object>)(((List)ancestors.get("categories")).get(1))).get("name"));		
+		int temp = ((List)ancestors.get("categories")).size();
+		List<Map<String,Object>> categoriesMap = ((List)ancestors.get("categories"));
+		//String tempCategory = (String)((Map<String,Object>)(((List)ancestors.get("categories")).get(1))).get("name");
+		
+		if (temp == 2) {
+			setAncestorsCategory((String)categoriesMap.get(1).get("name"));
+		} else if (temp >= 2){
+			setAncestorsCategory((String)categoriesMap.get(2).get("name"));
+		}
+//		setAncestorsCategory((String)((Map<String,Object>)(((List)ancestors.get("categories")).get(1))).get("name"));		
 	}
+	
 	public void setAncestorsCategory(String ancestorsCategory) {
-		this.ancestorsCategory = ancestorsCategory;
+		this.ancestorsCategory = ancestorsCategory.toLowerCase();
 	}
 	public String getAncestorsCategory() {
 		return ancestorsCategory;
@@ -222,6 +244,27 @@ public class StubhubEvent {
 	}
 	public void setTicketInfo(Map<String, String> ticketInfo) {
 		this.ticketInfo = ticketInfo;
+	}
+
+	public String getCategoryTwoEng() {
+		return getCategoryTwoEng;
+	}
+	public void setCategoryTwoEng(String getCategoryTwoEng) {
+		this.getCategoryTwoEng = getCategoryTwoEng;
+	}
+
+	public String getEventDate() {
+		return eventDate;
+	}
+	public void setEventDate(String eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	public String getEventTime() {
+		return eventTime;
+	}
+	public void setEventTime(String eventTime) {
+		this.eventTime = eventTime;
 	}
 
 	public String toString() {

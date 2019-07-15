@@ -7,6 +7,7 @@ public class Alarm {
 	private int alarmNo;
 	private int alarmCode;
 	private String alarmBody;
+	private String alarmKeyword;
 	private Date regDate;
 	private String userId;
 	private String readCode;
@@ -50,6 +51,14 @@ public class Alarm {
 	public String getRead() {
 		return readCode;
 	}
+	
+	public String getAlarmKeyword() {
+		return alarmKeyword;
+	}
+
+	public void setAlarmKeyword(String alarmKeyword) {
+		this.alarmKeyword = alarmKeyword;
+	}
 
 	public void setRead(String readCode) {
 		this.readCode = readCode;
@@ -73,8 +82,8 @@ public class Alarm {
 
 	@Override
 	public String toString() {
-		return "Alarm [alarmNo=" + alarmNo + ", alarmCode=" + alarmCode + ", alarmBody=" + alarmBody + ", regDate="
-				+ regDate + ", userId=" + userId + ", readCode=" + readCode + "]";
+		return "Alarm [alarmNo=" + alarmNo + ", alarmCode=" + alarmCode + ", alarmBody=" + alarmBody + ", alarmKeyword="
+				+ alarmKeyword + ", regDate=" + regDate + ", userId=" + userId + ", readCode=" + readCode + "]";
 	}
 	
 	
