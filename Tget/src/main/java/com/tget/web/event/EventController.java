@@ -75,19 +75,19 @@ public class EventController {
 //	public String test(Model model) throws Exception {
 //		System.out.println("===============test===============");
 //		
-////		List<Category> categorylist = eventService.getCategoryList();
-////		List<Category> tempList = new ArrayList<Category>();
-////		for (int i = 0; i < 3; i++) {
-////			for (Category category : categorylist) {			
-////				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
-////					tempList.add(category);
-////				}				
-////			}
-////			model.addAttribute("categorylist", categorylist);
-////			model.addAttribute("categorylist"+i, tempList);
-////			System.out.println("categorylist"+i+" : "+tempList);
-////			tempList.clear();
-////		}			
+//		List<Category> categorylist = eventService.getCategoryList();
+//		List<Category> tempList = new ArrayList<Category>();
+//		for (int i = 0; i < 3; i++) {
+//			for (Category category : categorylist) {			
+//				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
+//					tempList.add(category);
+//				}				
+//			}
+//			model.addAttribute("categorylist", categorylist);
+//			model.addAttribute("categorylist"+i, tempList);
+//			System.out.println("categorylist"+i+" : "+tempList);
+//			tempList.clear();
+//		}			
 //		return "forward:/event/test.jsp";
 //	}
 	
@@ -101,8 +101,8 @@ public class EventController {
 		}
 		
 		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
-//		//(List<StubhubEvent>)map.get("eventList")
-//		//int totalResults = (Integer)map.get("totalResults");
+		//(List<StubhubEvent>)map.get("eventList")
+		//int totalResults = (Integer)map.get("totalResults");
 		model.addAttribute("search", search);
 		model.addAttribute("requestPageToken",requestPageToken);
 		model.addAttribute("eventList",(List<StubhubEvent>)map.get("eventList"));
