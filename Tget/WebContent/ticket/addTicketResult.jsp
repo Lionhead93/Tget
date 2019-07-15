@@ -72,7 +72,7 @@
 <body>	
 	<div class="container">
 	<br/>
-		<h1 class="text-center">등록 확인</h1>
+		<h1 class="text-center">다음과 같이 등록되었습니다.</h1>
 		<br/>	
 		
 		<form class="form-horizontal">				  

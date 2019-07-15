@@ -90,13 +90,13 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted"  >콘서트</a>
-      <a class="p-2 text-muted" >페스티벌</a>
-      <a class="p-2 text-muted"  >뮤지컬</a>
-      <a class="p-2 text-muted"  >클래식/오페라</a>
-      <a class="p-2 text-muted"  >축구</a>
-      <a class="p-2 text-muted"  >야구</a>
-      <a class="p-2 text-muted"  >골프</a>
+      <a href="#" class="p-2 text-muted"  >콘서트</a>
+      <a href="#" class="p-2 text-muted" >페스티벌</a>
+      <a href="#" class="p-2 text-muted"  >뮤지컬</a>
+      <a href="#" class="p-2 text-muted"  >클래식/오페라</a>
+      <a href="#" class="p-2 text-muted"  >축구</a>
+      <a href="#" class="p-2 text-muted"  >야구</a>
+      <a href="#" class="p-2 text-muted"  >골프</a>
     </nav>
   </div>
 

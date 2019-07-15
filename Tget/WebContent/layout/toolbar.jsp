@@ -42,8 +42,12 @@
 				self.location = "/ticket/addTicketInfo?eventId=104175822";
 			});
 			
+			$("a:contains('티켓구매')").on("click",function(){
+				self.location = "/tran/addTran?ticketNo=10004";
+			});
+			
 			$("a:contains('getTicket')").on("click",function(){
-				self.location = "/ticket/getTicket?ticketNo=10007";
+				self.location = "/ticket/getTicket?ticketNo=10004";
 			});
 			
 			$("a:contains('내 티켓목록')").on("click",function(){
@@ -88,19 +92,7 @@
 		
 		$( function(){			
 			//onload시 읽지않은 알람 표시 
-			$.ajax(
-					{
-						url : "/alarm/rest/getNoReadAlarm/admin" ,
-						method : "GET" ,
-						dataType : "json" ,
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(data) {
-							$("#noReadAlarmCount").html(data.NoReadAlarmCount);
-						}					
-			}); 
+			getNoReadAlarmCount(); 
 			
 			//알람리스트 madal 출력
 			$("button:contains('Alarm')").on("click", function(){
@@ -156,6 +148,7 @@
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="#">getTicket</a>
 				          <a class="dropdown-item" href="#">티켓판매</a>
+				          <a class="dropdown-item" href="#">티켓구매</a>
 				          <a class="dropdown-item" href="#">내 티켓목록</a>
 				          <a class="dropdown-item" href="#">검증 티켓목록</a>
 				        </div>

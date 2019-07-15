@@ -16,18 +16,18 @@ DROP TABLE event;
 DROP TABLE category_two;
 
 
-DROP SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_category_two_no 			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_user_Interested_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_content_content_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_image_file_file_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_reply_reply_no 			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_report_report_no 			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_alarm_alarm_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_coupon_coupon_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_ticket_ticket_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_transaction_tran_no			INCREMENT BY 1 START WITH 10000;
-DROP SEQUENCE seq_point_history_no 			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_youtube_youtube_no ;
+DROP SEQUENCE seq_category_two_no ;
+DROP SEQUENCE seq_user_Interested_no ;
+DROP SEQUENCE seq_content_content_no ;
+DROP SEQUENCE seq_image_file_file_no ;
+DROP SEQUENCE seq_reply_reply_no ;
+DROP SEQUENCE seq_report_report_no ;
+DROP SEQUENCE seq_alarm_alarm_no ;
+DROP SEQUENCE seq_coupon_coupon_no ;
+DROP SEQUENCE seq_ticket_ticket_no ;
+DROP SEQUENCE seq_transaction_tran_no ;
+DROP SEQUENCE seq_point_history_no ;
 
 
 CREATE SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;
@@ -164,14 +164,12 @@ CREATE TABLE user_Interested(
 CREATE TABLE alarm ( 
 	alarm_no 		NUMBER(5)		NOT NULL ,
 	alarm_body		VARCHAR2(500)		NOT NULL ,
-
 	alarm_date		DATE			NOT NULL ,         
 	user_id			VARCHAR2(30)		NOT NULL 	REFERENCES users(user_id) ,
 	alarm_keyword			VARCHAR2(50)			NOT NULL ,
 	alarm_code			CHAR(1) 			NOT NULL ,
 	read			CHAR(1) 			NOT NULL ,	
-	PRIMARY KEY(alarm_no)
-);
+	PRIMARY KEY(alarm_no) );
 
 CREATE TABLE coupon(
 	coupon_no 		NUMBER(5) 	NOT NULL,
@@ -204,11 +202,8 @@ CREATE TABLE transaction (
 	tran_no 			NUMBER(5) 		NOT NULL,
 	ticket_no 		NUMBER(5)		NOT NULL REFERENCES ticket(ticket_no),
 	event_id			VARCHAR2(10)		NOT NULL REFERENCES event(event_id),
-	event_name 		VARCHAR2(110)		NOT NULL ,
 	seller_id			VARCHAR2(30)		NOT NULL REFERENCES users(user_id),
-	seller_nickname		VARCHAR2(20)		NOT NULL ,
 	buyer_id			VARCHAR2(30)		NOT NULL REFERENCES users(user_id),
-	buyer_nickname		VARCHAR2(20)		NOT NULL ,
 	order_amount		NUMBER(3)		NOT NULL ,
 	total_price		NUMBER(10)		NOT NULL ,
 	order_date		DATE			DEFAULT		SYSDATE, 
