@@ -1,6 +1,7 @@
 package com.tget.web.event;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,7 +70,7 @@ public class EventRestController {
 	///Method
 	@RequestMapping(value="rest/addInterestedEvent/{eventId}")
 	public Map<String,Object> addInterestedEvent(@PathVariable String eventId, @RequestBody String userId) throws Exception {
-		System.out.println("===============addInterestedEvent===============");
+		System.out.println("===============rest/addInterestedEvent/{eventId}===============");
 		
 		eventService.addInterestedEvent(eventId, userId);
 		
@@ -81,21 +83,21 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/getYoutubeList")
 	public List<String> getYoutubeList( @RequestBody String eventName) throws Exception {
-		System.out.println("===============getYoutubeList===============");
+		System.out.println("===============rest/getYoutubeList===============");
 		
 		return eventService.getYoutubeIdList(eventName);
 	}
 	
 	@RequestMapping(value="rest/addYoutubeVideo/{requestPageToken}", method=RequestMethod.GET)
 	public Map<String,Object> addYoutubeVideo(@PathVariable String requestPageToken, @ModelAttribute Search search) throws Exception {
-		System.out.println("===============addYoutubeVideo===============");
+		System.out.println("===============rest/addYoutubeVideo/{requestPageToken}===============");
 		//youtube테이블에 add하기위해 창을 요청하는 떄 -> youtube를 search하고 그 결과를 보여줄 화면
 		return eventService.getYoutubeList(search, requestPageToken, youtubeKey);
 	}
 	
 	@RequestMapping(value="rest/addYoutubeVideo/{youtubeId}", method=RequestMethod.POST)
 	public Map<String,Object> addYoutubeVideo(@PathVariable String youtubeId,@RequestBody String eventName) throws Exception {
-		System.out.println("===============addYoutubeVideo===============");
+		System.out.println("===============rest/addYoutubeVideo/{youtubeId}===============");
 		
 		eventService.addYoutubeVideo(youtubeId, eventName);
 		List<String> list = eventService.getYoutubeIdList(eventName);
@@ -120,7 +122,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/deleteInterestedEvent/{eventId}")
 	public Map<String,Object> deleteInterestedEvent(@PathVariable String eventId, @RequestBody String userId) throws Exception {
-		System.out.println("===============deleteInterestedEvent===============");
+		System.out.println("===============rest/deleteInterestedEvent/{eventId}===============");
 		
 		eventService.deleteInterestedEvent(eventId, userId);
 		
@@ -132,7 +134,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/getPopularEventList")
 	public Map<String,Object> getPopularEventList() throws Exception {
-		System.out.println("===============getPopularEventList===============");
+		System.out.println("===============rest/getPopularEventList===============");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("popularEventList", eventService.getPopularEventList());
@@ -142,7 +144,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/getRecommendedEvent")
 	public Map<String,Object> getRecommendedEvent(@RequestBody int recommEventNo) throws Exception {
-		System.out.println("===============getRecommendedEvent===============");
+		System.out.println("===============rest/getRecommendedEvent===============");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEventNo));
@@ -152,7 +154,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
 	public Map<String,Object> addRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-		System.out.println("===============addRecommendedEvent===============");
+		System.out.println("===============rest/addRecommendedEvent===============");
 		
 		eventService.addRecommendedEvent(recommEvent);
 		
@@ -164,7 +166,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
 	public Map<String,Object> updateRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-		System.out.println("===============updateRecommendedEvent===============");
+		System.out.println("===============rest/updateRecommendedEvent===============");
 		
 		eventService.updateRecommendedEvent(recommEvent);
 		
@@ -188,7 +190,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/addCategoryTwo", method=RequestMethod.POST)
 	public Map<String,Object> addCategoryTwo(@RequestBody Category category) throws Exception {
-		System.out.println("===============addCategoryTwo===============");
+		System.out.println("===============rest/addCategoryTwo===============");
 		
 		eventService.addCategoryTwo(category);
 		
@@ -200,7 +202,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.GET)
 	public Map<String,Object> updateCategoryTwo(@RequestParam String categoryTwoEng) throws Exception {
-		System.out.println("===============updateCategoryTwo===============");
+		System.out.println("===============rest/updateCategoryTwo===============");
 
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("category", eventService.getCategory(categoryTwoEng));
@@ -210,7 +212,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.POST)
 	public Map<String,Object> updateCategoryTwo(@RequestBody Category category) throws Exception {
-		System.out.println("===============updateCategoryTwo===============");
+		System.out.println("===============rest/updateCategoryTwo===============");
 		
 		eventService.updateCategoryTwo(category);
 		
@@ -222,7 +224,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/deleteCategoryTwo")
 	public Map<String,Object> deleteCategoryTwo(@RequestBody String categoryTwoEng) throws Exception {
-		System.out.println("===============deleteCategoryTwo===============");
+		System.out.println("===============rest/deleteCategoryTwo===============");
 		
 		eventService.deleteCategoryTwo(categoryTwoEng);
 		
@@ -246,7 +248,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/getEventTicketList")
 	public Map<String,Object> getEventTicketList(@RequestBody String eventId) throws Exception {
-		System.out.println("===============getEventTicketList===============");
+		System.out.println("===============rest/getEventTicketList===============");
 		
 		Search search = new Search();
 		search.setSearchCondition("0");
@@ -271,7 +273,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/getInterestedEventList")
 	public Map<String,Object> getInterestedEventList(@RequestBody String userId) throws Exception {
-		System.out.println("===============getInterestedEventList===============");
+		System.out.println("===============rest/getInterestedEventList===============");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("interestedEventList", eventService.getInterestedEventList(userId) );
@@ -293,7 +295,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/updateEventImage")
 	public Map<String,Object> updateEventImage(@RequestBody Event event) throws Exception {
-		System.out.println("===============updateEventImage===============");
+		System.out.println("===============rest/updateEventImage===============");
 		
 		eventService.updateEventImage(event.getEventImage(), event.getEventName());
 		
@@ -305,7 +307,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/deleteEventImage")
 	public Map<String,Object> deleteEventImage(@RequestBody String eventName) throws Exception {
-		System.out.println("===============deleteEventImage===============");
+		System.out.println("===============rest/deleteEventImage===============");
 		
 		eventService.deleteEventImage(eventName);
 		
@@ -315,5 +317,32 @@ public class EventRestController {
 		return map;
 	}
 	
+	@RequestMapping(value="rest/getCategoryList")
+	public Map<String,Object> getCategoryList() throws Exception {
+		System.out.println("===============rest/getCategoryList===============");
+		
+		List<Category> categorylist = eventService.getCategoryList();
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("categorylist", categorylist);
+			
+		
+		return map;		
+	}
 	
+	@RequestMapping(value="rest/getCategory")
+	public Map<String,Object> getCategory(String categoryTwoName) throws Exception {
+		System.out.println("===============rest/getCategory===============");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<Category> categorylist = eventService.getCategoryList();
+		
+		for (Category category : categorylist) {
+			if (category.getCategoryTwoName().equals(categoryTwoName)) {
+				map.put("categoryTwoEng", category.getCategoryTwoEng());
+			}
+		}	
+		System.out.println("rest/getCategory map - "+map);
+		return map;		
+	}
 }

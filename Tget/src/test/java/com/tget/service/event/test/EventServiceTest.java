@@ -51,7 +51,7 @@ public class EventServiceTest {
 		
 		Event event = new Event();
 		event.setEventId("testEvent");
-		event.setCategoryTwoNo(10000);
+//		event.setCategoryTwoNo(10000);
 		event.setEventDate(new Date(2012-1900, 4-1, 8));
 		event.setEventLocation("서울");
 		event.setEventName("EXO");
@@ -66,7 +66,7 @@ public class EventServiceTest {
 //		event2.setEventName("EXO");
 //		event2.setEventTime(1248);
 
-		eventService.addEvent(event);
+//		eventService.addEvent(event);
 		//==> API 확인
 		
 	}
@@ -166,7 +166,7 @@ public class EventServiceTest {
 		public void addCategoryTwo() throws Exception {
 					
 			Category category = new Category();
-			category.setCategoryOneCode('0');
+			category.setCategoryOneCode("0");
 			category.setCategoryTwoName("오페라");
 			category.setCategoryTwoEng("opera");
 			eventService.addCategoryTwo(category);			
@@ -182,7 +182,7 @@ public class EventServiceTest {
 		//@Test
 		public void updateCategoryTwo() throws Exception {
 			Category category = new Category();
-			category.setCategoryOneCode('0');
+			category.setCategoryOneCode("0");
 			category.setCategoryTwoName("뮤지컬");
 			category.setCategoryTwoEng("musical");
 			category.setCategoryTwoNo(10001);

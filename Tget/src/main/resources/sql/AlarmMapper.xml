@@ -10,6 +10,8 @@
 	<resultMap id="alarmSelectMap" type="alarm">
 		<result property="alarmNo" 			column="alarm_no" 			jdbcType="NUMERIC"/>
 		<result property="alarmBody" 	column="alarm_body" 		jdbcType="VARCHAR" />
+		<result property="alarmCode" 				column="alarm_code" 					jdbcType="CHAR" />
+		<result property="alarmKeyword" 				column="alarm_keyword" 					jdbcType="VARCHAR" />
 		<result property="regDate" 				column="alarm_date" 					jdbcType="DATE" />
 		<result property="userId" 				column="user_id" 					jdbcType="VARCHAR" />
 		<result property="readCode" 			column="read" 		jdbcType="CHAR" />
@@ -18,8 +20,8 @@
 	<!-- SQL -->
 	<insert id="insertAlarm" parameterType="alarm">
 		INSERT
-		INTO alarm( alarm_no , alarm_body , alarm_date , user_id , read ) 
-		VALUES	 ( seq_alarm_alarm_no.nextval	, #{alarmBody} , sysdate , #{userId} , '1' )	
+		INTO alarm( alarm_no , alarm_body , alarm_code , alarm_keyword , alarm_date , user_id , read ) 
+		VALUES	 ( seq_alarm_alarm_no.nextval	, #{alarmBody} , #{alarmCode} , #{alarmKeyword}, sysdate , #{userId} , '1' )	
 	</insert>
 	
 	<update	id="updateAlarmRead"	parameterType="int" >
@@ -39,7 +41,7 @@
 	 	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM	(	
-	  								SELECT alarm_no, alarm_body , alarm_date
+	  								SELECT alarm_no, alarm_body , alarm_code , alarm_keyword , alarm_date
 	  									, user_id	, read 
 										FROM alarm
 								<where>		

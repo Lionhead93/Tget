@@ -114,8 +114,11 @@
 		<br/>
 		  <div class="form-group">
 		    <label for="amount" class="col-sm-offset-1 col-sm-3 control-label">판매 수량</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="amount" name="amount" placeholder="판매수량입력">
+		    <div class="col-sm-1">
+		      <input type="text" class="form-control" id="amount" name="amount" style="width: 90px !important" >
+		    </div>
+		    <div class="col-sm-3 text-danger">  	
+		          * 일괄로 한번에 판매 됩니다.
 		    </div>
 		  </div>
 		<br/>  
@@ -127,20 +130,36 @@
 		    </div>
 		  </div>
 		<br/>  
-		  <div class="form-group">
-		    <label for="seat" class="col-sm-offset-1 col-sm-3 control-label">좌석</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="seat" name="seat" placeholder="좌석입력">
+		  <div class="form-group" >
+		    <label for="" class="col-sm-offset-1 col-sm-3 control-label">좌석</label>
+		    <div class="col-sm-1">
+		    <input type="text" class="form-control" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) B2">
+		    </div>
+		    <div class="col-sm-1">  	
+		         구역 <br/>(존/블럭)
+		    </div>
+		    <div class="col-sm-1">
+		    <input type="text" class="form-control" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) 6">
+		    </div>
+		    <div class="col-sm-1">  	
+		     	열
 		    </div>
 		  </div>
 		<br/>  
 		  <div class="form-group">
-		    <label for="options" class="col-sm-offset-1 col-sm-3 control-label">특이사항</label>
+		    <label for="options" class="col-sm-offset-1 col-sm-3 control-label">특이사항<br/>(선택)</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="options" name="options" placeholder="특이사항">
+		      <textarea name="options" cols="40" rows="8" ></textarea>
 		    </div>
 		  </div>
-		<br/>		  
+		<br/>
+			<div class="form-group">
+		    <label for="options" class="col-sm-offset-1 col-sm-3 control-label">쿠폰</label>
+		    <div class="col-sm-4">
+		      	<a class="btn btn-primary btn" role="button">내 쿠폰 보기</a>
+		    </div>
+		  </div>
+		<br/>			  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >계 &nbsp;속</button>
