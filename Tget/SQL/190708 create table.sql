@@ -16,18 +16,18 @@ DROP TABLE event;
 DROP TABLE category_two;
 
 
-DROP SEQUENCE seq_youtube_youtube_no;
-DROP SEQUENCE seq_category_two_no;
-DROP SEQUENCE seq_user_Interested_no;
-DROP SEQUENCE seq_content_content_no;
-DROP SEQUENCE seq_image_file_file_no;
-DROP SEQUENCE seq_reply_reply_no;
-DROP SEQUENCE seq_report_report_no;
-DROP SEQUENCE seq_alarm_alarm_no;
-DROP SEQUENCE seq_coupon_coupon_no;
-DROP SEQUENCE seq_ticket_ticket_no;
-DROP SEQUENCE seq_transaction_tran_no;
-DROP SEQUENCE seq_point_history_no;
+DROP SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_category_two_no 			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_user_Interested_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_content_content_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_image_file_file_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_reply_reply_no 			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_report_report_no 			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_alarm_alarm_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_coupon_coupon_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_ticket_ticket_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_transaction_tran_no			INCREMENT BY 1 START WITH 10000;
+DROP SEQUENCE seq_point_history_no 			INCREMENT BY 1 START WITH 10000;
 
 
 CREATE SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;

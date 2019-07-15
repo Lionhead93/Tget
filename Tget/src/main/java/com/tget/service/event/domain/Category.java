@@ -50,17 +50,25 @@ public class Category {
 		this.categoryTwoEng = categoryTwoEng;
 	}
 
+
+	/**
+	 * @return the userId
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
+
+	/**
+	 * @param userId the userId to set
+	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
 
 	public String toString() {
-		return "[Category] categoryTwoNo : "+categoryTwoNo+", "+"categoryTwoEng : "+categoryTwoEng
-	+", categoryOneCode : "+categoryOneCode+", " + "categoryTwoName : "+categoryTwoName;
+		return "[Category] categoryTwoNo : "+categoryTwoNo+", "
+	+"categoryOneCode : "+categoryOneCode+", " + "categoryTwoName : "+categoryTwoName;
 	}
 }

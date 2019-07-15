@@ -326,18 +326,19 @@ public class EventRestController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("categorylist", categorylist);
 			
+		
 		return map;		
 	}
 	
 	@RequestMapping(value="rest/getCategory")
-	public Map<String,Object> getCategory(@RequestParam String categoryTwoName) throws Exception {
+	public Map<String,Object> getCategory(String categoryTwoName) throws Exception {
 		System.out.println("===============rest/getCategory===============");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Category> categorylist = eventService.getCategoryList();
 		
 		for (Category category : categorylist) {
-			if (category.getCategoryTwoName().equals(categoryTwoName.trim())) {
+			if (category.getCategoryTwoName().equals(categoryTwoName)) {
 				map.put("categoryTwoEng", category.getCategoryTwoEng());
 			}
 		}	
