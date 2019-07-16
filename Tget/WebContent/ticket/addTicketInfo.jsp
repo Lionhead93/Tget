@@ -60,15 +60,15 @@
 	
 	$(function(){
 	    
-	    $("button").on("click",function(){
+	    $("button:contains('拌 加')").on("click",function(){
 	    	
 	    	fncAddTicketInfo();
 	    	
 	    });
 		
-		$("a[href='#']:contains('秒&nbsp;家')").on("click",function(){
+		$("a[href='#']:contains('秒 家')").on("click",function(){
 	    	
-	    	self.location = "/";
+			history.go(-1);
 	    	
 	    });
 	    
@@ -129,8 +129,8 @@
 		<br/>			  
 		  <div class="form-group">
 		    
-		      <button type="button" class="btn btn-primary"  >拌 &nbsp;加</button>
-			  <a class="btn btn-primary btn" href="#" role="button">秒&nbsp;家</a>
+		      <button type="button" class="btn btn-primary"  >拌 加</button>
+			  <a class="btn btn-primary btn" href="#" role="button">秒 家</a>
 		    
 		  </div>
 		</div>  
