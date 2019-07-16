@@ -95,11 +95,9 @@
 										tran_code = #{searchKeyword}
 									</when>
 									<when test="searchCondition == 1 and searchKeyword !='' ">
-										seller_id = #{searchKeyword}
-									</when>
-									<when test="searchCondition == 2 and searchKeyword !='' ">
-										buyer_id = #{searchKeyword}
-									</when>
+										tran_code in('1','2','3')
+										and #{searchKeyword} in (seller_id,buyer_id)
+									</when>									
 									</choose>
 									</if>												
 								</where>

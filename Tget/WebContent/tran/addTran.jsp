@@ -21,9 +21,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="/resources/javascript/common.js" ></script>
    	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
+   	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<style>
        body > div.container{
         	border: 3px solid #D6CDB7;
@@ -75,15 +73,68 @@
 			$("input[name='paymentOption']").val('1');
 			$("input[name='tranCode']").val('1');
 			
-			fncAddTran();
+			var totalPrice = numberWithOutCommas($("input[name='totalPrice']").val());
+			if(totalPrice>1000000){
+				  alert("카카오페이는 100만원까지 가능합니다.");
+				  return;
+			  }
+				$.ajax({
+					url : "/tran/rest/Kakaopay/${ticket.ticketNo}/"+totalPrice ,
+					method : "GET" ,
+					dataType : "json" ,
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+	              	success: function(data){
+	              	  $("input[name='paymentNo']").val(data.tid);
+	              	  var url= data.next_redirect_pc_url;
+	              	  var popOption = "width=650px, height=550px, resizable=no, location=no, top=300px, left=300px;"	                    
+	                  window.open(url,"T-get 카카오결제 ",popOption);
+	              	       	  
+	              	  
+	              	},
+	             	 error: function(){              	
+	                  alert('error');                   
+	              	}              
+	          	});
 	    });
+		
+		IMP.init('imp22741487');
 		
 		$("a:contains('신용카드')").on("click",function(){
 			
 			$("input[name='paymentOption']").val('0');
 			$("input[name='tranCode']").val('1');
 			
-			fncAddTran();
+			IMP.request_pay({
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '${ticket.event.eventName}',
+			    amount : 10,
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '유리',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';	
+			        $("input[name='paymentNo']").val(rsp.imp_uid);			        
+			        var tmp = 0;
+			    } else {
+			        var msg = '결제에 실패하였습니다.';			        
+			        msg += '에러내용 : ' + rsp.error_msg;
+			        var tmp = 1;
+			    }
+			
+			    alert(msg);
+			    if(tmp==0){
+			    	fncAddTran();
+			    }
+			});
+			
+			
 	    });
 		
 		$("a:contains('무통장입금')").on("click",function(){
@@ -190,7 +241,9 @@
 		<input type="hidden" name="event.eventId" value="${ticket.event.eventId}">
 		<input type="hidden" name="event.eventName" value="${ticket.event.eventName}">
 		<input type="hidden" name="paymentOption" value="">
+		<input type="hidden" name="paymentNo" value="">
 		<input type="hidden" name="tranCode" value="">
+		
 		<div class="text-center">
 			<h5><strong>티켓 수량을 선택해주세요.</strong></h5>
 			<small class="text-danger">최대 10장까지 구매가능합니다.<br/></small>
@@ -229,7 +282,7 @@
 		<div class="form-group" >
 		     <br/>
 		     <strong>사용포인트 : </strong> 	
-		        <input type="text" id="point" value="0" style="width: 150px !important"/>
+		        <input type="text" id="point" value="0" style="width: 150px !important"/><br/>
 		        <button type="button" class="btn btn-link"><small>전부 사용</small></button>
 		</div>
 		<div class="form-group" >

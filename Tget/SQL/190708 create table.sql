@@ -263,4 +263,5 @@ INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','스탠딩31번','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175824',100 ,'seller',200000,'1','1','스탠딩32번','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
 
+
 commit;
