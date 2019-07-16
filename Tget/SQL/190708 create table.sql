@@ -55,9 +55,9 @@ CREATE TABLE event(
 	event_id		VARCHAR2(10) 	NOT NULL,
 	view_count	NUMBER(10) 	DEFAULT 1,
 	category_two_eng	VARCHAR2(30) 	NOT NULL REFERENCES category_two(category_two_eng),
-	event_image	VARCHAR2(100),
+	event_image	VARCHAR2(200),
 	event_name	VARCHAR2(50) 	NOT NULL,
-	event_location	VARCHAR2(50) 	NOT NULL,
+	event_location	VARCHAR2(100) 	NOT NULL,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
 	PRIMARY KEY(event_id)
