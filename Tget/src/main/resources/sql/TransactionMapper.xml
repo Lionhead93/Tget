@@ -34,11 +34,11 @@
 	<insert 	id="insertTran"		parameterType="transaction" >
 	 	insert 
 	 	into 
-	 	transaction(tran_no, ticket_no, event_id, event_name, seller_id, seller_nickname, buyer_id,
-	 				 buyer_nickname, order_amount, total_price, payment_option, payment_no , tran_code, delivery_add ) 
+	 	transaction(tran_no, ticket_no, event_id,seller_id,buyer_id,
+	 				 order_amount, total_price, payment_option, payment_no , tran_code, delivery_add ) 
         
-        values( seq_transaction_tran_no.nextval , #{ticket.ticketNo} , #{event.eventId} , #{event.eventName} , 
-                #{seller.userId} , #{seller.nickName} , #{buyer.userId} , #{buyer.nickName} ,
+        values( seq_transaction_tran_no.nextval , #{ticket.ticketNo} , #{event.eventId} , 
+                #{seller.userId}, #{buyer.userId} ,
                  #{orderAmount} , #{totalPrice} , #{paymentOption} , #{paymentNo:VARCHAR} , #{tranCode} , #{deliveryAddr})
 	 </insert>
 	 

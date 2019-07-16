@@ -9,7 +9,7 @@ public class Report {
 		private String whiteNickName;
 		private String blackId;
 		private int contentNo;
-		private int ReplyNo;
+		private int replyNo;
 		private String reportReasonCode;
 		private Date regDate;
 		private String reportCode;
@@ -46,10 +46,10 @@ public class Report {
 			this.contentNo = contentNo;
 		}
 		public int getReplyNo() {
-			return ReplyNo;
+			return replyNo;
 		}
 		public void setReplyNo(int replyNo) {
-			ReplyNo = replyNo;
+			replyNo = replyNo;
 		}
 		public String getReportReasonCode() {
 			return reportReasonCode;
@@ -78,7 +78,7 @@ public class Report {
 		@Override
 		public String toString() {
 			return "Report [reportNo=" + reportNo + ", whiteId=" + whiteId + ", whiteNickName=" + whiteNickName
-					+ ", blackId=" + blackId + ", contentNo=" + contentNo + ", ReplyNo=" + ReplyNo
+					+ ", blackId=" + blackId + ", contentNo=" + contentNo + ", replyNo=" + replyNo
 					+ ", reportReasonCode=" + reportReasonCode + ", regDate=" + regDate + ", reportCode=" + reportCode
 					+ ", Check=" + check + "]";
 		}

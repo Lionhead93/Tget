@@ -7,6 +7,7 @@ import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -34,7 +35,8 @@ public class CommunityServiceImpl implements CommunityService{
 		System.out.println(this.getClass());
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 
 	@Override
 	public void addContent(Content content) throws Exception {
@@ -48,6 +50,7 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public void addReport(Report report) throws Exception {
 		// TODO Auto-generated method stub
+		
 		communityDao.InsertReport(report);
 	}
 	

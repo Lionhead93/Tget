@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -10,18 +10,14 @@
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="/resources/javascript/common.js" ></script>
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
    
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
@@ -31,9 +27,6 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
             background-color : whitesmoke;
-        }
-	   body {
-            padding-top : 50px;
         }
     
     </style>
@@ -78,7 +71,7 @@
 	    	
 	    });
 		
-	    $("a[href='#']").on("click",function(){
+		$("a[href='#']:contains('취&nbsp;소')").on("click",function(){
 	    	
 	    	self.location = "/";
 	    	
@@ -102,7 +95,7 @@
 	    	}	    	
 	    	$.ajax(
 					{
-						url : "/ticket/rest/getTicketSellProb/"+price+"/${sellticketInfo.event.eventId}" ,
+						url : "/ticket/rest/getTicketSellProb/"+price+"/${ticket.event.eventId}" ,
 						method : "GET" ,
 						dataType : "json" ,
 						headers : {
@@ -131,55 +124,43 @@
 </head>
 
 <body>
-	
+	<jsp:include page="/layout/toolbar.jsp" />
 	<div class="container">
 	<br/>
-		<h1 class="text-center">판매가격 결정  ${sellticketInfo.event.eventName}</h1>
+		<h1 class="text-center">판매가격 결정  ${ticket.event.eventName}</h1>
 				
-		<form class="form-horizontal">				  
+		<form>
+		<div class="text-center">				  
 		<br/>
 		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">희망 가격</label>
-		    <div class="col-sm-4">
-		     <input type="text" class="form-control" id="price" name="price" placeholder="판매가격입력">
-		    </div>
+		    <strong>희망 가격 : </strong>
+		     <input type="text" id="price" name="price" placeholder="판매가격입력">
 		  </div>
 		  <div class="form-group">
-		  <label for="lowPrice" class="col-sm-offset-1 col-sm-3 control-label">등록 최저가</label>
-		  <div class="col-sm-4">
+		  <strong>등록 최저가 : </strong>
 		  	<span id="lowPrice"></span>
 		  </div>
-		  </div>
-		  <div class="form-group">
-		  <label for="highPrice" class="col-sm-offset-1 col-sm-3 control-label">등록 최고가</label>
-		  <div class="col-sm-4">
+		  <div class="form-group">		 
+		  <strong>등록 최고가 : </strong>
 		  	<span id="highPrice"></span>
 		  </div>
+		  <div class="form-group">
+		  <strong>평균 가 : </strong>
+		  	<span id="avgPrice"></span>		  
 		  </div>
 		  <div class="form-group">
-		  <label for="avgPrice" class="col-sm-offset-1 col-sm-3 control-label">평균 가</label>
-		  <div class="col-sm-4">
-		  	<span id="avgPrice"></span>
-		  </div>
-		  </div>
-		  <div class="form-group">
-		  <label for="sellProb" class="col-sm-offset-1 col-sm-3 control-label">판매 확률</label>
-		  <div class="col-sm-4">
+		  <strong>판매 확률 : </strong> 
 		  	<span id="sellProb"></span>
 		  </div>
-		  </div>		  		
 		<br/>
 		   <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
 			  <a class="btn btn-danger btn" href="#" role="button">게시된 &nbsp;판매현황 &nbsp;보기</a>
-		    </div>
 		  </div>
 		 <br/>
 		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >결 &nbsp;정</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		    </div>
+		  </div>
 		  </div>
 		</form>
 		
