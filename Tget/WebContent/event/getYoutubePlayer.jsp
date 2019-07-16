@@ -21,66 +21,70 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script type="text/javascript">
 	
-	var videoList = [];
+		var tag = document.createElement('script');
 	
-	function requestTokenSubmit(requestPageToken){
-		$("#requestPageToken").val(requestPageToken);
-		$("form").attr("method" , "POST").attr("action" , "/event/addYoutubeVideo").submit();
-	}
+	    tag.src = "https://www.youtube.com/iframe_api";
+	    var firstScriptTag = document.getElementsByTagName('script')[3];
+	    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	
-	function getYoutubePlayerSubmit(videoId,description,title){
-		$("#description").val(description);
-		$("#title").val(title);
-		$("form").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?videoId="+videoId).submit();
-	}
+	    // 3. This function creates an <iframe> (and YouTube player)
+	    //    after the API code downloads.
+	    var player;
+	    function onYouTubeIframeAPIReady() {
+	      player = new YT.Player('player', {
+	        height: '260',
+	        width: '460',
+	        videoId: '${videoId}',
+	        events: {
+	          'onReady': onPlayerReady,
+	          'onStateChange': onPlayerStateChange
+	        }
+	      });
+	    }
 	
-	$(function(){
-// 		alert("eventName : "+$("#eventName").val());
-// 		$.ajax(
-// 				{
-// 					url : "/event/rest/addYoutubeVideo/ "+$("#requestPageToken").val(),
-// 					method : "GET",
-// 					data : {
-// 						searchKeyword : $("#searchKeyword").val()
-// 					},
-// 					dataType : "json",
-// 					success : function(JSONData, status){
-// 						alert(status);
-// 						alert("JSONData : \n"+JSONData);		
-				
-// 					}
-		
-// 		});		
-		$("#prevPageToken").on("click",function(){
-			if ($(this).val() == "") {
-				alert("첫번째 페이지 입니다.");
-			}else{
-				requestTokenSubmit($(this).val());				
-			}
-		});
-		
-		$("#nextPageToken").on("click",function(){
-			if ($(this).val() == "") {
-				alert("마지막 페이지 입니다.");
-			}else{
-				requestTokenSubmit($(this).val());				
-			}
-		});
-		
-		$("button[name='getYoutubePlayer']").on("click",function(){
-			getYoutubePlayerSubmit($(this).val(),$(this).parent().parent().children("input[name='descriptionByList']").val(),$(this).parent().parent().children("input[name='titleByList']").val());
-// 			$(this).parent().parent().children("input[name='titleByList']").val();
-// 			$(this).parent().parent().children("input[name='descriptionByList']").val();
-// 			$("form").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?youtubeId="+$(this).val()).submit();
-		});
-		
-		$("button:contains('검색')").on("click",function(){
-			$("#searchKeyword").val($("input[type='text']").val());
-			requestTokenSubmit("");
-		});
-		
-	});
+	    // 4. The API will call this function when the video player is ready.
+	    function onPlayerReady(event) {
+	      event.target.playVideo();
+	    }
 	
+	    // 5. The API calls this function when the player's state changes.
+	    //    The function indicates that when playing a video (state=1),
+	    //    the player should play for six seconds and then stop.
+	    var done = false;
+	    function onPlayerStateChange(event) {
+	      if (event.data == YT.PlayerState.PLAYING && !done) {
+	        setTimeout(stopVideo, 6000);
+	        done = true;
+	      }
+	    }
+	    function stopVideo() {
+	      player.stopVideo();
+	    }
+	    
+	    $(function(){
+	    	$("button:contains('뒤로가기')").on("click",function(){
+	  			$("form").attr("method" , "POST").attr("action" , "/event/addYoutubeVideo").submit();
+// 	  		  javascript:history.go(-1);
+	  		});   
+	    	
+	    	$("button:contains('등록하기')").on("click",function(){
+// 	    		alert($("#eventName").val());
+	    		$.ajax(
+	     				{
+	     					url : "/event/rest/addYoutubeVideo/ "+$("#videoId").val(),
+	     					method : "POST",
+	     					data : {
+	     						eventName : $("#eventName").val()
+	     					},
+	     					dataType : "json",
+	     					success : function(JSONData, status){
+	     						alert("등록완료");
+	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
+	     					}	    		
+	     		 });	
+// 	  			$("form").attr("method" , "POST").attr("action" , "/event/rest/addYoutubeVideo/"+$("#videoId").val()).submit();
+	  		});   
+	    });		
 	</script>
 	<style type="text/css">
 		@media (max-width: 500px) {
@@ -92,10 +96,12 @@
 	 	font-size: 15px;   
 	 	width: 500px;
 	 }
-	 img{
-	 	padding: 5px 5px 5px 5px ;
+	 #player{
+	 	padding: 20px 0px 0px 0px ;
 	 }
 	 .button_black{
+	 		width: 200;
+	 		height: 40px;
 			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
 			font-size:15px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
 			/* text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
@@ -120,49 +126,35 @@
 			 background-image: -o-linear-gradient(top, #646464, #282828);
 			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 		}
+		h5{
+			font-weight: bold;
+		}
 	</style>
 </head>
 
 <body>
 
 <form>
-	<div class="container">
+	<div class="container" >
+		<input type="hidden" id="videoId" name="videoId" value="${youtubeVideo.videoId}"/>
 		<input type="hidden" id="eventName" name="eventName" value="${eventName}"/>
-		<input type="hidden" id="title" name="title" />
-		<input type="hidden" id="description" name="description" />
-		<div class="input-group mb-3">
-			<input type="hidden" id="searchKeyword" name="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}"/>
-			<input type="text" class="form-control"  placeholder="검색어" 
-			 aria-label="searchKeyword" aria-describedby="button-addon2">
-			<div class="input-group-append">
-		 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
-		 	</div>
-		</div>
-		<div class="row">
-		<ul class="list-unstyled">
-			<c:forEach items="${youtubeList}"  var="i">
-				<li class="media">
-					<img src="${i.thumbnails}"/>
-			   		<div class="media-body">
-			      		<h6 class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>
-			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/>
-			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/>
-						 : ${i.description} <br/>
-						<div align="right">			
-							<button class="button_black" name="getYoutubePlayer" value="${i.videoId}">동영상보기</button><br/>
-						</div>
-			    	</div>
-			 	 </li>
-			  ===========================================================<br/>
-			</c:forEach>		
-		</ul>
-		
-				
-	</div><br/>
+		<input type="hidden" id="searchKeyword" name="searchKeyword" value="${!empty searchKeyword? searchKeyword : ''}"  >
+		<input type="hidden" id="requestPageToken" name="requestPageToken" value="${!empty requestPageToken? requestPageToken:'' }"/>
+		<h5>${youtubeVideo.title}</h5>
+		<div id="player"></div> <br/><br/>
 		<div align="center">
-			<input type="hidden" id="requestPageToken" name="requestPageToken" value="${!empty requestPageToken? requestPageToken:'' }"/>
-			<button class="button_black"  id="prevPageToken" name="prevPageToken" value="${!empty prevPageToken? prevPageToken : ''}">◀</button>&nbsp;&nbsp;
-			<button class="button_black"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
+			<div class="row" >
+				<div class="col-sm-1 "></div>
+				<div class="col-sm-3"  align="left"><button class="button_black">뒤로가기</button></div>
+				<div class="col-sm-4 ">
+<!-- 					 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  -->
+					
+				</div>
+				<div class="col-sm-3"  align="right"><button class="button_black">등록하기</button></div>
+				<div class="col-sm-1"></div>
+				<br/><br/><br/>
+				<div align="left">${youtubeVideo.description}</div>	
+			</div>		
 		</div>
 	</div>
 </form>

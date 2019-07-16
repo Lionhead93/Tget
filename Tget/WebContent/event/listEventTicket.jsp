@@ -3,17 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%
-// com.tget.service.user.domain.User user = new com.tget.service.user.domain.User();
-// user.setUserId("admin");
-// user.setUserName("admin");
-// user.setKakaoId("");
-// user.setFacebookId("");
-// user.setNaverId("");
-// session.setAttribute("user", user);
-%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,15 +14,15 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
-	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
+<!-- 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	 -->
+<!-- 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet"> -->
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+<!-- 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<!-- 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
 	<script type="text/javascript">
 	
 	var videoList = [];
@@ -55,18 +44,20 @@
 					}			
 			});	
 
-		$(".addTran").on("click",function(){
-// 			alert($(this).val());
-// 			$("form").attr("method" , "GET").attr("action" , "/trans/addTran?ticketNo="+$(this).val()).submit();
-			self.location = "/trans/addTran?ticketNo="+$(this).val();
+		$("#addYoutube").on("click",function(){
+			popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
+					"popWin",
+					"left=500, top=100, width=600, height=600, "
+					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		});
 		
-		$(".getSellerEstimation").on("click",function(){
-// 			alert($(this).val());
-// 			popWin = window.open("/rnp/getSellerEstimationList?sellerId="+$(this).val(),
-// 														"popWin",
-// 														"left=300, top=200, width=300, height=200, "
-// 														+"marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		$("button.addTran").on("click",function(){
+			self.location = "/tran/addTran?ticketNo="+$(this).val();
+//  			alert("ticketNo="+$(this).val());
+			
+		});
+		
+		$("button.getSellerEstimation").on("click",function(){
 			$("form").attr("method" , "GET").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).val()).submit();
 		});
 		
@@ -152,7 +143,7 @@
 	</script>
 	
 	<style>
-      div.container-fluid {
+      div.container {
         	margin-top: 50px;
         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
         	font-size: 25px;
@@ -196,6 +187,9 @@
 		.interested{
 			color : red;
 		}
+		div.list{
+			padding : 0px 20px;
+		}
     </style>
 </head>
 
@@ -203,8 +197,9 @@
 <jsp:include page="/layout/toolbar.jsp" />
 <form>
 	
-	<div class="container-fluid">
+	<div class="container" align="center">
 	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
+	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
 		<div class="row">
 			<div class="col-md-10">
 				
@@ -223,53 +218,60 @@
 		</div>		
 		
 		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-4" >
+			<div class="col-lg-6 col-sm-12 col-xs-12" >
 				<h1>${event.eventName }</h1><br/>
 				<div id="player"></div> <br/>
-				<div><button class="button_black" id="" name=""  value="">동영상 등록</button><br/><br/></div>
-<%-- 				이벤트ID : ${event.eventId}<br/> --%>
+				<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
 				${event.eventLocation }<br/>
 				${event.eventDate } &nbsp; 
 				${event.eventTime}<br/><br/><br/>
 			</div>
-			<div class="col-md-5">
-				총 ${totalTicketCount }건
-				<c:forEach items="${ticketList }" var="i">
-				
-					ticketNo : ${i.ticketNo }<br/>
-					총 ${i.amount }장, 장당 ${i.price }원
-					(<c:if test="${i.type == 0}">
-						종이티켓
-					</c:if>
-					<c:if test="${i.type == 1 }">
-						전자티켓
-					</c:if> )
-					<br/>
-					구역 정보 : ${i.seat }<br/>
-					특이사항 : ${i.options }<br/>
-					쿠폰 : 
-					<c:if test="${empty i.couponCode }">
-						미사용
-					</c:if>
-					<c:if test="${i.couponCode == 0 }">
-						강조권
-					</c:if>
-					<c:if test="${i.couponCode == 1 }">
-						상단출력
-					</c:if><br/><br/>
-					<button class="button_black addTran" value="${i.ticketNo }">구매하기</button>
-					<button class="button_black getSellerEstimation" value="${i.seller.userId }">판매자조회</button><br/><br/>
-					==================================<br/><br/>
-					
-				</c:forEach>		
+			<div class="col-lg-6 col-sm-12 col-xs-12">
+
+			<table class="table table-striped">
+					  <thead>
+					    <tr align="center">
+					      <th scope="col"><h4>총 ${totalTicketCount}건</h4></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <c:forEach items="${ticketList }" var="i">
+					    <tr>
+					      <td>
+							<div class="list" align="left">
+								ticketNo : ${i.ticketNo }<br/>
+								총 ${i.amount }장, 장당 ${i.price }원
+								(<c:if test="${i.type == 0}">
+									종이티켓
+								</c:if>
+								<c:if test="${i.type == 1 }">
+									전자티켓
+								</c:if> )
+								<br/>
+								구역 정보 : ${i.seat }<br/>
+								특이사항 : ${i.options }<br/>
+								쿠폰 : 
+								<c:if test="${empty i.couponCode }">
+									미사용
+								</c:if>
+								<c:if test="${i.couponCode == 0 }">
+									강조권
+								</c:if>
+								<c:if test="${i.couponCode == 1 }">
+									상단출력
+								</c:if><br/><br/>								
+							</div>			
+							<div class="list" align="right">
+								<button class="button_black addTran" value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
+								<button class="button_black getSellerEstimation" value="${i.seller.userId }">판매자조회</button><br/>
+							</div>
+					  		</td>
+				  	 	 </tr>
+						</c:forEach>
+			  		</tbody>
+				</table>					
 			</div>
-			<div class="col-md-2"></div>
 		</div>
-		
-	<input type="hidden" id="searchCondition" name="searchCondition" value="1"/>
-	<input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-	<button type="submit" id="searchSubmit" >검색</button>
 	</div>
 </form>
 

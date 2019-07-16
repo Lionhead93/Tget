@@ -316,7 +316,7 @@ public class EventDaoImpl implements EventDao {
 //		String url= 	"https://www.googleapis.com/youtube/v3/search?"
 //				+ "part=snippet&type=video&key=AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A";
 		
-		if (search.getSearchKeyword()!=null) {
+		if (search.getSearchKeyword() != null) {
 			url += "&q="+search.getSearchKeyword();
 		}		
 		if (requestPageToken != null && requestPageToken !="") {

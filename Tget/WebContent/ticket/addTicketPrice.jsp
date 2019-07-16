@@ -102,8 +102,8 @@
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"
 						},
-						success : function(data) {							
-							var sellProb = data.sellProb.sellprob;
+						success : function(data) {	
+							var sellProb = data.sellprob;
 							if(sellProb == 0){
 								$("#sellProb").html("추천가격 : 적당한 가격입니다. 해당 가격의 티켓은 판매 확률이 더 높습니다.").css("color" , "blue");
 							}else if(sellProb == 1){

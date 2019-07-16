@@ -114,7 +114,7 @@ public class EventController {
 	@RequestMapping(value="getEvent")
 	public String getEvent(@RequestParam String category, @RequestParam String eventName, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
-		
+
 		Search search = new Search();
 		
 		List<Event> eventListByName = eventService.getEventByName(eventName);
@@ -142,7 +142,7 @@ public class EventController {
 		}
 		
 		System.out.println(eventListByName);
-		
+		model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
 		model.addAttribute("eventListByName", eventListByName);
 		model.addAttribute("totalResults", eventListByName.size());
 		model.addAttribute("eventName", eventName);
@@ -166,10 +166,14 @@ public class EventController {
 		
 		Event event = eventService.getEvent(eventId);
 		
+		List<String> list = eventService.getYoutubeIdList(event.getEventName());
+		
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
 		model.addAttribute("lowPrice", sellProb.getLowPrice());
 		model.addAttribute("totalTicketCount",sellProb.getTotalCount());
+		model.addAttribute("videoId", "-iDOez7D1tY");
+		model.addAttribute("youtubeIdList",list);
 		
 		return "forward:/event/listEventTicket.jsp";		
 	}
@@ -200,25 +204,49 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.GET)
-	public String addYoutubeVideo(Model model) throws Exception {
+	public String addYoutubeVideo(@RequestParam String eventName,Model model) throws Exception {
 		System.out.println("===============addYoutubeVideo===============");
-		//youtube테이블에 add하기위해 창을 요청하는 때
-		Map<String,Object> map = eventService.getYoutubeList(null, null, youtubeKey);
+		//youtube 동영상 찾는 팝업창 들어올 때
+		
+		Map<String,Object> map = eventService.getYoutubeList(new Search(), null, youtubeKey);
 
 		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
 		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
 		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
 		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+		model.addAttribute("eventName",  eventName);
+		return "forward:/event/addYoutubeVideoGET.jsp";
+	}
+	
+	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.POST)
+	public String addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
+		System.out.println("===============addYoutubeVideo===============");
+		//검색하기 하면 여기로 옴(검색결과 주면서 팝업창 페이지이동)
 		
+		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
+
+		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
+		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
+		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
+		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+		model.addAttribute("eventName",  eventName);
+		model.addAttribute("requestPageToken",  requestPageToken);
 		return "forward:/event/addYoutubeVideoGET.jsp";
 	}
 	
 	@RequestMapping(value="getYoutubePlayer")
-	public String getYoutubePlayer(@RequestParam String youtubeId,Model model) throws Exception {
+	public String getYoutubePlayer( @ModelAttribute("youtubeVideo") YoutubeVideo youtubeVideo,@RequestParam String requestPageToken,
+			@RequestParam String eventName,@RequestParam String searchKeyword,Model model) throws Exception {
 		System.out.println("===============getYoutubePlayer===============");
 		//youtube를 search하고 그 결과를 보여주는 화면에서, 특정 동영상 재생을 할 수 있는 화면으로 넘어갈 때
 		//팝업창 화면 자체를 페이지 이동시키는 것이므로 이 Method는 RestController로 가지 않을 것...(?)
-		model.addAttribute("youtubeId", youtubeId);
+		System.out.println(youtubeVideo);
+		
+		System.out.println("eventName ; "+eventName);
+		model.addAttribute("youtubeVideo", youtubeVideo);
+		model.addAttribute("requestPageToken", requestPageToken);
+		model.addAttribute("eventName", eventName);
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "forward:/event/getYoutubePlayer.jsp";
 	}

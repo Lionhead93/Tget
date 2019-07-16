@@ -67,7 +67,7 @@ public class YoutubeVideo {
 		setChannelId((String)snippet.get("channelId"));
 		setTitle((String)snippet.get("title"));
 		setDescription((String)snippet.get("description"));
-		setThumbnails(((String)((Map<String,Object>)((Map<String,Object>)snippet.get("thumbnails")).get("medium")).get("url")));
+		setThumbnails(((String)((Map<String,Object>)((Map<String,Object>)snippet.get("thumbnails")).get("default")).get("url")));
 	}
 	public String getChannelId() {
 		return channelId;
