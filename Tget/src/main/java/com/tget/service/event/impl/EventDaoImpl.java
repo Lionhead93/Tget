@@ -208,13 +208,11 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-//				url+="&q="+search.getSearchKeyword();
-				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+				url+="&q="+search.getSearchKeyword();
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				//url+="&name="+search.getSearchKeyword();
-				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+				url+="&name="+search.getSearchKeyword();
 			}
 		}
 		url+="&start=0";
@@ -262,12 +260,12 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+				url+="&q="+search.getSearchKeyword();
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
 //				url+="&name="+search.getSearchKeyword();
-				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+				url+="&q="+search.getSearchKeyword();
 			}
 		}
 		
@@ -318,7 +316,7 @@ public class EventDaoImpl implements EventDao {
 //		String url= 	"https://www.googleapis.com/youtube/v3/search?"
 //				+ "part=snippet&type=video&key=AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A";
 		
-		if (search.getSearchKeyword()!=null) {
+		if (search.getSearchKeyword() != null) {
 			url += "&q="+search.getSearchKeyword();
 		}		
 		if (requestPageToken != null && requestPageToken !="") {

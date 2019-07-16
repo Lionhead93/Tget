@@ -18,6 +18,8 @@ public interface UserDao {
 		public User selectSalesGrade(String userId)throws Exception;
 		public int selectTotalCount(Search search) throws Exception ;
 		public User nickNameCheck(String nickName) throws Exception ;
+		public User selectCode(String code) throws Exception;
+	
 
 
 }

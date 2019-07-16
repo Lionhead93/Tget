@@ -94,19 +94,19 @@ public class EventRestController {
 		return eventService.getYoutubeIdList(eventName);
 	}
 	
-	@RequestMapping(value="rest/addYoutubeVideo/{requestPageToken}", method=RequestMethod.GET)
-	public Map<String,Object> addYoutubeVideo(@PathVariable String requestPageToken, @ModelAttribute Search search) throws Exception {
-		System.out.println("===============rest/addYoutubeVideo/{requestPageToken}===============");
-		//youtube테이블에 add하기위해 창을 요청하는 떄 -> youtube를 search하고 그 결과를 보여줄 화면
-		return eventService.getYoutubeList(search, requestPageToken, youtubeKey);
-	}
+//	@RequestMapping(value="rest/addYoutubeVideo", method=RequestMethod.GET)
+//	public Map<String,Object> addYoutubeVideo(@RequestParam String requestPageToken, @ModelAttribute Search search) throws Exception {
+//		System.out.println("===============rest/addYoutubeVideo===============");
+//		//youtube테이블에 add하기위해 창을 요청하는 떄 -> youtube를 search하고 그 결과를 보여줄 화면
+//		return eventService.getYoutubeList(search, requestPageToken.trim(), youtubeKey);
+//	}
 	
-	@RequestMapping(value="rest/addYoutubeVideo/{youtubeId}", method=RequestMethod.POST)
-	public Map<String,Object> addYoutubeVideo(@PathVariable String youtubeId,@RequestBody String eventName) throws Exception {
-		System.out.println("===============rest/addYoutubeVideo/{youtubeId}===============");
-		
-		eventService.addYoutubeVideo(youtubeId, eventName);
-		List<String> list = eventService.getYoutubeIdList(eventName);
+	@RequestMapping(value="rest/addYoutubeVideo/{videoId}", method=RequestMethod.POST)
+	public Map<String,Object> addYoutubeVideo(@PathVariable String videoId,@ModelAttribute("event") Event event) throws Exception {
+		System.out.println("===============rest/addYoutubeVideo/{videoId}===============");
+		System.out.println("eventName : "+event.getEventName());
+		eventService.addYoutubeVideo(videoId, event.getEventName());
+		List<String> list = eventService.getYoutubeIdList(event.getEventName());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("youtubeListByName", list);

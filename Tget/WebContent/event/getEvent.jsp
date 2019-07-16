@@ -28,8 +28,7 @@
 	var videoList = [];
 	
 	$(function(){
-		$(".addTicket").on("click",function(){
-			
+		$(".addTicket").on("click",function(){			
 			self.location="/ticket/addTicketInfo?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
@@ -37,15 +36,23 @@
 			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val()).submit();
 // 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
+		
+		$("#addImage").on("click",function(){			
+		});		
+		
+		$("#updateImage").on("click",function(){			
+		});		
+		
+		$("#deleteImage").on("click",function(){			
+		});		
 	});
 	
 	</script>
 	
 	<style>
       div.container-fluid {
-        	margin-top: 50px;
-        	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
-        	font-size: 30px;
+        	font-family: 'Sunflower', sans-serif;
+	 		font-size: 20px;    
         }
         
         div.col-md-4{
@@ -92,39 +99,48 @@
 <body>
 <jsp:include page="/layout/toolbar.jsp" />
 <form>
-	<div class="container-fluid">
-			eventListByName<br/><br/>		
-			총 ${totalResults} 건</br></br>	
-			<c:forEach items="${eventListByName}"  var="i">
+	<div class="container-fluid"  align="center">
+			<br/>			
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-3" align="center">
-					${i.eventName}
+				<div class="col-lg-5" align="center">
+					<h3>${eventName}</h3>
+					${eventImage}</br>	
 					<img src = "http://placehold.it/300x200" class="img-rounded"/><br/>
-					<button class="button_black" id="" name=""  value="">등록</button>&nbsp;&nbsp;
-					<button class="button_black" id="" name=""  value="">수정</button>&nbsp;&nbsp;
-					<button class="button_black" id="" name=""  value="">삭제</button><br/><br/><br/>
+					<button class="button_black" id="addImage" >등록</button>&nbsp;&nbsp;
+					<button class="button_black" id="updateImage" >수정</button>&nbsp;&nbsp;
+					<button class="button_black" id="deleteImage">삭제</button><br/><br/><br/>
 				</div>			
-				<div class="col-md-5">			
-					<div class="list">
-						<div>	
-							<input type="hidden"  value="${i.eventId}"/><br/><br/>
-							이벤트ID : ${i.eventId}<br/>
-							날짜 : ${i.eventDate }<br/>
-							시간 : ${i.eventTime}<br/>
-							이벤트 장소 : ${i.eventLocation }<br/>
-
-							현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
-							티켓최저가 : ${i.ticketLowestPrice }<br/>				
-							<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" >
-							<button class="button_black addTicket" name="addTicket" >판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="button_black getTicketList" name="getTicketList" >구매</button><br/>
-						</div>
-						============================<br/><br/><br/>
-					</div>
-					<div class="col-md-2"></div>
+				<div class="col-lg-6">	
+					<table class="table table-striped">
+					  <thead>
+					    <tr align="center">
+					      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <c:forEach items="${eventListByName}"  var="i">
+					    <tr>
+					      <td>
+							<div class="event" align="left">
+								<input type="hidden"  value="${i.eventId}"/><br/><br/>
+								이벤트ID : ${i.eventId}<br/>
+								날짜 : ${i.eventDate }<br/>
+								시간 : ${i.eventTime}<br/>
+								이벤트 장소 : ${i.eventLocation }<br/>
+	
+								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
+								티켓최저가 : ${i.ticketLowestPrice }<br/>				
+								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" >
+								<button class="button_black addTicket" name="addTicket" >판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="button_black getTicketList" name="getTicketList" >구매</button><br/>
+							</div>			
+					  </td>
+				    </tr>
+				   </c:forEach>
+			  		 </tbody>
+					</table>					
 				</div>
-			</c:forEach>		
+				<div class="col-lg-1"></div>
 		</div>
 		
 	</div>
