@@ -35,16 +35,19 @@
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="insertUser"		parameterType="user" >
+
+ 	 <insert 	id="insertUser"		parameterType="user" >
 	 	INSERT
 		INTO users( user_id , user_name , password , phone , nickname, address, postal_code, role, 
 		local, point, user_statement, last_conn_date, kakao_Id, naver_Id, facebook_Id, blacklist_code, blacklist_start_date,
 		blacklist_end_date, seller_code, sales_amount, sales_count, account_bank, account_no) 
 		VALUES	 (	#{userId} , #{userName} , #{password} , #{phone} , #{nickName} , #{address}, 
-					#{postalCode} , #{role} , #{local} , #{point} , #{userStatement} , SYSDATE ,
+					#{postalCode:VARCHAR} , '1' , #{local:CHAR} , #{point:NUMERIC} , '1' , SYSDATE ,
 					#{kakaoId:VARCHAR}, #{naverId:VARCHAR}, #{facebookId:VARCHAR} , #{blacklistCode:CHAR}, #{blacklistStartDate:DATE} , #{blacklistEndDate:DATE} ,
 					#{sellerCode:CHAR}, #{salesAmount:NUMERIC}, #{salesCount:NUMERIC}, #{accountBank:VARCHAR}, #{accountNo:VARCHAR} )
 	 </insert>
+	 
+	 
 	 
 	  <select 	id="selectUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT

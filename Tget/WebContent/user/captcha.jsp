@@ -7,7 +7,7 @@
 <%!
     String clientId = "09QL9rhEvTm5Zcy_oNaN"; //애플리케이션 클라이언트 아이디값";
 	String clientSecret = "G5d3gC1oHK"; //애플리케이션 클라이언트 시크릿값";
-
+	//String dirPath="C:\\Users\\user\\git\\Tget\\Tget\\WebContent\\resources\\images";
 	public String captchaNkey() {
 		String result = null;
 		try {
@@ -55,7 +55,7 @@
 				int read = 0;
 				byte[] bytes = new byte[1024];
 				// 랜덤한 이름으로 파일 생성
-				//dirPath="C:\\Users\\Clark\\workspace\\ajax\\WebContent\\captchaImage\\";
+				dirPath="C:\\Users\\user\\git\\Tget\\Tget\\WebContent\\resources\\images";
 				String tempname = Long.valueOf(new Date().getTime()).toString();
 				File f = new File(dirPath + tempname + ".jpg");
 				f.createNewFile();
@@ -118,7 +118,7 @@
 		return result;
 	}%>
 <%
-	String dirPath = request.getServletContext().getRealPath("captchaImage") + "\\";
+	String dirPath = request.getServletContext().getRealPath("C:\\Users\\user\\git\\Tget\\Tget\\WebContent\\resources\\images") + "\\";
 	System.out.println(dirPath);
 	
 	String captchaImageName = null;

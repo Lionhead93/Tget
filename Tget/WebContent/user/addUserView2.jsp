@@ -36,8 +36,7 @@
 			
 			$("button:contains('가 입')").on("click" , function() {
 				alert("오예");
-			 fncAddUser(); 
-			 
+			/* fncAddUser() */
 			
 			});
 		});	 
@@ -48,7 +47,7 @@
 			});
 		});	  */
 	  
-		 function fncAddUser() {
+		 /*  function fncAddUser() {
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
@@ -77,33 +76,31 @@
 				alert("비밀번호 확인이 일치하지 않습니다.");
 				$("input:text[name='password2']").focus();
 				return;
-			} 
-			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
-			
-		}
+			}  */
+				 
 	
-	
+	/*
 		 $(function() {
 	
 		$("button:contains('주소찾기')").on("click" ,function(){
 		    
 	     	new daum.Postcode({
 	            oncomplete: function(data) {
-	                var address = '';
+	                var addr = '';
 
 	                if (data.userSelectedType === 'R') {
-	                	addresss = data.roadAddress;
+	                    addr = data.roadAddress;
 	                } else { 
-	                	address = data.jibunAddress;
+	                    addr = data.jibunAddress;
 	                }				
 	               
-	                $("#address").val(address);
+	                $("#addr").val(addr);
 	            }
 	        }).open(); 
 	 	
 	 		});
 		});
-	
+	 */
 		
 
 
@@ -132,6 +129,9 @@
 		 });  // ajax 끝
 		});
 
+	
+	
+	
 	
 	function emailcheck(email1, email2){
 	    // 유효성 검사
@@ -167,6 +167,12 @@
 
  */
 
+
+
+
+
+	
+	
 /* 		function check() {
 			var form = document.authenform;
 			var authNum = ${authNum};
@@ -191,6 +197,74 @@
 
 /* } */
 	
+		
+		//============= "가입"  Event 연결 =============
+/* 		 $(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("#btn1").click(function() {
+				 fncAddUser(); 
+				
+				alert("좀 떠라ㅠㅠ");
+				
+			});
+		});	 
+		
+		
+		//============= "취소"  Event 처리 및  연결 =============
+		$(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("a[href='#' ]").on("click" , function() {
+				alert("좀 떠라ㅠㅠ");
+			
+				$("form")[0].reset();
+			});
+		});	
+	
+	
+		
+		function fncAddUser() {
+			
+			var id=$("input[name='userId']").val();
+			var pw=$("input[name='password']").val();
+			var pw_confirm=$("input[name='password2']").val();
+			var name=$("input[name='userName']").val();
+			
+			
+			if(id == null || id.length <1){
+				alert("아이디는 반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(pw == null || pw.length <1){
+				alert("패스워드는  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(pw_confirm == null || pw_confirm.length <1){
+				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(name == null || name.length <1){
+				alert("이름은  반드시 입력하셔야 합니다.");
+				return;
+			}
+			
+			if( pw != pw_confirm ) {				
+				alert("비밀번호 확인이 일치하지 않습니다.");
+				$("input:text[name='password2']").focus();
+				return;
+			}
+				 */
+			/* var value = "";	
+			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+				var value = $("option:selected").val() + "-" 
+									+ $("input[name='phone2']").val() + "-" 
+									+ $("input[name='phone3']").val();
+			}
+
+			$("input:hidden[name='phone']").val( value ); 
+			
+			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+		}
+		*/
 
 		//==>"이메일" 유효성Check  Event 처리 및 연결
 		 $(function() {
@@ -260,16 +334,14 @@
 <body>
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
-
+	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-
+	<div class="container">
+	
+		<h1 class="bg-primary text-center">회 원 가 입</h1>
+		
 	
 
 <!-- <script type="text/javascript">
@@ -311,7 +383,7 @@
 	</form> -->
 		
 		<!-- form Start /////////////////////////////////////-->
-		<!-- <form role="form" method="post" autocomplete="off">
+		<form role="form" method="post" autocomplete="off">
 			<p>
 		    <label for="nickName" >닉 네 임</label>
 		      <input type="text" id="nickName" name="nickName"/>
@@ -322,8 +394,16 @@
 			<span class="msg">닉네임을 확인해주세요</span>
 		</p>
 		</form>
-		 -->
-
+		
+		<input type="text" name="phone" id="phone" 
+  placeholder="받는 사람 번호" />
+   <button onclick="sendSms();">전송</button>
+    <br />
+     <br /> 
+   <input type="text" name="sms" id="sms" 
+   placeholder="인증 번호 입력" /> 
+   <button onclick="phoneCheck();">인증</button> 
+		  
 		  
 		  
 	<script type="text/javascript">
@@ -367,21 +447,67 @@
 		 	  } 
 		   }); 
 	   };
-	   
-	   
-	   $(function() {
-	   $("input:checkbox[name='local']:checked").val() {
-		   if($(this).is("checked") {
-		   $(this).attr('value','1');
-		   }
-		  else
-		  {
-		   $(this).attr('value','2');
-		  }
-		  });
-	   });
+	 
+	/* 	   $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				$("button:contains('가 입')").on("click" , function() {
+					alert("오예");
+					fncAddUser()
+				});
+			});	 
+		  $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				$("a:contains('취 소')").on("click" , function() {
+					
+				});
+			});	 
 		  
-		
+			 function fncAddUser() {
+				
+				var id=$("input[name='userId']").val();
+				var pw=$("input[name='password']").val();
+				var pw_confirm=$("input[name='password2']").val();
+				var name=$("input[name='userName']").val();
+				
+				
+				if(id == null || id.length <1){
+					alert("아이디는 반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(pw == null || pw.length <1){
+					alert("패스워드는  반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(pw_confirm == null || pw_confirm.length <1){
+					alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(name == null || name.length <1){
+					alert("이름은  반드시 입력하셔야 합니다.");
+					return;
+				}
+				
+				if( pw != pw_confirm ) {				
+					alert("비밀번호 확인이 일치하지 않습니다.");
+					$("input:text[name='password2']").focus();
+					return;
+				} 
+					  */
+				/* var value = "";	
+				if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+					var value = $("option:selected").val() + "-" 
+										+ $("input[name='phone2']").val() + "-" 
+										+ $("input[name='phone3']").val();
+				}
+
+				$("input:hidden[name='phone']").val( value ); */
+		/* 		
+			 	$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+			}
+		   
+		}); */
+		  
+		  
 	</script>
 		  
 		  <form class="form-horizontal">
@@ -393,7 +519,7 @@
 		    </div>
 		  </div>
 		  
-		  	  <div class="form-group">
+		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
@@ -407,37 +533,10 @@
 		    </div>
 		  </div>
 		  
-		    <div class="form-group">
+		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
-		    </div>
-		  </div>
-		  
-	
-		  
-		
-		  
-		  <div class="form-group">
-		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="phone" name="phone" placeholder="휴대폰">
-		       <button onclick="sendSms();">전송</button>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="sms" class="col-sm-offset-1 col-sm-3 control-label">인증번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="sms" name="sms" placeholder="인증번호">
-		      <button onclick="phoneCheck();">인증</button> 
 		    </div>
 		  </div>
 		  
@@ -446,18 +545,11 @@
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
 		    <div class="col-sm-4">
 		    
-		      <input type="text" class="form-control" id="address" name="address" >
+		      <input type="text" class="form-control" id="addr" name="addr" value="" >
 		      <button type="button" class="btn btn-link">주소찾기</button>
 		    </div>
 		    
 		      </div>
-		      
-		        <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">위치정보문의</label>
-		    <div class="col-sm-4">
-		     <input type="checkbox" id= "local" name="local" value="1"> 동의
-		    </div>
-		  </div>
 		  
 		  	  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">관심카테고리</label>
@@ -466,7 +558,7 @@
 			<input type="checkbox" name="chbox" value="rap"> 랩/힙합
 			<input type="checkbox" name="chbox" value="balad">발라드<br><br>
 		    </div>
-		  </div>W
+		  </div>
  
 		  <!-- <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
