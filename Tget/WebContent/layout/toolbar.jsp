@@ -33,9 +33,8 @@
 	 	font-size: 20px;        
  	}
  	
- 	a.navbar-brand{
+ 	h4{
  		font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
- 		font-size: 25px;
  		font-weight: bold;
  	}
  	
@@ -150,9 +149,9 @@
  	
 <div class="container">	
 				<a class="navbar-brand" >
-				<button type="button" class="btn btn-dark">
-							 <i class="fas fa-running"></i> T-GET</span>
-				</button>
+					<button type="button" class="btn btn-dark">
+								<h4><i class="fas fa-running"></i> T-GET</h4>
+					</button>
 				</a>
  	<!-- <a class="navbar-brand" ><i class="fas fa-running"></i> T-GET</a>	 -->		
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

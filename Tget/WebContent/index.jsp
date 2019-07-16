@@ -75,8 +75,18 @@
           font-size: 3.5rem;
         }
       }
-      
-     
+      .col-4{
+      	font-family: 'Acme', sans-serif; 
+      	font-size: 50px;
+      }
+     .p-2{
+     	font-family: 'Nanum Pen Script', cursive; 
+     	font-size: 30px;
+     }
+     .display-4{
+     	font-family: 'Nanum Pen Script', cursive; 
+     	font-size: 60px;
+     }
     </style>
   </head>
   <body>
@@ -117,7 +127,7 @@
 
   <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
   <div>
-      <h1 class="display-4 font-italic text-center">티켓 판매와 구매는 ? T-GET !</h1>
+      <h1 class="display-4 font-italic text-center"><small>티켓 판매와 구매는 ? </small>T-GET !</h1>
       <br/>
       <br/>
       <div class="row">
