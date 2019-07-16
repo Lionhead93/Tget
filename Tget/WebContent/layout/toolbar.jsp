@@ -80,6 +80,19 @@
 				self.location = "/ticket/getTicketList?menu=check";
 			});
 		
+			$("a:contains('리뷰작성')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+			$("a:contains('내리뷰조회')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+			$("a:contains('내평점조회')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+			$("a:contains('포인트내역조회')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+			
 			
 			
 		});
@@ -186,7 +199,17 @@
 				          <a class="dropdown-item" href="#">자유 게시판</a>
 				        </div>
 				    </li>  
-				    
+				    <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	ReviewAndPoint
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">리뷰작성</a>
+				          <a class="dropdown-item" href="#">내리뷰조회</a>
+				          <a class="dropdown-item" href="#">내평점조회</a>
+				          <a class="dropdown-item" href="#">포인트내역조회</a>
+				        </div>
+				    </li>  
 				    
 				    <li class="nav-item active">
 						    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">

@@ -68,7 +68,7 @@
 					return;
 				}
 				
-				$("form").attr("method","POST").attr("action","/Tget/user/login").attr("target","_parent").submit();
+				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
 		
@@ -77,7 +77,7 @@
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
-				self.location = "/Tget/user/addUser"
+				self.location = "/user/addUser"
 			});
 		});
 		

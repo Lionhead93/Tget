@@ -122,7 +122,7 @@
 	  	WHERE youtube_no = #{youtubeNo} 
   	</delete>
 	 
-	 <select 	id="selectListYoutubeId"	parameterType="string"	resultType="list">
+	 <select 	id="selectListYoutubeId"	parameterType="string"	resultType="string">
 		 SELECT youtube_id 
 		 FROM youtube
 		 WHERE event_name = #{eventName} 

@@ -33,5 +33,5 @@ public interface UserService {
 	public Map<String , Object> getSellerList(Search search) throws Exception;*/
 	public User nickNameCheck(String nickName)throws Exception;
 	
-	
+	public User getCode(String code)throws Exception;
 }

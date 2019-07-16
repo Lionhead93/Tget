@@ -4,29 +4,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Searching Stubhub Event</title>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!--   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 	<script type="text/javascript">
 	var str = "";
 	var arr = [];
 	$(function(){
+		$("input[type='text']").on("keyup",function(){
+			$("#searchKeyword").val($("input[type='text']").val());
+// 			alert("keyup : "+$("#searchKeyword").val());
+		});
+		
+		$("button:contains('검색')").on("click",function(){
+			$("#searchCondition").val("1");
+			$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+		});
+		
+		$("button.button_black").on("click",function(){
+			
+			arr = $(this).parent().children("input").val().split(' ');
+
+			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
+// 			$("form").attr("method" , "GET").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
+
+		});		
+		
 		$("#addEvent").on("click",function(){
 			alert("requestPageToken+1 : "+parseInt($("#requestPageToken").val())+1);
 			var requestPT = parseInt($("#requestPageToken").val())+1;
@@ -50,54 +66,100 @@
 				});			
 		});		
 		
-		$(".getEvent").on("click",function(){
-// 			alert($(this).val());
-// 			str = $(this).parent().children("input").val();
-			arr = $(this).parent().children("input").val().split(' ');
-			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
-// 			alert($(this).parent().children("input[type='hidden']").val());
-// 			self.location = "/event/getEvent?eventName="+$(this).parent().children("input[type='hidden']").val();
-		});		
+		
 	});
 	
 	</script>
-	
-	<style>
-	
-		div.container-fluid {
-	 		font-family: 'Sunflower', sans-serif;
-	 		font-size: 20px;
-	 	}
+	<style type="text/css">
+		 .button_black{
+			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
+			font-size:15px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
+			/* text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
+			 border-radius: 3px; color: white;
+			 font-size:25px;font-family: 'Nanum Pen Script', cursive; 
+/* 			 text-decoration:none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
+			 background-color: #7d7e7d; background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
+			 background-image: -webkit-linear-gradient(top, #7d7e7d, #0e0e0e);
+			 background-image: -moz-linear-gradient(top, #7d7e7d, #0e0e0e);
+			 background-image: -ms-linear-gradient(top, #7d7e7d, #0e0e0e);
+			 background-image: -o-linear-gradient(top, #7d7e7d, #0e0e0e);
+			 background-image: linear-gradient(to bottom, #7d7e7d, #0e0e0e);
+			 filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d, endColorstr=#0e0e0e);
+		}
+			
+		.button_black:hover{
+			 border:1px solid #4a4b4a;
+			 background-color: #646464; background-image: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#282828));
+			 background-image: -webkit-linear-gradient(top, #646464, #282828);
+			 background-image: -moz-linear-gradient(top, #646464, #282828);
+			 background-image: -ms-linear-gradient(top, #646464, #282828);
+			 background-image: -o-linear-gradient(top, #646464, #282828);
+			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
+		}
+ 		.container-fluid{ 
+ 			font-family: 'Sunflower', sans-serif;
+	 		font-size: 20px;    
+ 		} 
 	</style>
-	
-<body>
+<body>	
 <jsp:include page="/layout/toolbar.jsp" />
+
 <form>
-	<div class="container-fluid">	
-	<%-- 	<input type="hidden" id="currentPage" name="currentPage" value="${!empty search.currentPage? search.currentPage: ''}"/> --%>
-		<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
-		<input type="hidden"  id="searchKeyword" name="searchKeyword"  value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-		<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-		<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/>
-		</br>
-		총 ${totalResults} 건의 검색 결과</br></br>
-		eventList
-		<c:forEach items="${eventList}"  var="i">
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-<%-- 					<input type="hidden"  id="eventName" name="eventName"  value="${i.name }"/> --%>
-					이벤트명 : ${i.name}</br>
-					이벤트 장소 : ${i.venueName }</br>
-					출연진 : ${i.performersName }</br>
-					카테고리  : <input type="text"  id="category2" name="category2"  value="${i.ancestorsCategory}" ></br>
-					<button  type="button" class="getEvent" value="${i.name}">상세보기</button></br>
-					============================</br>
-				</div>
-				<div class="col-md-2"></div>
+	<div class="container-fluid" align="center">	
+		<div class="row" >
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" ><br/>
+					<div class="input-group mb-3">
+						<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
+						<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
+						<input type="text" class="form-control"  placeholder="검색어" />
+						<div class="input-group-append">
+					 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+					 	</div>
+					</div>
+				<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
 			</div>
-		</c:forEach>		
+			<div class="col-lg-3"></div>
+		</div>
+
+		<div class="row" >
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8" align="center">
+				
+				<table class="table table-striped">
+				  <thead>
+				    <tr align="center">
+				      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  <c:forEach items="${eventList}"  var="i">
+				    <tr>
+				      <td>
+						<div class="event" align="left">
+							<div  style="padding: 20px 30px ;">
+								이벤트명 : ${i.name }</br>
+								이벤트 장소 : ${i.venueName }</br>
+								출연진 : ${i.performersName }</br>
+							</div>						 
+							<div align="right"  style="padding: 20px  70px ;">
+								<input type="hidden"  id="category2" name="category2"  value="${i.ancestorsCategory}" ></br>
+								<button class="button_black" type="button" name="getEvent"  value="${i.name }">상세보기</button></br>
+							</div>
+						</div>			
+				  </td>
+			    </tr>
+			   </c:forEach>
+		  		 </tbody>
+				</table>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+
+		
 	</div>
 </form>
+
 </body>
 </html>

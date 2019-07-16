@@ -29,6 +29,7 @@ public class User {
 	private int salesCount;
 	private String accountBank;
 	private String accountNo;
+	private String code;
 	//C
 	
 	public User() {
@@ -267,6 +268,14 @@ public class User {
 	}
 
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", phone=" + phone
@@ -276,7 +285,7 @@ public class User {
 				+ ", blacklistCode=" + blacklistCode + ", blacklistStartDate=" + blacklistStartDate
 				+ ", blacklistEndDate=" + blacklistEndDate + ", sellerCode=" + sellerCode + ", salesAmount="
 				+ salesAmount + ", salesCount=" + salesCount + ", accountBank=" + accountBank + ", accountNo="
-				+ accountNo + "]";
+				+ accountNo + ", code=" + code + "]";
 	}
 
 	
