@@ -55,9 +55,9 @@ CREATE TABLE event(
 	event_id		VARCHAR2(10) 	NOT NULL,
 	view_count	NUMBER(10) 	DEFAULT 1,
 	category_two_eng	VARCHAR2(30) 	NOT NULL REFERENCES category_two(category_two_eng),
-	event_image	VARCHAR2(100),
-	event_name	VARCHAR2(10) 	NOT NULL,
-	event_location	VARCHAR2(50) 	NOT NULL,
+	event_image	VARCHAR2(200),
+	event_name	VARCHAR2(50) 	NOT NULL,
+	event_location	VARCHAR2(100) 	NOT NULL,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
 	PRIMARY KEY(event_id)
@@ -262,6 +262,5 @@ INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller',200000,'1','1','스탠딩39번','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','스탠딩31번','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175824',100 ,'seller',200000,'1','1','스탠딩32번','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
-
 
 commit;

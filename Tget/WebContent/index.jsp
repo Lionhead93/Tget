@@ -16,6 +16,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
+	<!-- 타이틀용 글씨 -->
+	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
 	
 	
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -61,7 +63,8 @@
 	
     <style>
     
-       div.container {
+        .p-2, .display-4 {
+       	 font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
        	 font-size: 30px;
        }
       .bd-placeholder-img {
@@ -77,8 +80,14 @@
           font-size: 3.5rem;
         }
       }
-      
-     
+      .row{
+		font-family: 'Sunflower', sans-serif;
+	 	font-size: 20px;           
+      }
+      .col-4{
+      	font-family: 'Acme', sans-serif; 
+ 		font-size: 50px;
+      }
     </style>
   </head>
   <body>
