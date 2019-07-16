@@ -77,7 +77,7 @@ public class ReviewAndPointRestController {
 	///M
 	@RequestMapping(value="json/addReview", method=RequestMethod.POST)
 	public Map<String,Object> addReview(@RequestBody Review review) throws Exception {
-		System.out.println("===============addReview===============");
+		System.out.println("===============rest/addReview===============");
 		
 		rNPService.addReview(review);
 		
@@ -86,9 +86,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/updateReview", method=RequestMethod.GET)
+	@RequestMapping(value="rest/updateReview", method=RequestMethod.GET)
 	public Map<String,Object> updateReview(@RequestBody int tranNo) throws Exception {
-		System.out.println("===============updateReview(===============");
+		System.out.println("===============rest/updateReview(===============");
 		
 		Review review = rNPService.getReview(tranNo);
 		
@@ -98,9 +98,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/updateReview", method=RequestMethod.POST )
+	@RequestMapping(value="rest/updateReview", method=RequestMethod.POST )
 	public Map<String,Object> updateReview(@RequestBody Review review) throws Exception {
-		System.out.println("===============updateReview(===============");
+		System.out.println("===============rest/updateReview(===============");
 		
 		rNPService.updateReview(review);
 		review = rNPService.getReview(review.getTranNo());
@@ -111,9 +111,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/getReview" )
+	@RequestMapping(value="rest/getReview" )
 	public Map<String,Object> getReview(@RequestBody int tranNo) throws Exception {
-		System.out.println("===============getReview(===============");
+		System.out.println("===============rest/getReview(===============");
 		
 		Review review = rNPService.getReview(tranNo);
 		
@@ -123,9 +123,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/getReviewList" )
+	@RequestMapping(value="rest/getReviewList" )
 	public Map<String,Object> getReviewList(@RequestBody String buyerId) throws Exception {
-		System.out.println("===============getReviewList(===============");
+		System.out.println("===============rest/getReviewList(===============");
 		
 		List<Review> list = rNPService.getReviewList(buyerId);
 		
@@ -135,9 +135,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/getSellerEstimationList")
+	@RequestMapping(value="rest/getSellerEstimationList")
 	public Map<String,Object> getSellerEstimationList(@RequestBody String sellerId) throws Exception {
-		System.out.println("===============getSellerEstimationList(===============");
+		System.out.println("===============rest/getSellerEstimationList(===============");
 		
 		List<Review> list = rNPService.getSellerEstimationList(sellerId);
 		
@@ -146,9 +146,9 @@ public class ReviewAndPointRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/getPointHistory")
+	@RequestMapping(value="rest/getPointHistory")
 	public Map<String,Object> getPointHistory(@RequestBody String userId) throws Exception {
-		System.out.println("===============getPointHistory(===============");
+		System.out.println("===============rest/getPointHistory(===============");
 		
 		List<PointHistory> list = rNPService.getPointHistory(userId);
 		
