@@ -86,7 +86,7 @@
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('회원가입')").on("click" , function() {
-				self.location = "/Tget/user/addUser"
+				self.location = "/user/addUser"
 			});
 		});
 		
@@ -94,14 +94,14 @@
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('로 그 인')").on("click" , function() {
-				self.location = "/Tget/user/login"
+				self.location = "/user/login"
 			});
 		});
 		
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('블랙리스트관리')").on("click" , function() {
-				self.location = "/Tget/user/listUser"
+				self.location = "/user/listUser"
 			});
 		});
 		

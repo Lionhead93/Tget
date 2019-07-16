@@ -29,12 +29,18 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
-    
+    	.img_wrap {
+			width: 300px;
+			margin: auto;
+		}
+		.img_wrap img {
+			max-width: 100%;
+		} 
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">	
-		
+	
 	$(function(){
 		
 	    $("a.getEvent").on("click", function(){
@@ -50,6 +56,29 @@
 	    $("a.endDelivery").on("click", function(){	    	
 	    });
 		
+	    $("#file").change(function(){
+	    	readURL(this);
+	    	var form = $("form")[0];
+	    	var formData = new FormData(form);
+	    	$.ajax(
+					{
+						url : "/tran/rest/getDeliveryInfo/" ,
+						processData: false,
+	                    contentType: false,
+						method : "POST" ,						
+						data : formData ,
+						beforeSend : function(){
+				            $('#loading').html("<div class='spinner-border text-primary' role='status'>"+
+				            "<span class='sr-only'>Loading...</span>"+
+				            "</div>");
+				        },
+						success : function(data) {	
+							$('#loading').html("");
+							$('#deliveryNo').val(data);
+						}							 
+			});
+	    });
+	   
 	});
 		
 	</script>		
@@ -104,7 +133,7 @@
 			      <td>
 			      <c:if test="${user.userId==tran.seller.userId}">
 				      <c:if test="${tran.tranCode==0}">-</c:if>
-				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#">배송시작</a></c:if>
+				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
 				      <c:if test="${tran.tranCode==2}">-</c:if>
 				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#">후기 확인</a></c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
@@ -125,6 +154,53 @@
 		</div>
 			
  	</div>
+	
+	<!-- 배송정보입력 모달창  -->
+					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-md" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      <form enctype="multipart/form-data">
+					      	<div class="form-group" >
+							     <br/>
+							     <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배송 사 : </strong> 	
+							        <select name="deliveryCompany">
+									    <option value="">선택</option>
+									    <option value="04">CJ대한통운</option>									    
+									    <option value="01">우체국택배</option>
+									    <option value="56">KGB택배</option>
+									    <option value="05">한진택배</option>
+									    <option value="06">로젠택배</option>
+									    <option value="08">롯데택배</option>
+									    <option value="46">CU편의점택배</option>
+									    <option value="23">경동택배</option>
+									    <option value="53">농협택배</option>
+									</select><br/><br/>
+							      <strong>운송장 번호 : </strong><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important"/>
+							      <br/><br/>
+							      <div class="text-center" id="loading"></div>
+							      <br/><br/>
+								  <div class="img_wrap">
+									<img id="preview" />	
+							      </div>
+							      <strong>이미지로 등록</strong>
+							      
+							      <input type="file" class="form-control" id="file" name="file" value="" placeholder="file input...">
+							</div>
+					      </form>			      
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary">등록</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	
 </body>
 

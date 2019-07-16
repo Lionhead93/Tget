@@ -40,7 +40,7 @@ public class UserController {
 	
 		System.out.println("/user/addUser : GET");
 		
-		return "redirect:/user/addUserView.jsp";
+		return "redirect:/addUserView.jsp";
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
@@ -50,7 +50,7 @@ public class UserController {
 		//Business Logic
 		userService.addUser(user);
 		
-		return "redirect:/user/loginView.jsp";
+		return "redirect:/loginView.jsp";
 		
 	}
 	
