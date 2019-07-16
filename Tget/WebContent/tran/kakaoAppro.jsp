@@ -1,15 +1,9 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
-
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-
-<html lang="ko">
-	
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-	<meta charset="EUC-KR">
+<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,65 +22,25 @@
        body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
-        }
-    
+        }    
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">	
-		
+	<script type="text/javascript">
 	$(function(){
-	    
-		$("#totalPrice").text(numberWithCommas(${transaction.totalPrice}));
-		
-	    $("button:contains('완료')").on("click",function(){
-	    	
-	    	self.location="/";
-	    	
-	    });
-	    
+		$("button:contains('확 인')").on("click",function(){
+			window.opener.fncAddTran();
+			window.self.close();
+		});
 	});
-		
 	</script>		
-    
 </head>
-
 <body>
-	<jsp:include page="/layout/toolbar.jsp" />
-	<div class="container">
-	<br/>
-		
-		<div class="text-center">
-		  <h3 class="display-4">구매 해주셔서 감사합니다.</h3>
-		  <hr class="my-4">
-		  <h5> ${transaction.event.eventName}</h5>
-		  <p>배송지 : ${transaction.deliveryAddr}</p>
-		  <p>결제 수단 : 
-		  <c:if test="${transaction.paymentOption==0}">
-		  	신용카드
-		  </c:if>
-		  <c:if test="${transaction.paymentOption==1}">
-		  	카카오페이
-		  </c:if>
-		  <c:if test="${transaction.paymentOption==2}">
-		  	무통장입금
-		  </c:if>		  
-		  </p>
-		  <p>총 금액 : <span id="totalPrice">${transaction.totalPrice}</span></p>
-		  <c:if test="${transaction.paymentOption==2}">
-		  
-		  <p class="text-danger">*아래의 입금계좌로 당일 안에 입금부탁 드립니다.</p> 
-		  <small class="text-secondary">은행 : 비트은행<br/>
-		  	예금주 : Tget<br/>
-		  	계좌번호 : 110-545-120154<br/></small>
-		  </c:if>
-		  
-		  <br/><br/>
-		  <button type="button" class="btn btn-outline-primary">완료</button>
-		</div>
-			
- 	</div>
-	
+<div class="text-center">
+<br/><br/><br/><br/><br/>
+<h3>결제가 완료 되었습니다.</h3>
+<br/><br/><br/><br/><br/>
+<button type="button" class="btn btn-outline-primary" >확 인</button>
+</div>
 </body>
-
 </html>

@@ -1,5 +1,9 @@
 package com.tget.web.transaction;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tget.common.domain.Search;
+import com.tget.service.alarm.AlarmService;
+import com.tget.service.alarm.domain.Alarm;
 import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.transaction.TranService;
 import com.tget.service.transaction.domain.Transaction;
+import com.tget.service.user.domain.User;
 
 @Controller
 @RequestMapping("/tran/*")
@@ -28,6 +36,9 @@ public class TranController {
 	@Qualifier("tranServiceImpl")
 	@Autowired
 	private TranService tranService;
+	@Qualifier("alarmServiceImpl")
+	@Autowired
+	private AlarmService alarmService;
 	
 	
 	public TranController() {
@@ -49,11 +60,53 @@ public class TranController {
 	@RequestMapping(value = "addTran", method = RequestMethod.POST)	
 	public String addTran(@ModelAttribute("transaction") Transaction transaction, Model model) throws Exception {
 		
-		System.out.println("addTran : POST // transaction = "+transaction);
+		System.out.println("addTran : POST // transaction = "+transaction);		
 		
 		tranService.addTran(transaction);
 		
+		Ticket ticket = ticketService.getTicket(transaction.getTicket().getTicketNo());
+		ticket.setAmount(ticket.getAmount()-transaction.getOrderAmount());
+		ticketService.updateTicketAmount(ticket);
+		System.out.println("payOption/////////////"+transaction.getPaymentOption());
+		
+		if(transaction.getPaymentOption().equals("0") || transaction.getPaymentOption().equals("1")) {
+			Alarm alarm = new Alarm();
+			alarm.setAlarmCode(0);
+			alarm.setAlarmKeyword(Integer.toString(transaction.getTicket().getTicketNo()));
+			alarm.setUserId(ticket.getSeller().getUserId());
+			alarmService.addAlarm(alarm);
+		}
+		
 		return "forward:/tran/addTranResult.jsp";
 	}
+	
+	@RequestMapping(value = "getTranList")	
+	public String getTicketList(@ModelAttribute("search") Search search,
+								HttpSession session, Model model) throws Exception {
+		
+		System.out.println("getTranList  ?search= "+search);
+		
+		User user = (User) session.getAttribute("user");
+		String result = "";
+		//로그인 상태인척
+		if(user==null) {
+			user = new User();
+			user.setUserId("seller");
+		}		
+		if(search.getMenu().equals("user")){
+			search.setSearchCondition("1");	
+			search.setSearchKeyword(user.getUserId());
+			result = "forward:/tran/listTran.jsp";
+		}else if(search.getMenu().equals("check")){
+			search.setSearchCondition("2");
+			result = "forward:/tran/listTranAll.jsp";
+		}
+		
+		Map<String, Object> map = tranService.getTranList(search);
 
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("totalCount", map.get("sellProb"));
+		
+		return result;
+	}	
 }
