@@ -234,7 +234,8 @@
 				${event.eventTime}<br/><br/><br/>
 			</div>
 			<div class="col-md-5">
-				ÃÑ ${totalTicketCount }°Ç
+				ÃÑ ${totalTicketCount }°Ç<br/>
+					==================================<br/>
 				<c:forEach items="${ticketList }" var="i">
 				
 					ticketNo : ${i.ticketNo }<br/>
