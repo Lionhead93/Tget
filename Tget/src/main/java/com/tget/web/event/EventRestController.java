@@ -78,9 +78,9 @@ public class EventRestController {
 	public Map<String,Object> addInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {
 		System.out.println("===============rest/addInterestedEvent/{eventId}===============");
 		
-//		User user = (User)session.getAttribute("user");
-//		String userId = user.getUserId();
-		String userId = "admin";
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+//		String userId = "admin";
 		System.out.println("userId : "+userId);
 		
 		eventService.addInterestedEvent(eventId, userId);
@@ -135,9 +135,9 @@ public class EventRestController {
 	public Map<String,Object> deleteInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {
 		System.out.println("===============rest/deleteInterestedEvent/{eventId}===============");
 		
-//		User user = (User)session.getAttribute("user");
-//		String userId = user.getUserId();
-		String userId = "admin";
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+//		String userId = "admin";
 		eventService.deleteInterestedEvent(eventId, userId);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -147,13 +147,32 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getPopularEventList")
-	public Map<String,Object> getPopularEventList() throws Exception {
+	public List<String> getPopularEventList() throws Exception {
 		System.out.println("===============rest/getPopularEventList===============");
 		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("popularEventList", eventService.getPopularEventList());
+//		Map<String,Object> map = new HashMap<String,Object>();
+		List<Event> list =  eventService.getPopularEventList();
+		List<String> eventNameList = new ArrayList<String>();
 		
-		return map;
+		for (Event event : list) {
+			if (eventNameList.size()==0) {
+				eventNameList.add(event.getEventName());
+			}else if(eventNameList.size()<10){
+				for (int i = 0; i < eventNameList.size(); i++) {
+					if (eventNameList.get(i).equals(event.getEventName())) {
+						break;
+					} else if ((i==eventNameList.size()-1) &&( ! eventNameList.get(i).equals(event.getEventName()))) {
+						eventNameList.add(event.getEventName());
+					}
+				}
+			}else if(eventNameList.size()==10){
+				break;
+			}
+		}
+		
+//		map.put("popularEventList", eventService.getPopularEventList());
+		
+		return eventNameList;
 	}
 	
 	@RequestMapping(value="rest/getRecommendedEvent")
@@ -289,9 +308,9 @@ public class EventRestController {
 	public Map<String,Object> getInterestedEventList(HttpSession session) throws Exception {
 		System.out.println("===============rest/getInterestedEventList===============");
 		
-//		User user = (User)session.getAttribute("user");
-//		String userId = user.getUserId();
-		String userId = "admin";
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+//		String userId = "admin";
 		
 		List<Event> list = eventService.getInterestedEventList(userId);
 		List<String> eventIdList = new ArrayList<String>();

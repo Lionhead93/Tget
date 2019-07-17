@@ -47,12 +47,26 @@
    	
    	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	
+	var popularEventList = [];
+	var popularEventListStr="";
 		$( function(){
-
-// 			$("a:contains('이벤트검색')").on("click",function(){
-// 				self.location = "/event/test";
-// 			});
 			
+// 			$.ajax(
+// 					{
+// 						url : "/event/rest/getPopularEventList",
+// 						method : "POST",
+// 						dataType : "text",
+// 						success : function(JSONData, status){
+// 								alert("JSONData : \n"+JSONData);
+// 								$.each(JSONData, function(index,value){
+// 									popularEventList[index] = value;
+// 									alert("popularEventList[index] : "+popularEventList[index]);
+// 								 });
+// 						}	
+// 			});	
+
+
 			$("a.navbar-brand").on("click",function(){
 				self.location = "/";
 			});
@@ -78,18 +92,23 @@
 			$("a:contains('내 거래내역')").on("click",function(){
 				self.location = "/tran/getTranList?menu=user";
 			});
-		
+			
+			
+			$("a:contains('이벤트관리')").on("click",function(){
+				self.location = "/event/getEventManage";
+			});
+			
 			$("a:contains('리뷰작성')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			$("a:contains('내리뷰조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			$("a:contains('내평점조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/getSellerEstimationList?sellerId="+session.user.userId;
 			});
 			$("a:contains('포인트내역조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			
 			
@@ -166,9 +185,9 @@
 				 <ul class="nav navbar-nav">           	
 	            	
 	            	
-<!-- 	            	<li class="nav-item active"> -->
-<!-- 			              <a class="nav-link" href="#">이벤트검색</a> -->
-<!-- 			        </li>  -->
+	            	<li class="nav-item active">
+			              <a class="nav-link" href="#">이벤트관리</a>
+			        </li> 
 			        
 			        <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,6 +234,15 @@
 				          <a class="dropdown-item" href="#">포인트내역조회</a>
 				        </div>
 				    </li>  
+				    
+<!-- 				    <li class="nav-item dropdown"> -->
+<!-- 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 				          	인기이벤트 -->
+<!-- 				        </a> -->
+<!-- 				        <div class="dropdown-menu popularEvent" aria-labelledby="navbarDropdownMenuLink"> -->
+				          
+<!-- 				        </div> -->
+<!-- 				    </li> -->
 				    
 				    <li class="nav-item active">
 						    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">

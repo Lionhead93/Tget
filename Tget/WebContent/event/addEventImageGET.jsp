@@ -112,7 +112,7 @@
 		<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
 		<input type="hidden"  id="eventImage" name="eventImage"  value="${!empty eventImage? eventImage : ''}" />
 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/><br/><br/>
-		eventImage  ; ${eventImage }<br/>
+<%-- 		eventImage  ; ${eventImage }<br/> --%>
 		
 		<button class="button_black"  id="cancel">취소</button>
 		<button class="button_black"  id="submit" >등록</button>

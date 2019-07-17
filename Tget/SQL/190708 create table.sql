@@ -28,8 +28,10 @@ DROP SEQUENCE seq_coupon_coupon_no ;
 DROP SEQUENCE seq_ticket_ticket_no ;
 DROP SEQUENCE seq_transaction_tran_no ;
 DROP SEQUENCE seq_point_history_no ;
+DROP SEQUENCE seq_recomm_event_no ;
 
 
+CREATE SEQUENCE seq_recomm_event_no			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_category_two_no 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_user_Interested_no			INCREMENT BY 1 START WITH 10000;
@@ -69,6 +71,7 @@ CREATE TABLE recommended_event(
 	video_name		VARCHAR2(100) 	NOT NULL,
 	recomm_event_name	VARCHAR2(20) 	NOT NULL,
 	recomm_event_detail	VARCHAR2(50),
+	recomm_status 			CHAR(1)		NOT NULL,
 	PRIMARY KEY(recomm_event_no)
 );
 

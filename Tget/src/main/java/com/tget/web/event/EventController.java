@@ -75,25 +75,25 @@ public class EventController {
 	
 
 	///Method
-	@RequestMapping(value="test")
-	public String test(Model model) throws Exception {
-		System.out.println("===============test===============");
-		
-//		List<Category> categorylist = eventService.getCategoryList();
-//		List<Category> tempList = new ArrayList<Category>();
-//		for (int i = 0; i < 3; i++) {
-//			for (Category category : categorylist) {			
-//				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
-//					tempList.add(category);
-//				}				
-//			}
-//			model.addAttribute("categorylist", categorylist);
-//			model.addAttribute("categorylist"+i, tempList);
-//			System.out.println("categorylist"+i+" : "+tempList);
-//			tempList.clear();
-//		}			
-		return "forward:/event/test.jsp";
-	}
+//	@RequestMapping(value="test")
+//	public String test(Model model) throws Exception {
+//		System.out.println("===============test===============");
+//		
+////		List<Category> categorylist = eventService.getCategoryList();
+////		List<Category> tempList = new ArrayList<Category>();
+////		for (int i = 0; i < 3; i++) {
+////			for (Category category : categorylist) {			
+////				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
+////					tempList.add(category);
+////				}				
+////			}
+////			model.addAttribute("categorylist", categorylist);
+////			model.addAttribute("categorylist"+i, tempList);
+////			System.out.println("categorylist"+i+" : "+tempList);
+////			tempList.clear();
+////		}			
+//		return "forward:/event/test.jsp";
+//	}
 	
 	@RequestMapping(value="getEventList")
 	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,Model model) throws Exception {
@@ -135,9 +135,11 @@ public class EventController {
 				eventService.addEvent(stubhubEvent);
 			}
 			eventListByName = eventService.getEventByName(eventName);
+			model.addAttribute("totalResults", eventListByName.size());	
 		}else {
 
 			for (Event event : eventListByName) {
+				category = event.getCategoryTwoEng();
 				search.setSearchCondition("0");
 				search.setSearchKeyword(event.getEventId());
 //				ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
@@ -146,13 +148,14 @@ public class EventController {
 				event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
 				viewCount = event.getViewCount();
 			}						
+			model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
+			model.addAttribute("totalResults", eventListByName.size());	
 		}
 		eventService.updateEventViewCount(viewCount+1, eventName);
 		
-		System.out.println(eventListByName);
-		model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
+//		System.out.println(eventListByName);
+
 		model.addAttribute("eventListByName", eventListByName);
-		model.addAttribute("totalResults", eventListByName.size());
 		model.addAttribute("eventName", eventName);
 		model.addAttribute("category", category);
 		model.addAttribute("viewCount", viewCount);
@@ -210,6 +213,7 @@ public class EventController {
 		List<Category> categorylist = eventService.getCategoryList();
 		
 		model.addAttribute("recommEventlist", recommEventlist);
+		model.addAttribute("recommEventlistSize", recommEventlist.size());
 		model.addAttribute("categorylist", categorylist);
 		
 		return "forward:/event/getEventManage.jsp";
