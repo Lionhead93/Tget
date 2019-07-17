@@ -166,10 +166,14 @@
 	</script>
 	
 	<style>
-      div.container , table{
+      div.container {
         	margin-top: 50px;
         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
         	font-size: 25px;
+        }
+        table{
+        	margin-top: 50px;
+        	font-size: 20px;
         }
         
         .col-md-5 {
