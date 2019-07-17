@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -112,7 +114,7 @@ public class TranRestController {
 	}
 	
 	@RequestMapping(value = "rest/getDeliveryInfo" ,method = RequestMethod.POST)
-	public String getDeliveryInfo(@RequestParam("file") MultipartFile imagefile) throws Exception {
+	public Map<String, Object> getDeliveryInfo(@RequestParam("file") MultipartFile imagefile) throws Exception {
 		
 		System.out.println("rest/getDeliveryInfo");
 		
@@ -128,7 +130,11 @@ public class TranRestController {
 		System.out.println(deilveryNo);
 		System.out.println(deliveryCompany);
 		
-		return deliveryCompany+"/"+deilveryNo;
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("deliveryCompany", deliveryCompany);
+		map.put("deilveryNo", deilveryNo);
+		
+		return map;
 	}
 	
 	
