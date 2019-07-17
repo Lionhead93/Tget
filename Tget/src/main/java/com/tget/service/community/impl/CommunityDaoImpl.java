@@ -49,6 +49,11 @@ public class CommunityDaoImpl implements CommunityDao{
 		return sqlSession.selectOne("CommunityMapper.selectContent", contentNo);
 	}
 	
+	/*@Override
+	public Reply selectReply(int replyNo) throws Exception {
+		return sqlSession.selectOne("CommunityMapper.selectReply", replyNo);
+	}*/
+	
 	@Override
 	public void updateContent(Content content) throws Exception {
 		sqlSession.update("CommunityMapper.updateContent", content);
@@ -67,13 +72,13 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 	
 	@Override
-	public void updateGoodCount(Map<String, Object> goodCount) throws Exception {
-		sqlSession.update("CommunityMapper.updateGoodCount", goodCount);		
+	public void updateGoodCount(int contentNo) throws Exception {
+		sqlSession.update("CommunityMapper.updateGoodCount", contentNo);		
 	}
 	
 	@Override
-	public void updateBadCount(Map<String, Object> BadCount) throws Exception {
-		sqlSession.update("CommunityMapper.updateBadCount", BadCount);		
+	public void updateBadCount(int contentNo) throws Exception {
+		sqlSession.update("CommunityMapper.updateBadCount", contentNo);		
 	}
 	
 	@Override
@@ -102,5 +107,11 @@ public class CommunityDaoImpl implements CommunityDao{
 	public List<Reply> selectListReply(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("CommunityMapper.selectListReply", search);
+	}
+
+	@Override
+	public List<Reply> selectListReply(int replyNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

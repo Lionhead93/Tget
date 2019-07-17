@@ -30,38 +30,46 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
- 		body {
-            padding-top : 50px;
-        }
+
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	/* function fncUpdateContent(){
 		
-	$(function() {
-			
-		
-		$( "button.btn.btn-primary" ).on("click" , function() {
-		
-			history.go(-1); 
-		});
-	}); 
+		$("form").attr("method", "POST").attr("action", "/community/getContent").submit();
+	}
+	  */
 	 
 	 $(function() {
 		 
 		 //a[href='#']:contains('수 &nbsp;정')
 		 $("button.btn.btn-warning").on("click" , function() {
-			 
-			self.location = "/community/updateContent?contentNo=${content.contentNo}"
+			 //fncUpdateContent();
+			 self.location = "/community/updateContent?contentNo=${content.contentNo}"
+			
 			});
 		}); 
+	 
+	 $(function() {
+			
+			
+			$( "button.btn.btn-primary" ).on("click" , function() {
+			
+				history.go(-1); 
+			});
+		});
 		
+	
+	
+	 
 	</script>
 	
 </head>
 
 <body>
 	<jsp:include page="/layout/toolbar.jsp" />
+	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -112,9 +120,14 @@
 		    </div>
 		</div><!--  -->
 		
+		
+		<jsp:include page="/community/reply.jsp"/>
+      	
+
+
 		<br/>
 		
- 	</div>
+ 	</div> 
  	<!--  화면구성 div Start /////////////////////////////////////-->
 
 </body>

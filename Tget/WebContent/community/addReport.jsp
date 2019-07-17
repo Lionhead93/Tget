@@ -32,9 +32,7 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
 	<style>
-		body {
-            padding-top : 30px;
-        }
+		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
