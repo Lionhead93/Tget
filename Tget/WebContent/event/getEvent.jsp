@@ -23,28 +23,57 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script type="text/javascript">
-	
+
 	var str = "";
 	var videoList = [];
 	
 	$(function(){
 		$(".addTicket").on("click",function(){			
-			self.location="/ticket/addTicketInfo?eventId="+$(this).parent().children("input[type='hidden']").val();
+// 			alert("${empty user}");
+			if ("${empty user}"=="true") {
+				alert("로그인을 해주세요.");
+				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
+			} else {
+				$("#eventId").val($(this).val());
+				$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
+			}
+// 			$("#eventId").val($(this).val());
+// 			$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
+// 			self.location="/ticket/addTicketInfo?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
 		$(".getTicketList").on("click",function(){
-			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val()).submit();
+			
+			$("#eventId").val($(this).val());
+			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList").submit();
 // 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
-		$("#addImage").on("click",function(){			
+// 		$(document).on("click", "#editImage",function(){			
+			
+// 		});		
+		$("#editImage").on("click",function(){		
+			popWin = window.open("/event/addEventImage?eventName="+$("#eventName").val()
+					+"&eventImage="+$("#eventImage").val(),"popWin",
+					"left=500, top=100, width=600, height=600, "
+					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+// 			popWin = window.open("addEventImageGET.jsp",
+// 					"popWin",
+// 					"left=500, top=100, width=600, height=600, "
+// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		});		
 		
-		$("#updateImage").on("click",function(){			
-		});		
+// 		$("#updateImage").on("click",function(){			
+// 			openChild();
+// 		});		
 		
-		$("#deleteImage").on("click",function(){			
-		});		
+// 		$("#deleteImage").on("click",function(){			
+			
+// 		});		
+
+		$("#eventImage").on("change",function(){			
+			alert("onChange");
+	 	});	
 	});
 	
 	</script>
@@ -64,7 +93,9 @@
       	}
         
        img {
-        	padding: 10px 10px;
+        	padding: 25px 25px 25px  25px ;
+        	width: 500px;
+	 		hieght: 280px;
         }
         
         .button_black{
@@ -104,11 +135,27 @@
 			<div class="row">
 				<div class="col-lg-5" align="center">
 					<h3>${eventName}</h3>
-					${eventImage}</br>	
-					<img src = "http://placehold.it/300x200" class="img-rounded"/><br/>
-					<button class="button_black" id="addImage" >등록</button>&nbsp;&nbsp;
-					<button class="button_black" id="updateImage" >수정</button>&nbsp;&nbsp;
-					<button class="button_black" id="deleteImage">삭제</button><br/><br/><br/>
+					<input type="hidden"  id="eventId" name="eventId" value="" />
+					<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
+					<input type="hidden"  id="category" name="category"  value="${category}" >
+					<input type="hidden" id="eventImage" name="eventImage" value="${eventImage}"/>
+					<div align="right">
+						<c:if test="${!empty eventImage}">
+							<img src="/resources/images/uploadFiles/${eventImage}" />
+						</c:if>
+						<c:if test="${empty eventImage}">
+							<img src = "http://placehold.it/500x280" class="img-rounded"/>
+						</c:if>
+						<br/>
+						<div >
+							<div align="right">조회수 : ${viewCount}회<br/></div>
+							
+							<c:if test="${user.role == 2 }">
+								admin
+							</c:if>
+							<button class="button_black" id="editImage" >편집</button><br/>
+						</div>
+					</div>	
 				</div>			
 				<div class="col-lg-6">	
 					<table class="table table-striped">
@@ -121,18 +168,15 @@
 					  <c:forEach items="${eventListByName}"  var="i">
 					    <tr>
 					      <td>
-							<div class="event" align="left">
-								<input type="hidden"  value="${i.eventId}"/><br/><br/>
-								이벤트ID : ${i.eventId}<br/>
-								날짜 : ${i.eventDate }<br/>
-								시간 : ${i.eventTime}<br/>
-								이벤트 장소 : ${i.eventLocation }<br/>
+							<div class="event" align="left">		
+								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/>
+								${i.eventLocation }<br/>
 	
 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
 								티켓최저가 : ${i.ticketLowestPrice }<br/>				
-								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" >
-								<button class="button_black addTicket" name="addTicket" >판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="button_black getTicketList" name="getTicketList" >구매</button><br/>
+<%-- 								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" > --%>								
+								<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/>
 							</div>			
 					  </td>
 				    </tr>

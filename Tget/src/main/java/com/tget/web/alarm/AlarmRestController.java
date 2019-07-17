@@ -55,4 +55,17 @@ public class AlarmRestController {
 		
 		return map;
 	}
+	
+	@RequestMapping(value = "rest/deleteAlarm/{alarmNo}", method = RequestMethod.GET)
+	public Map<String, Object> deleteAlarm( @PathVariable("alarmNo") int alarmNo ) throws Exception{
+		
+		System.out.println("rest/deleteAlarm/"+alarmNo);
+		
+		alarmService.deleteAlarm(alarmNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", "good");
+		
+		return map;
+	}
 }

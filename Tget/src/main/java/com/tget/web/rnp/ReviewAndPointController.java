@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tget.service.rnp.RNPService;
+import com.tget.service.user.UserService;
 
 
 @Controller
@@ -21,6 +23,10 @@ public class ReviewAndPointController {
 		@Autowired
 		@Qualifier("rNPServiceImpl")
 		private RNPService rNPService;
+		
+		@Autowired
+		@Qualifier("userServiceImpl")
+		private UserService userService;
 		
 		///C
 		public ReviewAndPointController(){
@@ -49,10 +55,12 @@ public class ReviewAndPointController {
 		}
 		
 		@RequestMapping(value="getSellerEstimationList")
-		public String getSellerEstimationList(HttpServletRequest request, Model model) throws Exception {
+		public String getSellerEstimationList(@RequestParam String sellerId,Model model) throws Exception {
 			System.out.println("===============getSellerEstimationList===============");
 			
-			model.addAttribute("sellerEstimationList", rNPService.getSellerEstimationList(request.getParameter("sellerId")));
+			model.addAttribute("sellerEstimationList", rNPService.getSellerEstimationList(sellerId));
+			model.addAttribute("sellerId",sellerId);
+			model.addAttribute("sellerNickname",userService.getUser(sellerId).getNickName());
 			
 			return "forward:/rnp/listSellerEstimation.jsp";
 			

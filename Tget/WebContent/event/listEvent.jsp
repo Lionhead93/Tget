@@ -37,7 +37,7 @@
 		$("button.button_black").on("click",function(){
 			
 			arr = $(this).parent().children("input").val().split(' ');
-
+			$("#category").val(arr[arr.length-1]);
 			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
 // 			$("form").attr("method" , "GET").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
 

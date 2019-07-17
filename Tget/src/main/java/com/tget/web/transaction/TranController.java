@@ -81,18 +81,19 @@ public class TranController {
 	}
 	
 	@RequestMapping(value = "getTranList")	
-	public String getTicketList(@ModelAttribute("search") Search search,
+	public String getTranList(@ModelAttribute("search") Search search,
 								HttpSession session, Model model) throws Exception {
 		
 		System.out.println("getTranList  ?search= "+search);
 		
 		User user = (User) session.getAttribute("user");
-		String result = "";
-		//로그인 상태인척
+		
 		if(user==null) {
-			user = new User();
-			user.setUserId("seller");
-		}		
+			return "redirect:/user/login";
+		}
+		
+		String result = "";
+		
 		if(search.getMenu().equals("user")){
 			search.setSearchCondition("1");	
 			search.setSearchKeyword(user.getUserId());
@@ -109,4 +110,14 @@ public class TranController {
 		
 		return result;
 	}	
+	
+	@RequestMapping(value = "addDelivery", method = RequestMethod.POST)	
+	public String addDelivery(@ModelAttribute("transaction") Transaction transaction) throws Exception {
+		
+		System.out.println("addDelivery : POST // transaction = "+transaction);		
+		
+		tranService.addDelivery(transaction);
+				
+		return "forward:/tran/getTranList?menu=user";
+	}
 }

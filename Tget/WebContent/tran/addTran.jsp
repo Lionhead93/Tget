@@ -35,7 +35,13 @@
 		
 		
 	function fncAddTran(){
-				
+			
+		
+		$("form").attr("method" , "POST").attr("action" , "/tran/addTran").submit();
+	}		
+	
+	function fncInputCheck(){
+		
 		var totalPrice = numberWithOutCommas($("input[name='totalPrice']").val());
 		$("input[name='totalPrice']").val(totalPrice);
 		
@@ -45,22 +51,23 @@
 		
 		if(orderAmount == null || orderAmount.length<1){
 			alert("수량은 반드시 입력하여야 합니다.");
-			return;
+			return "noGood";
 		}
 		if(addrDetail == null || addrDetail.length<1){
 			alert("상세주소는 반드시 입력하여야 합니다.");
-			return;
+			return "noGood";
 		}
 		if(deliveryAddr == null || deliveryAddr.length<1){
 			alert("주소는 반드시 입력하셔야 합니다.");
-			return;
+			return "noGood";
 		}			
 		if(isNaN(totalPrice)==true) {
 			alert("포인트에 숫자입력 바랍니다.");
-			return;
-		}
-		$("form").attr("method" , "POST").attr("action" , "/tran/addTran").submit();
-	}		
+			return "noGood";
+		}	
+		
+		return "good";
+	}
 	
 	$(function(){
 	    	    
@@ -103,7 +110,8 @@
 		IMP.init('imp22741487');
 		
 		$("a:contains('신용카드')").on("click",function(){
-			
+			var totalPrice = $("input[name='totalPrice']").val();
+			var result = numberWithOutCommas(totalPrice);
 			$("input[name='paymentOption']").val('0');
 			$("input[name='tranCode']").val('1');
 			
@@ -111,12 +119,12 @@
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '${ticket.event.eventName}',
-			    amount : 10,
-			    buyer_email : 'iamport@siot.do',
-			    buyer_name : '유리',
-			    buyer_tel : '010-1234-5678',
-			    buyer_addr : '서울특별시 강남구 삼성동',
-			    buyer_postcode : '123-456'
+			    amount : result,
+			    buyer_email : '${user.userId}',
+			    buyer_name : '${user.userName}',
+			    buyer_tel : '${user.phone}',
+			    buyer_addr : '${user.address}',
+			    buyer_postcode : '${user.postalCode}'
 			}, function(rsp) {
 			    if ( rsp.success ) {
 			        var msg = '결제가 완료되었습니다.';	
@@ -134,7 +142,7 @@
 			    }
 			});
 			
-			
+		
 	    });
 		
 		$("a:contains('무통장입금')").on("click",function(){
@@ -145,6 +153,17 @@
 			fncAddTran();
 	    });
 	    
+	});
+	
+	$(function(){
+		
+		$("button:contains('계 속')").on('click',function(){			
+			var result = fncInputCheck();
+			if(result=='noGood'){
+				location.reload();
+			}
+		});
+		
 	});
 	
 	$(function(){
@@ -186,8 +205,7 @@
 		
 		$("button:contains('전부 사용')").on("click",function(){
 	    	
-			//var allPoint = numberWithCommas(${user.point});
-			var allPoint = numberWithCommas(1000000);
+			var allPoint = numberWithCommas(${user.point});
 			
 			$("#point").val(allPoint);
 			
@@ -236,8 +254,7 @@
 		<form>
 		<input type="hidden" name="ticket.ticketNo" value="${ticket.ticketNo}">
 		<input type="hidden" name="seller.userId" value="${ticket.seller.userId}">
-		<%-- <input type="hidden" name="buyer.userId" value="${user.userId}"> --%>
-		<input type="hidden" name="buyer.userId" value="buyer">
+		<input type="hidden" name="buyer.userId" value="${user.userId}">
 		<input type="hidden" name="event.eventId" value="${ticket.event.eventId}">
 		<input type="hidden" name="event.eventName" value="${ticket.event.eventName}">
 		<input type="hidden" name="paymentOption" value="">

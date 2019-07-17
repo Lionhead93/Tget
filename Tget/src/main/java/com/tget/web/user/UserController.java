@@ -59,7 +59,7 @@ public class UserController {
 	
 		System.out.println("/user/addUser : GET");
 		
-		return "redirect:/addUserView.jsp";
+		return "redirect:/user/addUserView.jsp";
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
@@ -69,7 +69,7 @@ public class UserController {
 		//Business Logic
 		userService.addUser(user);
 		
-		return "redirect:/loginView.jsp";
+		return "redirect:/user/loginView.jsp";
 		
 	}
 	
@@ -107,7 +107,7 @@ public class UserController {
 			session.setAttribute("user", dbUser);
 		}
 		
-		return "redirect:/index.jsp";
+		return "redirect:/";
 	}
 	@RequestMapping( value="listUser" )
 	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
