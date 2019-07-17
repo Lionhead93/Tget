@@ -39,7 +39,7 @@
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
 		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time) 
-		VALUES	 (	#{id} , 1 , #{categoryTwoEng} , NULL , 
+		VALUES	 (	#{id} , 0 , #{categoryTwoEng} , NULL , 
 							#{name} , #{venueName:VARCHAR} , #{eventDate} , #{eventTime} )
 	 </insert>
 	 

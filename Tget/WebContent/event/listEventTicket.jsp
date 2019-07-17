@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-<!-- 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> -->
+	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
 	<script type="text/javascript">
@@ -46,15 +46,27 @@
 			});	
 
 		$("#addYoutube").on("click",function(){
-			popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
-					"popWin",
-					"left=500, top=100, width=600, height=600, "
-					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			if ("${empty user}"=="true") {
+				alert("로그인을 해주세요.");
+				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
+			} else {
+				popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
+						"popWin",
+						"left=500, top=100, width=600, height=600, "
+						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			}			
 		});
 		
 		$("button.addTran").on("click",function(){
-			$("#ticketNo").val($(this).val());
-			$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
+			if ("${empty user}"=="true") {
+				alert("로그인을 해주세요.");
+				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
+			} else {
+				$("#ticketNo").val($(this).val());
+				$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
+			}
+// 			$("#ticketNo").val($(this).val());
+// 			$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
 // 			self.location = "/tran/addTran?ticketNo="+$(this).val();
 
 		});
@@ -67,42 +79,48 @@
 		});
 		
 		$(".interested").on("click",function(){
-			if ($(this).children("input").val() == 'heart-empty') {
-				$(this).html('<input type="hidden"  value="heart">'
-						+'<ion-icon name="heart" size="large"></ion-icon>');
+			if ("${empty user}"=="true") {
+				alert("로그인을 해주세요.");
+				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
 				
-				$.ajax(
-						{
-							url : "/event/rest/addInterestedEvent/"+$("#eventId").val(),
-							method : "POST",
-							dataType : "json",
-							success : function(JSONData, status){
-								alert("관심이벤트 등록완료");
-// 								alert("JSONData : \n"+JSONData.stringify());		
-							}
-// 						,
-// 							error : function(request, status, error ) {   
-// 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 							}			
-					});	
-			}else{
-				$(this).html('<input type="hidden"  value="heart-empty">'
-						+'<ion-icon name="heart-empty" size="large"></ion-icon>');
-				
-				$.ajax(
-						{
-							url : "/event/rest/deleteInterestedEvent/"+$("#eventId").val(),
-							method : "POST",
-							dataType : "json",
-							success : function(JSONData, status){
-								alert("관심이벤트 삭제완료");
-							}
-// 						,
-// 							error : function(request, status, error ) {   
-// 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 							}			
-					});	
-			}
+			} else {
+				if ($(this).children("input").val() == 'heart-empty') {
+					$(this).html('<input type="hidden"  value="heart">'
+							+'<ion-icon name="heart" size="large"></ion-icon>');
+					
+					$.ajax(
+							{
+								url : "/event/rest/addInterestedEvent/"+$("#eventId").val(),
+								method : "POST",
+								dataType : "json",
+								success : function(JSONData, status){
+									alert("관심이벤트 등록완료");
+//	 								alert("JSONData : \n"+JSONData.stringify());		
+								}
+//	 						,
+//	 							error : function(request, status, error ) {   
+//	 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+//	 							}			
+						});	
+				}else{
+					$(this).html('<input type="hidden"  value="heart-empty">'
+							+'<ion-icon name="heart-empty" size="large"></ion-icon>');
+					
+					$.ajax(
+							{
+								url : "/event/rest/deleteInterestedEvent/"+$("#eventId").val(),
+								method : "POST",
+								dataType : "json",
+								success : function(JSONData, status){
+									alert("관심이벤트 삭제완료");
+								}
+//	 						,
+//	 							error : function(request, status, error ) {   
+//	 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+//	 							}			
+						});	
+				}
+			}			
 		});
 	});
 	var tag = document.createElement('script');
@@ -148,7 +166,7 @@
 	</script>
 	
 	<style>
-      div.container {
+      div.container , table{
         	margin-top: 50px;
         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
         	font-size: 25px;
@@ -205,19 +223,17 @@
 	<div class="container" align="center">
 	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
 	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
-		<div class="row">
-			<div class="col-md-10">
-				
-			</div>
-			<div class="col-md-1">
+		<div class="row" style="padding-top: 30px">
+			<div class="col-lg-10 col-md-10 col-9"></div>
+			<div class="col-lg-1 col-md-1 col-1">
 				<div class="interested"  value="heart-empty" align="right">
 					<input type="hidden"  value="heart-empty">
 					<ion-icon name="heart-empty" size="large"></ion-icon>
 				</div>
 			</div>
-			<div class="col-md-1">
+			<div class="col-lg-1 col-md-1 col-2">
 				<div  align="left">
-					<ion-icon name="share"></ion-icon>
+					<ion-icon name="share" size="large"></ion-icon>
 				</div>
 			</div>
 		</div>		
@@ -229,7 +245,7 @@
 				<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
 				${event.eventLocation }<br/>
 				${event.eventDate } &nbsp; 
-				${event.eventTime}<br/><br/><br/>
+				${event.eventTimeStr}<br/><br/><br/>
 			</div>
 			<div class="col-lg-6 col-sm-12 col-xs-12">
 

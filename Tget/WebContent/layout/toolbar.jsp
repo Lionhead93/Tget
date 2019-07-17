@@ -29,6 +29,7 @@
 	<script src="/resources/javascript/alarm.js" ></script>
 	<style>
 	 div.container{
+	 	margin-top: 0px;
  		font-family: 'Sunflower', sans-serif;
 	 	font-size: 20px;        
  	}

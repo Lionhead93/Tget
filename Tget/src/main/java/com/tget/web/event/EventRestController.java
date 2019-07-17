@@ -1,6 +1,7 @@
 package com.tget.web.event;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,6 +63,9 @@ public class EventRestController {
 	
 	@Value("#{apiKeyProperties['stubhubKey']}")
 	String stubhubKey;
+	
+	@Value("#{commonProperties['uploadPath']}")
+	String uploadPath;
 	
 	
 	///Constructor
@@ -331,17 +336,27 @@ public class EventRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="rest/addEventImage")
-	public Map<String,Object> addEventImage(@RequestBody Event event) throws Exception {
-		System.out.println("===============addEventImage===============");
-		
-		eventService.addEventImage(event.getEventImage(), event.getEventName());
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("eventListByName", eventService.getEventByName(event.getEventName()));
-		
-		return map;
-	}
+//	@RequestMapping(value="rest/addEventImage")
+//	public Map<String,Object> addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event) throws Exception {
+//		System.out.println("===============addEventImage===============");
+//		System.out.println(event);
+//		System.out.println(multipartFile);
+//		
+//		if(!multipartFile.isEmpty()) {
+//			event.setEventImage(multipartFile.getOriginalFilename( ));
+//					
+//			File file = new File(uploadPath,multipartFile.getOriginalFilename());
+//			FileCopyUtils.copy(multipartFile.getBytes(), file);
+//			
+//			//multipartFile.transferTo(file);		
+//		}
+////		eventService.addEventImage(event.getEventImage(), event.getEventName());
+//		
+//		Map<String,Object> map = new HashMap<String,Object>();
+////		map.put("eventListByName", eventService.getEventByName(event.getEventName()));
+//		map.put("eventImage", event.getEventImage());
+//		return map;
+//	}
 	
 	@RequestMapping(value="rest/updateEventImage")
 	public Map<String,Object> updateEventImage(@RequestBody Event event) throws Exception {
