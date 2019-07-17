@@ -115,25 +115,7 @@ public class CommuityController {
 			
 			return "forward:/community/getReportList";
 		}
-		
-		@RequestMapping(value="addReply", method=RequestMethod.GET)
-		public String addReply() throws Exception {
 
-			System.out.println("community/addReply: GET");
-			
-			return "forward: .jsp";
-		}
-		
-		@RequestMapping(value="addReply", method=RequestMethod.POST)
-		public String addReply( @ModelAttribute("reply") Reply reply) throws Exception {
-
-			System.out.println("community/addContent: POST");
-			
-			communityService.addReply(reply);
-			
-			return "forward:/community/addReply.jsp";
-		}
-		
 		@RequestMapping(value="getContent" , method= RequestMethod.GET)// View의 요청 경로 지정 
 		public String getContent( @RequestParam("contentNo") int contentNo , Model model) throws Exception {
 			
@@ -147,16 +129,6 @@ public class CommuityController {
 			
 			return "forward:/community/getContent.jsp";
 		}
-		
-//		@RequestMapping(value="getJsonContent/{contentNo}")
-//		public void getJsonProduct(@PathVariable int contentNo, @ModelAttribute("content") Content content01, Model model ) throws Exception{
-//			
-//			System.out.println("/getJsonProduct/getProduct : GET");
-//			
-//			Content content = communityService.getContent(contentNo);
-//			
-//			model.addAttribute("content", content);
-//		}
 	
 		@RequestMapping(value="updateContent" , method= RequestMethod.GET)
 		public String updateContent( @RequestParam("contentNo") int contentNo , Model model) throws Exception{
@@ -179,18 +151,7 @@ public class CommuityController {
 			return "forward:/community/getContent";
 		}
 		
-		@RequestMapping(value="updateReply", method=RequestMethod.POST)
-		public String updateReply( @ModelAttribute("reply") Reply reply  , Model model) throws Exception{
-
-			System.out.println("/community/updateReply: POST");
-			//Business Logic
-			
-			communityService.updateReply(reply);
-			
-			model.addAttribute("reply", reply);
-			
-			return "forward:/content/getContent.jsp?menu=manage";
-		}
+		
 		
 //		@RequestMapping(value="updateContent")
 //		public String updateContent( @RequestParam("contentNo") int contentNo , Model model ) throws Exception{

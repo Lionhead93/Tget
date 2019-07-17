@@ -26,9 +26,7 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
-            padding-top : 50px;
-        }
+	  
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -87,7 +85,64 @@
 			});
 	
 	});	
-	
+		 
+		 $(function() {
+				
+				$("button.btn.btn-info:contains('공감')").on("click" , function() {
+					
+					alert("되어라 좀");
+					//div:contains("contentNo")
+					//'div[name="contentNo"]'
+					//'div[id="contentNo"]'
+					var contentNo = $(this).attr("id").trim();
+					alert(contentNo)
+					$.ajax(
+			    		{
+			    	
+			        method:"GET",
+			        url : "/community/rest/updateGoodCount/"+contentNo,
+			        dataType: "json",
+			        header:{
+			        	"Accept" : "application/json",
+						"Content-Type" : "application/json"	
+			        },
+			        success : function(data){
+			        	alert("ok");
+			        	alert(data);
+			        	
+			        }
+			        
+			    	});
+				});
+		 });
+		 
+		 $(function() {
+				
+				$("button.btn.btn-danger:contains('비공감')").on("click" , function() {
+					
+					alert("될까..?");
+			
+					var contentNo = $(this).attr("id").trim();
+					alert(contentNo)
+					$.ajax(
+			    		{
+			    	
+			        method:"GET",
+			        url : "/community/rest/updateBadCount/"+contentNo,
+			        dataType: "json",
+			        header:{
+			        	"Accept" : "application/json",
+						"Content-Type" : "application/json"	
+			        },
+			        success : function(data){
+			        	alert("ok");
+			        	alert(data);
+			        	
+			        }
+			        
+			    	});
+				});
+		 });
 	</script>
 	
 </head>
@@ -171,16 +226,20 @@
 			<tr>
 			  <td align="center">${ i }</td>
 			  <td align="left">${content.contentName}
-			  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
+			  <div id="contentNo" name="contentNo">${content.contentNo}</div>
+			  <!--  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>-->
+			 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
+			   
 			  <td align="left">${content.contentBody}</td>
 			  <td align="left">${content.userId}</td>
 			  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
 			  <td align="left">${content.regDate}</td> 
 			  <td align="left"><button type="button" value="${content.contentNo}" class="btn btn-warning">신고</button>
-			  <button>
-			  <span  class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>공감</button>
-			  <button>
-			  <span  class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>비공감</button>
+			  <button class="btn btn-info" id="${content.contentNo}">공감</button>
+		   	  ${content.goodCount}
+			  <button class="btn btn-danger" id="${content.contentNo}">비공감</button>		  
+		   	  ${content.badCount}
+		   	 
 			  
 			  
 			  </td>

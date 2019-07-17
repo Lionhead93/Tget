@@ -66,6 +66,12 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		return communityDao.selectContent(contentNo);
 	}
+	
+/*	@Override
+	public List<Reply> getReply(int replyNo) throws Exception {
+		// TODO Auto-generated method stub
+		return communityDao.selectListReply(replyNo);
+	}*/
 
 
 	@Override
@@ -130,16 +136,16 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 	
 	@Override
-	public void updateGoodCount(Map<String, Object> goodCount) throws Exception {
+	public void updateGoodCount(int contentNo) throws Exception {
 		// TODO Auto-generated method stub
-		communityDao.updateGoodCount(goodCount);
+		communityDao.updateGoodCount(contentNo);
 	}
 
 
 	@Override
-	public void updateBadCount(Map<String, Object> badCount) throws Exception {
+	public void updateBadCount(int contentNo) throws Exception {
 		// TODO Auto-generated method stub
-		communityDao.updateBadCount(badCount);
+		communityDao.updateBadCount(contentNo);
 	}
 
 	@Override
@@ -166,5 +172,12 @@ public class CommunityServiceImpl implements CommunityService{
 		map.put("weather", weather );
 		
 		return map;
+	}
+
+
+	@Override
+	public Reply getReply(int replyNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

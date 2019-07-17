@@ -27,6 +27,9 @@ public interface CommunityService {
 		// 댓글 수정
 		public void updateReply(Reply reply) throws Exception;
 		
+		// 댓글 조회
+		public Reply getReply(int replyNo) throws Exception;
+		
 		// 댓글 삭제
 		public void deleteReply(int replyNo) throws Exception;
 		
@@ -40,10 +43,10 @@ public interface CommunityService {
 		public Map<String,Object> getReportList(Search search) throws Exception; //getTotalCount, getReportList 
 		
 		// 공감수
-		public void updateGoodCount(Map<String,Object> goodCount)throws Exception;
+		public void updateGoodCount(int contentNo)throws Exception;
 		
 		// 비 공감수
-		public void updateBadCount(Map<String,Object> badCount)throws Exception;
+		public void updateBadCount(int contentNo)throws Exception;
 		
 		// 환불 게시판 환불 처리
 		public void updateRefund(Content content) throws Exception;

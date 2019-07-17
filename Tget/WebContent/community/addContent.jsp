@@ -33,9 +33,7 @@
    <script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
    
 	<style>
-		body {
-            padding-top : 30px;
-        }
+		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
