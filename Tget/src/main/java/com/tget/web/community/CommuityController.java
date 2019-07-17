@@ -116,7 +116,7 @@ public class CommuityController {
 			return "forward:/community/getReportList";
 		}
 
-		@RequestMapping(value="getContent" , method= RequestMethod.GET)// View의 요청 경로 지정 
+		@RequestMapping(value="getContent")// View의 요청 경로 지정 
 		public String getContent( @RequestParam("contentNo") int contentNo , Model model) throws Exception {
 			
 			System.out.println("/community/getContent: GET");
@@ -142,40 +142,22 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="updateContent" , method= RequestMethod.POST)
-		public String updateContent( @ModelAttribute("content") Content content) throws Exception{
-
+		public String updateContent( @ModelAttribute("content") Content content, Model model) throws Exception{
+			
 			System.out.println("/community/updateContent: POST");
 			//Business Logic			
 			communityService.updateContent(content);
 			
-			return "forward:/community/getContent";
+			model.addAttribute("content", content);
+			
+			return "forward:/community/getContent?contentNo="+content.getContentNo();
 		}
-		
-		
-		
-//		@RequestMapping(value="updateContent")
-//		public String updateContent( @RequestParam("contentNo") int contentNo , Model model ) throws Exception{
-//
-//			System.out.println("/prdouct/updateContent: GET");
-//			//Business Logic
-//			Content content = communityService.getContent(contentNo);
-//			
-//			model.addAttribute("content", content);
-//			
-//			return "forward:/product/updateContent.jsp";
-//		}
-		
 	
 		@RequestMapping(value="getContentList")
 		public String getContentList( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 			
 			System.out.println("/community/getContentList: GET/ POST");
-			
-			if(search.getCurrentPage() ==0 ){
-				search.setCurrentPage(1);
-			}
-			search.setPageSize(pageSize);
-			
+
 			// Business logic
 			Map<String , Object> map=communityService.getContentList(search);
 			
@@ -192,20 +174,13 @@ public class CommuityController {
 			
 			System.out.println("/community/getReportList: GET/ POST");
 			
-			if(search.getCurrentPage() ==0 ){
-				search.setCurrentPage(1);
-			}
-			search.setPageSize(pageSize);
-			
 			// Business logic
 			Map<String , Object> map=communityService.getReportList(search);
-			/////수정필요....
-			//Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			//System.out.println(resultPage);
-			System.out.println( map.get("list"));
+			
+			System.out.println(map);
 			// Model and View 
 			model.addAttribute("list", map.get("list"));
-			//model.addAttribute("resultPage", resultPage);
+			model.addAttribute("totalCount", map.get("totalCount"));
 			model.addAttribute("search", search);
 			
 			return "forward:/community/getReportList.jsp";
