@@ -91,7 +91,16 @@
 				self.location = "/ticket/getTicketList?menu=check";
 			});
 			
-			
+			$("a:contains('쿠폰등록')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+			$("a:contains('내쿠폰조회')").on("click",function(){
+				self.location = "/coupon/getCoupon";
+			});
+			$("a:contains('쿠폰목록조회')").on("click",function(){
+				self.location = "/ticket/getTicketList?menu=check";
+			});
+		
 			
 		});
 		
@@ -105,10 +114,26 @@
 		//============= 로그인 화면이동 =============
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('로 그 인')").on("click" , function() {
+			$("a[href='#' ]:contains('로그인')").on("click" , function() {
 				self.location = "/user/login"
 			});
 		});
+		
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('로그아웃')").on("click" , function() {
+				self.location = "/user/logout"
+			});
+		});
+		
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('내정보보기')").on("click" , function() {
+			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+			});
+		});
+		
+		
 		
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
@@ -123,6 +148,8 @@
 				self.location="/community/getContentList"
 			});
 		});
+		
+		
 		
 		$( function(){			
 			//onload시 읽지않은 알람 표시 
@@ -174,8 +201,10 @@
 				          	User
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로 그 인</a>
+				          <a class="dropdown-item" href="#">로그인</a>
+				           <a class="dropdown-item" href="#">로그아웃</a>
 				          <a class="dropdown-item" href="#">회원가입</a>
+				          <a class="dropdown-item" href="#">내정보보기</a>
 				          <a class="dropdown-item" href="#">블랙리스트관리</a>
 				        </div>
 				    </li>
@@ -212,6 +241,17 @@
 				          <a class="dropdown-item" href="#">내리뷰조회</a>
 				          <a class="dropdown-item" href="#">내평점조회</a>
 				          <a class="dropdown-item" href="#">포인트내역조회</a>
+				        </div>
+				    </li>  
+				    
+				    <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	Coupon
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">쿠폰등록</a>
+				          <a class="dropdown-item" href="#">내쿠폰조회</a>
+				          <a class="dropdown-item" href="#">쿠폰목록조회</a>
 				        </div>
 				    </li>  
 				    

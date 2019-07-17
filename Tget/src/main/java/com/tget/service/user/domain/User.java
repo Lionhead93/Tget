@@ -12,7 +12,7 @@ public class User {
 	private String phone;
 	private String nickName;
 	private String address;
-	private int postalCode;
+	private int postalCode; 
 	private String role;
 	private String local;
 	private int point;

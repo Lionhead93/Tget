@@ -39,6 +39,8 @@ import com.tget.service.user.domain.User;
 @RequestMapping("/user/*")
 public class UserRestController {
 	
+	User user = new User();
+
 	///Field
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -125,16 +127,48 @@ public class UserRestController {
 	        return "true";
 
 	}  
-	@RequestMapping("json/smsCheck") 
-	public String smsCheck(String code){ 
+	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
+	public String smsCheck(String code  ){ 
 		
-		String saveCode = code;//데이터베이스에 저장된 코드 불러오기 
-				if(code==saveCode) { 
-					return "ok"; 
-				}else { 
-					return "no";
-					}
-				}
+		System.out.println("받은거"+user.getCode());
+		System.out.println("쓴거"+code);
+		
+		if(code.equals(user.getCode())) {
+			System.out.println("일치");
+			return "true";
+			}else { 
+				System.out.println("불일치");
+				return "false"; 
+				} 
+	}
+	
+
+	@RequestMapping(value = "json/checknickNameDuplication", method=RequestMethod.POST)
+	public boolean checknickNameDuplication(@RequestBody User user)throws Exception{
+		
+		System.out.println("/cafe/json/checknickNameDuplication : POST");
+		
+		boolean result = userService.checknickNameDuplication(user.getNickName());
+
+		System.out.println("될까?"+result);
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "json/checkcodeDuplication", method=RequestMethod.POST)
+	public boolean checkcodeDuplication(@RequestBody User user)throws Exception{
+		
+		System.out.println("/user/json/checkcodeDuplication : POST");
+		
+		boolean result = userService.checkcodeDuplication(user.getCode());
+
+		System.out.println("될까?"+result);
+		
+		return result;
+		
+	}
+	
 	
 	
 }
