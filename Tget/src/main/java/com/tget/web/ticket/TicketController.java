@@ -127,12 +127,13 @@ public class TicketController {
 		System.out.println("getTicketList  ?search= "+search);
 		
 		User user = (User) session.getAttribute("user");
-		String result = "";
-		//로그인 상태인척
+		
 		if(user==null) {
-			user = new User();
-			user.setUserId("seller");
-		}		
+			return "redirect:/user/login";
+		}
+		
+		String result = "";
+		
 		if(search.getMenu().equals("seller")){
 			search.setSearchCondition("1");	
 			search.setSearchKeyword(user.getUserId());
