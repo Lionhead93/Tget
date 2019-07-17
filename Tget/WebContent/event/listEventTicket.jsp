@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <!-- 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	 -->
 <!-- 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet"> -->
 	
@@ -26,6 +26,7 @@
 	<script type="text/javascript">
 	
 	var videoList = [];
+
 	$(function(){
 		
 		$.ajax(
@@ -52,13 +53,17 @@
 		});
 		
 		$("button.addTran").on("click",function(){
-			self.location = "/tran/addTran?ticketNo="+$(this).val();
-//  			alert("ticketNo="+$(this).val());
-			
+			$("#ticketNo").val($(this).val());
+			$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
+// 			self.location = "/tran/addTran?ticketNo="+$(this).val();
+
 		});
 		
 		$("button.getSellerEstimation").on("click",function(){
-			$("form").attr("method" , "GET").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).val()).submit();
+// 			nickName = $(this).parent().children("input[type='hidden']").val();
+// 			$("#sellerId").val($(this).val());
+// 			self.location = "/rnp/getSellerEstimationList?sellerId="+$(this).val();
+			$("form").attr("method" , "POST").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).val()).submit();
 		});
 		
 		$(".interested").on("click",function(){
@@ -132,7 +137,7 @@
     var done = false;
     function onPlayerStateChange(event) {
       if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
+        setTimeout(stopVideo, 600000);
         done = true;
       }
     }
@@ -262,14 +267,16 @@
 								</c:if><br/><br/>								
 							</div>			
 							<div class="list" align="right">
-								<button class="button_black addTran" value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
-								<button class="button_black getSellerEstimation" value="${i.seller.userId }">판매자조회</button><br/>
+<%-- 								<input type="hidden"  value="${i.seller.nickName}"/> --%>
+								<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
+								<button class="button_black getSellerEstimation" value="${i.seller.userId}">판매자조회</button><br/>
 							</div>
 					  		</td>
 				  	 	 </tr>
 						</c:forEach>
 			  		</tbody>
-				</table>					
+				</table>		
+				<input type="hidden"  id="ticketNo" name="ticketNo"/>			
 			</div>
 		</div>
 	</div>

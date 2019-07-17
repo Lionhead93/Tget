@@ -101,8 +101,7 @@ public class EventController {
 		}
 		
 		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
-//		//(List<StubhubEvent>)map.get("eventList")
-//		//int totalResults = (Integer)map.get("totalResults");
+
 		model.addAttribute("search", search);
 		model.addAttribute("requestPageToken",requestPageToken);
 		model.addAttribute("eventList",(List<StubhubEvent>)map.get("eventList"));

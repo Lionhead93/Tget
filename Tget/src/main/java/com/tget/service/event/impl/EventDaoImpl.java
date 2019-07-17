@@ -204,15 +204,15 @@ public class EventDaoImpl implements EventDao {
 		
 		if (search.getSearchCondition().equals("0")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&categoryName="+search.getSearchKeyword();
+				url+="&categoryName="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&name="+search.getSearchKeyword();
+				url+="&name="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
 		url+="&start=0";
@@ -256,16 +256,16 @@ public class EventDaoImpl implements EventDao {
 		
 		if (search.getSearchCondition().equals("0")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&categoryName="+search.getSearchKeyword();
+				url+="&categoryName="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("1")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
 //				url+="&name="+search.getSearchKeyword();
-				url+="&q="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
 		
@@ -294,15 +294,29 @@ public class EventDaoImpl implements EventDao {
 		StubhubSearchList stubhubSearchList = objectMapper.readValue(jsonobj.toString(), StubhubSearchList.class);
 		
 		List<StubhubEvent> list = stubhubSearchList.getEvents();
-//		List<StubhubEvent> returnList = new ArrayList<StubhubEvent>();
+		List<StubhubEvent> returnList = new ArrayList<StubhubEvent>();
 //		나중에 중복제거
-	  
+		for (StubhubEvent event : list) {
+			if (returnList.size()==0) {
+				returnList.add(event);
+			}else {
+				for (int i = 0; i < returnList.size(); i++) {
+					if (returnList.get(i).getName().equals(event.getName())) {
+						break;
+					} else if((i==returnList.size()-1) &&( ! returnList.get(i).getName().equals(event.getName()))){
+						returnList.add(event);
+					}
+				}
+			}
+		}
 
 //		System.out.println("returnList : " +returnList);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("eventList", list);
-		map.put("totalResults", list.size());
+		map.put("eventList", returnList);
+//		map.put("eventList", list);
+		map.put("totalResults", returnList.size());
+//		map.put("totalResults", list.size());
 		
 		return map;
 	}
