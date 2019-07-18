@@ -112,7 +112,7 @@ CREATE TABLE content(
 	content_no 	NUMBER 		NOT NULL,
 	user_id 		VARCHAR2(30) 	NOT NULL 	REFERENCES users(user_id),
 	user_nickname 	VARCHAR2(20) 	NOT NULL,
-	content_name 	VARCHAR2(30) 	NOT NULL,
+	content_name 	VARCHAR2(1000) 	NOT NULL,
 	content_body 	VARCHAR2(4000) 		NOT NULL,
 	file_name 	VARCHAR2(100),
 	video_name 	VARCHAR2(100),

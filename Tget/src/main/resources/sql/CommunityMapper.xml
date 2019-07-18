@@ -95,9 +95,36 @@
 	   	UPDATE content
 	   	<set>
 			content_name	= #{contentName:VARCHAR},
-			content_Body = #{contentBody:VARCHAR},
+			content_body = #{contentBody:VARCHAR},
 			file_name	= #{fileName:VARCHAR},
 			video_name = #{videoName:VARCHAR}
+	   	</set>
+	   	WHERE content_no = #{contentNo}
+	 </update>
+	 
+	 <update	id="updateReply"	parameterType="reply"  >
+	   	UPDATE reply
+	   	<set>
+			user_id	= #{userId},
+			user_nickname = #{userNickName},
+			content_no	= #{contentNo},
+			reply_body = #{contentBody:VARCHAR}
+	   	</set>
+	   	WHERE reply_no = #{replyNo}
+	 </update>
+	 
+	 <update	id="updateGoodCount"	parameterType="content"  >
+	   	UPDATE content
+	   	<set>
+			good_count = good_count+1
+	   	</set>
+	   	WHERE content_no = #{contentNo}
+	 </update>
+	 
+	 <update	id="updateBadCount"	parameterType="content"  >
+	   	UPDATE content
+	   	<set>
+			bad_count = bad_count+1
 	   	</set>
 	   	WHERE content_no = #{contentNo}
 	 </update>
@@ -123,11 +150,15 @@
 											<if test="searchCondition != null">
 												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				content_no = #{searchKeyword}
+										 				LOWER(content_name) LIKE LOWER('%'|| #{searchKeyword}||'%')
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				and LOWER(content_name) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+										 				AND board_code = #{searchKeyword} 
 													</if>
+													<if test="searchCondition == 2 and searchKeyword !='' ">
+														AND content_code = #{searchKeyword} 
+													</if>
+													
 												</where>
 											</if>
 											ORDER BY content_no ) inner_table)
@@ -146,10 +177,13 @@
 											<if test="searchCondition != null">
 												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				content_no = #{searchKeyword}
+										 				LOWER(content_name) LIKE LOWER('%'|| #{searchKeyword}||'%')
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				and LOWER(content_name) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+										 				AND board_code = #{searchKeyword} 
+													</if>
+													<if test="searchCondition == 2 and searchKeyword !='' ">
+														AND content_code = #{searchKeyword} 
 													</if>
 													</where>
 									</if>) countTable
@@ -166,10 +200,7 @@
 											<if test="searchCondition != null">
 												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				report_no = #{searchKeyword}
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				and LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+										 				LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
 													</if>
 												</where>
 											</if>
@@ -193,7 +224,7 @@
 													</where>
 									</if> -->) countTable
 	</select>
-	 <!-- 
+	  
 	 <select  id="selectListReply"  parameterType="search"	resultMap="replySelectMap">
 	 	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
@@ -204,6 +235,6 @@
 											
 											) inner_table
 			)		
-	 </select> -->
+	 </select> 
 
 </mapper>
