@@ -118,7 +118,7 @@
 			 <button type="button" class="btn btn-warning"  >수 &nbsp;정</button>
 			 <!-- <a class="btn btn-warning" href="#" role="button">수 &nbsp;정</a> --> 
 		    </div>
-		</div><!--  -->
+		</div>
 		
 		
 		<jsp:include page="/community/reply.jsp"/>

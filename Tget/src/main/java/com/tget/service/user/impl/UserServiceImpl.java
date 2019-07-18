@@ -95,17 +95,17 @@ public class UserServiceImpl implements UserService{
 		
 		String bc = user.getBlacklistCode();
 		
-		if(bc=="0") {
+		if(bc.equals("0")) {
 			user.setBlacklistCode("1");
 			user.setBlacklistStartDate(today);
 			user.setBlacklistEndDate(b1);
 		}else if
-			(bc=="1") {
+			(bc.equals("1")) {
 			user.setBlacklistCode("2");
 			user.setBlacklistStartDate(today);
 			user.setBlacklistEndDate(b2);
 		}else if
-			(bc=="2"){
+			(bc.equals("2")){
 			user.setBlacklistCode("3");
 			user.setBlacklistStartDate(today);
 			user.setBlacklistEndDate(b3);

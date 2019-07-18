@@ -48,7 +48,7 @@ public class TicketServiceTestApp {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 	
-	@Test
+	//@Test
 	public void searchDelivery() throws Exception {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -180,14 +180,14 @@ public class TicketServiceTestApp {
 	}
 	
 	
-	//@Test
+	@Test
 	public void addAlarm() throws Exception{
 		
 		Alarm alarm = new Alarm();
 		
-		alarm.setAlarmCode(8);
-		alarm.setAlarmKeyword("admin");
-		alarm.setUserId("admin");
+		alarm.setAlarmCode(0);
+		alarm.setAlarmKeyword("10001");
+		alarm.setUserId("seller");
 		
 		alarmService.addAlarm(alarm);
 		

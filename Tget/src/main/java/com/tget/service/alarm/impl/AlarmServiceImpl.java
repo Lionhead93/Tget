@@ -48,6 +48,8 @@ public class AlarmServiceImpl implements AlarmService{
 	String checkRefundAlarm;
 	@Value("#{alarmProperties['8']}")
 	String changeSellerCodeAlarm;
+	@Value("#{alarmProperties['9']}")
+	String chatRequestAlarm;
 	
 	
 	//MetaData»≠ «œ±‚
@@ -81,6 +83,9 @@ public class AlarmServiceImpl implements AlarmService{
 			break;
 		case 8:
 			alarm.setAlarmBody(changeSellerCodeAlarm);
+			break;
+		case 9:
+			alarm.setAlarmBody(chatRequestAlarm);
 			break;	
 		default:
 			break;
