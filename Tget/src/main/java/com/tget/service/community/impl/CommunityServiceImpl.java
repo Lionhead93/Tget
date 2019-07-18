@@ -59,12 +59,20 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		communityDao.InsertReply(reply);
 	}
+	
+	
 
 
 	@Override
 	public Content getContent(int contentNo) throws Exception {
 		// TODO Auto-generated method stub
 		return communityDao.selectContent(contentNo);
+	}
+	
+	@Override
+	public Report getReport(int reportNo) throws Exception {
+		// TODO Auto-generated method stub
+		return communityDao.selectReport(reportNo);
 	}
 	
 /*	@Override

@@ -33,7 +33,7 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetUserList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
+			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
 		}
 		
 		
@@ -58,7 +58,10 @@
 			});
 			 */
 						
-			//==> userId LINK Event End User 에게 보일수 있도록 
+			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
+					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
+				});
+			 
 			$( "td:nth-child(2)" ).css("color" , "black");
 			$("h7").css("color" , "red");
 			
@@ -84,8 +87,8 @@
 				$("#contentModalButton").on("click" , function() {
 						
 						var contentNo = $(this).children('input[type="hidden"]').val();
-						
-					
+						var reportNo = $(this).children('div').text().trim();
+						$('input[name="reportNo"]').val(reportNo);
 						$.ajax( 
 								{
 									url : "/community/json/getContent/"+contentNo ,
@@ -134,11 +137,8 @@
 		    
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
-			    
-			    
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>신고글 번호</option>
 						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>신고글 명</option>
 					</select>
 				  </div>
@@ -179,7 +179,9 @@
         </thead>
        
 		<tbody>
-		
+		<form name="reportCheck">
+			<input type="hidden" name="reportNo" value=""/>
+		</form>
 		  <c:set var="i" value="0" />
 		  <c:forEach var="report" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
@@ -203,7 +205,8 @@
 			  
 			  <td align="left">
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
-			  <input type="hidden"  value="${report.contentNo}"/>
+			  <input type="hidden" value="${report.contentNo}"/>
+			  <div style="display: none;">${report.reportNo}</div>
 			  상세보기 </button>
 			  </td>
 			  <td align="left">

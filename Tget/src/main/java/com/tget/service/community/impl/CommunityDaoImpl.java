@@ -55,6 +55,11 @@ public class CommunityDaoImpl implements CommunityDao{
 	}*/
 	
 	@Override
+	public Report selectReport(int reportNo) throws Exception {
+		return sqlSession.selectOne("CommunityMapper.selectReport", reportNo);
+	}
+	
+	@Override
 	public void updateContent(Content content) throws Exception {
 		sqlSession.update("CommunityMapper.updateContent", content);
 	}

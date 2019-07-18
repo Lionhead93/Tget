@@ -49,14 +49,14 @@
 	//var name= $("input[content='contentName']").val();
 	
 		
-		$("form").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
+		$("form").attr("method" , "POST").attr("action" , "/community/addReport").submit();
 	}
 
 		
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$( "button.btn.btn-danger" ).on("click" , function() {
-			alert("신고 접수되었습니다.")
+			
 			fncAddReport();
 		});
 	});	

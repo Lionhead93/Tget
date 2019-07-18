@@ -11,7 +11,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 		
-<title>Searching Youtube Video</title>
+<title>이벤트 이미지를 등록하세요!</title>
 
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
