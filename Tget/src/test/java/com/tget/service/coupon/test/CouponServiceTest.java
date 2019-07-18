@@ -1,4 +1,4 @@
-package com.tget.service.coupon.test;
+/*package com.tget.service.coupon.test;
 
 
 import org.junit.Assert;
@@ -30,7 +30,7 @@ public class CouponServiceTest {
 	@Qualifier("couponServiceImpl")
 	private CouponService couponService;
 
-	/*@Test
+	@Test
 	public void testAddCoupon() throws Exception {
 
 		Coupon coupon = new Coupon();
@@ -52,7 +52,7 @@ public class CouponServiceTest {
 		Assert.assertEquals("1", coupon.getCouponCode());
 		Assert.assertEquals("testUserId", coupon.getUserId());
 		Assert.assertEquals("1", coupon.getCouponStatement());
-	}*/
+	}
 	
 	//@Test
 	public void testGetCoupon() throws Exception {
@@ -65,7 +65,7 @@ Coupon coupon = new Coupon();
 		
 		couponService.addCoupon(coupon);
 	
-		coupon = couponService.getCoupon(10008);
+//		coupon = couponService.getCoupon(10008);
 
 		//==> console
 		//System.out.println(user);
@@ -107,4 +107,4 @@ Coupon coupon = new Coupon();
 	 
 	
 	
-	}
+	}*/

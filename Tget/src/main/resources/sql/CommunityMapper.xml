@@ -37,7 +37,7 @@
 		<result property="reportReasonCode" column="report_reason_code" jdbcType="CHAR"/>
 		<result property="regDate" 			column="reg_date" 			jdbcType="DATE"/>
 		<result property="reportCode" 		column="report_code" 		jdbcType="CHAR"/>
-		<result property="check" 			column="check_yn" 				jdbcType="CHAR"/>
+		<result property="check" 			column="check_yn" 			jdbcType="CHAR"/>
 			
 	</resultMap>
 	
@@ -88,6 +88,13 @@
 		board_code, content_code, open, good_count, bad_count, refund_tran_no, refund_check  		
 		FROM content 
 		WHERE content_no = #{value}
+	 </select>
+	 
+	 <select 	id="selectReport"	parameterType="report"	resultMap="reportSelectMap">
+		SELECT
+		report_no, white_id, white_nickname, black_id, report_reason_code, SYSDATE, content_no, reply_no, '1', report_code
+		FROM report 
+		WHERE report_no = #{value}
 	 </select>
 	 
 	 <!-- SQL :  UPDATE CLOB 수정 필요.....-->
@@ -202,6 +209,7 @@
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 										 				LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
 													</if>
+													
 												</where>
 											</if>
 											ORDER BY report_no ) inner_table)		

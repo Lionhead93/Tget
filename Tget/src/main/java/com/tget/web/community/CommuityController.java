@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,7 +38,11 @@ public class CommuityController {
 		@Autowired
 		@Qualifier("communityServiceImpl")
 		private CommunityService communityService;
+		@Autowired
+		@Qualifier("userServiceImpl")
 		private UserService userService;
+		@Autowired
+		@Qualifier("tranServiceImpl")
 		private TranService tranService;
 			
 		public CommuityController(){
@@ -104,14 +109,13 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
-		public String addReport(@ModelAttribute("report") Report report) throws Exception {
+		public String addReport(@ModelAttribute("report") Report report, HttpSession session) throws Exception {
 
 			System.out.println("community/addContent: POST");
 			//User user = userService.getUser("userId");
 			
 			communityService.addReport(report);
-			//report.getBlackId();
-			//userService.addBlacklist();
+			
 			
 			return "forward:/community/getReportList";
 		}
@@ -170,12 +174,18 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="getReportList")
-		public String getReportList( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+		public String getReportList(  @ModelAttribute("search") Search search , User user, Report report, Model model , HttpServletRequest request, HttpSession session) throws Exception{
 			
 			System.out.println("/community/getReportList: GET/ POST");
 			
 			// Business logic
 			Map<String , Object> map=communityService.getReportList(search);
+			
+			
+			
+//			user.
+//			communityService.get
+//			userService.addBlacklist(blackId);
 			
 			System.out.println(map);
 			// Model and View 
@@ -184,5 +194,17 @@ public class CommuityController {
 			model.addAttribute("search", search);
 			
 			return "forward:/community/getReportList.jsp";
+		}
+		
+		@RequestMapping(value="addBlack")
+		public String addBlack(@RequestParam("reportNo") int reportNo) throws Exception {
+			System.out.println("@@되어야하느니라");
+			Report report = communityService.getReport(reportNo);
+			System.out.println(report);
+			User user = userService.getUser(report.getBlackId());	
+			System.out.println(user);
+			userService.addBlacklist(user);
+			
+			return "forward:/user/listUser.jsp";
 		}
 	}

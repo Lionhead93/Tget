@@ -144,21 +144,45 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectUser(userId);
 	}
 
-	@Override
-	public User nickNameCheck(String nickName) throws Exception {
-	
-
-		return userDao.nickNameCheck(nickName);
-		
-		
-		
-		
-	}
 
 	@Override
 	public User getCode(String code) throws Exception {
 		// TODO Auto-generated method stub
 		return userDao.selectCode(code);
+	}
+
+	@Override
+	public boolean  checknickNameDuplication(String nickName) throws Exception {
+	
+		boolean result=true;
+		
+		System.out.println("nickName!!!!!!!!!!!!!!!!!!!!!!!"+nickName);
+		
+		User user = userDao.selectnickName(nickName);
+		
+		System.out.println("cafe!!!!!!!!!!!!!!!!!!!!!!!"+user);
+		
+		if(user != null) {
+			result=false;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean checkcodeDuplication(String code) throws Exception {
+		
+		boolean result=true;
+		
+		System.out.println("nickName!!!!!!!!!!!!!!!!!!!!!!!"+code);
+		
+		User user = userDao.selectCode(code);
+		
+		System.out.println("user!!!!!!!!!!!!!!!!!!!!!!!"+user);
+		
+		if(user != null) {
+			result=false;
+		}
+		return result;
 	}
 	
 	

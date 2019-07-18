@@ -5,17 +5,17 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tget.common.domain.Search;
 import com.tget.service.alarm.AlarmService;
 import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 
-@Controller
+@RestController
 @RequestMapping("/alarm/*")
 public class AlarmRestController {
 
