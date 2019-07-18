@@ -122,6 +122,8 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		return map;
 	}
+	
+	
 
 
 	@Override
@@ -134,6 +136,12 @@ public class CommunityServiceImpl implements CommunityService{
 	public void updateReply(Reply reply) throws Exception {
 		// TODO Auto-generated method stub
 		communityDao.updateReply(reply);
+	}
+	
+	@Override
+	public void updateReport(Report report) throws Exception {
+		// TODO Auto-generated method stub
+		communityDao.updateReport(report);
 	}
 
 	

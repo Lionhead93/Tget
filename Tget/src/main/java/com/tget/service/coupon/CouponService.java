@@ -1,5 +1,9 @@
 package com.tget.service.coupon;
 
+import java.util.List;
+import java.util.Map;
+
+import com.tget.common.domain.Search;
 import com.tget.service.coupon.domain.Coupon;
 
 public interface CouponService {
@@ -10,5 +14,6 @@ public interface CouponService {
 	
 	public void updateCoupon(Coupon coupon) throws Exception;
 	
-	
+//	public Map<String , Object> getCouponList(Search search) throws Exception;
+
 }

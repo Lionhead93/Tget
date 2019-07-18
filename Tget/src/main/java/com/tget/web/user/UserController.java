@@ -291,7 +291,20 @@ public String smsCheck(String code){
 			} 
 }
 	
+@RequestMapping( value="finduserId", method=RequestMethod.GET )
+public String finduserId( @RequestParam("phone") String phone , Model model ) throws Exception {
 	
+	System.out.println("/user/finduserId : GET");
+	//Business Logic
+	User user = userService.finduserId(phone);
+	// Model �� View ����
+	model.addAttribute("user", user);
+	
+	return "forward:/user/finduserId.jsp";
+}	
+
+
+
 
 		}
 

@@ -21,6 +21,7 @@ public interface UserDao {
 		public User selectCode(String code) throws Exception;
 		public User selectnickName(String nickName)throws Exception;
 		public User selectcode(String code)throws Exception;
+		public User finduserId(String phone) throws Exception ;
 
 
 }

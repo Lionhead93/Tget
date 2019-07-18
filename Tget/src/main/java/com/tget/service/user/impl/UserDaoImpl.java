@@ -101,4 +101,11 @@ public class UserDaoImpl implements UserDao{
 		
 		return	sqlSession.selectOne("UserMapper.selectCode",code);
 	}
+
+	@Override
+	public User finduserId(String phone) throws Exception  {
+		
+		return sqlSession.selectOne("UserMapper.finduserId", phone);
+		
+	}
 }

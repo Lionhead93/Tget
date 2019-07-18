@@ -32,34 +32,21 @@
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetUserList(currentPage) {
+			
 			$("#currentPage").val(currentPage)
-			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
+			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();
 		}
-		
-		
+	
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
+			 
 		 });
 		
-		
-	
 		 $(function() {
 			
-			
-				
-/* 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(3)" ).on("click" , function() {
-// 				alert($(this).children('input[type="hidden"]').val());
-				self.location ="/community/getContent?contentNo="+$(this).children('input[type="hidden"]').val();
-			});
-			 */
 						
 			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
-					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
+					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
 				});
 			 
 			$( "td:nth-child(2)" ).css("color" , "black");
@@ -123,7 +110,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>신고 리스트</h3>
+	       <h3>환불 게시판</h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -167,46 +154,30 @@
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left" >신고자</th>
-            <th align="left">신고 사유</th>
-            <th align="left">신고 일자</th>
+            <th align="left" >글 제목</th>
+            <th align="left">작성자</th>
+            <th align="left">작성일</th>
             <th align="left">검증 여부</th>
             
-			
-			
-			
+	
           </tr>
         </thead>
        
 		<tbody>
-		<form name="reportCheck">
-			<input type="hidden" name="reportNo" value=""/>
+		<form name="refundCheck">
+			<input type="hidden" name="contentNo" value=""/>
 		</form>
 		  <c:set var="i" value="0" />
 		  <c:forEach var="report" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left">${report.whiteId }</td>
-			  <td align="left">			  	
-			  <c:if test="${report.reportReasonCode==0}">
-			     부적절한 홍보 게시물
-			  </c:if>
-			  <c:if test="${report.reportReasonCode==1}">
-			     음란성 또는 청소년에게 부적합한 내용
-			  </c:if>
-			  <c:if test="${report.reportReasonCode==2}">
-			     특정인 대상의 비방/욕설
-			  </c:if>
-			  <c:if test="${report.reportReasonCode==3}">
-			     명예훼손/사생활 침해 및 저작권침해 등
-			  </c:if></td>
-			  <td align="left">${report.regDate}</td>
-			  
+			  <td align="left">${content.contentName}</td>
+			  <td align="left">${content.userId}</td>
 			  <td align="left">
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
-			  <input type="hidden" value="${report.contentNo}"/>
-			  <div style="display: none;">${report.reportNo}</div>
+			  <input type="hidden" value="${content.contentNo}"/>
+			  <div style="display: none;">${content.contentName}</div>
 			  상세보기 </button>
 			  </td>
 			  <td align="left">

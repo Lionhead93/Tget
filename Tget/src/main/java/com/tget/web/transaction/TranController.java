@@ -1,5 +1,6 @@
 package com.tget.web.transaction;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +23,16 @@ import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.transaction.TranService;
 import com.tget.service.transaction.domain.Transaction;
+import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
 
 @Controller
 @RequestMapping("/tran/*")
 public class TranController {
 	
+	@Qualifier("userServiceImpl")
+	@Autowired
+	private UserService userService;
 	@Qualifier("ticketServiceImpl")
 	@Autowired
 	private TicketService ticketService;
@@ -119,5 +125,29 @@ public class TranController {
 		tranService.addDelivery(transaction);
 				
 		return "forward:/tran/getTranList?menu=user";
+	}
+	
+	@RequestMapping(value = "goChat" ,method = RequestMethod.GET)
+	public String goChat(@RequestParam("userId") String userId,
+							@RequestParam("opponentId") String opponentId,
+							@RequestParam("re") String re, Model model) throws Exception {
+		
+		System.out.println("goChat/"+userId+"/"+opponentId+"/"+re);
+		
+		if(re.equals("res")) {
+			
+		}else {
+			Alarm alarm = new Alarm();
+			alarm.setAlarmCode(9);
+			alarm.setAlarmKeyword(userId);
+			alarm.setUserId(opponentId);
+			alarmService.addAlarm(alarm);
+		}
+		
+		model.addAttribute("chatUser",userService.getUser(userId));
+		model.addAttribute("chatOpponent",userService.getUser(opponentId));
+		model.addAttribute("re", re);		
+				
+		return "forward:/tran/chat.jsp";
 	}
 }
