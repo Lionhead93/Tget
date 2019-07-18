@@ -322,8 +322,15 @@ public class EventController {
 			FileCopyUtils.copy(multipartFile.getBytes(), file);
 			
 		}
+//		List<RecommEvent> list = eventService.getRecommendedEventList();
+//		for (int i=0; i<list.size(); i++) {
+//			if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+//				break;
+//			}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+//				eventService.addRecommendedEvent(recommEvent);
+//			}
+//		}	
 		eventService.addRecommendedEvent(recommEvent);
-		
 		System.out.println(recommEvent);
 		model.addAttribute("recommEvent",recommEvent);
 		model.addAttribute("videoName",recommEvent.getVideoName());

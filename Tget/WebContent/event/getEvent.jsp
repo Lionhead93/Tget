@@ -151,9 +151,9 @@
 							<div align="right">조회수 : ${viewCount}회<br/></div>
 							
 							<c:if test="${user.role == 2 }">
-								admin
+								<button class="button_black" id="editImage" >편집</button><br/>
 							</c:if>
-							<button class="button_black" id="editImage" >편집</button><br/>
+							
 						</div>
 					</div>	
 				</div>			
