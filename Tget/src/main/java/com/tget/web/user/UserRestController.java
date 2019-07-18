@@ -81,6 +81,9 @@ public class UserRestController {
 	System.out.println("뜨냐?");
 		
 		int rand = (int) (Math.random() * 899999) + 100000; 
+		
+	     user.setCode(String.valueOf(rand));
+		
 		  String hostname = "api.bluehouselab.com";
 	        String url = "https://"+hostname+"/smscenter/v1.0/sendsms";
 
@@ -131,12 +134,11 @@ public class UserRestController {
 	public String smsCheck(String code ){ 
 	
 		
-		String check = Config.content;
 		
-		System.out.println("받은거"+check);
+		System.out.println("받은거"+user.getCode());
 		System.out.println("쓴거"+code);
 		
-		if(code.equals(check)) {
+		if(code.equals(user.getCode())) {
 			System.out.println("일치");
 			return "true";
 			}else { 

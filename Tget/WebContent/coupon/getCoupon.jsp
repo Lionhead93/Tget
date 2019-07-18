@@ -60,44 +60,50 @@
       
         <thead>
           <tr>
-            <th align="center">No</th>
-            <th align="left" >회원 ID</th>
-            <th align="left">블랙리스트코드</th>
-            <th align="left">블랙리스트신고사유</th>
-            <th align="left">블랙리스트시작일</th>
-            <th align="left">블랙리스트종료일</th>
+            <th align="left">쿠폰번호</th>
+            <th align="left">쿠폰용도</th>
+            <th align="left">쿠폰사용일자</th>
+            <th align="left">쿠폰발급일자</th>
+            <th align="left">쿠폰상태</th>
             
             
           </tr>
         </thead>
        
 		<tbody>
-		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="coupon" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
+				
 			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${coupon.userId}</td>
 			  <td align="left">${coupon.couponNo}</td>
-			  <td align="left">신고사유?</td>
-			  <td align="left">${coupon.couponCode}</td>
+			  <td align="left">
+			  
+			  <c:set var ="Code" value="${coupon.couponCode}"/>
+			  <c:if test="${Code eq '0'}">
+			   강조권</c:if>
+			 <c:if test="${Code eq '1'}">
+			 	상단출력</c:if>
+				</td>
+				
 			  <td align="left">${coupon.couponUseDate}
 			  <td align="left">${coupon.couponRegDate}
-			  <td align="left">${coupon.couponStatement}
-	
+			  <td align="left">  <c:set var ="State" value="${coupon.couponStatement}"/>
+			  <c:if test="${State eq '0'}">
+			   사용가능</c:if>
+			 <c:if test="${State eq '1'}">
+			 	사용됨</c:if>
+			<c:if test="${State eq '2'}">
+			 	기간만료</c:if>
 			  	<input type="hidden" value="${coupon.userId}">
 			
 			  </td>
 			
 			  	
 			</tr>
-          </c:forEach>
         </tbody>
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+
+		
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	

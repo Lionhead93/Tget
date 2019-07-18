@@ -145,7 +145,7 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+        	<a class="navbar-brand" href="/index.jsp">T-GET</a>
    		</div>
    	</div>
 
@@ -181,7 +181,7 @@
 					//alert("오예");
 				
 			   $.ajax({ 
-				   url: "/user/smsCheck",
+				   url: "/user/json/smsCheck",
 			   data: { 
 				   code: $("#sms").val() 
 				   }, 
@@ -189,12 +189,15 @@
 			   success: function(result){ 
 				   console.log(result);
 				   
+				   
+				   
 				   if (result == "true") { 
 			   
-				   alert("번호 인증 성공"); 
+				   alert("인증 성공");
+				   
 			   } else if (result == "false")
 			  		 { 
-				   alert("번호 인증 실패"); 
+				   alert("인증 실패"); 
 			  	 	} 
 			 	  } 
 			   })
@@ -315,6 +318,7 @@
 							var inputed = $("input[name='nickName']").val();
 											
 
+							
 							$.ajax({
 							url : "/user/json/checknickNameDuplication",
 							method : "POST",
@@ -363,6 +367,7 @@
 		     
 				 
 				 
+				
 				 
 				 
 				 
@@ -488,7 +493,7 @@
 	
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary">가 입</button>
+		      <button id= "join" type="button" class="btn btn-primary">가 입</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
 			 
 			  

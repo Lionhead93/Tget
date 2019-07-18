@@ -36,4 +36,7 @@ public interface UserService {
 	public boolean checkcodeDuplication(String code)throws Exception;
 	
 	public User getCode(String code)throws Exception;
+	
+	public User finduserId(String phone)throws Exception;
+	
 }

@@ -117,12 +117,12 @@
 			$("a:contains('쿠폰등록')").on("click",function(){
 				self.location = "/ticket/getTicketList?menu=check";
 			});
-			$("a:contains('내쿠폰조회')").on("click",function(){
+			/* $("a:contains('내쿠폰조회')").on("click",function(){
 				self.location = "/coupon/getCoupon";
-			});
-			$("a:contains('쿠폰목록조회')").on("click",function(){
+			}); */
+		/* 	$("a:contains('쿠폰목록조회')").on("click",function(){
 				self.location = "/ticket/getTicketList?menu=check";
-			});
+			}); */
 		
 			
 		});
@@ -135,6 +135,15 @@
 		});
 		
 		//============= 로그인 화면이동 =============
+			$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('아이디찾기')").on("click" , function() {
+				self.location = "/user/finduserId.jsp"
+			});
+		});
+			
+			
+			
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('로그인')").on("click" , function() {
@@ -153,6 +162,13 @@
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('내정보보기')").on("click" , function() {
 			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+			});
+		});
+		
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {
+			$(self.location).attr("href","/coupon/getCoupon?userId=${sessionScope.user.userId}");
 			});
 		});
 		
@@ -218,9 +234,9 @@
 				 <ul class="nav navbar-nav">           	
 	            	
 	            	
-<!-- 	            	<li class="nav-item active"> -->
-<!-- 			              <a class="nav-link" href="#">이벤트관리</a> -->
-<!-- 			        </li>  -->
+            	<li class="nav-item active">
+			              <a class="nav-link" href="#">이벤트관리</a>
+			        </li>  
 			        
 			        <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -230,9 +246,10 @@
 				          <a class="dropdown-item" href="#">로그인</a>
 				           <a class="dropdown-item" href="#">로그아웃</a>
 				          <a class="dropdown-item" href="#">회원가입</a>
+				            <a class="dropdown-item" href="#">아이디찾기</a>
 				          <a class="dropdown-item" href="#">내정보보기</a>
 				          <a class="dropdown-item" href="#">블랙리스트관리</a>
-				        </div>
+				        </div> 
 				    </li>
 	            	
 	            	<li class="nav-item dropdown">
@@ -285,7 +302,7 @@
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="#">쿠폰등록</a>
 				          <a class="dropdown-item" href="#">내쿠폰조회</a>
-				          <a class="dropdown-item" href="#">쿠폰목록조회</a>
+				          <!-- <a class="dropdown-item" href="#">쿠폰목록조회</a> -->
 				        </div>
 				    </li>  
 				    

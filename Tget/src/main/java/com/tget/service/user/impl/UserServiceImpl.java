@@ -184,6 +184,12 @@ public class UserServiceImpl implements UserService{
 		}
 		return result;
 	}
+
+	@Override
+	public User finduserId(String phone) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.finduserId(phone);
+	}
 	
 	
 	

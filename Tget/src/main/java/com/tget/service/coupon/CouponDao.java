@@ -1,5 +1,7 @@
 package com.tget.service.coupon;
 
+import java.util.List;
+
 import com.tget.service.coupon.domain.Coupon;
 
 public interface CouponDao {

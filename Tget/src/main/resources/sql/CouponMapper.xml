@@ -30,7 +30,7 @@
 		coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement
 	 		
 		FROM coupon 
-		WHERE user_id = #{userId}
+		WHERE user_id = #{value}
 	 </select>
 	 
 	 <update	id="updateCoupon"	parameterType="coupon" >

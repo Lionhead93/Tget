@@ -137,7 +137,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>블랙리스트</h3>
+	       <h3>쿠폰</h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -183,11 +183,12 @@
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left" >회원 ID</th>
-            <th align="left">블랙리스트코드</th>
-            <th align="left">블랙리스트신고사유</th>
-            <th align="left">블랙리스트시작일</th>
-            <th align="left">블랙리스트종료일</th>
+            <th align="left" >회원 아이디</th>
+            <th align="left">쿠폰번호</th>
+            <th align="left">쿠폰용도</th>
+            <th align="left">쿠폰 사용일자</th>
+            <th align="left">쿠폰 발급일자</th>
+            <th align="left">쿠폰 상태</th>
             
             
           </tr>
@@ -196,16 +197,17 @@
 		<tbody>
 		
 		  <c:set var="i" value="0" />
-		  <c:forEach var="user" items="${list}">
+		  <c:forEach var="coupon" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
-			  <td align="left">${user.blacklistCode}</td>
-			  <td align="left">신고사유?</td>
-			  <td align="left">${user.blacklistStartDate}</td>
-			  <td align="left">${user.blacklistEndDate}
-			  	<input type="hidden" value="${user.userId}">
+			  <td align="left">${coupon.userId}</td>
+			  <td align="left">${coupon.couponNo}</td>
+			  <td align="left">${coupon.couponCode}</td>
+			  <td align="left">${coupon.couponUseDate}</td>
+			  <td align="left">${coupon.couponRegDate}</td>
+			   <td align="left">${coupon.couponStatement}
+			  	<input type="hidden" value="${coupon.userId}">
 			
 			  </td>
 			
