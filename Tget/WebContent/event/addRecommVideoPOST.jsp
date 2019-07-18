@@ -11,7 +11,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 		
-<title>추천 이벤트를 등록하세요!</title>
+<title>추천 이벤트가 다음과 같이 저장되었습니다.</title>
 
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -21,12 +21,10 @@
 	<script type="text/javascript">
 	
 	$(function(){
-		$("#cancel").on("click",function(){	
-			window.close();
-		})	;
+		
 		
 		$("#submit").on("click",function(){	
-			$(this).val($("#file").val());
+// 			$(this).val($("#file").val());
 // 			$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/product/updateProduct").submit();
 			
 // 			$.ajax(
@@ -48,8 +46,8 @@
 // 				});		
 			
 // 			$(opener.document).find("#eventImage").val($(this).val());
-			$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/addRecommEvent").submit();
-// 			window.close();
+// 			$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/addRecommEvent").submit();
+			window.close();
 		})	;
 	});
 	</script>
@@ -99,23 +97,18 @@
 <form>
 	<div class="container">
 	
-<!-- 		<div class="input-group mb-3"> -->
-<!-- 		  <div class="input-group-prepend"> -->
-<!-- 		    <span class="input-group-text" id="inputGroupFileAddon01">파일명</span> -->
-<!-- 		  </div> -->
-<!-- 		  <div class="custom-file"> -->
-<%-- 		    <input type="file" class="custom-file-input" id="file" value="${!empty eventImage? eventImage : ''}"> --%>
-<!-- 		    <label class="custom-file-label" for="inputGroupFile01"></label> -->
-<!-- 		  </div> -->
-<!-- 		</div> -->
+		<div align="center"><h3 style="font-weight: bold;">
+			추천 이벤트가 다음과 같이 저장되었습니다!
+		</h3></div>
+			${recommEvent.eventName }
+			${recommEvent.recommEventName }
+			${recommEvent.recommEventDetail }
+			${recommEvent.recommEventNo }
+		<video autoplay controls id="file"  src="/resources/video/${!empty recommEvent.videoName? videoName : ''}"  type="video/mp4" style="width:450px;" >
 		<br/><br/><br/><br/>
-<%-- 		<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" > --%>
-<%-- 		<input type="hidden"  id="eventImage" name="eventImage"  value="${!empty eventImage? eventImage : ''}" /> --%>
-		<input type="file" class="form-control" id="file" name="file" value="${!empty videoName? videoName : ''}"><br/><br/><br/><br/>
 <%-- 		eventImage  ; ${eventImage }<br/> --%>
 		
-		<button class="button_black"  id="cancel">취소</button>
-		<button class="button_black"  id="submit" >등록</button>
+		<button class="button_black"  id="submit" >확인</button>
 	</div>
 </form>
 

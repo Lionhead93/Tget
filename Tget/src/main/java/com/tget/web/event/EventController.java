@@ -325,6 +325,7 @@ public class EventController {
 		eventService.addRecommendedEvent(recommEvent);
 		
 		System.out.println(recommEvent);
+		model.addAttribute("recommEvent",recommEvent);
 		model.addAttribute("videoName",recommEvent.getVideoName());
 //		model.addAttribute("file",file);
 		return "forward:/event/addRecommVideoPOST.jsp";
@@ -356,7 +357,7 @@ public class EventController {
 		eventService.updateRecommendedEvent(recommEvent);
 		
 		System.out.println(recommEvent);
-		model.addAttribute("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+		model.addAttribute("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
 		model.addAttribute("recommEventlist",eventService.getRecommendedEventList());
 		model.addAttribute("videoName",recommEvent.getVideoName());
 //		model.addAttribute("file",file);
