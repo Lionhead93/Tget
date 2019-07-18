@@ -26,7 +26,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="/resources/javascript/common.js" ></script>
-	<script src="/resources/javascript/commonAlarm.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
 	<style>
 	 div.container{
 	 	margin-top: 0px;
