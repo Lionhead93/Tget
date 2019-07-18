@@ -18,14 +18,12 @@
   	<link rel="stylesheet" href="/resources/demos/style.css">
   
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-	<script src="/resources/javascript/common.js" ></script>
-	<script src="/resources/javascript/alarm.js" ></script>	
-<!-- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!-- 	<script src="/resources/javascript/common.js" ></script> -->
+<!-- 	<script src="/resources/javascript/alarm.js" ></script>	 -->
 	<script type="text/javascript">
 	$( function() {
 	    $( "#tabs" ).tabs();
@@ -36,8 +34,46 @@
 			alert("카테고리 추가");
 		});
 		
-		$("#addRecomm").on("click",function(){			
-			alert("추천이벤트 추가");
+		$("button:contains('삭제하기')").on("click",function(){			
+// 			alert("삭제하기");
+			$.ajax(
+					{
+						url : "/event/rest/deleteRecommendedEvent",
+						method : "GET",
+						contentType: 'application/json; charset=UTF-8',
+						data : {
+										recommEventNo : $(this).val()
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+// 							alert(status);
+// 							alert("JSONData : \n"+JSONData);		
+							$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())-1);
+// 							alert($("#recommEventlistSize").val());					
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});			
+// 			var temp = parseInt($("#recommEventlistSize").val())-1;
+			
+		});
+		
+		$("button:contains('수정하기')").on("click",function(){			
+			popWin = window.open("/event/updateRecommendedEvent?recommEventNo="+$(this).val(),"popWin",
+					"left=500, top=100, width=600, height=600, "
+					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+		});
+		
+		$("#addRecomm").on("click",function(){	
+			if (parseInt($("#recommEventlistSize").val()) < 3) {
+				popWin = window.open("/event/addRecommendedEvent","popWin",
+						"left=500, top=100, width=600, height=600, "
+						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			} else {
+				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+			}
+			
 // 			$.ajax(
 // 					{
 // 						url : "/event/rest/addRecommendedEvent",
@@ -61,11 +97,18 @@
 			
 // 				});			
 		});		
+// 		$("video").on("click", function(){
+// // 			alert($(this));
+// 			$(this).play();
+// 		});
 	});
 	
 	</script>
 	
 	<style>
+	.tab-content{
+		min-height: 400px;
+	}
       div.container {
         	margin-top: 50px;
         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
@@ -134,7 +177,7 @@
 		  </div>
 		  <div class="col-10">
 		    <div class="tab-content" id="nav-tabContent">
-		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-home-list">
+		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-recomm-list">
 		      <div  class="row" >
 		      	<div class="col-11"></div>
 		      	<div class="col-1" align="left"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
@@ -149,53 +192,25 @@
 <!--   </div><br/> -->
 <!-- </div> -->
 <!-- </form> -->
+  			<input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
   
-  
-		      <div class="row" align="center">
-		      		<input type="hidden" name="eventName" value="${i.eventName }"/>
-		      		<c:forEach items="${recommEventlist}"  var="i">
-		      			<div class="card  text-white bg-dark mb-3" style="width: 18rem;">
-							  	<img src = "http://placehold.it/300x200" class="img-rounded"/>
-							 	<div class="card-body">
-							    	<h5 class="card-title">recommEventName : ${i.recommEventName}</h5>
-							    	<p class="card-text">recommEventDetail : ${i.recommEventDetail}</p>
-							    	<p class="card-text">videoName : ${i.videoName}</p>
-							    	<input type="hidden" name="eventNameRecom" value="${i.eventName}"/>
-							    	<input type="hidden" name="recommStatus" value="${i.recommStatus}"/>
-							    	<a class="btn btn-dark" value="${i.recommEventNo}">수정하기</a>
-							    	<a class="btn btn-dark" value="${i.recommEventNo}">삭제하기</a>
-							  	</div>
-							 </div>
-				  </c:forEach>
-				  <div class="card  bg-light mb-3" style="width: 18rem;">
-					<img src = "http://placehold.it/300x200" class="img-rounded"/>
-						<div class="card-body">
-						<h5 class="card-title">추천이벤트명</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-dark" value="5">수정하기</a>
-						<a href="#" class="btn btn-dark" value="5">삭제하기</a>
+			<div class="row" align="center" >		      	
+				<c:forEach items="${recommEventlist}"  var="i">			
+					<div style="width: 18rem; height: 400px;" >
+						<video controls id="videoplay"  name="" value="video" style="width: 300px; height: 170px;">
+							<source src="/resources/video/${i.videoName}" type="video/mp4">
+						</video>
+						<div class="card-body" style="height: 220px;" >
+							<input type="hidden" name="eventName" value="${i.eventName }"/>
+							<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
+							<p class="card-text">${i.recommEventDetail }</p>
+							<button class="btn btn-dark" value="${i.recommEventNo }">수정하기</button>
+							<button class="btn btn-dark" value="${i.recommEventNo }">삭제하기</button>
+						</div>
 					</div>
-				  </div>
-				  <div class="card  bg-light mb-3" style="width: 18rem;">
-					<img src = "http://placehold.it/300x200" class="img-rounded"/>
-						<div class="card-body">
-						<h5 class="card-title">추천이벤트명</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-dark" value="5">수정하기</a>
-						<a href="#" class="btn btn-dark" value="5">삭제하기</a>
-					</div>
-				  </div>
-				  <div class="card  bg-light mb-3" style="width: 18rem;">
-					<img src = "http://placehold.it/300x200" class="img-rounded"/>
-						<div class="card-body">
-						<h5 class="card-title">추천이벤트명</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-dark" value="5">수정하기</a>
-						<a href="#" class="btn btn-dark" value="5">삭제하기</a>
-					</div>
-				  </div>
-			    </div>			
-			  </div>
+				</c:forEach>	
+			</div>
+		 </div>
 			  
 			  
 		      <div class="tab-pane fade" id="list-category" role="tabpanel" aria-labelledby="list-category-list">

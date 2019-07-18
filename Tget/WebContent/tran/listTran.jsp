@@ -69,7 +69,12 @@
 	    	
 	    	self.location = "/event/getEventTicketList?eventId="+eventId;	    	
 	    });
-	    
+	    $("a.chat").on("click", function(){
+	    	var opponentId = $(this).attr("id").trim();
+	    	var userId = "${user.userId}";
+	    	
+	    	window.open("/tran/goChat?userId="+userId+"&opponentId="+opponentId+"&re=req", "T-GET 채팅" ,"width = 500, height = 500, top = 100, left = 200, location = no");
+	    });	    
 	    $("#addDelivery").on("click", function(){
 	    	
 	    	$("#tranNo").val(tranNo);
@@ -124,8 +129,7 @@
                     
                     $("#searchResult").html(myInvoiceData)
                     
-                    var trackingDetails = data.trackingDetails;
-                    
+                    var trackingDetails = data.trackingDetails;                    
                     
                     var myTracking="";
                     var header ="";
@@ -242,8 +246,14 @@
 			      <td>${tran.orderAmount}</td>
 			      <td>${tran.orderDate}</td>
 			      <td>			      
-			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.userId}</c:if>
-			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.userId}</c:if>
+			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.userId}
+			      <a class="chat" id="${tran.buyer.userId}" href="#" >
+			      <i class="far fa-comment-alt"></i>
+			      </c:if>
+			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.userId}
+			      <a class="chat" id="${tran.seller.userId}" href="#" >
+			      <i class="far fa-comment-alt"></i>
+			      </c:if>
 			      </td>
 			      <td class="text-secondary">
 			      <c:if test="${tran.tranCode==0}">무통장 입금대기</c:if>

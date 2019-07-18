@@ -1,10 +1,7 @@
 package com.tget.web.transaction;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,12 +10,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tget.common.web.GoogleTextVision;
+import com.tget.service.alarm.AlarmService;
+import com.tget.service.alarm.domain.Alarm;
 import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.Ticket;
@@ -44,6 +40,9 @@ public class TranRestController {
 	@Qualifier("tranServiceImpl")
 	@Autowired
 	private TranService tranService;
+	@Qualifier("alarmServiceImpl")
+	@Autowired
+	private AlarmService alarmService;
 	
 	
 	public TranRestController() {
@@ -52,7 +51,7 @@ public class TranRestController {
 	
 	@RequestMapping(value = "rest/Kakaopay/{ticketNo}/{totalPrice}" ,method = RequestMethod.GET)
 	public String Kakaopay(@PathVariable("ticketNo") int ticketNo ,
-						@PathVariable("totalPrice") int totalPrice , HttpSession session) throws Exception {
+						@PathVariable("totalPrice") int totalPrice, HttpSession session) throws Exception {
 		
 		System.out.println("rest/Kakaopay/"+ticketNo+"/"+totalPrice);
 		
@@ -135,7 +134,6 @@ public class TranRestController {
 		map.put("deilveryNo", deilveryNo);
 		
 		return map;
-	}
-	
+	}	
 	
 }

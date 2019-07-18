@@ -67,6 +67,8 @@ public class EventRestController {
 	@Value("#{commonProperties['uploadPath']}")
 	String uploadPath;
 	
+	@Value("#{commonProperties['videoPath']}")
+	String videoPath;
 	
 	///Constructor
 	public EventRestController(){
@@ -175,6 +177,29 @@ public class EventRestController {
 		return eventNameList;
 	}
 	
+	@RequestMapping(value="rest/getRecommendedEventList")
+	public Map<String,Object> getRecommendedEventList() throws Exception {
+		System.out.println("===============rest/getRecommendedEventList===============");
+		List<RecommEvent> recommEventlist = eventService.getRecommendedEventList();
+		List<String> eventNameList = new ArrayList<String>();
+		List<String> videoNameList = new ArrayList<String>();
+		List<String> recommEventNameList = new ArrayList<String>();
+		List<String> recommEventDetailList = new ArrayList<String>();
+		for (RecommEvent recommEvent : recommEventlist) {
+			eventNameList.add(recommEvent.getEventName());
+			videoNameList.add(recommEvent.getVideoName());
+			recommEventNameList.add(recommEvent.getRecommEventName());
+			recommEventDetailList.add(recommEvent.getRecommEventDetail());
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("eventNameList", eventNameList);
+		map.put("videoNameList", videoNameList);
+		map.put("recommEventNameList", recommEventNameList);
+		map.put("recommEventDetailList", recommEventDetailList);
+		map.put("recommEventlistSize",recommEventlist.size());
+		return map;
+	}
+	
 	@RequestMapping(value="rest/getRecommendedEvent")
 	public Map<String,Object> getRecommendedEvent(@RequestBody int recommEventNo) throws Exception {
 		System.out.println("===============rest/getRecommendedEvent===============");
@@ -185,38 +210,39 @@ public class EventRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
-	public Map<String,Object> addRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-		System.out.println("===============rest/addRecommendedEvent===============");
-		
-		eventService.addRecommendedEvent(recommEvent);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-		
-		return map;
-	}
+//	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
+//	public Map<String,Object> addRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
+//		System.out.println("===============rest/addRecommendedEvent===============");
+//		
+//		eventService.addRecommendedEvent(recommEvent);
+//		
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		
+//		return map;
+//	}
 	
-	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
-	public Map<String,Object> updateRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-		System.out.println("===============rest/updateRecommendedEvent===============");
-		
-		eventService.updateRecommendedEvent(recommEvent);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-		
-		return map;
-	}
+//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
+//	public Map<String,Object> updateRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
+//		System.out.println("===============rest/updateRecommendedEvent===============");
+//		
+//		eventService.updateRecommendedEvent(recommEvent);
+//		
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		map.put("recommEventlist", eventService.getRecommendedEventList());
+//		return map;
+//	}
 	
 	@RequestMapping(value="rest/deleteRecommendedEvent")
-	public Map<String,Object> deleteRecommendedEvent(@RequestBody int recommEventNo) throws Exception {
+	public Map<String,Object> deleteRecommendedEvent(@ModelAttribute("recommEventNo") int recommEventNo) throws Exception {
 		System.out.println("===============deleteRecommendedEvent===============");
-		
+	
 		eventService.deleteRecommendedEvent(recommEventNo);
+
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("recommendedEventList", eventService.getRecommendedEventList());
+		map.put("recommEventlist", eventService.getRecommendedEventList());
 		
 		return map;
 	}
@@ -307,32 +333,36 @@ public class EventRestController {
 	@RequestMapping(value="rest/getInterestedEventList")
 	public Map<String,Object> getInterestedEventList(HttpSession session) throws Exception {
 		System.out.println("===============rest/getInterestedEventList===============");
-		
+		String userId = null;
 		User user = (User)session.getAttribute("user");
-		String userId = user.getUserId();
-//		String userId = "admin";
+		Map<String,Object> map = new HashMap<String,Object>();
 		
-		List<Event> list = eventService.getInterestedEventList(userId);
-		List<String> eventIdList = new ArrayList<String>();
-		
-		for (Event event : list) {
-			if (eventIdList.size()==0) {
-				eventIdList.add(event.getEventId());
-			}else {
-				for (int i = 0; i < eventIdList.size(); i++) {
-					if (eventIdList.get(i).equals(event.getEventId())) {
-						break;
-					} else if ((i==eventIdList.size()-1) &&( ! eventIdList.get(i).equals(event.getEventId()))) {
-						eventIdList.add(event.getEventId());
+		if (user != null) {
+			userId = user.getUserId();
+//			String userId = "admin";
+			
+			List<Event> list = eventService.getInterestedEventList(userId);
+			List<String> eventIdList = new ArrayList<String>();
+			
+			for (Event event : list) {
+				if (eventIdList.size()==0) {
+					eventIdList.add(event.getEventId());
+				}else {
+					for (int i = 0; i < eventIdList.size(); i++) {
+						if (eventIdList.get(i).equals(event.getEventId())) {
+							break;
+						} else if ((i==eventIdList.size()-1) &&( ! eventIdList.get(i).equals(event.getEventId()))) {
+							eventIdList.add(event.getEventId());
+						}
 					}
 				}
 			}
+			System.out.println(eventIdList);
+			map.put("interestedEventList", eventIdList);
+		}else {
+			return null;
 		}
-		System.out.println(eventIdList);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("interestedEventList", eventIdList);
-		
+	
 		return map;
 	}
 	
