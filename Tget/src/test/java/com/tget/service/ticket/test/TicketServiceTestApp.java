@@ -1,7 +1,17 @@
 package com.tget.service.ticket.test;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +47,30 @@ public class TicketServiceTestApp {
 	@Autowired
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
+	
+	@Test
+	public void searchDelivery() throws Exception {
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url= 	"http://info.sweettracker.co.kr?t_key=CbHyQ5hk2Mf9jPrkBc5Gcg";		
+		
+		url+="&t_code=08";
+		url+="&t_invoice=231863361166";
+		
+		System.out.println(url);
+
+		HttpGet httpGet = new HttpGet(url);
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+		System.out.println(httpResponse+"\n");
+
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		System.out.println(jsonobj);
+	}
 	
 	//@Test	
 	public void addTicket() throws Exception {

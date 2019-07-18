@@ -41,25 +41,24 @@
 	
 		//============= "수정"  Event 연결 =============
 		function fncUpdateContent() {
-	// Form 유효성 검증
+	
 	
 			$("form").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
-	}//===========================================//
-	//==> 추가된부분 : "수정"  Event 연결
+		}
+		
 	 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 	 $( "button.btn.btn-warning" ).on("click" , function() {
+		 alert("왜 또 안돼 ");
 		 fncUpdateContent();
 	 });
 });
 
 $(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+		
 	 $("button.btn.btn-primary").on("click" , function() {
-		//Debug..
-		//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+		
 		history.go(-1);
 	});
 });
@@ -103,14 +102,14 @@ $(function() {
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
-		    <label for="regDate" class="col-sm-offset-1 col-sm-3 control-label">작성일</label>
-		    <div class="col-sm-4">
-		       <input type="text" class="form-control" id="regDate" name="regDate" value="${content.regDate }" placeholder="수정 불가합니다"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      </span>
-		    </div>
-		  </div>
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="regDate" class="col-sm-offset-1 col-sm-3 control-label">작성일</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		       <input type="text" class="form-control" id="regDate" name="regDate" value="${content.regDate }" placeholder="수정 불가합니다"  readonly> --%>
+<!-- 		       <span id="helpBlock" class="help-block"> -->
+<!-- 		      </span> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
 		 
 		
 		  <div class="form-group">
@@ -127,7 +126,19 @@ $(function() {
 		    </div>
 		  </div>
 		  
+		  <div class="form-group">
+		    <label for="boardCode" class="col-sm-offset-1 col-sm-3 control-label">게시판 코드</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="boardCode" name="boardCode" value="${content.boardCode}">
+		    </div>
+		  </div> 
 		  
+		 <div class="form-group">
+		    <label for="contentCode" class="col-sm-offset-1 col-sm-3 control-label">게시글 코드</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="contentCode" name="contentCode" value="${content.contentCode}">
+		    </div>
+		  </div> 
 		  
 		   
 		  <!-- 

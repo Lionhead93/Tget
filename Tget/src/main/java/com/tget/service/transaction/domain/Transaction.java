@@ -158,8 +158,7 @@ public class Transaction {
 	
 	@Override
 	public String toString() {
-		return "Transaction [tranNo=" + tranNo + ", ticket=" + ticket.getTicketNo() + ", event=" + event.getEventId() + ", seller=" + seller.getUserId()
-				+ ", buyer=" + buyer.getUserId() + ", orderAmount=" + orderAmount + ", totalPrice=" + totalPrice + ", orderDate="
+		return "Transaction [tranNo=" + tranNo + ", orderAmount=" + orderAmount + ", totalPrice=" + totalPrice + ", orderDate="
 				+ orderDate + ", paymentOption=" + paymentOption + ", paymentNo=" + paymentNo + ", tranCode=" + tranCode
 				+ ", deliveryAddr=" + deliveryAddr + ", deliveryCompany=" + deliveryCompany + ", deliveryNo="
 				+ deliveryNo + ", deliveryStartDate=" + deliveryStartDate + ", reviewScore=" + reviewScore

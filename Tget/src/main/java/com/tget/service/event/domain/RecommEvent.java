@@ -10,6 +10,7 @@ public class RecommEvent {
 	private String videoName;
 	private String recommEventName;
 	private String recommEventDetail;
+//	private String recommStatus;
 	
 	///C
 	public RecommEvent() {
@@ -57,6 +58,13 @@ public class RecommEvent {
 		this.recommEventDetail = recommEventDetail;
 	}
 
+//	public String getRecommStatus() {
+//		return recommStatus;
+//	}
+//
+//	public void setRecommStatus(String recommStatus) {
+//		this.recommStatus = recommStatus;
+//	}
 
 
 	public String toString() {

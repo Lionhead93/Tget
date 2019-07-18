@@ -26,6 +26,7 @@
 		<result property="videoName" 				column="video_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventName" 				column="recomm_event_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventDetail" 			column="recomm_event_detail" 		jdbcType="VARCHAR" />
+<!-- 		<result property="recommStatus" 			column="recomm_status" 		jdbcType="CHAR" /> -->
 	</resultMap>
 	
 	<resultMap id="categorySelectMap" type="category">
@@ -39,7 +40,7 @@
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
 		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time) 
-		VALUES	 (	#{id} , 1 , #{categoryTwoEng} , NULL , 
+		VALUES	 (	#{id} , 0 , #{categoryTwoEng} , NULL , 
 							#{name} , #{venueName:VARCHAR} , #{eventDate} , #{eventTime} )
 	 </insert>
 	 
@@ -140,7 +141,7 @@
 	 	 FROM		(SELECT event_id, event_name, view_count
 		 					FROM event
 		 					ORDER BY view_count DESC) vt
-		 WHERE ROWNUM &lt;= 10 
+		 WHERE ROWNUM &lt;= 50 
 	 </select>
 	 
 <!-- 	 <select 	id="selectListRecommendedEvent" 	parameterType="map"	resultMap="recommEvent"> -->
@@ -151,13 +152,14 @@
 	 <select 	id="selectRecommendedEvent"	parameterType="search"	 resultMap="recommEventSelectMap">
 		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail
 		 FROM recommended_event
-		 <if test="searchCondition == 1" >WHERE recomm_event_no = #{searchKeyno} </if>
+		 <if test="searchCondition == 1" >WHERE recomm_event_no = #{searchKeyno}</if>
+		 ORDER BY recomm_event_no
 	 </select>
 	 
 	 <insert 	id="insertRecommendedEvent"	parameterType="recommEvent" >
 	 	INSERT
 		INTO recommended_event( recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail) 
-		VALUES	 (	#{recommEventNo} , #{eventName} , #{videoName}, #{recommEventName}, #{recommEventDetail} )
+		VALUES	 (	seq_recomm_event_no.nextval , #{eventName} , #{videoName}, #{recommEventName}, #{recommEventDetail} )
 	 </insert>	 
 	 
 	 <update	id="updateRecommendedEvent"	parameterType="recommEvent" >

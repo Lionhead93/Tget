@@ -17,6 +17,7 @@ public class Event {
 	private String userId;
 	private int ticketLowestPrice;
 	private int totalTicketCount;
+	private String eventTimeStr;
 	
 	///C
 	public Event() {
@@ -77,6 +78,7 @@ public class Event {
 	}
 	public void setEventTime(int eventTime) {
 		this.eventTime = eventTime;
+		this.setEventTimeStr(eventTime);
 	}
 
 	public int getInterestedCategoryNo() {
@@ -105,6 +107,15 @@ public class Event {
 	}
 	public void setTotalTicketCount(int totalTicketCount) {
 		this.totalTicketCount = totalTicketCount;
+	}
+
+	public String getEventTimeStr() {
+		return eventTimeStr;
+	}
+
+	public void setEventTimeStr(int eventTime) {
+		String temp = String.valueOf(eventTime);
+		this.eventTimeStr = temp.substring(0, 2)+":"+temp.substring(2);
 	}
 
 	public String toString() {

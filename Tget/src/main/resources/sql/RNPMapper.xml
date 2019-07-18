@@ -72,5 +72,12 @@
 		WHERE tran_no = #{tranNo}
 	 </update>
 	 
-	 
+<!-- 	<select 	id="selectTranList"	parameterType="int"	resultMap="reviewSelectMap"> -->
+<!-- 		 SELECT  -->
+<!-- 				tran_no , ticket_no , event_id , seller_id , buyer_id , order_amount ,  -->
+<!-- 				total_price , order_date , payment_option , payment_no , tran_code , delivery_add ,  -->
+<!-- 				delivery_company , delivery_no , delivery_start_date , review_score , review_body ,  -->
+<!-- 				review_reg_date , refund_account_bank , refund_account_no -->
+<!-- 				FROM transaction -->
+<!-- 	</select> -->
 </mapper>

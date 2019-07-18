@@ -107,12 +107,13 @@ public class GoogleTextVision {
 					
 					if(cc.contains("-")) {
 						
-						result = cc;
+						result = cc.replaceAll("-", "");
 						break;
 					}
 				}
 			}			
-		}				
+		}
+			
 		return result;
 	}
 	

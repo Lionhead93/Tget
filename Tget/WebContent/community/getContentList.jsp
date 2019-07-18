@@ -16,19 +16,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>T-GET</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>	
 	
+
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
-            padding-top : 50px;
-        }
+	  
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -53,8 +52,38 @@
 	
 		 $(function() {
 			
-			 $( "button.btn.btn-danger:contains('등록하기')" ).on("click" , function() {
+			 $( "button.btn.btn-danger:contains('글 등록하기')" ).on("click" , function() {
 					self.location="/community/addContent"	
+				});
+			 
+			 $( "button.btn.btn-primary:contains('티켓 거래 공지')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
+				
+				});
+			 
+			 $( "button.btn.btn-info:contains('자유게시판 이용 공지')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
+				
+				});
+			 
+			 $( "button.btn.btn-danger:contains('자주 찾는 질문')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
+				
+				});
+			 
+			 $( "button.btn.btn-secondary:contains('삽니다')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
+				
+				});
+			 
+			 $( "button.btn.btn-success:contains('팝니다')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=4";	
+				
+				});
+			 
+			 $( "button.btn.btn-dark:contains('수다방')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
+				
 				});
 			 
 			 $( "button.btn.btn-warning:contains('신고')" ).on("click" , function() {	
@@ -87,7 +116,70 @@
 			});
 	
 	});	
-	
+		 
+		 $(function() {
+				
+				$("ion-icon.btn.btn-info:contains('공감')").on("click" , function() {
+					
+					//div:contains("contentNo")
+					//'div[name="contentNo"]'
+					//'div[id="contentNo"]'
+					var contentNo = $(this).attr("id").trim();
+					var goodCount = $('span').closest("#"+contentNo+"").text().trim();
+					//alert(goodCount);
+					var result = parseInt(goodCount)+1;
+					$.ajax(
+			    		{
+			    	
+			        method:"GET",
+			        url : "/community/rest/updateGoodCount/"+contentNo,
+			        dataType: "json",
+			        header:{
+			        	"Accept" : "application/json",
+						"Content-Type" : "application/json"	
+			        },
+			        success : function(data){
+			        	//alert(data.result);
+			        	
+ 			        	if($.trim(data.result)=="good"){
+ 			        		$('span').closest("#"+contentNo+"").text(result);
+ 			        	}
+			        	
+			        }
+			        
+			    	});
+					//alert("ok");
+				});
+		 });
+		 
+ 		  $(function() {
+				
+				$("ion-icon.btn.btn-danger:contains('비공감')").on("click" , function() {
+				
+					var contentNo = $(this).attr("id").trim();
+					var badCount = $('a').closest("#"+contentNo+"").text().trim();
+					var result1 = parseInt(badCount)+1;
+					
+					$.ajax(
+			    		{
+			    	
+			        method:"GET",
+			        url : "/community/rest/updateBadCount/"+contentNo,
+			        dataType: "json",
+			        header:{
+			        	"Accept" : "application/json",
+						"Content-Type" : "application/json"	
+			        },
+			        success : function(data){
+			        	
+			        	if($.trim(data.result)=="bad"){
+ 			        	$('a').closest("#"+contentNo+"").text(result1);
+			        	} 
+			        } 
+			        
+			    	});
+				});
+		 });
 	</script>
 	
 </head>
@@ -102,7 +194,8 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>게시글 목록 조회</h3>
+	       <h3>전체 게시글 목록 조회</h3>
+	       
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -112,27 +205,37 @@
 		    	<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
-		    </div>
+		    </div>	
+		    	
+		    
 		    
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 			    
-			    <button type="button" class="btn btn-danger">등록하기</button>
+			    
+			    <button type="button" class="btn btn-primary">티켓 거래 공지</button>
+			    <button type="button" class="btn btn-info">자유게시판 이용 공지</button>
+			    <button type="button" class="btn btn-danger">자주 찾는 질문</button>
+			    <button type="button" class="btn btn-secondary">삽니다</button>
+			    <button type="button" class="btn btn-success">팝니다</button>
+			    <button type="button" class="btn btn-dark">수다방</button>
+			    
+			    
+			    <button type="button" class="btn btn-danger">글 등록하기</button>
+			    
 			    
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>게시글 번호</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>게시글 명</option>
+				    <option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>게시글 명</option>
 					</select>
 				  </div>
 				  
 				  <div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색어</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어">
 				  </div>
 				  
-				  <button type="button" class="btn btn-default">검색</button>
+				  <button type="button" class="btn btn-info">검색</button>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
@@ -150,11 +253,12 @@
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left" >글 제목</th>
-            <th align="left">글 내용</th>
+            <th align="left">글 제목</th>
+<!--              <th align="left">글 내용</th>  -->
             <th align="left">작성자</th>
             <th align="left">작성일</th>
-            
+            <th align="left">신고하기</th>
+            <th align="left">공감/비공감</th>
             
             
 			
@@ -170,20 +274,22 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left">${content.contentName}
-			  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-			  <td align="left">${content.contentBody}</td>
+			  <td align="left" class="btn btn-link">${content.contentName}
+			  <div id="contentNo" name="contentNo">${content.contentNo}</div>
+			  <!--  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>-->
+			 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
+			   
+<%--  			  <td align="left">${content.contentBody}</td> --%>
 			  <td align="left">${content.userId}</td>
 			  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
 			  <td align="left">${content.regDate}</td> 
 			  <td align="left"><button type="button" value="${content.contentNo}" class="btn btn-warning">신고</button>
-			  <button>
-			  <span  class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>공감</button>
-			  <button>
-			  <span  class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>비공감</button>
-			  
-			  
-			  </td>
+		   	  <td align="left">
+		   	  <ion-icon name="thumbs-up" class="btn btn-info" id="${content.contentNo}">공감</ion-icon>
+		   	  <span id="${content.contentNo}">${content.goodCount}</span>
+		   	 <ion-icon name="thumbs-down" class="btn btn-danger" id="${content.contentNo}">비공감</ion-icon>
+		   	 <a id="${content.contentNo}">${content.badCount}</a> 
+				</td>
   					 
 			
 			</tr>
@@ -202,7 +308,7 @@
  	
  	
  	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
+<%-- 	<jsp:include page="../common/pageNavigator_new.jsp"/> --%>
 	<!-- PageNavigation End... -->
 	
 </body>

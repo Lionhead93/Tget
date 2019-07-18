@@ -45,6 +45,7 @@
 	 <update	id="updateDeliveryInfo"	parameterType="transaction" >
 	 	UPDATE transaction
 	 	<set>
+	 		tran_code = '2' ,
 	 		delivery_company = #{deliveryCompany} , 
 	 		delivery_no = #{deliveryNo} , 
 	 		delivery_start_date = SYSDATE 

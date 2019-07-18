@@ -1,6 +1,7 @@
 package com.tget.web.event;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,6 +65,8 @@ public class EventController {
 	@Value("#{apiKeyProperties['stubhubKey']}")
 	String stubhubKey;
 	
+	@Value("#{commonProperties['uploadPath']}")
+	String uploadPath;
 	
 	///Constructor
 	public EventController(){
@@ -71,25 +75,25 @@ public class EventController {
 	
 
 	///Method
-	@RequestMapping(value="test")
-	public String test(Model model) throws Exception {
-		System.out.println("===============test===============");
-		
-//		List<Category> categorylist = eventService.getCategoryList();
-//		List<Category> tempList = new ArrayList<Category>();
-//		for (int i = 0; i < 3; i++) {
-//			for (Category category : categorylist) {			
-//				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
-//					tempList.add(category);
-//				}				
-//			}
-//			model.addAttribute("categorylist", categorylist);
-//			model.addAttribute("categorylist"+i, tempList);
-//			System.out.println("categorylist"+i+" : "+tempList);
-//			tempList.clear();
-//		}			
-		return "forward:/event/test.jsp";
-	}
+//	@RequestMapping(value="test")
+//	public String test(Model model) throws Exception {
+//		System.out.println("===============test===============");
+//		
+////		List<Category> categorylist = eventService.getCategoryList();
+////		List<Category> tempList = new ArrayList<Category>();
+////		for (int i = 0; i < 3; i++) {
+////			for (Category category : categorylist) {			
+////				if(category.getCategoryOneCode().equals(String.valueOf(i))) {
+////					tempList.add(category);
+////				}				
+////			}
+////			model.addAttribute("categorylist", categorylist);
+////			model.addAttribute("categorylist"+i, tempList);
+////			System.out.println("categorylist"+i+" : "+tempList);
+////			tempList.clear();
+////		}			
+//		return "forward:/event/test.jsp";
+//	}
 	
 	@RequestMapping(value="getEventList")
 	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,Model model) throws Exception {
@@ -101,8 +105,7 @@ public class EventController {
 		}
 		
 		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
-//		//(List<StubhubEvent>)map.get("eventList")
-//		//int totalResults = (Integer)map.get("totalResults");
+
 		model.addAttribute("search", search);
 		model.addAttribute("requestPageToken",requestPageToken);
 		model.addAttribute("eventList",(List<StubhubEvent>)map.get("eventList"));
@@ -114,7 +117,8 @@ public class EventController {
 	@RequestMapping(value="getEvent")
 	public String getEvent(@RequestParam String category, @RequestParam String eventName, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
-
+		int viewCount = 0;
+//		int ticketLowestPrice = 0;
 		Search search = new Search();
 		
 		List<Event> eventListByName = eventService.getEventByName(eventName);
@@ -131,27 +135,36 @@ public class EventController {
 				eventService.addEvent(stubhubEvent);
 			}
 			eventListByName = eventService.getEventByName(eventName);
+			model.addAttribute("totalResults", eventListByName.size());	
 		}else {
+
 			for (Event event : eventListByName) {
+				category = event.getCategoryTwoEng();
 				search.setSearchCondition("0");
 				search.setSearchKeyword(event.getEventId());
-				int ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
-				event.setTicketLowestPrice(ticketLowestPrice);
+//				ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
+//				event.setTicketLowestPrice(ticketLowestPrice);
+				event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
 				event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
-			}			
+				viewCount = event.getViewCount();
+			}						
+			model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
+			model.addAttribute("totalResults", eventListByName.size());	
 		}
+		eventService.updateEventViewCount(viewCount+1, eventName);
 		
-		System.out.println(eventListByName);
-		model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
+//		System.out.println(eventListByName);
+
 		model.addAttribute("eventListByName", eventListByName);
-		model.addAttribute("totalResults", eventListByName.size());
 		model.addAttribute("eventName", eventName);
+		model.addAttribute("category", category);
+		model.addAttribute("viewCount", viewCount);
 		
 		return "forward:/event/getEvent.jsp";
 	}
 	
 	@RequestMapping(value="getEventTicketList")
-	public String getEventTicketList(@RequestParam String eventId, HttpServletRequest request, Model model) throws Exception {
+	public String getEventTicketList(@RequestParam String eventId,Model model) throws Exception {
 		System.out.println("===============getEventTicketList===============");
 		
 		Search search = new Search();
@@ -164,9 +177,12 @@ public class EventController {
 		List<Ticket> ticketList = (List<Ticket>)map.get("list");
 		SellProb sellProb = (SellProb)map.get("sellProb");
 		
+		List<String> list = null;
 		Event event = eventService.getEvent(eventId);
+		if (event != null) {
+			list = eventService.getYoutubeIdList(event.getEventName());
+		}
 		
-		List<String> list = eventService.getYoutubeIdList(event.getEventName());
 		
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
@@ -197,6 +213,7 @@ public class EventController {
 		List<Category> categorylist = eventService.getCategoryList();
 		
 		model.addAttribute("recommEventlist", recommEventlist);
+		model.addAttribute("recommEventlistSize", recommEventlist.size());
 		model.addAttribute("categorylist", categorylist);
 		
 		return "forward:/event/getEventManage.jsp";
@@ -251,8 +268,35 @@ public class EventController {
 		return "forward:/event/getYoutubePlayer.jsp";
 	}
 	
+	@RequestMapping(value="addEventImage", method=RequestMethod.GET)
+	public String addEventImage(@RequestParam String eventName,@RequestParam String eventImage,Model model) throws Exception {
+		System.out.println("===============addEventImage===============");
+		
+		model.addAttribute("eventName",eventName);
+		model.addAttribute("eventImage",eventImage);
+		
+		return "forward:/event/addEventImageGET.jsp";
+	}
 	
-	
-	
+	@RequestMapping(value="addEventImage", method=RequestMethod.POST)
+	public String addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event,Model model) throws Exception {
+		System.out.println("===============addEventImage POST===============");
+		System.out.println(event);
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			event.setEventImage(multipartFile.getOriginalFilename( ));
+					
+			file = new File(uploadPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		eventService.addEventImage(event.getEventImage(), event.getEventName());
+		
+		model.addAttribute("eventImage",event.getEventImage());
+//		model.addAttribute("file",file);
+		return "forward:/event/addEventImagePOST.jsp";
+	}
 	
 }

@@ -18,6 +18,7 @@
 	<util:properties id="commonProperties" location="classpath:config/common.properties"/>
 	<util:properties id="alarmProperties" location="classpath:config/alarm.properties"/>	
 	<util:properties id="apiKeyProperties" location="classpath:config/apiKey.properties"/>
+	<util:properties id="deliveryCompanyProperties" location="classpath:config/deliveryCompany.properties"/>
 	<!-- 	ㅇ 어노테이션 기반 :: Spring Framework 사용. :: sub element 이해 할것 -->				
 	<context:component-scan base-package="com.tget.service">
 		<context:include-filter type="annotation"	expression="org.springframework.stereotype.Service" />

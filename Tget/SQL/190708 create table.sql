@@ -28,8 +28,10 @@ DROP SEQUENCE seq_coupon_coupon_no ;
 DROP SEQUENCE seq_ticket_ticket_no ;
 DROP SEQUENCE seq_transaction_tran_no ;
 DROP SEQUENCE seq_point_history_no ;
+DROP SEQUENCE seq_recomm_event_no ;
 
 
+CREATE SEQUENCE seq_recomm_event_no			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_youtube_youtube_no 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_category_two_no 			INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_user_Interested_no			INCREMENT BY 1 START WITH 10000;
@@ -110,7 +112,7 @@ CREATE TABLE content(
 	content_no 	NUMBER 		NOT NULL,
 	user_id 		VARCHAR2(30) 	NOT NULL 	REFERENCES users(user_id),
 	user_nickname 	VARCHAR2(20) 	NOT NULL,
-	content_name 	VARCHAR2(30) 	NOT NULL,
+	content_name 	VARCHAR2(1000) 	NOT NULL,
 	content_body 	VARCHAR2(4000) 		NOT NULL,
 	file_name 	VARCHAR2(100),
 	video_name 	VARCHAR2(100),

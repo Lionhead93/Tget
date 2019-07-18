@@ -23,12 +23,13 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="/resources/javascript/common.js" ></script>
-	<script src="/resources/javascript/alarm.js" ></script>
+	<script src="/resources/javascript/commonAlarm.js" ></script>
 	<style>
 	 div.container{
+	 	margin-top: 0px;
  		font-family: 'Sunflower', sans-serif;
 	 	font-size: 20px;        
  	}
@@ -48,47 +49,69 @@
 	<script type="text/javascript">
 		$( function(){
 
-// 			$("a:contains('이벤트검색')").on("click",function(){
-// 				self.location = "/event/test";
-// 			});
-			
+// 			$.ajax(
+// 					{
+// 						url : "/event/rest/getPopularEventList",
+// 						method : "POST",
+// 						dataType : "text",
+// 						success : function(JSONData, status){
+// 								alert("JSONData : \n"+JSONData);
+// 								$.each(JSONData, function(index,value){
+// 									popularEventList[index] = value;
+// 									alert("popularEventList[index] : "+popularEventList[index]);
+// 								 });
+// 						}	
+// 			});	
+
+
 			$("a.navbar-brand").on("click",function(){
 				self.location = "/";
 			});
 			
 			$("a:contains('티켓판매')").on("click",function(){
+				
 				self.location = "/ticket/addTicketInfo?eventId=104175822";
 			});
 			
 			$("a:contains('티켓구매')").on("click",function(){
+				
 				self.location = "/tran/addTran?ticketNo=10004";
 			});
 			
 			$("a:contains('getTicket')").on("click",function(){
+				
 				self.location = "/ticket/getTicket?ticketNo=10004";
 			});
 			
 			$("a:contains('내 티켓목록')").on("click",function(){
+				
 				self.location = "/ticket/getTicketList?menu=seller";
 			});
 			$("a:contains('검증 티켓목록')").on("click",function(){
+				
 				self.location = "/ticket/getTicketList?menu=check";
 			});
 			$("a:contains('내 거래내역')").on("click",function(){
+				
 				self.location = "/tran/getTranList?menu=user";
 			});
-		
+			
+			
+			$("a:contains('이벤트관리')").on("click",function(){
+				self.location = "/event/getEventManage";
+			});
+			
 			$("a:contains('리뷰작성')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			$("a:contains('내리뷰조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			$("a:contains('내평점조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/getSellerEstimationList?sellerId="+session.user.userId;
 			});
 			$("a:contains('포인트내역조회')").on("click",function(){
-				self.location = "/ticket/getTicketList?menu=check";
+				self.location = "/rnp/";
 			});
 			
 			$("a:contains('쿠폰등록')").on("click",function(){
@@ -152,14 +175,17 @@
 		
 		
 		$( function(){			
-			//onload시 읽지않은 알람 표시 
-			getNoReadAlarmCount(); 
 			
+			if('${user}'!=''){
+				getNoReadAlarmCount("${user.userId}"); 
+				$("button:contains('Alarm')").attr("data-toggle","modal").attr("style","");
+			}			
 			//알람리스트 madal 출력
 			$("button:contains('Alarm')").on("click", function(){
-				getAlarmModal();				
+				getAlarmModal("${user.userId}");				
 			});
 		});
+		
 		
 
 		
@@ -193,7 +219,7 @@
 	            	
 	            	
 <!-- 	            	<li class="nav-item active"> -->
-<!-- 			              <a class="nav-link" href="#">이벤트검색</a> -->
+<!-- 			              <a class="nav-link" href="#">이벤트관리</a> -->
 <!-- 			        </li>  -->
 			        
 			        <li class="nav-item dropdown">
@@ -243,6 +269,14 @@
 				          <a class="dropdown-item" href="#">포인트내역조회</a>
 				        </div>
 				    </li>  
+				     <li class="nav-item dropdown"> -->
+<!-- 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 				          	인기이벤트 -->
+<!-- 				        </a> -->
+<!-- 				        <div class="dropdown-menu popularEvent" aria-labelledby="navbarDropdownMenuLink"> -->
+				          
+<!-- 				        </div> -->
+<!-- 				    </li> -->
 				    
 				    <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -256,7 +290,7 @@
 				    </li>  
 				    
 				    <li class="nav-item active">
-						    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">
+						    <button type="button" class="btn btn-dark" style="display: none;" data-target="#alarmModal">
 							 Alarm <span class="badge badge-light" id="noReadAlarmCount"></span>
 							</button> 		            	
 	            	</li>   
@@ -279,9 +313,7 @@
 					      <div class="modal-body">
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary">Save changes</button>
-					      </div>
+					        </div>
 					    </div>
 					  </div>
 					</div>

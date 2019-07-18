@@ -41,7 +41,28 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">	
 	
+	function fncAddDelivery(){
+		//Form 유효성 검증
+	 	var deliveryCompany = $("#deliveryCompany option:selected").val();
+	 	var deliveryNo = $("input[name='deliveryNo']").val();
+	 	/* 
+		if(deliveryNo == null || deliveryNo.length<1){
+			alert("운송장번호는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(deliveryCompany == null || deliveryCompany.length<1){
+			alert("배송사를 선택해주세요.");
+			return;
+		} */
+		alert("등록 완료!");
+		$("form").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();
+	}	
+	
+	
 	$(function(){
+		
+		var key = "CbHyQ5hk2Mf9jPrkBc5Gcg";
+		var tranNo = "";
 		
 	    $("a.getEvent").on("click", function(){
 	    	var eventId = $(this).closest("div").attr("id").trim();
@@ -49,13 +70,93 @@
 	    	self.location = "/event/getEventTicketList?eventId="+eventId;	    	
 	    });
 	    
-	    $("a.startDelivery").on("click", function(){	    	
+	    $("#addDelivery").on("click", function(){
+	    	
+	    	$("#tranNo").val(tranNo);
+	    	var deliveryCompany = $("#deliveryCompany option:selected").val();
+		 	var deliveryNo = $("input[name='deliveryNo']").val();
+		 	var result = "0";
+		 	
+	    	$.ajax({
+	            type:"GET",
+	            dataType : "json",
+	            url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+key+"&t_code="+deliveryCompany+"&t_invoice="+deliveryNo,
+	            success:function(data){
+	            	console.log(data);                
+	                
+                    if(data.status == false){
+                    	alert(data.msg);
+                    }else{
+                    	fncAddDelivery();
+                    }
+	            }
+	    	});
 	    });
+	    
 	    $("a.getReview").on("click", function(){	    	
 	    });
 	    $("a.endDelivery").on("click", function(){	    	
 	    });
-		
+	    $("a.searchDelivery").on("click", function(){
+	    	tranNo = $(this).attr("id").trim();	    	
+	    	
+	    	var deliveryCompany = ""+$(this).children("#tranDeliveryCompany").text().trim()+"";
+	    	var deliveryNo = ""+$(this).children("#tranDeliveryNo").text().trim()+"";
+	    		    	
+	    	$.ajax({
+	            type:"GET",
+	            dataType : "json",
+	            url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+key+"&t_code="+deliveryCompany+"&t_invoice="+deliveryNo,
+	            success:function(data){
+	            	console.log(data);   
+	                var myInvoiceData = "";
+	                
+                    if(data.status == false){
+                        myInvoiceData += ('<p class="text-danger">'+data.msg+'<p>');
+                    }else{
+                    	myInvoiceData += ('<table class="table">');      
+                        myInvoiceData += ('<tr>');                
+                        myInvoiceData += ('<th>'+"송장번호"+'</td>');                     
+                        myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                     
+                        myInvoiceData += ('</tr>');     
+                        myInvoiceData += ('</table>');
+                    }                
+                    
+                    $("#searchResult").html(myInvoiceData)
+                    
+                    var trackingDetails = data.trackingDetails;
+                    
+                    
+                    var myTracking="";
+                    var header ="";
+                    header += ('<table class="table">');
+                    header += ('<thead>');  
+                    header += ('<tr>');                
+                    header += ('<th>'+"시간"+'</th>');
+                    header += ('<th>'+"장소"+'</th>');
+                    header += ('<th>'+"유형"+'</th>');
+                    header += ('<th>'+"전화번호"+'</th>');                     
+                    header += ('</tr>');     
+                    header += ('</thead>'); 
+                    header += ('<tbody>');
+                    $.each(trackingDetails,function(key,value) {
+                        myTracking += ('<tr>');                
+                        myTracking += ('<td>'+value.timeString+'</td>');
+                        myTracking += ('<td>'+value.where+'</td>');
+                        myTracking += ('<td>'+value.kind+'</td>');
+                        myTracking += ('<td>'+value.telno+'</td>');                     
+                        myTracking += ('</tr>');                                    
+                    });
+                    myTracking += ('</tbody>');
+                    myTracking += ('</table>');
+                    $("#searchTracking").html(header+myTracking);
+	            }
+	        });
+	    	
+	    });
+	    $("a.startDelivery").on("click", function(){
+	    	tranNo = $(this).closest("div").attr("id").trim();
+	    });
 	    $("#file").change(function(){
 	    	readURL(this);
 	    	var form = $("form")[0];
@@ -74,7 +175,28 @@
 				        },
 						success : function(data) {	
 							$('#loading').html("");
-							$('#deliveryNo').val(data);
+							var deliveryCompany = $.trim(data.deliveryCompany);
+							
+							if(deliveryCompany=="CJ")
+								$("#deliveryCompany").val("04").prop("selected", true);							
+							if(deliveryCompany=="우체국")
+								$("#deliveryCompany").val("01").prop("selected", true);							
+							if(deliveryCompany=="KGB")
+								$("#deliveryCompany").val("56").prop("selected", true);							
+							if(deliveryCompany=="한진")
+								$("#deliveryCompany").val("05").prop("selected", true);							
+							if(deliveryCompany=="로젠")
+								$("#deliveryCompany").val("06").prop("selected", true);							
+							if(deliveryCompany=="롯데")
+								$("#deliveryCompany").val("08").prop("selected", true);							
+							if(deliveryCompany=="CU")
+								$("#deliveryCompany").val("46").prop("selected", true);							
+							if(deliveryCompany=="경동")
+								$("#deliveryCompany").val("23").prop("selected", true);							
+							if(deliveryCompany=="농협")
+								$("#deliveryCompany").val("53").prop("selected", true);							
+							
+							$('#deliveryNo').val(data.deilveryNo);
 						}							 
 			});
 	    });
@@ -92,8 +214,8 @@
 		
 		<div class="text-center">
 		 <table class="table">
-			  <thead class="thead-light">
-			    <tr>
+			  <thead>
+			    <tr class="table-info">
 			      <th scope="col">#</th>
 			      <th scope="col">종류</th>
 			      <th scope="col">이벤트명</th>
@@ -119,18 +241,24 @@
 			      </td>
 			      <td>${tran.orderAmount}</td>
 			      <td>${tran.orderDate}</td>
-			      <td>
+			      <td>			      
 			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.userId}</c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.userId}</c:if>
 			      </td>
 			      <td class="text-secondary">
 			      <c:if test="${tran.tranCode==0}">무통장 입금대기</c:if>
 			      <c:if test="${tran.tranCode==1}">결제완료</c:if>
-			      <c:if test="${tran.tranCode==2}">배송 중</c:if>
+			      <c:if test="${tran.tranCode==2}">배송 중 
+			      <a class="searchDelivery" id="${tran.tranNo}" href="#" data-toggle="modal" data-target="#searchDeliveryModal">
+			      <i class="fas fa-truck"></i>
+			      <div id="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</div>
+			      <div id="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</div></a>
+			      </c:if>
 			      <c:if test="${tran.tranCode==3}">배송 완료</c:if>
 			      <c:if test="${tran.tranCode==4}">환불 및 취소</c:if>
 				  </td>
 			      <td>
+			      <div id="${tran.tranNo}">
 			      <c:if test="${user.userId==tran.seller.userId}">
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
@@ -145,6 +273,7 @@
 				      <c:if test="${tran.tranCode==3}">-</c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
+			      </div>
 			      </td>
 			    </tr>
 			  </c:forEach> 
@@ -166,11 +295,12 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					      <form enctype="multipart/form-data">
+					      <form enctype="multipart/form-data"> 
+					      	<input type="hidden" id="tranNo" name="tranNo" value=""/>
 					      	<div class="form-group" >
 							     <br/>
 							     <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배송 사 : </strong> 	
-							        <select name="deliveryCompany">
+							        <select id="deliveryCompany" name="deliveryCompany">
 									    <option value="">선택</option>
 									    <option value="04">CJ대한통운</option>									    
 									    <option value="01">우체국택배</option>
@@ -196,7 +326,26 @@
 					      </form>			      
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary">등록</button>
+					        <button type="button" id="addDelivery" class="btn btn-primary">등록</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+	<!-- 배송 조회 모달 -->
+					<div class="modal fade" id="searchDeliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      	<div id="searchResult">
+					      	</div>
+					      	<div id="searchTracking">
+					      	</div>					      	      
 					      </div>
 					    </div>
 					  </div>
