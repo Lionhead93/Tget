@@ -234,11 +234,11 @@
 				 
 				 <ul class="nav navbar-nav">           	
 	            	
-	            	
-            	<li class="nav-item active">
+	            	<c:if test="${user.role == 2 }">
+            		<li class="nav-item active">
 			              <a class="nav-link" href="#">이벤트관리</a>
 			        </li>  
-			        
+			      	</c:if>
 			        <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          	User
