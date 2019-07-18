@@ -165,10 +165,10 @@
 	 <update	id="updateRecommendedEvent"	parameterType="recommEvent" >
 	 	UPDATE recommended_event 
 	 	<set>
-	 		event_name	= #{eventName},
-	 		video_name = #{videoName},
-	 		recomm_event_name = #{recommEventName},
-			recomm_event_detail = #{recommEventDetail}
+	 		event_name	= #{eventName}
+	 		,video_name = #{videoName:VARCHAR}
+	 		,recomm_event_name = #{recommEventName}
+	 		,recomm_event_detail = #{recommEventDetail}
 		</set>
 		WHERE recomm_event_no = #{recommEventNo}
 	 </update>

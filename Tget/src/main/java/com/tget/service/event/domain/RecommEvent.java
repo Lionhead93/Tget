@@ -10,7 +10,7 @@ public class RecommEvent {
 	private String videoName;
 	private String recommEventName;
 	private String recommEventDetail;
-//	private String recommStatus;
+	private String recommEventUrl;
 	
 	///C
 	public RecommEvent() {
@@ -58,18 +58,23 @@ public class RecommEvent {
 		this.recommEventDetail = recommEventDetail;
 	}
 
-//	public String getRecommStatus() {
-//		return recommStatus;
-//	}
-//
-//	public void setRecommStatus(String recommStatus) {
-//		this.recommStatus = recommStatus;
-//	}
+	public String getRecommEventUrl() {
+		return  recommEventUrl;
+	}
+
+	public void setRecommEventUrl(String  recommEventUrl) {
+		this.recommEventUrl = recommEventUrl;
+//		this.recommEventUrl = recommEventUrl.replaceAll("%20", " ");
+		int index = 0;
+		if ((index = recommEventUrl.lastIndexOf("eventName=")) != -1) {
+			this.setEventName(recommEventUrl.substring(index).replaceAll("%20", " ").replace("eventName=", ""));
+		}
+	}
 
 
 	public String toString() {
 		return "[RecommEvent] recommEventNo : "+recommEventNo+", "+"eventName : "+eventName+", " + 
 				"videoName : "+videoName+", " +"recommEventName : "+recommEventName+", "
-				+"recommEventDetail : "+recommEventDetail;
+				+"recommEventDetail : "+recommEventDetail+", recommEventUrl : "+recommEventUrl;
 	}
 }
