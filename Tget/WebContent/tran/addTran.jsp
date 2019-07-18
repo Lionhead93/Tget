@@ -96,7 +96,7 @@
 	              	success: function(data){
 	              	  $("input[name='paymentNo']").val(data.tid);
 	              	  var url= data.next_redirect_pc_url;
-	              	  var popOption = "width=650px, height=550px, resizable=no, location=no, top=300px, left=300px;"	                    
+	              	  var popOption = "width=450px, height=450px, resizable=no, location=no, top=300px, left=300px;"	                    
 	                  window.open(url,"T-get 카카오결제 ",popOption);
 	              	       	  
 	              	  
@@ -199,7 +199,7 @@
 	    
 		$("button:contains('기존 배송지')").on("click",function(){
 	    	
-			$("#deliveryAddr").val('session.user.addr');
+			$("#deliveryAddr").val('${user.address}');
 	 	
 	 	});
 		
@@ -299,7 +299,7 @@
 		<div class="form-group" >
 		     <br/>
 		     <strong>사용포인트 : </strong> 	
-		        <input type="text" id="point" value="0" style="width: 150px !important"/><br/>
+		        <input type="text" id="point" value="0" style="width: 150px !important"/>&nbsp;&nbsp;보유 : ${user.point}<br/>
 		        <button type="button" class="btn btn-link"><small>전부 사용</small></button>
 		</div>
 		<div class="form-group" >
