@@ -30,7 +30,7 @@
 		coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement
 	 		
 		FROM coupon 
-		WHERE coupon_no = #{couponNo}
+		WHERE user_id = #{userId}
 	 </select>
 	 
 	 <update	id="updateCoupon"	parameterType="coupon" >
@@ -45,7 +45,7 @@
 	   		coupon_statement = #{couponStatement}
 	   		
 	   	</set>
-	   	WHERE coupon_no = #{couponNo}
+	   	WHERE user_id = #{userId}
 	 </update>
 	 
 </mapper>

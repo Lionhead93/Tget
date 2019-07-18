@@ -26,7 +26,7 @@
 		<result property="videoName" 				column="video_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventName" 				column="recomm_event_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventDetail" 			column="recomm_event_detail" 		jdbcType="VARCHAR" />
-		<result property="recommStatus" 			column="recomm_status" 		jdbcType="CHAR" />
+<!-- 		<result property="recommStatus" 			column="recomm_status" 		jdbcType="CHAR" /> -->
 	</resultMap>
 	
 	<resultMap id="categorySelectMap" type="category">
@@ -150,7 +150,7 @@
 <!-- 	 </select> -->
 	 
 	 <select 	id="selectRecommendedEvent"	parameterType="search"	 resultMap="recommEventSelectMap">
-		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail,recomm_status
+		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail
 		 FROM recommended_event
 		 <if test="searchCondition == 1" >WHERE recomm_event_no = #{searchKeyno}</if>
 		 ORDER BY recomm_event_no

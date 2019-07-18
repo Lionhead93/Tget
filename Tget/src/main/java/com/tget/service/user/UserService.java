@@ -31,7 +31,9 @@ public interface UserService {
 	public User getSalesGrade(String userId)throws Exception;
 /*	//판매자리스트 조회
 	public Map<String , Object> getSellerList(Search search) throws Exception;*/
-	public User nickNameCheck(String nickName)throws Exception;
+	public boolean  checknickNameDuplication(String nickName)throws Exception;
+	
+	public boolean checkcodeDuplication(String code)throws Exception;
 	
 	public User getCode(String code)throws Exception;
 }

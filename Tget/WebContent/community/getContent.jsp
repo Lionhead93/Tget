@@ -110,24 +110,6 @@
 		
 		
 		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>게시판 코드</strong></div>
-	  		<div class="col-xs-8 col-md-4">${content.boardCode}</div>
-			<!-- <img src="/images/uploadFiles/${product.fileName}"> -->
-		</div>
-		
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>게시글 코드</strong></div>
-	  		<div class="col-xs-8 col-md-4">${content.contentCode}</div>
-			<!-- <img src="/images/uploadFiles/${product.fileName}"> -->
-		</div>
-		
-		
-		<hr/>
 
 		
 		<div class="form-group">
@@ -136,7 +118,7 @@
 			 <button type="button" class="btn btn-warning"  >수 &nbsp;정</button>
 			 <!-- <a class="btn btn-warning" href="#" role="button">수 &nbsp;정</a> --> 
 		    </div>
-		</div><!--  -->
+		</div>
 		
 		
 		<jsp:include page="/community/reply.jsp"/>

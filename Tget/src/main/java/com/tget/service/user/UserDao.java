@@ -19,7 +19,8 @@ public interface UserDao {
 		public int selectTotalCount(Search search) throws Exception ;
 		public User nickNameCheck(String nickName) throws Exception ;
 		public User selectCode(String code) throws Exception;
-	
+		public User selectnickName(String nickName)throws Exception;
+		public User selectcode(String code)throws Exception;
 
 
 }

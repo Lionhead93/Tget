@@ -71,7 +71,6 @@ CREATE TABLE recommended_event(
 	video_name		VARCHAR2(100) 	NOT NULL,
 	recomm_event_name	VARCHAR2(20) 	NOT NULL,
 	recomm_event_detail	VARCHAR2(50),
-	recomm_status 			CHAR(1)		NOT NULL,
 	PRIMARY KEY(recomm_event_no)
 );
 

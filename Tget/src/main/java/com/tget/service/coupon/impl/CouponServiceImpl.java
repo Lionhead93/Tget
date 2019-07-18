@@ -38,8 +38,8 @@ public class CouponServiceImpl implements CouponService{
 	}
 
 	@Override
-	public Coupon getCoupon(int couponNo) throws Exception {
-		return couponDao.selectCoupon(couponNo);
+	public Coupon getCoupon(String userId) throws Exception {
+		return couponDao.selectCoupon(userId);
 	}
 
 	@Override
