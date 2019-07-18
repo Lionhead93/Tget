@@ -16,15 +16,16 @@ function getAlarmModal(userId) {
 						var displayValue = "";					
 						$.each(data.list,function(index, alarm){
 							
-							displayValue = "<li class='list-group-item d-flex justify-content-between align-items-center'>" +
-									"<small><i class='fab fa-twitter'></i>&nbsp;"+
-						    alarm.alarmBody+
-						    "</small>"+
-						    "<div id='"+alarm.alarmNo+"'><p id='"+alarm.alarmKeyword+"'><button id='"+alarm.alarmCode+"' type='button' class='btn btn-outline-primary'>" +
-						    		"<i class='fas fa-check'></i></button>"+
-						    "<a href='#' class='btn btn-outline-danger'>" +
-						    		"<i class='fas fa-trash-alt'></i></a>"+		
-						    "</p></div></li>";							   
+							displayValue = "<li class='list-group-item d-flex justify-content-between align-items-center'>";
+							displayValue +=	"<small><i class='fab fa-twitter'></i>";
+							if(alarm.alarmCode==9){
+								displayValue +=	alarm.alarmKeyword
+							}
+							displayValue += "&nbsp;"+alarm.alarmBody+"</small>";						    
+							displayValue += "<div id='"+alarm.alarmNo+"'><p id='"+alarm.alarmKeyword+"'><button id='"+alarm.alarmCode+"' type='button' class='btn btn-outline-primary'>";
+							displayValue +=	"<i class='fas fa-check'></i></button>";
+							displayValue += "<a href='#' class='btn btn-outline-danger'>";
+							displayValue +=	"<i class='fas fa-trash-alt'></i></a></p></div></li>";	
 							
 						    $(".modal-body").append(displayValue);
 							
@@ -64,7 +65,9 @@ function getAlarmModal(userId) {
 											if(alarmCode==8)
 												self.location="/";
 											if(alarmCode==9)
-												self.location="/";
+												window.open("/tran/goChat?userId="+userId+"&opponentId="+alarmKeyword+"&re=res", "T-GET 채팅" ,"width = 500, height = 500, top = 100, left = 200, location = no");
+												$("#"+alarmNo+"").closest("li").remove();
+												getNoReadAlarmCount(userId);
 										}
 							})
 							

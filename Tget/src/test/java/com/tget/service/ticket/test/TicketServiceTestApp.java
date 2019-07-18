@@ -185,9 +185,9 @@ public class TicketServiceTestApp {
 		
 		Alarm alarm = new Alarm();
 		
-		alarm.setAlarmCode(4);
+		alarm.setAlarmCode(0);
 		alarm.setAlarmKeyword("10001");
-		alarm.setUserId("admin");
+		alarm.setUserId("seller");
 		
 		alarmService.addAlarm(alarm);
 		
