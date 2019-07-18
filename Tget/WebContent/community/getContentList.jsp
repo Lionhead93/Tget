@@ -91,6 +91,11 @@
 				 	self.location="/community/addReport?contentNo="+$(this).val();
 				});
 				
+			 $( "button.btn.btn-warning:contains('환불게시판')" ).on("click" , function() {
+					self.location="/community/updateRefund?contentNo="+$(this).val();	
+				
+				});
+			 
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "td:nth-child(2)" ).on("click" , function() {
 				self.location ="/community/getContent?contentNo="+$(this).children('#contentNo').text().trim();
@@ -219,7 +224,7 @@
 			    <button type="button" class="btn btn-secondary">삽니다</button>
 			    <button type="button" class="btn btn-success">팝니다</button>
 			    <button type="button" class="btn btn-dark">수다방</button>
-			    
+			    <button type="button" class="btn btn-warning">환불게시판</button>
 			    
 			    <button type="button" class="btn btn-danger">글 등록하기</button>
 			    

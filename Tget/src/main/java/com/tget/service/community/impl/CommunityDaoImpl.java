@@ -69,6 +69,11 @@ public class CommunityDaoImpl implements CommunityDao{
 		sqlSession.update("CommunityMapper.updateReply", reply);
 	}
 	
+	@Override
+	public void updateReport(Report report) throws Exception {
+		sqlSession.update("CommunityMapper.updateReport", report);
+	}
+	
 
 	//// ¥Ò±€ ªË¡¶
 	@Override

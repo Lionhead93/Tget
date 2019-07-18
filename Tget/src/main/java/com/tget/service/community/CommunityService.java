@@ -23,7 +23,10 @@ public interface CommunityService {
 		
 		// 게시글 수정
 		public void updateContent(Content content) throws Exception;
-				
+			
+		// 신고 업데이트
+		public void updateReport(Report report) throws Exception;
+		
 		// 댓글 수정
 		public void updateReply(Reply reply) throws Exception;
 		
@@ -50,6 +53,7 @@ public interface CommunityService {
 		
 		// 비 공감수
 		public void updateBadCount(int contentNo)throws Exception;
+		
 		
 		// 환불 게시판 환불 처리
 		public void updateRefund(Content content) throws Exception;

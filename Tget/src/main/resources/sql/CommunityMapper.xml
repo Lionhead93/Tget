@@ -120,6 +120,14 @@
 	   	WHERE reply_no = #{replyNo}
 	 </update>
 	 
+	 <update	id="updateReport"	parameterType="report"  >
+	   	UPDATE report
+	   	<set>
+	   		check_yn = #{check}
+	   	</set>
+	   	WHERE report_no = #{reportNo}
+	 </update>
+	 
 	 <update	id="updateGoodCount"	parameterType="content"  >
 	   	UPDATE content
 	   	<set>
@@ -204,14 +212,7 @@
 	  									 content_no, reply_no, report_reason_code , reg_date, 
 	  									 report_code, check_yn
 											FROM report
-											<if test="searchCondition != null">
-												<where>
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				LOWER(white_id) LIKE LOWER('%'|| #{searchKeyword}||'%') 
-													</if>
-													
-												</where>
-											</if>
+											where check_yn = '1'
 											ORDER BY report_no ) inner_table)		
 	 </select>
 	 
@@ -244,5 +245,7 @@
 											) inner_table
 			)		
 	 </select> 
+	 
+	 
 
 </mapper>

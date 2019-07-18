@@ -180,14 +180,13 @@ public class CommuityController {
 			
 			// Business logic
 			Map<String , Object> map=communityService.getReportList(search);
-			
-			
-			
+					
 //			user.
 //			communityService.get
 //			userService.addBlacklist(blackId);
 			
 			System.out.println(map);
+			
 			// Model and View 
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("totalCount", map.get("totalCount"));
@@ -195,16 +194,35 @@ public class CommuityController {
 			
 			return "forward:/community/getReportList.jsp";
 		}
-		
+		// 신고 리스트에서 검증 후 블랙리스트로 보내기
 		@RequestMapping(value="addBlack")
 		public String addBlack(@RequestParam("reportNo") int reportNo) throws Exception {
+			
 			System.out.println("@@되어야하느니라");
 			Report report = communityService.getReport(reportNo);
-			System.out.println(report);
 			User user = userService.getUser(report.getBlackId());	
-			System.out.println(user);
+			
 			userService.addBlacklist(user);
 			
+			report.setCheck("0");
+			communityService.updateReport(report);
+			System.out.println(report);
+
 			return "forward:/user/listUser.jsp";
 		}
+		
+		@RequestMapping(value="updateRefund")
+		public String updateRefund(@RequestParam("contentNo") int contentNo, @ModelAttribute("content") Content content, Model model) throws Exception{
+			
+			System.out.println("/community/updateRefund");
+			//Business Logic			
+			Content refundContent = communityService.getContent(contentNo);
+			
+			content.setRefundCheck("0");
+			communityService.updateRefund(refundContent);
+			System.out.println(refundContent);
+		
+			return "forward:/community/updateRefund.jsp";
+		}
+		
 	}
