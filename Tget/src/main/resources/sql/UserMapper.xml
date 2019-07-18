@@ -115,21 +115,30 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	
-	<select id="nickNameCheck" resultType="com.tget.service.user.domain.User">
+	<select id="selectnickName" resultType="string" resultMap="userSelectMap">
 	SELECT 
 		nickName
 	FROM
 		users
-	where nickName = #{nickName}
+	where nickName = #{value}
 
 </select>
 	
-	<select id="selectCode" parameterType="string">
+	<!-- <select id="selectCode" parameterType="string">
 	SELECT 
 		code
 	FROM
 		users
 	where code = #{code}
+
+</select> -->
+
+<select id="selectCode" parameterType="string" resultMap="userSelectMap">
+	SELECT 
+		code
+	FROM
+		users
+	where code = #{value}
 
 </select>
 	

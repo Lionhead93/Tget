@@ -85,10 +85,20 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public User selectCode(String code) throws Exception {
+	public User selectcode(String code) throws Exception {
 	
-		return sqlSession.selectOne("UserMapper.selectCode",code);
+		return sqlSession.selectOne("UserMapper.selectcode",code);
 	}
 
-	
+	@Override
+	public User selectnickName(String nickName) throws Exception {
+		
+		return	sqlSession.selectOne("UserMapper.selectnickName",nickName);
+	}
+
+	@Override
+	public User selectCode(String code) throws Exception {
+		
+		return	sqlSession.selectOne("UserMapper.selectCode",code);
+	}
 }

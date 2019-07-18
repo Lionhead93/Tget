@@ -53,6 +53,7 @@
 			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button").on("click" , function() {
+				
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
@@ -77,6 +78,7 @@
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
+			
 				self.location = "/user/addUser"
 			});
 		});
@@ -101,11 +103,7 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Chul`s Shoes Shop</a>
-   		</div>
-   	</div>
+	
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -113,28 +111,19 @@
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
 		
-			<div class="col-md-6">
-					<Marquee behavior=alternate><img src="/images/CHULSSHOES.gif" style="max-width: 70%; height: auto;"/> </Marquee>
-			</div>
-	   	 	
-	 	 	<div class="col-md-6">
-	 	 	
-		 	 	<br/><br/>
-				
-				<div class="jumbotron">	 	 	
-		 	 	
+		
 
 			        <form class="form-horizontal">
 		  
 					  <div class="form-group">
-					    <label for="userId" class="col-sm-4 control-label">아 이 디</label>
+					    <label for="userId" class="col-sm-4 control-label">ID(Email)</label>
 					    <div class="col-sm-7">
 					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="아이디를 입력해주세요." >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="password" class="col-sm-4 control-label">패 스 워 드</label>
+					    <label for="password" class="col-sm-4 control-label">PASSWORD</label>
 					    <div class="col-sm-7">
 					      <input type="password" class="form-control" name="password" id="password" placeholder="패스워드를 입력해주세요." >
 					    </div>
@@ -147,11 +136,11 @@
 					    </div>
 					  </div>
 			
-				<div id="naverIdLogin" align="center">
+				<!-- <div id="naverIdLogin" align="center">
     <a id="naver-login-btn" href="#" role="button">
         <img src="https://static.nid.naver.com/oauth/big_g.PNG" width="80%" height="45"/> 
     </a>
-</div>
+</div> -->
 
 	
 	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
@@ -161,8 +150,8 @@
 			
 			
 			
-					<a id="custom-login-btn" href="javascript:loginWithKakao()">
-<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
+					<!-- <a id="custom-login-btn" href="javascript:loginWithKakao()">
+<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/> -->
 </a>
 <script type='text/javascript'>
   //<![CDATA[

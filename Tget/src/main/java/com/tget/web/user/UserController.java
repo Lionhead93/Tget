@@ -73,6 +73,50 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping( value="getUser", method=RequestMethod.GET )
+	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
+		
+		System.out.println("/user/getUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
+		model.addAttribute("user", user);
+		
+		return "forward:/user/getUser.jsp";
+	}
+	
+	@RequestMapping( value="updateUser", method=RequestMethod.GET )
+	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
+
+		System.out.println("/user/updateUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
+		model.addAttribute("user", user);
+		
+		return "forward:/user/updateUser.jsp";
+	}
+
+	@RequestMapping( value="updateUser", method=RequestMethod.POST )
+	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
+
+		System.out.println("/user/updateUser : POST");
+		//Business Logic
+		userService.updateUser(user);
+		
+		String sessionId=((User)session.getAttribute("user")).getUserId();
+		if(sessionId.equals(user.getUserId())){
+			session.setAttribute("user", user);
+		}
+		
+		return "redirect:/user/getUser?userId="+user.getUserId();
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping( value="addblacklist", method=RequestMethod.POST )
 	public String addBlacklist( @RequestParam("userId") String userId , HttpServletRequest request) throws Exception {
 
@@ -109,6 +153,17 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping( value="logout", method=RequestMethod.GET )
+	public String logout(HttpSession session ) throws Exception{
+		
+		System.out.println("/user/logout : POST");
+		
+		session.invalidate();
+		
+		return "redirect:/index.jsp";
+	}
+	
 	@RequestMapping( value="listUser" )
 	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
@@ -142,13 +197,13 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value = "/nickNameCheck", method = RequestMethod.POST)
 	public int postIdCheck(HttpServletRequest req) throws Exception {
 	 System.out.println("post nickNameCheck");
 	 
 	 String nickName = req.getParameter("nickName");
-	 User idCheck =  userService.nickNameCheck(nickName);
+	 User idCheck =  userService.checknickNameDuplication(nickName);
 	 
 	 int result = 0;
 	 
@@ -157,7 +212,7 @@ public class UserController {
 	 } 
 	 
 	 return result;
-	}
+	}*/
 	
 	
 	@ResponseBody
@@ -221,12 +276,18 @@ public class UserController {
 @RequestMapping(value = "smsCheck", method = RequestMethod.POST) 
 public String smsCheck(String code){ 
 	
-	System.out.println("1"+user.getCode());
-	System.out.println("2"+code);
-	if(code.equals(user.getCode())) { 
-		return "ok";
+	
+	
+	
+	System.out.println("¹ÞÀº°Å"+user.getCode());
+	System.out.println("¾´°Å"+code);
+	
+	if(code.equals(user.getCode())) {
+		System.out.println("ÀÏÄ¡");
+		return "true";
 		}else { 
-			return "no"; 
+			System.out.println("ºÒÀÏÄ¡");
+			return "false"; 
 			} 
 }
 	
