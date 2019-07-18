@@ -58,7 +58,7 @@
 	        url : "/community/json/addReply/"+replyNo,
 	        data: JSON.stringify({
 	        	userId: $("#userId").text().trim(),
-	        	userNickName: $("#userNickName").text().trim(),
+	        	nickName: $("#userNickName").text().trim(),
 	        	contentNo: $("#contentNo").text().trim(),
 	        	replyBody: $("#replyBody").val()
 	        }),

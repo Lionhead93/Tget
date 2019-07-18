@@ -18,6 +18,8 @@ public interface CommunityDao {
     public void InsertReply(Reply reply) throws Exception;
     // 게시글 상세조회
     public Content selectContent(int contentNo) throws Exception;
+    // 신고 조회
+    public Report selectReport(int reportNo) throws Exception;
     // 게시글 수정
 	public void updateContent(Content content) throws Exception;
 	

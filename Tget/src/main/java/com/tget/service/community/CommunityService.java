@@ -30,6 +30,9 @@ public interface CommunityService {
 		// 댓글 조회
 		public Reply getReply(int replyNo) throws Exception;
 		
+		// 신고 조회
+		public Report getReport(int reportNo) throws Exception;
+		
 		// 댓글 삭제
 		public void deleteReply(int replyNo) throws Exception;
 		
