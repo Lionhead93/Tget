@@ -107,7 +107,7 @@ public class UserRestController {
 	         
 	            StringEntity se = new StringEntity(json, "EUC-KR");
 	            httpPost.setEntity(se);
-
+ 
 	            HttpResponse httpResponse = client.execute(httpPost, context);
 	            
 	            System.out.println(httpResponse.getStatusLine().getStatusCode());
@@ -128,12 +128,15 @@ public class UserRestController {
 
 	}  
 	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
-	public String smsCheck(String code  ){ 
+	public String smsCheck(String code ){ 
+	
 		
-		System.out.println("받은거"+user.getCode());
+		String check = Config.content;
+		
+		System.out.println("받은거"+check);
 		System.out.println("쓴거"+code);
 		
-		if(code.equals(user.getCode())) {
+		if(code.equals(check)) {
 			System.out.println("일치");
 			return "true";
 			}else { 

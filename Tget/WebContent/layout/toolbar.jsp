@@ -269,7 +269,7 @@
 				          <a class="dropdown-item" href="#">포인트내역조회</a>
 				        </div>
 				    </li>  
-				     <li class="nav-item dropdown"> -->
+				     <li class="nav-item dropdown"> 
 <!-- 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
 <!-- 				          	인기이벤트 -->
 <!-- 				        </a> -->

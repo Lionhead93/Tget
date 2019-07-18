@@ -170,7 +170,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean checkcodeDuplication(String code) throws Exception {
-boolean result=true;
+		
+		boolean result=true;
 		
 		System.out.println("nickName!!!!!!!!!!!!!!!!!!!!!!!"+code);
 		

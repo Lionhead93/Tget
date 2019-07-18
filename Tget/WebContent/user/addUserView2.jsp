@@ -178,7 +178,7 @@
 		   $(function() {
 				
 				$("button:contains('인증')").on("click" ,function(){ 
-					alert("오예");
+					//alert("오예");
 				
 			   $.ajax({ 
 				   url: "/user/smsCheck",
@@ -187,10 +187,12 @@
 				   }, 
 				   type: "post", 
 			   success: function(result){ 
-				   if (result == "ok") { 
+				   console.log(result);
+				   
+				   if (result == "true") { 
 			   
 				   alert("번호 인증 성공"); 
-			   } else if (result == "no")
+			   } else if (result == "false")
 			  		 { 
 				   alert("번호 인증 실패"); 
 			  	 	} 
@@ -201,6 +203,29 @@
 		     </script>
 		     
 		     <script type="text/javascript">
+		     
+		     $(function(){
+		         $("#alert-success").hide();
+		         $("#alert-danger").hide();
+		         $("input").keyup(function(){
+		             var pwd1=$("#password").val();
+		             var pwd2=$("#password2").val();
+		             if(pwd1 != "" || pwd2 != ""){
+		                 if(pwd1 == pwd2){
+		                     $("#alert-success").show();
+		                     $("#alert-danger").hide();
+		                     $("#submit").removeAttr("disabled");
+		                 }else{
+		                     $("#alert-success").hide();
+		                     $("#alert-danger").show();
+		                     $("#submit").attr("disabled", "disabled");
+		                 }    
+		             }
+		         });
+		     });
+
+
+		
 		  
 		     $(function() {
 					
@@ -346,55 +371,7 @@
 										});
 		     
 
-				 $(function() {
-
-						$("input[name='sms']").on('keyup',function() {
-
-							var inputed = $("input[name='sms']").val();
-							alert("입력"+ inputed);
-
-							$.ajax({
-							url : "/user/json/checkcodeDuplication",
-							method : "POST",
-							dataType : "json",
-								headers : {
-									"Accept" : "application/json",
-								"Content-Type" : "application/json"
-											},
-										data : JSON.stringify({
-											sms : inputed,
-											}),
-
-										success : function(JSONData) {
-															alert(JSONData); 
-															alert(typeof(JSONData));
-
-											if (JSONData && inputed != "") {
-												$("#check2").children("strong")
-													.remove();
-														$("#check2")
-															.append(
-															"<strong class=\"text-success\">인증번호가 일치합니다.</strong>");
-													} else {
-														$("#check2").children("strong")
-																.remove();
-														$("#check2")
-															.append(
-															"<strong class=\"text-danger\">인증번호가 일치하지 않습니다.</strong>");													}
-												if (inputed == "") {
-													$("#check2").children("strong")
-														.remove();
-													$("#check2")
-															.append(
-																	"<strong class=\"text-muted\">인증번호를 입력해주세요.</strong>");
-												}
-												}
-
-											});
-										});
-
-										});
-		     
+				
 		     
 				 
 				 
@@ -444,6 +421,18 @@
 		    </div>
 		  </div>
 		  
+		  
+		  
+		  <div class="form-group">
+		  <label for="password2" class="col-sm-offset-1 col-sm-3 control-label"></label>
+		  <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div>
+		  <span id = "alert-success"><Strong>비밀번호가 일치합니다.</Strong>
+		      </span>
+			<div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+			<span id = "alert-danger"><Strong>비밀번호가 일치하지 않습니다.</Strong>
+		      </span>
+		</div>
+
 		    <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
@@ -477,7 +466,6 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="sms" name="sms" placeholder="인증번호">
 		      <button type="button" class="btn btn-primary">인증</button>
-		      <span id = "check2"><Strong>인증번호를 입력해주세요</Strong></span>
 		    </div>
 		  </div>
 		  

@@ -26,17 +26,17 @@ public class CouponController {
 		System.out.println(this.getClass());
 	}
 	
-	/*@RequestMapping( value="getCoupon", method=RequestMethod.GET )
+	@RequestMapping( value="getCoupon", method=RequestMethod.GET )
 	public String getCoupon( @RequestParam("userId") String userId , Model model ) throws Exception {
 		
 		System.out.println("/user/getCoupon : GET");
 		//Business Logic
-		Coupon coupon = couponService.getCoupon(couponNo);
+		Coupon coupon = couponService.getCoupon(userId);
 		// Model �� View ����
 		model.addAttribute("coupon", coupon);
 		
 		return "forward:/coupon/getCoupon.jsp";
-	}*/
+	}
 	
 	
 	
