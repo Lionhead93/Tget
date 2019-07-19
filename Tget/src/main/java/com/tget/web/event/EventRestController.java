@@ -112,6 +112,7 @@ public class EventRestController {
 	public Map<String,Object> addYoutubeVideo(@PathVariable String videoId,@ModelAttribute("event") Event event) throws Exception {
 		System.out.println("===============rest/addYoutubeVideo/{videoId}===============");
 		System.out.println("eventName : "+event.getEventName());
+
 		eventService.addYoutubeVideo(videoId, event.getEventName());
 		List<String> list = eventService.getYoutubeIdList(event.getEventName());
 		
@@ -457,6 +458,19 @@ public class EventRestController {
 			}
 		}	
 		System.out.println("rest/getCategory map - "+map);
+		return map;		
+	}
+	
+	@RequestMapping(value="rest/getRecommendedEventCount")
+	public Map<String,Object> getRecommendedEventCount() throws Exception {
+		System.out.println("===============rest/getRecommendedEventCount===============");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<RecommEvent> list = eventService.getRecommendedEventList();
+		
+		map.put("recommendedEventCount", list.size());
+		
+		System.out.println("rest/getRecommendedEventCount map - "+map);
 		return map;		
 	}
 }
