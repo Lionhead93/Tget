@@ -90,7 +90,7 @@
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>ÀÛ¼ºÀÚ</strong></div>
-			<div class="col-xs-8 col-md-4">${content.userId}</div>
+			<div class="col-xs-8 col-md-4">${content.userNickname}</div>
 		</div>
 		
 		<hr/>

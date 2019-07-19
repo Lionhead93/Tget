@@ -75,7 +75,7 @@ public class ReviewAndPointRestController {
 	}
 
 	///M
-	@RequestMapping(value="json/addReview", method=RequestMethod.POST)
+	@RequestMapping(value="rest/addReview", method=RequestMethod.POST)
 	public Map<String,Object> addReview(@RequestBody Review review) throws Exception {
 		System.out.println("===============rest/addReview===============");
 		

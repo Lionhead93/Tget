@@ -28,7 +28,40 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  
+		.dropbtn {
+  background-color: #7FFFD4;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #7FFFD4;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #7FFFD4;}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -43,46 +76,41 @@
 		
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
+			 
 		 });
-		
-		
-	
+
 		 $(function() {
 			
 			 $( "button.btn.btn-danger:contains('글 등록하기')" ).on("click" , function() {
 					self.location="/community/addContent"	
 				});
 			 
-			 $( "button.btn.btn-primary:contains('티켓 거래 공지')" ).on("click" , function() {
-					self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
+			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=1&searchKeyword=0";	
 				
 				});
 			 
-			 $( "button.btn.btn-info:contains('자유게시판 이용 공지')" ).on("click" , function() {
-					self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
+			 $( "a[href='#']:contains('자유게시판 이용 공지')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=1&searchKeyword=1";	
 				
 				});
 			 
-			 $( "button.btn.btn-danger:contains('자주 찾는 질문')" ).on("click" , function() {
-					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
+			 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=1&searchKeyword=2";	
 				
 				});
 			 
-			 $( "button.btn.btn-secondary:contains('삽니다')" ).on("click" , function() {
+			 $( "a[href='#']:contains('삽니다')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
 				
 				});
 			 
-			 $( "button.btn.btn-success:contains('팝니다')" ).on("click" , function() {
+			 $( "a[href='#']:contains('팝니다')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=4";	
 				
 				});
 			 
-			 $( "button.btn.btn-dark:contains('수다방')" ).on("click" , function() {
+			 $( "a[href='#']:contains('수다방')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
 				
 				});
@@ -92,18 +120,16 @@
 				 	self.location="/community/addReport?contentNo="+$(this).val();
 				});
 				
-			 $( "button.btn.btn-warning:contains('환불게시판')" ).on("click" , function() {
-					self.location="/community/updateRefund?contentNo="+$(this).val();	
+			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
+					self.location="/community/getRefundList";	
 				
 				});
 			 
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			// 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {
 				self.location ="/community/getContent?contentNo="+$(this).children('#contentNo').text().trim();
 			});
-			
-						
-			//==> userId LINK Event End User 에게 보일수 있도록 
+
 			$( "td:nth-child(2)" ).css("color" , "black");
 			$("h7").css("color" , "red");
 			
@@ -192,10 +218,6 @@
 
 <body>
 	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar Start /////////////////////////////////////-->
-	
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -211,42 +233,59 @@
 		    	<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
-		    </div>	
-		    	
 		    
-		    
-		    <div class="col-md-6 text-right">
-			    <form class="form-inline" name="detailForm">
-			    
-			    
-			    <button type="button" class="btn btn-primary">티켓 거래 공지</button>
-			    <button type="button" class="btn btn-info">자유게시판 이용 공지</button>
-			    <button type="button" class="btn btn-danger">자주 찾는 질문</button>
-			    <button type="button" class="btn btn-secondary">삽니다</button>
-			    <button type="button" class="btn btn-success">팝니다</button>
-			    <button type="button" class="btn btn-dark">수다방</button>
-			    <button type="button" class="btn btn-warning">환불게시판</button>
-			    
-			    <button type="button" class="btn btn-danger">글 등록하기</button>
-			    
-			    
-				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
-				    <option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>게시글 명</option>
-					</select>
+		    	<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				   	게시판 선택
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				    <a class="dropdown-item" id="boardCode0" href="#">공지사항</a>
+				    <a class="dropdown-item" id="boardCode1" href="#">자유게시판</a>
+				    <a class="dropdown-item" id="boardCode2" href="#">고객센터</a>
 				  </div>
-				  
-				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">검색어</label>
+				</div>
+				
+				<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				   	게시글 선택
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				   <c:if test="${sessionScope.user.role == '2'}">
+				    <a class="dropdown-item" id="contentCode0" href="#">티켓 거래 공지</a>
+				    <a class="dropdown-item" id="contentCode1" href="#">자유게시판 이용 공지</a>
+				    <a class="dropdown-item" id="contentCode2" href="#">자주 묻는 질문</a>
+				    </c:if>
+				    
+				    <a class="dropdown-item" id="contentCode3" href="#">삽니다</a>
+				    <a class="dropdown-item" id="contentCode4" href="#">팝니다</a>
+				    <a class="dropdown-item" id="contentCode5" href="#">수다방</a>
+				    <a class="dropdown-item" id="contentCode6" href="#">1:1 문의하기</a>
+				    <a class="dropdown-item" id="contentCode7" href="#">환불 게시판</a> 
+				  </div>
+				</div>
+				
+				<button type="button" class="btn btn-danger">게시글 등록하기</button>
+	
+				 <div>
+		    <div class="col-md-6 text-right">
+			    <!-- <form class="form-inline" name="detailForm">
+	
+			<div class="form-group">
+			    <label class="sr-only" for="searchKeyword">검색어</label>
 				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어">
 				  </div>
 				  
 				  <button type="button" class="btn btn-info">검색</button>
 				  
-				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  PageNavigation 선택 페이지 값을 보내는 부분
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  
+				   
 				</form>
+			  		 -->	 
+  			</div>
+		</div>
+				
+		   
 	    	</div>
 	    	
 		</div>

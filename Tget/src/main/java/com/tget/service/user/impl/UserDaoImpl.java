@@ -1,6 +1,7 @@
 package com.tget.service.user.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -108,4 +109,5 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("UserMapper.finduserId", phone);
 		
 	}
+
 }

@@ -44,15 +44,16 @@
         	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
    		</div>
    	</div>
-
+			
 		  
 		  <script type="text/javascript">
-		   $(function() {
-			
-			   $("button:contains('전송')").on("click" , function() {
+
+		  $(function() {
+				
+				$("button:contains('전송')").on("click" , function() {
 					alert("인증번호 전송");
 					$.ajax({ 
-						   url: "/user/sendSms",
+						   url: "/user/json/sendSms",
 						   data: { 
 							   receiver: $("#phone").val() 
 							   }, 
@@ -73,6 +74,8 @@
 			   
 			   $(function() {
 					
+				   var btn = document.getElementById('btn');
+				   
 					$("button:contains('인증')").on("click" ,function(){ 
 						//alert("오예");
 					
@@ -91,6 +94,10 @@
 				   
 					   alert("인증 성공");
 					   
+					 
+					   btn.disabled = false;
+
+					   
 				   } else if (result == "false")
 				  		 { 
 					   alert("인증 실패"); 
@@ -99,6 +106,59 @@
 				   })
 			   })
 			   });
+			   
+			   $( function() {
+					
+					$("#userName").focus();
+					
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$("button:contains('찾기')").on("click" , function() {
+						
+						alert("눌리니");
+						
+						/* var id=$("input:text").val();
+						var pw=$("input:password").val();
+						
+						if(id == null || id.length <1) {
+							alert('ID 를 입력하지 않으셨습니다.');
+							$("#userId").focus();
+							return;
+						}
+						
+						if(pw == null || pw.length <1) {
+							alert('패스워드를 입력하지 않으셨습니다.');
+							$("#password").focus();
+							return;
+						} */
+						
+						 $.ajax({ 
+							   url: "/user/json/finduserId",
+						   data: { 
+							   phone: $("#phone").val(), 
+							   }, 
+							   type: "post", 
+							   
+						   success: function(result){ 
+							   console.log(result);
+							   
+							   if(result == "no"){
+								   
+								   alert("입력하신 정보의 회원정보가 없습니다");
+							   }
+							   else{
+								   alert(result);
+							   }
+						   }
+							   });
+				});	
+					});
+				
+			   
+			   
+			   
+			   
+			   
+			   
 		     </script>
 				
 		  <form class="form-horizontal">
@@ -132,8 +192,10 @@
 	
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary">찾기</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
+		     
+		      <button type="button" id ="btn" class="btn btn-primary" disabled="disabled">찾기</button> 
+		      
+		  			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
 			 
 			  
 		    </div>

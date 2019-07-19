@@ -36,11 +36,11 @@ public class Content {
 		public void setUserId(String userId) {
 			this.userId = userId;
 		}
-		public String getUserNickName() {
+		public String getUserNickname() {
 			return userNickname;
 		}
-		public void setUserNickName(String userNickName) {
-			this.userNickname = userNickName;
+		public void setUserNickname(String userNickname) {
+			this.userNickname = userNickname;
 		}
 		public String getContentName() {
 			return contentName;
@@ -122,7 +122,7 @@ public class Content {
 		}
 		@Override
 		public String toString() {
-			return "Content [contentNo=" + contentNo + ", userId=" + userId + ", userNickName=" + userNickname
+			return "Content [contentNo=" + contentNo + ", userId=" + userId + ", userNickname=" + userNickname
 					+ ", contentName=" + contentName + ", contentBody=" + contentBody + ", videoName=" + videoName
 					+ ", fileName=" + fileName + ", regDate=" + regDate + ", viewCount=" + viewCount + ", boardCode="
 					+ boardCode + ", contentCode=" + contentCode + ", goodCount=" + goodCount + ", badCount=" + badCount
