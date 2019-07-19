@@ -34,6 +34,17 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
+	$( function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("button:contains('ID/PassWord찾기')").on("click" , function() {
+		
+			self.location = "/user/finduserId"
+		});
+	});
+	
+
+	
+	
 	$(function(){
 	    var naverLogin = new naver.LoginWithNaverId({
 	        clientId: "AziWQOW7S2sZhD1PEBi9",
@@ -52,7 +63,9 @@
 			$("#userId").focus();
 			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button").on("click" , function() {
+			$("button:contains('로그인')").on("click" , function() {
+				
+				alert("눌리니");
 				
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
@@ -69,10 +82,35 @@
 					return;
 				}
 				
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
-			});
+				 $.ajax({ 
+					   url: "/user/json/login",
+				   data: { 
+					   userId: $("#userId").val(), 
+					   }, 
+					   type: "post", 
+				   success: function(result){ 
+					   console.log(result);
+					   
+					   if (result == "no") {
+							  alert("ID/password error");
+				  		 }
+			
+					   
+					   if (result == "true") { 
+						   
+						   alert("응 너 블랙이야~");
+						   
+					   } else if (result == "false")
+					  		 { 
+						   $("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+					  	 	
+					  		 }
+			
+			
+				   }
+					   });
 		});	
-		
+			});
 		
 		//============= 회원원가입화면이동 =============
 		$( function() {
@@ -132,6 +170,7 @@
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
 					      <button type="button" class="btn btn-default"  >로그인</button>
+					      <button type="button" class="btn btn-default"  >ID/PassWord찾기</button>
 					      <a class="btn btn-default" href="#" role="button">회원가입</a>
 					    </div>
 					  </div>
@@ -151,8 +190,8 @@
 			
 			
 					<!-- <a id="custom-login-btn" href="javascript:loginWithKakao()">
-<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/> -->
-</a>
+<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
+</a> -->
 <script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.

@@ -20,6 +20,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -31,7 +32,7 @@
 	<style>
 	 div.container{
 	 	margin-top: 0px;
- 		font-family: 'Sunflower', sans-serif;
+ 		font-family: 'Noto Sans KR', sans-serif;
 	 	font-size: 20px;        
  	}
  	
@@ -69,6 +70,18 @@
 				self.location = "/";
 			});
 			
+// 			$("a:contains('aaa')").on("click",function(){
+// 				self.location = "/event/aaa";
+// 			});
+			$("a:contains('관리자페이지')").on("click",function(){
+				self.location = "/event/getEventManage";
+			});
+			
+			$("a:contains('관심이벤트')").on("click",function(){
+				
+				self.location = "/event/getInterestedEventList";
+			});
+			
 			$("a:contains('티켓판매')").on("click",function(){
 				
 				self.location = "/ticket/addTicketInfo?eventId=104175822";
@@ -98,9 +111,6 @@
 			});
 			
 			
-			$("a:contains('이벤트관리')").on("click",function(){
-				self.location = "/event/getEventManage";
-			});
 			
 			$("a:contains('리뷰작성')").on("click",function(){
 				self.location = "/rnp/";
@@ -233,6 +243,10 @@
 				 
 				 
 				 <ul class="nav navbar-nav">           	
+				 
+<!-- 				 <li class="nav-item active"> -->
+<!-- 			              <a class="nav-link" href="#">aaa</a> -->
+<!-- 			        </li> -->
 	            	
 	            	<c:if test="${empty user}">
             		<li class="nav-item active">
@@ -245,11 +259,25 @@
 			        </li>  
 			      	</c:if>
 	            	
-	            	<c:if test="${user.role == 2 }">
-            		<li class="nav-item active">
-			              <a class="nav-link" href="#">이벤트관리</a>
-			        </li>  
-			      	</c:if>
+<%-- 	            	<c:if test="${user.role == 2 }"> --%>
+<!--             		<li class="nav-item active"> -->
+<!-- 			              <a class="nav-link" href="#">이벤트관리</a> -->
+<!-- 			        </li>   -->
+<%-- 			      	</c:if> --%>
+			      	<c:if test="${!empty user }">
+			      	<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          	이벤트관리
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <c:if test="${user.role == 2 }">
+		            	  	<a class="dropdown-item" href="#">관리자페이지</a>
+					      </c:if>				          
+				          <a class="dropdown-item" href="#">관심이벤트</a>
+				        </div> 
+				    </li>
+			      	</c:if>	
+			      	
 			        <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          	User
@@ -261,6 +289,7 @@
 				            <a class="dropdown-item" href="#">아이디찾기</a>
 				          <a class="dropdown-item" href="#">내정보보기</a>
 				          <a class="dropdown-item" href="#">블랙리스트관리</a>
+				          <a class="dropdown-item" href="#">관심이벤트</a>
 				        </div> 
 				    </li>
 	            	

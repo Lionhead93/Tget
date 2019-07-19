@@ -33,7 +33,7 @@ public class UserServiceTest {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 
-	@Test
+	//@Test
 	public void testAddUser() throws Exception {
 		Date today = new Date();
 		User user = new User();
@@ -287,7 +287,7 @@ public class UserServiceTest {
 		
 	}
 	
-//@Test
+@Test
 
 public final void testGetDate() {
 

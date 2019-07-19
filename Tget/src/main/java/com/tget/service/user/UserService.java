@@ -1,5 +1,6 @@
 package com.tget.service.user;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.tget.common.domain.Search;
@@ -38,5 +39,6 @@ public interface UserService {
 	public User getCode(String code)throws Exception;
 	
 	public User finduserId(String phone)throws Exception;
+	
 	
 }
