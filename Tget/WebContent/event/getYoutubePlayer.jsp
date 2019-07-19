@@ -79,7 +79,7 @@
 	     					dataType : "json",
 	     					success : function(JSONData, status){
 	     						alert("등록완료");
-	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
+// 	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
 	     					}	    		
 	     		 });	
 // 	  			$("form").attr("method" , "POST").attr("action" , "/event/rest/addYoutubeVideo/"+$("#videoId").val()).submit();
