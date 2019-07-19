@@ -180,11 +180,7 @@ public class CommuityController {
 			
 			// Business logic
 			Map<String , Object> map=communityService.getReportList(search);
-					
-//			user.
-//			communityService.get
-//			userService.addBlacklist(blackId);
-			
+								
 			System.out.println(map);
 			
 			// Model and View 
@@ -194,6 +190,23 @@ public class CommuityController {
 			
 			return "forward:/community/getReportList.jsp";
 		}
+		
+		@RequestMapping(value="getRefundList")
+		public String getRefundList( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+			
+			System.out.println("/community/getRefundList: GET/ POST");
+
+			// Business logic
+			Map<String , Object> map=communityService.getRefundList(search);
+			
+			// Model and View 
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("totalCount", map.get("totalCount"));
+			model.addAttribute("search", search);
+			
+			return "forward:/community/getRefundList.jsp";
+		}
+		
 		// 신고 리스트에서 검증 후 블랙리스트로 보내기
 		@RequestMapping(value="addBlack")
 		public String addBlack(@RequestParam("reportNo") int reportNo) throws Exception {
@@ -210,7 +223,7 @@ public class CommuityController {
 
 			return "forward:/user/listUser.jsp";
 		}
-		
+		//환불 게시판 환불 검증 여부 처리
 		@RequestMapping(value="updateRefund")
 		public String updateRefund(@RequestParam("contentNo") int contentNo, @ModelAttribute("content") Content content, Model model) throws Exception{
 			
@@ -218,11 +231,13 @@ public class CommuityController {
 			//Business Logic			
 			Content refundContent = communityService.getContent(contentNo);
 			
+			// refundTranNo : 환불 거래 번호, refundCheck : 환불 검증 여부 ...update 필요..
+			
 			content.setRefundCheck("0");
 			communityService.updateRefund(refundContent);
 			System.out.println(refundContent);
 		
-			return "forward:/community/updateRefund.jsp";
+			return "forward:/community/getRefundList.jsp";
 		}
 		
 	}

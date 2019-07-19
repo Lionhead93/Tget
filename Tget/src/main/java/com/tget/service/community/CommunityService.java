@@ -48,6 +48,9 @@ public interface CommunityService {
 		// 신고 리스트 조회
 		public Map<String,Object> getReportList(Search search) throws Exception; //getTotalCount, getReportList 
 		
+		// 환불 게시판 조회
+		public Map<String,Object> getRefundList(Search search) throws Exception;
+		
 		// 공감수
 		public void updateGoodCount(int contentNo)throws Exception;
 		

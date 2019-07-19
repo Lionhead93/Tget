@@ -128,6 +128,15 @@
 	   	WHERE report_no = #{reportNo}
 	 </update>
 	 
+	 <update	id="updateRefund"	parameterType="content"  >
+	   	UPDATE content
+	   	<set>
+	   		refund_tran_no = #{refundTranNo}
+	   		refund_check = #{refundCheck}
+	   	</set>
+	   	WHERE content_no = #{contentNo}
+	 </update>
+	 
 	 <update	id="updateGoodCount"	parameterType="content"  >
 	   	UPDATE content
 	   	<set>
@@ -212,7 +221,7 @@
 	  									 content_no, reply_no, report_reason_code , reg_date, 
 	  									 report_code, check_yn
 											FROM report
-											where check_yn = '1'
+											WHERE check_yn = '1'
 											ORDER BY report_no ) inner_table)		
 	 </select>
 	 
@@ -233,7 +242,7 @@
 													</where>
 									</if> -->) countTable
 	</select>
-	  
+	 <!-- 댓글 리스트 조회...  -->
 	 <select  id="selectListReply"  parameterType="search"	resultMap="replySelectMap">
 	 	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
@@ -245,6 +254,32 @@
 											) inner_table
 			)		
 	 </select> 
+	 
+	 <select  id="selectListRefund"  parameterType="search"	resultMap="contentSelectMap">
+	 	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	
+	  									SELECT content_no, user_id, user_nickName
+	  										, content_name, content_body , file_name
+	  										, video_name , reg_date , view_count, board_code
+	  										, content_code , open , good_count , bad_count
+	  										, refund_tran_no, refund_check
+											FROM content
+											WHERE refund_check = '1'	
+											ORDER BY content_no ) inner_table)
+						
+	 </select>
+	 
+	 <select  id="selectTotalCountRefund"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  					FROM(			SELECT content_no, user_id, user_nickName
+	  										, content_name, content_body , file_name
+	  										, video_name , reg_date , view_count, board_code
+	  										, content_code , open , good_count , bad_count
+	  										, refund_tran_no, refund_check
+											FROM content
+											) countTable
+	</select>
 	 
 	 
 

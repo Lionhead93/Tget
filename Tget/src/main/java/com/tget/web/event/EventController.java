@@ -42,6 +42,7 @@ import com.tget.service.event.domain.YoutubeVideoList;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
 import com.tget.service.ticket.domain.Ticket;
+import com.tget.service.user.domain.User;
 
 
 //==> 회원관리 Controller
@@ -97,6 +98,12 @@ public class EventController {
 ////		}			
 //		return "forward:/event/test.jsp";
 //	}
+	
+	@RequestMapping(value="aaa")
+	public String aaa() throws Exception {
+		
+		return "forward:/event/aaa.jsp";
+	}
 	
 	@RequestMapping(value="getEventList")
 	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,Model model) throws Exception {
@@ -202,11 +209,25 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="getInterestedEventList")
-	public String getInterestedEventList(@RequestParam String userId, Model model) throws Exception {
+	public String getInterestedEventList(HttpSession session, Model model) throws Exception {
 		System.out.println("===============getInterestedEventList===============");
 		
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
 		List<Event> list = eventService.getInterestedEventList(userId);
+		
+		for (Event event : list) {
+			Search search = new Search();
+			search.setSearchCondition("0");
+			search.setSearchKeyword(event.getEventId());
+			event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
+			event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
+		}				
+		
 		model.addAttribute("interestedEventList", list);
+		if (list != null) {
+			model.addAttribute("interestedEventListCount", list.size());
+		}		
 		
 		return "forward:/event/listInterestedEvent.jsp";
 		

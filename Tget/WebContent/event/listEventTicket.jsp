@@ -288,7 +288,9 @@
 							</div>			
 							<div class="list" align="right">
 <%-- 								<input type="hidden"  value="${i.seller.nickName}"/> --%>
-								<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
+								<c:if test="${i.seller.userId!=user.userId}">
+									<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
+								</c:if>								
 								<button class="button_black getSellerEstimation" value="${i.seller.userId}">판매자조회</button><br/>
 							</div>
 					  		</td>

@@ -43,14 +43,9 @@
 		
 		//============= "검색"  Event  처리 =============	
 		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
+			 
 		 });
-		
-		
-	
+
 		 $(function() {
 			
 			 $( "button.btn.btn-danger:contains('글 등록하기')" ).on("click" , function() {
@@ -93,7 +88,7 @@
 				});
 				
 			 $( "button.btn.btn-warning:contains('환불게시판')" ).on("click" , function() {
-					self.location="/community/updateRefund?contentNo="+$(this).val();	
+					self.location="/community/getRefundList";	
 				
 				});
 			 
