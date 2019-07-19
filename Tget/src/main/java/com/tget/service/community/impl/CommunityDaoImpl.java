@@ -114,6 +114,12 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 	
 	@Override
+	public List<Content> selectListRefund(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CommunityMapper.selectListRefund", search);
+	}
+	
+	@Override
 	public List<Reply> selectListReply(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("CommunityMapper.selectListReply", search);
