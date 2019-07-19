@@ -100,10 +100,10 @@
 		<div align="center"><h3 style="font-weight: bold;">
 			추천 이벤트가 다음과 같이 저장되었습니다!
 		</h3></div>
-			${recommEvent.eventName }
-			${recommEvent.recommEventName }
-			${recommEvent.recommEventDetail }
-			${recommEvent.recommEventNo }
+			eventName : ${recommEvent.eventName }<br/>
+			recommEventName : ${recommEvent.recommEventName }<br/>
+			recommEventDetail : ${recommEvent.recommEventDetail }<br/>
+			recommEventNo : ${recommEvent.recommEventNo }<br/>
 		<video autoplay controls id="file"  src="/resources/video/${!empty recommEvent.videoName? videoName : ''}"  type="video/mp4" style="width:450px;" >
 		<br/><br/><br/><br/>
 <%-- 		eventImage  ; ${eventImage }<br/> --%>

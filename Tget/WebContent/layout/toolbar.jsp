@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+ <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
 
@@ -27,7 +27,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="/resources/javascript/common.js" ></script>
-	<script src="/resources/javascript/commonAlarm.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
 	<style>
 	 div.container{
 	 	margin-top: 0px;
@@ -234,6 +234,17 @@
 				 
 				 <ul class="nav navbar-nav">           	
 	            	
+	            	<c:if test="${empty user}">
+            		<li class="nav-item active">
+			              <a class="nav-link" href="#">로그인</a>
+			        </li>  
+			      	</c:if>
+			      	<c:if test="${!empty user}">
+            		<li class="nav-item active">
+			              <a class="nav-link" href="#">로그아웃</a>
+			        </li>  
+			      	</c:if>
+	            	
 	            	<c:if test="${user.role == 2 }">
             		<li class="nav-item active">
 			              <a class="nav-link" href="#">이벤트관리</a>
@@ -244,8 +255,8 @@
 				          	User
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인</a>
-				           <a class="dropdown-item" href="#">로그아웃</a>
+<!-- 				          <a class="dropdown-item" href="#">로그인</a> -->
+<!-- 				           <a class="dropdown-item" href="#">로그아웃</a> -->
 				          <a class="dropdown-item" href="#">회원가입</a>
 				            <a class="dropdown-item" href="#">아이디찾기</a>
 				          <a class="dropdown-item" href="#">내정보보기</a>
