@@ -3,6 +3,9 @@ package com.tget.web.user;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +24,6 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,6 +55,15 @@ public class UserController {
 	public UserController(){
 		System.out.println(this.getClass());
 	}
+	
+	@RequestMapping( value="finduserId", method=RequestMethod.GET )
+	public String finduserId() throws Exception{
+	
+		System.out.println("/user/finduserId : GET");
+		
+		return "redirect:/user/finduserId.jsp";
+	}
+	
 	
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUser() throws Exception{
@@ -139,7 +150,6 @@ public class UserController {
 
 		return "redirect:/user/loginView.jsp";
 	}
-	
 	@RequestMapping( value="login", method=RequestMethod.POST )
 	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
 		
@@ -147,12 +157,44 @@ public class UserController {
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
+		if(user.getUserId()!=null) {
 		
-		return "redirect:/";
+			if( user.getPassword().equals(dbUser.getPassword())){
+			session.setAttribute("user", dbUser);
+				}
+		}
+		return "redirect:/index.jsp";
 	}
+	/*@RequestMapping( value="login", method=RequestMethod.POST )
+	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+		
+		System.out.println("/user/login : POST");
+		
+		
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		String day = sdFormat.format(today);
+		String dday = sdFormat2.format(dbUser.getBlacklistEndDate());
+		
+		User dbUser=userService.getUser(user.getUserId());
+		
+		
+			if(dbUser.getBlacklistEndDate()== null &&
+					user.getPassword().equals(dbUser.getPassword())) {
+		
+				session.setAttribute("user", dbUser);
+			
+				return "redirect:/";
+			}
+					
+					
+					if(dbUser.getBlacklistEndDate()!= null &&
+							today.getTime() <= end.getTime() ) {
+						
+						return "forward:/user/x.jsp";
+					}
+					return "redirect:/";
+		}*/
 	
 	@RequestMapping( value="logout", method=RequestMethod.GET )
 	public String logout(HttpSession session ) throws Exception{
@@ -291,7 +333,7 @@ public String smsCheck(String code){
 			} 
 }
 	
-@RequestMapping( value="finduserId", method=RequestMethod.GET )
+/*@RequestMapping( value="finduserId", method=RequestMethod.GET )
 public String finduserId( @RequestParam("phone") String phone , Model model ) throws Exception {
 	
 	System.out.println("/user/finduserId : GET");
@@ -302,7 +344,7 @@ public String finduserId( @RequestParam("phone") String phone , Model model ) th
 	
 	return "forward:/user/finduserId.jsp";
 }	
-
+*/
 
 
 

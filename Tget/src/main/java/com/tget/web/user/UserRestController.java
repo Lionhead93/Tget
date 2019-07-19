@@ -3,8 +3,7 @@ package com.tget.web.user;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tget.service.user.Config;
@@ -59,8 +57,11 @@ public class UserRestController {
 		//Business Logic
 		return userService.getUser(userId);
 	}
+	
+	
 
-	@RequestMapping( value="json/login", method=RequestMethod.POST )
+
+/*	@RequestMapping( value="json/login", method=RequestMethod.POST )
 	public User login(	@RequestBody User user,
 									HttpSession session ) throws Exception{
 	
@@ -74,7 +75,7 @@ public class UserRestController {
 		}
 		
 		return dbUser;
-	}
+	}*/
 	
 	@RequestMapping(value= "json/sendSms", method=RequestMethod.POST ) 
 	public String sendSms(String receiver) { 
@@ -129,7 +130,27 @@ public class UserRestController {
 	        }
 	        return "true";
 
+	         
+	        
 	}  
+	
+	@RequestMapping( value="json/finduserId" , method=RequestMethod.POST)
+	public String finduserId (String phone )throws Exception{
+		
+		User user = userService.finduserId(phone);
+		
+		if (user==null){
+			return "no";
+		}
+		
+		
+		String check = user.getUserId();
+		
+		System.out.println(check);
+		
+		return check;
+		
+	}      
 	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
 	public String smsCheck(String code ){ 
 	
@@ -173,7 +194,37 @@ public class UserRestController {
 		return result;
 		
 	}
+	@RequestMapping( value="json/login", method=RequestMethod.POST )
+	public String login(String userId) throws Exception{
+		
+		System.out.println("/user/login : POST");
+		//Business Logic
+		
+		User user = userService.getUser(userId);
+		
+		if (user==null){
+			return "no";
+		}
+		
+		System.out.println("뭐가 들어왔니?"+user);
+		
+		Date today = new Date ();
+		Date end = user.getBlacklistEndDate();
+		
+		System.out.println("오늘은"+today);
+		System.out.println("유저 블랙리스트오니"+end);
 	
+		
+		if( end != null  &&
+				today.getTime() <= end.getTime() ) {
 	
+				System.out.println("이새키 블랙이다");
+				return "true";
+		}
+		else {
+			return "false";
+		}
+
+	}
 	
 }

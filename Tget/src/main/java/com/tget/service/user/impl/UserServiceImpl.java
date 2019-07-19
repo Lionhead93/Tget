@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService{
 		userDao.insertUser(user);
 		
 	}
-
+ 
 	@Override
 	public void updateSeller(User user) throws Exception {
 		userDao.updateUser(user);
@@ -190,7 +190,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userDao.finduserId(phone);
 	}
-	
 	
 	
 	
