@@ -126,7 +126,7 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public Map<String, Object> getRefundList(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		List<Content> list= communityDao.selectListContent(search);
+		List<Content> list= communityDao.selectListRefund(search);
 		int totalCount = communityDao.selectTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
