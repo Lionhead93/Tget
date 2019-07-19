@@ -24,7 +24,6 @@ public interface CommunityDao {
 	public void updateContent(Content content) throws Exception;
 	// 신고 업데이트
 	public void updateReport(Report report)	throws Exception;
-	
     // 게시글 리스트 조회
     public List<Content> selectListContent(Search search) throws Exception;
     // 댓글 수정
@@ -41,6 +40,9 @@ public interface CommunityDao {
 	public int selectTotalCount(Search search) throws Exception ;
 	// 환불 게시판 환불 처리 update
 	public void updateRefund(Content content) throws Exception;
+	// 환불 게시판 리스트 조회
+	public List<Content> selectListRefund(Search search) throws Exception;
+	
 	// 신고글 리스트 조회(관리자)
 	public List<Report> selectListReport(Search search) throws Exception;
 	// 댓글 리스트 조회(수정 필요)

@@ -34,7 +34,7 @@
 		function fncGetUserList(currentPage) {
 			
 			$("#currentPage").val(currentPage)
-			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();
+			$("form").attr("method" , "POST").attr("action" , "/community/getRefundList").submit();
 		}
 	
 		//============= "검색"  Event  처리 =============	
@@ -45,8 +45,8 @@
 		 $(function() {
 			
 						
-			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
-					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
+			 $( "button.btn.btn-primary:contains('검증')" ).on("click" , function() {
+					 $("form[name='refundCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
 				});
 			 
 			$( "td:nth-child(2)" ).css("color" , "black");
@@ -68,33 +68,33 @@
 	
 	});	
 		 
-		 $(function() {
+// 		 $(function() {
 			 
-				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$("#contentModalButton").on("click" , function() {
+// 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+// 				$("#contentModalButton").on("click" , function() {
 						
-						var contentNo = $(this).children('input[type="hidden"]').val();
-						var reportNo = $(this).children('div').text().trim();
-						$('input[name="reportNo"]').val(reportNo);
-						$.ajax( 
-								{
-									url : "/community/json/getContent/"+contentNo ,
-									method : "GET" ,
-									dataType : "json" ,
-									headers : {
-										"Accept" : "application/json",
-										"Content-Type" : "application/json"
-									},
-									success : function(JSONData , status) {
+// 						var contentNo = $(this).children('input[type="hidden"]').val();
+// 						var reportNo = $(this).children('div').text().trim();
+// 						$('input[name="reportNo"]').val(reportNo);
+// 						$.ajax( 
+// 								{
+// 									url : "/community/json/getContent/"+contentNo ,
+// 									method : "GET" ,
+// 									dataType : "json" ,
+// 									headers : {
+// 										"Accept" : "application/json",
+// 										"Content-Type" : "application/json"
+// 									},
+// 									success : function(JSONData , status) {
 
-										var displayValue ="게시글 제목 : "+JSONData.content.contentName+"<br/>"
-														+"게시글 내용 : "+JSONData.content.contentBody+"<br/>";
+// 										var displayValue ="게시글 제목 : "+JSONData.content.contentName+"<br/>"
+// 														+"게시글 내용 : "+JSONData.content.contentBody+"<br/>";
 										
-										$(".modal-body").html(displayValue);
-									}
-							});
-				});		
-			});	
+// 										$(".modal-body").html(displayValue);
+// 									}
+// 							});
+// 				});		
+// 			});	
 	
 	</script>
 	
@@ -168,17 +168,18 @@
 			<input type="hidden" name="contentNo" value=""/>
 		</form>
 		  <c:set var="i" value="0" />
-		  <c:forEach var="report" items="${list}">
+		  <c:forEach var="content" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
 			  <td align="left">${content.contentName}</td>
 			  <td align="left">${content.userId}</td>
+			  <td align="left">${content.regDate}</td>
 			  <td align="left">
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
 			  <input type="hidden" value="${content.contentNo}"/>
-			  <div style="display: none;">${content.contentName}</div>
-			  상세보기 </button>
+			  <div style="display: none;">${content.refundCheck}</div>
+			  검증 </button>
 			  </td>
 			  <td align="left">
 			  
@@ -202,23 +203,22 @@
  	
  	<!-- PageNavigation Start... -->
 	<!-- PageNavigation End... -->
-	<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+	 <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">게시글 내용</h5>
+					      <div class="modal-header"> 
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body">
-					      </div>
+					      <div class="modal-body">환불 처리 하시겠습니까?</div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					        <button type="button" class="btn btn-primary">검증 확인</button>
+					        <button type="button" class="btn btn-danger">취소</button>
 					      </div>
 					    </div>
-					  </div>
+					  </div> 
 	</div>
 </body>
 

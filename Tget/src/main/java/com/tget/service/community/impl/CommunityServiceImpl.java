@@ -123,6 +123,19 @@ public class CommunityServiceImpl implements CommunityService{
 		return map;
 	}
 	
+	@Override
+	public Map<String, Object> getRefundList(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		List<Content> list= communityDao.selectListContent(search);
+		int totalCount = communityDao.selectTotalCount(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list );
+		map.put("totalCount", totalCount);
+		
+		return map;
+	}
+	
 	
 
 
