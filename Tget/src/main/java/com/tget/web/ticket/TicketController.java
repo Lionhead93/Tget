@@ -23,6 +23,7 @@ import com.tget.service.event.domain.Event;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
 import com.tget.service.ticket.domain.Ticket;
+import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
 
 @Controller
@@ -35,6 +36,9 @@ public class TicketController {
 	@Qualifier("eventServiceImpl")
 	@Autowired
 	private EventService eventService;
+	@Qualifier("userServiceImpl")
+	@Autowired
+	private UserService userService;
 	
 	public TicketController() {
 		System.out.println(this.getClass());
@@ -151,4 +155,26 @@ public class TicketController {
 		return result;
 	}	
 	
+	@RequestMapping(value = "addSeller", method = RequestMethod.GET)	
+	public String addSeller() throws Exception {
+		
+		System.out.println("addSeller : GET");
+//		sellerCode
+		return "forward:/ticket/addSeller.jsp";
+	}
+	
+	@RequestMapping(value = "addSeller", method = RequestMethod.POST)	
+	public String addSeller(@ModelAttribute("user") User user, Model model) throws Exception {
+		
+		System.out.println("addSeller : POST user="+user);
+		user.setSellerCode("0");
+		user.setRole("1");
+		userService.updateSeller(user);
+		
+		User updateUser = userService.getUser(user.getUserId());
+		
+		model.addAttribute("updateUser", updateUser);
+		
+		return "forward:/ticket/addSellerResult.jsp";
+	}
 }

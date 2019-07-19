@@ -134,6 +134,16 @@ public class TranRestController {
 		map.put("deilveryNo", deilveryNo);
 		
 		return map;
-	}	
+	}
+	
+	@RequestMapping(value = "rest/getRefundTranList/{userId}" ,method = RequestMethod.POST)
+	public Map<String, Object> getTranList(@PathVariable("userId") String userId) throws Exception {
+		
+		System.out.println("rest/getRefundTranList/"+userId);
+		
+		
+		
+		return null;
+	}
 	
 }

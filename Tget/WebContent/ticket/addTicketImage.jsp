@@ -59,16 +59,12 @@
 	
 	$(function(){
 	    
-	    $("button").on("click",function(){
-	    	
-	    	fncAddTicketImage();
-	    	
+	    $("button").on("click",function(){	    	
+	    	fncAddTicketImage();	    	
 	    });
 		
-	    $("a[href='#']").on("click",function(){
-	    	
-	    	self.location = "/";
-	    	
+	    $("a[href='#']").on("click",function(){	    	
+	    	self.location = "/";	    	
 	    });
 	    
 	    $("#file").change(function(){
@@ -103,9 +99,9 @@
 			  <a class="btn btn-primary btn" href="#" role="button">√Î&nbsp;º“</a>
 		    </div>
 		  </div>
-		</form>
-		
- 	</div>
+		</form>		
+ 	</div>	
+				
 </body>
 
 </html>

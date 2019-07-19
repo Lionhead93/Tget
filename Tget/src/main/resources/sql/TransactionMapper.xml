@@ -96,8 +96,12 @@
 										tran_code = #{searchKeyword}
 									</when>
 									<when test="searchCondition == 1 and searchKeyword !='' ">
-										tran_code in('1','2','3')
+										tran_code in('0','1','2','3')
 										and #{searchKeyword} in (seller_id,buyer_id)
+									</when>
+									<when test="searchCondition == 2 and searchKeyword !='' ">
+										tran_code in('2','3')
+										and #{searchKeyword} = buyer_id
 									</when>									
 									</choose>
 									</if>												
@@ -115,15 +119,17 @@
 				<where>										
 					<if test="searchCondition != null">												
 					<choose>	
-					<when test="searchCondition == 0 and searchKeyword !='' ">
-						tran_code = #{searchKeyword}
-					</when>
-					<when test="searchCondition == 1 and searchKeyword !='' ">
-						seller_id = #{searchKeyword}
-					</when>
-					<when test="searchCondition == 2 and searchKeyword !='' ">
-						buyer_id = #{searchKeyword}
-					</when>
+						<when test="searchCondition == 0 and searchKeyword !='' ">
+							tran_code = #{searchKeyword}
+						</when>
+						<when test="searchCondition == 1 and searchKeyword !='' ">
+							tran_code in('0','1','2','3')
+							and #{searchKeyword} in (seller_id,buyer_id)
+						</when>
+						<when test="searchCondition == 2 and searchKeyword !='' ">
+							tran_code in('2','3')
+							and #{searchKeyword} = buyer_id
+						</when>	
 					</choose>
 					</if>												
 				</where>

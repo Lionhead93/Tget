@@ -133,6 +133,173 @@
 			 
 		});	
 		
+		 $(function() {
+				
+				$("button:contains('전송')").on("click" , function() {
+					alert("인증번호 전송");
+					$.ajax({ 
+						   url: "/user/json/sendSms",
+						   data: { 
+							   receiver: $("#phone").val() 
+							   }, 
+							   type: "post", 
+							
+				   success: function(result) { 
+					
+					   if (result == "true") { 
+						   console.log(result);
+						   }  else { 
+							   alert("인증번호 전송 실패");
+							   } 
+					   }
+						 }); 
+					
+						});
+					});
+			   
+			   $(function() {
+					
+					$("button:contains('인증')").on("click" ,function(){ 
+						//alert("오예");
+					
+				   $.ajax({ 
+					   url: "/user/json/smsCheck",
+				   data: { 
+					   code: $("#sms").val() 
+					   }, 
+					   type: "post", 
+				   success: function(result){ 
+					   console.log(result);
+					   
+					   
+					   
+					   if (result == "true") { 
+				   
+					   alert("인증 성공");
+					   
+				   } else if (result == "false")
+				  		 { 
+					   alert("인증 실패"); 
+				  	 	} 
+				 	  } 
+				   })
+			   })
+			   });
+			   $(function(){
+			         $("#alert-success").hide();
+			         $("#alert-danger").hide();
+			         $("input").keyup(function(){
+			             var pwd1=$("#password").val();
+			             var pwd2=$("#password2").val();
+			             if(pwd1 != "" || pwd2 != ""){
+			                 if(pwd1 == pwd2){
+			                     $("#alert-success").show();
+			                     $("#alert-danger").hide();
+			                     $("#submit").removeAttr("disabled");
+			                 }else{
+			                     $("#alert-success").hide();
+			                     $("#alert-danger").show();
+			                     $("#submit").attr("disabled", "disabled");
+			                 }    
+			             }
+			         });
+			     });
+
+
+			
+			  
+			     $(function() {
+						
+						$("button:contains('가 입')").on("click" , function() {
+							//alert("오예");
+						 fncAddUser(); 
+						 
+						
+						});
+					});	 
+				  /* $(function() {
+						//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+						$("a:contains('취 소')").on("click" , function() {
+							
+						});
+					});	  */				 
+			     
+					$(function() {
+						
+						$("button:contains('주소찾기')").on("click" ,function(){
+						    
+					     	new daum.Postcode({
+					            oncomplete: function(data) {
+					                var address = '';
+
+					                if (data.userSelectedType === 'R') {
+					                	address = data.roadAddress;
+					                } else { 
+					                	address = data.jibunAddress;
+					                }				
+					               
+					                $("#address").val(address);
+					            }
+					        }).open(); 
+					 	
+					 		});
+						});
+			
+					
+					
+					 $(function() {
+
+							$("input[name='nickName']").on('keyup',function() {
+
+								var inputed = $("input[name='nickName']").val();
+												
+
+								
+								$.ajax({
+								url : "/user/json/checknickNameDuplication",
+								method : "POST",
+								dataType : "json",
+									headers : {
+										"Accept" : "application/json",
+									"Content-Type" : "application/json"
+												},
+											data : JSON.stringify({
+												nickName : inputed,
+												}),
+
+											success : function(JSONData) {
+																//alert(JSONData); 
+																//alert(typeof(JSONData));
+
+												if (JSONData && inputed != "") {
+													$("#check").children("strong")
+														.remove();
+															$("#check")
+																.append(
+																"<strong class=\"text-success\">사용 가능합니다.</strong>");
+														} else {
+															$("#check").children("strong")
+																	.remove();
+															$("#check")
+																.append(
+																"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
+														}
+													if (inputed == "") {
+														$("#check").children("strong")
+															.remove();
+														$("#check")
+																.append(
+																		"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
+													}
+													}
+
+												});
+											});
+
+											});
+			     
+
+		
 		
 	  
 	
@@ -147,232 +314,8 @@
         <div class="container">
         	<a class="navbar-brand" href="/index.jsp">T-GET</a>
    		</div>
-   	</div>
-
+   	</div>	  
 		  
-		  <script type="text/javascript">
-		   $(function() {
-			
-			$("button:contains('전송')").on("click" , function() {
-				alert("인증번호 전송");
-				$.ajax({ 
-					   url: "/user/sendSms",
-					   data: { 
-						   receiver: $("#phone").val() 
-						   }, 
-						   type: "post", 
-						
-			   success: function(result) { 
-				
-				   if (result == "true") { 
-					   console.log(result);
-					   }  else { 
-						   alert("인증번호 전송 실패");
-						   } 
-				   }
-					 }); 
-				
-					});
-				});
-		   
-		   $(function() {
-				
-				$("button:contains('인증')").on("click" ,function(){ 
-					//alert("오예");
-				
-			   $.ajax({ 
-				   url: "/user/json/smsCheck",
-			   data: { 
-				   code: $("#sms").val() 
-				   }, 
-				   type: "post", 
-			   success: function(result){ 
-				   console.log(result);
-				   
-				   
-				   
-				   if (result == "true") { 
-			   
-				   alert("인증 성공");
-				   
-			   } else if (result == "false")
-			  		 { 
-				   alert("인증 실패"); 
-			  	 	} 
-			 	  } 
-			   })
-		   })
-		   });
-		     </script>
-		     
-		     <script type="text/javascript">
-		     
-		     $(function(){
-		         $("#alert-success").hide();
-		         $("#alert-danger").hide();
-		         $("input").keyup(function(){
-		             var pwd1=$("#password").val();
-		             var pwd2=$("#password2").val();
-		             if(pwd1 != "" || pwd2 != ""){
-		                 if(pwd1 == pwd2){
-		                     $("#alert-success").show();
-		                     $("#alert-danger").hide();
-		                     $("#submit").removeAttr("disabled");
-		                 }else{
-		                     $("#alert-success").hide();
-		                     $("#alert-danger").show();
-		                     $("#submit").attr("disabled", "disabled");
-		                 }    
-		             }
-		         });
-		     });
-
-
-		
-		  
-		     $(function() {
-					
-					$("button:contains('가 입')").on("click" , function() {
-						//alert("오예");
-					 fncAddUser(); 
-					 
-					
-					});
-				});	 
-			  /* $(function() {
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$("a:contains('취 소')").on("click" , function() {
-						
-					});
-				});	  */
-			  
-				 function fncAddUser() {
-				
-					var id=$("input[name='userId']").val();
-					var id2=$("select[name='userId2']").val();
-				/* 	var id3=$("option[id='ih']").val();
-					var id4=$("option[id='ig']").val(); */
-					var pw=$("input[name='password']").val();
-					var pw_confirm=$("input[name='password2']").val();
-					var name=$("input[name='userName']").val();
-					
-					
-					if(id == null || id.length <1){
-						alert("아이디는 반드시 입력하셔야 합니다.");
-						return;
-					}
-					if(pw == null || pw.length <1){
-						alert("패스워드는  반드시 입력하셔야 합니다.");
-						return;
-					}
-					if(pw_confirm == null || pw_confirm.length <1){
-						alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-						return;
-					}
-					if(name == null || name.length <1){
-						alert("이름은  반드시 입력하셔야 합니다.");
-						return;
-					}
-					
-					if( pw != pw_confirm ) {				
-						alert("비밀번호 확인이 일치하지 않습니다.");
-						$("input:text[name='password2']").focus();
-						return;
-					}
-				
-					
-					$("input[name='userId']").val(id+id2);
-				
-			
-					$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
-					
-				}
-		     
-				$(function() {
-					
-					$("button:contains('주소찾기')").on("click" ,function(){
-					    
-				     	new daum.Postcode({
-				            oncomplete: function(data) {
-				                var address = '';
-
-				                if (data.userSelectedType === 'R') {
-				                	addresss = data.roadAddress;
-				                } else { 
-				                	address = data.jibunAddress;
-				                }				
-				               
-				                $("#address").val(address);
-				            }
-				        }).open(); 
-				 	
-				 		});
-					});
-		
-				
-				
-				 $(function() {
-
-						$("input[name='nickName']").on('keyup',function() {
-
-							var inputed = $("input[name='nickName']").val();
-											
-
-							
-							$.ajax({
-							url : "/user/json/checknickNameDuplication",
-							method : "POST",
-							dataType : "json",
-								headers : {
-									"Accept" : "application/json",
-								"Content-Type" : "application/json"
-											},
-										data : JSON.stringify({
-											nickName : inputed,
-											}),
-
-										success : function(JSONData) {
-															//alert(JSONData); 
-															//alert(typeof(JSONData));
-
-											if (JSONData && inputed != "") {
-												$("#check").children("strong")
-													.remove();
-														$("#check")
-															.append(
-															"<strong class=\"text-success\">사용 가능합니다.</strong>");
-													} else {
-														$("#check").children("strong")
-																.remove();
-														$("#check")
-															.append(
-															"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
-													}
-												if (inputed == "") {
-													$("#check").children("strong")
-														.remove();
-													$("#check")
-															.append(
-																	"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
-												}
-												}
-
-											});
-										});
-
-										});
-		     
-
-				
-		     
-				 
-				 
-				
-				 
-				 
-				 
-				 
-		     </script>
 		  <form class="form-horizontal">
 		  
 		 <!--  <div class="form-group">

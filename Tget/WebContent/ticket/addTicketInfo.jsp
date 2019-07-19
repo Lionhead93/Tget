@@ -30,13 +30,17 @@
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">	
-		
-		
+	
 	function fncAddTicketInfo(){
 		//Form 유효성 검증
 	 	var amount = $("input[name='amount']").val();
 		var type = $("input[name='type']").val();
 		var seat = $("input[name='seat']").val();
+		
+		if("${user.role=='0'}"){
+			history.go(0);
+			return;
+		}
 		
 		if(amount == null || amount.length<1){
 			alert("수량은 반드시 입력하여야 합니다.");
@@ -59,11 +63,18 @@
 	}		
 	
 	$(function(){
-	    
+		
+		if(${user.role=='0'}){
+			alert("첫 판매는 판매자 등록이 필요합니다.");
+			 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
+             window.open("/ticket/addSeller","T-get 판매자등록 ",popOption);
+		}
+		
 	    $("button:contains('계 속')").on("click",function(){
 	    	
+	    		    	
 	    	fncAddTicketInfo();
-	    	
+	    		    	
 	    });
 		
 		$("a[href='#']:contains('취 소')").on("click",function(){
@@ -129,14 +140,30 @@
 		<br/>			  
 		  <div class="form-group">
 		    
-		      <button type="button" class="btn btn-primary"  >계 속</button>
+		      <button type="button" class="btn btn-primary">계 속</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
 		    
 		  </div>
 		</div>  
 		</form>
-				
+			<button type="button" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target="#addSeller"></button>	
  	</div>
+	
+	<!-- 판매자 등록 모달 -->
+ 				<div class="modal fade" id="addSeller" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">판매자 등록</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body"> 	      
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	
 </body>
 
