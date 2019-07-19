@@ -99,7 +99,7 @@ function getAlarmModal(userId) {
 function getNoReadAlarmCount(userId) {	
 	$.ajax(
 			{
-				url : "/alarm/rest/getNoReadAlarm/"+userId ,
+				url : "/alarm/rest/getNoReadAlarm/${user.userId}" ,
 				method : "GET" ,
 				dataType : "json" ,
 				headers : {
