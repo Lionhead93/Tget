@@ -54,41 +54,51 @@
 	    <hr/>
 	    총  ${sellProb.totalCount} 개
 	
-	 <div class="container marketing">
-
-      <!-- Three columns of text below the carousel -->
+	 <div class="text-center">
+    
       <div class="row" id="#">
        <c:forEach var="ticket" items="${list}" varStatus="j" > 
-        <div class="col-lg-4">
-          <div id="${ticket.ticketNo}">
-	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" width="140" height="140">
-	          <h2>${ticket.event.eventName}</h2>         
-	          <p>좌석 : ${ticket.seat}</p>
-	          <p>수량 : ${ticket.amount}</p>
-	          <p>${ticket.price} 원</p>	          
-	          <c:if test="${ticket.code=='0'}">
-		          <p class="text-warning">	         
-		          	*검증 대기중		          
-		          </p>
-		          </c:if>
-		          <c:if test="${ticket.code=='1'}">
-		          <p class="text-success">
-		          	*판매중	
-		          </p>
-		          </c:if>
-		          <c:if test="${ticket.code=='2'}">
-		          <p class="text-danger">
-		          	*등록취소	
-		          </p>
-		      </c:if> 	    	
-	      </div>
-        </div><!-- /.col-lg-4 -->
+	       <div class="col-md">
+	       <div class="card" style="width: 18rem;">
+			  <img src="/resources/images/uploadFiles/${ticket.ticketImage}" class="card-img-top">
+			  <div class="card-body">
+			    <h2>${ticket.event.eventName}</h2>         
+		          <p>좌석 : ${ticket.seat}</p>
+		          <p>수량 : ${ticket.amount}</p>
+		          <p>${ticket.price} 원</p>	          
+		        
+			          <p class="text-info">	         
+			          	<a class="btn btn-outline-primary" id="${ticket.ticketNo}" href="#" data-toggle="modal" data-target="#checkModal">
+				      <i class="fas fa-search"></i>검증</a>		          
+			          </p>
+			  </div>
+			</div>
+	       </div>	       
         </c:forEach>
+        </div>
     </div>
 
 
 <!-- Modal -->
-	  
+			<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">티켓 검증</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      <div class="text-center">
+					      </div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+			 </div>	  
 </div>
 </body>
 

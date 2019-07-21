@@ -36,8 +36,8 @@
 	 	var amount = $("input[name='amount']").val();
 		var type = $("input[name='type']").val();
 		var seat = $("input[name='seat']").val();
-		
-		if("${user.role=='0'}"){
+				
+		if(${user.role=='0'}){
 			history.go(0);
 			return;
 		}
@@ -95,7 +95,7 @@
 		<form class="form-horizontal">
 		<input type="hidden" name="event.eventId" value="${event.eventId}" >
 		<input type="hidden" name="event.eventName" value="${event.eventName}" >
-		<input type="hidden" name="seller.userId" value="seller" >
+		<input type="hidden" name="seller.userId" value="${user.userId}" >
 		
 		<br/>
 		<div class="text-center">

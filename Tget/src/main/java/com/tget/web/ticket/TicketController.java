@@ -44,7 +44,7 @@ public class TicketController {
 		System.out.println(this.getClass());
 	}
 	
-	@Value("#{commonProperties['uploadPath']}")
+	@Value("#{commonProperties['swuploadPath']}")
 	String uploadPath;
 	
 	@RequestMapping(value = "addTicketInfo", method = RequestMethod.GET)	
@@ -164,7 +164,7 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value = "addSeller", method = RequestMethod.POST)	
-	public String addSeller(@ModelAttribute("user") User user, Model model) throws Exception {
+	public String addSeller(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 		
 		System.out.println("addSeller : POST user="+user);
 		user.setSellerCode("0");
@@ -173,7 +173,7 @@ public class TicketController {
 		
 		User updateUser = userService.getUser(user.getUserId());
 		
-		model.addAttribute("updateUser", updateUser);
+		session.setAttribute("user", updateUser);
 		
 		return "forward:/ticket/addSellerResult.jsp";
 	}

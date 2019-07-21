@@ -80,7 +80,7 @@
 <body>	
 	<div class="container">
 	<br/>
-		<h1 class="text-center">실물 이미지 등록 : ${sellticketInfo.event.eventName}</h1>
+		<h3 class="text-center">실물 이미지 등록</h3>
 		<br/>	
 		<div class="img_wrap">
 		<img id="preview" />	

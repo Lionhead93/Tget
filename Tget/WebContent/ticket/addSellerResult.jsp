@@ -22,8 +22,6 @@
 	
 	$(function(){
 		alert("등록성공!")
-		window.opener.sessionStorage.setItem("user","${updateUser}");
-		alert("${updateUser}");
 		window.opener.history.go(0);
 		window.self.close();
 		
