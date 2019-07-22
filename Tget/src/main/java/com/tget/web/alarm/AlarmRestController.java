@@ -42,6 +42,9 @@ public class AlarmRestController {
 		Search search = new Search();
 		search.setSearchKeyword(userId);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.get("list");
+		
 		return alarmService.getAlarmList(search);		
 	}
 	

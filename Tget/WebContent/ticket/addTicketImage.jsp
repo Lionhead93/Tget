@@ -59,16 +59,12 @@
 	
 	$(function(){
 	    
-	    $("button").on("click",function(){
-	    	
-	    	fncAddTicketImage();
-	    	
+	    $("button").on("click",function(){	    	
+	    	fncAddTicketImage();	    	
 	    });
 		
-	    $("a[href='#']").on("click",function(){
-	    	
-	    	self.location = "/";
-	    	
+	    $("a[href='#']").on("click",function(){	    	
+	    	self.location = "/";	    	
 	    });
 	    
 	    $("#file").change(function(){
@@ -84,7 +80,7 @@
 <body>	
 	<div class="container">
 	<br/>
-		<h1 class="text-center">실물 이미지 등록 : ${sellticketInfo.event.eventName}</h1>
+		<h3 class="text-center">실물 이미지 등록</h3>
 		<br/>	
 		<div class="img_wrap">
 		<img id="preview" />	
@@ -103,9 +99,9 @@
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>
-		</form>
-		
- 	</div>
+		</form>		
+ 	</div>	
+				
 </body>
 
 </html>

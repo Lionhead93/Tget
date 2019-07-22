@@ -70,6 +70,12 @@
 	    	self.location = "/event/getEventTicketList?eventId="+eventId;	    	
 	    });
 	    $("a.chat").on("click", function(){
+	    	
+	    	var tranCode = $(this).closest("td").attr("id").trim();
+	    	if(tranCode=='0'){
+	    		alert("입금완료 후 채팅을 신청하세요.");
+	    		return;
+	    	}
 	    	var opponentId = $(this).attr("id").trim();
 	    	var userId = "${user.userId}";
 	    	
@@ -245,7 +251,7 @@
 			      </td>
 			      <td>${tran.orderAmount}</td>
 			      <td>${tran.orderDate}</td>
-			      <td>			      
+			      <td id="${tran.tranCode}">			      
 			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.userId}
 			      <a class="chat" id="${tran.buyer.userId}" href="#" >
 			      <i class="far fa-comment-alt"></i>

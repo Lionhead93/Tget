@@ -64,14 +64,15 @@
 	   	
 	   		<if test="phone != null">phone = #{phone} ,</if>
 	   		<if test="address != null">address = #{address} ,</if> 
-	   		<if test="postal_code != null">postal_code #{postalCode} ,</if>
+	   		<if test="postalCode != null">postal_code = #{postalCode} ,</if>
 	   		<if test="local != null">local = #{local}, </if>
+	   		<if test="role != null">role = #{role} ,</if>
 	   		<if test="nickName != null">nickname = #{nickName} ,</if>
 	   		<if test="sellerCode != null">seller_code = #{sellerCode} ,</if>
 	   		<if test="salesAmount != null">sales_amount = #{salesAmount} ,</if>
 	   		<if test="salesCount != null">sales_count = #{salesCount} ,</if>
-	   		<if test="accountBank != null">account_bank = #{accoutBank} ,</if>
-	   		<if test="acoountNo != null">acoount_no = #{accountNo}</if>
+	   		<if test="accountBank != null">account_bank = #{accountBank} ,</if>
+	   		<if test="accountNo != null">account_no = #{accountNo}</if>
 	   		
 	   	</set>
 	   	

@@ -51,18 +51,9 @@
 	
 	$(function(){
 	    
-	    $("button").on("click",function(){
-	    	
-	    	
-	    	
-	    });
-		
-	    $("a[href='#']").on("click",function(){
-	    	
-	    	self.location = "/";
-	    	
-	    });
-	    
+	    alert("등록 성공!");
+	    window.opener.location.href = "/ticket/getTicketList?menu=seller";
+		window.self.close();	    
 	    
 	});
 	</script>		
@@ -70,23 +61,7 @@
 </head>
 
 <body>	
-	<div class="container">
-	<br/>
-		<h1 class="text-center">다음과 같이 등록되었습니다.</h1>
-		<br/>	
-		
-		<form class="form-horizontal">				  
-		<br/>		
-		  ${ticket}  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >요 &nbsp;청</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		    </div>
-		  </div>
-		</form>
-		
- 	</div>
+	
 </body>
 
 </html>

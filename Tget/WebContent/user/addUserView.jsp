@@ -177,6 +177,14 @@
 				   
 					   alert("인증 성공");
 					   
+				   } else if (result == "false")
+				  		 { 
+					   alert("인증 실패"); 
+				  	 	} 
+				 	  } 
+				   })
+					   alert("인증 성공");
+					   
 					   
 					   
 					   
