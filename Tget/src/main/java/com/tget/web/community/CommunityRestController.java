@@ -22,6 +22,8 @@ import com.tget.common.domain.Search;
 import com.tget.service.community.CommunityService;
 import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
+import com.tget.service.event.EventService;
+import com.tget.service.transaction.TranService;
 
 @RestController
 @RequestMapping("/community/*")
@@ -32,7 +34,10 @@ public class CommunityRestController {
 	@Qualifier("communityServiceImpl")
 	private CommunityService communityService;
 	//setter Method 구현 않음
-		
+	@Autowired
+	@Qualifier("eventServiceImpl")
+	private EventService eventService;
+	
 	public CommunityRestController(){
 		System.out.println(this.getClass());
 	}
@@ -157,5 +162,14 @@ public class CommunityRestController {
 		
 		return "bad";
 	}
-
+	// 날씨 안내
+	@RequestMapping( value="rest/getSearchWeather/{eventId}", method=RequestMethod.GET ) 
+	public String getSearchWeather( @PathVariable("eventId") String eventId ) throws Exception{
+		
+		System.out.println("/community/rest/getSearchWeather : GET");
+		
+		communityService.getSearchWeather(eventId);
+		
+		return "weather";
+	}
 }

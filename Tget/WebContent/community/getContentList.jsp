@@ -125,6 +125,10 @@
 				
 				});
 			 
+			 $( "button.btn.btn-info:contains('이벤트 날씨 안내')" ).on("click" , function() {
+					self.location="/event/getInterestedEventList"	
+				});
+			 
 			// 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {
 				self.location ="/community/getContent?contentNo="+$(this).children('#contentNo').text().trim();
@@ -265,8 +269,10 @@
 				</div>
 				
 				<button type="button" class="btn btn-danger">게시글 등록하기</button>
-	
+				<button type="button" class="btn btn-info">이벤트 날씨 안내</button>
+				
 				 <div>
+				 
 		    <div class="col-md-6 text-right">
 			    <!-- <form class="form-inline" name="detailForm">
 	
