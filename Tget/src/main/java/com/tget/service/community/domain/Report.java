@@ -6,7 +6,7 @@ public class Report {
 	
 		private int reportNo;
 		private String whiteId;
-		private String whiteNickName;
+		private String whiteNickname;
 		private String blackId;
 		private int contentNo;
 		private int replyNo;
@@ -28,10 +28,10 @@ public class Report {
 			this.whiteId = whiteId;
 		}
 		public String getWhiteNickName() {
-			return whiteNickName;
+			return whiteNickname;
 		}
-		public void setWhiteNickName(String whiteNickName) {
-			this.whiteNickName = whiteNickName;
+		public void setWhiteNickName(String whiteNickname) {
+			this.whiteNickname = whiteNickname;
 		}
 		public String getBlackId() {
 			return blackId;
@@ -77,7 +77,7 @@ public class Report {
 		}
 		@Override
 		public String toString() {
-			return "Report [reportNo=" + reportNo + ", whiteId=" + whiteId + ", whiteNickName=" + whiteNickName
+			return "Report [reportNo=" + reportNo + ", whiteId=" + whiteId + ", whiteNickname=" + whiteNickname
 					+ ", blackId=" + blackId + ", contentNo=" + contentNo + ", replyNo=" + replyNo
 					+ ", reportReasonCode=" + reportReasonCode + ", regDate=" + regDate + ", reportCode=" + reportCode
 					+ ", Check=" + check + "]";

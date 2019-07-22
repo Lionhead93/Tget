@@ -58,7 +58,7 @@
 	        url : "/community/json/addReply/"+replyNo,
 	        data: JSON.stringify({
 	        	userId: $("#userId").text().trim(),
-	        	nickName: $("#userNickName").text().trim(),
+	        	nickName: $("#userNickname").text().trim(),
 	        	contentNo: $("#contentNo").text().trim(),
 	        	replyBody: $("#replyBody").val()
 	        }),
@@ -142,7 +142,7 @@
             </div>
            
 		    <div id="userId">manager</div><!-- ${user.userId} -->
-		    <div id="userNickName">包府磊</div><!-- ${user.userNickName} -->
+		    <div id="userNickname">包府磊</div><!-- ${user.userNickname} -->
 		    <div id="contentNo">${reply.contentNo}</div>
             <div>
                 <table class="table">                    

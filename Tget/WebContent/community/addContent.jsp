@@ -159,7 +159,7 @@
    			 	<option value="">게시판 선택</option>
 		   			<option value="0">공지사항</option>
 	   			 	<option value="1">자유게시판</option>
-	   			 	<option value="2">고개센터</option>
+	   			 	<option value="2">고객센터</option>
    			 	</select> 
    			 	
    			 <select id="contentCode" name="contentCode">
@@ -186,7 +186,7 @@
 		
 		  
 		  <div class="form-group">
-		    <label for="userNickName" class="col-sm-offset-1 col-sm-3 control-label">회원 닉네임</label>
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">회원 닉네임</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">

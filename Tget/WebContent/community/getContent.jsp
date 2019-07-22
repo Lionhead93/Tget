@@ -121,7 +121,7 @@
 		</div>
 		
 		
-		<jsp:include page="/community/reply.jsp"/>
+		<!--<jsp:include page="/community/reply.jsp"/>-->
       	
 
 

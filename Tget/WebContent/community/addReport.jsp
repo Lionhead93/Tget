@@ -106,9 +106,9 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="whiteNickName" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
+		    <label for="whiteNickname" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="whiteNickName" name="whiteNickName" value="나관리자얌" readonly>
+		      <input type="text" class="form-control" id="whiteNickname" name="whiteNickname" value="나관리자얌" readonly>
 		      
 		    </div>
 		  </div>
