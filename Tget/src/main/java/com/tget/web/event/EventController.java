@@ -99,10 +99,10 @@ public class EventController {
 //		return "forward:/event/test.jsp";
 //	}
 	
-	@RequestMapping(value="aaa")
+	@RequestMapping(value="countdown")
 	public String aaa() throws Exception {
 		
-		return "forward:/event/aaa.jsp";
+		return "forward:/event/countdown.jsp";
 	}
 	
 	@RequestMapping(value="getEventList")
@@ -394,5 +394,50 @@ public class EventController {
 		model.addAttribute("videoName",recommEvent.getVideoName());
 //		model.addAttribute("file",file);
 		return "forward:/event/addRecommVideoPOST.jsp";
+	}
+	
+	@RequestMapping(value="deleteInterestedEventAll")
+	public String deleteInterestedEventAll(HttpSession session) throws Exception {
+		System.out.println("===============deleteInterestedEventAll===============");
+		
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+
+		eventService.deleteInterestedEventAll(userId);
+	
+		return "forward:/event/listInterestedEvent.jsp";
+	}
+	
+	@RequestMapping(value="deleteInterestedEvent")
+	public String deleteInterestedEvent(@RequestParam String eventId, HttpSession session,Model model) throws Exception {
+		System.out.println("===============deleteInterestedEvent===============");
+		System.out.println(eventId);
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+		String[] arr = null;
+		
+		if(eventId.contains(",")) {
+			arr  =eventId.split(",");
+			for (String string : arr) {
+				eventService.deleteInterestedEvent(string, userId);
+			} 
+		}
+		
+		List<Event> list = eventService.getInterestedEventList(userId);
+		
+		for (Event event : list) {
+			Search search = new Search();
+			search.setSearchCondition("0");
+			search.setSearchKeyword(event.getEventId());
+			event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
+			event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
+		}				
+		
+		model.addAttribute("interestedEventList", list);
+		if (list != null) {
+			model.addAttribute("interestedEventListCount", list.size());
+		}		
+		
+		return "forward:/event/listInterestedEvent.jsp";
 	}
 }

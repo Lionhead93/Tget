@@ -2,6 +2,8 @@ package com.tget.service.event.domain;
 
 import java.sql.Date;
 
+import com.tget.common.util.CommonUtil;
+
 public class Event {
 
 	///F
@@ -18,6 +20,7 @@ public class Event {
 	private int ticketLowestPrice;
 	private int totalTicketCount;
 	private String eventTimeStr;
+	private String ticketLowestPriceStr;
 	
 	///C
 	public Event() {
@@ -100,6 +103,7 @@ public class Event {
 	}
 	public void setTicketLowestPrice(int ticketLowestPrice) {
 		this.ticketLowestPrice = ticketLowestPrice;
+		this.setTicketLowestPriceStr(ticketLowestPrice);
 	}
 
 	public int getTotalTicketCount() {
@@ -117,6 +121,16 @@ public class Event {
 		String temp = String.valueOf(eventTime);
 		this.eventTimeStr = temp.substring(0, 2)+":"+temp.substring(2);
 	}
+	
+	public String getTicketLowestPriceStr() {
+		return ticketLowestPriceStr;
+	}
+	
+	public void setTicketLowestPriceStr(int ticketLowestPrice) {
+//		String temp = String.valueOf(ticketLowestPrice);
+		this.ticketLowestPriceStr = CommonUtil.toAmountStr(String.valueOf(ticketLowestPrice));
+	}
+
 
 	public String toString() {
 		return "[Event] eventId : "+eventId+"\n viewCount : "+viewCount+"\n" + 

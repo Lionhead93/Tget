@@ -171,6 +171,9 @@ public class EventServiceImpl implements EventService{
 		return eventDao.getYoutubeList(search,requestPageToken,apiKey);
 	}
 	
+	public void deleteInterestedEventAll(String userId) throws Exception{
+		eventDao.deleteInterestedEventAll(userId);
+	}
 	
 	
 }
