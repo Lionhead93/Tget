@@ -6,6 +6,7 @@ import com.tget.common.domain.Search;
 import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Report;
+import com.tget.service.community.domain.Weather;
 
 public interface CommunityService {
 	
@@ -64,8 +65,6 @@ public interface CommunityService {
 		// ±æ Ã£±â
 		public Map<String,Object> getSearchLoad(String load) throws Exception;
 		
-		// ³¯¾¾
-		public Map<String,Object> getSearchWeather(String weather) throws Exception;
 		
 		
 }
