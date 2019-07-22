@@ -91,6 +91,10 @@ public class CommuityController {
 //			}
 //			
 //			content.setFileName(uploadFile);
+			if(content.getContentCode().equals("7")) {
+				content.setRefundCheck("1");
+			}
+			
 			communityService.addContent(content);
 			
 			return "forward:/community/getContentList";
@@ -225,7 +229,7 @@ public class CommuityController {
 		}
 		//환불 게시판 환불 검증 여부 처리
 		@RequestMapping(value="updateRefund")
-		public String updateRefund(@RequestParam("contentNo") int contentNo, @ModelAttribute("content") Content content, Model model) throws Exception{
+		public String updateRefund(@RequestParam("contentNo") int contentNo, Model model) throws Exception{
 			
 			System.out.println("/community/updateRefund");
 			//Business Logic			
@@ -233,7 +237,7 @@ public class CommuityController {
 			
 			// refundTranNo : 환불 거래 번호, refundCheck : 환불 검증 여부 ...update 필요..
 			
-			content.setRefundCheck("0");
+			refundContent.setRefundCheck("0");
 			communityService.updateRefund(refundContent);
 			System.out.println(refundContent);
 		

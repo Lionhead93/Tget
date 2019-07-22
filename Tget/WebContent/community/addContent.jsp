@@ -33,7 +33,40 @@
    <script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
    
 	<style>
-		
+	.dropbtn {
+  background-color: #7FFFD4;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #7FFFD4;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #7FFFD4;}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -43,8 +76,9 @@
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-primary" ).on("click" , function() {
-				alert("등록되었습니다.")
-				$("form").attr("method" , "POST").attr("action" , "/community/addContent").submit();
+				fncAddContent();
+				
+				
 			});
 		});	
 		
@@ -60,23 +94,24 @@
 			 
 		
 		///////////////////////////////////////////////////////////////////////
-		function fncAddContent(){
+	function fncAddContent(){
 	//Form 유효성 검증
- 	//var name = document.detailForm.prodName.value;
-	//var detail = document.detailForm.prodDetail.value;
-	//var manuDate = document.detailForm.manuDate.value;
-	//var price = document.detailForm.price.value;
-	
-	//var name= $("input[content='contentName']").val();
-	
-	
-	if(content == null || content.length<1){
-		alert("글을 입력해 주세요.");
-		return;
+ 	
+		var contentName= $("input[name='contentName']").val();
+		var contentBody= $("textarea[name='contentBody']").val();
+		
+		if(contentName == null || contentName.length<1){
+			alert("제목을 입력해 주세요.");
+			return;
+		}
+// 		if(contentBody == null || contentBody.length<1){
+// 			alert("내용을 입력해 주세요.");
+// 			return;
+// 		}
+		
+		alert("등록 되었습니다.")
+		$("form").attr("method" , "POST").attr("action" , "/community/addContent").submit();
 	}
-	
-	$("form").attr("method" , "POST").attr("action" , "/community/getContentList").submit();
-}
 
 	$(function(){
 			
@@ -102,49 +137,66 @@
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
+		<div>
+<!-- 		<div class="dropdown"> -->
+<!--   			<button class="dropbtn">게시판 선택</button> -->
+<!--   		<div class="dropdown-content"> -->
+<%--    			 <a href="#" id="boardCode0" value="${search.searchCodition==1&&search.searchKeyword==0}">공지사항</a> --%>
+<%--    			 <a href="#" id="boardCode1" value="${search.searchCodition==1&&search.searchKeyword==1}">자유게시판</a> --%>
+<%--     		 <a href="#" id="boardCode2" value="${search.searchCodition==1&&search.searchKeyword==2}">고객센터</a>	  --%>
+<!--   			</div> -->
+<!-- 		</div> -->
+		
+		
+		</div>
 		<form class="form-horizontal" >
 		<!-- enctype="multipart/form-data" -->
-		<div class="form-group">
-		    <label for="boardCode" class="col-sm-offset-1 col-sm-3 control-label">게시판 코드</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="boardCode" name="boardCode" value="${content.boardCode}">
-		      
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="contentCode" class="col-sm-offset-1 col-sm-3 control-label">게시글 코드</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentCode" name="contentCode" value="${content.contentCode}">  
-		    </div>
-		  </div>
+	  
+<!-- 		  <div class="dropdown"> -->
+<!--   			<button class="dropbtn">게시글 선택</button> -->
+<!--   		<div class="dropdown-content"> -->
+   			 <select id="boardCode" name="boardCode">
+   			 	<option value="">게시판 선택</option>
+		   			<option value="0">공지사항</option>
+	   			 	<option value="1">자유게시판</option>
+	   			 	<option value="2">고객센터</option>
+   			 	</select> 
+   			 	
+   			 <select id="contentCode" name="contentCode">
+   			 	<option value="">게시글 선택</option>
+		   			 <c:if test="${sessionScope.user.role == '2'}">   			 		
+			   			 	<option value="0">티켓 거래 공지</option>
+			   			 	<option value="1">자유 게시판 이용 공지</option>
+					</c:if>
+			   		<option value="2">자주 찾는 질문</option>
+	   			 	<option value="3">삽니다</option>
+	   			 	<option value="4">팝니다</option>
+	   			 	<option value="5">수다방</option>
+	   			 	<option value="6">1:1 문의하기</option>
+	   			 	<option value="7">환불 게시판</option>
+   			 	</select>  			 
+<!--   			</div> -->
+<!-- 		</div> -->
+		
+			<select id="open" name="open">
+				<option value="">공개 여부</option>
+					<option value="0">공개</option>
+					<option value="1">비공개</option>
+			</select>	
+		
 		  
 		  <div class="form-group">
-		    <label for="open" class="col-sm-offset-1 col-sm-3 control-label">공개 여부</label>
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">회원 닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="open" name="open" value="${content.open}">
-		      
+		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
+		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
 		    </div>
 		  </div>
-		<div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">회원 아이디</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" value="${content.userId}">
-		      
-		    </div>
-		  </div>
-		  
+ 
 		  <div class="form-group">
-		    <label for="userNickName" class="col-sm-offset-1 col-sm-3 control-label">회원 닉네임</label>
+		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">제목</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickName" name="userNickName" value="${content.userNickName}">
-		      
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentName" name="contentName" value="${content.contentName}">
+		      <input type="text" class="form-control" id="contentName" name="contentName">
 		      
 		    </div>
 		  </div>
@@ -152,7 +204,7 @@
 		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">글 내용</label>
 		  <hr>
 		
-		<textarea class="form-control" id="contentBody" name="contentBody" value="${content.contentBody}"></textarea>
+		<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
 		<script type="text/javascript">
 		CKEDITOR.replace('contentBody'
 				, {height: 200});

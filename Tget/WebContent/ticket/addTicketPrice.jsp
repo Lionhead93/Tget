@@ -50,7 +50,8 @@
 		}
 		
 		$("input[name='price']").val(result);
-		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketPrice").submit();
+		window.open("", "popup_window", "width=500, height=500, scrollbars=no");
+		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketPrice").attr("target" , "popup_window").submit();
 	}		
 	
 	
@@ -65,7 +66,7 @@
 		var avgPrice = numberWithCommas(${sellProb.avgPrice});
 		$("#avgPrice").html(""+avgPrice);
 		
-	    $("button").on("click",function(){
+	    $("button:contains('결 정')").on("click",function(){
 	    	
 	    	fncAddTicketPrice();
 	    	
@@ -158,7 +159,7 @@
 		  </div>
 		 <br/>
 		  <div class="form-group">
-		      <button type="button" class="btn btn-primary"  >결 &nbsp;정</button>
+		      <button type="button" class="btn btn-primary"  >결 정</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		  </div>
 		  </div>

@@ -36,18 +36,24 @@
 			$("#currentPage").val(currentPage)
 			$("form").attr("method" , "POST").attr("action" , "/community/getRefundList").submit();
 		}
-	
-		//============= "검색"  Event  처리 =============	
+		
 		 $(function() {
 			 
 		 });
 		
 		 $(function() {
-			
-						
-			 $( "button.btn.btn-primary:contains('검증')" ).on("click" , function() {
-					 $("form[name='refundCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
-				});
+					
+			 $( "button.btn.btn-primary:contains('확인')" ).on("click" , function() {
+				 alert("확인");
+				 $("form[name='refundCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
+			});
+			 
+			 $( "button.btn.btn-info:contains('검증')" ).on("click" , function() {
+			 	 alert("검증");
+				 var contentNo = $(this).children("div").text().trim();
+			 	 alert(contentNo);
+			 	 $("input[name='contentNo']").val(contentNo);
+			});
 			 
 			$( "td:nth-child(2)" ).css("color" , "black");
 			$("h7").css("color" , "red");
@@ -60,51 +66,19 @@
 			})
 			.on("mouseleave", function(){
 				var style = {
-						backgroundColor: "",//#ddd
+						backgroundColor: "",
 						fontWeight:""
 				};
 				$(this).css(style);
 			});
 	
 	});	
-		 
-// 		 $(function() {
-			 
-// 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-// 				$("#contentModalButton").on("click" , function() {
-						
-// 						var contentNo = $(this).children('input[type="hidden"]').val();
-// 						var reportNo = $(this).children('div').text().trim();
-// 						$('input[name="reportNo"]').val(reportNo);
-// 						$.ajax( 
-// 								{
-// 									url : "/community/json/getContent/"+contentNo ,
-// 									method : "GET" ,
-// 									dataType : "json" ,
-// 									headers : {
-// 										"Accept" : "application/json",
-// 										"Content-Type" : "application/json"
-// 									},
-// 									success : function(JSONData , status) {
-
-// 										var displayValue ="게시글 제목 : "+JSONData.content.contentName+"<br/>"
-// 														+"게시글 내용 : "+JSONData.content.contentBody+"<br/>";
-										
-// 										$(".modal-body").html(displayValue);
-// 									}
-// 							});
-// 				});		
-// 			});	
-	
 	</script>
 	
 </head>
 
 <body>
 	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar Start /////////////////////////////////////-->
-	
-   	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
@@ -125,19 +99,8 @@
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 				  <div class="form-group">
-				   <%--  <select class="form-control" name="searchCondition" >
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>신고글 명</option>
-					</select> --%>
-				  </div>
 				  
-				  <%-- <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">검색어</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default">검색</button> --%>
-				  
+				  </div> 
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
@@ -146,8 +109,7 @@
 	    	
 		</div>
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		
-		
+			
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
       
@@ -157,13 +119,12 @@
             <th align="left" >글 제목</th>
             <th align="left">작성자</th>
             <th align="left">작성일</th>
-            <th align="left">검증 여부</th>
-            
-	
+            <th align="left">검증 여부</th>	
           </tr>
         </thead>
        
 		<tbody>
+		
 		<form name="refundCheck">
 			<input type="hidden" name="contentNo" value=""/>
 		</form>
@@ -176,10 +137,10 @@
 			  <td align="left">${content.userId}</td>
 			  <td align="left">${content.regDate}</td>
 			  <td align="left">
+			  
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
-			  <input type="hidden" value="${content.contentNo}"/>
-			  <div style="display: none;">${content.refundCheck}</div>
-			  검증 </button>
+				<div style="display: none;">${content.contentNo}</div>검증</button>
+			  
 			  </td>
 			  <td align="left">
 			  
@@ -213,9 +174,9 @@
 					      </div>
 					      <div class="modal-body">환불 처리 하시겠습니까?</div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					        <button type="button" class="btn btn-primary">검증 확인</button>
-					        <button type="button" class="btn btn-danger">취소</button>
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary">확인</button>
+					        
 					      </div>
 					    </div>
 					  </div> 
