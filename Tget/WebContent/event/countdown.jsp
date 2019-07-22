@@ -1,5 +1,5 @@
-﻿ <%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
@@ -12,7 +12,7 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   -->
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -41,7 +41,7 @@ $(function(){
 	    else if( distance <=0) {
 			clearInterval(x);
 			$("div").attr("style","visibility:hidden;");
-		    $("#expire").text("즐거운 관람되십시오.");
+		    $("#expire").text("");
 		} 
 	    else {
 			$("div").attr("style","visibility:visible;");
@@ -56,11 +56,6 @@ $(function(){
 	    $("#minute").text(minutes) ;
 	    $("#second").text(seconds);
 
-// 	if (distance = 0) {
-// 		    clearInterval(x);
-// 		    $("div").attr("style","visibility:hidden;");
-// 		    $("#expire").text("즐거운 관람되십시오.");
-// 		}
 	}, 1000);
 	
 	});
