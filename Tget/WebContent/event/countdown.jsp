@@ -1,5 +1,5 @@
 ﻿ <%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="UTF-8"%>
+<%@ page pageEncoding="EUC-KR"%>
 
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
