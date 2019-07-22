@@ -11,52 +11,25 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 		
-<title>추천 이벤트를 등록하세요!</title>
+<title>리뷰작성하기</title>
 
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-	
+
 	$(function(){
 		
-		$("#cancel").on("click",function(){	
+		$("button:contains('확인')").on("click",function(){	
 			window.close();
 		})	;
-		
-		$("#submit").on("click",function(){	
-			$(this).val($("#file").val());
-// 			$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/product/updateProduct").submit();
-			
-// 			$.ajax(
-// 					{
-// 						url : "/event/rest/addEventImage",
-// 						method : "POST",
-// 						data : {
-// 										eventImage : $("#file").val(),
-// 										eventName : $("#eventName").val()
-// 									},
-// 						dataType : "json",
-// 						success : function(JSONData, status){
-// 							alert(status);
-// 							alert("JSONData : \n"+JSONData.stringify());		
-// 						},
-// 						error : function(request, status, error ) {   
-// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 						}			
-// 				});		
-			
-// 			$(opener.document).find("#eventImage").val($(this).val());
-			if ("${recommEvent.eventName}"=="") {
-				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/addRecommendedEvent").submit();
-			}else{
-				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/updateRecommendedEvent").submit();
-			}
-			
-// 			window.close();
+		$("button:contains('포인트조회')").on("click",function(){	
+			window.close();
+			window.opener.location="/rnp/getPointHistory";
 		})	;
+		
 	});
 	</script>
 	<style type="text/css">
@@ -108,36 +81,23 @@
 
 <div class="container">
 	<div align="center"><h3 style="font-weight: bold;">
-		<c:if test="${empty recommEvent }">추천 이벤트를 등록하세요!</c:if>
-		<c:if test="${!empty recommEvent }">추천 이벤트를 수정하세요!</c:if>
+		리뷰 등록 완료!
 	</h3></div>
 	<form>		
+		<input type="hidden" name="tranNo" value="${tranNo }">
 		<div class="form-group">
-    		<label for="recommEventName">♥ 추천이벤트명</label>
-    		<input type="text" class="form-control" name="recommEventName" id="recommEventName" 
-    		value="${recommEvent.recommEventName }" placeholder="추천 이벤트의 이름을 입력해주세요">
- 		 </div>
+    		<label for="score">♥ 평점 </label>&nbsp; &nbsp; &nbsp;
+    		: ${review.score}.0점
+ 		 </div><br/>
  		 <div class="form-group">
-		    <label for="recommEventDetail">♥ 추천이벤트 설명</label>
-		    <textarea class="form-control" name="recommEventDetail" id="recommEventDetail"
-		    value="${recommEvent.recommEventDetail }"  rows="3">${recommEvent.recommEventDetail }</textarea>
-		 </div>
- 		 <div class="form-group">
-    		<label for="recommEventUrl">♥ 상세조회 url</label>
-    		<c:if test="${empty recommEvent }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
-    			placeholder="추천 이벤트로 등록할 페이지의 url을 입력하세요"></c:if>
-    		<c:if test="${!empty recommEvent }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
-    			value="http://127.0.0.1:8080/event/getEvent?category=&eventName=${recommEvent.eventName }"></c:if>
- 		 </div>
- 		 <div class="form-group">
-    		<label for="videoName">♥ 동영상</label>
-    		<input type="file" class="form-control" id="videoName" name="file" value="${!empty recommEvent.videoName? recommEvent.videoName : ''}">
- 		 </div>
-		
-<%-- 		eventImage  ; ${eventImage }<br/> --%>
+		    <label for="reviewBody">♥ 리뷰</label><br/>
+		    : ${review.reviewBody}
+		 </div><br/><br/>
+
+		포인트가 적립되었습니다.
 		<div align="center">
-			<button class="button_black"  id="cancel">취소</button>
-			<button class="button_black"  id="submit" >등록</button>
+			<button class="button_black"  >확인</button>
+			<button class="button_black"  >포인트조회</button>
 		</div>
 	</form>
 </div>

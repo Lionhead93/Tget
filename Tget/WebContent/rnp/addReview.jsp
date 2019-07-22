@@ -20,6 +20,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 	function submitReview(){
+		$("form").attr("method","POST").attr("action","/rnp/addReview").submit();	
 		window.opener.reload();
 		window.close();
 	}
@@ -31,26 +32,28 @@
 		})	;
 		
 		$("#submit").on("click",function(){	
+			submitReview();
+// 			$("form").attr("method","POST").attr("action","/rnp/addReview").submit();	
 // 			$(this).val($("#file").val());			
-			$.ajax(
-					{
-						url : "/rnp/rest/addReivew",
-						method : "POST",
-						data : {
-								tranNo : $("#tranNo").val(),
-								score : $("#score").val(),
-								reviewBody : $("#reviewBody").val()
-									},
-						dataType : "json",
-						success : function(JSONData, status){
-							alert(status);
-							alert("JSONData : \n"+JSONData.stringify());		
-							submitReview();
-						},
-						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}			
-				});	
+// 			$.ajax(
+// 					{
+// 						url : "/rnp/rest/addReivew",
+// 						method : "POST",
+// 						data : {
+// 								tranNo : $("#tranNo").val(),
+// 								score : $("#score").val(),
+// 								reviewBody : $("#reviewBody").val()
+// 									},
+// 						dataType : "json",
+// 						success : function(JSONData, status){
+// 							alert(status);
+// 							alert("JSONData : \n"+JSONData.stringify());		
+// // 							submitReview();
+// 						},
+// 						error : function(request, status, error ) {   
+// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 						}			
+// 				});	
 		});
 	});
 	</script>
@@ -109,7 +112,7 @@
 	<form>		
 		<input type="hidden" name="tranNo" value="${tranNo }">
 		<div class="form-group">
-    		<label for="score">♥ 평점 </label>
+    		<label for="score">♥ 평점 </label>&nbsp; &nbsp; &nbsp;
     		<select name="score">
     			<option value="5">5.0</option>
     			<option value="4">4.0</option>

@@ -114,7 +114,7 @@
 			
 			$("a:contains('∏Æ∫‰¿€º∫')").on("click",function(){
 				popWin = window.open("/rnp/addReview?tranNo=10000","popWin",
-						"left=500, top=100, width=600, height=600, "
+						"left=500, top=100, width=600, height=500, "
 						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 				
 // 				self.location = "/rnp/addReview?tranNo=10000";
