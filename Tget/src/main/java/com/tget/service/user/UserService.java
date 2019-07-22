@@ -34,11 +34,14 @@ public interface UserService {
 	public Map<String , Object> getSellerList(Search search) throws Exception;*/
 	public boolean  checknickNameDuplication(String nickName)throws Exception;
 	
+	public boolean  checkuserIdDuplication(String userId)throws Exception;
+	
 	public boolean checkcodeDuplication(String code)throws Exception;
 	
 	public User getCode(String code)throws Exception;
 	
 	public User finduserId(String phone)throws Exception;
-	
+
+	public User findPassword(String phone)throws Exception;
 	
 }

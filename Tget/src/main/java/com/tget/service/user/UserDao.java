@@ -19,10 +19,12 @@ public interface UserDao {
 		public User selectSalesGrade(String userId)throws Exception;
 		public int selectTotalCount(Search search) throws Exception ;
 		public User nickNameCheck(String nickName) throws Exception ;
+		public User userIdCheck(String userId) throws Exception ;
 		public User selectCode(String code) throws Exception;
 		public User selectnickName(String nickName)throws Exception;
+		public User selectuserId(String userId)throws Exception;
 		public User selectcode(String code)throws Exception;
 		public User finduserId(String phone) throws Exception ;
-
+		public User findPassword(String phone)throws Exception;
 
 }

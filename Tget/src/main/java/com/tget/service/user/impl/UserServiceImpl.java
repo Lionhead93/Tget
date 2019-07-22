@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.tget.common.domain.Search;
+import com.tget.service.user.TempKey;
 import com.tget.service.user.UserDao;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
@@ -32,10 +33,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void addUser(User user) throws Exception {
+	public void addUser(User user) throws Exception  {
 		userDao.insertUser(user);
 		
-	}
+	    }
+
 
 	@Override
 	public User getUser(String userId) throws Exception {
@@ -190,8 +192,32 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userDao.finduserId(phone);
 	}
+
+	@Override
+	public User findPassword(String phone) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.findPassword(phone);
+	}
+
+	@Override
+	public boolean checkuserIdDuplication(String userId) throws Exception {
+		// TODO Auto-generated method stub
+boolean result=true;
+		
+		System.out.println("userId!!!!!!!!!!!!!!!!!!!!!!!"+userId);
+		
+		User user = userDao.selectuserId(userId);
+		
+		System.out.println("user!!!!!!!!!!!!!!!!!!!!!!!"+user);
+		
+		if(user != null) {
+			result=false;
+		}
+		return result;
+	}
+	}
+
+
+
 	
 	
-	
-	
-}

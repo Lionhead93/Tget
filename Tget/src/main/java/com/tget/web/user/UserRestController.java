@@ -151,6 +151,8 @@ public class UserRestController {
 		return check;
 		
 	}      
+	
+
 	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
 	public String smsCheck(String code ){ 
 	
@@ -175,6 +177,19 @@ public class UserRestController {
 		System.out.println("/cafe/json/checknickNameDuplication : POST");
 		
 		boolean result = userService.checknickNameDuplication(user.getNickName());
+
+		System.out.println("될까?"+result);
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "json/checkuserIdDuplication", method=RequestMethod.POST)
+	public boolean checkuserIdDuplication(@RequestBody User user)throws Exception{
+		
+		System.out.println("/cafe/json/checknickNameDuplication : POST");
+		
+		boolean result = userService.checkuserIdDuplication(user.getUserId());
 
 		System.out.println("될까?"+result);
 		

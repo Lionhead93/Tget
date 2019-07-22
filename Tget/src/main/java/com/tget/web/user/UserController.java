@@ -3,9 +3,6 @@ package com.tget.web.user;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tget.common.domain.Page;
 import com.tget.common.domain.Search;
@@ -74,15 +72,19 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser( @ModelAttribute("user") User user , HttpServletRequest request) throws Exception {
+	public String addUser( @ModelAttribute("user") User user , HttpServletRequest request ) throws Exception {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
 		userService.addUser(user);
 		
+	
 		return "redirect:/user/loginView.jsp";
 		
 	}
+	
+
+
 	
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
 	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
@@ -95,6 +97,19 @@ public class UserController {
 		
 		return "forward:/user/getUser.jsp";
 	}
+	
+	@RequestMapping( value="myPage", method=RequestMethod.GET )
+	public String myPage( @RequestParam("userId") String userId , Model model ) throws Exception {
+		
+		System.out.println("/user/getUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		// Model �� View ����
+		model.addAttribute("user", user);
+		
+		return "forward:/user/myPage.jsp";
+	}
+	
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.GET )
 	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
@@ -163,7 +178,7 @@ public class UserController {
 			session.setAttribute("user", dbUser);
 				}
 		}
-		return "redirect:/index.jsp";
+		return "redirect:/";
 	}
 	/*@RequestMapping( value="login", method=RequestMethod.POST )
 	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
@@ -203,7 +218,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "redirect:/index.jsp";
+		return "redirect:/";
 	}
 	
 	@RequestMapping( value="listUser" )
