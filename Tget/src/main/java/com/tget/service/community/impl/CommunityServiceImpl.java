@@ -17,6 +17,7 @@ import com.tget.service.community.CommunityService;
 import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Report;
+import com.tget.service.community.domain.Weather;
 
 
 @Service("communityServiceImpl")
@@ -193,16 +194,7 @@ public class CommunityServiceImpl implements CommunityService{
 		return map;
 	}
 
-
-	@Override
-	public Map<String, Object> getSearchWeather(String weather) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("weather", weather );
-		
-		return map;
-	}
-
+	
 
 	@Override
 	public Reply getReply(int replyNo) throws Exception {

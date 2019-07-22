@@ -17,20 +17,20 @@ function getAlarmModal(userId) {
 						$.each(data.list,function(index, alarm){
 							
 							displayValue = "<li class='list-group-item d-flex justify-content-between align-items-center'>";
-							displayValue +=	"<small><i class='fab fa-twitter'></i>";
+							displayValue +=	"<h6><span class='text-dark'><i class='fab fa-twitter'></i>";
 							if(alarm.alarmCode==9){
 								displayValue +=	alarm.alarmKeyword
 							}
-							displayValue += "&nbsp;"+alarm.alarmBody+"</small>";						    
-							displayValue += "<div id='"+alarm.alarmNo+"'><p id='"+alarm.alarmKeyword+"'><button id='"+alarm.alarmCode+"' type='button' class='btn btn-outline-primary'>";
-							displayValue +=	"<i class='fas fa-check'></i></button>";
-							displayValue += "<a href='#' class='btn btn-outline-danger'>";
+							displayValue += "&nbsp;"+alarm.alarmBody+"</span></h6>";						    
+							displayValue += "<div id='"+alarm.alarmNo+"'><p id='"+alarm.alarmKeyword+"'><a href='#' name='check' id='"+alarm.alarmCode+"' class='btn btn-outline-primary'>";
+							displayValue +=	"<i class='fas fa-check'></i></a>";
+							displayValue += "<a name='delete' href='#' class='btn btn-outline-danger'>";
 							displayValue +=	"<i class='fas fa-trash-alt'></i></a></p></div></li>";	
 							
 						    $(".modal-body").append(displayValue);
 							
 						});	
-						$(".modal-body button").on("click",function(){
+						$("a[name='check']").on("click",function(){
 							var alarmCode = $(this).attr("id").trim();
 							var alarmNo = $(this).closest("div").attr("id").trim();
 							var alarmKeyword = $(this).closest("p").attr("id").trim();
@@ -65,7 +65,7 @@ function getAlarmModal(userId) {
 											if(alarmCode==8)
 												self.location="/";
 											if(alarmCode==9)
-												window.open("/tran/goChat?userId="+userId+"&opponentId="+alarmKeyword+"&re=res", "T-GET ì±„íŒ…" ,"width = 500, height = 500, top = 100, left = 200, location = no");
+												window.open("/tran/goChat?userId="+userId+"&opponentId="+alarmKeyword+"&re=res", "T-GET Ã¤ÆÃ" ,"width = 500, height = 500, top = 100, left = 200, location = no");
 												$("#"+alarmNo+"").closest("li").remove();
 												getNoReadAlarmCount(userId);
 										}
@@ -73,7 +73,7 @@ function getAlarmModal(userId) {
 							
 													
 						});
-						$(".modal-body a").on("click",function(){
+						$("a[name='delete']").on("click",function(){
 							var alarmNo = $(this).closest("div").attr("id").trim();
 							$.ajax(
 									{
@@ -107,7 +107,9 @@ function getNoReadAlarmCount(userId) {
 					"Content-Type" : "application/json"
 				},
 				success : function(data) {
-					$("#noReadAlarmCount").html(data.NoReadAlarmCount);
+					if(data.NoReadAlarmCount != "0"){					
+						$("#noReadAlarmCount").html(data.NoReadAlarmCount);
+					}
 				}					
 	});
 }

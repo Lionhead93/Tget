@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding//WebContent/event/countdown.jsp=UTF-8
+encoding//WebContent/event/countdown.jsp=EUC-KR
+encoding//WebContent/TgetMain.jsp=EUC-KR
+encoding//WebContent/resources/javascript/alarm.js=EUC-KR
+

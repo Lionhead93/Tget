@@ -22,46 +22,47 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>	
+ 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+ 	<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+	
 	
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		.dropbtn {
-  background-color: #7FFFD4;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #7FFFD4;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #7FFFD4;}
+			.dropbtn {
+	  background-color: #7FFFD4;
+	  color: white;
+	  padding: 16px;
+	  font-size: 16px;
+	  border: none;
+	}
+	
+	.dropdown {
+	  position: relative;
+	  display: inline-block;
+	}
+	
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #f1f1f1;
+	  min-width: 160px;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  z-index: 1;
+	}
+	
+	.dropdown-content a {
+	  color: black;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+	}
+	
+	.dropdown-content a:hover {background-color: #7FFFD4;}
+	
+	.dropdown:hover .dropdown-content {display: block;}
+	
+	.dropdown:hover .dropbtn {background-color: #7FFFD4;}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -81,7 +82,7 @@
 
 		 $(function() {
 			
-			 $( "button.btn.btn-danger:contains('글 등록하기')" ).on("click" , function() {
+			 $( "button.btn.btn-danger:contains('게시글 등록하기')" ).on("click" , function() {
 					self.location="/community/addContent"	
 				});
 			 
@@ -124,6 +125,10 @@
 					self.location="/community/getRefundList";	
 				
 				});
+			 
+	
+			 
+			 
 			 
 			// 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {
@@ -180,7 +185,7 @@
 			        }
 			        
 			    	});
-					//alert("ok");
+					alert("ok");
 				});
 		 });
 		 
@@ -212,11 +217,45 @@
 			    	});
 				});
 		 });
+ 		  
+ 		 $(function getSearchWeather(lat, lon) {
+			
+				$("button.btn.btn-info:contains('고척 스카이돔')").on("click" , function() {
+						//alert("찍혀라");
+ 								
+						$.ajax( 
+								
+								{
+									url : "/community/rest/getSearchWeather/",
+									method : "POST" ,
+// 									dataType : "json" ,
+									data : JSON.stringify({
+										lat : lat,
+										lon : lon,
+									}),
+									headers : {
+										
+										"Accept" : "application/json",
+										"Content-Type" : "application/json"
+									},
+									success : function(JSONData , status) {
+										//alert(JSONData);
+										var displayValue ="날씨 : "+JSONData.weather+"<br/>"
+														+"온도 : "+JSONData.temp+"℃<br/>"
+														+"풍속 : "+JSONData.wind+"m/s<br/>"
+														+"흐림 : "+JSONData.clouds+"%<br/>";
+										
+										$(".modal-body").html(displayValue);
+									}
+							});
+				});		
+			});	
 	</script>
 	
 </head>
 
 <body>
+	
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
@@ -265,8 +304,11 @@
 				</div>
 				
 				<button type="button" class="btn btn-danger">게시글 등록하기</button>
-	
+				
+				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">고척 스카이돔</button>
+				
 				 <div>
+				 
 		    <div class="col-md-6 text-right">
 			    <!-- <form class="form-inline" name="detailForm">
 	
@@ -355,7 +397,31 @@
  	<!-- PageNavigation Start... -->
 <%-- 	<jsp:include page="../common/pageNavigator_new.jsp"/> --%>
 	<!-- PageNavigation End... -->
+	<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-md" role="document">
+					    <div class="modal-weather">
+					      <div class="modal-header"> 
+					        <h5 class="modal-title" id="modalCenterTitle"><strong>날씨 안내</strong></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					     
+					      </div>     
+					   </div>
+					          
+					      <div class="modal-footer">
+<!-- 					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button> -->
+<!-- 					        <button type="button" class="btn btn-primary">확인</button> -->
+					        
+					      </div>
+					    </div>
+					  </div> 
+					  
+					  
 	
+
 </body>
 
 </html>
