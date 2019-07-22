@@ -173,7 +173,7 @@
 								${i.eventLocation }<br/>
 	
 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
-								티켓최저가 : ${i.ticketLowestPrice }<br/>				
+								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				
 <%-- 								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" > --%>								
 								<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
 								<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/>

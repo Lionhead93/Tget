@@ -78,25 +78,25 @@ public class ReviewAndPointRestController {
 	@RequestMapping(value="rest/addReview", method=RequestMethod.POST)
 	public Map<String,Object> addReview(@RequestBody Review review) throws Exception {
 		System.out.println("===============rest/addReview===============");
-		
+		System.out.println(review);
 		rNPService.addReview(review);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		return map;
-	}
-	
-	@RequestMapping(value="rest/updateReview", method=RequestMethod.GET)
-	public Map<String,Object> updateReview(@RequestBody int tranNo) throws Exception {
-		System.out.println("===============rest/updateReview(===============");
-		
-		Review review = rNPService.getReview(tranNo);
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("review", review);
 		
 		return map;
 	}
+	
+//	@RequestMapping(value="rest/updateReview", method=RequestMethod.GET)
+//	public Map<String,Object> updateReview(@RequestBody int tranNo) throws Exception {
+//		System.out.println("===============rest/updateReview(===============");
+//		
+//		Review review = rNPService.getReview(tranNo);
+//		
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("review", review);
+//		
+//		return map;
+//	}
 	
 	@RequestMapping(value="rest/updateReview", method=RequestMethod.POST )
 	public Map<String,Object> updateReview(@RequestBody Review review) throws Exception {
