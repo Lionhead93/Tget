@@ -178,6 +178,13 @@
 		
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('마이페이지')").on("click" , function() {
+			$(self.location).attr("href","/user/myPage?userId=${sessionScope.user.userId}");
+			});
+		});
+		
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {
 			$(self.location).attr("href","/coupon/getCoupon?userId=${sessionScope.user.userId}");
 			});
@@ -287,6 +294,7 @@
 <!-- 				           <a class="dropdown-item" href="#">로그아웃</a> -->
 				          <a class="dropdown-item" href="#">회원가입</a>
 				            <a class="dropdown-item" href="#">아이디찾기</a>
+				            <a class="dropdown-item" href="#">마이페이지</a>
 				          <a class="dropdown-item" href="#">내정보보기</a>
 				          <a class="dropdown-item" href="#">블랙리스트관리</a>
 				          <a class="dropdown-item" href="#">관심이벤트</a>

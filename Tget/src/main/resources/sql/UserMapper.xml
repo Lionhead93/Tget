@@ -123,6 +123,16 @@
 	where nickName = #{value}
 
 </select>
+
+<select id="selectuserId" resultType="string" resultMap="userSelectMap">
+	SELECT 
+		user_Id
+	FROM
+		users
+		
+		WHERE user_id = #{value}
+
+</select>
 	
 	<!-- <select id="selectCode" parameterType="string">
 	SELECT 
@@ -152,6 +162,18 @@
 	where phone = #{value}
 
 </select>
+
+	<select id="findPassword" parameterType="string" resultMap="userSelectMap">
+	   	SELECT 
+		password
+	FROM
+		users
+	where phone = #{value}
+
+</select>
+
+
+
 	
 <!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
@@ -170,6 +192,6 @@
 						</if> ) countTable						
 	 </select>
 	
-	
+
 	
 </mapper>

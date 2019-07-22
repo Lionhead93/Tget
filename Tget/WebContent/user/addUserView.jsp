@@ -134,9 +134,14 @@
 		});	
 		
 		 $(function() {
+			 
+		 
 				
 				$("button:contains('전송')").on("click" , function() {
 					alert("인증번호 전송");
+					
+					$("#inj").show();
+					
 					$.ajax({ 
 						   url: "/user/json/sendSms",
 						   data: { 
@@ -158,10 +163,12 @@
 					});
 			   
 			   $(function() {
-					
+				   var join = document.getElementById('join');
+				   
+				   
 					$("button:contains('인증')").on("click" ,function(){ 
-						//alert("오예");
-					
+						alert("오예");
+						
 				   $.ajax({ 
 					   url: "/user/json/smsCheck",
 				   data: { 
@@ -177,8 +184,12 @@
 				   
 					   alert("인증 성공");
 					   
+					   $("#inj").hide();
+					   $("#check3").show();
 					   
+					   join.disabled = false;
 					   
+					  
 					   
 				   } else if (result == "false")
 				  		 { 
@@ -196,10 +207,14 @@
 			             var pwd2=$("#password2").val();
 			             if(pwd1 != "" || pwd2 != ""){
 			                 if(pwd1 == pwd2){
+			                	 
+			                 	$("#check1").show();
 			                     $("#alert-success").show();
 			                     $("#alert-danger").hide();
 			                     $("#submit").removeAttr("disabled");
 			                 }else{
+			                	 
+			                	 $("#check1").hide();	
 			                     $("#alert-success").hide();
 			                     $("#alert-danger").show();
 			                     $("#submit").attr("disabled", "disabled");
@@ -214,12 +229,52 @@
 			     $(function() {
 						
 						$("button:contains('가 입')").on("click" , function() {
-							//alert("오예");
+							alert("오예");
 						 fncAddUser(); 
 						 
 						
 						});
 					});	 
+			     
+			     
+			     function fncAddUser() {
+						
+						var id=$("input[name='userId']").val();
+						var pw=$("input[name='password']").val();
+						var pw_confirm=$("input[name='password2']").val();
+						var name=$("input[name='userName']").val();
+						
+						
+						if(id == null || id.length <1){
+							alert("아이디는 반드시 입력하셔야 합니다.");
+							return;
+						}
+						if(pw == null || pw.length <1){
+							alert("패스워드는  반드시 입력하셔야 합니다.");
+							return;
+						}
+						if(pw_confirm == null || pw_confirm.length <1){
+							alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+							return;
+						}
+						if(name == null || name.length <1){
+							alert("이름은  반드시 입력하셔야 합니다.");
+							return;
+						}
+						
+						if( pw != pw_confirm ) {				
+							alert("비밀번호 확인이 일치하지 않습니다.");
+							$("input:text[name='password2']").focus();
+							return;
+						}
+				
+						
+						$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+					}
+			     
+			     
+			     
+			     
 				  /* $(function() {
 						//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 						$("a:contains('취 소')").on("click" , function() {
@@ -280,7 +335,10 @@
 															$("#check")
 																.append(
 																"<strong class=\"text-success\">사용 가능합니다.</strong>");
+															$("#check2").show();
 														} else {
+															
+															$("#check2").hide();
 															$("#check").children("strong")
 																	.remove();
 															$("#check")
@@ -288,6 +346,8 @@
 																"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
 														}
 													if (inputed == "") {
+														
+														$("#check2").hide();
 														$("#check").children("strong")
 															.remove();
 														$("#check")
@@ -301,8 +361,63 @@
 
 											});
 			     
+/* 
+					 $(function() {
 
-		
+							$("input[name='userId']").on('keyup',function() {
+
+								var inputed = $("input[name='userId']").val();
+												
+
+								
+								$.ajax({
+								url : "/user/json/checknickNameDuplication",
+								method : "POST",
+								dataType : "json",
+									headers : {
+										"Accept" : "application/json",
+									"Content-Type" : "application/json"
+												},
+											data : JSON.stringify({
+												nickName : inputed,
+												}),
+
+											success : function(JSONData) {
+																//alert(JSONData); 
+																//alert(typeof(JSONData));
+
+												if (JSONData && inputed != "") {
+													$("#check").children("strong")
+														.remove();
+															$("#check")
+																.append(
+																"<strong class=\"text-success\">사용 가능합니다.</strong>");
+															$("#check2").show();
+														} else {
+															
+															$("#check2").hide();
+															$("#check").children("strong")
+																	.remove();
+															$("#check")
+																.append(
+																"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
+														}
+													if (inputed == "") {
+														
+														$("#check2").hide();
+														$("#check").children("strong")
+															.remove();
+														$("#check")
+																.append(
+																		"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
+													}
+													}
+
+												});
+											});
+
+											}); */
+			     
 		
 	  
 	
@@ -332,8 +447,8 @@
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">아이디</label>
 		    <div class="col-sm-4">
 		      <td>
-	    <input type="text" name="userId" maxlength="15">@
-		 <select name="userId2">
+	    <input type="text" name="userId" id="userId" maxlength="15">@
+		 <select name="userId2" id="userId2" >
 		      <option  id = "ig" value="@naver.com">naver.com</option>
 		      <option  id = "ig" value="@daum.net">daum.net</option>
 		      <option  id = "ig" value="@nate.com">nate.com</option>
@@ -354,9 +469,10 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
+		    <img src="/resources/images/check.jpg" width="25" height="25" id="check1" style="display:none;"/> <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+		      
 		    </div>
 		  </div>
 		  
@@ -380,6 +496,7 @@
 		  </div>
 		  
 		  <div class="form-group">
+		  <img src="/resources/images/check.jpg" width="25" height="25" id="check2" style="display:none;"/>
 		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
@@ -393,6 +510,7 @@
 		
 		  
 		  <div class="form-group">
+		  <img src="/resources/images/check.jpg" width="25" height="25" id="check3" style="display:none;"/>
 		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-primary">전송</button>
@@ -401,9 +519,9 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="sms" class="col-sm-offset-1 col-sm-3 control-label">인증번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="sms" name="sms" placeholder="인증번호">
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
+		    <div class="col-sm-4" id="inj" style="display:none">
+		      <input type="text" class="form-control" id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
 		      <button type="button" class="btn btn-primary">인증</button>
 		    </div>
 		  </div>
@@ -421,8 +539,8 @@
 		        <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">위치정보문의</label>
 		    <div class="col-sm-4">
-		     <input type="checkbox" id= "local" name="local" value="1" checked="checked"> 동의
-		     <input type="checkbox" id= "local" name="local" value="2"> 비동의
+		     <input type="radio" id= "local" name="local" value="1" checked="checked"> 동의
+		     <input type="radio" id= "local" name="local" value="2"> 비동의
 		    </div>
 		  </div>
 		  
@@ -439,7 +557,7 @@
 	
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button id= "join" type="button" class="btn btn-primary">가 입</button>
+		      <button id= "join" type="button" class="btn btn-primary" disabled="disabled" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
 			 
 			  
