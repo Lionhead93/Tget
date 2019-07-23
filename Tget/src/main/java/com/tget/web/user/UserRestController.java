@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,12 +24,15 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tget.common.domain.Search;
 import com.tget.service.user.Config;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
@@ -226,16 +231,19 @@ public class UserRestController {
 		return result;
 		
 	}
-	@RequestMapping( value="json/login", method=RequestMethod.POST )
-	public String login(String userId,  HttpSession session) throws Exception{
+	@RequestMapping( value="json/login")
+	public Map<String,Object> login(String userId, Model model) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
-		
+		Map<String,Object> map = new HashMap<String,Object>();
 		User user = userService.getUser(userId);
 		
+		
+		System.out.println("ㅁㄷ"+user);
 		if (user==null){
-			return "no";
+			map.put("msg",  "no");
+			return map;
 		}
 		
 		System.out.println("뭐가 들어왔니?"+user);
@@ -246,15 +254,26 @@ public class UserRestController {
 		System.out.println("오늘은"+today);
 		System.out.println("유저 블랙리스트오니"+end);
 	
-		session.setAttribute("user", user);
+	
 		
 		if( end != null  &&
 				today.getTime() <= end.getTime() ) {
+			
+//			model.addAttribute("user", user);
+			map.put("msg", "true");
+			map.put("nickName", user.getNickName()+"님은 블랙리스트 상태입니다.");
+			map.put("startDate", user.getBlacklistStartDate().toLocaleString());
+			map.put("endDate", user.getBlacklistEndDate().toLocaleString());
+	
+			System.out.println("으으응?"+user.getBlacklistEndDate());
+			System.out.println(user);
 				System.out.println("이새키 블랙이다");
-				return "true";
+				
+				return map;
 		}
 		else {
-			return "false";
+			map.put("msg", "false");
+			return map;
 		}
 
 	}

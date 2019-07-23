@@ -17,6 +17,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -73,7 +74,7 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button:contains('로그인')").on("click" , function() {
 				
-				alert("눌리니");
+				//alert("눌리니");
 				
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
@@ -98,22 +99,22 @@
 					   userId: $("#userId").val(), 
 					   }, 
 					   type: "post", 
-				   success: function(result){ 
-					   console.log(result);
+					   dataType: "json",
+				   success: function(JSONData){ 
+					   console.log(JSONData);
 					   
-					   if (result == "no") {
+					   if (JSONData.msg == "no") {
 							  alert("ID/password error");
-				  		 }
-			
-					   
-					   if (result == "true") { 
-						   
+				  		 }else if (JSONData.msg == "true") { 
+						
 						  $('#black').modal('show');
-						//  alert("응 너 블랙이야~");
 						  
-						   
-						   
-					   } else if (result == "false")
+						// alert("응 너 블랙이야~");
+						 $("#nickName").text(JSONData.nickName);
+						 $("#startDate").text(JSONData.startDate);
+						 $("#endDate").text(JSONData.endDate);
+						 
+					   } else if (JSONData.msg == "false")
 					  		 { 
 						   $("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 					  	 	
@@ -195,43 +196,41 @@
 				  <div class="modal-dialog modal-lg" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				       <h5 class="modal-title" id="modalCenterTitle">${user.userId}님은 블랙리스트 상태입니다.</h5>
+				       <h5 class="modal-title" id="modalCenterTitle"><p id="nickName"></p></h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				
 					      </div>
-					      </div>
+					     
 					      
 					     <div class="form-group">
 		    <label for="blacklistStartDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 시작일자</label>
 		    <div class="col-sm-4">
-		   ${user.blacklistStartDate}
+		
+		   <p id="startDate"></p>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		   <label for="blacklistStartDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 종료일자</label>
-		    <div class="col-sm-4"><div class="col-sm-4">
-		     ${user.blacklistEndDate}		      
+		   <label for="blacklistEndDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 종료일자</label>
+		    <div class="col-sm-4">
+		     <p id="endDate"></p>
 		    </div>
 		  </div>
-      <div class="modal-footer">	      
+    		  <div class="modal-footer">	      
         <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
-	
-	
-	
-	   </div>
-				  </div>	   
-  </div>
-			  </div>  
-			  
-			     
+	   	    	</div>
+
+
+				   </div>
+	  </div>
+		 </div>  
+		
 	</form>
-			  
-			
-			  </div>
-		  </div> 
+	 </div>
+	  </div>
+	  
 </html>		
 			
 				<!-- <div id="naverIdLogin" align="center">
@@ -248,7 +247,7 @@
 			
 			
 			
-					<!-- <a id="custom-login-btn" href="javascript:loginWithKakao()">
+					<!-- <a id="custom-login-btn" href="avascript:loginWithKakao()">
 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
 </a> -->
 <!-- <script type='text/javascript'>

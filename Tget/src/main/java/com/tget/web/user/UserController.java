@@ -196,45 +196,18 @@ public class UserController {
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		if(user.getUserId()!=null) {
+		if(user.getUserId()!=null) {                                                                     
 		
 			if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 				}
 			
 		}
+
 		return "redirect:/";
 	}
-	/*@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
-		
-		System.out.println("/user/login : POST");
-		
-		
-		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-		DateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		String day = sdFormat.format(today);
-		String dday = sdFormat2.format(dbUser.getBlacklistEndDate());
-		
-		User dbUser=userService.getUser(user.getUserId());
-		
-		
-			if(dbUser.getBlacklistEndDate()== null &&
-					user.getPassword().equals(dbUser.getPassword())) {
-		
-				session.setAttribute("user", dbUser);
-			
-				return "redirect:/";
-			}
-					
-					
-					if(dbUser.getBlacklistEndDate()!= null &&
-							today.getTime() <= end.getTime() ) {
-						
-						return "forward:/user/x.jsp";
-					}
-					return "redirect:/";
-		}*/
+	
+
 	
 	@RequestMapping( value="logout", method=RequestMethod.GET )
 	public String logout(HttpSession session ) throws Exception{
