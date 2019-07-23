@@ -23,9 +23,11 @@ $( function(){
 	});
 });
 $( function(){
-	$("a:contains('이벤트관리')").on("click",function(){
+	
+	$("a:contains('관리자페이지')").on("click",function(){
 		self.location = "/event/getEventManage";
 	});
+	
 	$("a:contains('관심이벤트')").on("click",function(){		
 		self.location = "/event/getInterestedEventList";
 	});
@@ -43,13 +45,17 @@ $( function(){
 });	
 $( function(){	
 	$("a:contains('리뷰작성')").on("click",function(){
-		self.location = "/rnp/";
+		popWin = window.open("/rnp/addReview?tranNo=10002","popWin",
+				"left=500, top=100, width=600, height=500, "
+				+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+		
+//			self.location = "/rnp/addReview?tranNo=10000";
 	});
 	$("a:contains('내리뷰조회')").on("click",function(){
-		self.location = "/rnp/";
+		self.location = "/rnp/getReviewList";
 	});
 	$("a:contains('내평점조회')").on("click",function(){
-		self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
+		self.location = "/rnp/getSellerEstimationList?sellerId="+session.user.userId;
 	});
 	$("a:contains('포인트내역조회')").on("click",function(){
 		self.location = "/rnp/";
@@ -143,7 +149,8 @@ $(function() {
 				<ul class="links">
 					<li>
 					      <div class="text-center"><strong><i class="fas fa-user-circle"></i>&nbsp;Event</strong></div>
-				          <a href="#">이벤트관리</a>
+				           <c:if test="${user.role == 2 }"><a href="#">관리자페이지</a></c:if>		
+				          <a href="#">관심이벤트</a>
 				    </li>     																				
 					
 				</ul>
