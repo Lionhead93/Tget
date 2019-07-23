@@ -66,7 +66,7 @@
  		} 
 	</style>
 <body>	
-<jsp:include page="/layout/toolbar.jsp" />
+
 
 <form>
 	<div class="container-fluid" align="center">	

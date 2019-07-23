@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.user.domain.User;
 import com.tget.service.event.EventService;
 import com.tget.service.rnp.RNPDao;
 import com.tget.service.rnp.RNPService;
@@ -53,5 +54,19 @@ public class RNPServiceImpl implements RNPService{
 	public Review getReview(int tranNo) throws Exception{
 		return rNPDao.selectReview(tranNo);
 	}
+	
+	public void updatePoint(User user) throws Exception{
+		rNPDao.updatePoint(user);
+	}
+	
+	public int getPointHistoryCount(String userId) throws Exception{
+		return rNPDao.selectPointHistoryCount(userId);
+	}
+	
+	
+	
+//	public  PointHistory getPointHistoryByTranNo(int tranNo)  throws Exception{
+//		return null;
+//	}
 	
 }

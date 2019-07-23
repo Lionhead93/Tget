@@ -32,11 +32,36 @@
 <!-- 							#{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE ) -->
 <!-- 	 </insert> -->
 
-	<select 	id="selectPointHistory"	parameterType="string"	resultMap="pointHistorySelectMap">
+	<select 	id="selectLatestPointHistory"	parameterType="string"	resultType="int">
+		SELECT vt.*, ROWNUM
+	 	 FROM		(SELECT
+							point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point
+							FROM point_history
+							WHERE user_id = #{userId}
+							ORDER BY reg_date DESC) vt
+		 WHERE ROWNUM &lt;= 1
+	 </select>
+	 
+<!-- 	 <select 	id="selectPointHistoryByTranNo"	parameterType="int" resultMap="pointHistorySelectMap"> -->
+<!-- 		SELECT -->
+<!-- 					point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point -->
+<!-- 					FROM point_history -->
+<!-- 					WHERE tran_no = #{tranNo} -->
+<!-- 	 </select> -->
+	 
+	 <select 	id="selectPointHistory"	parameterType="string"	resultMap="pointHistorySelectMap">
 		SELECT
 		point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point
 		FROM point_history
 		WHERE user_id = #{userId}
+	 </select>
+	 
+	 <select 	id="selectPointHistoryCount"	parameterType="string"	resultType="int">
+		SELECT COUNT(*) 
+		FROM (SELECT
+						point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point
+						FROM point_history
+						WHERE user_id = #{userId})  countTable	
 	 </select>
 	 
 	 <insert 	id="insertPointHistory"		parameterType="pointHistory" >
@@ -70,6 +95,14 @@
 	 		review_reg_date = SYSDATE
 		</set>
 		WHERE tran_no = #{tranNo}
+	 </update>
+	 
+	 <update	id="updatePoint"  parameterType="user" >
+	 	UPDATE users 
+	 	<set>
+	 		point	= #{point}
+		</set>
+		WHERE user_id = #{userId}
 	 </update>
 	 
 <!-- 	<select 	id="selectTranList"	parameterType="int"	resultMap="reviewSelectMap"> -->

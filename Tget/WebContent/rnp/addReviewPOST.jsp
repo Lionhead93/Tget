@@ -25,10 +25,13 @@
 		$("button:contains('확인')").on("click",function(){	
 			window.close();
 		})	;
+		
 		$("button:contains('포인트조회')").on("click",function(){	
 			window.close();
 			window.opener.location="/rnp/getPointHistory";
 		})	;
+		
+		
 		
 	});
 	</script>
@@ -42,7 +45,7 @@
 		}
 	 div.container{
 	 	padding: 20px;
-	 	font-family: 'Sunflower', sans-serif;
+/* 	 	font-family: 'Sunflower', sans-serif; */
 	 	font-size:  20px;   
 	 	width: 500px;
 	 }
@@ -93,11 +96,15 @@
 		    <label for="reviewBody">♥ 리뷰</label><br/>
 		    : ${review.reviewBody}
 		 </div><br/><br/>
-
-		포인트가 적립되었습니다.
+		<c:if test="${!empty updatePoint }">
+			${ updatePoint }포인트가 적립되었습니다.
+		</c:if>
+		
 		<div align="center">
 			<button class="button_black"  >확인</button>
-			<button class="button_black"  >포인트조회</button>
+			<c:if test="${!empty updatePoint }">
+				<button class="button_black"  >포인트조회</button>
+			</c:if>
 		</div>
 	</form>
 </div>

@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tget.service.rnp.RNPService;
+import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.ticket.TicketService;
+import com.tget.service.transaction.TranService;
+import com.tget.service.transaction.domain.Transaction;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
 
@@ -35,6 +39,11 @@ public class ReviewAndPointController {
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 		
+		@Autowired
+		@Qualifier("tranServiceImpl")
+		private TranService tranService;
+		
+		
 		///C
 		public ReviewAndPointController(){
 			System.out.println(this.getClass());
@@ -42,10 +51,15 @@ public class ReviewAndPointController {
 
 		///M	
 		@RequestMapping(value="getPointHistory")
-		public String getPointHistory(HttpServletRequest request, Model model) throws Exception {
+		public String getPointHistory(HttpSession session, HttpServletRequest request, Model model) throws Exception {
 			System.out.println("===============getPointHistory===============");
 			
-			rNPService.getPointHistory(request.getParameter("userId"));
+			User user = (User)session.getAttribute("user");
+			System.out.println(rNPService.getPointHistoryCount(user.getUserId()));
+			
+			if (rNPService.getPointHistoryCount(user.getUserId()) != 0 ) {
+				rNPService.getPointHistory(user.getUserId());
+			}
 			
 			return "forward:/rnp/getPointHistory.jsp";
 			
@@ -78,25 +92,45 @@ public class ReviewAndPointController {
 		public String addReview(@RequestParam int tranNo,Model model) throws Exception {
 			System.out.println("===============addReview GET===============");	
 			
+			
 			model.addAttribute("tranNo",tranNo);
+//			model.addAttribute("updatePoint", transaction.getTotalPrice()*0.01);
+//			System.out.println("=============end============");
 			return "forward:/rnp/addReview.jsp";
 		}
 		
 		@RequestMapping(value="addReview", method=RequestMethod.POST)
-		public String addReview(@ModelAttribute("review") Review review, Model model) throws Exception {
+		public String addReview(@ModelAttribute("review") Review review,HttpSession session, Model model) throws Exception {
 			System.out.println("===============addReview===============");
+			System.out.println(review);
 			
-			rNPService.addReview(review);
+//			rNPService.addReview(review);
+			User user = (User)session.getAttribute("user");
+			String userId =user.getUserId();
+		
+			int updatePoint = tranService.getTran(review.getTranNo()).getTotalPrice()/100;
+		
+			PointHistory pointHistory = new PointHistory();
+			pointHistory.setPointUpdateCode("0");
+			pointHistory.setUpdatePoint(updatePoint);
+			pointHistory.setUserId(userId);
+			pointHistory.setTotalPoint(user.getPoint()+updatePoint);
+			user.setPoint(user.getPoint()+updatePoint);
+			
+			rNPService.addPoint(pointHistory);
+			rNPService.updatePoint(user);
+			
 			model.addAttribute("review", review);
 			model.addAttribute("tranNo", review.getTranNo());
+			model.addAttribute("updatePoint", updatePoint);
 			
 			return "forward:/rnp/addReviewPOST.jsp";
 		}
 		
 		@RequestMapping(value="updateReview", method=RequestMethod.GET)
 		public String updateReview(@RequestParam int tranNo, Model model) throws Exception {
-			System.out.println("===============updateReview(===============");
-			
+			System.out.println("===============updateReview===============");
+
 			Review review = rNPService.getReview(tranNo);
 		
 			model.addAttribute("tranNo", tranNo);
@@ -104,4 +138,18 @@ public class ReviewAndPointController {
 			
 			return "forward:/rnp/addReview.jsp";
 		}
+		
+		@RequestMapping(value="updateReview", method=RequestMethod.POST)
+		public String updateReview(@ModelAttribute("review") Review review, Model model) throws Exception {
+			System.out.println("===============updateReview===============");
+			System.out.println(review);
+			
+			rNPService.updateReview(review);
+			
+			model.addAttribute("review", review);
+			model.addAttribute("tranNo", review.getTranNo());
+			return "forward:/rnp/addReviewPOST.jsp";
+		}
+		
+		
 }

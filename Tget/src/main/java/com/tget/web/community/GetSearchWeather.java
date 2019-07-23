@@ -24,23 +24,25 @@ public class GetSearchWeather {
 
 	public static Weather getSearchweather(Weather weather)throws Exception{
 		
-		HttpClient httpClient = new DefaultHttpClient();
 		
+		String lon = "126.867240";  //경도
+        String lat = "37.498424";
+		//HttpClient httpClient = new DefaultHttpClient();
+		//weather.getLat() weather.getLon()
 		String urlstr = "http://api.openweathermap.org/data/2.5/weather?"
-                + "lat="+weather.getLat()+"&lon="+weather.getLon()
+                + "lat="+lat+"&lon="+lon
                 +"&appid=84ac436b251ba211b816950cd0b486d8";
 		
-		HttpGet httpGet = new HttpGet(urlstr);
+		//HttpGet httpGet = new HttpGet(urlstr);
 		
-		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type" , "application/json");
+		//httpGet.setHeader("Accept", "application/json");
+		//httpGet.setHeader("Content-Type" , "application/json");
 		
         try{
             //고척 스타디움 위도와 경도
-            String lon = "126.867240";  //경도
-            String lat = "37.498424";   //위도 
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
+               //위도 
+            //HttpResponse httpResponse = httpClient.execute(httpGet);
+            //HttpEntity httpEntity = httpResponse.getEntity();
             //OpenAPI URL
             
             URL url = new URL(urlstr);
@@ -49,7 +51,7 @@ public class GetSearchWeather {
             String result="";
 
             //날씨 정보를 받아온다
-            InputStream is = httpEntity.getContent();
+            //InputStream is = httpEntity.getContent();
             bf = new BufferedReader(new InputStreamReader(url.openStream()));
 
             //버퍼에 있는 정보를 문자열로 변환한다

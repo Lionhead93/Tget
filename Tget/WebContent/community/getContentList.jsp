@@ -16,19 +16,33 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>T-GET</title>
 
-	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/css/videoBox.css" />
+		<link rel="stylesheet" href="/resources/css/main.css" />
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
- 	<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+				
+		<script src="/resources/javascript/common.js" ></script>
+		<script src="/resources/javascript/alarm.js" ></script>
+		<script src="/resources/javascript/jquery.min.js"></script>
+		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+		<script src="/resources/javascript/skel.min.js"></script>
+		<script src="/resources/javascript/util.js"></script>
+		<script src="/resources/javascript/main.js"></script>	
 	
 	
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+	
+	body {
+            margin-top: 70px;
+            
+       }
 			.dropbtn {
 	  background-color: #7FFFD4;
 	  color: white;
@@ -220,7 +234,7 @@
  		  
  		 $(function getSearchWeather(lat, lon) {
 			
-				$("button.btn.btn-info:contains('고척 스카이돔')").on("click" , function() {
+				$("button.btn.btn-info:contains('날씨 안내')").on("click" , function() {
 						//alert("찍혀라");
  								
 						$.ajax( 
@@ -256,12 +270,12 @@
 
 <body>
 	
-	<jsp:include page="/layout/toolbar.jsp" />
+	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>전체 게시글 목록 조회</h3>
+	       <h3>Community</h3>
 	       
 	    </div>
 	    
@@ -273,39 +287,39 @@
 		    		전체  ${totalCount } 건수
 		    	</p>
 		    
-		    	<div class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				   	게시판 선택
-				  </button>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <a class="dropdown-item" id="boardCode0" href="#">공지사항</a>
-				    <a class="dropdown-item" id="boardCode1" href="#">자유게시판</a>
-				    <a class="dropdown-item" id="boardCode2" href="#">고객센터</a>
-				  </div>
-				</div>
+<!-- 		    	<div class="dropdown"> -->
+<!-- 				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 				   	게시판 선택 -->
+<!-- 				  </button> -->
+<!-- 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+<!-- 				    <a class="dropdown-item" id="boardCode0" href="#">공지사항</a> -->
+<!-- 				    <a class="dropdown-item" id="boardCode1" href="#">자유게시판</a> -->
+<!-- 				    <a class="dropdown-item" id="boardCode2" href="#">고객센터</a> -->
+<!-- 				  </div> -->
+<!-- 				</div> -->
 				
-				<div class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				   	게시글 선택
-				  </button>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				   <c:if test="${sessionScope.user.role == '2'}">
-				    <a class="dropdown-item" id="contentCode0" href="#">티켓 거래 공지</a>
-				    <a class="dropdown-item" id="contentCode1" href="#">자유게시판 이용 공지</a>
-				    <a class="dropdown-item" id="contentCode2" href="#">자주 묻는 질문</a>
-				    </c:if>
+<!-- 				<div class="dropdown"> -->
+<!-- 				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 				   	게시글 선택 -->
+<!-- 				  </button> -->
+<!-- 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+<%-- 				   <c:if test="${sessionScope.user.role == '2'}"> --%>
+<!-- 				    <a class="dropdown-item" id="contentCode0" href="#">티켓 거래 공지</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode1" href="#">자유게시판 이용 공지</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode2" href="#">자주 묻는 질문</a> -->
+<%-- 				    </c:if> --%>
 				    
-				    <a class="dropdown-item" id="contentCode3" href="#">삽니다</a>
-				    <a class="dropdown-item" id="contentCode4" href="#">팝니다</a>
-				    <a class="dropdown-item" id="contentCode5" href="#">수다방</a>
-				    <a class="dropdown-item" id="contentCode6" href="#">1:1 문의하기</a>
-				    <a class="dropdown-item" id="contentCode7" href="#">환불 게시판</a> 
-				  </div>
-				</div>
+<!-- 				    <a class="dropdown-item" id="contentCode3" href="#">삽니다</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode4" href="#">팝니다</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode5" href="#">수다방</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode6" href="#">1:1 문의하기</a> -->
+<!-- 				    <a class="dropdown-item" id="contentCode7" href="#">환불 게시판</a>  -->
+<!-- 				  </div> -->
+<!-- 				</div> -->
 				
 				<button type="button" class="btn btn-danger">게시글 등록하기</button>
 				
-				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">고척 스카이돔</button>
+				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>
 				
 				 <div>
 				 

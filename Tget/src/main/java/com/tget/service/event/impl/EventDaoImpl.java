@@ -12,9 +12,12 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -377,4 +380,44 @@ public class EventDaoImpl implements EventDao {
 		sqlSession.delete("EventMapper.deleteInterestedEventAll",userId);
 	}
 	
+	
+	public String translate(String sourceLang, String targetLang,String queryText) throws Exception{
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
+		HttpPost httpPost = new HttpPost(url);
+//		httpPost.setHeader("Authorization", "Bearer AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A");
+		httpPost.setHeader("Content-Type", "application/json");
+				
+		JSONObject json = new JSONObject();
+		json.put("q", queryText);
+		json.put("source", sourceLang);
+		json.put("target", targetLang);
+//		json.put("source", "en");
+//		json.put("target", "ko");
+		json.put("format", "text");
+		
+		HttpEntity httpEntity01 = new StringEntity(json.toString(),"utf-8");
+
+		httpPost.setEntity(httpEntity01);
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+			
+		HttpEntity httpEntity = httpResponse.getEntity();
+		
+		//System.out.println(httpResponse);
+		
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		//System.out.println(jsonobj);
+		
+		JSONObject data = (JSONObject) jsonobj.get("data");
+		JSONArray tran = (JSONArray) data.get("translations");
+		JSONObject tranText = (JSONObject) tran.get(0);
+		String result = (String) tranText.get("translatedText");
+		
+		return result;
+	}
 }

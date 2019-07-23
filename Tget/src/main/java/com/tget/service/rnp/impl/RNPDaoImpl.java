@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.user.domain.User;
 import com.tget.common.domain.Search;
 import com.tget.service.event.EventDao;
 import com.tget.service.rnp.RNPDao;
@@ -69,7 +70,17 @@ public class RNPDaoImpl implements RNPDao {
 		sqlSession.update("RNPMapper.updateReview",review);
 	}
 	
-
+	public void updatePoint(User user) throws Exception{
+		sqlSession.update("RNPMapper.updatePoint",user);
+	}
+	
+	public int selectPointHistoryCount(String userId) throws Exception{
+		return sqlSession.selectOne("RNPMapper.selectPointHistoryCount",userId);
+	}
+	
+//	public  PointHistory selectPointHistoryByTranNo(int tranNo)  throws Exception{
+//		return null;
+//	}
 	
 	
 }

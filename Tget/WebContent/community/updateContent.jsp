@@ -126,19 +126,19 @@ $(function() {
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
-		    <label for="boardCode" class="col-sm-offset-1 col-sm-3 control-label">게시판 코드</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="boardCode" name="boardCode" value="${content.boardCode}">
-		    </div>
-		  </div> 
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="boardCode" class="col-sm-offset-1 col-sm-3 control-label">게시판 코드</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="boardCode" name="boardCode" value="${content.boardCode}"> --%>
+<!-- 		    </div> -->
+<!-- 		  </div>  -->
 		  
-		 <div class="form-group">
-		    <label for="contentCode" class="col-sm-offset-1 col-sm-3 control-label">게시글 코드</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentCode" name="contentCode" value="${content.contentCode}">
-		    </div>
-		  </div> 
+<!-- 		 <div class="form-group"> -->
+<!-- 		    <label for="contentCode" class="col-sm-offset-1 col-sm-3 control-label">게시글 코드</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="contentCode" name="contentCode" value="${content.contentCode}"> --%>
+<!-- 		    </div> -->
+<!-- 		  </div>  -->
 		  
 		   
 		  <!-- 

@@ -130,10 +130,11 @@ public class CommuityController {
 			System.out.println("/community/getContent: GET");
 			
 			Content content = communityService.getContent(contentNo);
-
+			
 			//Model객체를 이용해서 View로 데이터 전달
+			
 			model.addAttribute("content", content);
-			//System.out.println("menu : "+menu);
+			model.addAttribute("reply", new Reply());
 			
 			return "forward:/community/getContent.jsp";
 		}

@@ -1,5 +1,6 @@
 package com.tget.service.community;
 
+import java.util.List;
 import java.util.Map;
 
 import com.tget.common.domain.Search;
@@ -44,7 +45,7 @@ public interface CommunityService {
 		public Map<String,Object> getContentList(Search search) throws Exception;
 		
 		// 댓글 리스트 조회
-		public Map<String,Object> getReplyList(Search search) throws Exception;
+		public List<Reply> getReplyList(Reply reply) throws Exception;
 		
 		// 신고 리스트 조회
 		public Map<String,Object> getReportList(Search search) throws Exception; //getTotalCount, getReportList 

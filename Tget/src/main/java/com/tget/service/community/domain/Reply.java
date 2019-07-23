@@ -6,7 +6,7 @@ public class Reply {
 	
 	private int replyNo;
 	private String userId;
-	private String userNickName;
+	private String userNickname;
 	private int contentNo;
 	private String replyBody;
 	private Date regDate;
@@ -23,11 +23,11 @@ public class Reply {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserNickName() {
-		return userNickName;
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setUserNickName(String userNickName) {
-		this.userNickName = userNickName;
+	public void setUserNickName(String userNickname) {
+		this.userNickname = userNickname;
 	}
 	public int getContentNo() {
 		return contentNo;
@@ -50,7 +50,7 @@ public class Reply {
 	
 	@Override
 	public String toString() {
-		return "Reply [replyNo=" + replyNo + ", userId=" + userId + ", userNickName=" + userNickName + ", contentNo="
+		return "Reply [replyNo=" + replyNo + ", userId=" + userId + ", userNickname=" + userNickname + ", contentNo="
 				+ contentNo + ", replyBody=" + replyBody + ", regDate=" + regDate + "]";
 	}
 	

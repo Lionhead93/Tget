@@ -57,12 +57,9 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Override
 	public void addReply(Reply reply) throws Exception {
-		// TODO Auto-generated method stub
+		
 		communityDao.InsertReply(reply);
 	}
-	
-	
-
 
 	@Override
 	public Content getContent(int contentNo) throws Exception {
@@ -76,11 +73,11 @@ public class CommunityServiceImpl implements CommunityService{
 		return communityDao.selectReport(reportNo);
 	}
 	
-/*	@Override
-	public List<Reply> getReply(int replyNo) throws Exception {
+	@Override
+	public Reply getReply(int replyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return communityDao.selectListReply(replyNo);
-	}*/
+		return communityDao.selectReply(replyNo);			
+	}
 
 
 	@Override
@@ -98,16 +95,16 @@ public class CommunityServiceImpl implements CommunityService{
 
 
 	@Override
-	public Map<String, Object> getReplyList(Search search) throws Exception {
+	public List<Reply> getReplyList(Reply reply) throws Exception {
 		// TODO Auto-generated method stub
-		List<Reply> list= communityDao.selectListReply(search);
-		int totalCount = communityDao.selectTotalCount(search);
+		return communityDao.selectListReply(reply);
+		//int totalCount = communityDao.selectTotalCount(search);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list );
-		map.put("totalCount", totalCount);
-		
-		return map;
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("list", list );
+//		map.put("totalCount", totalCount);
+//		
+//		return map;
 	}
 
 
@@ -136,9 +133,6 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		return map;
 	}
-	
-	
-
 
 	@Override
 	public void updateContent(Content content) throws Exception {
@@ -148,7 +142,7 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Override
 	public void updateReply(Reply reply) throws Exception {
-		// TODO Auto-generated method stub
+		
 		communityDao.updateReply(reply);
 	}
 	
@@ -161,7 +155,7 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Override
 	public void deleteReply(int replyNo) throws Exception {
-		// TODO Auto-generated method stub
+		
 		communityDao.deleteReply(replyNo);
 	}
 	
@@ -193,12 +187,4 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		return map;
 	}
-
-	
-
-	@Override
-	public Reply getReply(int replyNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 }

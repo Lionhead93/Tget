@@ -49,10 +49,10 @@ public class CommunityDaoImpl implements CommunityDao{
 		return sqlSession.selectOne("CommunityMapper.selectContent", contentNo);
 	}
 	
-	/*@Override
+	@Override
 	public Reply selectReply(int replyNo) throws Exception {
 		return sqlSession.selectOne("CommunityMapper.selectReply", replyNo);
-	}*/
+	}
 	
 	@Override
 	public Report selectReport(int reportNo) throws Exception {
@@ -118,16 +118,10 @@ public class CommunityDaoImpl implements CommunityDao{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("CommunityMapper.selectListRefund", search);
 	}
-	
-	@Override
-	public List<Reply> selectListReply(Search search) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("CommunityMapper.selectListReply", search);
-	}
 
 	@Override
-	public List<Reply> selectListReply(int replyNo) throws Exception {
+	public List<Reply> selectListReply(Reply reply) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("CommunityMapper.selectListReply", reply);
 	}
 }

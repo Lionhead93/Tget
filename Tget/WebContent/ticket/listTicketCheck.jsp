@@ -56,11 +56,11 @@
 	
 	 <div class="text-center">
     
-      <div class="row" id="#">
+      <div class="row" id="ticketCheckRow">
        <c:forEach var="ticket" items="${list}" varStatus="j" > 
 	       <div class="col-md">
-	       <div class="card" style="width: 18rem;">
-			  <img src="/resources/images/uploadFiles/${ticket.ticketImage}" class="card-img-top">
+	       <div class="card" style="width: 18rem; height: ">
+			  <img class='img-circle' src="/resources/images/uploadFiles/${ticket.ticketImage}" class="card-img-top">
 			  <div class="card-body">
 			    <h2>${ticket.event.eventName}</h2>         
 		          <p>ÁÂ¼® : ${ticket.seat}</p>
