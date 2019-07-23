@@ -41,6 +41,6 @@ public interface EventDao {
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public void deleteInterestedEventAll(String userId) throws Exception;
-	
+	public String translate(String sourceLang, String targetLang,String queryText) throws Exception;
 	
 }

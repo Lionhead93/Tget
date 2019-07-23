@@ -29,6 +29,9 @@ public interface RNPDao {
 	
 	public void updatePoint(User user) throws Exception;
 	
+	public int selectPointHistoryCount(String userId) throws Exception;
+	
+	
 //	public  PointHistory selectPointHistoryByTranNo(int tranNo)  throws Exception;
 
 	

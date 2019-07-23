@@ -59,6 +59,12 @@ public class RNPServiceImpl implements RNPService{
 		rNPDao.updatePoint(user);
 	}
 	
+	public int getPointHistoryCount(String userId) throws Exception{
+		return rNPDao.selectPointHistoryCount(userId);
+	}
+	
+	
+	
 //	public  PointHistory getPointHistoryByTranNo(int tranNo)  throws Exception{
 //		return null;
 //	}

@@ -175,5 +175,10 @@ public class EventServiceImpl implements EventService{
 		eventDao.deleteInterestedEventAll(userId);
 	}
 	
+	public String translate(String sourceLang, String targetLang,String queryText) throws Exception{
+		return eventDao.translate(sourceLang, targetLang, queryText);
+	}
+	
+	
 	
 }

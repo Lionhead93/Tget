@@ -436,7 +436,7 @@ public class EventController {
 		model.addAttribute("interestedEventList", list);
 		if (list != null) {
 			model.addAttribute("interestedEventListCount", list.size());
-		}		
+		}
 		
 		return "forward:/event/listInterestedEvent.jsp";
 	}

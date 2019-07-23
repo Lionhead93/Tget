@@ -55,10 +55,10 @@ $( function(){
 		self.location = "/rnp/getReviewList";
 	});
 	$("a:contains('내평점조회')").on("click",function(){
-		self.location = "/rnp/getSellerEstimationList?sellerId="+session.user.userId;
+		self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
 	});
 	$("a:contains('포인트내역조회')").on("click",function(){
-		self.location = "/rnp/";
+		self.location = "/rnp/getPointHistory";
 	});
 	
 	$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
@@ -150,7 +150,7 @@ $(function() {
 					<li>
 					      <div class="text-center"><strong><i class="fas fa-user-circle"></i>&nbsp;Event</strong></div>
 				           <c:if test="${user.role == 2 }"><a href="#">관리자페이지</a></c:if>		
-				          <a href="#">관심이벤트</a>
+				          <c:if test="${!empty user }"><a href="#">관심이벤트</a></c:if>		 
 				    </li>     																				
 					
 				</ul>

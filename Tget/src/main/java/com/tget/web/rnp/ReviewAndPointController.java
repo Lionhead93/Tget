@@ -51,10 +51,15 @@ public class ReviewAndPointController {
 
 		///M	
 		@RequestMapping(value="getPointHistory")
-		public String getPointHistory(HttpServletRequest request, Model model) throws Exception {
+		public String getPointHistory(HttpSession session, HttpServletRequest request, Model model) throws Exception {
 			System.out.println("===============getPointHistory===============");
 			
-			rNPService.getPointHistory(request.getParameter("userId"));
+			User user = (User)session.getAttribute("user");
+			System.out.println(rNPService.getPointHistoryCount(user.getUserId()));
+			
+			if (rNPService.getPointHistoryCount(user.getUserId()) != 0 ) {
+				rNPService.getPointHistory(user.getUserId());
+			}
 			
 			return "forward:/rnp/getPointHistory.jsp";
 			
@@ -118,12 +123,13 @@ public class ReviewAndPointController {
 			model.addAttribute("review", review);
 			model.addAttribute("tranNo", review.getTranNo());
 			model.addAttribute("updatePoint", updatePoint);
+			
 			return "forward:/rnp/addReviewPOST.jsp";
 		}
 		
 		@RequestMapping(value="updateReview", method=RequestMethod.GET)
 		public String updateReview(@RequestParam int tranNo, Model model) throws Exception {
-			System.out.println("===============updateReview(===============");
+			System.out.println("===============updateReview===============");
 
 			Review review = rNPService.getReview(tranNo);
 		
