@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.user.domain.User;
 
 
 public interface RNPService {
@@ -23,5 +24,9 @@ public interface RNPService {
 	public void addPoint(PointHistory pointHistory) throws Exception;
 	
 	public Review getReview(int tranNo) throws Exception;
+	
+	public void updatePoint(User user) throws Exception;
+	
+//	public  PointHistory getPointHistoryByTranNo(int tranNo)  throws Exception;
 	
 }

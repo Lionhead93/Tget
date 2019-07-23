@@ -42,7 +42,7 @@
 		local, point, user_statement, last_conn_date, kakao_Id, naver_Id, facebook_Id, blacklist_code, blacklist_start_date,
 		blacklist_end_date, seller_code, sales_amount, sales_count, account_bank, account_no) 
 		VALUES	 (	#{userId} , #{userName} , #{password} , #{phone} , #{nickName} , #{address}, 
-					#{postalCode:VARCHAR} , '1' , #{local:CHAR} , #{point:NUMERIC} , '1' , SYSDATE ,
+					#{postalCode:VARCHAR} , '0' , #{local:CHAR} , #{point:NUMERIC} , '1' , SYSDATE ,
 					#{kakaoId:VARCHAR}, #{naverId:VARCHAR}, #{facebookId:VARCHAR} , #{blacklistCode:CHAR}, #{blacklistStartDate:DATE} , #{blacklistEndDate:DATE} ,
 					#{sellerCode:CHAR}, #{salesAmount:NUMERIC}, #{salesCount:NUMERIC}, #{accountBank:VARCHAR}, #{accountNo:VARCHAR} )
 	 </insert>
@@ -79,6 +79,18 @@
 	   	WHERE user_id = #{userId}
 	   	
 	 </update>
+	 
+	  <update 	id="updatePassword"		parameterType="user" >
+	 	UPDATE users
+	 	<set>
+	 	       password = #{password:VARCHAR}
+					
+	 	</set>
+	 	WHERE user_id = #{userId:VARCHAR}
+	 </update>
+	 
+	 
+	 
 	 
 	 
 	 <update 	id="insertBlacklist"		parameterType="user" >
@@ -169,11 +181,9 @@
 		password
 	FROM
 		users
-	where phone = #{value}
+	where user_id = #{value}
 
 </select>
-
-
 
 	
 <!-- SQL : SELECT ROW Count -->	 

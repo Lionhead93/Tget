@@ -56,7 +56,11 @@ public class UserDaoImpl implements UserDao{
 		
 	}
 
-
+	@Override
+	public void updatePassword(User user) throws Exception {
+		sqlSession.update("UserMapper.updatePassword", user);
+		
+	}
 
 	@Override
 	public User selectSellerEval(String userId) throws Exception {
@@ -118,9 +122,9 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public User findPassword(String phone) throws Exception {
+	public User findPassword(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		 return sqlSession.selectOne("UserMapper.findPassword",phone);
+		 return sqlSession.selectOne("UserMapper.findPassword",userId);
 		
 	}
 

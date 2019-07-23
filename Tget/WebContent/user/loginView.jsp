@@ -36,9 +36,17 @@
 
 	$( function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("button:contains('ID/PassWord찾기')").on("click" , function() {
+		$("button:contains('ID 찾기')").on("click" , function() {
 		
 			self.location = "/user/finduserId"
+		});
+	});
+	
+	$( function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("button:contains('비밀번호 찾기')").on("click" , function() {
+		
+			self.location = "/user/findPassword"
 		});
 	});
 	
@@ -70,6 +78,8 @@
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
+				
+				
 				if(id == null || id.length <1) {
 					alert('ID 를 입력하지 않으셨습니다.');
 					$("#userId").focus();
@@ -98,7 +108,10 @@
 					   
 					   if (result == "true") { 
 						   
-						   alert("응 너 블랙이야~");
+						  $('#black').modal('show');
+						//  alert("응 너 블랙이야~");
+						  
+						   
 						   
 					   } else if (result == "false")
 					  		 { 
@@ -170,10 +183,56 @@
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
 					      <button type="button" class="btn btn-default"  >로그인</button>
-					      <button type="button" class="btn btn-default"  >ID/PassWord찾기</button>
+					      <button type="button" class="btn btn-default"  >ID 찾기</button>
+					      <button type="button" class="btn btn-default"  >비밀번호 찾기</button>
 					      <a class="btn btn-default" href="#" role="button">회원가입</a>
 					    </div>
 					  </div>
+			
+			
+				
+		 <div class="modal fade" id="black" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-lg" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				       <h5 class="modal-title" id="modalCenterTitle">${user.userId}님은 블랙리스트 상태입니다.</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				
+					      </div>
+					      </div>
+					      
+					     <div class="form-group">
+		    <label for="blacklistStartDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 시작일자</label>
+		    <div class="col-sm-4">
+		   ${user.blacklistStartDate}
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		   <label for="blacklistStartDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 종료일자</label>
+		    <div class="col-sm-4"><div class="col-sm-4">
+		     ${user.blacklistEndDate}		      
+		    </div>
+		  </div>
+      <div class="modal-footer">	      
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+	
+	
+	
+	   </div>
+				  </div>	   
+  </div>
+			  </div>  
+			  
+			     
+	</form>
+			  
+			
+			  </div>
+		  </div> 
+</html>		
 			
 				<!-- <div id="naverIdLogin" align="center">
     <a id="naver-login-btn" href="#" role="button">
@@ -192,7 +251,7 @@
 					<!-- <a id="custom-login-btn" href="javascript:loginWithKakao()">
 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
 </a> -->
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('f784da1696e287dff9fa08e5c44d8558');
@@ -209,20 +268,5 @@
     };
   //]]>
 </script>
-	
+	 -->
 			
-			
-					</form>
-			   	 </div>
-			
-			</div>
-			
-  	 	</div>
-  	 	<!--  row Start /////////////////////////////////////-->
-  	 	
- 	</div>
- 	<!--  화면구성 div end /////////////////////////////////////-->
-
-</body>
-
-</html>

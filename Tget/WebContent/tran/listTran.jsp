@@ -15,23 +15,54 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
+	<link rel="stylesheet" href="/resources/css/main.css" />
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="/resources/javascript/common.js" ></script>
-   	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+				
+		<script src="/resources/javascript/common.js" ></script>
+		<script src="/resources/javascript/alarm.js" ></script>
+		<script src="/resources/javascript/jquery.min.js"></script>
+		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+		<script src="/resources/javascript/skel.min.js"></script>
+		<script src="/resources/javascript/util.js"></script>
+		<script src="/resources/javascript/main.js"></script>
+		
 	<style>
-      body {
-            margin-top: 200px;
-            background: url(/resources/images/99B7CC415D2D4B212F.jpg) no-repeat center center fixed; 
-            -webkit-background-size: cover;-moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
+		
+		body {
+			
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+	
+       #titleSection {       
+       
+       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;			  
+			 
+       }
+       
+       strong, h1, h2, h3, h5, h6 {
+       		color: black;
+       }
+       
+       .modal-content{ 			
+			color: black;			  
+			border: 3px solid #D6CDB7;          	
+       }
+       
+       input, select{
+       		border: 1px solid black;
+       }
+       
     	.img_wrap {
 			width: 300px;
 			margin: auto;
@@ -130,8 +161,8 @@
                     }else{
                     	myInvoiceData += ('<table class="table">');      
                         myInvoiceData += ('<tr>');                
-                        myInvoiceData += ('<th>'+"송장번호"+'</td>');                     
-                        myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                     
+                        myInvoiceData += ('<th style="color: black;">'+"송장번호"+'</td>');                     
+                        myInvoiceData += ('<th style="color: black;">'+data.invoiceNo+'</td>');                     
                         myInvoiceData += ('</tr>');     
                         myInvoiceData += ('</table>');
                     }                
@@ -215,34 +246,80 @@
 	    });
 	   
 	});
+	
+	$(function(){
+		$("a[href='#']:contains('판매자 등록')").on("click", function(){
+			var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
+	             window.open("/ticket/addSeller","T-get 판매자등록 ",popOption);
+		});
+		$("a[href='#']:contains('후기작성 내역')").on("click", function(){
+			
+		});
+		$("a[href='#']:contains('포인트 사용내역')").on("click", function(){
+			
+		});
+		$("a[href='#']:contains('판매티켓 목록')").on("click", function(){
+			self.location = "/ticket/getTicketList?menu=seller";
+		});
+		
+	});
 		
 	</script>		
     
 </head>
 
 <body>
-	<jsp:include page="/layout/toolbar.jsp" />
-	<div class="container">
+	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<br/>
+	
+	<div id="main">
+	
+	
+	<section id="titleSection" class="wrapper style2">
+	<div class='inner'>
+		<div class="text-center"><h2>거래내역 조회</h2></div>
+	</div>
+	</section>
+	
+	<section class="wrapper style1">
+	<div class='inner'>
 		
-		<div class="text-center">
-		 <table class="table">
+	<div class="row">
+		<section class="3u$ 6u$(medium) 12u$(small)">
+		<div class='text-center'>
+										<ul class="alt">
+											<li>&nbsp;</li>											
+											<c:if test="${user.role=='0'}">
+											<li><a href="#">판매자 등록</a></li>
+											</c:if>
+											<li><a href="#">후기작성 내역</a></li>
+											<li><a href="#">포인트 사용내역</a></li>
+											<c:if test="${user.role=='1'}">
+											<li><a href="#">판매티켓 목록</a></li>
+											</c:if>
+											<li>&nbsp;</li>
+										</ul>
+		</div>
+		</section>
+		
+		<section>
+		 <table class='alt'>
 			  <thead>
-			    <tr class="table-secondary">
-			      <th scope="col">#</th>
-			      <th scope="col">종류</th>
-			      <th scope="col">이벤트명</th>
-			      <th scope="col">수량</th>
-			      <th scope="col">구매/판매일자</th>
-			      <th scope="col">거래상대</th>
-			      <th scope="col">진행상태</th>
-			      <th scope="col">-</th>
+			    <tr>
+			      <th>#</th>
+			      <th>종류</th>
+			      <th>이벤트명</th>
+			      <th>수량</th>
+			      <th>구매/판매일자</th>
+			      <th>거래상대</th>
+			      <th>진행상태</th>
+			      <th>-</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach var="tran" items="${list}" varStatus="j">
 			    <tr>
-			      <th scope="row">${j.index+1}</th>
+			      <td>${j.index+1}</td>
 			      <td>
 			      <c:if test="${user.userId==tran.seller.userId}">판매</c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">구매</c:if>
@@ -264,7 +341,7 @@
 			      <i class="far fa-comment-alt"></i>
 			      </c:if>
 			      </td>
-			      <td class="text-secondary">
+			      <td>
 			      <c:if test="${tran.tranCode==0}">무통장 입금대기</c:if>
 			      <c:if test="${tran.tranCode==1}">결제완료</c:if>
 			      <c:if test="${tran.tranCode==2}">배송 중 
@@ -298,27 +375,28 @@
 			  </c:forEach> 
 			  </tbody>
 		</table>
-		 
-		</div>
-			
- 	</div>
-	
+		</section>		
+	</div>
+	</div>
+	</section>
+	</div>	
+ 
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <h3 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h3>
+					        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
-					        </button>
+					        </a>
 					      </div>
 					      <div class="modal-body">
 					      <form enctype="multipart/form-data"> 
 					      	<input type="hidden" id="tranNo" name="tranNo" value=""/>
 					      	<div class="form-group" >
 							     <br/>
-							     <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배송 사 : </strong> 	
+							     <strong>배송 사</strong> 	
 							        <select id="deliveryCompany" name="deliveryCompany">
 									    <option value="">선택</option>
 									    <option value="04">CJ대한통운</option>									    
@@ -331,7 +409,7 @@
 									    <option value="23">경동택배</option>
 									    <option value="53">농협택배</option>
 									</select><br/><br/>
-							      <strong>운송장 번호 : </strong><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important"/>
+							      <strong>운송장 번호</strong><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; border: 1px solid black;"/>
 							      <br/><br/>
 							      <div class="text-center" id="loading"></div>
 							      <br/><br/>
@@ -355,10 +433,10 @@
 					  <div class="modal-dialog modal-lg" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <h3 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h3>
+					        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
-					        </button>
+					        </a>
 					      </div>
 					      <div class="modal-body">
 					      	<div id="searchResult">
@@ -369,6 +447,46 @@
 					    </div>
 					  </div>
 					</div>
+					
+					
+	<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex flex-3">
+						<div class="col">
+							<h4>공지사항</h4>
+							<ul class="alt">
+								<li><a href="#">티켓거래 공지</a></li>
+								<li><a href="#">자유게시판 이용공지</a></li>
+								<li><a href="#">자주묻는질문</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<h4>자유게시판</h4>
+							<ul class="alt">
+								<li><a href="#">삽니다</a></li>
+								<li><a href="#">팝니다</a></li>
+								<li><a href="#">수다방</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<h4>고객센터</h4>
+							<ul class="alt">
+								<li><a href="#">link</a></li>
+								<li><a href="#">link</a></li>
+								<li><a href="#">link</a></li>
+								<li><a href="#">link</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="copyright">
+					<ul class="icons">
+						<li><a href="#" >Back to Top</a></li>
+					</ul>
+					&copy; T-GET. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
+				</div>
+			</footer>
 	
 </body>
 

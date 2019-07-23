@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tget.common.domain.Search;
 import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.user.domain.User;
 
 
 
@@ -26,7 +27,9 @@ public interface RNPDao {
 	
 	public void insertPointHistory(PointHistory pointHistory)  throws Exception;
 	
+	public void updatePoint(User user) throws Exception;
 	
+//	public  PointHistory selectPointHistoryByTranNo(int tranNo)  throws Exception;
 
 	
 }
