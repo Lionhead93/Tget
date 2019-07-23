@@ -133,7 +133,7 @@ public class ReviewAndPointController {
 			return "forward:/rnp/addReview.jsp";
 		}
 		
-		@RequestMapping(value="addReview", method=RequestMethod.POST)
+		@RequestMapping(value="updateReview", method=RequestMethod.POST)
 		public String updateReview(@ModelAttribute("review") Review review, Model model) throws Exception {
 			System.out.println("===============updateReview===============");
 			System.out.println(review);
