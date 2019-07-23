@@ -32,8 +32,8 @@
 		})	;
 		
 		$("#submit").on("click",function(){	
-			submitReview();
-// 			$("form").attr("method","POST").attr("action","/rnp/addReview").submit();	
+// 			submitReview();
+			$("form").attr("method","POST").attr("action","/rnp/addReview").submit();	
 // 			$(this).val($("#file").val());			
 // 			$.ajax(
 // 					{
@@ -111,6 +111,7 @@
 	</h3></div>
 	<form>		
 		<input type="hidden" name="tranNo" value="${tranNo }">
+<%-- 		<input type="hidden" name="updatePoint" value="${updatePoint}"> --%>
 		<div class="form-group">
     		<label for="score">¢æ ∆Ú¡° </label>&nbsp; &nbsp; &nbsp;
     		<select name="score">

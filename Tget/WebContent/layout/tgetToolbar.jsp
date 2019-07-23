@@ -127,10 +127,13 @@
 		});	
 		$( function(){	
 			$("a:contains('리뷰작성')").on("click",function(){
-				self.location = "/rnp/";
+				popWin = window.open("/rnp/addReview?tranNo=10002","popWin",
+						"left=500, top=100, width=600, height=500, "
+						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+				
 			});
 			$("a:contains('내리뷰조회')").on("click",function(){
-				self.location = "/rnp/";
+				self.location =  "/rnp/getReviewList";
 			});
 			$("a:contains('내평점조회')").on("click",function(){
 				self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
