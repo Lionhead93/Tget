@@ -15,8 +15,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
 		<link rel="stylesheet" href="/resources/css/main.css" />
-	</head>
-	<body>
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -29,77 +28,10 @@
 		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
-		<script src="/resources/javascript/main.js"></script>	
+		<script src="/resources/javascript/main.js"></script>
+	</head>
+	<body>
 		
-		<script type="text/javascript">
-			var recommSize = "";
-			var eventNameArr = [];
-			var videoNameArr = [];
-			var recommEventNameArr = [];
-			var recommEventDetailArr = [];
-			$(function(){
-				
-				$.ajax(
-						{
-							url : "/event/rest/getRecommendedEventList",
-							method : "POST",
-							dataType : "json",
-							success : function(JSONData, status){
-		// 							alert(status);
-									recommSize = JSONData.recommEventlistSize;
-									$.each(JSONData.eventNameList, function(index,value){
-										$("#goRecommEvent"+index).val(value);
-									 });
-									$.each(JSONData.videoNameList, function(index,value){
-										$("#videoName"+index).attr("src","/resources/video/"+value);
-									 });
-									$.each(JSONData.recommEventNameList, function(index,value){
-										$("#nav-"+index+"-tab").text(value).attr( "style","display:block;");
-		// 								alert(value);
-									 });
-									$.each(JSONData.recommEventDetailList, function(index,value){
-										$("#recommDetail"+index).text(value);
-									 });
-		// 						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-							}
-				});
-				
-				$("input[type='text']").on("keyup",function(){
-					$("#searchKeyword").val($("input[type='text']").val());
-				});
-				
-				$("a:contains('검색')").on("click",function(){
-					$("#searchCondition").val("1");
-					$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-				});
-				
-				$(".p-2").on("click",function(){
-		// 			alert($(this).text());
-					$("#searchCondition").val("0");
-					 $.ajax(
-								{
-									url : "/event/rest/getCategory",
-									method : "POST",
-									data : {
-										categoryTwoName : $(this).text()
-												},
-									dataType : "json",
-									success : function(JSONData, status){
-		// 								alert(status);
-										$("#searchKeyword").val(JSONData.categoryTwoEng);
-										$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-									}
-						});
-				});	
-				
-				
-				$("button:contains('이벤트바로가기')").on("click",function(){
-					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
-				});
-				
-			});	
-			
-	 </script>
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
 		
 			<!-- Banner -->
@@ -362,6 +294,74 @@
 
 		<!-- Scripts -->	
 		
-		
+		<script type="text/javascript">
+			var recommSize = "";
+			var eventNameArr = [];
+			var videoNameArr = [];
+			var recommEventNameArr = [];
+			var recommEventDetailArr = [];
+			$(function(){
+				
+				$.ajax(
+						{
+							url : "/event/rest/getRecommendedEventList",
+							method : "POST",
+							dataType : "json",
+							success : function(JSONData, status){
+		// 							alert(status);
+									recommSize = JSONData.recommEventlistSize;
+									$.each(JSONData.eventNameList, function(index,value){
+										$("#goRecommEvent"+index).val(value);
+									 });
+									$.each(JSONData.videoNameList, function(index,value){
+										$("#videoName"+index).attr("src","/resources/video/"+value);
+									 });
+									$.each(JSONData.recommEventNameList, function(index,value){
+										$("#nav-"+index+"-tab").text(value).attr( "style","display:block;");
+		// 								alert(value);
+									 });
+									$.each(JSONData.recommEventDetailList, function(index,value){
+										$("#recommDetail"+index).text(value);
+									 });
+		// 						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+							}
+				});
+				
+				$("input[type='text']").on("keyup",function(){
+					$("#searchKeyword").val($("input[type='text']").val());
+				});
+				
+				$("a:contains('검색')").on("click",function(){
+					$("#searchCondition").val("1");
+					$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+				});
+				
+				$(".p-2").on("click",function(){
+		// 			alert($(this).text());
+					$("#searchCondition").val("0");
+					 $.ajax(
+								{
+									url : "/event/rest/getCategory",
+									method : "POST",
+									data : {
+										categoryTwoName : $(this).text()
+												},
+									dataType : "json",
+									success : function(JSONData, status){
+		// 								alert(status);
+										$("#searchKeyword").val(JSONData.categoryTwoEng);
+										$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+									}
+						});
+				});	
+				
+				
+				$("button:contains('이벤트바로가기')").on("click",function(){
+					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
+				});
+				
+			});	
+			
+	 </script>
 	</body>
 </html>
