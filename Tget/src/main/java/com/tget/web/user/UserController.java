@@ -62,6 +62,14 @@ public class UserController {
 		return "redirect:/user/finduserId.jsp";
 	}
 	
+	@RequestMapping( value="findPassword", method=RequestMethod.GET )
+	public String findPassword() throws Exception{
+	
+		System.out.println("/user/findPassword : GET");
+		
+		return "redirect:/user/findPassword.jsp";
+	}
+	
 	
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUser() throws Exception{
@@ -138,7 +146,23 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
+	@RequestMapping( value="updatePassword", method=RequestMethod.GET )
+	public String updatePassword(@RequestParam("userId") String userId , @RequestParam("password") String password, Model model ) throws Exception{
+
+		System.out.println("updatePassword 컨트롤러시작");
 	
+		User user = userService.getUser(userId);
+		
+		user.setPassword(password);
+		
+		userService.updatePassword(user);
+		
+		model.addAttribute("user", user);
+		
+		
+		
+		return "redirect:/";
+	}
 	
 	
 	
@@ -166,7 +190,7 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 	}
 	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	public String login(@ModelAttribute("user") User user , HttpSession session) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
@@ -177,6 +201,7 @@ public class UserController {
 			if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 				}
+			
 		}
 		return "redirect:/";
 	}

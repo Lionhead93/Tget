@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -152,6 +154,21 @@ public class UserRestController {
 		
 	}      
 	
+	@RequestMapping( value="json/findPassword" , method=RequestMethod.POST)
+	public String findPassword (String userId)throws Exception{
+		
+		System.out.println("들어왔니"); 
+		
+		User user = userService.getUser(userId);
+		System.out.println(user);
+		
+		if (user==null){
+			return "no";
+		}
+		
+		return "yes";
+		
+	}      
 
 	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
 	public String smsCheck(String code ){ 
@@ -210,7 +227,7 @@ public class UserRestController {
 		
 	}
 	@RequestMapping( value="json/login", method=RequestMethod.POST )
-	public String login(String userId) throws Exception{
+	public String login(String userId,  HttpSession session) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
@@ -229,10 +246,10 @@ public class UserRestController {
 		System.out.println("오늘은"+today);
 		System.out.println("유저 블랙리스트오니"+end);
 	
+		session.setAttribute("user", user);
 		
 		if( end != null  &&
 				today.getTime() <= end.getTime() ) {
-	
 				System.out.println("이새키 블랙이다");
 				return "true";
 		}

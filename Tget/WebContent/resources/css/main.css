@@ -39,6 +39,8 @@
 		content: '';
 		content: none;
 	}
+	
+	
 
 	table {
 		border-collapse: collapse;
@@ -1842,7 +1844,7 @@
 	}
 
 /* Button */
-
+ 
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
@@ -2021,7 +2023,7 @@
 			button.special:active,
 			.button.special:active {
 				background-color: #041321;
-			}
+			} 
 
 /* Flex */
 
@@ -2361,7 +2363,7 @@
 		color: #676d71 !important;
 	}
 
-/* Icon */
+Icon
 
 	.icon {
 		text-decoration: none;

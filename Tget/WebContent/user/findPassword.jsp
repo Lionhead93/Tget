@@ -115,26 +115,11 @@
 					$("button:contains('찾기')").on("click" , function() {
 						
 						alert("눌리니");
-						
-						/* var id=$("input:text").val();
-						var pw=$("input:password").val();
-						
-						if(id == null || id.length <1) {
-							alert('ID 를 입력하지 않으셨습니다.');
-							$("#userId").focus();
-							return;
-						}
-						
-						if(pw == null || pw.length <1) {
-							alert('패스워드를 입력하지 않으셨습니다.');
-							$("#password").focus();
-							return;
-						} */
-						
+				
 						 $.ajax({ 
-							   url: "/user/json/finduserId",
+							   url: "/user/json/findPassword",
 						   data: { 
-							   phone: $("#phone").val(), 
+							   userId: $("#userId").val()
 							   }, 
 							   type: "post", 
 							   
@@ -142,32 +127,58 @@
 							   console.log(result);
 							   
 							   if(result == "no"){
-								   
+								   $('#findpassword').modal('hide');
 								   alert("입력하신 정보의 회원정보가 없습니다");
+								   
 							   }
-							   else{
-								   alert(result);
-							   }
+							  
 						   }
 							   });
 				});	
 					});
 				
+			   $(function(){
+			         $("#alert-success").hide();
+			         $("#alert-danger").hide();
+			         $("input").keyup(function(){
+			             var pwd1=$("#password").val();
+			             var pwd2=$("#password2").val();
+			             if(pwd1 != "" || pwd2 != ""){
+			                 if(pwd1 == pwd2){
+			                	 
+			                 	$("#check1").show();
+			                     $("#alert-success").show();
+			                     $("#alert-danger").hide();
+			                     $("#submit").removeAttr("disabled");
+			                 }else{
+			                	 
+			                	 $("#check1").hide();	
+			                     $("#alert-success").hide();
+			                     $("#alert-danger").show();
+			                     $("#submit").attr("disabled", "disabled");
+			                 }    
+			             }
+			         });
+			     });
+
+			   $(function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+							$("button:contains('변경')").on("click" , function() {
 			   
-			   
-			   
-			   
-			   
+								$("form").attr("method" , "GET").attr("action" , "/user/updatePassword").submit();
+				
+							});
+			   });
 			   
 		     </script>
 				
 		  <form class="form-horizontal">
-		  <h4 align="center">아이디 찾기</h4>
+		  <h4 align="center">비밀번호 찾기</h4>
 			<hr/>
 		<div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">아이디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
 		    </div>
 		  </div>
 		
@@ -190,23 +201,55 @@
 		  </div>
 		  
 	
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		     
-		      <button type="button" id ="btn" class="btn btn-primary" disabled="disabled">찾기</button> 
-		      
-		  			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
-			 
-			  
+			
+			<div class="form-group">
+		      <button type="button" id= "btn" class="btn btn-primary" data-toggle="modal" data-target="#findpassword" disabled="disabled">찾기</button>
+			  <a class="btn btn-danger btn" href="#" role="button">취&nbsp;소</a>
+		</div>
+		
+				
+ 
+		<div class="modal fade" id="findpassword" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle">변경할 비밀번호 설정</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					     <div class="form-group">
+		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
+		    <div class="col-sm-4">
+		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
 		    </div>
- 			 </div>
+		  </div>
 		  
-		  
-		
-		</form>
-		
+		  <div class="form-group">
+		    <img src="/resources/images/check.jpg" width="25" height="25" id="check1" style="display:none;"/> <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
+		    <div class="col-sm-4">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+		      
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		  <label for="password3" class="col-sm-offset-1 col-sm-3 control-label"></label>
+		<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+		  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
+		      </span>
+			<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+			<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
+		      </span>
+		</div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">변경</button>
+					      </div>
+					    </div>
+					  </div>
+	</div>	
+	</form>			
  	
-	
-</body>
+	</body>
 
 </html>

@@ -16,6 +16,8 @@ public interface UserService {
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	//회원 수정
 	public void updateUser(User user) throws Exception;
+	
+	public void updatePassword(User user)throws Exception;
 	//중복성 체크
 	public boolean checkDuplication(String userId) throws Exception;
 	//블랙리스트 추가
@@ -42,6 +44,6 @@ public interface UserService {
 	
 	public User finduserId(String phone)throws Exception;
 
-	public User findPassword(String phone)throws Exception;
+	public User findPassword(String userId)throws Exception;
 	
 }
