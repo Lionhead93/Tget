@@ -50,7 +50,7 @@ public class CommunityRestController {
 	int pageSize;
 	
 	
-	@RequestMapping( value="json/getContent/{contentNo}", method=RequestMethod.GET ) //GET방식은 {prodNo}처럼 명시를 해줘야하지만
+	@RequestMapping( value="rest/getContent/{contentNo}", method=RequestMethod.GET ) //GET방식은 {prodNo}처럼 명시를 해줘야하지만
 	public Map getContent( @PathVariable int contentNo ) throws Exception{//       POST방식의 경우 Body로 바로 가므로 명시하지않고 바로 접근이 가능
 		
 		System.out.println("/community/json/getContent : GET");
@@ -64,26 +64,13 @@ public class CommunityRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="json/getReplyList/{replyNo}", method=RequestMethod.GET)
-	public String getReplyList(@ModelAttribute("reply") Reply reply, @ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="rest/getReplyList/", method=RequestMethod.POST)
+	public List<Reply> getReplyList(@RequestBody Reply reply) throws Exception{
 	
 		System.out.println("/community/getReplyList: GET/ POST");
-	
-		if(search.getCurrentPage() ==0 ){
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-	
-		// Business logic
-		Map<String , Object> map=communityService.getReplyList(search);
-	
-		System.out.println( map.get("list"));
-		// Model and View 
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("totalCount", map.get("totalCount"));
-		model.addAttribute("search", search);
-	
-		return "forward:/community/getContent";
+		
+		return communityService.getReplyList(reply);
+		
 	}
 
 //	@RequestMapping(value="json/addReply/{replyNo}", method=RequestMethod.GET)
@@ -98,53 +85,60 @@ public class CommunityRestController {
 //		return map;
 //	}
 	
-	@RequestMapping(value="json/addReply", method=RequestMethod.POST)
+	@RequestMapping(value="rest/addReply", method=RequestMethod.POST)
 	public Map<String,Object> addReply( @RequestBody Reply reply) throws Exception {
 
 		System.out.println("community/addReply: POST");
 		
-		communityService.addReply(reply);
+		//communityService.addReply(reply);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("list", communityService.getReply(reply.getReplyNo()));
+		//map.put("list", communityService.getReply(reply.getReplyNo()));
+		try {
+			communityService.addReply(reply);
+			map.put("status", "OK");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("status", "False");
+		}
 		
 		return map;
 	}
-	
-	@RequestMapping(value="json/updateReply/{replyNo}", method=RequestMethod.GET)
-	public String updateReply( @RequestParam("replyNo") int replyNo  , Model model) throws Exception{
-
-		System.out.println("/community/updateReply: GET");
-		//Business Logic
-		
-		model.addAttribute("reply", communityService.getReply(replyNo));
-		
-		return "forward:/content/getContent.jsp";
-	}
-	
-	
-	@RequestMapping(value="json/updateReply", method=RequestMethod.POST)
-	public String updateReply( @ModelAttribute("reply") Reply reply  , Model model) throws Exception{
-
-		System.out.println("/community/updateReply: POST");
-		//Business Logic
-		
-		communityService.updateReply(reply);
-		
-		return "forward:/content/getContent";
-	}
-
-	@RequestMapping(value="json/deleteReply/{replyNo}", method=RequestMethod.GET)
-	public String deleteReply( @PathVariable int replyNo) throws Exception{
-
-		System.out.println("/community/deleteReply: GET");
-		//Business Logic
-		
-		communityService.deleteReply(replyNo);
-		
-		return "forward:/content/getContent";
-	}
+	/// 수정...필요해
+//	@RequestMapping(value="json/updateReply/{replyNo}", method=RequestMethod.GET)
+//	public String updateReply( @PathVariable int replyNo  , Model model) throws Exception{
+//
+//		System.out.println("/community/updateReply: GET");
+//		//Business Logic
+//		
+//		model.addAttribute("reply", communityService.getReply(replyNo));
+//		
+//		return "forward:/content/getContent.jsp";
+//	}
+//	
+//	
+//	@RequestMapping(value="json/updateReply", method=RequestMethod.POST)
+//	public String updateReply( @ModelAttribute("reply") Reply reply  , Model model) throws Exception{
+//
+//		System.out.println("/community/updateReply: POST");
+//		//Business Logic
+//		
+//		communityService.updateReply(reply);
+//		
+//		return "forward:/content/getContent";
+//	}
+//
+//	@RequestMapping(value="json/deleteReply/{replyNo}", method=RequestMethod.GET)
+//	public String deleteReply( @PathVariable int replyNo) throws Exception{
+//
+//		System.out.println("/community/deleteReply: GET");
+//		//Business Logic
+//		
+//		communityService.deleteReply(replyNo);
+//		
+//		return "forward:/content/getContent";
+//	}
 	// 수정필요..
 	@RequestMapping(value="rest/updateGoodCount/{contentNo}", method=RequestMethod.GET)
 	public String updateGoodCount( @PathVariable("contentNo") int contentNo) throws Exception {
@@ -165,11 +159,11 @@ public class CommunityRestController {
 		return "bad";
 	}
 	// 날씨 안내
-	@RequestMapping( value="rest/getSearchWeather/{eventId}") 
-	public Weather getSearchWeather( @RequestBody Weather weather , @PathVariable("eventId") String eventId) throws Exception{
+	@RequestMapping( value="rest/getSearchWeather/") 
+	public Weather getSearchWeather( @RequestBody Weather weather ) throws Exception{
 		
 		System.out.println("/community/rest/getSearchWeather : ");
-		Event event = eventService.getEvent(eventId);
+		//Event event = eventService.getEvent(eventId);
 		
 		weather = GetSearchWeather.getSearchweather(weather);
 		

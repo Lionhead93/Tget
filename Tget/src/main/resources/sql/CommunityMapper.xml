@@ -97,6 +97,13 @@
 		WHERE report_no = #{value}
 	 </select>
 	 
+	 <select 	id="selectReply"	parameterType="report"	resultMap="replySelectMap">
+		SELECT
+		reply_no, user_id, user_nickname, content_no, reply_body, SYSDATE
+		FROM reply 
+		WHERE reply_no = #{value}
+	 </select>
+	 
 	 <!-- SQL :  UPDATE CLOB 수정 필요.....-->
 	 <update	id="updateContent"	parameterType="content"  >
 	   	UPDATE content

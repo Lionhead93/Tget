@@ -93,11 +93,51 @@
 				});	
 				
 				
-				$("button:contains('이벤트바로가기')").on("click",function(){
-					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
+			$("button:contains('이벤트바로가기')").on("click",function(){
+				$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
 				});
 				
-			});	
+			});
+			
+			$(function() {
+			
+			$( "a[href='#']:contains('티켓거래 공지')" ).on("click" , function() {
+				
+				self.location="/community/getContentList?searchCondition=1&searchKeyword=0";	
+			
+			});
+			
+			$( "a[href='#']:contains('자유게시판 이용공지')" ).on("click" , function() {
+				alert("adlksjfjasd");
+				self.location="/community/getContentList?searchCondition=1&searchKeyword=1";	
+			
+			});
+		 
+			 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=1&searchKeyword=2";	
+				
+				});
+			 
+			 $( "a[href='#']:contains('삽니다')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
+				
+				});
+			 
+			 $( "a[href='#']:contains('팝니다')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=4";	
+				
+				});
+			 
+			 $( "a[href='#']:contains('수다방')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
+				
+				});
+			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
+					self.location="/community/getRefundList";	
+				
+				});
+			 
+			});
 			
 	 </script>
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
@@ -328,26 +368,26 @@
 						<div class="col">
 							<h3>공지사항</h3>
 							<ul class="alt">
-								<li><a href="#">티켓거래 공지</a></li>
-								<li><a href="#">자유게시판 이용공지</a></li>
-								<li><a href="#">자주묻는질문</a></li>
+								<li><a id="contentCode0" href="#">티켓거래 공지</a></li>
+								<li><a id="contentCode1" href="#">자유게시판 이용공지</a></li>
+								<li><a id="contentCode2" href="#">자주묻는질문</a></li>
 							</ul>
 						</div>
 						<div class="col">
 							<h3>자유게시판</h3>
 							<ul class="alt">
-								<li><a href="#">삽니다</a></li>
-								<li><a href="#">팝니다</a></li>
-								<li><a href="#">수다방</a></li>
+								<li><a id="contentCode3" href="#">삽니다</a></li>
+								<li><a id="contentCode4" href="#">팝니다</a></li>
+								<li><a id="contentCode5" href="#">수다방</a></li>
 							</ul>
 						</div>
 						<div class="col">
 							<h3>고객센터</h3>
 							<ul class="alt">
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
+								<li><a href="#">1:1 문의내역</a></li>
+								<li><a href="#">환불 게시판</a></li>
+<!-- 								<li><a href="#">link</a></li> -->
+<!-- 								<li><a href="#">link</a></li> -->
 							</ul>
 						</div>
 					</div>
