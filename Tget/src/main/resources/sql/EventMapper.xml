@@ -47,13 +47,13 @@
 	  <select 	id="selectEventByName"	 parameterType="string" 	resultMap="eventSelectMap">
 		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 FROM event
-		 WHERE event_name = #{eventName}
+		 WHERE event_name = #{eventName} AND event_date >= SYSDATE
 	 </select>
 	 
 	 <select 	id="selectEventById"	 parameterType="string" 	resultMap="eventSelectMap">
 		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 FROM event
-		 WHERE event_id = #{eventId}		 
+		 WHERE event_id = #{eventId}	
 	 </select>
 	 
 	 <select 	id="selectEventCount"	parameterType="map"	 resultType="int">
@@ -61,7 +61,7 @@
 	  	FROM( SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
 		 				FROM event
 						<if test="searchKeyword == 'eventId'">WHERE event_id = #{eventId}</if>
-		 				<if test="searchKeyword == 'eventName'">WHERE event_name = #{eventName}</if>)  countTable	
+		 				<if test="searchKeyword == 'eventName'">WHERE event_name = #{eventName} AND event_date >= SYSDATE</if>)  countTable	
 	 </select>
 <!-- 	 <select 	id="selectListEvent"	parameterType="string"	resultMap="eventSelectMap"> -->
 <!-- 		 SELECT event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time -->
@@ -88,15 +88,17 @@
 		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
 		 FROM user_interested u, event e
 		 WHERE u.event_id = e.event_id
-		 AND user_id = #{userId} 
+		 AND user_id = #{userId}  AND event_date >= SYSDATE
+		 ORDER BY e.event_date
 	 </select>
 	 
 	 <select 	id="selectListInterestedEventCount"	parameterType="string"	resultType="int">
 		SELECT COUNT(*)
 	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
 		 				FROM user_interested u, event e
-		 				WHERE u.event_id = e.event_id
-						AND user_id = #{userId} )  countTable	
+		 				WHERE u.event_id = e.event_id  
+						AND user_id = #{userId} AND event_date >= SYSDATE
+						ORDER BY e.event_date )  countTable	
 	 </select>
 	 
 	 <insert 	id="insertInterestedEvent"		parameterType="event" >
@@ -109,6 +111,12 @@
 	  	DELETE 
 	  	FROM user_interested 
 	  	WHERE event_id = #{eventId} AND user_id = #{userId}
+  	</delete>
+  	
+  	<delete id="deleteInterestedEventAll" parameterType="string">
+	  	DELETE 
+	  	FROM user_interested 
+	  	WHERE user_id = #{userId}
   	</delete>
 
 	 <insert 	id="insertYoutubeVideo"		parameterType="map" >

@@ -17,26 +17,82 @@
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
+	<script src="/resources/javascript/common.js" ></script>
     <script type="text/javascript">
-	
+
     $(function(){
+    	
+    	
     	$("#checkAll").on("click", function(){
+    		
     		if ($(this).prop("checked")) {
-    			$("input[type='checkbox']").prop("checked","checked");    			
-			}else {
-				$("input[type='checkbox']").prop("checked",false);
+    			$(".check").prop("checked","checked");    			
+			}else{
+				$(".check").prop("checked",false);
 			}    		
     	});
-    	$("input[type='checkbox']").on("click", function(){
-    		if ($("input[type='checkbox']:checked").length=="${interestedEventListCount}") {
+    	
+    	$(".check").on("click", function(){
+    		if ($(".check:checked").length=="${interestedEventListCount}") {
     			$("#checkAll").prop("checked","checked");   
 			}else{
 				$("#checkAll").prop("checked",false);   
 			}
     	})
+    	
+    	$(".btn").on("click", function(){
+//     		$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
+    		self.location = "/event/getEventTicketList?eventId="+$(this).val();
+        });
+    	
+    	$("#all").on("click", function(){
+    		$("form").attr("method" , "POST").attr("action" , "/event/deleteInterestedEventAll").submit();
+    	});
+    	
+    	$("#select").on("click",function(){
+    		$("form").attr("method","POST").attr("action","/event/deleteInterestedEvent");
+    	})
+    	
     });
-	
+    
+    $(function(){
+    	
+
+//     	var countDownDate = new Date("2019-07-22 11:49").getTime();
+//     	var x = setInterval(function() {
+    	
+//     	    var now = new Date().getTime();
+//     	    var distance = countDownDate - now;
+    	    
+//     	    if (distance >= 60*60*48*1000 ) {
+//     			$("div.cd").attr("style","visibility:hidden;");
+//     		}
+//     	    else if( distance <=0) {
+//     			clearInterval(x);
+//     			$("div.cd").html("<p ><br/>즐거운 관람되십시오.</p>");
+// //     			$("div.cd").attr("style","visibility:hidden;");
+// //     		    $("#expire").text("즐거운 관람되십시오.");
+//     		} 
+//     	    else {
+//     			$("div.cd").attr("style","visibility:visible;");
+//     		}
+//     	    var days = Math.floor(distance / (1000 * 60 * 60 * 24)); 
+     
+//     	    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+days*24; 
+//     	    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//     	    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+//     	    $(".hour").text(hours) ;
+//     	    $(".minute").text(minutes) ;
+//     	    $(".second").text(seconds);
+
+// //     	if (distance = 0) {
+// //     		    clearInterval(x);
+// //     		    $("div.cd").attr("style","visibility:hidden;");
+// //     		    $("#expire").text("즐거운 관람되십시오.");
+// //     		}
+//     	}, 1000);                                                                                                                                                                                   	
+    	});
 	</script>
 	<style type="text/css">
 		h1{
@@ -74,9 +130,26 @@
 		}
  		.container-fluid{ 
  			padding: 50px;
- 			font-family: 'Sunflower', sans-serif;
+/*  			font-family: 'Sunflower', sans-serif; */
 	 		font-size: 20px;    
  		} 
+ 		
+ 		
+		ul {overflow:hidden;} 
+		li { 
+			margin: 5px 5px 5px 5px;
+			 float:left; 
+			list-style:none;
+			text-align:center; margin-top:20px;  
+			font-size:20px;
+		} 
+		li:first-child { margin-left:20px;  } 
+		div.cd {
+/* 			top: 50%; */
+/* 			left: 50%; */
+/* 			transform: translate(-50%, -50%); */
+		}
+		
 	</style>
 <body>	
 <jsp:include page="/layout/toolbar.jsp" />
@@ -99,9 +172,10 @@
 				<table class="table table-striped">
 				  <thead>
 				    <tr align="center">
-				      <th scope="col"><h4><input type="checkbox" id="checkAll" value="uncheck" /></h4></th>
+				      <th scope="col"><h4><input type="checkbox" id="checkAll"  /></h4></th>
 				      <th scope="col"><h4>관심이벤트</h4></th>
-				      <th scope="col"><h4>카운트다운</h4></th>
+				      <th scope="col"></th>
+<!-- 				      <th scope="col"><h4>카운트다운</h4></th> -->
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -109,20 +183,23 @@
 				    <tr>
 				      <td>
 						<div align="center">
-							<input type="checkbox"  />
+							<input type="checkbox" class="check" name="eventId" value="${i.eventId }"/>
 						</div>			
 				  	  </td>
 				  	  <td>
-						<div align="left">
+						<div class="event" align="left" >
 							${i.eventName}<br/>
 							${i.eventDate }, ${i.eventTimeStr}<br/>
 							${i.eventLocation}<br/>
-							<button type="button" class="btn btn-outline-primary" >Primary</button>
+<!-- 							<button type="button" class="btn btn-outline-primary" >Primary</button> -->
 						</div>			
 				  	  </td>
 				  	  <td>
-						<div align="left">
-							${i.eventTimeStr}
+						<div align="center" >
+							<div style="font-size: 15px; font-weight: bold; margin: 10px;">
+								최저가 ${i.ticketLowestPriceStr }원, 총 ${i.totalTicketCount }건
+							</div>
+							<button type="button" class="btn btn-outline-primary"  value="${i.eventId }">바로가기</button>						
 						</div>			
 				  	  </td>
 			    </tr>
@@ -131,11 +208,14 @@
 				</table>
 			</div>
 			<div class="col-lg-2"></div>
-		</div>
-
-		
+		</div>	
+		<div class="floating"  align="center">
+			<button id="all"  class="button_black">전체삭제</button>
+			<button id="select" class="button_black">선택삭제</button>			
+		</div>	
 	</div>
-</form>
+	
+	</form>
 
 </body>
 </html>

@@ -25,9 +25,12 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
+      body {
+            margin-top: 200px;
+            background: url(/resources/images/99B7CC415D2D4B212F.jpg) no-repeat center center fixed; 
+            -webkit-background-size: cover;-moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
     	.img_wrap {
 			width: 300px;
@@ -225,7 +228,7 @@
 		<div class="text-center">
 		 <table class="table">
 			  <thead>
-			    <tr class="table-info">
+			    <tr class="table-secondary">
 			      <th scope="col">#</th>
 			      <th scope="col">종류</th>
 			      <th scope="col">이벤트명</th>

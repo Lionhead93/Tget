@@ -373,5 +373,8 @@ public class EventDaoImpl implements EventDao {
 		return map;
 	}
 	
+	public void deleteInterestedEventAll(String userId) throws Exception{
+		sqlSession.delete("EventMapper.deleteInterestedEventAll",userId);
+	}
 	
 }

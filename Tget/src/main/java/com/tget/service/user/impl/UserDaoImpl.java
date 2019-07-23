@@ -1,8 +1,9 @@
 package com.tget.service.user.impl;
 
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,12 @@ public class UserDaoImpl implements UserDao{
 		
 		return	sqlSession.selectOne("UserMapper.selectnickName",nickName);
 	}
+	
+	@Override
+	public User selectuserId(String userId) throws Exception {
+		
+		return	sqlSession.selectOne("UserMapper.selectnickName",userId);
+	}
 
 	@Override
 	public User selectCode(String code) throws Exception {
@@ -109,5 +116,19 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("UserMapper.finduserId", phone);
 		
 	}
+
+	@Override
+	public User findPassword(String phone) throws Exception {
+		// TODO Auto-generated method stub
+		 return sqlSession.selectOne("UserMapper.findPassword",phone);
+		
+	}
+
+	@Override
+	public User userIdCheck(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

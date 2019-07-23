@@ -344,22 +344,26 @@ public class EventRestController {
 			
 			List<Event> list = eventService.getInterestedEventList(userId);
 			List<String> eventIdList = new ArrayList<String>();
+			List<String> eventTimeList = new ArrayList<String>();
 			
 			for (Event event : list) {
 				if (eventIdList.size()==0) {
 					eventIdList.add(event.getEventId());
+					eventTimeList.add(event.getEventDate()+" "+event.getEventTimeStr());
 				}else {
 					for (int i = 0; i < eventIdList.size(); i++) {
 						if (eventIdList.get(i).equals(event.getEventId())) {
 							break;
 						} else if ((i==eventIdList.size()-1) &&( ! eventIdList.get(i).equals(event.getEventId()))) {
 							eventIdList.add(event.getEventId());
+							eventTimeList.add(event.getEventDate()+" "+event.getEventTimeStr());
 						}
 					}
 				}
 			}
 			System.out.println(eventIdList);
 			map.put("interestedEventList", eventIdList);
+			map.put("interestedEventTimeList", eventTimeList);
 		}else {
 			return null;
 		}

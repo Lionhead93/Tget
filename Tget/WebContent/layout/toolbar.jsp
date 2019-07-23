@@ -70,9 +70,9 @@
 				self.location = "/";
 			});
 			
-// 			$("a:contains('aaa')").on("click",function(){
-// 				self.location = "/event/aaa";
-// 			});
+			$("a:contains('countdown')").on("click",function(){
+				self.location = "/event/countdown";
+			});
 			$("a:contains('관리자페이지')").on("click",function(){
 				self.location = "/event/getEventManage";
 			});
@@ -113,10 +113,14 @@
 			
 			
 			$("a:contains('리뷰작성')").on("click",function(){
-				self.location = "/rnp/";
+				popWin = window.open("/rnp/addReview?tranNo=10000","popWin",
+						"left=500, top=100, width=600, height=500, "
+						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+				
+// 				self.location = "/rnp/addReview?tranNo=10000";
 			});
 			$("a:contains('내리뷰조회')").on("click",function(){
-				self.location = "/rnp/";
+				self.location = "/rnp/getReviewList";
 			});
 			$("a:contains('내평점조회')").on("click",function(){
 				self.location = "/rnp/getSellerEstimationList?sellerId="+session.user.userId;
@@ -173,6 +177,13 @@
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('내정보보기')").on("click" , function() {
 			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+			});
+		});
+		
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('마이페이지')").on("click" , function() {
+			$(self.location).attr("href","/user/myPage?userId=${sessionScope.user.userId}");
 			});
 		});
 		
@@ -274,6 +285,7 @@
 		            	  	<a class="dropdown-item" href="#">관리자페이지</a>
 					      </c:if>				          
 				          <a class="dropdown-item" href="#">관심이벤트</a>
+				          <a class="dropdown-item" href="#">countdown</a>
 				        </div> 
 				    </li>
 			      	</c:if>	
@@ -287,9 +299,9 @@
 <!-- 				           <a class="dropdown-item" href="#">로그아웃</a> -->
 				          <a class="dropdown-item" href="#">회원가입</a>
 				            <a class="dropdown-item" href="#">아이디찾기</a>
+				            <a class="dropdown-item" href="#">마이페이지</a>
 				          <a class="dropdown-item" href="#">내정보보기</a>
 				          <a class="dropdown-item" href="#">블랙리스트관리</a>
-				          <a class="dropdown-item" href="#">관심이벤트</a>
 				        </div> 
 				    </li>
 	            	

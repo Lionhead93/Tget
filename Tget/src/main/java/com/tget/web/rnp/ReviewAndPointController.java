@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tget.service.rnp.RNPService;
 import com.tget.service.rnp.domain.Review;
 import com.tget.service.user.UserService;
+import com.tget.service.user.domain.User;
 
 
 @Controller
@@ -50,10 +52,11 @@ public class ReviewAndPointController {
 		}
 		
 		@RequestMapping(value="getReviewList")
-		public String getReviewList(HttpServletRequest request, Model model) throws Exception {
+		public String getReviewList(HttpSession session, Model model) throws Exception {
 			System.out.println("===============getReviewList===============");
 			
-			rNPService.getReviewList(request.getParameter("buyerId"));
+			model.addAttribute("reviewList",rNPService.getReviewList(((User)session.getAttribute("user")).getUserId()));
+			
 			
 			return "forward:/rnp/listReview.jsp";
 			
@@ -71,15 +74,34 @@ public class ReviewAndPointController {
 			
 		}
 		
+		@RequestMapping(value="addReview", method=RequestMethod.GET)
+		public String addReview(@RequestParam int tranNo,Model model) throws Exception {
+			System.out.println("===============addReview GET===============");	
+			
+			model.addAttribute("tranNo",tranNo);
+			return "forward:/rnp/addReview.jsp";
+		}
 		
-//		@RequestMapping(value="addReview", method=RequestMethod.POST)
-//		public Map<String,Object> addReview(@RequestBody Review review) throws Exception {
-//			System.out.println("===============rest/addReview===============");
-//			
-//			rNPService.addReview(review);
-//			
-//			Map<String,Object> map = new HashMap<String,Object>();
-//			
-//			return map;
-//		}
+		@RequestMapping(value="addReview", method=RequestMethod.POST)
+		public String addReview(@ModelAttribute("review") Review review, Model model) throws Exception {
+			System.out.println("===============addReview===============");
+			
+			rNPService.addReview(review);
+			model.addAttribute("review", review);
+			model.addAttribute("tranNo", review.getTranNo());
+			
+			return "forward:/rnp/addReviewPOST.jsp";
+		}
+		
+		@RequestMapping(value="updateReview", method=RequestMethod.GET)
+		public String updateReview(@RequestParam int tranNo, Model model) throws Exception {
+			System.out.println("===============updateReview(===============");
+			
+			Review review = rNPService.getReview(tranNo);
+		
+			model.addAttribute("tranNo", tranNo);
+			model.addAttribute("review", review);
+			
+			return "forward:/rnp/addReview.jsp";
+		}
 }
