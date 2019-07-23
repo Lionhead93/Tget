@@ -24,6 +24,7 @@ import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Weather;
 import com.tget.service.event.EventService;
+import com.tget.service.event.domain.Event;
 import com.tget.service.transaction.TranService;
 
 @RestController
@@ -164,10 +165,11 @@ public class CommunityRestController {
 		return "bad";
 	}
 	// ³¯¾¾ ¾È³»
-	@RequestMapping( value="rest/getSearchWeather/") 
-	public Weather getSearchWeather( @RequestBody Weather weather ) throws Exception{
+	@RequestMapping( value="rest/getSearchWeather/{eventId}") 
+	public Weather getSearchWeather( @RequestBody Weather weather , @PathVariable("eventId") String eventId) throws Exception{
 		
-		System.out.println("/community/rest/getSearchWeather : POST");
+		System.out.println("/community/rest/getSearchWeather : ");
+		Event event = eventService.getEvent(eventId);
 		
 		weather = GetSearchWeather.getSearchweather(weather);
 		

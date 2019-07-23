@@ -121,14 +121,14 @@
 		</div>
 		
 		
-		<!--<jsp:include page="/community/reply.jsp"/>-->
+		<jsp:include page="/community/reply.jsp"/>
       	
 
 
 		<br/>
 		
  	</div> 
- 	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	
 
 </body>
 

@@ -18,9 +18,6 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
-	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -30,21 +27,7 @@
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<style>
-	 div.container{
-	 	margin-top: 0px;
- 		font-family: 'Noto Sans KR', sans-serif;
-	 	font-size: 20px;        
- 	}
- 	
- 	h4{
- 		font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
- 		font-weight: bold;
- 	}
- 	
- 	ul {
- 		font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
- 		font-size: 25px;
- 	}
+	
 	</style>
    	
    	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -114,7 +97,7 @@
 			
 			$("a:contains('∏Æ∫‰¿€º∫')").on("click",function(){
 				popWin = window.open("/rnp/addReview?tranNo=10000","popWin",
-						"left=500, top=100, width=600, height=600, "
+						"left=500, top=100, width=600, height=500, "
 						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 				
 // 				self.location = "/rnp/addReview?tranNo=10000";
@@ -237,13 +220,13 @@
 
  
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
- 	
-<div class="container">	
-				<a class="navbar-brand" >
+ 	<a class="navbar-brand" >
 					<button type="button" class="btn btn-dark">
-								<h4><i class="fas fa-running"></i> T-GET</h4>
+								<strong>T-GET</strong><small>&nbsp;&nbsp; by MFC</small>
 					</button>
-				</a>
+	</a>
+<div class="container">	
+				
  	<!-- <a class="navbar-brand" ><i class="fas fa-running"></i> T-GET</a>	 -->		
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     	<span class="navbar-toggler-icon"></span>

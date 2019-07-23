@@ -4,7 +4,111 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+$( function(){	
+	$("#brand").on("click",function(){
+		self.location = "/";
+	});
+	$("a[href='#' ]:contains('Home')").on("click" , function() {
+		self.location = "/"
+	});
+	$("a[href='#' ]:contains('Sign Up')").on("click" , function() {
+		self.location = "/user/addUser"
+	});
+	$("a[href='#' ]:contains('Login')").on("click" , function() {
+		self.location = "/user/login"
+	});
+	$("a[href='#' ]:contains('Logout')").on("click" , function() {
+		self.location = "/user/logout"
+	});
+});
+$( function(){
+	$("a:contains('이벤트관리')").on("click",function(){
+		self.location = "/event/getEventManage";
+	});
+	$("a:contains('관심이벤트')").on("click",function(){		
+		self.location = "/event/getInterestedEventList";
+	});
+});
+$( function(){
+	$("a:contains('내 판매목록')").on("click",function(){		
+		self.location = "/ticket/getTicketList?menu=seller";
+	});
+	$("a:contains('티켓관리')").on("click",function(){		
+		self.location = "/ticket/getTicketList?menu=check";
+	});
+	$("a:contains('내 거래내역')").on("click",function(){		
+		self.location = "/tran/getTranList?menu=user";
+	});
+});	
+$( function(){	
+	$("a:contains('리뷰작성')").on("click",function(){
+		self.location = "/rnp/";
+	});
+	$("a:contains('내리뷰조회')").on("click",function(){
+		self.location = "/rnp/";
+	});
+	$("a:contains('내평점조회')").on("click",function(){
+		self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
+	});
+	$("a:contains('포인트내역조회')").on("click",function(){
+		self.location = "/rnp/";
+	});
+	
+	$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
+		self.location = "/coupon/getCoupon?userId=${sessionScope.user.userId}";
+	});
+});
+$( function(){				
+	
+	if('${user}'!=''){
+		getNoReadAlarmCount("${user.userId}"); 
+	}			
+	//알람리스트 madal 출력
+	$("a:contains('Alarm')").on("click", function(){
+		getAlarmModal("${user.userId}");				
+	});	
+});
 
+$(function() {
+	
+	$( "a[href='#']:contains('티켓거래 공지')" ).on("click" , function() {
+		
+		self.location="/community/getContentList?searchCondition=1&searchKeyword=0";	
+	
+	});
+	
+	$( "a[href='#']:contains('자유게시판 이용공지')" ).on("click" , function() {
+		self.location="/community/getContentList?searchCondition=1&searchKeyword=1";	
+	
+	});
+ 
+	 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=1&searchKeyword=2";	
+		
+		});
+	 
+	 $( "a[href='#']:contains('삽니다')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
+		
+		});
+	 
+	 $( "a[href='#']:contains('팝니다')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=4";	
+		
+		});
+	 
+	 $( "a[href='#']:contains('수다방')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
+		
+		});
+	 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
+			self.location="/community/getRefundList";	
+		
+		});
+	 
+});
+</script>
 		<!-- Header -->
 			<header id="header">
 				<h1><a id="brand" href="#">T-GET <span>by MFC</span></a></h1>
@@ -88,71 +192,4 @@
 					</div>
 		
 		
-		<script>					  
-		$( function(){	
-			$("#brand").on("click",function(){
-				self.location = "/";
-			});
-			$("a[href='#' ]:contains('Home')").on("click" , function() {
-				self.location = "/"
-			});
-			$("a[href='#' ]:contains('Sign Up')").on("click" , function() {
-				self.location = "/user/addUser"
-			});
-			$("a[href='#' ]:contains('Login')").on("click" , function() {
-				self.location = "/user/login"
-			});
-			$("a[href='#' ]:contains('Logout')").on("click" , function() {
-				self.location = "/user/logout"
-			});
-		});
-		$( function(){
-			$("a:contains('이벤트관리')").on("click",function(){
-				self.location = "/event/getEventManage";
-			});
-			$("a:contains('관심이벤트')").on("click",function(){		
-				self.location = "/event/getInterestedEventList";
-			});
-		});
-		$( function(){
-			$("a:contains('내 판매목록')").on("click",function(){		
-				self.location = "/ticket/getTicketList?menu=seller";
-			});
-			$("a:contains('티켓관리')").on("click",function(){		
-				self.location = "/ticket/getTicketList?menu=check";
-			});
-			$("a:contains('내 거래내역')").on("click",function(){		
-				self.location = "/tran/getTranList?menu=user";
-			});
-		});	
-		$( function(){	
-			$("a:contains('리뷰작성')").on("click",function(){
-				self.location = "/rnp/";
-			});
-			$("a:contains('내리뷰조회')").on("click",function(){
-				self.location = "/rnp/";
-			});
-			$("a:contains('내평점조회')").on("click",function(){
-				self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
-			});
-			$("a:contains('포인트내역조회')").on("click",function(){
-				self.location = "/rnp/";
-			});
-			
-			$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
-				self.location = "/coupon/getCoupon?userId=${sessionScope.user.userId}";
-			});
-		});
-		$( function(){				
-			
-			if('${user}'!=''){
-				getNoReadAlarmCount("${user.userId}"); 
-			}			
-			//알람리스트 madal 출력
-			$("a:contains('Alarm')").on("click", function(){
-				getAlarmModal("${user.userId}");				
-			});
-			
-			
-		});
-		</script>
+		
