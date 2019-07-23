@@ -64,6 +64,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public void updatePassword(User user) throws Exception {
+		userDao.updatePassword(user);
+		
+	}
+	
+	@Override
 	public boolean checkDuplication(String userId) throws Exception {
 		boolean result=true;
 		User user=userDao.selectUser(userId);
@@ -194,9 +200,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User findPassword(String phone) throws Exception {
+	public User findPassword(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return userDao.findPassword(phone);
+		return userDao.findPassword(userId);
 	}
 
 	@Override
