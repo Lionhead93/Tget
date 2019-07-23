@@ -72,7 +72,7 @@ public class TicketServiceTestApp {
 		System.out.println(jsonobj);
 	}
 	
-	//@Test	
+	@Test	
 	public void addTicket() throws Exception {
 		
 		Ticket ticket = new Ticket();
@@ -90,7 +90,7 @@ public class TicketServiceTestApp {
 		ticket.setType("0");
 		ticket.setSeat("c열34");
 		ticket.setOptions("애완동물출입금지");
-		ticket.setTicketImage("ccc.jpg");
+		ticket.setTicketImage("20190719140327_logo.png");
 		
 		ticketService.addTicket(ticket);
 		
@@ -180,7 +180,7 @@ public class TicketServiceTestApp {
 	}
 	
 	
-	@Test
+	//@Test
 	public void addAlarm() throws Exception{
 		
 		Alarm alarm = new Alarm();
