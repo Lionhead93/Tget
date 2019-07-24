@@ -19,6 +19,15 @@ public class User {
 	private String userStatement;
 	private Date lastConnDate;
 	private String kakaoId;
+	private String kakaoToken;
+	public String getKakaoToken() {
+		return kakaoToken;
+	}
+
+	public void setKakaoToken(String kakaoToken) {
+		this.kakaoToken = kakaoToken;
+	}
+
 	private String naverId;
 	private String facebookId;
 	private String blacklistCode;

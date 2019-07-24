@@ -22,6 +22,7 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -30,11 +31,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tget.common.domain.Search;
 import com.tget.service.user.Config;
 import com.tget.service.user.UserService;
+import com.tget.service.user.kakao_restapi;
 import com.tget.service.user.domain.User;
 
 
@@ -277,5 +280,29 @@ public class UserRestController {
 		}
 
 	}
+	
+	/* @RequestMapping(value = "oauth", produces = "application/json")
+	    public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
+	        System.out.println("로그인 할때 임시 코드값");
+	        //카카오 홈페이지에서 받은 결과 코드
+	        System.out.println(code);
+	        System.out.println("로그인 후 결과값");
+	        
+	        //카카오 rest api 객체 선언
+	        kakao_restapi kr = new kakao_restapi();
+	        //결과값을 node에 담아줌
+	        JsonNode node = kr.getAccessToken(code);
+	        //결과값 출력
+	        System.out.println(node);
+	        //노드 안에 있는 access_token값을 꺼내 문자열로 변환
+	        String token = node.get("access_token").toString();
+	        //세션에 담아준다.
+	        session.setAttribute("token", token);
+	        
+	        return "forward:/user/logininfo.jsp";
+	    }*/
+
+
+	
 	
 }

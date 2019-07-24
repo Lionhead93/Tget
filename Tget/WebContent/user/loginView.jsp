@@ -10,25 +10,35 @@
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"></script>
+
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
     	 body >  div.container{ 
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
+        	background : black;
         }
     </style>
     
@@ -54,7 +64,7 @@
 
 	
 	
-	$(function(){
+	/* $(function(){
 	    var naverLogin = new naver.LoginWithNaverId({
 	        clientId: "AziWQOW7S2sZhD1PEBi9",
 	        callbackUrl: "http://127.0.0.1:8080/user/callback.jsp",
@@ -63,7 +73,7 @@
 	    });
 	    naverLogin.init();
 	})//e.o.naver
-
+ */
 
 	
 		//============= "로그인"  Event 연결 =============
@@ -105,6 +115,7 @@
 					   
 					   if (JSONData.msg == "no") {
 							  alert("ID/password error");
+							  return;
 				  		 }else if (JSONData.msg == "true") { 
 						
 						  $('#black').modal('show');
@@ -135,7 +146,7 @@
 			});
 		});
 		
-		Kakao.init('f784da1696e287dff9fa08e5c44d8558');
+	/* 	Kakao.init('f784da1696e287dff9fa08e5c44d8558');
 	    // 카카오 로그인 버튼을 생성합니다.
 	    Kakao.Auth.createLoginButton({
 	      container: '#kakao-login-btn',
@@ -145,7 +156,7 @@
 	      fail: function(err) {
 	         alert(JSON.stringify(err));
 	      }
-	    });
+	    }); */
 		
 		
 	</script>		
@@ -154,6 +165,8 @@
 
 <body>
 
+
+<jsp:include page="/layout/tgetToolbar.jsp" />
 	<!-- ToolBar Start /////////////////////////////////////-->
 	
    	<!-- ToolBar End /////////////////////////////////////-->	
@@ -187,6 +200,9 @@
 					      <button type="button" class="btn btn-default"  >ID 찾기</button>
 					      <button type="button" class="btn btn-default"  >비밀번호 찾기</button>
 					      <a class="btn btn-default" href="#" role="button">회원가입</a>
+					      <a id="custom-login-btn" href = "https://kauth.kakao.com/oauth/authorize?client_id=8dbe371059a9972c710af6d3eb14767e&redirect_uri=http://localhost:8080/user/oauth&response_type=code">
+<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="200"/>
+</a>
 					    </div>
 					  </div>
 			
@@ -231,6 +247,9 @@
 	 </div>
 	  </div>
 	  
+	  
+	  <jsp:include page="/layout/footer.jsp" />
+	  </body>
 </html>		
 			
 				<!-- <div id="naverIdLogin" align="center">
