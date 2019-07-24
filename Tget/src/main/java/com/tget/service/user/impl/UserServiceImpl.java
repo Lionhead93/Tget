@@ -221,6 +221,12 @@ boolean result=true;
 		}
 		return result;
 	}
+
+	@Override
+	public User getKakao(String kakaoId) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.selectKakao(kakaoId);
+	}
 	}
 
 
