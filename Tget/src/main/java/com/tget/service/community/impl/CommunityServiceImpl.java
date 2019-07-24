@@ -177,14 +177,5 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		communityDao.updateRefund(content);
 	}
-
-
-	@Override
-	public Map<String, Object> getSearchLoad(String load) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("load", load );
-		
-		return map;
-	}
+	
 }
