@@ -3,6 +3,7 @@ package com.tget.web.community;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Report;
 import com.tget.service.event.EventService;
+import com.tget.service.event.domain.Event;
 import com.tget.service.transaction.TranService;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
@@ -120,8 +122,10 @@ public class CommuityController {
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
 		public String addReport(@ModelAttribute("report") Report report, HttpSession session) throws Exception {
 
-			System.out.println("community/addContent: POST");
+			System.out.println("community/addReport: POST");
 			//User user = userService.getUser("userId");
+			
+			System.out.println("report////////////"+report);
 			
 			communityService.addReport(report);
 			
@@ -224,13 +228,12 @@ public class CommuityController {
 			System.out.println("@@되어야하느니라");
 			Report report = communityService.getReport(reportNo);
 			User user = userService.getUser(report.getBlackId());	
-			
 			userService.addBlacklist(user);
 			
 			report.setCheck("0");
 			communityService.updateReport(report);
-			System.out.println(report);
-
+			System.out.println("@@@@@@@/////////"+report);
+			System.out.println("@@@@@@@@@@@@@@@하...좀....");
 			return "forward:/user/listUser.jsp";
 		}
 		//환불 게시판 환불 검증 여부 처리
@@ -254,7 +257,9 @@ public class CommuityController {
 		public String getSearchLoad(Model model) throws Exception{
 			
 			System.out.println("/community/getSearchLoad");
+			List<String> list = eventService.getAllLocation();
 			
+			model.addAttribute("list", list);
 			
 			return "forward:/community/getSearchLoad.jsp";
 		}

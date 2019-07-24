@@ -89,9 +89,11 @@
 						var contentNo = $(this).children('input[type="hidden"]').val();
 						var reportNo = $(this).children('div').text().trim();
 						$('input[name="reportNo"]').val(reportNo);
+						
 						$.ajax( 
+								
 								{
-									url : "/community/json/getContent/"+contentNo ,
+									url : "/community/rest/getContent/"+contentNo ,
 									method : "GET" ,
 									dataType : "json" ,
 									headers : {
@@ -167,7 +169,7 @@
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left" >신고자</th>
+            <th align="left" >신고자</th>           
             <th align="left">신고 사유</th>
             <th align="left">신고 일자</th>
             <th align="left">검증 여부</th>
@@ -186,8 +188,10 @@
 		  <c:forEach var="report" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
+			  
 			  <td align="center">${ i }</td>
-			  <td align="left">${report.whiteId }</td>
+			  <td align="left">${report.whiteId}
+			  </td>
 			  <td align="left">			  	
 			  <c:if test="${report.reportReasonCode==0}">
 			     부적절한 홍보 게시물
@@ -205,7 +209,7 @@
 			  
 			  <td align="left">
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
-			  <input type="hidden" value="${report.contentNo}"/>
+			  <input type="hidden" name="reportNo" value="${report.contentNo}"/>
 			  <div style="display: none;">${report.reportNo}</div>
 			  상세보기 </button>
 			  </td>

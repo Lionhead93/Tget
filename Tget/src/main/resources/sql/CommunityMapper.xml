@@ -92,7 +92,7 @@
 	 
 	 <select 	id="selectReport"	parameterType="report"	resultMap="reportSelectMap">
 		SELECT
-		report_no, white_id, white_nickname, black_id, report_reason_code, SYSDATE, content_no, reply_no, '1', report_code
+		report_no, white_id, white_nickname, black_id, content_no, reply_no, report_reason_code, SYSDATE, report_code, '1'
 		FROM report 
 		WHERE report_no = #{value}
 	 </select>
