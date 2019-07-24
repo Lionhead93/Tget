@@ -60,6 +60,7 @@
       
         <thead>
           <tr>
+           <th align="left">No</th>
             <th align="left">쿠폰번호</th>
             <th align="left">쿠폰용도</th>
             <th align="left">쿠폰사용일자</th>
@@ -72,7 +73,12 @@
        
 		<tbody>
 				
+			
+			<c:set var="i" value="0" />
+		  <c:forEach var="coupon" items="${list}">
+			<c:set var="i" value="${ i+1 }" />	
 			<tr>
+			 <td align="center">${ i }</td>
 			  <td align="left">${coupon.couponNo}</td>
 			  <td align="left">
 			  
@@ -97,7 +103,9 @@
 			  </td>
 			
 			  	
+			
 			</tr>
+			</c:forEach>
         </tbody>
       
       </table>

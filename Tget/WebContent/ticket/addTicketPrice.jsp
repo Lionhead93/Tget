@@ -22,6 +22,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 				   
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -137,7 +138,7 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<div class="container">
 	<br/>
-		<h1 class="text-center">판매가격 결정  ${ticket.event.eventName}</h1>
+		<h1 class="text-center">판매가격 결정 : ${ticket.event.eventName}</h1>
 				
 		<form>
 		<div class="text-center">				  
@@ -159,12 +160,11 @@
 		  	<span id="avgPrice"></span>		  
 		  </div>
 		  <div class="form-group">
-		  <strong>판매 확률 : </strong> 
 		  	<span id="sellProb"></span>
 		  </div>
 		<br/>
 		   <div class="form-group">
-			  <a class="btn btn-danger btn" href="#" role="button">게시된 &nbsp;판매현황 &nbsp;보기</a>
+			  <a class="btn btn-danger btn" href="#" id="${ticket.event.eventId}" name="sellModal" role="button" data-target="#sellModal" data-toggle="modal">게시된 &nbsp;판매현황 &nbsp;보기</a>
 		  </div>
 		 <br/>
 		  <div class="form-group">
@@ -175,6 +175,64 @@
 		</form>
 		
  	</div>
+ 	<!-- 판매현황 모달창  -->
+					<div class="modal fade" id="sellModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h3 class="modal-title" id="modalCenterTitle"><div class="text-secondary text-center">게시된 판매현황</div></h3>
+					        <a href="#" class="close" data-dismiss="modal">
+					          &times;
+					        </a>
+					      </div>
+					      <div class="modal-body">
+					      	<canvas id="myChart"></canvas>
+					      </div>
+					      <div class="modal-footer">
+					        </div>
+					    </div>
+					  </div>
+					</div>
+					<script >
+					
+						$("a[name='sellModal']").on("click", function(){
+							
+							var eventId = $(this).attr("id").trim();
+							
+							$.ajax({
+								url : "/ticket/rest/getSellList/"+eventId ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+					          	success: function(JSONdata){
+					          		
+					          		var ctx = document.getElementById('myChart').getContext('2d');
+									
+									var chart = new Chart(ctx, {
+									    // The type of chart we want to create
+									    type: 'line',
+								
+									    // The data for our dataset
+									    data: {
+									        labels: ['5만원 이하', '5만원~10만원', '10만원~20만원', '20만원~30만원', '30만원~40만원', '40만원이상'],
+									        datasets: [{
+									            label: '판매 현황',
+									            borderColor: 'rgb(255, 99, 132)',
+									            data: [JSONdata.a, JSONdata.b, JSONdata.c, JSONdata.d, JSONdata.e, JSONdata.f]
+									        }]
+									    },					
+									    options: {}
+									});					          		
+					          	}
+							});
+							
+						});
+											
+						
+					</script>	
  	<jsp:include page="/layout/footer.jsp" />
 </body>
 

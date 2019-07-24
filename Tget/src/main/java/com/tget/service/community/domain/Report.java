@@ -27,10 +27,10 @@ public class Report {
 		public void setWhiteId(String whiteId) {
 			this.whiteId = whiteId;
 		}
-		public String getWhiteNickName() {
+		public String getWhiteNickname() {
 			return whiteNickname;
 		}
-		public void setWhiteNickName(String whiteNickname) {
+		public void setWhiteNickname(String whiteNickname) {
 			this.whiteNickname = whiteNickname;
 		}
 		public String getBlackId() {
@@ -49,7 +49,7 @@ public class Report {
 			return replyNo;
 		}
 		public void setReplyNo(int replyNo) {
-			replyNo = replyNo;
+			this.replyNo = replyNo;
 		}
 		public String getReportReasonCode() {
 			return reportReasonCode;

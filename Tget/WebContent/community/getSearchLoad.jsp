@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,7 +75,7 @@
           
       };
       directionsService.route(request, function(response, status) {
-        alert(status);  
+    	//alert(status);  
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
         }
@@ -95,11 +95,11 @@
             </div>
         <div class="input-group">		    
 							    <input type="text" id="start" class="form-control" width="100%" value="${user.address}">
-							   <input type="text" id="end" class="form-control" width="100%" placeholder="도착지를 선택하세요">
-<!-- 							   		<option value="skydome">고척 스카이돔</option> -->
-<!-- 							   		<option value="artCenter">예술의전당</option> -->
-							   		
-							   		</select>
+							   <select type="text" id="end" class="form-control" width="100%">
+							   		<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
+							   		<option value="${location}">${location}</option>
+							   		</c:forEach>
+							   	</select>
 							    	<input type="button" value="검색" onclick="Javascript:calcRoute();" >							
 						     </div>
         <div id="map-canvas"></div>

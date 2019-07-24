@@ -48,7 +48,7 @@
 	//var price = document.detailForm.price.value;
 	
 	//var name= $("input[content='contentName']").val();
-	
+	alert($("input[name='whiteNickname']").val());
 		
 		$("form").attr("method" , "POST").attr("action" , "/community/addReport").submit();
 	}
@@ -95,28 +95,28 @@
 		<div class="form-group">
 		    <label for="contentNo" class="col-sm-offset-1 col-sm-3 control-label">게시글 번호</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="contentNo" name="contentNo" value="${report.contentNo}" readonly>
+		      <input type="text" class="form-control" id="contentNo" name="contentNo" value="${content.contentNo}" readonly>
 		      
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="whiteId" class="col-sm-offset-1 col-sm-3 control-label">신고자</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="whiteId" name="whiteId" value="${report.whiteId}" readonly>  
+		      <input type="text" class="form-control" id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly>  
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="whiteNickname" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="whiteNickname" name="whiteNickname" value="${report.whiteNickname}" readonly>
+		      <input type="text" class="form-control" id="whiteNickname" name="whiteNickname" value="${user.nickName}" readonly>
 		      
 		    </div>
 		  </div>
 		<div class="form-group">
 		    <label for="blackId" class="col-sm-offset-1 col-sm-3 control-label">신고 당한 사람</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="blackId" name="blackId" value="${report.blackId}" readonly>
+		      <input type="text" class="form-control" id="blackId" name="blackId" value="${content.userId}" readonly>
 		      
 		    </div>
 		  </div>

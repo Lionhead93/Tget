@@ -10,7 +10,7 @@ public interface CouponService {
 
 	public void addCoupon(Coupon coupon) throws Exception;
 
-	public Coupon getCoupon(String userId) throws Exception;
+	public Map<String, Object> getCouponList(String userId) throws Exception;
 	
 	public void updateCoupon(Coupon coupon) throws Exception;
 	
