@@ -18,5 +18,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/httpcomponents-client-4.5.9"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javax.mail-1.4.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-framework-4.0.9.RELEASE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jackson-core-2.9.5"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

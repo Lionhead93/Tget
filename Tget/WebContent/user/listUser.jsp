@@ -203,8 +203,8 @@
 			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
 			  <td align="left">${user.blacklistCode}</td>
 			  <td align="left">신고사유?</td>
-			  <td align="left">${user.blacklistStartDate}</td>
-			  <td align="left">${user.blacklistEndDate}
+			  <td align="left">${user.blacklistStartDate.toLocaleString()}</td>
+			  <td align="left">${user.blacklistEndDate.toLocaleString()}
 			  	<input type="hidden" value="${user.userId}">
 			
 			  </td>

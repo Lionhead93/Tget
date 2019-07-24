@@ -22,7 +22,8 @@
 <!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!-- 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
+	<!-- KAKAO -->
+<!--    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 	<script type="text/javascript">
 	
 	var videoList = [];
@@ -122,6 +123,42 @@
 				}
 			}			
 		});
+		
+		
+			$("#kakaoSendToMe").on("click",function(){
+				$.ajax( 
+						{
+							url : "/event/rest/kakaoSendToMe",
+							method : "GET" ,
+							data : {
+								accessToken : "DbusJL3wDmeTRuZqdufu9HGYrhefWSX0uhWYTgopyNgAAAFrz7PoTA"
+							},
+							dataType : "json" ,							
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData , status) {
+								alert(JSONData);
+							}
+					});
+			})
+	       
+	       $( "#twitter" ).on("click" , function() {
+	           window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20'
+	        		   +encodeURIComponent(document.URL)+'%20-%20'
+	        		   +encodeURIComponent(document.title), 
+	        		   'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600');
+	         });      
+	     
+	      $( "#facebook" ).on("click" , function() {
+	           window.open('https://www.facebook.com/sharer/sharer.php?u=' 
+	        		   +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+	         });         
+	      
+	      $( "#kakao" ).on("click" , function() {
+	         sendLinkKakao()
+	      }); 
 	});
 	var tag = document.createElement('script');
 
@@ -227,6 +264,7 @@
 	<div class="container" align="center">
 	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
 	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
+	<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
 		<div class="row" style="padding-top: 30px">
 			<div class="col-lg-10 col-md-10 col-9"></div>
 			<div class="col-lg-1 col-md-1 col-1">
@@ -244,10 +282,10 @@
 		
 		<div class="row">
 			<div class="col-lg-6 col-sm-12 col-xs-12" >
-				<h1>${event.eventName }</h1><br/>
+				<h1>${!empty event.koName? event.koName:event.eventName }</h1><br/>
 				<div id="player"></div> <br/>
 				<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
-				${event.eventLocation }<br/>
+				${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
 				${event.eventDate } &nbsp; 
 				${event.eventTimeStr}<br/><br/><br/>
 			</div>
@@ -298,7 +336,10 @@
 						</c:forEach>
 			  		</tbody>
 				</table>		
-				<input type="hidden"  id="ticketNo" name="ticketNo"/>			
+				<input type="hidden"  id="ticketNo" name="ticketNo"/>		
+				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
+    		    <a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
+    	   		<a href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>	
 			</div>
 		</div>
 	</div>

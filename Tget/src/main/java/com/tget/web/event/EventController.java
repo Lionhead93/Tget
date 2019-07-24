@@ -106,31 +106,59 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="getEventList")
-	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,Model model) throws Exception {
+	public String getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,HttpSession session,Model model) throws Exception {
 		System.out.println("===============getEventList===============");
 		System.out.println("search:"+search);
-		
+		Map<String,Object> map = null;
+		List<StubhubEvent> list = null;
 		if (search.getSearchCondition().equals("0")) {
 			model.addAttribute("category", search.getSearchKeyword());
+			
+			List<StubhubEvent> tempList = (List<StubhubEvent>)session.getAttribute(search.getSearchKeyword());
+			
+			if (tempList != null) {
+				
+				list = tempList;				
+				model.addAttribute("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
+			}else {
+				map = eventService.getEventList(search, requestPageToken, stubhubKey);
+				list = (List<StubhubEvent>)map.get("eventList");
+				int totalResult = (Integer)map.get("totalResults");
+				if (totalResult != 0 && list != null) {
+					list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
+					session.setAttribute( search.getSearchKeyword(), list);
+					session.setAttribute( search.getSearchKeyword()+"TotalResults", (Integer)map.get("totalResults"));
+					model.addAttribute("totalResults",(Integer)map.get("totalResults"));
+				}			
+//				list = (List<StubhubEvent>)map.get("eventList");
+//				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null, (List<StubhubEvent>)map.get("eventList"))).get("result");
+				
+			}
+		}else {
+			search.setSearchKeyword(((String)eventService.translate("ko", "en", search.getSearchKeyword(),null).get("result")));
+			map = eventService.getEventList(search, requestPageToken, stubhubKey);
+			list = (List<StubhubEvent>)map.get("eventList");
+			int totalResult = (Integer)map.get("totalResults");
+			if (totalResult != 0 && list != null) {
+				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
+				model.addAttribute("totalResults",(Integer)map.get("totalResults"));
+			}			
 		}
 		
-		Map<String,Object> map = eventService.getEventList(search, requestPageToken, stubhubKey);
-
+		model.addAttribute("eventList",list);
 		model.addAttribute("search", search);
-		model.addAttribute("requestPageToken",requestPageToken);
-		model.addAttribute("eventList",(List<StubhubEvent>)map.get("eventList"));
-		model.addAttribute("totalResults",(Integer)map.get("totalResults"));
+		model.addAttribute("requestPageToken",requestPageToken);				
 
 		return "forward:/event/listEvent.jsp";
 	}
 	
 	@RequestMapping(value="getEvent")
-	public String getEvent(@RequestParam String category, @RequestParam String eventName, Model model) throws Exception {
+	public String getEvent(@RequestParam String category, @ModelAttribute("event") Event event, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
 		int viewCount = 0;
 //		int ticketLowestPrice = 0;
 		Search search = new Search();
-		
+		String eventName = event.getEventName();
 		List<Event> eventListByName = eventService.getEventByName(eventName);
 		System.out.println(eventListByName);
 		
@@ -142,21 +170,23 @@ public class EventController {
 			List<StubhubEvent> list = (List<StubhubEvent>)eventService.getEventList(search, "0", stubhubKey).get("eventList");
 			for (StubhubEvent stubhubEvent : list) {
 				stubhubEvent.setCategoryTwoEng(category.toLowerCase());
+				stubhubEvent.setKoLocation(event.getKoLocation());
+				stubhubEvent.setKoName(event.getKoName());
 				eventService.addEvent(stubhubEvent);
 			}
 			eventListByName = eventService.getEventByName(eventName);
 			model.addAttribute("totalResults", eventListByName.size());	
 		}else {
 
-			for (Event event : eventListByName) {
-				category = event.getCategoryTwoEng();
+			for (Event e : eventListByName) {
+				category = e.getCategoryTwoEng();
 				search.setSearchCondition("0");
-				search.setSearchKeyword(event.getEventId());
+				search.setSearchKeyword(e.getEventId());
 //				ticketLowestPrice = ((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice();
 //				event.setTicketLowestPrice(ticketLowestPrice);
-				event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
-				event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
-				viewCount = event.getViewCount();
+				e.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
+				e.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
+				viewCount = e.getViewCount();
 			}						
 			model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
 			model.addAttribute("totalResults", eventListByName.size());	
@@ -167,6 +197,7 @@ public class EventController {
 
 		model.addAttribute("eventListByName", eventListByName);
 		model.addAttribute("eventName", eventName);
+		model.addAttribute("event", event);
 		model.addAttribute("category", category);
 		model.addAttribute("viewCount", viewCount);
 		
@@ -174,7 +205,7 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="getEventTicketList")
-	public String getEventTicketList(@RequestParam String eventId,Model model) throws Exception {
+	public String getEventTicketList(@RequestParam String eventId, @ModelAttribute("event") Event e, Model model) throws Exception {
 		System.out.println("===============getEventTicketList===============");
 		
 		Search search = new Search();
@@ -189,6 +220,9 @@ public class EventController {
 		
 		List<String> list = null;
 		Event event = eventService.getEvent(eventId);
+		event.setEventLocation(e.getEventLocation());
+		event.setKoName(e.getKoName());
+		
 		if (event != null) {
 			list = eventService.getYoutubeIdList(event.getEventName());
 		}
@@ -198,7 +232,6 @@ public class EventController {
 			model.addAttribute("videoId", youtubeList.get(youtubeList.size()-1));
 		}
 		
-//		model.addAttribute("videoId", "-iDOez7D1tY");
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
 		model.addAttribute("lowPrice", sellProb.getLowPrice());
@@ -417,7 +450,7 @@ public class EventController {
 		String[] arr = null;
 		
 		if(eventId.contains(",")) {
-			arr  =eventId.split(",");
+			arr = eventId.split(",");
 			for (String string : arr) {
 				eventService.deleteInterestedEvent(string, userId);
 			} 

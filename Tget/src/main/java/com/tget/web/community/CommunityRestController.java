@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,7 @@ import com.tget.service.community.domain.Weather;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Event;
 import com.tget.service.transaction.TranService;
+import com.tget.service.user.domain.User;
 
 @RestController
 @RequestMapping("/community/*")
@@ -72,7 +74,7 @@ public class CommunityRestController {
 		return communityService.getReplyList(reply);
 		
 	}
-
+	//이거로 하나
 //	@RequestMapping(value="json/addReply/{replyNo}", method=RequestMethod.GET)
 //	public Map<String,Object> addReply(@PathVariable int replyNo, Search search) throws Exception {
 //
@@ -84,7 +86,7 @@ public class CommunityRestController {
 //		
 //		return map;
 //	}
-	
+	//이거로 하나.....
 	@RequestMapping(value="rest/addReply", method=RequestMethod.POST)
 	public Map<String,Object> addReply( @RequestBody Reply reply) throws Exception {
 
@@ -105,6 +107,24 @@ public class CommunityRestController {
 		
 		return map;
 	}
+	//// 이것도 안되고 18
+//	@RequestMapping(value="/rest/addReply", method=RequestMethod.POST)
+//    public String addReply(@ModelAttribute("reply") Reply reply, HttpServletRequest request) throws Exception{
+//        
+//        HttpSession session = request.getSession();
+//        User user = (User)session.getAttribute("loginVO");
+//        
+//        try{
+//        
+//        	reply.setUserId(user.getUserId());        
+//            communityService.addReply(reply);
+//            
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        
+//        return "success";
+//    }
 	/// 수정...필요해
 //	@RequestMapping(value="json/updateReply/{replyNo}", method=RequestMethod.GET)
 //	public String updateReply( @PathVariable int replyNo  , Model model) throws Exception{
@@ -169,4 +189,5 @@ public class CommunityRestController {
 		
 		return weather;
 	}
+
 }

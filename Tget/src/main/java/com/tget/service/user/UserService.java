@@ -8,8 +8,11 @@ import com.tget.service.user.domain.User;
 
 
 public interface UserService {
+	
+	public User getKakao(String kakaoId) throws Exception;
+	
 	//회원가입
-	public void addUser(User user) throws Exception;
+		public void addUser(User user) throws Exception;
 	//회원조회
 	public User getUser(String userId) throws Exception;
 	//회원목록조회

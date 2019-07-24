@@ -239,7 +239,10 @@ public class EventDaoImpl implements EventDao {
 		ObjectMapper objectMapper = new ObjectMapper();
 		StubhubSearchList stubhubSearchList = objectMapper.readValue(jsonobj.toString(), StubhubSearchList.class);
 
-		return stubhubSearchList.getNumFound();
+		if (stubhubSearchList != null) {
+			return stubhubSearchList.getNumFound();
+		}
+		return 0;
 	}
 	 
 	
@@ -381,8 +384,8 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	
-	public String translate(String sourceLang, String targetLang,String queryText) throws Exception{
-		
+	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception{
+		Map<String, Object> map =  new HashMap<String, Object>();
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
@@ -391,12 +394,25 @@ public class EventDaoImpl implements EventDao {
 		httpPost.setHeader("Content-Type", "application/json");
 				
 		JSONObject json = new JSONObject();
-		json.put("q", queryText);
 		json.put("source", sourceLang);
 		json.put("target", targetLang);
 //		json.put("source", "en");
 //		json.put("target", "ko");
 		json.put("format", "text");
+		
+		StubhubEvent stubhubEvent = null; 
+		String str = "";
+		if (queryText != null && queryText != "") {
+			json.put("q", queryText);
+		}else if (list != null && list.size() != 0) {
+			for (int i=0; i<list.size(); i++) {
+				stubhubEvent = (StubhubEvent)list.get(i);
+				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" //";				
+			}
+			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+			System.out.println("query///////////////////////////"+str);
+			json.put("q",str);
+		}		
 		
 		HttpEntity httpEntity01 = new StringEntity(json.toString(),"utf-8");
 
@@ -417,7 +433,119 @@ public class EventDaoImpl implements EventDao {
 		JSONArray tran = (JSONArray) data.get("translations");
 		JSONObject tranText = (JSONObject) tran.get(0);
 		String result = (String) tranText.get("translatedText");
+		System.out.println("result///////////////////////////"+result);
 		
-		return result;
+		String[] translated = null;
+		String[] tempArr = null;
+		
+		if (queryText != null && queryText != "") {
+			map.put("result", result);
+			return map;
+		}else if (list != null && list.size() != 0) {
+			translated = result.split("//");
+			
+			for (int i=0; i<translated.length; i++ ) {
+				tempArr = translated[i].split("/");
+				stubhubEvent = (StubhubEvent)list.get(i);
+				
+				for (int j = 0; j < tempArr.length; j++) {
+					if (j==0) {
+						stubhubEvent.setKoName(tempArr[j]);
+					}else if (j==1) {
+						stubhubEvent.setVenueName(tempArr[j]);
+					}else if (j==2) {
+						stubhubEvent.setPerformersName(tempArr[j]);
+					}
+				}
+				System.out.println("==============================");
+				System.out.println("tempArr.length : "+tempArr.length);
+				System.out.println(stubhubEvent);
+				list.set(i, stubhubEvent);
+			}
+			map.put("result", list);
+			return map;
+		}	
+		return null;
+	}
+	
+	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception{
+		Map<String, Object> map =  new HashMap<String, Object>();
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
+		HttpPost httpPost = new HttpPost(url);
+//		httpPost.setHeader("Authorization", "Bearer AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A");
+		httpPost.setHeader("Content-Type", "application/json");
+				
+		JSONObject json = new JSONObject();
+		json.put("source", sourceLang);
+		json.put("target", targetLang);
+//		json.put("source", "en");
+//		json.put("target", "ko");
+		json.put("format", "text");
+		
+		Event event = null; 
+		String str = "";
+		if (list != null && list.size() != 0) {
+			for (int i=0; i<list.size(); i++) {
+				event = list.get(i);
+				str += event.getEventName()+"/"+event.getEventLocation()+" //";				
+			}
+			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+			System.out.println("query///////////////////////////"+str);
+			json.put("q",str);
+		}		
+		
+		HttpEntity httpEntity01 = new StringEntity(json.toString(),"utf-8");
+
+		httpPost.setEntity(httpEntity01);
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+			
+		HttpEntity httpEntity = httpResponse.getEntity();
+		
+		//System.out.println(httpResponse);
+		
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		//System.out.println(jsonobj);
+		
+		JSONObject data = (JSONObject) jsonobj.get("data");
+		JSONArray tran = (JSONArray) data.get("translations");
+		JSONObject tranText = (JSONObject) tran.get(0);
+		String result = (String) tranText.get("translatedText");
+		System.out.println("result///////////////////////////"+result);
+		
+		String[] translated = null;
+		String[] tempArr = null;
+		
+		if (list != null && list.size() != 0) {
+			translated = result.split("//");
+			
+			for (int i=0; i<translated.length; i++ ) {
+				tempArr = translated[i].split("/");
+				event = list.get(i);
+				
+				for (int j = 0; j < tempArr.length; j++) {
+					if (j==0) {
+						event.setKoName(tempArr[j]);
+					}else if (j==1) {
+						event.setEventLocation(tempArr[j]);
+					}
+				}
+				System.out.println("==============================");
+				System.out.println("tempArr.length : "+tempArr.length);
+				System.out.println(event);
+				list.set(i, event);
+			}
+			map.put("result", list);
+			return map;
+		}	
+		return null;
+	}
+	
+	public List<String> selectAllLocation() throws Exception{
+		return sqlSession.selectList("EventMapper.selectAllLocation");
 	}
 }

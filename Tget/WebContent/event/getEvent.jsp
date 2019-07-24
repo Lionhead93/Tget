@@ -134,8 +134,10 @@
 			<br/>			
 			<div class="row">
 				<div class="col-lg-5" align="center">
-					<h3>${eventName}</h3>
+					<h3>${!empty event.koName? event.koName:eventName}</h3>
 					<input type="hidden"  id="eventId" name="eventId" value="" />
+					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
+					<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
 					<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
 					<input type="hidden"  id="category" name="category"  value="${category}" >
 					<input type="hidden" id="eventImage" name="eventImage" value="${eventImage}"/>
@@ -170,7 +172,7 @@
 					      <td>
 							<div class="event" align="left">		
 								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/>
-								${i.eventLocation }<br/>
+								${!empty event.koLocation? event.koLocation: i.eventLocation }<br/>
 	
 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
 								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				
