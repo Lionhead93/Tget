@@ -37,97 +37,7 @@
        }	
     </style>
     
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-		
-	
-	// 댓글 등록하기
-	$(function() {
-		
-		$("button.btn.pull-right.btn-success:contains('등&nbsp;록')").on("click" , function() {
-			
-			alert("181818181818181818");
-			
-			var reportBody = $(this).children('a[type="hidden"]').serialize();
-	    
-			$.ajax(
-	    		{
-	    
-	        method:"POST",
-	        url : "/community/rest/addReply/",
-	        data: JSON.stringify({
-	        	
-	        	userId : $("#userId").text().trim(),
-	        	nickName : $("#userNickname").text().trim(),
-	        	contentNo : $("#contentNo").text().trim(),
-	        	replyBody : $("#replyBody").val()
-	        
-	        }),
-	        //dataType: "json",
-	        header:{
-	        	"Accept" : "application/json",
-				"Content-Type" : "application/json"	
-	        },
-	        success : function(data, status){
-	            
-	        	if(data=="success")
-	            {
-	                
-	                $("#reply").val("");
-	                getReplyList();
-	            }
-	        },
-	        error:function(request,status,error){
-	 
-	       } 
-	        
-	    });
-	});
-
-	 //초기 페이지 로딩시 댓글 불러오기
-	 
-  	$(function(){
-	    
- 	getReplyList();
-	    
- 	}); 
-	 
-	// 댓글 불러오기(Ajax)
-	
-	function getReplyList(){
-	    
-		var html = "";
-	    var cCnt = data.length
-		
-	    $.ajax({
-	        type:'GET',
-	        url : "/community/rest/getReplyList/"+replyNo,
-	        dataType : "json",
-	        data: $("#replyForm").serialize(),
-	        headers : {
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			}, 
-			success : function(JSONData , status) {
-	            
-	            ;
-	            
-	            var displayValue =+JSONData.reply.replyBody+"<br/>";
-								
-	            $("#cCnt").html(cCnt);
-	            $("#commentList").html(html);
-	            
-	        },
-	        error:function(request,status,error){
-	            
-	       }
-	        
-	    });
-	});
-	 
-	</script>
-
-	
+ 
 </head>
 
 <body>
@@ -150,10 +60,10 @@
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="reply" name="reply" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="replyBody" name="replyBody" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
-                                <button class="btn pull-right btn-success" >등&nbsp;록</button>
+                                <a href='#' onClick="fn_comment('${result.code}')" class="btn pull-right btn-success" >등&nbsp;록</a>
                             </div>
                         </td>
                     </tr>
@@ -161,7 +71,7 @@
             </div>
         </div><!-- onClick="fn_comment('${result.code }')"  -->
   
-        <input type="hidden" id="replyBody" name=replyBody value="${reply.replyBody}" />        
+        <input type="hidden" id="contentNo" name="contentNo" value="${result.code}" />        
     </form>
 </div>
 
@@ -172,7 +82,88 @@
     </form>
 </div>
  
+ <script type="text/javascript">
 
+
+			/*
+			 * 댓글 등록하기(Ajax)
+			 */
+			function fn_comment(code){
+			    alert("찍히나");
+			    $.ajax({
+			        type:'POST',
+			        url : "/community/rest/addReply/",
+			        data:$("#replyForm").serialize(),
+			        success : function(data){
+			            if(data=="success")
+			            {
+			                getCommentList();
+			                $("#replyBody").val("");
+			            }
+			        },
+			        error:function(request,status,error){
+			            
+			       }
+			        
+			    });
+			}
+			 
+			/**
+			 * 초기 페이지 로딩시 댓글 불러오기
+			 */
+			$(function(){
+			    
+			    getCommentList();
+			    
+			});
+			 
+			/**
+			 * 댓글 불러오기(Ajax)
+			 */
+			function getCommentList(){
+			    
+			    $.ajax({
+			        type:'GET',
+			        url : "/community/rest/getReplyList/"+replyNo,
+			        dataType : "json",
+			        data : $("#replyForm").serialize(),
+			        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			        success : function(data){
+			            
+			            var html = "";
+			            var cCnt = data.length;
+			            
+			            if(data.length > 0){
+			                
+			                for(i=0; i<data.length; i++){
+			                    html += "<div>";
+			                    html += "<div><table class='table'><h6><strong>"+data[i].userId+"</strong></h6>";
+			                    html += data[i].replyBody + "<tr><td></td></tr>";
+			                    html += "</table></div>";
+			                    html += "</div>";
+			                }
+			                
+			            } else {
+			                
+			                html += "<div>";
+			                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+			                html += "</table></div>";
+			                html += "</div>";
+			                
+			            }
+			            
+			            $("#cCnt").html(cCnt);
+			            $("#commentList").html(html);
+			            
+			        },
+			        error:function(request,status,error){
+			            
+			       }
+			        
+			    });
+			}
+ 
+</script>
  
 </body>
 </html>
