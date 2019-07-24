@@ -21,6 +21,7 @@ $( function(){
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
+	
 });
 $( function(){
 	
@@ -62,7 +63,10 @@ $( function(){
 	});
 	
 	$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
-		self.location = "/coupon/getCoupon?userId=${sessionScope.user.userId}";
+		self.location = "/coupon/getCouponList?userId=${sessionScope.user.userId}";
+	});
+	$("a[href='#' ]:contains('Logout')").on("click" , function() {
+		self.location = "/user/logout"
 	});
 });
 $( function(){				

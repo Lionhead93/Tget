@@ -25,12 +25,13 @@
 							SYSDATE , SYSDATE, #{couponStatement} )
 	 </insert>
 	 
-	   <select 	id="selectCoupon"	parameterType="string"	resultMap="couponSelectMap">
+	   <select 	id="selectCoupon"	parameterType="coupon"	resultMap="couponSelectMap">
 		SELECT
 		coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement
 	 		
 		FROM coupon 
-		WHERE user_id = #{value}
+		WHERE user_id = #{userId}
+		
 	 </select>
 	 
 	 <update	id="updateCoupon"	parameterType="coupon" >
