@@ -59,13 +59,7 @@ public interface CommunityService {
 		// 비 공감수
 		public void updateBadCount(int contentNo)throws Exception;
 		
-		
 		// 환불 게시판 환불 처리
 		public void updateRefund(Content content) throws Exception;
-		
-		// 길 찾기
-		public Map<String,Object> getSearchLoad(String load) throws Exception;
-		
-		
 		
 }

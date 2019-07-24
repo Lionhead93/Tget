@@ -72,7 +72,7 @@ public class TicketServiceTestApp {
 		System.out.println(jsonobj);
 	}
 	
-	@Test	
+	//@Test	
 	public void addTicket() throws Exception {
 		
 		Ticket ticket = new Ticket();
@@ -85,10 +85,10 @@ public class TicketServiceTestApp {
 		ticket.setEvent(event);
 		ticket.setSeller(user);
 		
-		ticket.setAmount(10);
-		ticket.setPrice(200000);
+		ticket.setAmount(4);
+		ticket.setPrice(32100100);
 		ticket.setType("0");
-		ticket.setSeat("c열34");
+		ticket.setSeat("a열34");
 		ticket.setOptions("애완동물출입금지");
 		ticket.setTicketImage("20190719140327_logo.png");
 		
@@ -117,7 +117,7 @@ public class TicketServiceTestApp {
 		
 	}
 	
-	//@Test
+	@Test
 	public void insertTran() throws Exception {
 		
 		Transaction transaction = new Transaction();
@@ -126,9 +126,9 @@ public class TicketServiceTestApp {
 		User seller = new User();
 		User buyer = new User();
 		
-		ticket.setTicketNo(10002);
-		event.setEventId("testId");
-		event.setEventName("EXO");
+		ticket.setTicketNo(10020);
+		event.setEventId("104060536");
+		event.setEventName("EXO 333");
 		seller.setUserId("seller");
 		seller.setNickName("판매자얌");
 		buyer.setUserId("buyer");
@@ -142,7 +142,7 @@ public class TicketServiceTestApp {
 		transaction.setTotalPrice(600000);
 		transaction.setPaymentNo("30303154542");
 		transaction.setPaymentOption("2");
-		transaction.setTranCode("1");
+		transaction.setTranCode("3");
 		transaction.setDeliveryAddr("서울시마포구");
 		
 		tranService.addTran(transaction);

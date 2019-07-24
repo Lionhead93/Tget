@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import com.tget.service.community.CommunityService;
 import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Report;
+import com.tget.service.event.EventService;
 import com.tget.service.transaction.TranService;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
@@ -44,6 +46,9 @@ public class CommuityController {
 		@Autowired
 		@Qualifier("tranServiceImpl")
 		private TranService tranService;
+		@Autowired
+		@Qualifier("eventServiceImpl")
+		private EventService eventService;
 			
 		public CommuityController(){
 			System.out.println(this.getClass());
@@ -243,6 +248,15 @@ public class CommuityController {
 			System.out.println(refundContent);
 		
 			return "forward:/community/getRefundList.jsp";
+		}
+		
+		@RequestMapping(value="getSearchLoad")
+		public String getSearchLoad(Model model) throws Exception{
+			
+			System.out.println("/community/getSearchLoad");
+			
+			
+			return "forward:/community/getSearchLoad.jsp";
 		}
 		
 	}

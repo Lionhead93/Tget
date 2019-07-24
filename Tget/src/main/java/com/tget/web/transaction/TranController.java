@@ -105,8 +105,7 @@ public class TranController {
 			search.setSearchKeyword(user.getUserId());
 			result = "forward:/tran/listTran.jsp";
 		}else if(search.getMenu().equals("check")){
-			search.setSearchCondition("2");
-			result = "forward:/tran/listTranAll.jsp";
+			result = "forward:/ticket/adminMenu.jsp";
 		}
 		
 		Map<String, Object> map = tranService.getTranList(search);

@@ -140,7 +140,13 @@
 	    
 	    $("a.getReview").on("click", function(){	    	
 	    });
-	    $("a.endDelivery").on("click", function(){	    	
+	    $("a.endDelivery").on("click", function(){
+	    	var tranNo = $(this).attr("id").trim();
+	    	
+	    	popWin = window.open("/rnp/addReview?tranNo="+tranNo ,"popWin",
+					"left=500, top=100, width=600, height=500, "
+					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			
 	    });
 	    $("a.searchDelivery").on("click", function(){
 	    	tranNo = $(this).attr("id").trim();	    	
@@ -256,7 +262,7 @@
 			
 		});
 		$("a[href='#']:contains('포인트 사용내역')").on("click", function(){
-			
+			self.location = "/rnp/getPointHistory";
 		});
 		$("a[href='#']:contains('판매티켓 목록')").on("click", function(){
 			self.location = "/ticket/getTicketList?menu=seller";
@@ -365,7 +371,7 @@
 			      <c:if test="${user.userId==tran.buyer.userId}">
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}">-</c:if>
-				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" href="#">배송도착</a></c:if>
+				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}" href="#">배송도착</a></c:if>
 				      <c:if test="${tran.tranCode==3}">-</c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>

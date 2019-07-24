@@ -40,7 +40,7 @@
 				its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
 				formats to work correctly.
 			-->
-				<section id="banner" data-video="/resources/video/UEFA">
+				<section id="banner" data-video="/resources/video/main">
 					<div class="inner">
 					<form>
 					<input type="hidden" id="requestPageToken" name="requestPageToken" value="${requestPageToken }"/>
