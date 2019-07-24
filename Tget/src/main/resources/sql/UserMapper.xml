@@ -147,14 +147,15 @@
 
 </select>
 	
-	<!-- <select id="selectCode" parameterType="string">
+	 <select id="selectKakao" parameterType="string" resultMap="userSelectMap">
 	SELECT 
-		code
+		*
 	FROM
 		users
-	where code = #{code}
+		
+	where kakao_Id = #{value}
 
-</select> -->
+</select> 
 
 <select id="selectCode" parameterType="string" resultMap="userSelectMap">
 	SELECT 

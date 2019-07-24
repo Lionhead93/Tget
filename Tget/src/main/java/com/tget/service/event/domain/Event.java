@@ -21,6 +21,8 @@ public class Event {
 	private int totalTicketCount;
 	private String eventTimeStr;
 	private String ticketLowestPriceStr;
+	private String koName;
+	private String koPerformer;
 	
 	///C
 	public Event() {
@@ -131,6 +133,48 @@ public class Event {
 		this.ticketLowestPriceStr = CommonUtil.toAmountStr(String.valueOf(ticketLowestPrice));
 	}
 
+
+	/**
+	 * @return the koName
+	 */
+	public String getKoName() {
+		return koName;
+	}
+
+	/**
+	 * @param koName the koName to set
+	 */
+	public void setKoName(String koName) {
+		this.koName = koName;
+	}
+
+	/**
+	 * @param eventTimeStr the eventTimeStr to set
+	 */
+	public void setEventTimeStr(String eventTimeStr) {
+		this.eventTimeStr = eventTimeStr;
+	}
+
+	/**
+	 * @param ticketLowestPriceStr the ticketLowestPriceStr to set
+	 */
+	public void setTicketLowestPriceStr(String ticketLowestPriceStr) {
+		this.ticketLowestPriceStr = ticketLowestPriceStr;
+	}
+
+	/**
+	 * @return the koPerformer
+	 */
+	public String getKoPerformer() {
+		return koPerformer;
+	}
+
+	/**
+	 * @param koPerformer the koPerformer to set
+	 */
+	public void setKoPerformer(String koPerformer) {
+		this.koPerformer = koPerformer;
+	}
 
 	public String toString() {
 		return "[Event] eventId : "+eventId+"\n viewCount : "+viewCount+"\n" + 

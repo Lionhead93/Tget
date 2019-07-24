@@ -56,6 +56,14 @@
 		WHERE user_id = #{userId}
 	 </select>
 	 
+	 <select 	id="selectPointHistoryCount"	parameterType="string"	resultType="int">
+		SELECT COUNT(*) 
+		FROM (SELECT
+						point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point
+						FROM point_history
+						WHERE user_id = #{userId})  countTable	
+	 </select>
+	 
 	 <insert 	id="insertPointHistory"		parameterType="pointHistory" >
 	 	INSERT
 		INTO point_history( point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point) 

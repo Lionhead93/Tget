@@ -27,6 +27,9 @@ public interface RNPService {
 	
 	public void updatePoint(User user) throws Exception;
 	
+	public int getPointHistoryCount(String userId) throws Exception;
+	
+	
 //	public  PointHistory getPointHistoryByTranNo(int tranNo)  throws Exception;
 	
 }

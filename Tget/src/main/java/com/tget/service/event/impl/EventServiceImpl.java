@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.sun.org.apache.regexp.internal.recompile;
 import com.tget.common.domain.Search;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
@@ -174,6 +175,20 @@ public class EventServiceImpl implements EventService{
 	public void deleteInterestedEventAll(String userId) throws Exception{
 		eventDao.deleteInterestedEventAll(userId);
 	}
+	
+	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception{
+		return eventDao.translate(sourceLang, targetLang, queryText, list);
+	}
+	
+	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception{
+		return eventDao.translate(sourceLang, targetLang, list);
+	}
+	
+	public List<String> getAllLocation() throws Exception{
+		return eventDao.selectAllLocation();
+	}
+	
+	
 	
 	
 }

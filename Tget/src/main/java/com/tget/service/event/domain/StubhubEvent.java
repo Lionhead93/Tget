@@ -44,6 +44,7 @@ public class StubhubEvent {
 	private String getCategoryTwoEng;
 	private String eventDate;
 	private String eventTime;
+	private String koName;
 	
 	///C
 	public StubhubEvent() {
@@ -265,6 +266,34 @@ public class StubhubEvent {
 	}
 	public void setEventTime(String eventTime) {
 		this.eventTime = eventTime;
+	}
+
+	/**
+	 * @return the getCategoryTwoEng
+	 */
+	public String getGetCategoryTwoEng() {
+		return getCategoryTwoEng;
+	}
+
+	/**
+	 * @param getCategoryTwoEng the getCategoryTwoEng to set
+	 */
+	public void setGetCategoryTwoEng(String getCategoryTwoEng) {
+		this.getCategoryTwoEng = getCategoryTwoEng;
+	}
+
+	/**
+	 * @return the koName
+	 */
+	public String getKoName() {
+		return koName;
+	}
+
+	/**
+	 * @param koName the koName to set
+	 */
+	public void setKoName(String koName) {
+		this.koName = koName;
 	}
 
 	public String toString() {

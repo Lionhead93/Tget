@@ -74,6 +74,10 @@ public class RNPDaoImpl implements RNPDao {
 		sqlSession.update("RNPMapper.updatePoint",user);
 	}
 	
+	public int selectPointHistoryCount(String userId) throws Exception{
+		return sqlSession.selectOne("RNPMapper.selectPointHistoryCount",userId);
+	}
+	
 //	public  PointHistory selectPointHistoryByTranNo(int tranNo)  throws Exception{
 //		return null;
 //	}

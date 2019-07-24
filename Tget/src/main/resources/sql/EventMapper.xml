@@ -149,7 +149,7 @@
 	 	 FROM		(SELECT event_id, event_name, view_count
 		 					FROM event
 		 					ORDER BY view_count DESC) vt
-		 WHERE ROWNUM &lt;= 50 
+		 WHERE ROWNUM &lt;= 30 
 	 </select>
 	 
 <!-- 	 <select 	id="selectListRecommendedEvent" 	parameterType="map"	resultMap="recommEvent"> -->
@@ -241,6 +241,11 @@
 		 				FROM user_interested 
 		 				<if test="searchCondition == 0" >WHERE category_two_eng = #{searchKeyword}</if>
 		 				<if test="searchCondition == 1" >WHERE event_id = #{searchKeyword}</if>)  countTable	
+	 </select>
+	 
+	 <select 	id="selectAllLocation"	resultType="string">
+		 SELECT DISTINCT event_location 
+		 FROM event
 	 </select>
 	 
 	 
