@@ -23,6 +23,7 @@ public class Event {
 	private String ticketLowestPriceStr;
 	private String koName;
 	private String koPerformer;
+	private String koLocation;
 	
 	///C
 	public Event() {
@@ -174,6 +175,20 @@ public class Event {
 	 */
 	public void setKoPerformer(String koPerformer) {
 		this.koPerformer = koPerformer;
+	}
+
+	/**
+	 * @return the koLocation
+	 */
+	public String getKoLocation() {
+		return koLocation;
+	}
+
+	/**
+	 * @param koLocation the koLocation to set
+	 */
+	public void setKoLocation(String koLocation) {
+		this.koLocation = koLocation;
 	}
 
 	public String toString() {

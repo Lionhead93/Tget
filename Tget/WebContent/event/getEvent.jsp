@@ -172,7 +172,7 @@
 					      <td>
 							<div class="event" align="left">		
 								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/>
-								${!empty event.eventLocation? event.eventLocation: i.eventLocation }<br/>
+								${!empty event.koLocation? event.koLocation: i.eventLocation }<br/>
 	
 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
 								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				

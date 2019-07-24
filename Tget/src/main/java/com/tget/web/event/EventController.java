@@ -170,6 +170,8 @@ public class EventController {
 			List<StubhubEvent> list = (List<StubhubEvent>)eventService.getEventList(search, "0", stubhubKey).get("eventList");
 			for (StubhubEvent stubhubEvent : list) {
 				stubhubEvent.setCategoryTwoEng(category.toLowerCase());
+				stubhubEvent.setKoLocation(event.getKoLocation());
+				stubhubEvent.setKoName(event.getKoName());
 				eventService.addEvent(stubhubEvent);
 			}
 			eventListByName = eventService.getEventByName(eventName);

@@ -45,6 +45,7 @@ public class StubhubEvent {
 	private String eventDate;
 	private String eventTime;
 	private String koName;
+	private String koLocation;
 	
 	///C
 	public StubhubEvent() {
@@ -294,6 +295,20 @@ public class StubhubEvent {
 	 */
 	public void setKoName(String koName) {
 		this.koName = koName;
+	}
+
+	/**
+	 * @return the koLocation
+	 */
+	public String getKoLocation() {
+		return koLocation;
+	}
+
+	/**
+	 * @param koLocation the koLocation to set
+	 */
+	public void setKoLocation(String koLocation) {
+		this.koLocation = koLocation;
 	}
 
 	public String toString() {
