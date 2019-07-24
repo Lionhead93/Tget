@@ -38,7 +38,6 @@
     	 body >  div.container{ 
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
-        	background : black;
         }
     </style>
     
@@ -146,6 +145,16 @@
 			});
 		});
 		
+		$( function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("a[id='kakao' ]").on("click" , function() {
+					
+					var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
+					window.open("https://kauth.kakao.com/oauth/authorize?client_id=8dbe371059a9972c710af6d3eb14767e&redirect_uri=http://localhost:8080/user/oauth&response_type=code","Kakao login",popOption);
+					
+					
+			});
+		});
 	/* 	Kakao.init('f784da1696e287dff9fa08e5c44d8558');
 	    // 카카오 로그인 버튼을 생성합니다.
 	    Kakao.Auth.createLoginButton({
@@ -182,11 +191,10 @@
 		  
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-4 control-label">ID(Email)</label>
-					    <div class="col-sm-7">
-					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="아이디를 입력해주세요." >
+					    <div class="col-sm-7">		    
+							    <input type="text" class="form-control" name="userId" id="userId"  placeholder="아이디를 입력해주세요.">
 					    </div>
 					  </div>
-					  
 					  <div class="form-group">
 					    <label for="password" class="col-sm-4 control-label">PASSWORD</label>
 					    <div class="col-sm-7">
@@ -200,7 +208,7 @@
 					      <button type="button" class="btn btn-default"  >ID 찾기</button>
 					      <button type="button" class="btn btn-default"  >비밀번호 찾기</button>
 					      <a class="btn btn-default" href="#" role="button">회원가입</a>
-					      <a id="custom-login-btn" href = "https://kauth.kakao.com/oauth/authorize?client_id=8dbe371059a9972c710af6d3eb14767e&redirect_uri=http://localhost:8080/user/oauth&response_type=code">
+					      <a id="kakao" href = "#2">
 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="200"/>
 </a>
 					    </div>

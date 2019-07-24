@@ -40,7 +40,7 @@
 			$("#category").val(arr[arr.length-1]);
 			$("#eventName").val($(this).val());
 			$("#koName").val($(this).parent().children(".kn").val());
-			$("#eventLocation").val($(this).parent().children(".el").val());
+			$("#koLocation").val($(this).parent().children(".el").val());
 			$("#koPerformer").val($(this).parent().children(".kp").val());
 // 			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
 // 			$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
@@ -163,7 +163,7 @@
 			   </c:forEach>
 				<input type="hidden"  id="eventName" name="eventName"  value="" >
 				<input type="hidden"  id="koName" name="koName"  value="" >
-				<input type="hidden"  id="eventLocation" name="eventLocation"  value="" >
+				<input type="hidden"  id="koLocation" name="koLocation"  value="" >
 				<input type="hidden"  id="koPerformer" name="koPerformer"  value="" >
 		  		 </tbody>
 				</table>

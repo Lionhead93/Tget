@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.tget.service.coupon.CouponDao;
 import com.tget.service.coupon.CouponService;
 import com.tget.service.coupon.domain.Coupon;
+import com.tget.service.user.UserDao;
 
 
 //==> ȸ������ ���� ����
@@ -38,8 +39,13 @@ public class CouponServiceImpl implements CouponService{
 	}
 
 	@Override
-	public Coupon getCoupon(String userId) throws Exception {
-		return couponDao.selectCoupon(userId);
+	public Map<String, Object> getCouponList(String userId) throws Exception {
+		List<Coupon> list= couponDao.selectCouponList(userId);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("list", list);
+		
+		return map;
 	}
 
 	@Override

@@ -21,6 +21,7 @@ $( function(){
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
+	
 });
 $( function(){
 	
@@ -37,7 +38,7 @@ $( function(){
 		self.location = "/ticket/getTicketList?menu=seller";
 	});
 	$("a:contains('티켓관리')").on("click",function(){		
-		self.location = "/ticket/getTicketList?menu=check";
+		self.location = "/tran/getTranList?menu=check";
 	});
 	$("a:contains('내 거래내역')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=user";
@@ -62,7 +63,10 @@ $( function(){
 	});
 	
 	$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
-		self.location = "/coupon/getCoupon?userId=${sessionScope.user.userId}";
+		self.location = "/coupon/getCouponList?userId=${sessionScope.user.userId}";
+	});
+	$("a[href='#' ]:contains('Logout')").on("click" , function() {
+		self.location = "/user/logout"
 	});
 });
 $( function(){				

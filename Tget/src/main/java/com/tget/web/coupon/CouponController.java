@@ -1,6 +1,7 @@
 package com.tget.web.coupon;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,16 +29,16 @@ public class CouponController {
 		System.out.println(this.getClass());
 	}
 	
-	@RequestMapping( value="getCoupon", method=RequestMethod.GET )
-	public String getCoupon( @RequestParam("userId") String userId , Model model ) throws Exception {
+	@RequestMapping( value="getCouponList", method=RequestMethod.GET )
+	public String getCouponList( @RequestParam("userId") String userId , Model model ) throws Exception {
 		
 		System.out.println("/user/getCoupon : GET");
 		//Business Logic
-		Coupon coupon = couponService.getCoupon(userId);
+		Map<String, Object> map = couponService.getCouponList(userId);
 		// Model �� View ����
-		model.addAttribute("coupon", coupon);
+		model.addAttribute("list", map.get("list"));
 		
-		return "forward:/coupon/getCoupon.jsp";
+		return "forward:/coupon/getCouponList.jsp";
 	}
 	
 	

@@ -91,6 +91,7 @@ tranCode
 2=배송중
 3=배송완료
 4=환불 및 취소
+5=입금완료
 
 paymentOption
 0=신용카드

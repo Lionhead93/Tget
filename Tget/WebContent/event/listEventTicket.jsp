@@ -285,7 +285,7 @@
 				<h1>${!empty event.koName? event.koName:event.eventName }</h1><br/>
 				<div id="player"></div> <br/>
 				<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
-				${event.eventLocation }<br/>
+				${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
 				${event.eventDate } &nbsp; 
 				${event.eventTimeStr}<br/><br/><br/>
 			</div>

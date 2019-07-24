@@ -382,7 +382,7 @@ public String finduserId( @RequestParam("phone") String phone , Model model ) th
 }	
 */
 
-@RequestMapping(value = "oauth", produces = "application/json")
+@RequestMapping(value = "oauth")
 public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) throws Exception {
     System.out.println("로그인 할때 임시 코드값");
     //카카오 홈페이지에서 받은 결과 코드
@@ -430,7 +430,7 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
 			session.setAttribute("user", user);
 		
 				
-		return "redirect:/";
+		return "forward:/user/kakaoResult.jsp";
 	}
 
     	
@@ -441,7 +441,7 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
     	
     	System.out.println("신규 카카오 계정이네 회원가입으로 보내자");
     	
-    	return "redirect:/user/addUser";
+    	return "forward:/user/kakaoResult.jsp";
     }
     }
     

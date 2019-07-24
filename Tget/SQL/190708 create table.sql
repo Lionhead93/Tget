@@ -62,6 +62,8 @@ CREATE TABLE event(
 	event_location	VARCHAR2(200) ,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
+	ko_name VARCHAR2(50) 	NOT NULL,
+	ko_location VARCHAR2(200) ,
 	PRIMARY KEY(event_id)
 );
 
@@ -252,17 +254,17 @@ INSERT INTO category_two VALUES (seq_category_two_no.nextval,'2','뮤지컬','music
 INSERT INTO category_two VALUES (seq_category_two_no.nextval,'2','클래식/오페라','opera');
 
 
-INSERT INTO event	VALUES ('104175821',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/19', 'YYYY/MM/DD'),'2000'); 
-INSERT INTO event	VALUES ('104175823',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/20', 'YYYY/MM/DD'),'1800'); 
-INSERT INTO event	VALUES ('104175819',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/21', 'YYYY/MM/DD'),'1600'); 
-INSERT INTO event	VALUES ('104175345',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/26', 'YYYY/MM/DD'),'2000'); 
-INSERT INTO event	VALUES ('104175822',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/27', 'YYYY/MM/DD'),'1800'); 
-INSERT INTO event	VALUES ('104175824',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/28', 'YYYY/MM/DD'),'1600'); 
+INSERT INTO event	VALUES ('104175821',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/19', 'YYYY/MM/DD'),'2000','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175823',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/20', 'YYYY/MM/DD'),'1800','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175819',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/21', 'YYYY/MM/DD'),'1600','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175345',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/26', 'YYYY/MM/DD'),'2000','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175822',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/27', 'YYYY/MM/DD'),'1800','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175824',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/28', 'YYYY/MM/DD'),'1600','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175823',100 ,'seller',200000,'1','1','스탠딩E1','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','스탠딩X2','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller',200000,'1','1','스탠딩O2','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','8구역','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175823',100 ,'seller',200000,'1','1','스탠딩E1','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','스탠딩X2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller',200000,'1','1','스탠딩O2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','8구역','알콜프리존', sysdate , 'aaa.png','1', null , null); 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175824',100 ,'seller',200000,'1','1','15구역','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
 
 

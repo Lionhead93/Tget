@@ -106,6 +106,7 @@
 									</choose>
 									</if>												
 								</where>
+								order by order_date desc
 								) inner_table
 			)	
 	 </select>
@@ -135,6 +136,12 @@
 				</where>
 	  	) countTable						
 	 </select>
+	 
+	 <delete id="deleteTran" parameterType="int">
+	  	DELETE 
+	  	FROM transaction
+	  	WHERE tran_no = #{value}
+  	</delete>
 	 
 	 <!-- 
 	 WHERE ROWNUM &lt;= #{endRowNum} )
