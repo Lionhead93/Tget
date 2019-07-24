@@ -189,6 +189,10 @@ public class EventDaoImpl implements EventDao {
 		return sqlSession.selectList("EventMapper.selectInterestedByUser",search);
 	}
 	
+	public int selectInterestedByUserCount(Search search) throws Exception{
+		//searchCondition = 0이면  InterestedCategory, searchCondition = 1이면 InterestedEvent
+		return sqlSession.selectOne("EventMapper.selectInterestedByUserCount",search);
+	}
 	
 	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception{
 		Event event = new Event();

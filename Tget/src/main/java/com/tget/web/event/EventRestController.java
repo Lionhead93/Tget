@@ -491,20 +491,53 @@ public class EventRestController {
 	
 	@RequestMapping( value="rest/kakaoSendToMe")
 //	public Map<String,Object> kakaoSendToMe(@ModelAttribute("user") User user) throws Exception{		
-	public Map<String,Object> kakaoSendToMe(HttpSession session) throws Exception{			
+	public Map<String,Object> kakaoSendToMe(HttpSession session,@ModelAttribute("event") Event event) throws Exception{			
 		System.out.println("===========rest/kakaoSendToMe=============");
 		
 		User user = (User)session.getAttribute("user");
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
+		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/default/send";
+//		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
 				
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//		httpPost.setHeader("Authorization", "Bearer "+user.getAccessToken());
+		httpPost.setHeader("Authorization", "Bearer "+user.getKakaoToken());
+		
+		JSONObject content = new JSONObject();
+		content.put("title",	event.getKoLocation());
+		content.put("description",	"");
+		if (event.getEventImage() != null) {
+			content.put("image_url",	"http:192.168.0.82:8080/resources/images/uploadFiles/"+event.getEventImage());
+		}else {
+			content.put("image_url",	"http:192.168.0.82:8080/resources/images/logo.png");
+		}		
+		content.put("image_width",	640);
+		content.put("image_height",	320);
+		
+		JSONObject link = new JSONObject();
+		link.put("web_url",	"http://192.168.0.82:8080");
+		link.put("mobile_web_url",	"http://192.168.0.82:8080");
+		link.put("android_execution_params",	"http://192.168.0.82:8080");
+		link.put("ios_execution_params",	"http://192.168.0.82:8080");
+		
+		content.put("link", link);
+		
+		JSONObject social = new JSONObject();
+		social.put("like_count", event.getInterestedNum());
+		social.put("view_count", event.getViewCount());
+		
+		JSONObject json = new JSONObject();
+		json.put("object_type", "feed");
+		json.put("content", content);
+		json.put("social", social);
 
-		String parameter = "request_url=http://192.168.0.82:8080";
+		String parameter = "template_object="+json;		
+		//http://192.168.0.82:8080/resources/images/uploadFiles/EXO-LOVE%20SHOT%20TEASER00.jpg
+
+//		String parameter = "request_url=http://192.168.0.82:8080";
+//		String parameter = "request_url=http://127.0.0.1:8080";
 		System.out.println("parameter : "+parameter);
 
 		HttpEntity httpEntity01 = new StringEntity(parameter,"utf-8");

@@ -130,11 +130,11 @@
 <body>
 <jsp:include page="/layout/toolbar.jsp" />
 <form>
-	<div class="container-fluid"  align="center">
+	<div class="container-fluid"  align="center" style="margin-top: 50px">
 			<br/>			
 			<div class="row">
 				<div class="col-lg-5" align="center">
-					<h3>${!empty event.koName? event.koName:eventName}</h3>
+					<h3>${event.koName}</h3>
 					<input type="hidden"  id="eventId" name="eventId" value="" />
 					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
 					<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
@@ -146,7 +146,8 @@
 							<img src="/resources/images/uploadFiles/${eventImage}" />
 						</c:if>
 						<c:if test="${empty eventImage}">
-							<img src = "http://placehold.it/500x280" class="img-rounded"/>
+							<img src="/resources/images/logo.png"  style="width:500px; height=280px;"/>
+<!-- 							<img src = "http://placehold.it/500x280" class="img-rounded"/> -->
 						</c:if>
 						<br/>
 						<div >

@@ -231,7 +231,10 @@ public class EventController {
 		if (youtubeList != null && youtubeList.size() != 0 ) {
 			model.addAttribute("videoId", youtubeList.get(youtubeList.size()-1));
 		}
-		
+		search.setSearchCondition("1");
+//		search.setSearchKeyword(eventId);
+//		int interestedCount = eventService.getInterestedByUserCount(search);
+		model.addAttribute("interestedCount",  eventService.getInterestedByUserCount(search));
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
 		model.addAttribute("lowPrice", sellProb.getLowPrice());

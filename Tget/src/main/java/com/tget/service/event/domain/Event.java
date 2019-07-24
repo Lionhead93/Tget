@@ -24,6 +24,7 @@ public class Event {
 	private String koName;
 	private String koPerformer;
 	private String koLocation;
+	private int interestedNum;
 	
 	///C
 	public Event() {
@@ -189,6 +190,20 @@ public class Event {
 	 */
 	public void setKoLocation(String koLocation) {
 		this.koLocation = koLocation;
+	}
+
+	/**
+	 * @return the interestedNum
+	 */
+	public int getInterestedNum() {
+		return interestedNum;
+	}
+
+	/**
+	 * @param interestedNum the interestedNum to set
+	 */
+	public void setInterestedNum(int interestedNum) {
+		this.interestedNum = interestedNum;
 	}
 
 	public String toString() {

@@ -27,6 +27,7 @@
 	<script type="text/javascript">
 	
 	var videoList = [];
+	var i=0;
 
 	$(function(){
 		
@@ -80,12 +81,14 @@
 		});
 		
 		$(".interested").on("click",function(){
+			i = parseInt($("#interestedCount").val());
+			
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
 				
 			} else {
-				if ($(this).children("input").val() == 'heart-empty') {
+				if($(this).children("input").val() == 'heart-empty') {
 					$(this).html('<input type="hidden"  value="heart">'
 							+'<ion-icon name="heart" size="large"></ion-icon>');
 					
@@ -95,7 +98,7 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 등록완료");
+									alert("관심이벤트 등록완료");														
 //	 								alert("JSONData : \n"+JSONData.stringify());		
 								}
 //	 						,
@@ -103,6 +106,8 @@
 //	 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 //	 							}			
 						});	
+// 					$("#interestedCount").val(i+1);
+// 					$("#interestedCount").parent("div").text(i+"명");				
 				}else{
 					$(this).html('<input type="hidden"  value="heart-empty">'
 							+'<ion-icon name="heart-empty" size="large"></ion-icon>');
@@ -113,7 +118,14 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 삭제완료");
+									alert("관심이벤트 삭제완료");									
+									if (i == 1 || i =="1") {
+										$("#interestedCount").val("0");
+										$("#interestedCount").parent("div").text("0");			
+									} else {
+										$("#interestedCount").val(i-1);
+										$("#interestedCount").parent("div").text(i);			
+									}															
 								}
 //	 						,
 //	 							error : function(request, status, error ) {   
@@ -204,9 +216,9 @@
 	
 	<style>
       div.container {
-        	margin-top: 50px;
+/*         	margin-top: 50px; */
         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
-        	font-size: 25px;
+/*         	font-size: 25px; */
         }
         table{
         	margin-top: 50px;
@@ -265,15 +277,20 @@
 	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
 	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
 	<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
+	<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }"/>
 		<div class="row" style="padding-top: 30px">
-			<div class="col-lg-10 col-md-10 col-9"></div>
-			<div class="col-lg-1 col-md-1 col-1">
+			<div class="col-lg-8 col-md-8 col-8"></div>
+			<div class="col-lg-2 col-md-2 col-2">
+<%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
 				<div class="interested"  value="heart-empty" align="right">
 					<input type="hidden"  value="heart-empty">
-					<ion-icon name="heart-empty" size="large"></ion-icon>
+					<ion-icon name="heart-empty" size="large"></ion-icon>					
 				</div>
+				<div align="right" style="font-size: 10px; color: black;" >
+					<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
+					${interestedCount}</div>
 			</div>
-			<div class="col-lg-1 col-md-1 col-2">
+			<div class="col-lg-2 col-md-2 col-2">
 				<div  align="left">
 					<ion-icon name="share" size="large"></ion-icon>
 				</div>
