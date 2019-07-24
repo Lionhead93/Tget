@@ -36,10 +36,15 @@
 		
 		$("button.button_black").on("click",function(){
 			
-			arr = $(this).parent().children("input").val().split(' ');
+			arr = $(this).parent().children("input.category").val().split(' ');
 			$("#category").val(arr[arr.length-1]);
-			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
-// 			$("form").attr("method" , "GET").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
+			$("#eventName").val($(this).val());
+			$("#koName").val($(this).parent().children(".kn").val());
+			$("#eventLocation").val($(this).parent().children(".el").val());
+			$("#koPerformer").val($(this).parent().children(".kp").val());
+// 			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
+// 			$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
+			$("form").attr("method" , "POST").attr("action" , "/event/getEvent").submit();
 
 		});		
 		
@@ -130,7 +135,7 @@
 				<table class="table table-striped">
 				  <thead>
 				    <tr align="center">
-				      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th>
+				      <th scope="col"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -139,18 +144,27 @@
 				      <td>
 						<div class="event" align="left">
 							<div  style="padding: 20px 30px ;">
-								이벤트명 : ${i.name }</br>
+								이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
 								이벤트 장소 : ${i.venueName }</br>
-								출연진 : ${i.performersName }</br>
+								<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">
+									출연진 : ${i.performersName }</br>
+								</c:if>								
 							</div>						 
-							<div align="right"  style="padding: 20px  70px ;">
-								<input type="hidden"  id="category2" name="category2"  value="${i.ancestorsCategory}" ></br>
+							<div align="right"  style="padding: 20px  70px ;">				
+								<input type="hidden"  class="kn"  value="${i.koName}" >
+								<input type="hidden"  class="el"  value="${i.venueName}" >
+								<input type="hidden" class="kp"  value="${i.performersName}" >			
+								<input type="hidden" class="category"  value="${i.ancestorsCategory}" >			
 								<button class="button_black" type="button" name="getEvent"  value="${i.name }">상세보기</button></br>
 							</div>
 						</div>			
 				  </td>
 			    </tr>
 			   </c:forEach>
+				<input type="hidden"  id="eventName" name="eventName"  value="" >
+				<input type="hidden"  id="koName" name="koName"  value="" >
+				<input type="hidden"  id="eventLocation" name="eventLocation"  value="" >
+				<input type="hidden"  id="koPerformer" name="koPerformer"  value="" >
 		  		 </tbody>
 				</table>
 			</div>

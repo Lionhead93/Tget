@@ -1,7 +1,10 @@
 package com.tget.web.event;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -476,5 +487,43 @@ public class EventRestController {
 		
 		System.out.println("rest/getRecommendedEventCount map - "+map);
 		return map;		
+	}
+	
+	@RequestMapping( value="rest/kakaoSendToMe")
+//	public Map<String,Object> kakaoSendToMe(@ModelAttribute("user") User user) throws Exception{		
+	public Map<String,Object> kakaoSendToMe(HttpSession session) throws Exception{			
+		System.out.println("===========rest/kakaoSendToMe=============");
+		
+		User user = (User)session.getAttribute("user");
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
+				
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+//		httpPost.setHeader("Authorization", "Bearer "+user.getAccessToken());
+
+		String parameter = "request_url=http://192.168.0.82:8080";
+		System.out.println("parameter : "+parameter);
+
+		HttpEntity httpEntity01 = new StringEntity(parameter,"utf-8");
+		
+		httpPost.setEntity(httpEntity01);
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+		
+		System.out.println(httpResponse);
+		System.out.println();
+
+		HttpEntity httpEntity = httpResponse.getEntity();
+
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+	
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		System.out.println(jsonobj);
+
+		
+		return null;
 	}
 }

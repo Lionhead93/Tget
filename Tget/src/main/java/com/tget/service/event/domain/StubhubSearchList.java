@@ -9,7 +9,7 @@ public class StubhubSearchList {
 	//private String query; //stubhub에 보낼때 'q'라는 항목의 값(검색어)	
 	//위의 2개의 항목은 Search 도메인에 넣는게 나을 듯
 	
-	private Integer numFound; //검색 결과, 이벤트 갯수
+	private int numFound; //검색 결과, 이벤트 갯수
 	private List<StubhubEvent> events; 
 	//이벤트들이 담긴 리스트(default가 10개. 결과가 10개 미만일 경우, 있는 것 만큼만...)
 
@@ -31,7 +31,7 @@ public class StubhubSearchList {
 //	public void setQuery(String query) {
 //		this.query = query;
 //	}
-	public Integer getNumFound() {
+	public int getNumFound() {
 		return numFound;
 	}
 	public void setNumFound(Integer numFound) {
