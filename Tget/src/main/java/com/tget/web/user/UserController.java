@@ -21,6 +21,7 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,12 +32,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tget.common.domain.Page;
 import com.tget.common.domain.Search;
 import com.tget.service.user.Config;
+import com.tget.service.user.KakaoUserInfo;
 import com.tget.service.user.UserService;
+import com.tget.service.user.kakao_restapi;
 import com.tget.service.user.domain.User;
 
 @Controller
@@ -80,10 +82,16 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser( @ModelAttribute("user") User user , HttpServletRequest request ) throws Exception {
+	public String addUser( @ModelAttribute("user") User user , HttpServletRequest request , HttpSession session) throws Exception {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
+
+		if(session!=null) {
+			System.out.println("카카오 계정 회원가입 들옴");
+		user.setKakaoId((String) session.getAttribute("kakaoId"));
+		}
+		
 		userService.addUser(user);
 		
 	
@@ -196,45 +204,33 @@ public class UserController {
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		if(user.getUserId()!=null) {
+		if(user.getUserId()!=null) {                                                                     
 		
 			if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 				}
 			
 		}
+
 		return "redirect:/";
 	}
-	/*@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	
+/*	@RequestMapping( value="snslogin", method=RequestMethod.GET )
+	public String snslogin(@ModelAttribute("user") User user , HttpSession session) throws Exception{
 		
-		System.out.println("/user/login : POST");
-		
-		
-		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-		DateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		String day = sdFormat.format(today);
-		String dday = sdFormat2.format(dbUser.getBlacklistEndDate());
-		
+		System.out.println("/user/snslogin : POST");
+		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		
-			if(dbUser.getBlacklistEndDate()== null &&
-					user.getPassword().equals(dbUser.getPassword())) {
-		
-				session.setAttribute("user", dbUser);
+		if(user.getUserId()!=null) {
 			
-				return "redirect:/";
-			}
-					
-					
-					if(dbUser.getBlacklistEndDate()!= null &&
-							today.getTime() <= end.getTime() ) {
-						
-						return "forward:/user/x.jsp";
-					}
-					return "redirect:/";
-		}*/
+			session.setAttribute("user", dbUser);
+		}
+
+		return "redirect:/";
+	}*/
+	
+
 	
 	@RequestMapping( value="logout", method=RequestMethod.GET )
 	public String logout(HttpSession session ) throws Exception{
@@ -386,6 +382,76 @@ public String finduserId( @RequestParam("phone") String phone , Model model ) th
 }	
 */
 
+@RequestMapping(value = "oauth", produces = "application/json")
+public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) throws Exception {
+    System.out.println("로그인 할때 임시 코드값");
+    //카카오 홈페이지에서 받은 결과 코드
+    System.out.println(code);
+    System.out.println("로그인 후 결과값");
+    
+    //카카오 rest api 객체 선언
+    kakao_restapi kr = new kakao_restapi();
+    //결과값을 node에 담아줌
+    JsonNode node = kr.getAccessToken(code);
+    //결과값 출력
+    System.out.println(node);
+    
+    JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(node.get("access_token"));
+    
+    JsonNode kakao_account = userInfo.path("kakao_account");
+    
+    String kakaoId = userInfo.path("id").asText();
+    
+    String token = node.path("access_token").asText();
+    
+    String email = null;
+    
+    email = kakao_account.path("email").asText();
+
+    System.out.println("토큰 나와라 얍"+token);
+    
+    String userId = userInfo.path("kakao_account").asText();
+    
+    System.out.println("id : " + kakaoId);
+
+    System.out.println("userId"+ userId+""+email+"이메일ㅇ느?");
+    
+    User user = userService.getKakao(kakaoId);
+    
+    		if(user != null) {
+
+
+    	user = userService.getUser(user.getUserId());
+    	
+    	System.out.println("기존 카카오 계정이네"+user);
+    	
+    		user.setKakaoToken(token);
+    	
+			session.setAttribute("user", user);
+		
+				
+		return "redirect:/";
+	}
+
+    	
+    	
+    else {
+    	
+    	session.setAttribute("kakaoId", kakaoId);
+    	
+    	System.out.println("신규 카카오 계정이네 회원가입으로 보내자");
+    	
+    	return "redirect:/user/addUser";
+    }
+    }
+    
+    //노드 안에 있는 access_token값을 꺼내 문자열로 변환
+    //    String token = node.get("access_token").toString();
+    //세션에 담아준다.
+    //    session.setAttribute("token", token);
+    		
+
+    
 
 
 		}

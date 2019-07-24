@@ -18,6 +18,8 @@
 		<result property="eventTime" 			column="event_time" 				jdbcType="VARCHAR"  />
 		<result property="interestedCategoryNo" 			column="interested_category_no" 				jdbcType="NUMERIC"  />
 		<result property="userId" 			column="user_id" 				jdbcType="VARCHAR"  />
+		<result property="koName" 			column="ko_name" 			jdbcType="VARCHAR"/>
+		<result property="koLocation" 			column="ko_location" 			jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap id="recommEventSelectMap" type="recommEvent">
@@ -39,26 +41,27 @@
 	
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
-		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time) 
+		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time,ko_name,ko_location) 
 		VALUES	 (	#{id} , 0 , #{categoryTwoEng} , NULL , 
-							#{name} , #{venueName:VARCHAR} , #{eventDate} , #{eventTime} )
+							#{name} , #{venueName:VARCHAR} , #{eventDate} ,
+							#{eventTime}, #{koName:VARCHAR} , #{koLocation:VARCHAR} )
 	 </insert>
 	 
 	  <select 	id="selectEventByName"	 parameterType="string" 	resultMap="eventSelectMap">
-		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
+		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time,ko_name,ko_location
 		 FROM event
 		 WHERE event_name = #{eventName} AND event_date >= SYSDATE
 	 </select>
 	 
 	 <select 	id="selectEventById"	 parameterType="string" 	resultMap="eventSelectMap">
-		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
+		 SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time,ko_name,ko_location
 		 FROM event
 		 WHERE event_id = #{eventId}	
 	 </select>
 	 
 	 <select 	id="selectEventCount"	parameterType="map"	 resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time
+	  	FROM( SELECT event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time,ko_name,ko_location
 		 				FROM event
 						<if test="searchKeyword == 'eventId'">WHERE event_id = #{eventId}</if>
 		 				<if test="searchKeyword == 'eventName'">WHERE event_name = #{eventName} AND event_date >= SYSDATE</if>)  countTable	
@@ -85,7 +88,7 @@
 	 </update>
 	 
 	 <select 	id="selectListInterestedEvent"	parameterType="string"	resultMap="eventSelectMap">
-		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
+		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time,e.ko_name,e.ko_location
 		 FROM user_interested u, event e
 		 WHERE u.event_id = e.event_id
 		 AND user_id = #{userId}  AND event_date >= SYSDATE
@@ -94,7 +97,7 @@
 	 
 	 <select 	id="selectListInterestedEventCount"	parameterType="string"	resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time
+	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time,e.ko_name,e.ko_location
 		 				FROM user_interested u, event e
 		 				WHERE u.event_id = e.event_id  
 						AND user_id = #{userId} AND event_date >= SYSDATE
@@ -146,10 +149,10 @@
 	 
 	 <select 	id="selectListPopularEvent"	resultMap="eventSelectMap">
 	 	 SELECT vt.*, ROWNUM
-	 	 FROM		(SELECT event_id, event_name, view_count
+	 	 FROM		(SELECT event_id, event_name, view_count, ko_name, ko_location
 		 					FROM event
 		 					ORDER BY view_count DESC) vt
-		 WHERE ROWNUM &lt;= 50 
+		 WHERE ROWNUM &lt;= 30 
 	 </select>
 	 
 <!-- 	 <select 	id="selectListRecommendedEvent" 	parameterType="map"	resultMap="recommEvent"> -->
@@ -241,6 +244,11 @@
 		 				FROM user_interested 
 		 				<if test="searchCondition == 0" >WHERE category_two_eng = #{searchKeyword}</if>
 		 				<if test="searchCondition == 1" >WHERE event_id = #{searchKeyword}</if>)  countTable	
+	 </select>
+	 
+	 <select 	id="selectAllLocation"	resultType="string">
+		 SELECT DISTINCT event_location 
+		 FROM event
 	 </select>
 	 
 	 

@@ -17,8 +17,7 @@
     <title>T-GET</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="/resources/css/videoBox.css" />
-		<link rel="stylesheet" href="/resources/css/main.css" />
+		<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -98,6 +97,12 @@
 			
 			 $( "button.btn.btn-danger:contains('게시글 등록하기')" ).on("click" , function() {
 					self.location="/community/addContent"	
+				});
+			 
+			 $( "button.btn.btn-warning:contains('길 찾기 안내')" ).on("click" , function() {
+				 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
+		             window.open("/community/getSearchLoad","T-get 길 찾기 ",popOption);	
+				 
 				});
 			 
 			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
@@ -320,7 +325,7 @@
 				<button type="button" class="btn btn-danger">게시글 등록하기</button>
 				
 				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>
-				
+				<button type="button" class="btn btn-warning">길 찾기 안내</button>
 				 <div>
 				 
 		    <div class="col-md-6 text-right">
@@ -376,8 +381,8 @@
 			<tr>
 			  <td align="center">${ i }</td>
 			  <td align="left" class="btn btn-link">${content.contentName}
-			  <div id="contentNo" name="contentNo">${content.contentNo}</div>
-			  <!--  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>-->
+			  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
+			  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 			 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
 			   
 <%--  			  <td align="left">${content.contentBody}</td> --%>

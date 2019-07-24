@@ -134,5 +134,11 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
+	@Override
+	public User selectKakao(String kakaoId) throws Exception {
+		// TODO Auto-generated method stub
+		 return sqlSession.selectOne("UserMapper.selectKakao",kakaoId);
+	}
+
 
 }

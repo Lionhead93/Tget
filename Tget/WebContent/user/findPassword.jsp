@@ -202,9 +202,9 @@
 		  
 	
 			
-			<div class="form-group">
+			<div class="form-group" align="center">
 		      <button type="button" id= "btn" class="btn btn-primary" data-toggle="modal" data-target="#findpassword" disabled="disabled">찾기</button>
-			  <a class="btn btn-danger btn" href="#" role="button">취&nbsp;소</a>
+			  <a class="btn btn-danger btn" href="#" role="button" >취&nbsp;소</a>
 		</div>
 		
 				

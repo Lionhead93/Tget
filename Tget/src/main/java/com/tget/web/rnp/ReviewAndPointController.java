@@ -107,9 +107,13 @@ public class ReviewAndPointController {
 //			rNPService.addReview(review);
 			User user = (User)session.getAttribute("user");
 			String userId =user.getUserId();
-		
-			int updatePoint = tranService.getTran(review.getTranNo()).getTotalPrice()/100;
-		
+			
+			Transaction tran =  tranService.getTran(review.getTranNo());
+			tran.setTranCode("3");
+			tranService.updateTranCode(tran);
+			
+			int updatePoint = tran.getTotalPrice()/100;
+			
 			PointHistory pointHistory = new PointHistory();
 			pointHistory.setPointUpdateCode("0");
 			pointHistory.setUpdatePoint(updatePoint);
