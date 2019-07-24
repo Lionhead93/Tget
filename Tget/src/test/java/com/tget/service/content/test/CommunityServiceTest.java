@@ -71,7 +71,7 @@ public class CommunityServiceTest {
 		Report report = new Report();
 		
 		report.setWhiteId("admin");
-		report.setWhiteNickName("唱包府磊句");
+		report.setWhiteNickname("唱包府磊句");
 		report.setBlackId("manager");
 		report.setReportReasonCode("1");
 		report.setContentNo(10002);
