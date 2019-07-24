@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -72,6 +74,44 @@ public class TicketServiceTestApp {
 		System.out.println(jsonobj);
 	}
 	
+	@Test
+	public void getSell() throws Exception {
+		
+		Search search = new Search();
+		search.setSearchCondition("0");
+		search.setSearchKeyword("104175822");
+		
+		Map<String, Object> map = ticketService.getTicketList(search);
+		
+		List<Ticket> list = (List<Ticket>) map.get("list");
+		
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+		int e = 0;
+		int f = 0;
+		
+		for( Ticket ticket : list) {			
+			if(ticket.getPrice()<=50000) {
+				a += ticket.getAmount();
+			}else if( ticket.getPrice()>50000 && ticket.getPrice()<=100000) {
+				b += ticket.getAmount();
+			}else if( ticket.getPrice()>100000 && ticket.getPrice()<=200000) {
+				c += ticket.getAmount();
+			}else if( ticket.getPrice()>200000 && ticket.getPrice()<=300000) {
+				d += ticket.getAmount();
+			}else if( ticket.getPrice()>300000 && ticket.getPrice()<=400000) {
+				e += ticket.getAmount();
+			}else if( ticket.getPrice()>400000) {
+				f += ticket.getAmount();
+			}
+		}
+		
+		System.out.println("a = "+a+"//b = "+b+"//c = "+c+"//d = "+d+"//e = "+e+"//f = "+f);
+		
+	}
+	
 	//@Test	
 	public void addTicket() throws Exception {
 		
@@ -86,7 +126,7 @@ public class TicketServiceTestApp {
 		ticket.setSeller(user);
 		
 		ticket.setAmount(4);
-		ticket.setPrice(32100100);
+		ticket.setPrice(510000);
 		ticket.setType("0");
 		ticket.setSeat("a열34");
 		ticket.setOptions("애완동물출입금지");
@@ -117,7 +157,7 @@ public class TicketServiceTestApp {
 		
 	}
 	
-	@Test
+	//@Test
 	public void insertTran() throws Exception {
 		
 		Transaction transaction = new Transaction();
@@ -126,9 +166,8 @@ public class TicketServiceTestApp {
 		User seller = new User();
 		User buyer = new User();
 		
-		ticket.setTicketNo(10020);
-		event.setEventId("104060536");
-		event.setEventName("EXO 333");
+		ticket.setTicketNo(10000);
+		event.setEventId("104175822");
 		seller.setUserId("seller");
 		seller.setNickName("판매자얌");
 		buyer.setUserId("buyer");
@@ -142,7 +181,7 @@ public class TicketServiceTestApp {
 		transaction.setTotalPrice(600000);
 		transaction.setPaymentNo("30303154542");
 		transaction.setPaymentOption("2");
-		transaction.setTranCode("3");
+		transaction.setTranCode("1");
 		transaction.setDeliveryAddr("서울시마포구");
 		
 		tranService.addTran(transaction);
@@ -185,7 +224,7 @@ public class TicketServiceTestApp {
 		
 		Alarm alarm = new Alarm();
 		
-		alarm.setAlarmCode(0);
+		alarm.setAlarmCode(3);
 		alarm.setAlarmKeyword("10001");
 		alarm.setUserId("seller");
 		
