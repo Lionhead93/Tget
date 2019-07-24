@@ -26,6 +26,7 @@ import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.transaction.TranService;
+import com.tget.service.transaction.domain.Transaction;
 
 @RestController
 @RequestMapping("/tran/*")
@@ -144,6 +145,65 @@ public class TranRestController {
 		
 		
 		return null;
+	}
+	
+	@RequestMapping(value = "rest/checkDeposit/{tranNo}", method = RequestMethod.GET)	
+	public Map<String, Object> checkDeposit(@PathVariable("tranNo") int tranNo) throws Exception {
+		
+		System.out.println("rest/checkDeposit/"+tranNo);
+		
+		Transaction tran = tranService.getTran(tranNo);
+		tran.setTranCode("1");
+		
+		tranService.updateTranCode(tran);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tran", tran);
+		map.put("message", "처리 완료");
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "rest/depositSeller/{tranNo}", method = RequestMethod.GET)	
+	public Map<String, Object> depositSeller(@PathVariable("tranNo") int tranNo) throws Exception {
+		
+		System.out.println("rest/depositSeller/"+tranNo);
+		
+		Transaction tran = tranService.getTran(tranNo);
+		tran.setTranCode("5");
+		
+		tranService.updateTranCode(tran);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tran", tran);
+		map.put("message", "처리 완료");
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "rest/deleteTran/{tranNo}", method = RequestMethod.GET)	
+	public Map<String, Object> deleteTran(@PathVariable("tranNo") int tranNo) throws Exception {
+		
+		System.out.println("rest/deleteTran/"+tranNo);
+		
+		Transaction tran = tranService.getTran(tranNo);
+		
+		tran.setTranCode("4");
+		
+		tranService.updateTranCode(tran);
+		
+		Ticket ticket = tran.getTicket();
+		
+		int amount = ticket.getAmount()+tran.getOrderAmount();	
+		ticket.setAmount(amount); 	
+		
+		ticketService.updateTicketAmount(ticket);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tran", tran);
+		map.put("message", "취소 완료");
+		
+		return map;
 	}
 	
 }

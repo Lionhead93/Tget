@@ -44,7 +44,7 @@ public class TicketController {
 		System.out.println(this.getClass());
 	}
 	
-	@Value("#{commonProperties['swuploadPath']}")
+	@Value("#{commonProperties['uploadPath']}")
 	String uploadPath;
 	
 	@RequestMapping(value = "addTicketInfo", method = RequestMethod.GET)	

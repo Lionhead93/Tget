@@ -35,8 +35,14 @@
 	
 	<style>
        body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
+        	border: 1px solid #D6CDB7;
+            padding-top: 30px;
+        }
+        .marketing{
+        	padding: 10px;
+        }
+        .col-lg-4{        	
+        	border: 1px solid #D6CDB7;        	
         }
     </style>
     
@@ -62,17 +68,32 @@
 		<h1 class="text-center">내 판매 티켓</h1>
 		<br/> 
 	    <hr/>
-	    총  ${sellProb.totalCount} 개
-	
-	 <div class="container marketing">
+	     <div class="text-info">  
+	    	<strong>총  ${sellProb.totalCount} 개</strong>
+	  	</div>	
+	    <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="inputGroupSelect01">검색 조건</label>
+						  </div>
+						  <select class="custom-select" id="inputGroupSelect01" style="width :100px;">
+						    <option selected>All</option>
+						    <option value="0">입금 대기</option>
+						    <option value="1">배송 대기</option>
+						    <option value="2">배송 중</option>
+						    <option value="3">배송 완료</option>
+						    <option value="4">환불 및 취소</option>
+						  </select>
+		</div>	 
+	 <div  class="container marketing">
 
       <!-- Three columns of text below the carousel -->
-      <div class="row" id="#">
+      <div align="center" class="row" id="#">
        <c:forEach var="ticket" items="${list}" varStatus="j" > 
         <div class="col-lg-4">
           <div id="${ticket.ticketNo}">
 	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" width="140" height="140">
 	          <h2>${ticket.event.eventName}</h2>         
+	          <hr class="my-4">
 	          <p>좌석 : ${ticket.seat}</p>
 	          <p>수량 : ${ticket.amount}</p>
 	          <p>${ticket.price} 원</p>	          

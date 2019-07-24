@@ -35,10 +35,21 @@
 	
    
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
+		
+		body > div.container{
+        	border: 1px solid #D6CDB7;
+        	background-color: whitesmoke;
         }
+        
+       #eventHeader{
+       padding-top: 30px;
+       padding-bottom: 30px;
+       		background: url(/resources/images/pic10.jpg) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;	
+       } 
     
     </style>
     
@@ -112,7 +123,7 @@
 		<input type="hidden" name="seller.userId" value="${user.userId}" >
 		
 		<br/>
-		<div class="text-center">
+		<div id="eventHeader" class="text-center">
 		  <h1 class="display-4">${event.eventName}</h1>
 		  <p class="lead">${event.eventLocation}</p>
 		  <p>${event.eventDate}</p>

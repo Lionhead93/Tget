@@ -37,7 +37,7 @@ $( function(){
 		self.location = "/ticket/getTicketList?menu=seller";
 	});
 	$("a:contains('티켓관리')").on("click",function(){		
-		self.location = "/ticket/getTicketList?menu=check";
+		self.location = "/tran/getTranList?menu=check";
 	});
 	$("a:contains('내 거래내역')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=user";
