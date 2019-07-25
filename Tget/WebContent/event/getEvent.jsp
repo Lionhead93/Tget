@@ -36,14 +36,15 @@
 	
 	$(function(){
 		$(".addTicket").on("click",function(){			
-// 			alert("${empty user}");
+			var eventId = $(this).val(); 			
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
 // 				self.location="/user/login";
 			} else {
 				$("#eventId").val($(this).val());
-				$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
+				$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo").submit();
+// 				self.location="/ticket/addTicketInfo?eventId="+eventId;
 // 				self.location="/user/login";
 			}
 // 			$("#eventId").val($(this).val());
@@ -144,7 +145,7 @@
 			<div class="row">
 				<div class="col-lg-5" align="center">
 					<h3>${event.koName}</h3>
-<!-- 					<input type="hidden"  id="eventId" name="eventId" value="" /> -->
+					<input type="hidden"  id="eventId" name="eventId" />
 					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
 					<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
 					<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
