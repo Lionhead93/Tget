@@ -54,8 +54,8 @@
 		
 		$(".getTicketList").on("click",function(){
 			
-// 			$("#eventId").val($(this).val());
-			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
+			$("#eventId").val($(this).val());
+			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventIds="+$(this).val()).submit();
 // 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
