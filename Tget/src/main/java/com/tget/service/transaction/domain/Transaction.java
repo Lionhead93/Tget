@@ -16,6 +16,7 @@ public class Transaction {
 	private User buyer;
 	private int orderAmount;
 	private int totalPrice;
+	private int usePoint;	
 	private Date orderDate;
 	private String paymentOption;
 	private String paymentNo;
@@ -77,6 +78,14 @@ public class Transaction {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public int getUsePoint() {
+		return usePoint;
+	}
+
+	public void setUsePoint(int usePoint) {
+		this.usePoint = usePoint;
+	}
+
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -158,12 +167,13 @@ public class Transaction {
 	
 	@Override
 	public String toString() {
-		return "Transaction [tranNo=" + tranNo + ", orderAmount=" + orderAmount + ", totalPrice=" + totalPrice + ", orderDate="
-				+ orderDate + ", paymentOption=" + paymentOption + ", paymentNo=" + paymentNo + ", tranCode=" + tranCode
-				+ ", deliveryAddr=" + deliveryAddr + ", deliveryCompany=" + deliveryCompany + ", deliveryNo="
-				+ deliveryNo + ", deliveryStartDate=" + deliveryStartDate + ", reviewScore=" + reviewScore
-				+ ", reviewBody=" + reviewBody + ", reviewRegDate=" + reviewRegDate + ", refundAccountNo="
-				+ refundAccountNo + ", refundAccountBank=" + refundAccountBank + "]";
+		return "Transaction [tranNo=" + tranNo + ", ticket=" + ticket + ", event=" + event + ", seller=" + seller
+				+ ", buyer=" + buyer + ", orderAmount=" + orderAmount + ", totalPrice=" + totalPrice + ", usePoint="
+				+ usePoint + ", orderDate=" + orderDate + ", paymentOption=" + paymentOption + ", paymentNo="
+				+ paymentNo + ", tranCode=" + tranCode + ", deliveryAddr=" + deliveryAddr + ", deliveryCompany="
+				+ deliveryCompany + ", deliveryNo=" + deliveryNo + ", deliveryStartDate=" + deliveryStartDate
+				+ ", reviewScore=" + reviewScore + ", reviewBody=" + reviewBody + ", reviewRegDate=" + reviewRegDate
+				+ ", refundAccountNo=" + refundAccountNo + ", refundAccountBank=" + refundAccountBank + "]";
 	}
 	
 	

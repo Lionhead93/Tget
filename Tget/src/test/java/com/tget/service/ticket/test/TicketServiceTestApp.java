@@ -74,7 +74,7 @@ public class TicketServiceTestApp {
 		System.out.println(jsonobj);
 	}
 	
-	@Test
+	//@Test
 	public void getSell() throws Exception {
 		
 		Search search = new Search();
@@ -157,7 +157,7 @@ public class TicketServiceTestApp {
 		
 	}
 	
-	//@Test
+	@Test
 	public void insertTran() throws Exception {
 		
 		Transaction transaction = new Transaction();
@@ -185,6 +185,8 @@ public class TicketServiceTestApp {
 		transaction.setDeliveryAddr("서울시마포구");
 		
 		tranService.addTran(transaction);
+		
+		System.out.println(transaction.getTranNo());
 		
 	}
 	

@@ -20,6 +20,7 @@ import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.rnp.RNPService;
 import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.rnp.domain.Review;
+import com.tget.service.user.domain.User;
 
 
 
@@ -48,13 +49,13 @@ public class RNPServiceTest {
 	private RNPService rNPService;
 
 	
-	//@Test
+	@Test
 	public void addReview() throws Exception {
-		Review review = new Review();
-		review.setReviewBody("¸®ºä¿ä~~!!!!!");
-		review.setScore(5);
-		review.setTranNo(10000);
-		rNPService.addReview(review);
+
+		User user = new User();
+		user.setUserId("buyer");
+		user.setPoint(500000);
+		rNPService.updatePoint(user);
 		
 	}
 	

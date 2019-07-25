@@ -32,6 +32,9 @@
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="insertTran"		parameterType="transaction" >
+	 	<selectKey keyProperty="tranNo" resultType="integer" order="BEFORE">
+	 		SELECT NVL(MAX(tran_no), 0) + 1 FROM transaction
+	 	</selectKey>
 	 	insert 
 	 	into 
 	 	transaction(tran_no, ticket_no, event_id,seller_id,buyer_id,

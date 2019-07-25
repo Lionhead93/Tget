@@ -8,7 +8,7 @@ import com.tget.service.transaction.domain.Transaction;
 
 public interface TranService {
 	
-	public void addTran(Transaction transaction) throws Exception;
+	public int addTran(Transaction transaction) throws Exception;
 	
 	public void addDelivery(Transaction transaction) throws Exception;
 	

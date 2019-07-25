@@ -153,7 +153,7 @@ public class EventServiceImpl implements EventService{
 	}
 	
 	
-	public List<User> getInterestedByUser(Search search) throws Exception{
+	public List<String> getInterestedByUser(Search search) throws Exception{
 		return eventDao.selectInterestedByUser(search);
 	}
 	

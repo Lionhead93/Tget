@@ -7,7 +7,7 @@ import com.tget.service.transaction.domain.Transaction;
 
 public interface TranDao {
 	
-	public void insertTran(Transaction transaction) throws Exception;
+	public int insertTran(Transaction transaction) throws Exception;
 	
 	public void updateDeliveryInfo(Transaction transaction) throws Exception;
 	

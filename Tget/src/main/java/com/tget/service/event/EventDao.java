@@ -36,7 +36,7 @@ public interface EventDao {
 	public void updateCategoryTwo(Category category) throws Exception;
 	public Category selectCategory(String categoryTwoEng) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
-	public List<User> selectInterestedByUser(Search search) throws Exception;
+	public List<String> selectInterestedByUser(Search search) throws Exception;
 	public int selectInterestedByUserCount(Search search) throws Exception;
 	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
