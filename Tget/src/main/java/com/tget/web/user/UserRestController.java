@@ -237,7 +237,7 @@ public class UserRestController {
 	@RequestMapping( value="json/login")
 	public Map<String,Object> login(String userId, Model model) throws Exception{
 		
-		System.out.println("/user/login : POST");
+		System.out.println("/user/json/login : POST");
 		//Business Logic
 		Map<String,Object> map = new HashMap<String,Object>();
 		User user = userService.getUser(userId);

@@ -15,9 +15,9 @@ $( function(){
 	$("a[href='#' ]:contains('Sign Up')").on("click" , function() {
 		self.location = "/user/addUser"
 	});
-	$("a[href='#' ]:contains('Login')").on("click" , function() {
+	/* $("a[href='#' ]:contains('Login')").on("click" , function() {
 		self.location = "/user/login"
-	});
+	}); */
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
@@ -127,7 +127,7 @@ $(function() {
 					<a href="#">Home</a>
 				<c:if test="${empty user}">
 					<a href="#">Sign Up</a>
-					<a href="#">Login</a>
+					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" >Login</a>
 				</c:if>
 				<c:if test="${!empty user}">
 					<a href="#">Logout</a>

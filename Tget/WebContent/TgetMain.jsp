@@ -13,6 +13,8 @@
     <title>T-GET</title>
     	    	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/css/login.css" />
+
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
 		<link rel="stylesheet" href="/resources/css/main.css" />
 		
@@ -33,7 +35,7 @@
 	<body>
 		
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
-		
+	<jsp:include page="/user/xx.jsp" />	
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without
