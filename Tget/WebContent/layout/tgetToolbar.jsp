@@ -15,9 +15,9 @@ $( function(){
 	$("a[href='#' ]:contains('Sign Up')").on("click" , function() {
 		self.location = "/user/addUser"
 	});
-	$("a[href='#' ]:contains('Login')").on("click" , function() {
+	/* $("a[href='#' ]:contains('Login')").on("click" , function() {
 		self.location = "/user/login"
-	});
+	}); */
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
@@ -84,17 +84,17 @@ $(function() {
 	
 	$( "a[href='#']:contains('티켓거래 공지')" ).on("click" , function() {
 		
-		self.location="/community/getContentList?searchCondition=1&searchKeyword=0";	
+		self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
 	
 	});
 	
 	$( "a[href='#']:contains('자유게시판 이용공지')" ).on("click" , function() {
-		self.location="/community/getContentList?searchCondition=1&searchKeyword=1";	
+		self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
 	
 	});
  
 	 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
-			self.location="/community/getContentList?searchCondition=1&searchKeyword=2";	
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 		
 		});
 	 
@@ -127,7 +127,7 @@ $(function() {
 					<a href="#">Home</a>
 				<c:if test="${empty user}">
 					<a href="#">Sign Up</a>
-					<a href="#">Login</a>
+					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" >Login</a>
 				</c:if>
 				<c:if test="${!empty user}">
 					<a href="#">Logout</a>

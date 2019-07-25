@@ -161,22 +161,27 @@ public class CommunityRestController {
 //	}
 	// 수정필요..
 	@RequestMapping(value="rest/updateGoodCount/{contentNo}", method=RequestMethod.GET)
-	public String updateGoodCount( @PathVariable("contentNo") int contentNo) throws Exception {
+	public Map<String, Object> updateGoodCount( @PathVariable("contentNo") int contentNo) throws Exception {
 
 		System.out.println("community/updateGoodCount: GET");
 		communityService.updateGoodCount(contentNo);
 		
-		return "good";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", "good");
+		
+		return map;
 	}
 	
 	@RequestMapping(value="rest/updateBadCount/{contentNo}", method=RequestMethod.GET)
-	public String updateBadCount( @PathVariable("contentNo") int contentNo) throws Exception {
+	public Map<String, Object> updateBadCount( @PathVariable("contentNo") int contentNo) throws Exception {
 
 		System.out.println("community/updateBadCount: GET");
-		
 		communityService.updateBadCount(contentNo);
 		
-		return "bad";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", "bad");
+		
+		return map;
 	}
 	// 날씨 안내
 	@RequestMapping( value="rest/getSearchWeather/") 
