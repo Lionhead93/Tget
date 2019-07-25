@@ -132,7 +132,7 @@ $(function() {
 				<c:if test="${!empty user}">
 					<a href="#">Logout</a>
 					<a href="#" data-target="#alarmModal" data-toggle="modal">
-							 Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
+							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
 				</c:if>				
 				<a href="#menu">Menu</a>
@@ -189,7 +189,7 @@ $(function() {
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary">My Alarm</span></h3>
+					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary"><i class="far fa-bell"></i> My Alarm </span></h3>
 					        <a href="#" class="close" data-dismiss="modal">
 					          &times;
 					        </a>

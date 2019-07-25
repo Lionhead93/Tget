@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tget.common.domain.Search;
+import com.tget.service.alarm.AlarmService;
+import com.tget.service.alarm.domain.Alarm;
 import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
@@ -33,6 +35,11 @@ public class TicketRestController {
 	@Qualifier("eventServiceImpl")
 	@Autowired
 	private EventService eventService;
+	
+	@Qualifier("alarmServiceImpl")
+	@Autowired
+	private AlarmService alarmService;
+	
 	
 	public TicketRestController() {
 		System.out.println(this.getClass());
@@ -83,7 +90,7 @@ public class TicketRestController {
 		ticket.setCode("1");
 		
 		ticketService.updateTicketCode(ticket);
-		
+			
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ticket", ticket);
 		map.put("message", "검증 성공");

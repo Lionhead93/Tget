@@ -2,6 +2,7 @@ package com.tget.web.ticket;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tget.common.domain.Search;
+import com.tget.service.alarm.AlarmService;
+import com.tget.service.alarm.domain.Alarm;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Event;
 import com.tget.service.ticket.TicketService;
@@ -39,6 +42,9 @@ public class TicketController {
 	@Qualifier("userServiceImpl")
 	@Autowired
 	private UserService userService;
+	@Qualifier("alarmServiceImpl")
+	@Autowired
+	private AlarmService alarmService;
 	
 	public TicketController() {
 		System.out.println(this.getClass());
@@ -108,6 +114,22 @@ public class TicketController {
 		session.removeAttribute("sellticketInfo");
 		
 		ticketService.addTicket(ticket);
+		
+		Search search = new Search();
+		search.setSearchCondition("1");
+		search.setSearchKeyword(ticket.getEvent().getEventId());
+		
+		List<String> list = eventService.getInterestedByUser(search);
+		
+		for(String userId : list) {
+			
+			Alarm alarm = new Alarm();
+			alarm.setAlarmCode(1);
+			alarm.setAlarmKeyword(ticket.getEvent().getEventId());
+			alarm.setUserId(userId);
+			alarmService.addAlarm(alarm);	
+			
+		}
 		
 		return "forward:/ticket/addTicketResult.jsp";
 	}

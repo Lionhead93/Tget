@@ -37,7 +37,7 @@ public interface EventService {
 	public void updateCategoryTwo(Category category) throws Exception;
 	public Category getCategory(String categoryTwoEng) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
-	public List<User> getInterestedByUser(Search search) throws Exception;
+	public List<String> getInterestedByUser(Search search) throws Exception;
 	public void addInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;

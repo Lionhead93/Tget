@@ -184,7 +184,7 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	
-	public List<User> selectInterestedByUser(Search search) throws Exception{
+	public List<String> selectInterestedByUser(Search search) throws Exception{
 		//searchCondition = 0이면  InterestedCategory, searchCondition = 1이면 InterestedEvent
 		return sqlSession.selectList("EventMapper.selectInterestedByUser",search);
 	}

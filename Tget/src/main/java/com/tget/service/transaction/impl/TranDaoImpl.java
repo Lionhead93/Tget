@@ -27,9 +27,11 @@ public class TranDaoImpl implements TranDao{
 	}
 
 	@Override
-	public void insertTran(Transaction transaction) throws Exception {
+	public int insertTran(Transaction transaction) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.insert("TransactionMapper.insertTran", transaction);
+		
+		return transaction.getTranNo();
 	}
 
 	@Override

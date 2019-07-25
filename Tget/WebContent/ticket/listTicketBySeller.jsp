@@ -38,12 +38,16 @@
         	border: 1px solid #D6CDB7;
             padding-top: 30px;
         }
+        .sellerTicketTitle{
+        
+        }
         .marketing{
         	padding: 10px;
         }
-        .col-lg-4{   
+        .myTicket{   
+        	margin: 3px;
         	padding-top: 10px;     	
-        	border: 1px solid #D6CDB7;        	
+        	border: 2px solid #D6CDB7;        	
         }
     </style>
     
@@ -64,40 +68,32 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<div class="container">
+	<div align="center" class="container">
 	
-		<h1 class="text-center">내 판매 티켓</h1>
+	<div class="sellerTicketTitle">
+	
+		<span  class="text-center"> <h1><strong>My Ticket</strong></h1> </span>
+		<img alt="" src="/resources/images/1523464646.jpeg">
 		<br/> 
+	 </div>
 	    <hr/>
+	    
 	     <div class="text-info">  
 	    	<strong>총  ${sellProb.totalCount} 개</strong>
 	  	</div>	
-	    <div class="input-group mb-3">
-						  <div class="input-group-prepend">
-						    <label class="input-group-text" for="inputGroupSelect01">검색 조건</label>
-						  </div>
-						  <select class="custom-select" id="inputGroupSelect01" style="width :100px;">
-						    <option selected>All</option>
-						    <option value="0">입금 대기</option>
-						    <option value="1">배송 대기</option>
-						    <option value="2">배송 중</option>
-						    <option value="3">배송 완료</option>
-						    <option value="4">환불 및 취소</option>
-						  </select>
-		</div>	 
-	 <div  class="container marketing">
+	 <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
       <div align="center" class="row" id="#">
        <c:forEach var="ticket" items="${list}" varStatus="j" > 
-        <div class="col-lg-4">
-          <div id="${ticket.ticketNo}">
+        <div class="col-4">
+          <div class="myTicket" id="${ticket.ticketNo}">
 	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" onerror="this.src='/resources/images/logo.png'"  width="140" height="140">
 	          <h2>${ticket.event.eventName}</h2>         
 	          <hr class="my-4">
 	          <p>좌석 : ${ticket.seat}</p>
 	          <p>수량 : ${ticket.amount}</p>
-	          <p>${ticket.price} 원</p>	          
+	          <p>가격 : ${ticket.price} 원</p>	          
 	          <c:if test="${ticket.code=='0'}">
 		          <p class="text-warning">	         
 		          	*검증 대기중		          
