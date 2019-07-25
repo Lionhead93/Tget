@@ -152,7 +152,7 @@
 							url : "/event/rest/kakaoSendToMe",
 							method : "GET" ,
 							data : {
-								accessToken : "DbusJL3wDmeTRuZqdufu9HGYrhefWSX0uhWYTgopyNgAAAFrz7PoTA",
+								
 								requestUrl : newURL+"?eventId="+$("#eventId").val(),
 								eventId : $("#eventId").val()
 							},
@@ -179,9 +179,9 @@
 	        		   +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
 	         });         
 	      
-	      $( "#kakao" ).on("click" , function() {
-	         sendLinkKakao()
-	      }); 
+// 	      $( "#kakao" ).on("click" , function() {
+// 	         sendLinkKakao()
+// 	      }); 
 	});
 	var tag = document.createElement('script');
 

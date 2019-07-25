@@ -106,7 +106,7 @@ public class ReviewAndPointController {
 			System.out.println("===============addReview===============");
 			System.out.println(review);
 			
-//			rNPService.addReview(review);
+			rNPService.addReview(review);
 			User user = (User)session.getAttribute("user");
 			String userId =user.getUserId();
 			
