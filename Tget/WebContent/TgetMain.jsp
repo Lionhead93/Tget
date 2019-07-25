@@ -44,7 +44,7 @@
 			-->
 				<section id="banner" data-video="/resources/video/main">
 					<div class="inner">
-					<form>
+					<form name="searchEvent">
 					<input type="hidden" id="requestPageToken" name="requestPageToken" value="${requestPageToken }"/>
 					<input type="hidden" id="searchCondition" name="searchCondition" 
 					placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}"/>
@@ -52,7 +52,7 @@
 					placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 					
 							<div class="input-group">		    
-							    <input type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
+							    <input name="searching" type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
 							    <div class="input-group-append">
 							    	<a class="input-group-text" href="#">검색</a>
 								</div>							
@@ -403,14 +403,14 @@
 							}
 				});
 				
-				$("input[type='text']").on("keyup",function(){
-					$("#searchKeyword").val($("input[type='text']").val());
+				$("input[name='searching']").on("keyup",function(){
+					$("#searchKeyword").val($("input[name='searching']").val());
 				});
 				
 				$("input[type='text']").on("keypress",function(){
 					if (event.keyCode ==13) {
 						$("#searchCondition").val("1");
-						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+						$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 					}
 				});
 				
