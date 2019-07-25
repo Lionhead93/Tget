@@ -13,6 +13,8 @@
     <title>T-GET</title>
     	    	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/css/login.css" />
+
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
 		<link rel="stylesheet" href="/resources/css/main.css" />
 		
@@ -33,7 +35,7 @@
 	<body>
 		
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
-		
+	<jsp:include page="/user/xx.jsp" />	
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without
@@ -71,8 +73,8 @@
 						    </nav>
 						  </div>
 						  <br/>
-						<a href="#main" class="button big alt scrolly">추천 이벤트</a>
-						<a href="#popular" class="button big alt scrolly">인기 이벤트</a>
+						<a href="#main" class="button big alt scrolly">인기 이벤트</a>
+						<a href="#popular" class="button big alt scrolly">추천 이벤트</a>
 					</div>
 
 				</section>
@@ -84,48 +86,53 @@
 				<section class="wrapper style1">
 					<div class="inner">
 						<header class="align-center">
-							<h2>추천 이벤트</h2>
-							<p>T-GET이 추천하는 이달의 이벤트 Top 3</p>
+							<h2>인기 이벤트</h2>
+							<p>조회수 Top 3</p>
 						</header>
+						
 						<!-- 2 Column Video Section -->
 							<div class="flex flex-3">
+							
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic07.jpg" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage0" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe0">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink0" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic08.jpg" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage1" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe1">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink1" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic02.jpg" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage2"   />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe2">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink2"  class="link"><span>Click Me</span></a>
 								</div>
+								
 							</div>
+							
+							
 					</div>
 				</section>
 
@@ -133,118 +140,163 @@
 				<section id="popular" class="wrapper style2">
 					<div class="inner">
 						<header>
-							<h2>인기 이벤트</h2>
-							<p>카테고리 별 조회수 Top 4</p>
+							<h2>추천 이벤트</h2>
+							<p>T-GET이 추천하는 이달의 이벤트 Top 3</p>							
 						</header>
 						
 						<!-- Tabbed Video Section -->
 							<div class="flex flex-tabs">
 								<ul class="tab-list">
-									<li><a href="#" data-tab="tab-1" class="active">음악 공연</a></li>
-									<li><a href="#" data-tab="tab-2">스포츠</a></li>
-									<li><a href="#" data-tab="tab-3">기타 예술공연</a></li>
+									<li><a id="tab0"  href="#" data-tab="tab-1" class="active" style="display:none;">추천이벤트1</a></li>
+									<li><a id="tab1" href="#" data-tab="tab-2" style="display:none;">추천이벤트2</a></li>
+									<li><a  id="tab2"  href="#" data-tab="tab-3" style="display:none;">추천이벤트3</a></li>
 								</ul>
 								<div class="tabs">
 
 									<!-- Tab 1 -->
 										<div class="tab tab-1 flex flex-3 active">
-											<div class="row mb-2">											    
-											    <div class="col-md-6">
+											<div class="row mb-1">											    
+											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 											        <div class="col p-4 d-flex flex-column position-static">
-											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
-											          <div class="mb-1 text-muted">2019-07-27</div>
-											          <a href="#" class="">상세보기</a>
+<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
+											          <h3 class="mb-0"  id="goRecommEvent0">EXO Seoul</h3>
+											          <div class="mb-1 text-muted" id="recommDetail0">2019-07-27</div>
+											          <a id="getEvent0" href="#" class="">상세보기</a>
 											        </div>
+											        <video controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
-											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+											        	
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
 											        </div>
 											      </div>
 											    </div>
+									
+<!-- 											    <div class="col-md-12"> -->
+<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
+<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
+<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
+<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
+<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
+<!-- 											          <a href="#" class="">상세보기</a> -->
+<!-- 											        </div> -->
+<!-- 											        <div class="col-auto d-none d-lg-block"> -->
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+<!-- 											        </div> -->
+<!-- 											      </div> -->
+<!-- 											    </div> -->
 											    
-											    <div class="col-md-6">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
-											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
-											          <div class="mb-1 text-muted">2019-07-27</div>
-											          <a href="#" class="">상세보기</a>
-											        </div>
-											        <div class="col-auto d-none d-lg-block">
-											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-											        </div>
-											      </div>
-											    </div>
+<!-- 											    <div class="col-md-6"> -->
+<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
+<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
+<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
+<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
+<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
+<!-- 											          <a href="#" class="">상세보기</a> -->
+<!-- 											        </div> -->
+<!-- 											        <div class="col-auto d-none d-lg-block"> -->
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+<!-- 											        </div> -->
+<!-- 											      </div> -->
+<!-- 											    </div> -->
 											    
-											    <div class="col-md-6">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
-											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
-											          <div class="mb-1 text-muted">2019-07-27</div>
-											          <a href="#" class="">상세보기</a>
-											        </div>
-											        <div class="col-auto d-none d-lg-block">
-											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-											        </div>
-											      </div>
-											    </div>
-											    
-											    <div class="col-md-6">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
-											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
-											          <div class="mb-1 text-muted">2019-07-27</div>
-											          <a href="#" class="">상세보기</a>
-											        </div>
-											        <div class="col-auto d-none d-lg-block">
-											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-											        </div>
-											      </div>
-											    </div>
+<!-- 											    <div class="col-md-6"> -->
+<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
+<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
+<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
+<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
+<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
+<!-- 											          <a href="#" class="">상세보기</a> -->
+<!-- 											        </div> -->
+<!-- 											        <div class="col-auto d-none d-lg-block"> -->
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+<!-- 											        </div> -->
+<!-- 											      </div> -->
+<!-- 											    </div> -->
 											</div>
 										</div>
 
 									<!-- Tab 2 -->
-										<div class="tab tab-2 flex flex-3">
-											<div class="thumbnails">
-												<div class="box">
-														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a>
-														<div class="inner">
-															<h3>Nascetur nunc varius commodo</h3>
-															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-														</div>
-												</div>
-												<div class="box">
-														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a>
-														<div class="inner">
-															<h3>Nascetur nunc varius commodo</h3>
-															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-														</div>
-												</div>
-												<div class="box">
-														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a>
-														<div class="inner">
-															<h3>Nascetur nunc varius commodo</h3>
-															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-														</div>
-												</div>												
+									<div class="tab tab-2 flex flex-3">
+											<div class="row mb-1">											    
+											    <div class="col-md-12">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+											        <div class="col p-4 d-flex flex-column position-static">
+											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
+											          <h3 class="mb-0">EXO Seoul</h3>
+											          <div class="mb-1 text-muted">2019-07-27</div>
+											          <a id="getEvent1" href="#" class="">상세보기</a>
+											        </div>
+											        <video id="videoName1"  autoplay="autoplay"  controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <div class="col-auto d-none d-lg-block">
+											        	
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+											        </div>
+											      </div>
+											    </div>
 											</div>
-										</div>
-
-									<!-- Tab 3 -->
+										</div>   
+									
 										<div class="tab tab-3 flex flex-3">
+											<div class="row mb-1">											    
+											    <div class="col-md-12">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+											        <div class="col p-4 d-flex flex-column position-static">
+											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
+											          <h3 class="mb-0">EXO Seoul</h3>
+											          <div class="mb-1 text-muted">2019-07-27</div>
+											          <a id="getEvent2"  href="#" class="">상세보기</a>
+											        </div>
+											        <video id="videoName1"  autoplay="autoplay"  controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <div class="col-auto d-none d-lg-block">
+											        	
+<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
+<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+											        </div>
+											      </div>
+											    </div>
+											</div>
+										</div>   
+									
+									
+<!-- 										<div class="tab tab-2 flex flex-3"> -->
+<!-- 											<div class="thumbnails"> -->
+<!-- 												<div class="box"> -->
+<!-- 														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a> -->
+<!-- 														<div class="inner"> -->
+<!-- 															<h3>Nascetur nunc varius commodo</h3> -->
+<!-- 															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p> -->
+<!-- 															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a> -->
+<!-- 														</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="box"> -->
+<!-- 														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a> -->
+<!-- 														<div class="inner"> -->
+<!-- 															<h3>Nascetur nunc varius commodo</h3> -->
+<!-- 															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p> -->
+<!-- 															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a> -->
+<!-- 														</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="box"> -->
+<!-- 														<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="/resources/images/pic01.jpg" alt="" /></a> -->
+<!-- 														<div class="inner"> -->
+<!-- 															<h3>Nascetur nunc varius commodo</h3> -->
+<!-- 															<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p> -->
+<!-- 															<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a> -->
+<!-- 														</div> -->
+<!-- 												</div>												 -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+
+												<!-- Tab 3 -->
+<!-- 										<div class="tab tab-3 flex flex-3"> -->
 											
-										</div>
+<!-- 										</div> -->
 
 								</div>
 							</div>
@@ -311,13 +363,15 @@
 		// 							alert(status);
 									recommSize = JSONData.recommEventlistSize;
 									$.each(JSONData.eventNameList, function(index,value){
-										$("#goRecommEvent"+index).val(value);
+										$("#getEvent"+index).val(value);
+										$("#tab"+index).attr( "style","display:block;");
 									 });
 									$.each(JSONData.videoNameList, function(index,value){
 										$("#videoName"+index).attr("src","/resources/video/"+value);
 									 });
 									$.each(JSONData.recommEventNameList, function(index,value){
-										$("#nav-"+index+"-tab").text(value).attr( "style","display:block;");
+										$("#goRecommEvent"+index).text(value);
+										
 		// 								alert(value);
 									 });
 									$.each(JSONData.recommEventDetailList, function(index,value){
@@ -327,8 +381,37 @@
 							}
 				});
 				
+				
+				$.ajax(
+						{
+							url : "/event/rest/getPopularEventList",
+							method : "POST",
+							dataType : "json",
+							success : function(JSONData, status){
+		// 							alert(status);
+									recommSize = JSONData.recommEventlistSize;
+									$.each(JSONData.eventNameList, function(index,value){
+										$("#pelink"+index).val(value);
+									 });
+									$.each(JSONData.eventImageList, function(index,value){
+										$("#peImage"+index).attr("src","/resources/images/uploadFiles/"+value);
+									 });
+									$.each(JSONData.koNameList, function(index,value){
+										$("#pe"+index).text(value);
+									 });
+		// 						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+							}
+				});
+				
 				$("input[type='text']").on("keyup",function(){
 					$("#searchKeyword").val($("input[type='text']").val());
+				});
+				
+				$("input[type='text']").on("keypress",function(){
+					if (event.keyCode ==13) {
+						$("#searchCondition").val("1");
+						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+					}
 				});
 				
 				$("a:contains('검색')").on("click",function(){
@@ -356,7 +439,11 @@
 				});	
 				
 				
-				$("button:contains('이벤트바로가기')").on("click",function(){
+				$("a:contains('상세보기')").on("click",function(){
+					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
+				});
+				
+				$("a:contains('Click Me')").on("click",function(){
 					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
 				});
 				

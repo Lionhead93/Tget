@@ -11,12 +11,18 @@
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
-	
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 <!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 <!-- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <!--   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
@@ -101,13 +107,9 @@
 			 background-image: -o-linear-gradient(top, #646464, #282828);
 			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 		}
- 		.container-fluid{ 
- 			font-family: 'Sunflower', sans-serif;
-	 		font-size: 20px;    
- 		} 
 	</style>
 <body>	
-<jsp:include page="/layout/toolbar.jsp" />
+<jsp:include page="/layout/tgetToolbar.jsp" />
 
 <form>
 	<div class="container-fluid" align="center">	
@@ -174,6 +176,6 @@
 		
 	</div>
 </form>
-
+<jsp:include page="/layout/footer.jsp" />
 </body>
 </html>

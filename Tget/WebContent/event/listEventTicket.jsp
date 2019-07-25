@@ -11,15 +11,22 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<!-- 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-<!-- 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	 -->
-<!-- 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
+	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 	
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!-- KAKAO -->
@@ -27,6 +34,8 @@
 	<script type="text/javascript">
 	
 	var videoList = [];
+	var i=0;
+	var newURL = window.location.protocol + "//" + window.location.host +  window.location.pathname;
 
 	$(function(){
 		
@@ -80,12 +89,14 @@
 		});
 		
 		$(".interested").on("click",function(){
+			i = parseInt($("#interestedCount").val());
+			
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
 				
 			} else {
-				if ($(this).children("input").val() == 'heart-empty') {
+				if($(this).children("input").val() == 'heart-empty') {
 					$(this).html('<input type="hidden"  value="heart">'
 							+'<ion-icon name="heart" size="large"></ion-icon>');
 					
@@ -95,7 +106,7 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 등록완료");
+									alert("관심이벤트 등록완료");														
 //	 								alert("JSONData : \n"+JSONData.stringify());		
 								}
 //	 						,
@@ -103,6 +114,8 @@
 //	 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 //	 							}			
 						});	
+// 					$("#interestedCount").val(i+1);
+// 					$("#interestedCount").parent("div").text(i+"명");				
 				}else{
 					$(this).html('<input type="hidden"  value="heart-empty">'
 							+'<ion-icon name="heart-empty" size="large"></ion-icon>');
@@ -113,7 +126,14 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 삭제완료");
+									alert("관심이벤트 삭제완료");									
+									if (i == 1 || i =="1") {
+										$("#interestedCount").val("0");
+										$("#interestedCount").parent("div").text("0");			
+									} else {
+										$("#interestedCount").val(i-1);
+										$("#interestedCount").parent("div").text(i);			
+									}															
 								}
 //	 						,
 //	 							error : function(request, status, error ) {   
@@ -126,12 +146,15 @@
 		
 		
 			$("#kakaoSendToMe").on("click",function(){
+// 				alert($("#eventId").val());
 				$.ajax( 
 						{
 							url : "/event/rest/kakaoSendToMe",
 							method : "GET" ,
 							data : {
-								accessToken : "DbusJL3wDmeTRuZqdufu9HGYrhefWSX0uhWYTgopyNgAAAFrz7PoTA"
+								accessToken : "DbusJL3wDmeTRuZqdufu9HGYrhefWSX0uhWYTgopyNgAAAFrz7PoTA",
+								requestUrl : newURL+"?eventId="+$("#eventId").val(),
+								eventId : $("#eventId").val()
 							},
 							dataType : "json" ,							
 							headers : {
@@ -204,9 +227,9 @@
 	
 	<style>
       div.container {
-        	margin-top: 50px;
-        	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
-        	font-size: 25px;
+/* */         	margin-top: 50px;
+/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
+/*         	font-size: 25px; */
         }
         table{
         	margin-top: 50px;
@@ -258,25 +281,38 @@
 </head>
 
 <body>
-<jsp:include page="/layout/toolbar.jsp" />
+<jsp:include page="/layout/tgetToolbar.jsp" />
 <form>
 	
 	<div class="container" align="center">
 	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
 	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
 	<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
+	<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }"/>
 		<div class="row" style="padding-top: 30px">
-			<div class="col-lg-10 col-md-10 col-9"></div>
-			<div class="col-lg-1 col-md-1 col-1">
+			<div class="col-lg-8 col-md-8 col-8"></div>
+			<div class="col-lg-2 col-md-2 col-2">
+<%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
 				<div class="interested"  value="heart-empty" align="right">
 					<input type="hidden"  value="heart-empty">
-					<ion-icon name="heart-empty" size="large"></ion-icon>
+					<ion-icon name="heart-empty" size="large"></ion-icon>					
 				</div>
+				<div align="right" style="font-size: 10px; color: black;" >
+					<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
+					${interestedCount}</div>
 			</div>
-			<div class="col-lg-1 col-md-1 col-2">
-				<div  align="left">
+			<div class="col-lg-2 col-md-2 col-2 dropdown" >
+				<div  align="left" class=" dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<ion-icon name="share" size="large"></ion-icon>
 				</div>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenu">
+				    <h6 class="dropdown-header">공유하기</h6>
+<!-- 					<a class="dropdown-item" href="#">Action</a> -->
+<!-- 					<a class="dropdown-item" href="#">Another action</a> -->
+					<a class="dropdown-item"  href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/images/twitter.png" style="width:30px">트위터 공유</a>
+    		    	<a class="dropdown-item"  href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/images/facebook.png" style="width:30px">페이스북 공유</a>
+    	   			<a class="dropdown-item"  href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/images/kakaotalk.png"  style="width:30px">나에게 보내기</a>	
+				  </div>
 			</div>
 		</div>		
 		
@@ -302,7 +338,7 @@
 					    <tr>
 					      <td>
 							<div class="list" align="left">
-								ticketNo : ${i.ticketNo }<br/>
+<%-- 								ticketNo : ${i.ticketNo }<br/> --%>
 								총 ${i.amount }장, 장당 ${i.price }원
 								(<c:if test="${i.type == 0}">
 									종이티켓
@@ -337,13 +373,13 @@
 			  		</tbody>
 				</table>		
 				<input type="hidden"  id="ticketNo" name="ticketNo"/>		
-				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a>
-    		    <a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a>
-    	   		<a href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>	
+<!-- 				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a> -->
+<!--     		    <a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a> -->
+<!--     	   		<a href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>	 -->
 			</div>
 		</div>
 	</div>
 </form>
-
+<jsp:include page="/layout/footer.jsp" />
 </body>
 </html>

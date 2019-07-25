@@ -231,7 +231,10 @@ public class EventController {
 		if (youtubeList != null && youtubeList.size() != 0 ) {
 			model.addAttribute("videoId", youtubeList.get(youtubeList.size()-1));
 		}
-		
+		search.setSearchCondition("1");
+//		search.setSearchKeyword(eventId);
+//		int interestedCount = eventService.getInterestedByUserCount(search);
+		model.addAttribute("interestedCount",  eventService.getInterestedByUserCount(search));
 		model.addAttribute("event", event);
 		model.addAttribute("ticketList", ticketList);
 		model.addAttribute("lowPrice", sellProb.getLowPrice());
@@ -381,13 +384,18 @@ public class EventController {
 			
 		}
 		List<RecommEvent> list = eventService.getRecommendedEventList();
-		for (int i=0; i<list.size(); i++) {
-			if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
-				break;
-			}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
-				eventService.addRecommendedEvent(recommEvent);
-			}
-		}	
+		if (list != null && list.size() !=0) {
+			for (int i=0; i<list.size(); i++) {
+				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					break;
+				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					eventService.addRecommendedEvent(recommEvent);
+				}
+			}	
+		}else {
+			eventService.addRecommendedEvent(recommEvent);
+		}
+		
 //		eventService.addRecommendedEvent(recommEvent);
 		System.out.println(recommEvent);
 		model.addAttribute("recommEvent",recommEvent);

@@ -189,6 +189,10 @@ public class EventDaoImpl implements EventDao {
 		return sqlSession.selectList("EventMapper.selectInterestedByUser",search);
 	}
 	
+	public int selectInterestedByUserCount(Search search) throws Exception{
+		//searchCondition = 0ÀÌ¸é  InterestedCategory, searchCondition = 1ÀÌ¸é InterestedEvent
+		return sqlSession.selectOne("EventMapper.selectInterestedByUserCount",search);
+	}
 	
 	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception{
 		Event event = new Event();
@@ -407,9 +411,10 @@ public class EventDaoImpl implements EventDao {
 		}else if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				stubhubEvent = (StubhubEvent)list.get(i);
-				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" //";				
+				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" ///";				
 			}
-			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+			str.replaceAll("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+//			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			System.out.println("query///////////////////////////"+str);
 			json.put("q",str);
 		}		
@@ -434,6 +439,7 @@ public class EventDaoImpl implements EventDao {
 		JSONObject tranText = (JSONObject) tran.get(0);
 		String result = (String) tranText.get("translatedText");
 		System.out.println("result///////////////////////////"+result);
+		result.replaceAll("¼£·Ô ±ØÀå", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 		
 		String[] translated = null;
 		String[] tempArr = null;
@@ -442,9 +448,10 @@ public class EventDaoImpl implements EventDao {
 			map.put("result", result);
 			return map;
 		}else if (list != null && list.size() != 0) {
-			translated = result.split("//");
+			translated = result.split("///");
 			
 			for (int i=0; i<translated.length; i++ ) {
+//			for (int i=0; i<list.size(); i++ ) {
 				tempArr = translated[i].split("/");
 				stubhubEvent = (StubhubEvent)list.get(i);
 				
@@ -489,9 +496,10 @@ public class EventDaoImpl implements EventDao {
 		if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				event = list.get(i);
-				str += event.getEventName()+"/"+event.getEventLocation()+" //";				
+				str += event.getEventName()+"/"+event.getEventLocation()+" ///";				
 			}
-			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+//			str.replaceAll("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+//			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			System.out.println("query///////////////////////////"+str);
 			json.put("q",str);
 		}		
@@ -516,12 +524,13 @@ public class EventDaoImpl implements EventDao {
 		JSONObject tranText = (JSONObject) tran.get(0);
 		String result = (String) tranText.get("translatedText");
 		System.out.println("result///////////////////////////"+result);
+		result.replaceAll("¼£·Ô ±ØÀå", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 		
 		String[] translated = null;
 		String[] tempArr = null;
 		
 		if (list != null && list.size() != 0) {
-			translated = result.split("//");
+			translated = result.split("///");
 			
 			for (int i=0; i<translated.length; i++ ) {
 				tempArr = translated[i].split("/");

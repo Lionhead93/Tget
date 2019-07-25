@@ -1,6 +1,7 @@
 package com.tget.web.rnp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,14 +54,15 @@ public class ReviewAndPointController {
 		@RequestMapping(value="getPointHistory")
 		public String getPointHistory(HttpSession session, HttpServletRequest request, Model model) throws Exception {
 			System.out.println("===============getPointHistory===============");
-			
+			List<PointHistory> list= null;
 			User user = (User)session.getAttribute("user");
 			System.out.println(rNPService.getPointHistoryCount(user.getUserId()));
 			
 			if (rNPService.getPointHistoryCount(user.getUserId()) != 0 ) {
-				rNPService.getPointHistory(user.getUserId());
+				list = rNPService.getPointHistory(user.getUserId());
 			}
 			
+			model.addAttribute("pointHistoryList", list);
 			return "forward:/rnp/getPointHistory.jsp";
 			
 		}
@@ -115,6 +117,7 @@ public class ReviewAndPointController {
 			int updatePoint = tran.getTotalPrice()/100;
 			
 			PointHistory pointHistory = new PointHistory();
+			pointHistory.setTranNo(review.getTranNo());
 			pointHistory.setPointUpdateCode("0");
 			pointHistory.setUpdatePoint(updatePoint);
 			pointHistory.setUserId(userId);
@@ -124,6 +127,7 @@ public class ReviewAndPointController {
 			rNPService.addPoint(pointHistory);
 			rNPService.updatePoint(user);
 			
+			session.setAttribute("user", user);
 			model.addAttribute("review", review);
 			model.addAttribute("tranNo", review.getTranNo());
 			model.addAttribute("updatePoint", updatePoint);

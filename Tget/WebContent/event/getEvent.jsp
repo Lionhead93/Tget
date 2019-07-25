@@ -11,7 +11,7 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
@@ -22,6 +22,13 @@
 <!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="/resources/javascript/common.js" ></script>
+	<script src="/resources/javascript/alarm.js" ></script>
+	<script src="/resources/javascript/jquery.min.js"></script>
+	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
+	<script src="/resources/javascript/skel.min.js"></script>
+	<script src="/resources/javascript/util.js"></script>
+	<script src="/resources/javascript/main.js"></script>
 	<script type="text/javascript">
 
 	var str = "";
@@ -33,9 +40,11 @@
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
+// 				self.location="/user/login";
 			} else {
 				$("#eventId").val($(this).val());
 				$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
+// 				self.location="/user/login";
 			}
 // 			$("#eventId").val($(this).val());
 // 			$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
@@ -44,8 +53,8 @@
 		
 		$(".getTicketList").on("click",function(){
 			
-			$("#eventId").val($(this).val());
-			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList").submit();
+// 			$("#eventId").val($(this).val());
+			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
 // 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
@@ -128,14 +137,14 @@
 </head>
 
 <body>
-<jsp:include page="/layout/toolbar.jsp" />
+<jsp:include page="/layout/tgetToolbar.jsp" />
 <form>
-	<div class="container-fluid"  align="center">
+	<div class="container-fluid"  align="center" style="margin-top: 50px">
 			<br/>			
 			<div class="row">
 				<div class="col-lg-5" align="center">
-					<h3>${!empty event.koName? event.koName:eventName}</h3>
-					<input type="hidden"  id="eventId" name="eventId" value="" />
+					<h3>${event.koName}</h3>
+<!-- 					<input type="hidden"  id="eventId" name="eventId" value="" /> -->
 					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
 					<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
 					<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
@@ -146,7 +155,8 @@
 							<img src="/resources/images/uploadFiles/${eventImage}" />
 						</c:if>
 						<c:if test="${empty eventImage}">
-							<img src = "http://placehold.it/500x280" class="img-rounded"/>
+							<img src="/resources/images/logo.png"  style="width:500px; height=280px;"/>
+<!-- 							<img src = "http://placehold.it/500x280" class="img-rounded"/> -->
 						</c:if>
 						<br/>
 						<div >
@@ -191,6 +201,6 @@
 		
 	</div>
 </form>
-
+<jsp:include page="/layout/footer.jsp" />
 </body>
 </html>

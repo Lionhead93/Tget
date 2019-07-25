@@ -157,6 +157,10 @@ public class EventServiceImpl implements EventService{
 		return eventDao.selectInterestedByUser(search);
 	}
 	
+	public int getInterestedByUserCount(Search search) throws Exception{
+		return eventDao.selectInterestedByUserCount(search);
+	}
+	
 	
 	public void addInterestedCategory(String categoryTwoEng, String userId) throws Exception{
 		eventDao.insertInterestedCategory(categoryTwoEng, userId);
