@@ -411,7 +411,7 @@ public class EventDaoImpl implements EventDao {
 		}else if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				stubhubEvent = (StubhubEvent)list.get(i);
-				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" //";				
+				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" ///";				
 			}
 			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			System.out.println("query///////////////////////////"+str);
@@ -446,7 +446,7 @@ public class EventDaoImpl implements EventDao {
 			map.put("result", result);
 			return map;
 		}else if (list != null && list.size() != 0) {
-			translated = result.split("//");
+			translated = result.split("///");
 			
 			for (int i=0; i<translated.length; i++ ) {
 				tempArr = translated[i].split("/");
@@ -493,7 +493,7 @@ public class EventDaoImpl implements EventDao {
 		if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				event = list.get(i);
-				str += event.getEventName()+"/"+event.getEventLocation()+" //";				
+				str += event.getEventName()+"/"+event.getEventLocation()+" ///";				
 			}
 			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			System.out.println("query///////////////////////////"+str);
@@ -525,7 +525,7 @@ public class EventDaoImpl implements EventDao {
 		String[] tempArr = null;
 		
 		if (list != null && list.size() != 0) {
-			translated = result.split("//");
+			translated = result.split("///");
 			
 			for (int i=0; i<translated.length; i++ ) {
 				tempArr = translated[i].split("/");

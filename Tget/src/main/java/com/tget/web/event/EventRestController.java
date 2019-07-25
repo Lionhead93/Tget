@@ -491,10 +491,13 @@ public class EventRestController {
 	
 	@RequestMapping( value="rest/kakaoSendToMe")
 //	public Map<String,Object> kakaoSendToMe(@ModelAttribute("user") User user) throws Exception{		
-	public Map<String,Object> kakaoSendToMe(HttpSession session,@ModelAttribute("event") Event event) throws Exception{			
+	public Map<String,Object> kakaoSendToMe(HttpServletRequest request,HttpSession session) throws Exception{			
 		System.out.println("===========rest/kakaoSendToMe=============");
+		String requestUrl = null;
 		
 		User user = (User)session.getAttribute("user");
+		System.out.println((requestUrl = (String)request.getParameter("requestUrl"))+"\n");
+		Event event = eventService.getEvent((String)request.getParameter("eventId"));
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
@@ -506,26 +509,27 @@ public class EventRestController {
 		httpPost.setHeader("Authorization", "Bearer "+user.getKakaoToken());
 		
 		JSONObject content = new JSONObject();
-		content.put("title",	event.getKoLocation());
-		content.put("description",	"");
-		if (event.getEventImage() != null) {
-			content.put("image_url",	"http:192.168.0.82:8080/resources/images/uploadFiles/"+event.getEventImage());
-		}else {
-			content.put("image_url",	"http:192.168.0.82:8080/resources/images/logo.png");
-		}		
-		content.put("image_width",	640);
-		content.put("image_height",	320);
+		content.put("title",	event.getKoName());
+		content.put("description",	event.getEventDate()+", "+event.getEventTimeStr()+"\n"+event.getKoLocation());
+		content.put("image_url",	"https://postfiles.pstatic.net/MjAxOTA3MjVfMTc5/MDAxNTY0MDIyNDI1MDAy.JrJIonZVX34tFj-Wu6EjNou_gYtFjwhhVbUTOVr9xUMg.88hG1dy_KjkoiSrxYar_nWFUOKu2gPZVcza-InffitEg.PNG.youree1226/logo.png?type=w580");
+//		if (event.getEventImage() != null) {
+//			content.put("image_url",	"http://192.168.0.82:8080/resources/images/uploadFiles/"+event.getEventImage());
+//		}else {
+//			content.put("image_url",	"http://192.168.0.82:8080/resources/images/logo.png");
+//		}		
+		content.put("image_width",	400);
+		content.put("image_height",	200);
 		
 		JSONObject link = new JSONObject();
-		link.put("web_url",	"http://192.168.0.82:8080");
-		link.put("mobile_web_url",	"http://192.168.0.82:8080");
-		link.put("android_execution_params",	"http://192.168.0.82:8080");
-		link.put("ios_execution_params",	"http://192.168.0.82:8080");
+		link.put("web_url",	requestUrl);
+		link.put("mobile_web_url",	requestUrl);
+		link.put("android_execution_params",	requestUrl);
+		link.put("ios_execution_params",requestUrl);
 		
 		content.put("link", link);
 		
 		JSONObject social = new JSONObject();
-		social.put("like_count", event.getInterestedNum());
+//		social.put("like_count", event.getInterestedNum());
 		social.put("view_count", event.getViewCount());
 		
 		JSONObject json = new JSONObject();

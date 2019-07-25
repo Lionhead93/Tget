@@ -150,7 +150,7 @@
 			$("a[id='kakao' ]").on("click" , function() {
 					
 					var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
-					window.open("https://kauth.kakao.com/oauth/authorize?client_id=8dbe371059a9972c710af6d3eb14767e&redirect_uri=http://localhost:8080/user/oauth&response_type=code","Kakao login",popOption);
+					window.open("https://kauth.kakao.com/oauth/authorize?client_id=8dbe371059a9972c710af6d3eb14767e&redirect_uri=http://192.168.0.82:8080/user/oauth&response_type=code","Kakao login",popOption);
 					
 					
 			});
