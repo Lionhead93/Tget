@@ -117,6 +117,7 @@ public class ReviewAndPointController {
 			int updatePoint = tran.getTotalPrice()/100;
 			
 			PointHistory pointHistory = new PointHistory();
+			pointHistory.setTranNo(review.getTranNo());
 			pointHistory.setPointUpdateCode("0");
 			pointHistory.setUpdatePoint(updatePoint);
 			pointHistory.setUserId(userId);
@@ -126,6 +127,7 @@ public class ReviewAndPointController {
 			rNPService.addPoint(pointHistory);
 			rNPService.updatePoint(user);
 			
+			session.setAttribute("user", user);
 			model.addAttribute("review", review);
 			model.addAttribute("tranNo", review.getTranNo());
 			model.addAttribute("updatePoint", updatePoint);

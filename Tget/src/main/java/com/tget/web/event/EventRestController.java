@@ -161,32 +161,40 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getPopularEventList")
-	public List<String> getPopularEventList() throws Exception {
+	public Map<String,Object> getPopularEventList() throws Exception {
 		System.out.println("===============rest/getPopularEventList===============");
 		
-//		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		List<Event> list =  eventService.getPopularEventList();
 		List<String> eventNameList = new ArrayList<String>();
+		List<String> eventImageList = new ArrayList<String>();
+		List<String> koNameList = new ArrayList<String>();
 		
 		for (Event event : list) {
 			if (eventNameList.size()==0) {
 				eventNameList.add(event.getEventName());
-			}else if(eventNameList.size()<10){
+				eventImageList.add(event.getEventImage());
+				koNameList.add(event.getKoName());
+			}else if(eventNameList.size()<3){
 				for (int i = 0; i < eventNameList.size(); i++) {
 					if (eventNameList.get(i).equals(event.getEventName())) {
 						break;
 					} else if ((i==eventNameList.size()-1) &&( ! eventNameList.get(i).equals(event.getEventName()))) {
 						eventNameList.add(event.getEventName());
+						eventImageList.add(event.getEventImage());
+						koNameList.add(event.getKoName());
 					}
 				}
-			}else if(eventNameList.size()==10){
+			}else if(eventNameList.size()==3){
 				break;
 			}
 		}
 		
 //		map.put("popularEventList", eventService.getPopularEventList());
-		
-		return eventNameList;
+		map.put("eventNameList",eventNameList);
+		map.put("eventImageList",eventImageList);
+		map.put("koNameList",koNameList);
+		return map;
 	}
 	
 	@RequestMapping(value="rest/getRecommendedEventList")

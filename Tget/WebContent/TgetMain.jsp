@@ -93,39 +93,39 @@
 							
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic07.jpg" alt="" />
+										<img src="/resources/images/uploadFiles/logo.png"  id="peImage0" alt="" />
 										<div class="arrow">
 											<div class="icon fa-play"></div>
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe0">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink0" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic08.jpg" alt="" />
+										<img src="/resources/images/uploadFiles/logo.png"  id="peImage1" alt="" />
 										<div class="arrow">
 											<div class="icon fa-play"></div>
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe1">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink1" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/pic02.jpg" alt="" />
+										<img src="/resources/images/uploadFiles/logo.png"  id="peImage2"  alt="" />
 										<div class="arrow">
 											<div class="icon fa-play"></div>
 										</div>
 									</div>
-									<p class="caption">
-										이벤트 설명
+									<p class="caption" id="pe2">
+										이벤트
 									</p>
-									<a href="generic.html" class="link"><span>Click Me</span></a>
+									<a id="pelink2"  class="link"><span>Click Me</span></a>
 								</div>
 								
 							</div>
@@ -379,6 +379,28 @@
 							}
 				});
 				
+				
+				$.ajax(
+						{
+							url : "/event/rest/getPopularEventList",
+							method : "POST",
+							dataType : "json",
+							success : function(JSONData, status){
+		// 							alert(status);
+									recommSize = JSONData.recommEventlistSize;
+									$.each(JSONData.eventNameList, function(index,value){
+										$("#pelink"+index).val(value);
+									 });
+									$.each(JSONData.eventImageList, function(index,value){
+										$("#peImage"+index).attr("src","/resources/images/uploadFiles/"+value);
+									 });
+									$.each(JSONData.koNameList, function(index,value){
+										$("#pe"+index).text(value);
+									 });
+		// 						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+							}
+				});
+				
 				$("input[type='text']").on("keyup",function(){
 					$("#searchKeyword").val($("input[type='text']").val());
 				});
@@ -419,6 +441,9 @@
 					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
 				});
 				
+				$("a:contains('Click Me')").on("click",function(){
+					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
+				});
 				
 			});	
 			
