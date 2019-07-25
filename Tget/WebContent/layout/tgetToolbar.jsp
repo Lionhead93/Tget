@@ -84,17 +84,17 @@ $(function() {
 	
 	$( "a[href='#']:contains('티켓거래 공지')" ).on("click" , function() {
 		
-		self.location="/community/getContentList?searchCondition=1&searchKeyword=0";	
+		self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
 	
 	});
 	
 	$( "a[href='#']:contains('자유게시판 이용공지')" ).on("click" , function() {
-		self.location="/community/getContentList?searchCondition=1&searchKeyword=1";	
+		self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
 	
 	});
  
 	 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
-			self.location="/community/getContentList?searchCondition=1&searchKeyword=2";	
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 		
 		});
 	 
