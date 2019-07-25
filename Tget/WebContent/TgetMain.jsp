@@ -93,9 +93,9 @@
 							
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage0" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage0" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe0">
@@ -105,9 +105,9 @@
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage1" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage1" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe1">
@@ -117,9 +117,9 @@
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage2"  alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage2"   />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe2">
