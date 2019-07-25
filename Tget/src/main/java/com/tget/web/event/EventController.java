@@ -207,12 +207,12 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="getEventTicketList")
-	public String getEventTicketList(@RequestParam String eventId, @ModelAttribute("event") Event e, Model model) throws Exception {
+	public String getEventTicketList(@RequestParam String eventIds, @ModelAttribute("event") Event e, Model model) throws Exception {
 		System.out.println("===============getEventTicketList===============");
 		
 		Search search = new Search();
 		search.setSearchCondition("0");
-		search.setSearchKeyword(eventId);
+		search.setSearchKeyword(eventIds);
 		
 		Map<String, Object> map = ticketService.getTicketList(search);
 		//eventId에 따른 티켓 리스트
@@ -221,7 +221,7 @@ public class EventController {
 		SellProb sellProb = (SellProb)map.get("sellProb");
 		
 		List<String> list = null;
-		Event event = eventService.getEvent(eventId);
+		Event event = eventService.getEvent(eventIds);
 		event.setEventLocation(e.getEventLocation());
 		event.setKoName(e.getKoName());
 		
