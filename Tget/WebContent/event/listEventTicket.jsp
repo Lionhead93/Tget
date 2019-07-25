@@ -152,7 +152,7 @@
 							url : "/event/rest/kakaoSendToMe",
 							method : "GET" ,
 							data : {
-								accessToken : "DbusJL3wDmeTRuZqdufu9HGYrhefWSX0uhWYTgopyNgAAAFrz7PoTA",
+								
 								requestUrl : newURL+"?eventId="+$("#eventId").val(),
 								eventId : $("#eventId").val()
 							},
