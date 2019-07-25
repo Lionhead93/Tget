@@ -21,7 +21,7 @@
 	<script type="text/javascript">
 	
 	$(function(){
-		if(${user==""}){		
+		if(${user==null}){		
 		    window.opener.location.href = "/user/addUser";
 			window.self.close();	  
 		}else{

@@ -29,7 +29,7 @@ package com.tget.service.user;
 	 
 	        postParams.add(new BasicNameValuePair("client_id", "8dbe371059a9972c710af6d3eb14767e"));
 	 
-	        postParams.add(new BasicNameValuePair("redirect_uri", "http://192.168.0.82:8080/user/oauth"));
+	        postParams.add(new BasicNameValuePair("redirect_uri", "http://192.168.0.16:8080/user/oauth"));
 	 
 	        postParams.add(new BasicNameValuePair("code", autorize_code));
 	 

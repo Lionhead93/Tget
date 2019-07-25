@@ -28,6 +28,10 @@ $( function(){
 	$("a:contains('관리자페이지')").on("click",function(){
 		self.location = "/event/getEventManage";
 	});
+	$("a:contains('마이페이지')").on("click",function(){	
+		alert("${user.userId}");
+		self.location = "/user/myPage?userId=${user.userId}";
+	});
 	
 	$("a:contains('관심이벤트')").on("click",function(){		
 		self.location = "/event/getInterestedEventList";
