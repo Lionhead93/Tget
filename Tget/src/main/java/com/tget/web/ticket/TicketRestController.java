@@ -1,6 +1,7 @@
 package com.tget.web.ticket;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +88,51 @@ public class TicketRestController {
 		map.put("ticket", ticket);
 		map.put("message", "검증 성공");
 		
+		return map;
+	}
+	
+	@RequestMapping(value = "rest/getSellList/{eventId}", method = RequestMethod.GET)	
+	public Map<String, Object> getSellList(@PathVariable("eventId") String eventId) throws Exception {
+		
+		System.out.println("rest/getSellList/"+eventId);
+		
+		Search search = new Search();
+		search.setSearchCondition("0");
+		search.setSearchKeyword(eventId);
+		
+		Map<String, Object> map = ticketService.getTicketList(search);
+		
+		List<Ticket> list = (List<Ticket>) map.get("list");
+		
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+		int e = 0;
+		int f = 0;
+		
+		for( Ticket ticket : list) {			
+			if(ticket.getPrice()<=50000) {
+				a += ticket.getAmount();
+			}else if( ticket.getPrice()>50000 && ticket.getPrice()<=100000) {
+				b += ticket.getAmount();
+			}else if( ticket.getPrice()>100000 && ticket.getPrice()<=200000) {
+				c += ticket.getAmount();
+			}else if( ticket.getPrice()>200000 && ticket.getPrice()<=300000) {
+				d += ticket.getAmount();
+			}else if( ticket.getPrice()>300000 && ticket.getPrice()<=400000) {
+				e += ticket.getAmount();
+			}else if( ticket.getPrice()>400000) {
+				f += ticket.getAmount();
+			}
+		}
+		
+		map.put("a", a);
+		map.put("b", b);
+		map.put("c", c);
+		map.put("d", d);
+		map.put("e", e);
+		map.put("f", f);
 		return map;
 	}
 	

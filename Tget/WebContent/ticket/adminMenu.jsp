@@ -94,7 +94,7 @@
 								 	<div class="text-center">
 								 		<div class="border bg-light">
 								 		<br/>
-								 			<h5><strong>${tran.event.eventName}</strong></h5>
+								 			<h5><strong>${tran.event.koName}</strong></h5>
 								 			<hr/>
 								 			<div><small>${tran.orderDate}</small></div>
 								 			<div><small>${tran.seller.userId} <i class="far fa-handshake"></i> ${tran.buyer.userId}</small></div>

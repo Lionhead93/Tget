@@ -124,7 +124,7 @@
 		
 		<br/>
 		<div id="eventHeader" class="text-center">
-		  <h1 class="display-4">${event.eventName}</h1>
+		  <h1 class="display-4">${event.koName}</h1>
 		  <p class="lead">${event.eventLocation}</p>
 		  <p>${event.eventDate}</p>
 		</div>

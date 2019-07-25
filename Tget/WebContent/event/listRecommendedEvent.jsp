@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="/resources/css/toolbar.css" />
 <title>Searching Youtube Video</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -46,7 +47,7 @@
 </head>
 
 <body>
-
+<jsp:include page="/layout/tgetToolbar.jsp" />
 <form>
 	<div class="container-fluid">
 <%-- 	<input type="hidden" id="currentPage" name="currentPage" value="${!empty search.currentPage? search.currentPage: ''}"/> --%>

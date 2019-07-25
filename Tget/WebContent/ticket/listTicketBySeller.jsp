@@ -41,7 +41,8 @@
         .marketing{
         	padding: 10px;
         }
-        .col-lg-4{        	
+        .col-lg-4{   
+        	padding-top: 10px;     	
         	border: 1px solid #D6CDB7;        	
         }
     </style>
@@ -91,7 +92,7 @@
        <c:forEach var="ticket" items="${list}" varStatus="j" > 
         <div class="col-lg-4">
           <div id="${ticket.ticketNo}">
-	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" width="140" height="140">
+	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" onerror="this.src='/resources/images/logo.png'"  width="140" height="140">
 	          <h2>${ticket.event.eventName}</h2>         
 	          <hr class="my-4">
 	          <p>ÁÂ¼® : ${ticket.seat}</p>

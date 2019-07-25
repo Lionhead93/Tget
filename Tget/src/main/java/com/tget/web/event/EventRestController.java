@@ -161,32 +161,40 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getPopularEventList")
-	public List<String> getPopularEventList() throws Exception {
+	public Map<String,Object> getPopularEventList() throws Exception {
 		System.out.println("===============rest/getPopularEventList===============");
 		
-//		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		List<Event> list =  eventService.getPopularEventList();
 		List<String> eventNameList = new ArrayList<String>();
+		List<String> eventImageList = new ArrayList<String>();
+		List<String> koNameList = new ArrayList<String>();
 		
 		for (Event event : list) {
 			if (eventNameList.size()==0) {
 				eventNameList.add(event.getEventName());
-			}else if(eventNameList.size()<10){
+				eventImageList.add(event.getEventImage());
+				koNameList.add(event.getKoName());
+			}else if(eventNameList.size()<3){
 				for (int i = 0; i < eventNameList.size(); i++) {
 					if (eventNameList.get(i).equals(event.getEventName())) {
 						break;
 					} else if ((i==eventNameList.size()-1) &&( ! eventNameList.get(i).equals(event.getEventName()))) {
 						eventNameList.add(event.getEventName());
+						eventImageList.add(event.getEventImage());
+						koNameList.add(event.getKoName());
 					}
 				}
-			}else if(eventNameList.size()==10){
+			}else if(eventNameList.size()==3){
 				break;
 			}
 		}
 		
 //		map.put("popularEventList", eventService.getPopularEventList());
-		
-		return eventNameList;
+		map.put("eventNameList",eventNameList);
+		map.put("eventImageList",eventImageList);
+		map.put("koNameList",koNameList);
+		return map;
 	}
 	
 	@RequestMapping(value="rest/getRecommendedEventList")
@@ -491,20 +499,57 @@ public class EventRestController {
 	
 	@RequestMapping( value="rest/kakaoSendToMe")
 //	public Map<String,Object> kakaoSendToMe(@ModelAttribute("user") User user) throws Exception{		
-	public Map<String,Object> kakaoSendToMe(HttpSession session) throws Exception{			
+	public Map<String,Object> kakaoSendToMe(HttpServletRequest request,HttpSession session) throws Exception{			
 		System.out.println("===========rest/kakaoSendToMe=============");
+		String requestUrl = null;
 		
 		User user = (User)session.getAttribute("user");
+		System.out.println((requestUrl = (String)request.getParameter("requestUrl"))+"\n");
+		Event event = eventService.getEvent((String)request.getParameter("eventId"));
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
+		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/default/send";
+//		String url= 	"https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
 				
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//		httpPost.setHeader("Authorization", "Bearer "+user.getAccessToken());
+		httpPost.setHeader("Authorization", "Bearer "+user.getKakaoToken());
+		
+		JSONObject content = new JSONObject();
+		content.put("title",	event.getKoName());
+		content.put("description",	event.getEventDate()+", "+event.getEventTimeStr()+"\n"+event.getKoLocation());
+		content.put("image_url",	"https://postfiles.pstatic.net/MjAxOTA3MjVfMTc5/MDAxNTY0MDIyNDI1MDAy.JrJIonZVX34tFj-Wu6EjNou_gYtFjwhhVbUTOVr9xUMg.88hG1dy_KjkoiSrxYar_nWFUOKu2gPZVcza-InffitEg.PNG.youree1226/logo.png?type=w580");
+//		if (event.getEventImage() != null) {
+//			content.put("image_url",	"http://192.168.0.82:8080/resources/images/uploadFiles/"+event.getEventImage());
+//		}else {
+//			content.put("image_url",	"http://192.168.0.82:8080/resources/images/logo.png");
+//		}		
+		content.put("image_width",	400);
+		content.put("image_height",	200);
+		
+		JSONObject link = new JSONObject();
+		link.put("web_url",	requestUrl);
+		link.put("mobile_web_url",	requestUrl);
+		link.put("android_execution_params",	requestUrl);
+		link.put("ios_execution_params",requestUrl);
+		
+		content.put("link", link);
+		
+		JSONObject social = new JSONObject();
+//		social.put("like_count", event.getInterestedNum());
+		social.put("view_count", event.getViewCount());
+		
+		JSONObject json = new JSONObject();
+		json.put("object_type", "feed");
+		json.put("content", content);
+		json.put("social", social);
 
-		String parameter = "request_url=http://192.168.0.82:8080";
+		String parameter = "template_object="+json;		
+		//http://192.168.0.82:8080/resources/images/uploadFiles/EXO-LOVE%20SHOT%20TEASER00.jpg
+
+//		String parameter = "request_url=http://192.168.0.82:8080";
+//		String parameter = "request_url=http://127.0.0.1:8080";
 		System.out.println("parameter : "+parameter);
 
 		HttpEntity httpEntity01 = new StringEntity(parameter,"utf-8");
