@@ -25,8 +25,8 @@ public class GetSearchWeather {
 	public static Weather getSearchweather(Weather weather)throws Exception{
 		
 		
-		String lon = "126.867240";  //경도
-        String lat = "37.498424";
+		String lon = "127.027567";  //경도 , 
+        String lat = "37.497985";	//37.498424 126.867240
 		//HttpClient httpClient = new DefaultHttpClient();
 		//weather.getLat() weather.getLon()
 		String urlstr = "http://api.openweathermap.org/data/2.5/weather?"
