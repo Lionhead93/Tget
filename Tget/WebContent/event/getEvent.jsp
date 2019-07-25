@@ -36,7 +36,7 @@
 	
 	$(function(){
 		$(".addTicket").on("click",function(){			
-// 			alert("${empty user}");
+			var eventId = $(this).val(); 			
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
@@ -44,6 +44,7 @@
 			} else {
 				$("#eventId").val($(this).val());
 				$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
+// 				self.location="/ticket/addTicketInfo?eventId="+eventId;
 // 				self.location="/user/login";
 			}
 // 			$("#eventId").val($(this).val());

@@ -187,6 +187,8 @@ public class EventController {
 				e.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
 				e.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
 				viewCount = e.getViewCount();
+				event.setKoName(e.getKoName());
+				event.setKoLocation(e.getKoLocation());
 			}						
 			model.addAttribute("eventImage", eventListByName.get(0).getEventImage());
 			model.addAttribute("totalResults", eventListByName.size());	
