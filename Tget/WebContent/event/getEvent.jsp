@@ -89,6 +89,12 @@
 	</script>
 	
 	<style>
+	
+	body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+		
       div.container-fluid {
         	font-family: 'Sunflower', sans-serif;
 	 		font-size: 20px;    

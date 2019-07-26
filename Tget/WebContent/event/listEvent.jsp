@@ -82,6 +82,21 @@
 	
 	</script>
 	<style type="text/css">
+		body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+		
+		table{
+			background-color : #193147; 
+			border: 1px solid #FBFCFE;	
+			color: #FBFCFE;		
+		}
+		
+		th, td{
+			color: #FBFCFE;		
+		}
+
 		 .button_black{
 			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
 			font-size:15px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
@@ -145,11 +160,11 @@
 				    <tr>
 				      <td>
 						<div class="event" align="left">
-							<div  style="padding: 20px 30px ;">
+							<div  style="margin-left:50px">
 								이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
 								이벤트 장소 : ${i.venueName }</br>
 								<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">
-									출연진 : ${i.performersName }</br>
+									출연진 : ${i.performersName }
 								</c:if>								
 							</div>						 
 							<div align="right"  style="padding: 20px  70px ;">				

@@ -222,8 +222,11 @@ public class EventController {
 		
 		List<String> list = null;
 		Event event = eventService.getEvent(eventIds);
-		event.setEventLocation(e.getEventLocation());
-		event.setKoName(e.getKoName());
+		
+//		if (e != null) {
+//			event.setEventLocation(e.getEventLocation());
+//			event.setKoName(e.getKoName());
+//		}		
 		
 		if (event != null) {
 			list = eventService.getYoutubeIdList(event.getEventName());
