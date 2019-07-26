@@ -19,6 +19,8 @@ import com.tget.common.domain.Search;
 import com.tget.service.alarm.AlarmService;
 import com.tget.service.alarm.domain.Alarm;
 import com.tget.service.event.EventService;
+import com.tget.service.rnp.RNPService;
+import com.tget.service.rnp.domain.PointHistory;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.transaction.TranService;
@@ -45,6 +47,9 @@ public class TranController {
 	@Qualifier("alarmServiceImpl")
 	@Autowired
 	private AlarmService alarmService;
+	@Qualifier("rNPServiceImpl")
+	@Autowired
+	private RNPService rNPService;
 	
 	
 	public TranController() {
@@ -64,24 +69,36 @@ public class TranController {
 	}
 	
 	@RequestMapping(value = "addTran", method = RequestMethod.POST)	
-	public String addTran(@ModelAttribute("transaction") Transaction transaction, Model model) throws Exception {
+	public String addTran(@ModelAttribute("transaction") Transaction transaction, Model model, HttpSession session) throws Exception {
 		
 		System.out.println("addTran : POST // transaction = "+transaction);		
 		
-		tranService.addTran(transaction);
+		int selectKey = tranService.addTran(transaction);
 		
 		Ticket ticket = ticketService.getTicket(transaction.getTicket().getTicketNo());
 		ticket.setAmount(ticket.getAmount()-transaction.getOrderAmount());
 		ticketService.updateTicketAmount(ticket);
 		System.out.println("payOption/////////////"+transaction.getPaymentOption());
 		
-		if(transaction.getPaymentOption().equals("0") || transaction.getPaymentOption().equals("1")) {
-			Alarm alarm = new Alarm();
-			alarm.setAlarmCode(0);
-			alarm.setAlarmKeyword(Integer.toString(transaction.getTicket().getTicketNo()));
-			alarm.setUserId(ticket.getSeller().getUserId());
-			alarmService.addAlarm(alarm);
-		}
+		User user = (User) session.getAttribute("user");
+		user.setPoint(user.getPoint()-transaction.getUsePoint());		
+		rNPService.updatePoint(user);
+		
+		session.setAttribute("user", user);
+		
+		PointHistory pointHistory = new PointHistory();
+		pointHistory.setPointUpdateCode("1");
+		pointHistory.setUserId(user.getUserId());
+		pointHistory.setTranNo(selectKey);
+		pointHistory.setTotalPoint(user.getPoint());
+		pointHistory.setUpdatePoint(transaction.getUsePoint());
+		rNPService.addPoint(pointHistory);
+		
+		Alarm alarm = new Alarm();
+		alarm.setAlarmCode(0);
+		alarm.setAlarmKeyword(Integer.toString(transaction.getTicket().getTicketNo()));
+		alarm.setUserId(ticket.getSeller().getUserId());
+		alarmService.addAlarm(alarm);
 		
 		return "forward:/tran/addTranResult.jsp";
 	}

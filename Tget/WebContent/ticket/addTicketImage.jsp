@@ -53,7 +53,6 @@
 			alert("이미지등록 바람");
 			return;
 		}
-	
 		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
 	}		
 	

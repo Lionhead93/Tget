@@ -13,6 +13,8 @@
     <title>T-GET</title>
     	    	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/css/login.css" />
+
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
 		<link rel="stylesheet" href="/resources/css/main.css" />
 		
@@ -33,7 +35,7 @@
 	<body>
 		
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
-		
+	<jsp:include page="/user/xx.jsp" />	
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without
@@ -42,7 +44,7 @@
 			-->
 				<section id="banner" data-video="/resources/video/main">
 					<div class="inner">
-					<form>
+					<form name="searchEvent">
 					<input type="hidden" id="requestPageToken" name="requestPageToken" value="${requestPageToken }"/>
 					<input type="hidden" id="searchCondition" name="searchCondition" 
 					placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}"/>
@@ -50,7 +52,7 @@
 					placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 					
 							<div class="input-group">		    
-							    <input type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
+							    <input name="searching" type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
 							    <div class="input-group-append">
 							    	<a class="input-group-text" href="#">검색</a>
 								</div>							
@@ -93,9 +95,9 @@
 							
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage0" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage0" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe0">
@@ -105,9 +107,9 @@
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage1" alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage1" />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe1">
@@ -117,9 +119,9 @@
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/resources/images/uploadFiles/logo.png"  id="peImage2"  alt="" />
+										<img src="/resources/images/logo.jpg"  id="peImage2"   />
 										<div class="arrow">
-											<div class="icon fa-play"></div>
+<!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
 									<p class="caption" id="pe2">
@@ -400,14 +402,14 @@
 							}
 				});
 				
-				$("input[type='text']").on("keyup",function(){
-					$("#searchKeyword").val($("input[type='text']").val());
+				$("input[name='searching']").on("keyup",function(){
+					$("#searchKeyword").val($("input[name='searching']").val());
 				});
 				
 				$("input[type='text']").on("keypress",function(){
 					if (event.keyCode ==13) {
 						$("#searchCondition").val("1");
-						$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+						$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 					}
 				});
 				

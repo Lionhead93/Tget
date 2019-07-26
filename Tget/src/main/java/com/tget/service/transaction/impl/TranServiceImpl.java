@@ -31,10 +31,10 @@ public class TranServiceImpl implements TranService{
 	}	
 	
 	@Override
-	public void addTran(Transaction transaction) throws Exception {
+	public int addTran(Transaction transaction) throws Exception {
 		// TODO Auto-generated method stub
 				
-		tranDao.insertTran(transaction);
+		return tranDao.insertTran(transaction);
 	}
 
 	@Override

@@ -81,6 +81,7 @@
 												</choose>
 												</if>												
 											</where>
+											order by reg_date desc
 											) inner_table
 			)		
 	 </select>

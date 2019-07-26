@@ -81,7 +81,7 @@ public class ReviewAndPointController {
 		@RequestMapping(value="getSellerEstimationList")
 		public String getSellerEstimationList(@RequestParam String sellerId,Model model) throws Exception {
 			System.out.println("===============getSellerEstimationList===============");
-			
+			System.out.println(userService.getUser(sellerId));
 			model.addAttribute("sellerEstimationList", rNPService.getSellerEstimationList(sellerId));
 			model.addAttribute("sellerId",sellerId);
 			model.addAttribute("sellerNickname",userService.getUser(sellerId).getNickName());
@@ -106,7 +106,7 @@ public class ReviewAndPointController {
 			System.out.println("===============addReview===============");
 			System.out.println(review);
 			
-//			rNPService.addReview(review);
+			rNPService.addReview(review);
 			User user = (User)session.getAttribute("user");
 			String userId =user.getUserId();
 			

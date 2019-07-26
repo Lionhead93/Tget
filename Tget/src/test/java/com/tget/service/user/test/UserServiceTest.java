@@ -117,26 +117,18 @@ public class UserServiceTest {
 	//@Test
 	 public void testUpdateUser() throws Exception{
 		 
-		User user = userService.getUser("admin");
-		Assert.assertNotNull(user);
+		User user = userService.getUser("buyer");
 		
-		Assert.assertEquals("admin", user.getUserId());
-		Assert.assertEquals("관리자", user.getUserName());
 
 		
 		
-		user.setUserName("test");
-		user.setNickName("닉네임");
+		user.setPoint(500000);
 		
 		userService.updateUser(user);
 		
-		user = userService.getUser("test");
-		Assert.assertNotNull(user);
+		user = userService.getUser("buyer");
 		
 		System.out.println(user);
-			
-		Assert.assertEquals("test", user.getUserName());
-		Assert.assertEquals("닉네임", user.getNickName());
 	
 	 }
 	 
@@ -287,7 +279,7 @@ public class UserServiceTest {
 		
 	}
 	
-@Test
+//@Test
 
 public final void testGetDate() {
 

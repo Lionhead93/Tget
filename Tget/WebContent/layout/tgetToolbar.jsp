@@ -15,9 +15,9 @@ $( function(){
 	$("a[href='#' ]:contains('Sign Up')").on("click" , function() {
 		self.location = "/user/addUser"
 	});
-	$("a[href='#' ]:contains('Login')").on("click" , function() {
+	/* $("a[href='#' ]:contains('Login')").on("click" , function() {
 		self.location = "/user/login"
-	});
+	}); */
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
@@ -27,6 +27,10 @@ $( function(){
 	
 	$("a:contains('관리자페이지')").on("click",function(){
 		self.location = "/event/getEventManage";
+	});
+	$("a:contains('마이페이지')").on("click",function(){	
+		alert("${user.userId}");
+		self.location = "/user/myPage?userId=${user.userId}";
 	});
 	
 	$("a:contains('관심이벤트')").on("click",function(){		
@@ -127,12 +131,12 @@ $(function() {
 					<a href="#">Home</a>
 				<c:if test="${empty user}">
 					<a href="#">Sign Up</a>
-					<a href="#">Login</a>
+					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" >Login</a>
 				</c:if>
 				<c:if test="${!empty user}">
 					<a href="#">Logout</a>
 					<a href="#" data-target="#alarmModal" data-toggle="modal">
-							 Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
+							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
 				</c:if>				
 				<a href="#menu">Menu</a>
@@ -189,7 +193,7 @@ $(function() {
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary">My Alarm</span></h3>
+					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary"><i class="far fa-bell"></i> My Alarm </span></h3>
 					        <a href="#" class="close" data-dismiss="modal">
 					          &times;
 					        </a>

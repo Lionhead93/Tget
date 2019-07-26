@@ -35,7 +35,7 @@
 // 			alert("keyup : "+$("#searchKeyword").val());
 		});
 		
-		$("#button-addon2").on("click",function(){
+		$("button:contains('검색')").on("click",function(){
 			$("#searchCondition").val("1");
 			$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 		});
@@ -82,19 +82,6 @@
 	
 	</script>
 	<style type="text/css">
-	
-	#tgetHeader{
-		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 30px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
-       
 		body{
 			background-color : #062038; 
 			color: #FBFCFE;
@@ -108,7 +95,6 @@
 		
 		th, td{
 			color: #FBFCFE;		
-			font-size:20px;
 		}
 
 		 .button_black{
@@ -141,48 +127,29 @@
 <jsp:include page="/layout/tgetToolbar.jsp" />
 
 <form>
-
 	<div class="container-fluid" align="center">	
-		<div id="tgetHeader" class="text-center">
-		<br/><br/>
-			<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
-			<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-			<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-<!-- 			<h3><strong> -->
-<!-- 							<input type="text"  />							 -->
-<!-- 								 <button class="btn btn-secondary" type="button" id="button-addon2">검색</button> -->
-<!-- 						</strong></h3><br/><br/> -->
-						
-					<div class="row">
-					<div class="col-lg-3  col-md-3 col-1">	
+		<div class="row" >
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" ><br/>
+					<div class="input-group mb-3">
+						<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
+						<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
+						<input type="text" class="form-control"  placeholder="검색어" />
+						<div class="input-group-append">
+					 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+					 	</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-10">	
-						<div class="input-group mb-1">
-					  <input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
-					  <div class="input-group-append">
-					    <span class="input-group-text btn"  id="button-addon2">검색</span>
-					  </div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-1">	
-					</div>
-					</div>
-				</div>
-<!-- 				</div> -->
 				<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-3"></div> -->
+			</div>
+			<div class="col-lg-3"></div>
 		</div>
-		</div>
-		</div>
-		
-					
-					
 
 		<div class="row" >
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
 				
-				<table class="table ">
+				<table class="table table-striped">
 				  <thead>
 				    <tr align="center">
 				      <th scope="col"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
@@ -191,9 +158,9 @@
 				  <tbody>
 				  <c:forEach items="${eventList}"  var="i">
 				    <tr>
-				      <td align="center">
+				      <td>
 						<div class="event" align="left">
-							<div  style="margin-left:10%; margin-right:10%" >
+							<div  style="margin-left:50px">
 								이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
 								이벤트 장소 : ${i.venueName }</br>
 								<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">

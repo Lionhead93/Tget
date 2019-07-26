@@ -42,7 +42,7 @@
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
 		INTO event( event_id, view_count, category_two_eng, event_image, event_name, event_location, event_date, event_time,ko_name,ko_location) 
-		VALUES	 (	#{id} , 0 , #{categoryTwoEng} , NULL , 
+		VALUES	 (	#{id} , 0 , #{categoryTwoEng} , 'logo.png' , 
 							#{name} , #{venueName:VARCHAR} , #{eventDate} ,
 							#{eventTime}, #{koName:VARCHAR} , #{koLocation:VARCHAR} )
 	 </insert>
@@ -149,7 +149,7 @@
 	 
 	 <select 	id="selectListPopularEvent"	resultMap="eventSelectMap">
 	 	 SELECT vt.*, ROWNUM
-	 	 FROM		(SELECT event_id, event_name, view_count, ko_name, ko_location
+	 	 FROM		(SELECT event_id, event_name, view_count, ko_name, ko_location,event_image
 		 					FROM event
 		 					ORDER BY view_count DESC) vt
 		 WHERE ROWNUM &lt;= 30 
