@@ -37,7 +37,7 @@
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("input[id='signin']").on("click" , function() {
 			
-			alert("눌리니");
+		//	alert("눌리니");
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();

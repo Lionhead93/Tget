@@ -155,7 +155,7 @@
 				   
 				   
 					$("button:contains('인증')").on("click" ,function(){ 
-						alert("오예");
+					//	alert("오예");
 						
 				   $.ajax({ 
 					   url: "/user/json/smsCheck",
@@ -217,7 +217,7 @@
 			     $(function() {
 						
 						$("button:contains('가 입')").on("click" , function() {
-							alert("오예");
+						//	alert("오예");
 						 fncAddUser(); 
 						 
 						
