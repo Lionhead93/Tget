@@ -87,7 +87,7 @@ public class UserRestController {
 		return dbUser;
 	}*/
 	
-	@RequestMapping(value= "json/sendSms", method=RequestMethod.POST ) 
+	@RequestMapping(value= "json/sendSms", produces="application/json" , method=RequestMethod.POST ) 
 	public String sendSms(String receiver) { 
 	System.out.println("¶ß³Ä?");
 		
@@ -102,30 +102,30 @@ public class UserRestController {
 	        credsProvider.setCredentials(
 	            new AuthScope(hostname, 443, AuthScope.ANY_REALM),
 	            new UsernamePasswordCredentials(Config.appid, Config.apikey));
-			
+	        
 	        // Create AuthCache instance
 	        AuthCache authCache = new BasicAuthCache();
 	        authCache.put(new HttpHost(hostname, 443, "https"), new BasicScheme());
-	     
+
 	        // Add AuthCache to the exe.put(new Hecution context
 	        HttpClientContext context = HttpClientContext.create();
 	        context.setCredentialsProvider(credsProvider);
 	        context.setAuthCache(authCache);
-
+	    
 	        DefaultHttpClient client = new DefaultHttpClient();
 
 	        try {
 	            HttpPost httpPost = new HttpPost(url);
 	            httpPost.setHeader("Content-type", "application/json; charset=EUC-KR");
 	            String json = "{\"sender\":\""+Config.sender+"\",\"receivers\":[\""+receiver+"\",],\"content\":\""+Config.content+"\"}";
-	         
+	       
 	            StringEntity se = new StringEntity(json, "EUC-KR");
 	            httpPost.setEntity(se);
- 
+	            System.out.println("¶ß³Ä?6.55");
 	            HttpResponse httpResponse = client.execute(httpPost, context);
-	            
+	            System.out.println("¶ß³Ä?6.66");
 	            System.out.println(httpResponse.getStatusLine().getStatusCode());
-	
+	            System.out.println("¶ß³Ä?7");
 	            InputStream inputStream = httpResponse.getEntity().getContent();
 	            if(inputStream != null) {
 	                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
@@ -178,8 +178,8 @@ public class UserRestController {
 		
 	}      
 
-	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
-	public String smsCheck(String code ){ 
+	@RequestMapping(value = "json/smsCheck", produces="application/json" , method=RequestMethod.POST) 
+	public String smsCheck(String code){ 
 	
 		
 		

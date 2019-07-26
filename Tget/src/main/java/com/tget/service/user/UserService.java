@@ -11,6 +11,8 @@ public interface UserService {
 	
 	public User getKakao(String kakaoId) throws Exception;
 	
+	public User getNaver(String naverId) throws Exception;
+	
 	//회원가입
 		public void addUser(User user) throws Exception;
 	//회원조회

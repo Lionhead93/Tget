@@ -135,7 +135,8 @@
 						   data: { 
 							   receiver: $("#phone").val() 
 							   }, 
-							   type: "post", 
+							   type: "post",
+							   dataType:"json", 
 							
 				   success: function(result) { 
 					
@@ -163,6 +164,7 @@
 					   code: $("#sms").val() 
 					   }, 
 					   type: "post", 
+					   dataType:"json", 
 				   success: function(result){ 
 					   console.log(result);
 					   
@@ -544,8 +546,8 @@
 		
 	
 		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button id= "join" type="button" class="btn btn-primary" disabled="disabled" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+		    <div class="col-sm-offset-4  col-sm-4 text-center"><!--  disabled="disabled" -->
+		      <button id= "join" type="button" class="btn btn-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
 			 
 			  

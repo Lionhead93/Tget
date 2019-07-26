@@ -3,12 +3,17 @@ package com.tget.web.user;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -39,6 +44,8 @@ import com.tget.service.user.Config;
 import com.tget.service.user.KakaoUserInfo;
 import com.tget.service.user.UserService;
 import com.tget.service.user.kakao_restapi;
+import com.tget.service.user.naverUserInfo;
+import com.tget.service.user.naver_restapi;
 import com.tget.service.user.domain.User;
 
 @Controller
@@ -90,6 +97,10 @@ public class UserController {
 		if(session.getAttribute("kakaoId")!=null) {
 			System.out.println("카카오 계정 회원가입 들옴");
 		user.setKakaoId((String) session.getAttribute("kakaoId"));
+		}
+		if(session.getAttribute("naverId")!=null) {
+			System.out.println("네이버 계정 회원가입 들옴");
+		user.setNaverId((String) session.getAttribute("naverId"));
 		}
 		
 		userService.addUser(user);
@@ -446,20 +457,63 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
     }
     }
     
-    //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-    //    String token = node.get("access_token").toString();
-    //세션에 담아준다.
-    //    session.setAttribute("token", token);
-    		
+  @RequestMapping(value = "callback")
+  public String naverLogin(@RequestParam("code") String code , Model model,ServletRequest request, HttpSession session) throws Exception {
+	   
+	    System.out.println("코드 값 주냐? 안주지?시벌ㄹ?"+code);
 
-    
+	    naver_restapi kr = new  naver_restapi();
+	    //결과값을 node에 담아줌
+	    JsonNode node = kr.getAccessToken(code);
+	    //결과값 출력
+	    System.out.println("코드있냐?"+code);
+	    
+	    System.out.println("노드들감?"+node);
+	    
+	    JsonNode userInfo = naverUserInfo.getNaverUserInfo(node.get("access_token"));
+	    
+	    String naver = userInfo.toString();
+	    
+	    String naverId =userInfo.path("response").path("id").asText();
+	    
+	    
+	    
+	    String token = node.path("access_token").asText();
+
+	    System.out.println("토큰 나와라 얍"+token);
+	    
+	    System.out.println("뭐 담겺냐?"+naver);
+	    
+	    System.out.println("id : " + naverId);
+
+	    User user = userService.getNaver(naverId);
+	    
+	    System.out.println(user+"네이버 유저정보");
+	    
+		if(user != null) {
 
 
-		}
+	user = userService.getUser(user.getUserId());
+	
+	System.out.println("기존 네이버 계정이네"+user);
+		
+		session.setAttribute("user", user);
+	
+			
+	return "forward:/user/kakaoResult.jsp";
+}
 
-
-
-
-
-
+	
+	
+else {
+	
+	session.setAttribute("naverId", naverId);
+	
+	System.out.println("신규 네이버 계정이네 회원가입으로~!");
+	
+	return "forward:/user/kakaoResult.jsp";
+}
+}
+	    
+  }
 

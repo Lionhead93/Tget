@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
-
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 
 <!DOCTYPE html>
 
@@ -254,6 +256,33 @@
 	</form>
 	 </div>
 	  </div>
+	  
+	  
+	  
+	  <%
+    String clientId = "AziWQOW7S2sZhD1PEBi9";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://192.168.0.24:8080/user/callback.jsp", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>		
+			
+				<div id="naverIdLogin" align="center">
+     <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+
+        <img src="https://static.nid.naver.com/oauth/big_g.PNG" width="80%" height="45"/> 
+   
+</div>
+	  
+	  
+	  
+	  
+	  
+	  
 	  
 	  
 	  <jsp:include page="/layout/footer.jsp" />
