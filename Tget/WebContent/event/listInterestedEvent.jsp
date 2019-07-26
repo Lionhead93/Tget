@@ -50,7 +50,7 @@
     	
     	$(".btn").on("click", function(){
 //     		$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
-    		self.location = "/event/getEventTicketList?eventId="+$(this).val();
+    		self.location = "/event/getEventTicketList?eventIds="+$(this).val();
         });
     	
     	$("#all").on("click", function(){
@@ -103,6 +103,15 @@
     	});
 	</script>
 	<style type="text/css">
+	
+	body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+	table{
+		color: #FBFCFE;
+	}
+	
 		h1{
 			font-weight: bold; 
 		}
@@ -190,7 +199,7 @@
 				    <tr>
 				      <td>
 						<div align="center">
-							<input type="checkbox" class="check" name="eventId" value="${i.eventId }"/>
+							<input type="checkbox" class="check"  value="${i.eventId }"/>
 						</div>			
 				  	  </td>
 				  	  <td>

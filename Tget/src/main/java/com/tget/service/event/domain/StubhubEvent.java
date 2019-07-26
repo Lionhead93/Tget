@@ -312,11 +312,11 @@ public class StubhubEvent {
 	}
 
 	public String toString() {
-		return "\n"+"\n[id] " + id+"\n[status] "+ status+"\n[name] " + name+
-				"\n[description] "+description+"\n[webURI] "+webURI+"\n[eventDateLocal] " + eventDateLocal+
-				"\n[eventDateUTC] " + eventDateUTC+"\n[createdDate] "+ createdDate+
-				"\n[lastUpdatedDate] " + lastUpdatedDate+"\n[venueId] "+venueId+"\n[venueName] " +venueName+
-				"\n[city] "+city+"\n[state] "+state+"\n[postalCode] "+postalCode+"\n[country] "+country+ 
-				"\n[timezone] "+timezone+"	\n[performersId] "+performersId+"\n[performersName] "+performersName;
+		return "\n "+"[id] " + id+" , [status] "+ status+" , [name] " + name+
+				" , [description] "+description+" , [webURI] "+webURI+" , [eventDateLocal] " + eventDateLocal+
+				" , [eventDateUTC] " + eventDateUTC+" , [createdDate] "+ createdDate+
+				" , [lastUpdatedDate] " + lastUpdatedDate+" , [venueId] "+venueId+" , [venueName] " +venueName+
+				" , [city] "+city+" , [state] "+state+" , [postalCode] "+postalCode+" , [country] "+country+ 
+				" , [timezone] "+timezone+"	 , [performersId] "+performersId+" , [performersName] "+performersName;
 	}
 }

@@ -7,9 +7,9 @@
 
 <!-- Footer -->
 			<br/><br/><br/><br/>
-			<footer id="footer">
+			<footer>
 				
-				<div class="jumbotron">
+				<div id="footer" class="jumbotron">
 				<div class="text-center">
 					<div class="row">
 						<div class="col">
@@ -33,9 +33,18 @@
 							<h3>고객센터</h3>
 							<hr/>
 							<br/>
-								<a href="#">link</a><br/><br/>
-								<a href="#">link</a><br/><br/>
-								<a href="#">link</a>
+								<a href="#">1:1 문의하기</a><br/><br/>
+								<a href="#">환불게시판</a><br/><br/>
+								<div id="plusfriend-chat-button"></div><br/>
+								<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+								<script type='text/javascript'>
+										    Kakao.init('b5e745a340ec3959a1b015bdb9699746');
+										    Kakao.PlusFriend.createChatButton({
+										    	  container: '#plusfriend-chat-button',
+										    	  plusFriendId: '_xajLCT' 
+										    });										  
+								</script>
+								
 							
 						</div>
 					</div>

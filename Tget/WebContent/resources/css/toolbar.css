@@ -2,15 +2,9 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Signika:300,700");
 	
-	body {
-			  margin-top: 80px;				
-			  font-family: 'Nanum Gothic', sans-serif;
-		}
-	
 	body.subpage {
 		padding-top: 3.125em;
-	}
-	
+	}	
 	#header {
 		background: rgba(4, 22, 37, 0.75);
 		color: #c0c5c9;

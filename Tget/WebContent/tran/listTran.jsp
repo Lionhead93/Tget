@@ -41,13 +41,13 @@
 		}
 	
        #titleSection {       
-       
+       		margin-top:30px;
        		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 			  -webkit-background-size: cover;
 			  -moz-background-size: cover;
 			  -o-background-size: cover;
 			  background-size: cover;			  
-			 
+			padding-bottom:110px; 
        }
        
        strong, h1, h2, h3, h5, h6 {
@@ -62,7 +62,9 @@
        input, select{
        		border: 1px solid black;
        }
-       
+       .row{
+       	margin-left: 30px;
+       }
     	.img_wrap {
 			width: 300px;
 			margin: auto;
@@ -101,7 +103,7 @@
 	    $("a.getEvent").on("click", function(){
 	    	var eventId = $(this).closest("div").attr("id").trim();
 	    	
-	    	self.location = "/event/getEventTicketList?eventId="+eventId;	    	
+	    	self.location = "/event/getEventTicketList?eventIds="+eventId;	    	
 	    });
 	    $("a.chat").on("click", function(){
 	    	
@@ -282,19 +284,18 @@
 	
 	
 	<section id="titleSection" class="wrapper style2">
-	<div class='inner'>
-		<div class="text-center"><h2>거래내역 조회</h2></div>
-	</div>
 	</section>
 	
+	
 	<section class="wrapper style1">
-	<div class='inner'>
-		
+	<div class="inner">	
 	<div class="row">
-		<section class="3u$ 6u$(medium) 12u$(small)">
+		<section class="2u$">
+		<div class="sticky-top">
+		<br/><br/>
 		<div class='text-center'>
-										<ul class="alt">
-											<li>&nbsp;</li>											
+			<p><strong>${user.nickName} > 거래내역조회 </strong></p>
+										<ul class="alt">										
 											<c:if test="${user.role=='0'}">
 											<li><a href="#">판매자 등록</a></li>
 											</c:if>
@@ -303,12 +304,14 @@
 											<c:if test="${user.role=='1'}">
 											<li><a href="#">판매티켓 목록</a></li>
 											</c:if>
-											<li>&nbsp;</li>
+											<li><a href="#">티켓거래 공지</a></li>
+											<li><a href="#">카톡 문의하기</a></li>
 										</ul>
+		</div>
 		</div>
 		</section>
 		
-		<section>
+		<section class="9u$">
 		 <table class='alt'>
 			  <thead>
 			    <tr>
@@ -381,11 +384,11 @@
 			  </c:forEach> 
 			  </tbody>
 		</table>
-		</section>		
+		</section>
+		</div>		
 	</div>
 	</div>
 	</section>
-	</div>	
  
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">

@@ -187,6 +187,7 @@
 				
 				});
 			 
+				
 	 
 			// 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {
@@ -216,14 +217,9 @@
 				
 				$(".good").on("click" , function() {
 					
-					//div:contains("contentNo")
-					//'div[name="contentNo"]'
-					//'div[id="contentNo"]'
 					var contentNo = $(this).attr("id").trim();
 					var goodCount = $("span[name='"+contentNo+"']").text().trim();
-					alert(goodCount);
 					var result = parseInt(goodCount)+1;
-					alert(result);
 					var content = $("span[name='"+contentNo+"']");
 					$.ajax(
 			    		{
@@ -236,13 +232,11 @@
 						"Content-Type" : "application/json"	
 			        },
 			        success : function(data){
-			        		alert("11");
  			        		content.text(result);
  			        
 			        }
 			        
 			    	});
-					alert("ok");
 				});
 		 });
 		 
@@ -252,6 +246,7 @@
 				
 					var contentNo = $(this).attr("id").trim();
 					var badCount = $('a').closest("#"+contentNo+"").text().trim();
+					alert(badCount);
 					var result1 = parseInt(badCount)+1;
 					var content1 = $('a').closest("#"+contentNo+"");
 					
@@ -279,14 +274,14 @@
  		 $(function getSearchWeather(lat, lon) {
 			
 				$("button.btn.btn-info:contains('날씨 안내')").on("click" , function() {
-						//alert("찍혀라");
+						
  								
 						$.ajax( 
 								
 								{
 									url : "/community/rest/getSearchWeather/",
 									method : "POST" ,
-// 									dataType : "json" ,
+
 									data : JSON.stringify({
 										lat : lat,
 										lon : lon,
@@ -297,7 +292,7 @@
 										"Content-Type" : "application/json"
 									},
 									success : function(JSONData , status) {
-										//alert(JSONData);
+									
 										var displayValue ="날씨 : "+JSONData.weather+"<br/>"
 														+"온도 : "+JSONData.temp+"℃<br/>"
 														+"풍속 : "+JSONData.wind+"m/s<br/>"
@@ -354,7 +349,7 @@
 		   
 	 <div class="row">
 	  <div class="col-md-2 text-center">
-	  <br/><br/><br/><br/><br/>
+	  <br/>
 	  
 		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
 			<ul class="list-group list-group-flush">
@@ -375,6 +370,7 @@
 		
       <!--  table Start /////////////////////////////////////-->
      	<div class="col-md-10 text-center">
+     	
       <table class="table table-hover table-striped" >
       
         <thead>
@@ -470,11 +466,7 @@
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	  <div class="modal-dialog modal-lg modal-center" role="document">
 	    <div class="modal-content modal-80size">
-<!-- 	      <div class="modal-header"> -->
-<!-- 	        <h4 class="modal-title" id="myModalLabel"><strong>글 등록하기</strong></h4> -->
-<!-- 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-	        
-<!-- 	      </div> -->
+
 	      <div class="modal-body">
 	      <select id="boardCode" name="boardCode">
    			 	<option value="">게시판 선택</option>
@@ -531,6 +523,8 @@
 		</script>
 		<br/>  		
 	      </div>
+	      
+	      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
 	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>

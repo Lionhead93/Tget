@@ -207,10 +207,10 @@ public class Event {
 	}
 
 	public String toString() {
-		return "[Event] eventId : "+eventId+"\n viewCount : "+viewCount+"\n" + 
-				"categoryTwoEng : "+categoryTwoEng+"\n" +"eventImage : "+eventImage+"\n" + 
-				"eventName : "+eventName+"\n eventLocation : "+eventLocation+"\n" +
-				"eventDate : "+eventDate+"\n eventTime : "+eventTime+
-				"\n ticketLowestPrice : "+ticketLowestPrice+"\n totalTicketCount : "+totalTicketCount;
+		return "[Event] eventId : "+eventId+", viewCount : "+viewCount+"," + 
+				"categoryTwoEng : "+categoryTwoEng+"," +"eventImage : "+eventImage+"," + 
+				"eventName : "+eventName+", eventLocation : "+eventLocation+"," +
+				"eventDate : "+eventDate+", eventTime : "+eventTime+
+				", ticketLowestPrice : "+ticketLowestPrice+", totalTicketCount : "+totalTicketCount;
 	}
 }

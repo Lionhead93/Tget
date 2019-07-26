@@ -101,8 +101,8 @@ public class YoutubeVideo {
 	}
 
 	public String toString() {
-		return "\n---------------------------------------------------------"
-				+"\n[kind] "+kind+"\n[etag]"+etag+"\n[videoId]"+videoId+"\n[channelId]"+channelId
-				+"\n[title]"+title+"\n[description]"+description+"\n[channelTitle]"+channelTitle+"\n[thumbnails]"+thumbnails;
+		return "\n ---------------------------------------------------------"
+				+"\n[kind] "+kind+", [etag]"+etag+", [videoId]"+videoId+", [channelId]"+channelId
+				+", [title]"+title+", [description]"+description+", [channelTitle]"+channelTitle+", [thumbnails]"+thumbnails;
 	}
 }

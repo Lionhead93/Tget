@@ -17,6 +17,7 @@
 	<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
 	<meta name="author" content="Codrops" />
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />	
 	<link rel="shortcut icon" href="../favicon.ico">
@@ -26,12 +27,50 @@
 	
 	
 	<style>
-		body {
-			
+		body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		.col-lg-4{
+		a, hr{
+			color: #FBFCFE ;	
+		}
+		.col-lg-3{			
 			margin-bottom: 20px;
+		}
+		
+		.border{
+			background-color: #193147;
+		}
+		section{
+			margin-left: 40px;
+		}
+		#inputGroupSelect01, nav{
+			background: rgba(4, 22, 37, 0.75);
+			color: #c0c5c9;
+		} 
+		#tgetHeader{
+		   margin-top:30px;	
+		   color: #FBFCFE;	
+	       padding-bottom:110px; 
+	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+				  -webkit-background-size: cover;
+				  -moz-background-size: cover;
+				  -o-background-size: cover;
+				  background-size: cover;	
+       } 
+       #cyberWidget{
+       		background-color: white;
+       }       
+		#footer{
+			background-color: #1B1B1F;
+		}
+		.list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
 		}
     </style>
     
@@ -59,10 +98,32 @@
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	
-	<div class="container">
+	<div id="tgetHeader" class="text-center">
+		  <br/><br/>
+		  <h3><strong></strong></h3>
+		  <br/><br/>
+	</div>
+	
 		<div class="row">
+		<div class="col-2">
+      <div class="sticky-top">
+      	<div class='text-center'>
+      		<br/><br/><br/><br/><br/><br/>
+			<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 관리자 메뉴 </strong></p>
+			<br/>
+										<ul class="list-group list-group-flush">										  
+										  <li class="list-group-item"><a href="#">관리자 가이드</a></li>
+										  <li></li>
+										  
+										</ul> 
+										  
+										  
+		</div> 
+		</div>    	
+      </div>
 		<div class="col-8">	
 			<section>
+				<br/>
 				<div class="tabs tabs-style-topline">
 					<nav>
 						<ul>
@@ -74,11 +135,9 @@
 					</nav>
 					<div class="content-wrap">
 						<section id="section-topline-1">
-						<div class="input-group mb-3">
 						  <div class="input-group-prepend">
-						    <label class="input-group-text" for="inputGroupSelect01">검색 조건</label>
-						  </div>
-						  <select class="custom-select" id="inputGroupSelect01" style="width :100px;">
+						  <label class="input-group-text" for="inputGroupSelect01">검색</label>						  
+						  <select class="custom-select" id="inputGroupSelect01" style="width :150px;">
 						    <option selected>All</option>
 						    <option value="0">입금 대기</option>
 						    <option value="1">배송 대기</option>
@@ -86,13 +145,13 @@
 						    <option value="3">배송 완료</option>
 						    <option value="4">환불 및 취소</option>
 						  </select>
-						</div>
+						  </div>
 						<hr/>
 							 <div class="row">
 								 <c:forEach var="tran" items="${list}" varStatus="j">
-								 	<div name="${tran.tranCode}" class="col-lg-4">
+								 	<div name="${tran.tranCode}" class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border bg-light">
+								 		<div class="border">
 								 		<br/>
 								 			<h5><strong>${tran.event.koName}</strong></h5>
 								 			<hr/>
@@ -147,9 +206,9 @@
 							<div class="row">
 								 <c:forEach var="tran" items="${list}" varStatus="j">
 								 <c:if test="${tran.tranCode=='0'}">
-								 	<div class="col-lg-4">
+								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border bg-light">
+								 		<div class="border">
 								 		<br/>
 								 			<h5><strong>${tran.event.eventName}</strong></h5>
 								 			<hr/>
@@ -172,9 +231,9 @@
 							<div class="row">
 								 <c:forEach var="tran" items="${list}" varStatus="j">
 								 <c:if test="${tran.tranCode=='3'}">
-								 	<div class="col-lg-4">
+								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border bg-light">
+								 		<div class="border">
 								 		<br/>
 								 			<h5><strong>${tran.event.eventName}</strong></h5>
 								 			<hr/>
@@ -198,12 +257,11 @@
 				</div><!-- /tabs -->
 			</section>
 			</div>
-			<div class="col-4">
+			<div class="col-2">
 			<div class="sticky-top">
-			<br/><br/><br/><br/><br/><br/><br/><br/>
-			<div class="embed-responsive embed-responsive-16by9">	
-				<iframe class="embed-responsive-item" src="https://www.cyber.go.kr/widget.html" allowfullscreen></iframe>				
-			</div>	
+			<br/><br/><br/><br/><br/><br/>
+				<iframe id="cyberWidget" class="embed-responsive-item" height="180px" width="170px" src="https://www.cyber.go.kr/widget.html" allowfullscreen></iframe>				
+			
 				<div id="appendSeller">
 						    
 				</div>			
@@ -213,9 +271,6 @@
 		</div>	
 
 
-
-	
-</div>
 
 <jsp:include page="/layout/footer.jsp" />
 
@@ -235,7 +290,7 @@
 function ticketModalClick(){
 	$("a[name='check']").on("click", function(){	          			
 		var ticketNo= $(this).attr('id').trim();
-		var content = $(this).closest('.col-lg-4');
+		var content = $(this).closest('.col-lg-3');
 		$.ajax({
 			url : "/ticket/rest/checkTicket/"+ticketNo ,
 			method : "GET" ,
@@ -265,9 +320,9 @@ function getSellerInfo(){
 			},
           	success: function(data){
           		var display = "";
-          		display += "<div class='text-info'><p>ID : <small>"+data.userId+"</small></p>";
-          		display += "<p>전화번호 : <small>"+data.phone+"</small></p>";
-          		display += "<p>계좌번호 : <small>"+data.accountNo+"</small></p></div>";
+          		display += "<div class='text-secondary'><p>[ID] : <small>"+data.userId+"</small></p>";
+          		display += "<p>[전화번호] : <small>"+data.phone+"</small></p>";
+          		display += "<p>[계좌번호] : <small>"+data.accountNo+"</small></p></div>";
           		
           		$("#appendSeller").html(display);
           	}
@@ -278,7 +333,7 @@ function getSellerInfo(){
 
 	$("button[name='depositCheck']").on("click", function(){
 		var tranNo= $(this).attr("id").trim();
-		var content= $(this).closest(".col-lg-4");		
+		var content= $(this).closest(".col-lg-3");		
 		
 		$.ajax({
 			url : "/tran/rest/checkDeposit/"+tranNo ,
@@ -298,7 +353,7 @@ function getSellerInfo(){
 	$("button[name='tranDelete']").on("click", function(){
 		
 		var tranNo= $(this).attr("id").trim();
-		var content= $(this).closest(".col-lg-4");		
+		var content= $(this).closest(".col-lg-3");		
 		
 		$.ajax({
 			url : "/tran/rest/deleteTran/"+tranNo ,
@@ -329,8 +384,8 @@ function getSellerInfo(){
           		$("#ticketCheckRow").html("");
           		$.each(data.list, function( index, ticket){
           			var display = "";	
-	          		display += '<div class="col-lg-4"><br/>';
-	          		display += '<div class="border bg-light">';
+	          		display += '<div class="col-lg-3"><br/>';
+	          		display += '<div class="border">';
 	          		display += '<img class="img-circle" src="/resources/images/uploadFiles/'+ticket.ticketImage+'" width="200px" >';
 	          		display +=	'<h2>'+ticket.event.eventName+'</h2><hr/>';       
 	          		display +=  '<read>좌석 : '+ticket.seat+'</read><br/>' ;
@@ -352,11 +407,11 @@ function getSellerInfo(){
 	$("#inputGroupSelect01").on('change', function(){
 		var tranCode = $(this).val();
 		if(tranCode=="All"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			return;
 		}
 		if(tranCode=="0"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			$("div[name='1']").attr("style","display: none;");
 			$("div[name='2']").attr("style","display: none;");
 			$("div[name='3']").attr("style","display: none;");
@@ -364,7 +419,7 @@ function getSellerInfo(){
 			return;
 		}
 		if(tranCode=="1"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			$("div[name='0']").attr("style","display: none;");
 			$("div[name='2']").attr("style","display: none;");
 			$("div[name='3']").attr("style","display: none;");
@@ -372,7 +427,7 @@ function getSellerInfo(){
 			return;
 		}
 		if(tranCode=="2"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			$("div[name='0']").attr("style","display: none;");
 			$("div[name='1']").attr("style","display: none;");
 			$("div[name='3']").attr("style","display: none;");
@@ -380,7 +435,7 @@ function getSellerInfo(){
 			return;
 		}
 		if(tranCode=="3"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			$("div[name='0']").attr("style","display: none;");
 			$("div[name='1']").attr("style","display: none;");
 			$("div[name='2']").attr("style","display: none;");
@@ -388,7 +443,7 @@ function getSellerInfo(){
 			return;
 		}
 		if(tranCode=="4"){
-			$(".col-lg-4").attr("style","");
+			$(".col-lg-3").attr("style","");
 			$("div[name='0']").attr("style","display: none;");
 			$("div[name='1']").attr("style","display: none;");
 			$("div[name='2']").attr("style","display: none;");
@@ -402,7 +457,7 @@ function getSellerInfo(){
 	
 	$("button[name='depositSeller']").on("click",function(){
 		
-		var content = $(this).closest(".col-lg-4");	
+		var content = $(this).closest(".col-lg-3");	
 		
 		IMP.request_pay({
 		    pay_method : 'trans',
