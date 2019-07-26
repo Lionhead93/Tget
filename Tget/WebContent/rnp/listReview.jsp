@@ -111,7 +111,7 @@
 							<div style="font-size: 15px; font-weight: bold; margin: 10px;">
 								${i.score}.0
 							</div>
-							<button type="button" class="btn btn-outline-primary"  value="${i.eventId }">바로가기</button>						
+<%-- 							<button type="button" class="btn btn-outline-primary"  value="${i.tranNo }">바로가기</button>						 --%>
 						</div>			
 				  	  </td>
 				  	  <td>

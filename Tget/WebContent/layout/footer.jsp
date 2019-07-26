@@ -7,9 +7,9 @@
 
 <!-- Footer -->
 			<br/><br/><br/><br/>
-			<footer id="footer">
+			<footer>
 				
-				<div class="jumbotron">
+				<div id="footer" class="jumbotron">
 				<div class="text-center">
 					<div class="row">
 						<div class="col">
