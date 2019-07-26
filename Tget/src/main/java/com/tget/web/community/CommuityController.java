@@ -3,6 +3,7 @@ package com.tget.web.community;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,7 @@ import com.tget.service.community.domain.Reply;
 import com.tget.service.community.domain.Report;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Event;
+import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.transaction.TranService;
 import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
@@ -64,6 +67,8 @@ public class CommuityController {
 		//@Value("#{commonProperties['pageSize'] ?: 2}")
 		int pageSize;
 		
+		@Value("#{commonProperties['videoPath']}")
+		String videoPath;
 		//@Value("#{commonProperties['fileroot']}")
 		//String fileroot;
 		
@@ -78,30 +83,27 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="addContent", method=RequestMethod.POST)
-		public String addContent( @ModelAttribute("content") Content content) throws Exception {
+		public String addContent(@RequestParam(value = "file", required = false) MultipartFile multipartFile, @ModelAttribute("content") Content content, Model model) throws Exception {
 			//, @RequestParam("file") MultipartFile file
 			System.out.println("content/addContent: POST");
+			System.out.println(multipartFile.getOriginalFilename( ));
 			//Business Logic
-			//String fileName = file.getOriginalFilename();
 			
-			//File f = new File(fileroot, fileName);
-			//String originFileName =  file.getOriginalFilename();
+			File file = null;
 					
-			//String uploadFile = System.currentTimeMillis()+ originFileName;
-//			String safeFile = fileroot + uploadFile;
-//			
-//			try {
-//				file.transferTo(new File(fileroot , uploadFile ));
-//				
-//			} catch(IOException e) {
-//				e.printStackTrace();
-//			}
-//			
-//			content.setFileName(uploadFile);
+			if(!multipartFile.isEmpty()) {
+				content.setVideoName(multipartFile.getOriginalFilename( ));
+						
+				file = new File(videoPath,multipartFile.getOriginalFilename());
+				FileCopyUtils.copy(multipartFile.getBytes(), file);
+				
+			}
+			
 			if(content.getContentCode().equals("7")) {
 				content.setRefundCheck("1");
 			}
 			
+			model.addAttribute("videoName",content.getVideoName());
 			communityService.addContent(content);
 			
 			return "forward:/community/getContentList";

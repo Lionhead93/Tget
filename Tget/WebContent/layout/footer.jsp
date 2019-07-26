@@ -33,9 +33,9 @@
 							<h3>고객센터</h3>
 							<hr/>
 							<br/>
-								<a href="#">link</a><br/><br/>
-								<a href="#">link</a><br/><br/>
-								<a href="#">link</a>
+								<a href="#">1:1 문의하기</a><br/><br/>
+								<a href="#">환불게시판</a><br/><br/>
+								
 							
 						</div>
 					</div>

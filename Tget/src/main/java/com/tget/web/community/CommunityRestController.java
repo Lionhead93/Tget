@@ -66,6 +66,20 @@ public class CommunityRestController {
 		return map;
 	}
 	
+	@RequestMapping( value="rest/getRefund/{contentNo}", method=RequestMethod.GET ) 
+	public Map getRefund( @PathVariable int contentNo ) throws Exception{
+		
+		System.out.println("/community/rest/getRefund : GET");
+		
+		Content content = communityService.getContent(contentNo);
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		map.put("content", content);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="rest/getReplyList/", method=RequestMethod.POST)
 	public List<Reply> getReplyList(@RequestBody Reply reply) throws Exception{
 	

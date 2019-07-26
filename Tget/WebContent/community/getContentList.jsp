@@ -187,6 +187,7 @@
 				
 				});
 			 
+				
 	 
 			// 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {
@@ -252,6 +253,7 @@
 				
 					var contentNo = $(this).attr("id").trim();
 					var badCount = $('a').closest("#"+contentNo+"").text().trim();
+					alert(badCount);
 					var result1 = parseInt(badCount)+1;
 					var content1 = $('a').closest("#"+contentNo+"");
 					
@@ -354,7 +356,7 @@
 		   
 	 <div class="row">
 	  <div class="col-md-2 text-center">
-	  <br/><br/><br/><br/><br/>
+	  <br/>
 	  
 		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
 			<ul class="list-group list-group-flush">
@@ -375,6 +377,7 @@
 		
       <!--  table Start /////////////////////////////////////-->
      	<div class="col-md-10 text-center">
+     	
       <table class="table table-hover table-striped" >
       
         <thead>
@@ -531,6 +534,8 @@
 		</script>
 		<br/>  		
 	      </div>
+	      
+	      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
 	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>

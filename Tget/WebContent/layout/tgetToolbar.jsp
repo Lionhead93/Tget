@@ -112,7 +112,7 @@ $(function() {
 			self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
 		
 		});
-	 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
+	 $( "a[href='#']:contains('환불게시판')" ).on("click" , function() {
 			self.location="/community/getRefundList";	
 		
 		});
