@@ -226,6 +226,11 @@
 	</script>
 	
 	<style>
+	body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+	
       div.container {
 /* */         	margin-top: 50px;
 /*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */

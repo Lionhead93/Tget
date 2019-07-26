@@ -44,6 +44,12 @@
 	});
 	
 	</script>
+	<style type="text/css">
+		body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+	</style>
 </head>
 
 <body>
