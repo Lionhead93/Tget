@@ -21,6 +21,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -95,8 +96,16 @@
 			color: #FBFCFE;
 		}
 		
+		div.border{
+			background-color : #193147; 
+		}
+		
+		div.border:hover{
+			background-color : #041625; 
+		}
+		
       div.container-fluid {
-        	font-family: 'Sunflower', sans-serif;
+/*         	font-family: 'Sunflower', sans-serif; */
 	 		font-size: 20px;    
         }
         
@@ -104,7 +113,7 @@
         	border: 1px; color: black;
       	}
       	div.list{
-        	font-family: 'Sunflower', sans-serif;
+/*         	font-family: 'Sunflower', sans-serif; */
 	 		font-size: 20px;
       	}
         
@@ -139,6 +148,10 @@
 			 background-image: -o-linear-gradient(top, #646464, #282828);
 			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 		}
+		
+		hr{
+			 background-color:#FBFCFE ;
+		}
     </style>
 	
 </head>
@@ -150,6 +163,7 @@
 			<br/>			
 			<div class="row">
 				<div class="col-lg-5" align="center">
+					<div class="sticky-top">
 					<h3>${event.koName}</h3>
 					<input type="hidden"  id="eventId" name="eventId" />
 					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
@@ -175,35 +189,76 @@
 							
 						</div>
 					</div>	
+					</div>
 				</div>			
 				<div class="col-lg-6">	
-					<table class="table table-striped">
-					  <thead>
-					    <tr align="center">
-					      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					  <c:forEach items="${eventListByName}"  var="i">
-					    <tr>
-					      <td>
-							<div class="event" align="left">		
-								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/>
-								${!empty event.koLocation? event.koLocation: i.eventLocation }<br/>
+				
+				<section id="section-topline-1" align="center">
+
+					<div class="row" align="center">
+						<c:forEach var="i" items="${eventListByName}" varStatus="j">
+							<div class="col-lg-6">
+								<div class="text-center">
+									<div class="border">
+								 		<br/>
+								 		<h5><strong>${i.eventDate } <span id="time"> ${i.eventTimeStr}</span></strong></h5>
+								 		<hr/>
+								 		
+								 		<div class="event" align="center" style="margin-left:10%;margin-right:10%">		
+								 		<div align="left" >
+								 			<%-- 											<small>${i.eventDate }, <span id="time">${i.eventTimeStr}</span></small><br/> --%>
+											<ion-icon name="checkmark"></ion-icon><small>개최장소</small><br/>
+											<small>${!empty event.koLocation? event.koLocation: i.eventLocation }</small><br/><br/>
+											<ion-icon name="checkmark"></ion-icon>
+											<small>현재 등록된 티켓</small><br/> ${i.totalTicketCount } 건<br/><br/>
+											<ion-icon name="checkmark"></ion-icon>
+											<small>티켓최저가</small><br/>${i.ticketLowestPriceStr } 원<br/>	<br/>	<br/>	
+											<div class="container-fluid" align="center">			
+												<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
+												<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/>
+											</div>	
+								 		</div>									
+										</div>		
+								 			<div><small></small></div>
+								 			<div><small></small></div>
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:forEach>
+							 </div>
+						</section>
+				
+				
+				
+				
+<!-- 					<table class="table table-striped"> -->
+<!-- 					  <thead> -->
+<!-- 					    <tr align="center"> -->
+<%-- 					      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th> --%>
+<!-- 					    </tr> -->
+<!-- 					  </thead> -->
+<!-- 					  <tbody> -->
+<%-- 					  <c:forEach items="${eventListByName}"  var="i"> --%>
+<!-- 					    <tr> -->
+<!-- 					      <td> -->
+<!-- 							<div class="event" align="left">		 -->
+<%-- 								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/> --%>
+<%-- 								${!empty event.koLocation? event.koLocation: i.eventLocation }<br/> --%>
 	
-								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/>
-								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				
-<%-- 								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" > --%>								
-								<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/>
-							</div>			
-					  </td>
-				    </tr>
-				   </c:forEach>
-			  		 </tbody>
-					</table>					
+<%-- 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/> --%>
+<%-- 								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				 --%>
+<%-- <%-- 								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" > --%>			
+<%-- 								<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp; --%>
+<%-- 								<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/> --%>
+<!-- 							</div>			 -->
+<!-- 					  </td> -->
+<!-- 				    </tr> -->
+<%-- 				   </c:forEach> --%>
+<!-- 			  		 </tbody> -->
+<!-- 					</table>					 -->
 				</div>
-				<div class="col-lg-1"></div>
+<!-- 				<div class="col-lg-1"></div> -->
 		</div>
 		
 	</div>

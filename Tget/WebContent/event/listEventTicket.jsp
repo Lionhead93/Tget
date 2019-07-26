@@ -38,22 +38,24 @@
 	var newURL = window.location.protocol + "//" + window.location.host +  window.location.pathname;
 
 	$(function(){
+		if ("${!empty user}") {
+			$.ajax(
+					{
+						url : "/event/rest/getInterestedEventList/"+$("#eventId").val(),
+						method : "POST",
+						dataType : "json",
+						success : function(JSONData, status){
+	 						if (JSONData.isInterestedEvent == true) {
+								$(".interested").html('<input type="hidden"  value="heart">'
+										+'<ion-icon name="heart" size="large"></ion-icon>');
+							}								
+						},
+						error : function(request, status, error ) {   
+//	 					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});	
+		}
 		
-		$.ajax(
-				{
-					url : "/event/rest/getInterestedEventList/"+$("#eventId").val(),
-					method : "POST",
-					dataType : "json",
-					success : function(JSONData, status){
- 						if (JSONData.isInterestedEvent == true) {
-							$(".interested").html('<input type="hidden"  value="heart">'
-									+'<ion-icon name="heart" size="large"></ion-icon>');
-						}								
-					},
-					error : function(request, status, error ) {   
-// 					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}			
-			});	
 
 		$("#addYoutube").on("click",function(){
 			if ("${empty user}"=="true") {
@@ -81,11 +83,12 @@
 
 		});
 		
-		$("button.getSellerEstimation").on("click",function(){
+		$(".getSellerEstimation").on("click",function(){
+// 			alert($(this).children().val());
 // 			nickName = $(this).parent().children("input[type='hidden']").val();
 // 			$("#sellerId").val($(this).val());
 // 			self.location = "/rnp/getSellerEstimationList?sellerId="+$(this).val();
-			$("form").attr("method" , "POST").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).val()).submit();
+			$("form").attr("method" , "POST").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).children().val()).submit();
 		});
 		
 		$(".interested").on("click",function(){
@@ -236,19 +239,37 @@
 /*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
 /*         	font-size: 25px; */
         }
-        table{
-        	margin-top: 50px;
-        	font-size: 20px;
-        }
         
-        .col-md-5 {
-        	font-family: 'Sunflower', sans-serif;
-	 		font-size: 20px;
-        }
+        div.border{
+			background-color : #193147; 
+		}
+		
+		div.border:hover{
+			background-color : #041625; 
+		}
+		
+		hr{
+			 background-color:#FBFCFE ;
+		}
         
-       #player {
-        	padding: 10px 10px;
+        .getSellerEstimation:hover{
+        	font-size:25px;
+/*         	background-color: #9190FF; */
         }
+/*         table{ */
+/*         	margin-top: 50px; */
+/*         	font-size: 20px; */
+/*         } */
+        
+/*         .col-md-5 { */
+/*         	font-family: 'Sunflower', sans-serif; */
+/* 	 		font-size: 20px; */
+/*         } */
+        
+        #player { /**/
+         	padding: 10px 10px; /**/
+				padding: 25px 25px 25px  25px ;
+     	  } /*  */
         
         .button_black{
 			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
@@ -279,22 +300,23 @@
 		.interested{
 			color : red;
 		}
-		div.list{
-			padding : 0px 20px;
-		}
+/* 		div.list{ */
+/* 			padding : 0px 20px; */
+/* 		} */
     </style>
 </head>
 
 <body>
-<jsp:include page="/layout/tgetToolbar.jsp" />
-<form>
-	
+	<jsp:include page="/layout/tgetToolbar.jsp" />
+	<form>	
 	<div class="container" align="center">
-	<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
-	<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
-	<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
-	<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }"/>
-		<div class="row" style="padding-top: 30px">
+		<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
+		<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
+		<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
+		<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }"/>
+		
+		
+		<div class="row" style="padding-top: 30px">		
 			<div class="col-lg-8 col-md-8 col-8"></div>
 			<div class="col-lg-2 col-md-2 col-2">
 <%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
@@ -304,9 +326,10 @@
 				</div>
 				<div align="right" style="font-size: 10px; color: black;" >
 					<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
-					${interestedCount}</div>
-			</div>
-			<div class="col-lg-2 col-md-2 col-2 dropdown" >
+					${interestedCount}
+				</div>
+			 </div>			
+			 <div class="col-lg-2 col-md-2 col-2 dropdown" >
 				<div  align="left" class=" dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<ion-icon name="share" size="large"></ion-icon>
 				</div>
@@ -317,74 +340,95 @@
 					<a class="dropdown-item"  href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/images/twitter.png" style="width:30px">트위터 공유</a>
     		    	<a class="dropdown-item"  href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/images/facebook.png" style="width:30px">페이스북 공유</a>
     	   			<a class="dropdown-item"  href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/images/kakaotalk.png"  style="width:30px">나에게 보내기</a>	
-				  </div>
-			</div>
+				</div>
+			</div>			
 		</div>		
 		
-		<div class="row">
-			<div class="col-lg-6 col-sm-12 col-xs-12" >
-				<h1>${!empty event.koName? event.koName:event.eventName }</h1><br/>
-				<div id="player"></div> <br/>
-				<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
-				${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
-				${event.eventDate } &nbsp; 
-				${event.eventTimeStr}<br/><br/><br/>
-			</div>
-			<div class="col-lg-6 col-sm-12 col-xs-12">
-
-			<table class="table table-striped">
-					  <thead>
-					    <tr align="center">
-					      <th scope="col"><h4>총 ${totalTicketCount}건</h4></th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					  <c:forEach items="${ticketList }" var="i">
-					    <tr>
-					      <td>
-							<div class="list" align="left">
-<%-- 								ticketNo : ${i.ticketNo }<br/> --%>
-								총 ${i.amount }장, 장당 ${i.price }원
-								(<c:if test="${i.type == 0}">
-									종이티켓
-								</c:if>
-								<c:if test="${i.type == 1 }">
-									전자티켓
-								</c:if> )
-								<br/>
-								구역 정보 : ${i.seat }<br/>
-								특이사항 : ${i.options }<br/>
-								쿠폰 : 
-								<c:if test="${empty i.couponCode }">
-									미사용
-								</c:if>
-								<c:if test="${i.couponCode == 0 }">
-									강조권
-								</c:if>
-								<c:if test="${i.couponCode == 1 }">
-									상단출력
-								</c:if><br/><br/>								
-							</div>			
-							<div class="list" align="right">
-<%-- 								<input type="hidden"  value="${i.seller.nickName}"/> --%>
-								<c:if test="${i.seller.userId!=user.userId}">
-									<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
-								</c:if>								
-								<button class="button_black getSellerEstimation" value="${i.seller.userId}">판매자조회</button><br/>
-							</div>
-					  		</td>
-				  	 	 </tr>
-						</c:forEach>
-			  		</tbody>
-				</table>		
-				<input type="hidden"  id="ticketNo" name="ticketNo"/>		
-<!-- 				<a href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/file/others/twitter.png"></a> -->
-<!--     		    <a href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/file/others/facebook.png"></a> -->
-<!--     	   		<a href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/file/others/kakao.png" ></a>	 -->
-			</div>
-		</div>
-	</div>
-</form>
-<jsp:include page="/layout/footer.jsp" />
-</body>
+		<div class="container-fluid">
+			<div class="row">
+			
+				<div class="col-lg-5 " >
+					<div class="sticky-top">
+						<h1>${!empty event.koName? event.koName:event.eventName }</h1><br/>
+						<div id="player"></div> <br/>
+						<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
+						${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
+						${event.eventDate } &nbsp; 
+						${event.eventTimeStr}<br/><br/><br/>
+					</div>				
+				</div>
+				
+				<div class="col-lg-7 ">
+					<div class="row" align="center">
+						<div class="col-lg-3"></div>
+						<div class="col-lg-6" align="center"><h4>총 ${totalTicketCount}건</h4></div>
+						<div class="col-lg-3"></div>
+					</div><br/>
+					
+									
+					<section id="section-topline-1" align="center">
+						<div class="row" align="center">	
+							<c:forEach var="i" items="${ticketList}" varStatus="j">														
+								<div class="col-lg-6">
+									<div class="text-center">
+										<div class="border">
+								 			<br/>
+								 			<h5><strong>
+								 				<a  class="getSellerEstimation">
+								 					<input type="hidden" value="${i.seller.userId}">
+								 					${i.seller.nickName}
+								 				</a>
+								 			</strong><small>(총 ${i.amount }장)</small></h5>
+								 			<hr/>								 
+								 			<div  align="center" style="margin-left:10%;margin-right:10%">	
+											 	<div class="list" align="left">
+													<ion-icon name="checkmark"></ion-icon>가격<br/>
+													${i.price }원(per ticket)<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
+													<c:if test="${i.type == 0}">
+														종이티켓
+													</c:if>
+													<c:if test="${i.type == 1 }">
+														전자티켓
+													</c:if> 
+													<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													구역 정보<br/> ${i.seat }<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													특이사항<br/>${i.options }<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													쿠폰 : 
+													<c:if test="${empty i.couponCode }">
+														미사용
+													</c:if>
+													<c:if test="${i.couponCode == 0 }">
+														강조권
+													</c:if>
+													<c:if test="${i.couponCode == 1 }">
+														상단출력
+													</c:if><br/><br/>								
+												</div>		
+											</div>	
+											<div class="list" align="right">
+	<%-- 								<input type="hidden"  value="${i.seller.nickName}"/> --%>
+												<c:if test="${i.seller.userId!=user.userId}">
+													<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
+												</c:if>								
+<%-- 												<button class="button_black getSellerEstimation" value="${i.seller.userId}">판매자조회</button><br/> --%>
+											</div>
+										</div><!-- border -->	
+									 </div>									
+									</div><!-- col-md-6 -->		
+									<div><small></small></div>
+									<div><small></small></div><br/>
+								</c:forEach>
+							</div><!-- row -->
+						</section>					
+					</div>	<!-- col-lg-6 -->
+				</div><!-- row -->		  
+			</div><!-- container-fluid -->					
+		</div><!-- row -->
+		<input type="hidden"  id="ticketNo" name="ticketNo"/>		
+	</form>
+	<jsp:include page="/layout/footer.jsp" />
 </html>
