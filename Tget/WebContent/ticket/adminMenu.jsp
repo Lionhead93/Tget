@@ -44,18 +44,17 @@
 			background-color: #193147;
 		}
 		section{
-			margin-left: 100px;
+			margin-left: 40px;
 		}
 		#inputGroupSelect01, nav{
 			background: rgba(4, 22, 37, 0.75);
 			color: #c0c5c9;
 		} 
 		#tgetHeader{
+		   margin-top:30px;	
 		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 30px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+	       padding-bottom:110px; 
+	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
 				  -moz-background-size: cover;
 				  -o-background-size: cover;
@@ -66,6 +65,12 @@
        }       
 		#footer{
 			background-color: #1B1B1F;
+		}
+		.list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
 		}
     </style>
     
@@ -95,13 +100,30 @@
 	
 	<div id="tgetHeader" class="text-center">
 		  <br/><br/>
-		  <h3><strong>티켓 관리</strong></h3>
+		  <h3><strong></strong></h3>
 		  <br/><br/>
 	</div>
 	
 		<div class="row">
-		<div class="col-9">	
+		<div class="col-2">
+      <div class="sticky-top">
+      	<div class='text-center'>
+      		<br/><br/><br/><br/><br/><br/>
+			<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 관리자 메뉴 </strong></p>
+			<br/>
+										<ul class="list-group list-group-flush">										  
+										  <li class="list-group-item"><a href="#">관리자 가이드</a></li>
+										  <li></li>
+										  
+										</ul> 
+										  
+										  
+		</div> 
+		</div>    	
+      </div>
+		<div class="col-8">	
 			<section>
+				<br/>
 				<div class="tabs tabs-style-topline">
 					<nav>
 						<ul>
@@ -235,7 +257,7 @@
 				</div><!-- /tabs -->
 			</section>
 			</div>
-			<div class="col-3">
+			<div class="col-2">
 			<div class="sticky-top">
 			<br/><br/><br/><br/><br/><br/>
 				<iframe id="cyberWidget" class="embed-responsive-item" height="180px" width="170px" src="https://www.cyber.go.kr/widget.html" allowfullscreen></iframe>				

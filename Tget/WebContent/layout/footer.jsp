@@ -35,7 +35,15 @@
 							<br/>
 								<a href="#">link</a><br/><br/>
 								<a href="#">link</a><br/><br/>
-								<a href="#">link</a>
+								<div id="plusfriend-chat-button"></div><br/>
+								<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+								<script type='text/javascript'>
+										    Kakao.init('b5e745a340ec3959a1b015bdb9699746');
+										    Kakao.PlusFriend.createChatButton({
+										    	  container: '#plusfriend-chat-button',
+										    	  plusFriendId: '_xajLCT' 
+										    });										  
+								</script>
 							
 						</div>
 					</div>
