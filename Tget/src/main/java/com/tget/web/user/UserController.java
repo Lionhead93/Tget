@@ -103,6 +103,7 @@ public class UserController {
 		user.setNaverId((String) session.getAttribute("naverId"));
 		}
 		
+		
 		userService.addUser(user);
 		
 		session.setAttribute("user", user);
@@ -226,24 +227,7 @@ public class UserController {
 
 		return "redirect:/";
 	}
-	
-/*	@RequestMapping( value="snslogin", method=RequestMethod.GET )
-	public String snslogin(@ModelAttribute("user") User user , HttpSession session) throws Exception{
-		
-		System.out.println("/user/snslogin : POST");
-		//Business Logic
-		User dbUser=userService.getUser(user.getUserId());
-		
-		if(user.getUserId()!=null) {
-			
-			session.setAttribute("user", dbUser);
-		}
 
-		return "redirect:/";
-	}*/
-	
-
-	
 	@RequestMapping( value="logout", method=RequestMethod.GET )
 	public String logout(HttpSession session ) throws Exception{
 		
@@ -305,7 +289,7 @@ public class UserController {
 	}*/
 	
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value = "sendSms", method = RequestMethod.POST) 
 	public String sendSms(String receiver) { 
 	
@@ -361,25 +345,7 @@ public class UserController {
 	            client.getConnectionManager().shutdown();
 	        }
 	        return "true";
-	}
-
-@RequestMapping(value = "smsCheck", method = RequestMethod.POST) 
-public String smsCheck(String code){ 
-	
-	
-	
-	
-	System.out.println("받은거"+user.getCode());
-	System.out.println("쓴거"+code);
-	
-	if(code.equals(user.getCode())) {
-		System.out.println("일치");
-		return "true";
-		}else { 
-			System.out.println("불일치");
-			return "false"; 
-			} 
-}
+	}*/
 	
 /*@RequestMapping( value="finduserId", method=RequestMethod.GET )
 public String finduserId( @RequestParam("phone") String phone , Model model ) throws Exception {
@@ -396,6 +362,7 @@ public String finduserId( @RequestParam("phone") String phone , Model model ) th
 
 @RequestMapping(value = "oauth")
 public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) throws Exception {
+	
     System.out.println("로그인 할때 임시 코드값");
     //카카오 홈페이지에서 받은 결과 코드
     System.out.println(code);
