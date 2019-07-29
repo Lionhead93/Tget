@@ -411,7 +411,7 @@ public class EventDaoImpl implements EventDao {
 		}else if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				stubhubEvent = (StubhubEvent)list.get(i);
-				str += stubhubEvent.getName()+"/"+stubhubEvent.getVenueName()+"/"+stubhubEvent.getPerformersName()+" ///";				
+				str += stubhubEvent.getName()+"//"+stubhubEvent.getVenueName()+"//"+stubhubEvent.getPerformersName()+" /////";				
 			}
 			str.replaceAll("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 //			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
@@ -439,7 +439,7 @@ public class EventDaoImpl implements EventDao {
 		JSONObject tranText = (JSONObject) tran.get(0);
 		String result = (String) tranText.get("translatedText");
 		System.out.println("result///////////////////////////"+result);
-		result.replaceAll("¼£·Ô ±ØÀå", "»þ·Ôµ¥ ¾¾¾îÅÍ");
+		
 		
 		String[] translated = null;
 		String[] tempArr = null;
@@ -448,11 +448,11 @@ public class EventDaoImpl implements EventDao {
 			map.put("result", result);
 			return map;
 		}else if (list != null && list.size() != 0) {
-			translated = result.split("///");
+			translated = result.split("/////");
 			
-			for (int i=0; i<translated.length; i++ ) {
+			for (int i=0; i<translated.length-1; i++ ) {
 //			for (int i=0; i<list.size(); i++ ) {
-				tempArr = translated[i].split("/");
+				tempArr = translated[i].split("//");
 				stubhubEvent = (StubhubEvent)list.get(i);
 				
 				for (int j = 0; j < tempArr.length; j++) {
@@ -496,7 +496,7 @@ public class EventDaoImpl implements EventDao {
 		if (list != null && list.size() != 0) {
 			for (int i=0; i<list.size(); i++) {
 				event = list.get(i);
-				str += event.getEventName()+"/"+event.getEventLocation()+" ///";				
+				str += event.getEventName()+"//"+event.getEventLocation()+" /////";				
 			}
 //			str.replaceAll("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 //			str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
@@ -530,10 +530,10 @@ public class EventDaoImpl implements EventDao {
 		String[] tempArr = null;
 		
 		if (list != null && list.size() != 0) {
-			translated = result.split("///");
+			translated = result.split("/////");
 			
 			for (int i=0; i<translated.length; i++ ) {
-				tempArr = translated[i].split("/");
+				tempArr = translated[i].split("//");
 				event = list.get(i);
 				
 				for (int j = 0; j < tempArr.length; j++) {
