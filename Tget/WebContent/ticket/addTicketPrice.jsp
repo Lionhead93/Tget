@@ -33,11 +33,48 @@
 	<script src="/resources/javascript/main.js"></script>
     
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-            background-color : whitesmoke;
-        }
+       body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+		#ticketInput{
+			  border: 1px solid #D6CDB7;
+			  background-color: #193147;
+		}
+		a, hr{
+			color: #FBFCFE ;	
+		}
+		.col-lg-3{			
+			margin-bottom: 20px;
+		}
+		
+		section{
+			margin-left: 40px;
+		}
+		#tgetHeader{
+		   margin-top:30px;	
+		   color: #FBFCFE;	
+	       padding-bottom:200px; 
+	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+				  -webkit-background-size: cover;
+				  -moz-background-size: cover;
+				  -o-background-size: cover;
+				  background-size: cover;	
+       } 
+		#footer{
+			background-color: #1B1B1F;
+		}
+       .list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
+		}
+		#addImageModal{
+			color: black;
+		}
     
     </style>
     
@@ -52,17 +89,28 @@
 	 	
 		if(result == null || result.length<4){
 			alert("가격은 1,000원 이상으로 반드시 입력하여야 합니다.");
-			return;
+			return false;
 		}
 		if(isNaN(result)==true) {
 			alert("가격에 숫자입력 바랍니다. 입력 값 :"+result);
-			return;
+			return false;
 		}
 		
-		$("input[name='price']").val(result);
-		window.open("", "popup_window", "width=500, height=500, scrollbars=no");
-		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketPrice").attr("target" , "popup_window").submit();
-	}		
+		$.ajax(
+				{
+					url : "/ticket/rest/addTicketPrice/"+result ,
+					method : "GET" ,
+					dataType : "json" ,
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					success : function(data) {
+						alert("가격등록 성공");							
+					}
+				});
+		return true;
+	}	
 	
 	
 	$(function(){
@@ -77,9 +125,10 @@
 		$("#avgPrice").html(""+avgPrice);
 		
 	    $("button:contains('결 정')").on("click",function(){
-	    	
-	    	fncAddTicketPrice();
-	    	
+	    	$(this).attr("data-target","");
+	    	if(fncAddTicketPrice()){
+	    		$(this).attr("data-target","#addImageModal");
+	    	}
 	    });
 		
 		$("a[href='#']:contains('취&nbsp;소')").on("click",function(){
@@ -136,11 +185,30 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<div class="container">
+	<div id="tgetHeader" class="text-center">
+		  
+	</div>
 	<br/>
-		<h1 class="text-center">판매가격 결정 : ${ticket.event.eventName}</h1>
+	<div class="row">
+		<div class="col-lg-2">
+			   <div class="sticky-top">
+		      	<div class='text-center'>
+		      		<br/><br/><br/>
+					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 판매가격 결정 </strong></p>
+					<br/>
+												<ul class="list-group list-group-flush">										  
+												  <li class="list-group-item"><a href="#">판매자 가이드</a></li>
+												  <li class="list-group-item"><a href="#">내 판매티켓</a></li>
+												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
+												  <li></li>											  
+												</ul> 											  
+				</div> 
+				</div>
+		</div>
+		<div id="ticketInput" class="col-lg-8">	
+		<br/>
+		<h1 class="text-center">${ticket.event.eventName}</h1>
 				
-		<form>
 		<div class="text-center">				  
 		<br/>
 		  <div class="form-group">
@@ -164,27 +232,74 @@
 		  </div>
 		<br/>
 		   <div class="form-group">
-			  <a class="btn btn-danger btn" href="#" id="${ticket.event.eventId}" name="sellModal" role="button" data-target="#sellModal" data-toggle="modal">게시된 &nbsp;판매현황 &nbsp;보기</a>
+			  <a class="btn btn-outline-danger btn" href="#" id="${ticket.event.eventId}" name="sellModal" role="button" data-target="#sellModal" data-toggle="modal">게시된 &nbsp;판매현황 &nbsp;보기</a>
 		  </div>
 		 <br/>
 		  <div class="form-group">
-		      <button type="button" class="btn btn-primary"  >결 정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		      <button type="button" class="btn btn-outline-light" data-toggle="modal" >결 정</button>
+			  <a class="btn btn-outline-light btn" href="#" role="button">취&nbsp;소</a>
 		  </div>
 		  </div>
-		</form>
-		
- 	</div>
+		</div>
+		<div class="col-lg-2">
+		</div>
+	</div>
+	<!-- 이미지등록 모달창  -->
+					<div class="modal fade" id="addImageModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					    <div class="modal-content">
+					      
+					      <div class="modal-body">
+					      <div class="text-center">
+					      		<h3>실물 이미지 등록</h3>
+								<br/>	
+								<div class="img_wrap">
+								<img id="preview" />	
+								</div>
+								<form>				  
+								<br/>
+								       <input type="file" id="file" name="file" value="" placeholder="file input...">
+								  
+								  </div>
+								<br/>
+									<div class="text-center">
+								      <button type="button" class="btn btn-primary">요 청</button>
+									</div>							   
+								</form>
+						  </div>		
+					      </div>
+					      <div class="modal-footer">
+					        </div>
+					    </div>
+					  </div>
+					</div>
+					
+					<script>		
+						function fncAddTicketImage(){
+							//Form 유효성 검증
+						 	var file = $("input[name='file']").val();							
+							if(file == null || file.length<1){
+								alert("이미지등록 바람");
+								return;
+							}
+							$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
+						}						
+						$(function(){
+						    
+						    $("button:contains('요 청')").on("click",function(){
+						    	fncAddTicketImage();	    	
+						    });						    
+						    $("#file").change(function(){
+						    	readURL(this);
+						    });					    
+						});
+					</script>
+	
  	<!-- 판매현황 모달창  -->
 					<div class="modal fade" id="sellModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h3 class="modal-title" id="modalCenterTitle"><div class="text-secondary text-center">게시된 판매현황</div></h3>
-					        <a href="#" class="close" data-dismiss="modal">
-					          &times;
-					        </a>
-					      </div>
+					      
 					      <div class="modal-body">
 					      	<canvas id="myChart"></canvas>
 					      </div>

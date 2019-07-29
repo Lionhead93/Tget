@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>이벤트 관리</title>
+<title>T-GET</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
@@ -112,12 +112,26 @@
 	</script>
 	
 	<style>
+	
+	body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}
+	
+		#footer{
+		background-color: #1B1B1F ;
+		}
+		
+		a, hr{
+				color: #FBFCFE ;	
+		}		
+		
 	.tab-content{
 		min-height: 400px;
 	}
       div.container {
         	margin-top: 50px;
-        	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
+/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
         	font-size: 25px;
         }
         #list-recomm, #list-category{  
@@ -127,8 +141,8 @@
 			padding : 10px  10px 10px 20px;
 		}
         .col-10{
-        	border: 2px solid #5D5D5D;            
-/*         	background-color : #5D5D5D ; */
+        	border: 2px solid #FBFCFE ;            
+/* */        	background-color : #193147 ;
         }
 /*         .row{ */
 /*         	margin-top: 30px;  */

@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<title>TicketList</title>
+	<title>T-GET</title>
 	
 	<!-- 참조 : http://getbootstrap.com/css/   -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,6 +16,9 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
+<!-- 	<link href="/resources/css/neon.css"/> -->
+<!-- 	<link href="/resources/css/neon2.css"/> -->
+	
 	
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -31,6 +34,8 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!-- KAKAO -->
 <!--    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
+
+
 	<script type="text/javascript">
 	
 	var videoList = [];
@@ -38,6 +43,42 @@
 	var newURL = window.location.protocol + "//" + window.location.host +  window.location.pathname;
 
 	$(function(){
+		
+		$.ajax(
+				{
+					url : "/event/rest/getPopularEventList",
+					method : "POST",
+					dataType : "json",
+					success : function(JSONData, status){
+// 							alert(status);
+							recommSize = JSONData.recommEventlistSize;
+							$.each(JSONData.eventNameList, function(index,value){
+								if(value=="${event.eventName}"){
+									$("#title").append("<span class='neon' style='font-weight:bold;font-size:23px'>HOT</span>");
+// 									$("#title").attr("class","neon");
+									
+								}
+							});
+					}
+		});
+		
+		$("input[type='text']").on("keyup",function(){
+			$("#searchKeyword").val($("input[type='text']").val());
+		});
+		
+		$("input[type='text']").on("keypress",function(){
+			if (event.keyCode ==13) {
+				$("#searchCondition").val("1");
+				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+			}
+		});
+		
+		$("#button-addon2").on("click",function(){
+			$("#searchCondition").val("1");
+			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+		});
+		
+
 		if ("${!empty user}") {
 			$.ajax(
 					{
@@ -56,6 +97,9 @@
 				});	
 		}
 		
+		$("#deleteYoutube").on("click",function(){
+			
+		});
 
 		$("#addYoutube").on("click",function(){
 			if ("${empty user}"=="true") {
@@ -185,6 +229,11 @@
 // 	      $( "#kakao" ).on("click" , function() {
 // 	         sendLinkKakao()
 // 	      }); 
+
+		$(".coupon1").attr("class", "flux coupon1");
+		
+		initparticles();
+		
 	});
 	var tag = document.createElement('script');
 
@@ -229,94 +278,139 @@
 	</script>
 	
 	<style>
-	body{
+		
+		
+		body{
 			background-color : #062038; 
 			color: #FBFCFE;
 		}
 	
+		#footer{
+		background-color: #1B1B1F ;
+		}
+		
+		a, hr{
+				color: #FBFCFE ;	
+		}			
+		
+		button.btn-light:hover{
+			background-color: gray;
+			color: #FBFCFE ;
+		}
+	
       div.container {
-/* */         	margin-top: 50px;
-/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
-/*         	font-size: 25px; */
+/* */         	margin-top: 20px;
         }
         
         div.border{
 			background-color : #193147; 
+			margin-top:20px;
 		}
 		
 		div.border:hover{
 			background-color : #041625; 
-		}
-		
-		hr{
-			 background-color:#FBFCFE ;
-		}
+		}		
         
         .getSellerEstimation:hover{
         	font-size:25px;
-/*         	background-color: #9190FF; */
         }
-/*         table{ */
-/*         	margin-top: 50px; */
-/*         	font-size: 20px; */
-/*         } */
-        
-/*         .col-md-5 { */
-/*         	font-family: 'Sunflower', sans-serif; */
-/* 	 		font-size: 20px; */
-/*         } */
-        
+
         #player { /**/
          	padding: 10px 10px; /**/
 				padding: 25px 25px 25px  25px ;
-     	  } /*  */
-        
-        .button_black{
-			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
-			font-size:20px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
-			/* text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 border-radius: 3px; color: white;
-			 font-size:25px;font-family: 'Nanum Pen Script', cursive; 
-/* 			 text-decoration:none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 background-color: #7d7e7d; background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
-			 background-image: -webkit-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -moz-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -ms-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -o-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: linear-gradient(to bottom, #7d7e7d, #0e0e0e);
-			 filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d, endColorstr=#0e0e0e);
-		}
-			
-		.button_black:hover{
-			 border:1px solid #4a4b4a;
-			 background-color: #646464; background-image: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#282828));
-			 background-image: -webkit-linear-gradient(top, #646464, #282828);
-			 background-image: -moz-linear-gradient(top, #646464, #282828);
-			 background-image: -ms-linear-gradient(top, #646464, #282828);
-			 background-image: -o-linear-gradient(top, #646464, #282828);
-			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
-		}
-		
+     	  }
 		.interested{
 			color : red;
 		}
-/* 		div.list{ */
-/* 			padding : 0px 20px; */
-/* 		} */
+		
+		
+		.neon {
+		  font-family: neon;
+		  color: #FB4264;
+/* 		  font-size: 9vw; */
+/* 		  line-height: 9vw; */
+		  text-shadow: 0 0 3vw #F40A35;
+		}
+		
+		.flux {
+		  font-family: neon;
+		  color: #426DFB;
+/* 		  font-size: 9vw; */
+/* 		  line-height: 9vw; */
+		  text-shadow: 0 0 3vw #2356FF;
+		}
+		
+/* */ 		.neon {
+		  animation: neon 1s ease infinite;
+		  -moz-animation: neon 1s ease infinite;
+		  -webkit-animation: neon 1s ease infinite;
+		}
+		
+		
+		@keyframes neon {
+		  0%,
+		  50% {
+		    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+		    color: #FED128;
+		  }
+		  50% {
+		    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+		    color: #806914;
+		  }
+		}
+		
+		.flux {
+		  animation: flux 2s linear infinite;
+		  -moz-animation: flux 2s linear infinite;
+		  -webkit-animation: flux 2s linear infinite;
+		  -o-animation: flux 2s linear infinite;
+		}
+		
+		@keyframes flux {
+		  0%,
+		  100% {
+		    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+		    color: #28D7FE;
+		  }
+		  50% {
+		    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+		    color: #146C80;
+		  }
+  		}
     </style>
 </head>
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<form>	
+	<form name="searchEvent">
+			<div id="tgetHeader" class="text-center">
+			<br/><br/><br/>
+				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
+				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
+				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
+				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
+				<div class="col-lg-6 col-md-6 col-10">	
+					<div class="input-group mb-1">
+				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
+				  		<div class="input-group-append">
+				    		<span class="input-group-text btn"  id="button-addon2">검색</span>
+				 		 </div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-1"></div>
+				</div>
+			</div>
+			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
+		</div>
+	</form>
+	
+	<form name="main">	
 	<div class="container" align="center">
-		<input type="hidden" id="eventId" name="eventId" value="${event.eventId}"/>
-		<input type="hidden" id="eventName" name="eventName" value="${event.eventName }"/>
-		<input type="hidden" id="koName" name="koName" value="${event.koName }"/>
-		<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }"/>
+		<input type="hidden" id="eventId" name="eventId" value="${event.eventId}">
+		<input type="hidden" id="eventName" name="eventName" value="${event.eventName }">
+		<input type="hidden" id="koName" name="koName" value="${event.koName }">
+		<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }">		
 		
-		
-		<div class="row" style="padding-top: 30px">		
+		<div class="row" >		
 			<div class="col-lg-8 col-md-8 col-8"></div>
 			<div class="col-lg-2 col-md-2 col-2">
 <%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
@@ -326,7 +420,7 @@
 				</div>
 				<div align="right" style="font-size: 10px; color: black;" >
 					<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
-					${interestedCount}
+					
 				</div>
 			 </div>			
 			 <div class="col-lg-2 col-md-2 col-2 dropdown" >
@@ -344,17 +438,26 @@
 			</div>			
 		</div>		
 		
-		<div class="container-fluid">
-			<div class="row">
-			
+		<div class="container">
+			<div class="row" align="center">			
 				<div class="col-lg-5 " >
 					<div class="sticky-top">
-						<h1>${!empty event.koName? event.koName:event.eventName }</h1><br/>
+						<div class="textcontainer">
+							<h1><span id="title">${!empty event.koName? event.koName:event.eventName }</span></h1>
+						</div>
 						<div id="player"></div> <br/>
-						<div><button class="button_black" id="addYoutube" name="addYoutube" >동영상 등록</button><br/><br/></div>
+<!-- 						<span id="deleteYoutube"> -->
+<!-- 						<ion-icon name="remove-circle-outline"  size="large"></ion-icon> -->
+<!-- 						</span> -->
+						<span id="addYoutube" name="addYoutube">
+						<ion-icon name="add-circle-outline"  size="large"></ion-icon>
+						</span>
+						<br/><br/>
 						${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
 						${event.eventDate } &nbsp; 
 						${event.eventTimeStr}<br/><br/><br/>
+
+	
 					</div>				
 				</div>
 				
@@ -364,16 +467,16 @@
 						<div class="col-lg-6" align="center"><h4>총 ${totalTicketCount}건</h4></div>
 						<div class="col-lg-3"></div>
 					</div><br/>
-					
 									
 					<section id="section-topline-1" align="center">
 						<div class="row" align="center">	
-							<c:forEach var="i" items="${ticketList}" varStatus="j">														
+							<c:forEach var="i" items="${ticketList}" >			
+								<c:if test="${i.couponCode == 0 }">											
 								<div class="col-lg-6">
 									<div class="text-center">
-										<div class="border">
+										<div class="border ">
 								 			<br/>
-								 			<h5><strong>
+								 			<h5  class="coupon${i.couponCode }"><strong>
 								 				<a  class="getSellerEstimation">
 								 					<input type="hidden" value="${i.seller.userId}">
 								 					${i.seller.nickName}
@@ -383,44 +486,84 @@
 								 			<div  align="center" style="margin-left:10%;margin-right:10%">	
 											 	<div class="list" align="left">
 													<ion-icon name="checkmark"></ion-icon>가격<br/>
-													${i.price }원(per ticket)<br/><br/>
+													<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
 													<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
-													<c:if test="${i.type == 0}">
-														종이티켓
-													</c:if>
-													<c:if test="${i.type == 1 }">
-														전자티켓
-													</c:if> 
+													<div class="coupon${i.couponCode }">
+														<c:if test="${i.type == 0}">
+															종이티켓
+														</c:if>
+														<c:if test="${i.type == 1 }">
+															전자티켓
+														</c:if> 
+													</div>
 													<br/><br/>
 													<ion-icon name="checkmark"></ion-icon>
-													구역 정보<br/> ${i.seat }<br/><br/>
-													<ion-icon name="checkmark"></ion-icon>
-													특이사항<br/>${i.options }<br/><br/>
-													<ion-icon name="checkmark"></ion-icon>
-													쿠폰 : 
-													<c:if test="${empty i.couponCode }">
-														미사용
-													</c:if>
-													<c:if test="${i.couponCode == 0 }">
-														강조권
-													</c:if>
-													<c:if test="${i.couponCode == 1 }">
-														상단출력
-													</c:if><br/><br/>								
+													구역 정보<br/>
+													<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
+													<ion-icon name="checkmark"></ion-icon>													
+													특이사항<br/>
+													<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
 												</div>		
 											</div>	
 											<div class="list" align="right">
-	<%-- 								<input type="hidden"  value="${i.seller.nickName}"/> --%>
 												<c:if test="${i.seller.userId!=user.userId}">
-													<button class="button_black addTran"  value="${i.ticketNo}">구매하기</button> &nbsp; &nbsp;
-												</c:if>								
-<%-- 												<button class="button_black getSellerEstimation" value="${i.seller.userId}">판매자조회</button><br/> --%>
+													<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+												</c:if>					
 											</div>
 										</div><!-- border -->	
 									 </div>									
 									</div><!-- col-md-6 -->		
 									<div><small></small></div>
 									<div><small></small></div><br/>
+									</c:if>
+								</c:forEach>
+								
+								<c:forEach var="i" items="${ticketList}" >			
+								<c:if test="${i.couponCode != 0 }">											
+								<div class="col-lg-6">
+									<div class="text-center">
+										<div class="border ">
+								 			<br/>
+								 			<h5  class="coupon${i.couponCode }"><strong>
+								 				<a  class="getSellerEstimation">
+								 					<input type="hidden" value="${i.seller.userId}">
+								 					${i.seller.nickName}
+								 				</a>
+								 			</strong><small>(총 ${i.amount }장)</small></h5>
+								 			<hr/>								 
+								 			<div  align="center" style="margin-left:10%;margin-right:10%">	
+											 	<div class="list" align="left">
+													<ion-icon name="checkmark"></ion-icon>가격<br/>
+													<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
+													<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
+													<div class="coupon${i.couponCode }">
+														<c:if test="${i.type == 0}">
+															종이티켓
+														</c:if>
+														<c:if test="${i.type == 1 }">
+															전자티켓
+														</c:if> 
+													</div>
+													<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													구역 정보<br/>
+													<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
+													<ion-icon name="checkmark"></ion-icon>													
+													특이사항<br/>
+													<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
+												</div>		
+											</div>	
+											<div class="list" align="right">
+												<c:if test="${i.seller.userId!=user.userId}">
+													<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+												</c:if>					
+											</div>
+										</div><!-- border -->	
+									 </div>									
+									</div><!-- col-md-6 -->		
+									<div><small></small></div>
+									<div><small></small></div><br/>
+									</c:if>
 								</c:forEach>
 							</div><!-- row -->
 						</section>					

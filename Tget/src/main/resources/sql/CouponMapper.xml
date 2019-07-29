@@ -20,33 +20,42 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="insertCoupon"		parameterType="coupon" >
 	 	INSERT
-		INTO coupon( coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement) 
-		VALUES	 (	seq_coupon_coupon_no.nextval,  #{couponCode} , #{userId} ,  
-							SYSDATE , SYSDATE, #{couponStatement} )
+		INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement) 
+<<<<<<< HEAD
+		VALUES	 (	seq_coupon_coupon_no.nextval,  #{couponCode} , #{userId} , SYSDATE, '0' )
+=======
+		VALUES	 (	seq_coupon_coupon_no.nextval,  #{couponCode} , #{userId}  , SYSDATE, '0' )
+>>>>>>> refs/remotes/origin/master
 	 </insert>
 	 
-	   <select 	id="selectCoupon"	parameterType="coupon"	resultMap="couponSelectMap">
+	 <select  id="selectCoupon"  parameterType="int"	resultMap="couponSelectMap">
+	 	SELECT
+		coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement	 		
+		FROM coupon
+	 	WHERE coupon_NO = #{value}	
+	 </select>
+	 
+	 <select 	id="selectListCoupon"	parameterType="coupon"	resultMap="couponSelectMap">
 		SELECT
 		coupon_no , coupon_code , user_id , coupon_use_date , coupon_reg_date, coupon_statement
 	 		
 		FROM coupon 
-		WHERE user_id = #{userId}
+		WHERE user_id = #{userId} AND coupon_statement = '0'
 		
 	 </select>
 	 
 	 <update	id="updateCoupon"	parameterType="coupon" >
 	   	UPDATE coupon
 	   	<set>
-	   		coupon_no 	= #{couponNo} ,
-	   		coupon_code	= #{couponCode} ,
-	   		
-	   		user_id = #{userId} ,
-	   		coupon_use_date = #{couponUseDate} ,
-	   		coupon_reg_date = SYSDATE ,
-	   		coupon_statement = #{couponStatement}
+<<<<<<< HEAD
+	   		coupon_use_date = SYSDATE ,
+=======
+	   		coupon_use_date = sysdate ,
+>>>>>>> refs/remotes/origin/master
+	   		coupon_statement = '1'
 	   		
 	   	</set>
-	   	WHERE user_id = #{userId}
+	   	WHERE coupon_no = #{couponNo}
 	 </update>
 	 
 </mapper>

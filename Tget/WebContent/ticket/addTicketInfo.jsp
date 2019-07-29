@@ -7,6 +7,7 @@
 <html lang="ko">
 	
 <head>
+	<title>T-GET</title>
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -15,6 +16,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
+	<link rel="stylesheet" href="/resources/css/login.css" />
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 	
 	
@@ -35,21 +37,46 @@
 	
    
 	<style>
+			
+		body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+		#ticketInput{
+			  border: 1px solid #D6CDB7;
+			  background-color: #193147;
+		}
+		a, hr{
+			color: #FBFCFE ;	
+		}
+		.col-lg-3{			
+			margin-bottom: 20px;
+		}
 		
-		body > div.container{
-        	border: 1px solid #D6CDB7;
-        	background-color: whitesmoke;
-        }
-        
-       #eventHeader{
-       padding-top: 30px;
-       padding-bottom: 30px;
-       		background: url(/resources/images/pic10.jpg) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;	
+		section{
+			margin-left: 40px;
+		}
+		#tgetHeader{
+		   margin-top:30px;	
+		   color: #FBFCFE;	
+	       padding-bottom:200px; 
+	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+				  -webkit-background-size: cover;
+				  -moz-background-size: cover;
+				  -o-background-size: cover;
+				  background-size: cover;	
        } 
+		#footer{
+			background-color: #1B1B1F;
+		}
+       .list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
+		}
     
     </style>
     
@@ -115,80 +142,127 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<div class="container">
-	<br/>
-		<form class="form-horizontal">
-		<input type="hidden" name="event.eventId" value="${event.eventId}" >
-		<input type="hidden" name="event.eventName" value="${event.eventName}" >
-		<input type="hidden" name="seller.userId" value="${user.userId}" >
-		
-		<br/>
-		<div id="eventHeader" class="text-center">
-		  <h1 class="display-4">${event.koName}</h1>
-		  <p class="lead">${event.eventLocation}</p>
-		  <p>${event.eventDate}</p>
-		</div>
-		<hr class="my-4">
-		<div class="text-center">
+			
+		<div id="tgetHeader" class="text-center">
 		  
+		</div>
 		<br/>
-		  <div class="form-group">
-		 
-		    <div>
-		    <strong>수량 : </strong>      <input type="text" id="amount" name="amount" style="width: 90px !important" >
-		    </div>
-		    <small class="text-danger">*연석 일 경우만 한번에 등록</small>
-		  </div>
-		<br/>  
-		  <div class="form-group">
-		    <strong>형태 : </strong>
-		      <input type="radio" name="type" value="0" checked="checked" /> 종이티켓
-			  <input type="radio" name="type" value="1" /> 전자티켓
-		  </div>
-		<br/>  
-		  <div class="form-group" >
-		    <strong>좌석 : </strong>
-		    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) B2">  구역 (존/블럭)		  
-		    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) 6"> 열
-		    
-		  </div>
-		<br/>
-		<strong>특이사항(선택)</strong>  
-		  <div class="form-group">
-		     
-		      <textarea name="options" cols="40" rows="8" ></textarea>
-		  </div>
-		<br/>
-			<div class="form-group">
-		    <a class="btn btn-outline-info" role="button">쿠폰적용 하기</a>
-		  </div>
-		<br/>			  
-		  <div class="form-group">
-		    
-		      <button type="button" class="btn btn-primary">계 속</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
-		    
-		  </div>
-		</div>  
-		</form>
-			<button type="button" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target="#addSeller"></button>	
- 	</div>
-	
-	<!-- 판매자 등록 모달 -->
- 				<div class="modal fade" id="addSeller" role="dialog">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">판매자 등록</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body"> 	      
-					      </div>
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="sticky-top">
+		      	<div class='text-center'>
+		      		<br/><br/><br/>
+					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 티켓 판매 </strong></p>
+					<br/>
+												<ul class="list-group list-group-flush">										  
+												  <li class="list-group-item"><a href="#">판매자 가이드</a></li>
+												  <li class="list-group-item"><a href="#">내 판매티켓</a></li>
+												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
+												  <li></li>											  
+												</ul> 											  
+				</div> 
+				</div>
+			</div>
+			
+			<div id="ticketInput" class="col-lg-8">
+			<div class="text-center">
+			<form class="form-horizontal">
+			<input type="hidden" name="event.eventId" value="${event.eventId}" >
+			<input type="hidden" name="event.eventName" value="${event.eventName}" >
+			<input type="hidden" name="seller.userId" value="${user.userId}" >	  
+			<br/>
+			<h1 class="display-4">${event.koName}</h1>
+			  <p class="lead">${event.eventLocation}</p>
+			  <p>${event.eventDate}</p>
+			<hr class="my-4">
+			  <div class="form-group">
+			 
+			    <div>
+			    <strong>수량 : </strong>      <input type="text" id="amount" name="amount" style="width: 90px !important" >
+			    </div>
+			    <small class="text-danger">*연석 일 경우만 한번에 등록</small>
+			  </div>
+			<br/>  
+			  <div class="form-group">
+			    <strong>형태 : </strong>
+			      <input type="radio" name="type" value="0" checked="checked" /> 종이티켓
+				  <input type="radio" name="type" value="1" /> 전자티켓
+			  </div>
+			<br/>  
+			  <div class="form-group" >
+			    <strong>좌석 : </strong>
+			    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) B2">  구역 (존/블럭)		  
+			    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) 6"> 열
+			    
+			  </div>
+			<br/>
+			<strong>특이사항(선택)</strong>  
+			  <div class="form-group">
+			     
+			      <textarea name="options" cols="40" rows="8" ></textarea>
+			  </div>
+			<br/>
+				<div class="form-group">
+				<div class="row">
+					<div class="col-4"></div>
+					<div class="col-4">
+						<div class="addCoupon">
+					    <a class="btn btn-outline-info" role="button">쿠폰적용 하기</a>
 					    </div>
-					  </div>
 					</div>
+				    <div class="col-4"></div>					
+			    </div>
+			  </div>
+			<br/>			  
+			  <div class="form-group">
+			    
+			      <button type="button" class="btn btn-outline-light">계 속</button>
+				  <a class="btn btn-outline-light btn" href="#" role="button">취 소</a>
+			    
+			  </div>		  
+			</form>
+			</div>
+			</div>	
+			<div class="col-2">
+			</div>
+		</div>					<script>
+					$(function(){
+						$("a:contains('쿠폰적용')").on("click",function(){
+							$.ajax({
+								url : "/coupon/rest/getCouponList/${user.userId}" ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+					          	success: function(data){
+					          		alert(data.list.size());
+					          		var displayValue = "";	
+					          		if(data.list==""){
+					          			alert("쿠폰이 없습니다.");
+					          			return;
+					          		}else{
+					          			$(".addCoupon").html("");
+					          			if(data.listA.size() != 0){
+					          				displayValue += "<a href='#' id='0' class='btn btn-outline-info checkCoupon'>상단출력    <span class='badge badge-light'>"+data.listA.size()+"</span></a>&nbsp;";
+					          			}
+					          		    if(data.listB.size() != 0){
+					          				displayValue += "<a href='#' id='1' class='btn btn-outline-info checkCoupon'>강조권   <span class='badge badge-light'>"+data.listB.size()+"</span></a>";
+					          			}
+					          		       		
+					          		}
+								    $(".addCoupon").append(displayValue);
+								    $(".checkCoupon").on("click",function(){
+								    	var code = $(this).attr("id").trim();
+								    	alert(code);
+								    });
+					          	}
+							});
+						});
+					});
+					
+					</script>
 	<jsp:include page="/layout/footer.jsp" />
 </body>
 

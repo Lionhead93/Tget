@@ -12,5 +12,7 @@ public interface CouponDao {
 	public List<Coupon> selectCouponList(String userId) throws Exception;
 	
 	public void updateCoupon(Coupon coupon) throws Exception;
+
+	public Coupon selectCoupon(int couponNo) throws Exception;
 	
 }
