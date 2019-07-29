@@ -31,6 +31,11 @@
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>
+		<style type="text/css">
+			img{
+				height: 300px;
+			}
+		</style>
 	</head>
 	<body>
 		

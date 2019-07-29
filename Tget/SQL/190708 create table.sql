@@ -58,20 +58,20 @@ CREATE TABLE event(
 	view_count	NUMBER(10) 	DEFAULT 1,
 	category_two_eng	VARCHAR2(30) 	NOT NULL REFERENCES category_two(category_two_eng),
 	event_image	VARCHAR2(200),
-	event_name	VARCHAR2(50) 	NOT NULL,
+	event_name	VARCHAR2(200) 	NOT NULL,
 	event_location	VARCHAR2(200) ,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
-	ko_name VARCHAR2(50) 	NOT NULL,
+	ko_name VARCHAR2(200) 	NOT NULL,
 	ko_location VARCHAR2(200) ,
 	PRIMARY KEY(event_id)
 );
 
 CREATE TABLE recommended_event(
 	recomm_event_no		NUMBER(5) 	NOT NULL,
-	event_name		VARCHAR2(50) 	NOT NULL,
+	event_name		VARCHAR2(200) 	NOT NULL,
 	video_name		VARCHAR2(100) 	NOT NULL,
-	recomm_event_name	VARCHAR2(50) 	NOT NULL,
+	recomm_event_name	VARCHAR2(200) 	NOT NULL,
 	recomm_event_detail	VARCHAR2(500),
 	PRIMARY KEY(recomm_event_no)
 );
@@ -79,7 +79,7 @@ CREATE TABLE recommended_event(
 CREATE TABLE youtube(
 	youtube_no	NUMBER(5) 	NOT NULL,
 	youtube_id	VARCHAR2(20) 	NOT NULL,
-	event_name	VARCHAR2(50) 	NOT NULL,
+	event_name	VARCHAR2(200) 	NOT NULL,
 	PRIMARY KEY(youtube_no)
 );
 
