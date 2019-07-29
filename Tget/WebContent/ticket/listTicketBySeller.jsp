@@ -10,6 +10,7 @@
 <html lang="ko">
 	
 <head>
+	<title>T-GET</title>
 	<meta charset="EUC-KR">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -75,8 +76,7 @@
 		#tgetHeader{
 			margin-top:30px;
 		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 70px;
+	       padding-bottom: 200px;
 	       margin-bottom: 30px;
 	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
@@ -108,8 +108,6 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	
 	<div id="tgetHeader" class="text-center">
-		  <br/><br/>
-		  <br/><br/>
 	</div>
 	    
 <div class="row">	  		

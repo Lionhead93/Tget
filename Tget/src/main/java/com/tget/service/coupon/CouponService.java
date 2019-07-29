@@ -14,6 +14,8 @@ public interface CouponService {
 	
 	public void updateCoupon(Coupon coupon) throws Exception;
 	
+	public Coupon getCoupon(int couponNo) throws Exception;
+	
 //	public Map<String , Object> getCouponList(Search search) throws Exception;
 
 }

@@ -10,6 +10,7 @@
 <html lang="ko">
 	
 <head>
+	<title>T-get</title>
 	<meta charset="EUC-KR">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,7 +54,7 @@
 		#tgetHeader{
 		   margin-top:30px;	
 		   color: #FBFCFE;	
-	       padding-bottom:110px; 
+	       padding-bottom:200px; 
 	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
 				  -moz-background-size: cover;
@@ -99,9 +100,7 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	
 	<div id="tgetHeader" class="text-center">
-		  <br/><br/>
-		  <h3><strong></strong></h3>
-		  <br/><br/>
+	
 	</div>
 	
 		<div class="row">
@@ -385,7 +384,7 @@ function getSellerInfo(){
           		$.each(data.list, function( index, ticket){
           			var display = "";	
 	          		display += '<div class="col-lg-3"><br/>';
-	          		display += '<div class="border">';
+	          		display += '<div class="border"><br/>';
 	          		display += '<img class="img-circle" src="/resources/images/uploadFiles/'+ticket.ticketImage+'" width="200px" >';
 	          		display +=	'<h2>'+ticket.event.eventName+'</h2><hr/>';       
 	          		display +=  '<read>좌석 : '+ticket.seat+'</read><br/>' ;

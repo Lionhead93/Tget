@@ -30,8 +30,8 @@ blackListCode
 2=영구정지
 
 couponCode
-0=강조권
-1=상단출력
+0=상단출력
+1=강조권
 
 couponStatement
 0=사용가능

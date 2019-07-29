@@ -53,7 +53,9 @@
 			alert("이미지등록 바람");
 			return;
 		}
+		alert("등록성공!");
 		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
+		
 	}		
 	
 	$(function(){
@@ -63,7 +65,7 @@
 	    });
 		
 	    $("a[href='#']").on("click",function(){	    	
-	    	self.location = "/";	    	
+	    	self.close();	
 	    });
 	    
 	    $("#file").change(function(){

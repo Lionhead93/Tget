@@ -34,7 +34,7 @@ public class CouponRestController {
 	@RequestMapping( value="rest/getCouponList/{userId}", method=RequestMethod.GET )
 	public Map<String,Object> getCouponList( @PathVariable("userId") String userId ) throws Exception {
 		
-		System.out.println("/user/rest/getCoupon : GET");
+		System.out.println("/coupon/rest/getCouponList : GET");
 		
 		return  couponService.getCouponList(userId);
 	}
