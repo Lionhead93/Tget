@@ -458,37 +458,26 @@ public class EventRestController {
 		return map;
 	}
 	
-//	@RequestMapping(value="rest/addEventImage")
-//	public Map<String,Object> addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event) throws Exception {
-//		System.out.println("===============addEventImage===============");
-//		System.out.println(event);
-//		System.out.println(multipartFile);
-//		
-//		if(!multipartFile.isEmpty()) {
-//			event.setEventImage(multipartFile.getOriginalFilename( ));
-//					
-//			File file = new File(uploadPath,multipartFile.getOriginalFilename());
-//			FileCopyUtils.copy(multipartFile.getBytes(), file);
-//			
-//			//multipartFile.transferTo(file);		
-//		}
-////		eventService.addEventImage(event.getEventImage(), event.getEventName());
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-////		map.put("eventListByName", eventService.getEventByName(event.getEventName()));
-//		map.put("eventImage", event.getEventImage());
-//		return map;
-//	}
-	
-	@RequestMapping(value="rest/updateEventImage")
-	public Map<String,Object> updateEventImage(@RequestBody Event event) throws Exception {
-		System.out.println("===============rest/updateEventImage===============");
+	@RequestMapping(value="rest/addEventImage")
+	public Map<String,Object> addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event) throws Exception {
+		System.out.println("===============rest/addEventImage===============");
+		System.out.println(event);
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
 		
-		eventService.updateEventImage(event.getEventImage(), event.getEventName());
+		if(!multipartFile.isEmpty()) {
+			event.setEventImage(multipartFile.getOriginalFilename( ));
+					
+			file = new File(uploadPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		eventService.addEventImage(event.getEventImage(), event.getEventName());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("eventListByName", eventService.getEventByName(event.getEventName()));
-		
+//		map.put("eventListByName", eventService.getEventByName(event.getEventName()));
+		map.put("eventImage", event.getEventImage());
+		map.put("msg", "OK");
 		return map;
 	}
 	
@@ -554,6 +543,7 @@ public class EventRestController {
 		
 		User user = (User)session.getAttribute("user");
 		System.out.println((requestUrl = (String)request.getParameter("requestUrl"))+"\n");
+		System.out.println(user);
 		Event event = eventService.getEvent((String)request.getParameter("eventId"));
 		
 		HttpClient httpClient = new DefaultHttpClient();

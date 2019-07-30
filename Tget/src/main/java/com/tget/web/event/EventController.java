@@ -336,36 +336,36 @@ public class EventController {
 		return "forward:/event/getYoutubePlayer.jsp";
 	}
 	
-	@RequestMapping(value="addEventImage", method=RequestMethod.GET)
-	public String addEventImage(@RequestParam String eventName,@RequestParam String eventImage,Model model) throws Exception {
-		System.out.println("===============addEventImage===============");
-		
-		model.addAttribute("eventName",eventName);
-		model.addAttribute("eventImage",eventImage);
-		
-		return "forward:/event/addEventImageGET.jsp";
-	}
+//	@RequestMapping(value="addEventImage", method=RequestMethod.GET)
+//	public String addEventImage(@RequestParam String eventName,@RequestParam String eventImage,Model model) throws Exception {
+//		System.out.println("===============addEventImage===============");
+//		
+//		model.addAttribute("eventName",eventName);
+//		model.addAttribute("eventImage",eventImage);
+//		
+//		return "forward:/event/addEventImageGET.jsp";
+//	}
 	
-	@RequestMapping(value="addEventImage", method=RequestMethod.POST)
-	public String addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event,Model model) throws Exception {
-		System.out.println("===============addEventImage POST===============");
-		System.out.println(event);
-		System.out.println(multipartFile.getOriginalFilename( ));
-		File file = null;
-				
-		if(!multipartFile.isEmpty()) {
-			event.setEventImage(multipartFile.getOriginalFilename( ));
-					
-			file = new File(uploadPath,multipartFile.getOriginalFilename());
-			FileCopyUtils.copy(multipartFile.getBytes(), file);
-			
-		}
-		eventService.addEventImage(event.getEventImage(), event.getEventName());
-		
-		model.addAttribute("eventImage",event.getEventImage());
-//		model.addAttribute("file",file);
-		return "forward:/event/addEventImagePOST.jsp";
-	}
+//	@RequestMapping(value="addEventImage", method=RequestMethod.POST)
+//	public String addEventImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("event") Event event,Model model) throws Exception {
+//		System.out.println("===============addEventImage POST===============");
+//		System.out.println(event);
+//		System.out.println(multipartFile.getOriginalFilename( ));
+//		File file = null;
+//				
+//		if(!multipartFile.isEmpty()) {
+//			event.setEventImage(multipartFile.getOriginalFilename( ));
+//					
+//			file = new File(uploadPath,multipartFile.getOriginalFilename());
+//			FileCopyUtils.copy(multipartFile.getBytes(), file);
+//			
+//		}
+//		eventService.addEventImage(event.getEventImage(), event.getEventName());
+//		
+//		model.addAttribute("eventImage",event.getEventImage());
+////		model.addAttribute("file",file);
+//		return "forward:/event/addEventImagePOST.jsp";
+//	}
 	
 	@RequestMapping(value="addRecommendedEvent", method=RequestMethod.GET)
 	public String addRecommendedEvent(Model model) throws Exception {

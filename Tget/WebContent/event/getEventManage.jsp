@@ -42,19 +42,21 @@
 		
 		$("button:contains('삭제하기')").on("click",function(){			
 // 			alert("삭제하기");
+			var temp = $(this).val();
 			$.ajax(
 					{
 						url : "/event/rest/deleteRecommendedEvent",
 						method : "GET",
 						contentType: 'application/json; charset=UTF-8',
 						data : {
-										recommEventNo : $(this).val()
+										recommEventNo : temp
 									},
 						dataType : "json",
 						success : function(JSONData, status){
 // 							alert(status);
 // 							alert("JSONData : \n"+JSONData);		
 							$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())-1);
+							$("#"+temp).html("");
 // 							alert($("#recommEventlistSize").val());					
 						},
 						error : function(request, status, error ) {   
@@ -104,24 +106,24 @@
 // 				});			
 		});		
 
-		$("a.category").on("click", function(){
-			$.ajax(
-					{
-						url : "/event/rest/updateCa",
-						method : "POST",
-						data : {
-										 : $("#").val()
-									},
-						dataType : "json",
-						success : function(JSONData, status){
-							alert(status);
-							alert("JSONData : \n"+JSONData);		
+// 		$("a.category").on("click", function(){
+// 			$.ajax(
+// 					{
+// 						url : "/event/rest/updateCa",
+// 						method : "POST",
+// 						data : {
+// 										 : $("#").val()
+// 									},
+// 						dataType : "json",
+// 						success : function(JSONData, status){
+// 							alert(status);
+// 							alert("JSONData : \n"+JSONData);		
 					
-						},
-						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}
-		});
+// 						},
+// 						error : function(request, status, error ) {   
+// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 						}
+// 		});
 	});
 	
 	</script>
@@ -241,8 +243,8 @@
   
 			<div class="row" align="center" >		      	
 				<c:forEach items="${recommEventlist}"  var="i">			
-					<div style="width: 18rem; height: 400px;" >
-						<video controls id="videoplay"  name="" value="video" style="width: 300px; height: 170px;">
+					<div style="width: 18rem; height: 400px;" id="">
+						<video controls id="videoplay"  name="${i.recommEventNo }" value="video" style="width: 300px; height: 170px;">
 							<source src="/resources/video/${i.videoName}" type="video/mp4">
 						</video>
 						<div class="card-body" style="height: 220px;" >
@@ -272,9 +274,11 @@
 					  	<h5 class="card-title">
 					 	 <c:forEach items="${categorylist }"  var="i">
 						    <c:if test="${i.categoryOneCode == 0}">
-						   		<div><ion-icon name="checkmark"></ion-icon>
-					 			<a class="category" value="${i.categoryTwoNo }">
-						   		${i.categoryTwoName }</a></div><br/>
+						   		<div class="row">
+							        <ion-icon name="checkmark"></ion-icon>
+									<a class="category" value="${i.categoryTwoNo }">
+								   	 ${i.categoryTwoName }</a>
+						   		</div>
 					    	</c:if>
 					  	</c:forEach></h5>				    
 					  </div>

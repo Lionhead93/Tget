@@ -77,6 +77,7 @@ $( function(){
 	
 	if('${user}'!=''){
 		getNoReadAlarmCount("${user.userId}"); 
+		alert("${user.userId}");
 	}			
 	//알람리스트 madal 출력
 	$("a:contains('Alarm')").on("click", function(){
@@ -122,6 +123,26 @@ $(function() {
 		});
 });
 </script>
+<style>
+	/*Modal*/
+		
+		.modal-wrap{
+			width:100%;
+			margin:auto;
+			max-width:525px;
+ 			position:relative; 
+			background-color: black;
+			background:url(/resources/images/logins.jpg) no-repeat center;
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			overflow:auto;
+		}
+		.modal-html{
+			background:rgba(40,57,101,.9);			
+		}
+		.close{
+			color: white;
+		}
+</style>
 
 		<!-- Header -->
 			<header id="header">
@@ -192,6 +213,8 @@ $(function() {
 					<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
+					    <div class="modal-wrap">
+     					 <div class="modal-html">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary"><i class="far fa-bell"></i> My Alarm </span></h3>
 					        <a href="#" class="close" data-dismiss="modal">
@@ -202,6 +225,8 @@ $(function() {
 					      </div>
 					      <div class="modal-footer">
 					        </div>
+					      </div>
+					     </div>
 					    </div>
 					  </div>
 					</div>
