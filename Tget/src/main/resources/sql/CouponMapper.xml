@@ -21,11 +21,7 @@
 	<insert 	id="insertCoupon"		parameterType="coupon" >
 	 	INSERT
 		INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement) 
-<<<<<<< HEAD
 		VALUES	 (	seq_coupon_coupon_no.nextval,  #{couponCode} , #{userId} , SYSDATE, '0' )
-=======
-		VALUES	 (	seq_coupon_coupon_no.nextval,  #{couponCode} , #{userId}  , SYSDATE, '0' )
->>>>>>> refs/remotes/origin/master
 	 </insert>
 	 
 	 <select  id="selectCoupon"  parameterType="int"	resultMap="couponSelectMap">
@@ -47,11 +43,7 @@
 	 <update	id="updateCoupon"	parameterType="coupon" >
 	   	UPDATE coupon
 	   	<set>
-<<<<<<< HEAD
 	   		coupon_use_date = SYSDATE ,
-=======
-	   		coupon_use_date = sysdate ,
->>>>>>> refs/remotes/origin/master
 	   		coupon_statement = '1'
 	   		
 	   	</set>
