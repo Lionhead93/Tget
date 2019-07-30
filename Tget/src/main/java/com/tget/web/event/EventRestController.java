@@ -612,9 +612,10 @@ public class EventRestController {
 		return null;
 	}
 	
-	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
-	public String addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+	@RequestMapping(value="rest/addRecommendedEvent")
+	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
 		System.out.println("===============rest/addRecommendedEvent POST===============");
+		Map<String,Object> map = new HashMap<String,Object>();
 		
 		System.out.println(multipartFile.getOriginalFilename( ));
 		File file = null;
@@ -639,27 +640,31 @@ public class EventRestController {
 			eventService.addRecommendedEvent(recommEvent);
 		}
 		
+		System.out.println("recommEventNo - "+recommEvent.getRecommEventNo());
+		
 //		eventService.addRecommendedEvent(recommEvent);
 		System.out.println(recommEvent);
-		model.addAttribute("recommEvent",recommEvent);
-		model.addAttribute("videoName",recommEvent.getVideoName());
+		map.put("recommEvent", recommEvent);
+		map.put("videoName", recommEvent.getVideoName());
+//		model.addAttribute("recommEvent",recommEvent);
+//		model.addAttribute("videoName",recommEvent.getVideoName());
 //		model.addAttribute("file",file);
-		return "forward:/event/addRecommVideoPOST.jsp";
+		return map;
 	}
 	
-	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.GET)
-	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
-		System.out.println("===============rest/updateRecommendedEvent GET===============");
-		System.out.println(recommEventNo);
-//		eventService.getRecommendedEvent(recommEventNo);
-		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
-		return "forward:/event/addRecommVideoGET.jsp";
-	}	
+//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.GET)
+//	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
+//		System.out.println("===============rest/updateRecommendedEvent GET===============");
+//		System.out.println(recommEventNo);
+////		eventService.getRecommendedEvent(recommEventNo);
+//		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
+//		return "forward:/event/addRecommVideoGET.jsp";
+//	}	
 	
-	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
-	public String updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+	@RequestMapping(value="rest/updateRecommendedEvent")
+	public Map<String,Object> updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
 		System.out.println("===============rest/updateRecommendedEvent===============");
-		
+		Map<String,Object> map = new HashMap<String,Object>();
 		System.out.println(multipartFile.getOriginalFilename( ));
 		File file = null;
 				
@@ -673,11 +678,11 @@ public class EventRestController {
 		eventService.updateRecommendedEvent(recommEvent);
 		
 		System.out.println(recommEvent);
-		model.addAttribute("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-		model.addAttribute("recommEventlist",eventService.getRecommendedEventList());
-		model.addAttribute("videoName",recommEvent.getVideoName());
-//		model.addAttribute("file",file);
-		return "forward:/event/addRecommVideoPOST.jsp";
+		map.put("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		map.put("recommEventlist", eventService.getRecommendedEventList());
+		map.put("videoName", recommEvent.getVideoName());
+
+		return map;
 	}
 	
 	

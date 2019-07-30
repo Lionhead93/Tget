@@ -73,39 +73,6 @@
 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		});
 		
-		$("#addRecomm").on("click",function(){	
-			if (parseInt($("#recommEventlistSize").val()) < 3) {
-				popWin = window.open("/event/addRecommendedEvent","popWin",
-						"left=500, top=100, width=600, height=600, "
-						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-			} else {
-				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
-			}
-			
-// 			$.ajax(
-// 					{
-// 						url : "/event/rest/addRecommendedEvent",
-// 						method : "POST",
-// 						data : {
-// 										recommEventNo : $("#recommEventNo").val(),
-// 										eventName : $("#eventName").val(),
-// 										videoName : $("#videoName").val(),
-// 										recommEventName : $("#recommEventName").val(),
-// 										recommEventDetail : $("#recommEventDetail").val()
-// 									},
-// 						dataType : "json",
-// 						success : function(JSONData, status){
-// 							alert(status);
-// 							alert("JSONData : \n"+JSONData);		
-					
-// 						},
-// 						error : function(request, status, error ) {   
-// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 						}
-			
-// 				});			
-		});		
-
 // 		$("a.category").on("click", function(){
 // 			$.ajax(
 // 					{
@@ -127,82 +94,62 @@
 
 
 		$("#submit").on("click",function(){	
-			var formData = new FormData($("#editRecommEvent")[0]);
+// 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
+// 			alert("submit");
+			var formData = new FormData($("#editRecommEvent")[0]);			
 			
-			
-			if ("${recommEvent.eventName}"=="") {
-			$.ajax(
-					{
-						url : "/event/rest/addRecommendedEvent",
-						method : "POST",
-						data : formData,
-						processData: false,
-						contentType: false,
-						dataType : "json",
-						success : function(JSONData,status){
-// 							alert(JSONData.eventImage);
-// 							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
-							$("button.close").click();
-						},
-						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}			
-				});
-			}else{
-				$.ajax(
+				if (parseInt($("#recommEventlistSize").val()) < 3) {
+// 					alert("recommEventlistSize<3");
+					$.ajax(
 						{
-							url : "/event/rest/updateRecommendedEvent",
+							url : "/event/rest/addRecommendedEvent",
 							method : "POST",
 							data : formData,
 							processData: false,
 							contentType: false,
 							dataType : "json",
 							success : function(JSONData,status){
-//	 							alert(JSONData.eventImage);
-//	 							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
+// 							alert(JSONData.eventImage);
+//  							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
 								$("button.close").click();
 							},
 							error : function(request, status, error ) {   
 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 							}			
-					});
-			}
-			
-// 			if ("${recommEvent.eventName}"=="") {
-// 				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/addRecommendedEvent").submit();
-// 			}else{
-// 				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/updateRecommendedEvent").submit();
-// 			}
-			
-		})	;
+						});
+				}else{					
+	 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+				}
+		});
+
 	});
 	
 	</script>
 	
 	<style>
 	
-	body{
-		background-color : #062038; 
-		color: #FBFCFE;
-	}	
-	#footer{
-		background-color: #1B1B1F ;
-	}		
-	a, hr{
-		color: #FBFCFE ;	
-	}		
-	button.btn-light:hover{
-		background-color: gray;
-		color: #FBFCFE ;
-	}			
-	.tab-content{
-		min-height: 400px;
-	}	
-      div.container {
-        	margin-top: 50px;
-/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
-        	font-size: 20px;
-        }
+		body{
+			background-color : #062038; 
+			color: #FBFCFE;
+		}	
+		#footer{
+			background-color: #1B1B1F ;
+		}		
+		a, hr{
+			color: #FBFCFE ;	
+		}		
+		button.btn-light:hover{
+			background-color: gray;
+			color: #FBFCFE ;
+		}			
+		.tab-content{
+			min-height: 400px;
+		}	
+	    div.container {
+	        	margin-top: 50px;
+	/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
+	        	font-size: 20px;
+	    }
         #list-recomm, #list-category{  
 			padding : 10px 10px 10px 10px;
 		}
@@ -211,56 +158,21 @@
 		}
         .col-10{
         	border: 2px solid #FBFCFE ;            
-/* */        	background-color : #193147 ;
+	       	background-color : #193147 ;
         }
-/*         .row{ */
-/*         	margin-top: 30px;  */
-/*         } */
         .card{
         	padding : 5px 5px 5px 5px;
         	color: black;
         	font-weight: bold;
-        }        
-        
+        }                
         .card-header{
         	font-weight:bold; background-color:#1B1B1F ; color:#FBFCFE ;
-        }
-        
+        }        
         .card-bodys{
         	background-color:  #FBFCFE; color: #1B1B1F;
         	padding: 5%;
         }
-        
-        button {
-/*         	 height: 33px; width: 100px;  */
-        }
-        .button_black{
-			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
-			font-size:20px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
-			/* text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 border-radius: 3px; color: white;
-			 font-size:25px;font-family: 'Nanum Pen Script', cursive; 
-/* 			 text-decoration:none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 background-color: #7d7e7d; background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
-			 background-image: -webkit-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -moz-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -ms-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -o-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: linear-gradient(to bottom, #7d7e7d, #0e0e0e);
-			 filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d, endColorstr=#0e0e0e);
-		}
-			
-		.button_black:hover{
-			 border:1px solid #4a4b4a;
-			 background-color: #646464; background-image: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#282828));
-			 background-image: -webkit-linear-gradient(top, #646464, #282828);
-			 background-image: -moz-linear-gradient(top, #646464, #282828);
-			 background-image: -ms-linear-gradient(top, #646464, #282828);
-			 background-image: -o-linear-gradient(top, #646464, #282828);
-			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
-		}
-	
-		
+
     </style>
     
 </head>
@@ -285,22 +197,13 @@
 		      	<div class="col-1" align="left" data-toggle="modal"  class="btn btn-light"							
 								 data-target="#exampleModalCenter"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
 		      </div>
-		      
-<!-- <form class="was-validated"> -->
-<!-- <div class="row">  -->
-<!-- 	<div class="custom-control custom-checkbox mb-3"> -->
-<!--     <input type="checkbox" class="custom-control-input" id="customControlValidation1" required> -->
-<!--     <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label> -->
-<!--     <div class="invalid-feedback">Example invalid feedback text</div> -->
-<!--   </div><br/> -->
-<!-- </div> -->
-<!-- </form> -->
+
   			<input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
   
 			<div class="row" align="center" >		      	
 				<c:forEach items="${recommEventlist}"  var="i">			
-					<div style="width: 18rem; height: 400px;" id="">
-						<video controls id="videoplay"  name="${i.recommEventNo }" value="video" style="width: 300px; height: 170px;">
+					<div style="width: 18rem; height: 400px;" id="${i.recommEventNo }">
+						<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 300px; height: 170px;">
 							<source src="/resources/video/${i.videoName}" type="video/mp4">
 						</video>
 						<div class="card-body" style="height: 220px;" >
