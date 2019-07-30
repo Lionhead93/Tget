@@ -74,7 +74,7 @@ public class UserRestController {
 	
 
 
-	@RequestMapping( value="json/login", method=RequestMethod.POST )
+/*	@RequestMapping( value="json/login", method=RequestMethod.POST )
 	public User login(	@RequestBody User user,
 									HttpSession session ) throws Exception{
 	
@@ -88,7 +88,7 @@ public class UserRestController {
 		}
 		
 		return dbUser;
-	}
+	}*/
 	
 	@RequestMapping(value= "json/sendSms", method=RequestMethod.POST ) 
 	public Map<String,Object> sendSms(String receiver)throws Exception { 

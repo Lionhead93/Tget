@@ -40,7 +40,7 @@
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("input[id='signin']").on("click" , function() {
 			
-		//	alert("눌리니");
+			//alert("눌리니");
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
@@ -142,10 +142,11 @@
 				<div class="group">
 					<input id="signin" class="button" value="Sign In">
 				</div>
+				
 				<div class="text-center">
-				     <a id="kakao"><img src="/resources/images/kakaos.jpg" /></a>
-     <a id="naver"><img src="/resources/images/navers.jpg" /></a>
-		<a id="google"><img src="/resources/images/googles.jpg"/></a>
+				     <a id="kakao"><img src="/resources/images/kakaos.jpg" style="max-width: 100%; height: auto;"/></a>
+     <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
+		<a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a>
 		</div>
 			<div class="foot-lnk">Not a member?   
 					<a href="#signUp">Sign up</a>
