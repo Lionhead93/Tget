@@ -101,17 +101,12 @@
 			
 		});
 
-		$("#addYoutube").on("click",function(){
-			if ("${empty user}"=="true") {
-				alert("로그인을 해주세요.");
-				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
-			} else {
-				popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
-						"popWin",
-						"left=500, top=100, width=600, height=600, "
-						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-			}			
-		});
+// 		$("#addYoutube").on("click",function(){
+// 			popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
+// 						"popWin",
+// 						"left=500, top=100, width=600, height=600, "
+// 						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");		
+// 		});
 		
 		$("button.addTran").on("click",function(){
 			if ("${empty user}"=="true") {
@@ -200,7 +195,7 @@
 							method : "GET" ,
 							data : {
 								
-								requestUrl : newURL+"?eventId="+$("#eventId").val(),
+								requestUrl : newURL+"?eventIds="+$("#eventId").val(),
 								eventId : $("#eventId").val()
 							},
 							dataType : "json" ,							
@@ -449,7 +444,8 @@
 <!-- 						<span id="deleteYoutube"> -->
 <!-- 						<ion-icon name="remove-circle-outline"  size="large"></ion-icon> -->
 <!-- 						</span> -->
-						<span id="addYoutube" name="addYoutube">
+						<span id="addYoutube" name="addYoutube" data-toggle="modal"  						
+								 data-target="#exampleModalCenter">
 						<ion-icon name="add-circle-outline"  size="large"></ion-icon>
 						</span>
 						<br/><br/>
@@ -573,5 +569,36 @@
 		</div><!-- row -->
 		<input type="hidden"  id="ticketNo" name="ticketNo"/>		
 	</form>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">유튜브 동영상 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <jsp:include page="/event/addYoutubeVideoGET.jsp" />
+<%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
+      </div>
+      <div class="modal-footer">
+       
+<!--         <button type="button" class="btn btn-light"  id="delete" >삭제</button> -->
+<!--         <button type="button" class="btn btn-light"  id="submit" >저장</button> -->
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
 	<jsp:include page="/layout/footer.jsp" />
 </html>
