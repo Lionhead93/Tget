@@ -36,21 +36,20 @@
 	
 	$(function(){
 // 		alert("eventName : "+$("#eventName").val());
-// 		$.ajax(
-// 				{
-// 					url : "/event/rest/addYoutubeVideo/ "+$("#requestPageToken").val(),
-// 					method : "GET",
-// 					data : {
-// 						searchKeyword : $("#searchKeyword").val()
-// 					},
-// 					dataType : "json",
-// 					success : function(JSONData, status){
-// 						alert(status);
-// 						alert("JSONData : \n"+JSONData);		
-				
-// 					}
+		$.ajax(
+			{
+				url : "/event/rest/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
+				method : "GET",
+				data : {
+					searchKeyword : $("#searchKeyword").val()
+				},
+				dataType : "json",
+				success : function(JSONData, status){
+					alert(status);
+					alert("JSONData : \n"+JSONData);		
+				}		
+		 });		
 		
-// 		});		
 		$("#prevPageToken").on("click",function(){
 			if ($(this).val() == "") {
 				alert("첫번째 페이지 입니다.");
@@ -128,10 +127,8 @@
 		<div class="row">
 		<ul class="list-unstyled">
 			<c:forEach items="${youtubeList}"  var="i">
-			
 			<tr>
 				<td align="left" >
-				
 				<li class="media" >
 					<img src="${i.thumbnails}"/>
 			   		<div class="media-body">
@@ -140,12 +137,14 @@
 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/>
 						 : ${i.description} <br/>
 						<div align="right">			
-							<button class="button_black" name="getYoutubePlayer" value="${i.videoId}">동영상보기</button><br/>
+							<button name="getYoutubePlayer" value="${i.videoId}"
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/-iDOez7D1tY" 
+							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
+							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
-			 	 
-				</td>
+			   </td>
 			</tr>
 <!-- 			  ===========================================================<br/> -->
 			</c:forEach>		

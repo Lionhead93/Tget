@@ -171,6 +171,9 @@ public class EventServiceImpl implements EventService{
 		return eventDao.getEventList(search,requestPageToken,apiKey);
 	}
 	
+	public Map<String,Object> getEvent(Search search, String requestPageToken, String apiKey) throws Exception{
+		return eventDao.getEvent(search,requestPageToken,apiKey);
+	}
 	
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception{
 		return eventDao.getYoutubeList(search,requestPageToken,apiKey);

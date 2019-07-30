@@ -41,6 +41,7 @@ public interface EventService {
 	public int getInterestedByUserCount(Search search) throws Exception;
 	public void addInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
+	public Map<String,Object> getEvent(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public void deleteInterestedEventAll(String userId) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;

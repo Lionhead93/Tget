@@ -270,6 +270,49 @@
       player.stopVideo();
     }
     
+    
+    
+    
+    
+    (function($) {
+        
+        $.fn.bmdIframe = function( options ) {
+            var self = this;
+            var settings = $.extend({
+                classBtn: '.bmd-modalButton',
+                defaultW: 640,
+                defaultH: 360
+            }, options );
+          
+            $(settings.classBtn).on('click', function(e) {
+              var allowFullscreen = $(this).attr('data-bmdVideoFullscreen') || false;
+              
+              var dataVideo = {
+                'src': $(this).attr('data-bmdSrc'),
+                'height': $(this).attr('data-bmdHeight') || settings.defaultH,
+                'width': $(this).attr('data-bmdWidth') || settings.defaultW
+              };
+              
+              if ( allowFullscreen ) dataVideo.allowfullscreen = "";
+              
+              $(self).find("iframe").attr(dataVideo);
+            });
+          
+            this.on('hidden.bs.modal', function(){
+              $(this).find('iframe').html("").attr("src", "");
+            });
+          
+            return this;
+        };
+      
+    })(jQuery);
+
+
+
+
+    jQuery(document).ready(function(){
+      jQuery("#myModal").bmdIframe();
+    });
 	</script>
 	
 	<style>
@@ -372,6 +415,62 @@
 		    color: #146C80;
 		  }
   		}
+  		.modal-wrap{
+			width:100%;
+			margin:auto;
+			max-width:525px;
+ 			position:relative; 
+			background-color: black;
+			background:url(/resources/images/logins.jpg) no-repeat center;
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			overflow:auto;
+		}
+		.modal-html{
+			background:rgba(40,57,101,.9);			
+		}
+  		
+  		
+  		
+  		
+.bmd-modalButton {
+  display: block;
+  margin: 15px auto;
+  padding: 5px 15px;
+}
+
+.close-button {
+  overflow: hidden;
+}
+
+.bmd-modalContent {
+  box-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+  
+.bmd-modalContent .close {
+  font-size: 30px;
+  line-height: 30px;
+  padding: 7px 4px 7px 13px;
+  text-shadow: none;
+  opacity: .7;
+  color:#fff;
+}
+
+.bmd-modalContent .close span {
+  display: block;
+}
+
+.bmd-modalContent .close:hover,
+.bmd-modalContent .close:focus {
+  opacity: 1;
+  outline: none;
+}
+
+.bmd-modalContent iframe {
+  display: block;
+  margin: 0 auto;
+}
     </style>
 </head>
 
@@ -570,6 +669,31 @@
 		<input type="hidden"  id="ticketNo" name="ticketNo"/>		
 	</form>
 	
+	
+<!-- 	<button type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/-iDOez7D1tY" data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal"  data-bmdVideoFullscreen="true">Youtube</button> -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content bmd-modalContent">
+
+				<div class="modal-body">
+          
+          <div class="close-button">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="embed-responsive embed-responsive-16by9">
+					            <iframe class="embed-responsive-item" frameborder="0"></iframe>
+          </div>
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	
+	
+	
+	
 	<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -584,7 +708,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         </button>
       </div>
       <div class="modal-body">
-        <jsp:include page="/event/addYoutubeVideoGET.jsp" />
+        <jsp:include page="/event/addYoutubeVideo.jsp" />
 <%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
       </div>
       <div class="modal-footer">

@@ -49,6 +49,7 @@ import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.event.domain.StubhubEvent;
+import com.tget.service.event.domain.YoutubeVideo;
 
 
 //==> 회원관리 Controller
@@ -607,6 +608,92 @@ public class EventRestController {
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		System.out.println(jsonobj);
 
+		
+		return null;
+	}
+	
+	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
+	public String addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+		System.out.println("===============rest/addRecommendedEvent POST===============");
+		
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		List<RecommEvent> list = eventService.getRecommendedEventList();
+		if (list != null && list.size() !=0) {
+			for (int i=0; i<list.size(); i++) {
+				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					break;
+				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					eventService.addRecommendedEvent(recommEvent);
+				}
+			}	
+		}else {
+			eventService.addRecommendedEvent(recommEvent);
+		}
+		
+//		eventService.addRecommendedEvent(recommEvent);
+		System.out.println(recommEvent);
+		model.addAttribute("recommEvent",recommEvent);
+		model.addAttribute("videoName",recommEvent.getVideoName());
+//		model.addAttribute("file",file);
+		return "forward:/event/addRecommVideoPOST.jsp";
+	}
+	
+	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.GET)
+	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
+		System.out.println("===============rest/updateRecommendedEvent GET===============");
+		System.out.println(recommEventNo);
+//		eventService.getRecommendedEvent(recommEventNo);
+		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
+		return "forward:/event/addRecommVideoGET.jsp";
+	}	
+	
+	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
+	public String updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+		System.out.println("===============rest/updateRecommendedEvent===============");
+		
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		eventService.updateRecommendedEvent(recommEvent);
+		
+		System.out.println(recommEvent);
+		model.addAttribute("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+		model.addAttribute("recommEventlist",eventService.getRecommendedEventList());
+		model.addAttribute("videoName",recommEvent.getVideoName());
+//		model.addAttribute("file",file);
+		return "forward:/event/addRecommVideoPOST.jsp";
+	}
+	
+	
+	@RequestMapping(value="rest/addYoutubeVideo")
+	public Map<String,Object> addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
+		System.out.println("===============rest/addYoutubeVideo===============");
+		
+		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
+
+		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
+		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
+		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
+		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+		model.addAttribute("eventName",  eventName);
+		model.addAttribute("requestPageToken",  requestPageToken);
+		
 		
 		return null;
 	}

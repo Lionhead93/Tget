@@ -188,7 +188,9 @@
       div.container{
 	 		font-size: 20px;    
         }
-        
+        .col-lg-6{
+        	margin-top: 10px;
+        }
         div.col-md-4{
         	border: 1px; color: black;
       	}
@@ -344,7 +346,7 @@
 								 		<div align="left" >
 								 			<%-- 											<small>${i.eventDate }, <span id="time">${i.eventTimeStr}</span></small><br/> --%>
 											<ion-icon name="checkmark"></ion-icon><small>개최장소</small><br/>
-											<small>${!empty event.koLocation? event.koLocation: i.eventLocation }</small><br/><br/>
+											<small>${!empty event.koLocation? event.koLocation: i.koLocation }</small><br/><br/>
 											<ion-icon name="checkmark"></ion-icon>
 											<small>현재 등록된 티켓</small><br/> ${i.totalTicketCount } 건<br/><br/>
 											<ion-icon name="checkmark"></ion-icon>

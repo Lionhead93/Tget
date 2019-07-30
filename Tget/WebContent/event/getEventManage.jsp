@@ -124,6 +124,57 @@
 // 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 // 						}
 // 		});
+
+
+		$("#submit").on("click",function(){	
+			var formData = new FormData($("#editRecommEvent")[0]);
+			
+			
+			if ("${recommEvent.eventName}"=="") {
+			$.ajax(
+					{
+						url : "/event/rest/addRecommendedEvent",
+						method : "POST",
+						data : formData,
+						processData: false,
+						contentType: false,
+						dataType : "json",
+						success : function(JSONData,status){
+// 							alert(JSONData.eventImage);
+// 							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
+							$("button.close").click();
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});
+			}else{
+				$.ajax(
+						{
+							url : "/event/rest/updateRecommendedEvent",
+							method : "POST",
+							data : formData,
+							processData: false,
+							contentType: false,
+							dataType : "json",
+							success : function(JSONData,status){
+//	 							alert(JSONData.eventImage);
+//	 							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
+								$("button.close").click();
+							},
+							error : function(request, status, error ) {   
+							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}			
+					});
+			}
+			
+// 			if ("${recommEvent.eventName}"=="") {
+// 				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/addRecommendedEvent").submit();
+// 			}else{
+// 				$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/event/updateRecommendedEvent").submit();
+// 			}
+			
+		})	;
 	});
 	
 	</script>
@@ -139,7 +190,11 @@
 	}		
 	a, hr{
 		color: #FBFCFE ;	
-	}				
+	}		
+	button.btn-light:hover{
+		background-color: gray;
+		color: #FBFCFE ;
+	}			
 	.tab-content{
 		min-height: 400px;
 	}	
@@ -227,7 +282,8 @@
 		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-recomm-list">
 		      <div  class="row" >
 		      	<div class="col-11"></div>
-		      	<div class="col-1" align="left"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
+		      	<div class="col-1" align="left" data-toggle="modal"  class="btn btn-light"							
+								 data-target="#exampleModalCenter"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
 		      </div>
 		      
 <!-- <form class="was-validated"> -->
@@ -384,6 +440,36 @@
 	
   </div>
 </form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">추천이벤트 편집</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <jsp:include page="/event/addRecommVideoGET.jsp" />
+<%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-light"  id="submit" >저장</button>
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
+
 <jsp:include page="/layout/footer.jsp" />
 </body>
 </html>
