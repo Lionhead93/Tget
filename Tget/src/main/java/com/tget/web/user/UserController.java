@@ -93,7 +93,7 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
-
+		System.out.println(user.getUserId()+"아이디 뭐로 들옴?");
 		if(session.getAttribute("kakaoId")!=null) {
 			System.out.println("카카오 계정 회원가입 들옴");
 		user.setKakaoId((String) session.getAttribute("kakaoId"));

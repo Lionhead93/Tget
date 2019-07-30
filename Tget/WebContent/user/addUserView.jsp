@@ -89,16 +89,21 @@
 		  $(function() {
 			 
 		 		var rand = "";
+			
 				
 				$("button:contains('전송')").on("click" , function() {
 					alert("인증번호 전송");
 					
+			
+					
+					
 					$("#inj").show();
+				
 					
 					$.ajax({ 
 						   url: "/user/json/sendSms",
 						   data: { 
-							   receiver: $("#phone").val() 
+							   receiver: $("#phone").val()
 							   }, 
 							   type: "post",
 							   dataType:"json", 
@@ -118,18 +123,20 @@
 					$("button:contains('인증')").on("click" ,function(){ 
 				
 						var join = document.getElementById('join');
+		
+						var phone = document.getElementById("phone");
 						
 						var code = $("#sms").val();
+			
 						
-		
 					   if (rand == code) { 
 				   
 					   alert("인증 성공");
 					   
 					   $("#inj").hide();
-					   $("#check3").show();
+						phone.style.border = "3px solid gold";
+						phone.disabled = true;
 					   
-					   join.disabled = false;
 			
 				   } else
 				  		 { 
@@ -187,8 +194,8 @@
 						var pw=$("input[name='password']").val();
 						var pw_confirm=$("input[name='password2']").val();
 						var name=$("input[name='userName']").val();
-						
-						
+						var address1=$("input[name='address']").val();
+						var address2=$("input[name='address2']").val();
 						if(id == null || id.length <1){
 							alert("아이디는 반드시 입력하셔야 합니다.");
 							return;
@@ -211,12 +218,14 @@
 							$("input:text[name='password2']").focus();
 							return;
 						}
-
-						if($("#check4").attr("style") == "display:none;"){
-							alert("이메일 인증해 십새꺄");
-							return;
-						}
 						
+						var userId = id+id2;
+						
+			/* 			var address = address1+address2;
+						
+						$("input[name='userId']").val(userId); */
+						
+						$("input[name='address']").val(address);
 						
 						$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 					}
@@ -316,9 +325,8 @@
 												var check = "";
 										
 												$("button:contains('인 증')").on("click" , function() {
-										
-												var Id = $("#userId").val();
-												
+													var userId = document.getElementById("userId");
+													var Id = $("#userId").val();
 													
 													if(Id == null || Id.length <1){
 														alert("아이디는 반드시 입력하셔야 합니다.");
@@ -353,6 +361,11 @@
 															console.log(JSONData);
 															 $('#loading').html("");
 															/* alert(JSONData.check); */
+															
+															if(JSONData.msg== "bad"){
+																
+																alert("이미 존재하는 아이디입니다.");
+															}else
 															check = JSONData.check;
 															} 
 														   
@@ -363,14 +376,21 @@
 												
 											$("button:contains('확인')").on("click" , function() {
 												
+												var id=$("input[name='userId']").val();
+												var id2=$("select[id='userId2']").val();
 												var userCheck = $("#emailcode").val();		
-												
+												var userId = document.getElementById("userId");
 												if(check.trim()==userCheck.trim()){
 													alert("인증성공");
+													userId.value = id+id2;
+													userId.style.border = "3px solid gold";
+												
 													 $("#divemail").hide();
-													 $("#check4").show();
+													 $("#userId2").hide();
+													 $("#injb").hide();
+													 
 												}else{
-													alert("인증실패");
+													alert("인증실패");  
 												}
 												
 												
@@ -378,59 +398,7 @@
 												
 												
 									});
-												
-										/* 		$("button:contains('확인')").on("click" , function() {		
-												
-													if(check2==emailcode){
-													
-														alert("인증 완료");
-													}else{
-														alert(check2+""+emailcode);
-													alert("인증실패");
-													}
-													
-													
-													
-													
-													
-												});	 */
-													
-													
-													
-									
-									
-								/* 			
-												$("button:contains('확인')").on("click" , function() {
-													alert("눌렸니");
-													alert(check);
-													alert(emailcode);
-													
-													if(check!=""){
-														alert(check+"받은거");
-														alert(emailcode+"쓴거");
-														if(check==emailcode){
-																alert("인증 성공");
-															   $("#divemail").hide();
-															   $("#emailcode").css("","");
-														}else{
-															 	alert("인증 실패");													
-														}
-														
-													}else{
-														alert("먼저 인증번호를 받아주세요");
-													}
-												
-													
-													
-										});						
-											});
-											
-											
-								
-											 */
-											
-											
-											
+							
 	</script>		
     
 </head>
@@ -442,139 +410,137 @@
 		  <br/><br/>
 		  <br/><br/>
 	</div>
-		 <div class="text-center">
-		  <form class="form-horizontal">
-		  
-		 <!--  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아이디</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
-		    </div>
-		  </div> -->
-		   <div class="form-group">
-		    <div id="check4" class="text-success" style="display:none;"><i class="fas fa-check"></i></div>
-		    
-		    <div>
-			아이디  : 
-	    <input type="text" name="userId" id="userId" maxlength="15">@
-		 <select name="userId2" id="userId2" >
-		      <option  id = "ig" value="@naver.com">naver.com</option>
-		      <option  id = "ig" value="@daum.net">daum.net</option>
-		      <option  id = "ig" value="@nate.com">nate.com</option>
-		      <option id = "ig"  value="@gmail.com">gmail.com</option>
-		      <option id = "ih" value="">직접입력</option>
-		     
-		  </select>
-		    <button type="button" class="btn btn-primary">인 증</button>
-		    <div class="text-center" id="loading"></div>
-		    </div>
-		    </div>
-		    
-		     <div class="form-group">
-		        <div id="divemail" style="display:none;">
-		      <input type="text" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-primary">확인</button>
-		    </div>
-		  </div>
-		    
-		  
-		  
-		  	  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <img src="/resources/images/check.jpg" width="25" height="25" id="check1" style="display:none;"/> <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
-		      
-		    </div>
-		  </div>
-		  
-		  
-		  
-		  <div class="form-group">
-		  <label for="password3" class="col-sm-offset-1 col-sm-3 control-label"></label>
-		<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
-		  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
-		      </span>
-			<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
-			<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
-		      </span>
-		</div>
-
-		    <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		  <img src="/resources/images/check.jpg" width="25" height="25" id="check2" style="display:none;"/>
-		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
-		      <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
-		      </span>
-		    </div>
-		  </div>
-		  
-	
-		  
-		
-		  
-		  <div class="form-group">
-		  <img src="/resources/images/check.jpg" width="25" height="25" id="check3" style="display:none;"/>
-		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-primary">전송</button>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label"></label>
-		    <div class="col-sm-4" id="inj" style="display:none">
-		      <input type="text" class="form-control" id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
-		      <button type="button" class="btn btn-primary">인증</button>
-		    </div>
-		  </div>
-		  
-			<div id="emailSend" style="display: none;"> 전송중.... </div>		 
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
-		    <div class="col-sm-4">
-		     <input type="text" class="form-control" id="address" name="address" >
-		      <button type="button" class="btn btn-link">주소찾기</button>
-		    </div>
-		      </div>
-		      
-		        <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">위치정보문의</label>
-		    <div class="col-sm-4">
-		     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
-		     <input type="radio" id= "local" name="local" value="2" /> 비동의
-		    </div>
-		  </div>
-		  
-	
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center"><!--  disabled="disabled" -->
-		      <button id= "join" type="button" class="btn btn-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
-			 
-			  
-		    </div>
- 			 </div>
-		
-		  
-		  
-		
-		</form>
-	</div>	
- 	
+			 <div class="text-center">아이디
+							  <form class="form-horizontal">
+							  
+							 <!--  <div class="form-group">
+							    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아이디</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
+							    </div>
+							  </div> -->
+							   <div class="form-group" >
+							   
+						    <input type="text" name="userId" id="userId" maxlength="15" > 
+							 <select name="userId2" id="userId2" >
+							      <option  id = "ig" value="@naver.com">@naver.com</option>
+							      <option  id = "ig" value="@daum.net">@daum.net</option>
+							      <option  id = "ig" value="@nate.com">@nate.com</option>
+							      <option id = "ig"  value="@gmail.com">@gmail.com</option>
+							      <option id = "ih" value="">직접입력</option>
+							     
+							  </select>
+							    <button id="injb" type="button" class="btn btn-primary">인 증</button>
+							    <div id="loading"></div>
+							 
+							    </div>
+							    
+							     <div class="form-group">
+							        <div id="divemail" style="display:none;">인증번호
+							      <input type="text" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-primary">확인</button>
+							    </div>
+							  </div>
+							    
+							  
+							  비밀번호
+							  	  <div class="form-group">
+							  	  
+					
+							      <input type="password"  id="password" name="password" placeholder="비밀번호">
+							    
+							  </div>
+							  비밀번호확인
+							  <div class="form-group">
+						
+							      <input type="password" id="password2" name="password2" placeholder="비밀번호 확인">
+							      
+							  
+							  </div>
+							 
+							  
+							  
+							  <div class="form-group">
+							  <label for="password3"></label>
+							<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
+							      </span>
+								<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+								<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
+							      </span>
+							</div>
+								
+							    이름<div class="form-group">
+							    <label for="userName"></label>
+					
+							      <input type="text" id="userName" name="userName" placeholder="회원이름">
+							 
+							  </div>
+							  
+							  닉네임<div class="form-group">
+							  <img src="/resources/images/check.jpg" width="25" height="25" id="check2" style="display:none;"/>
+							    <label for="nickName"></label>
+							    
+					
+							      <input type="text" id="nickName" name="nickName" placeholder="닉네임"><br>
+							      <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
+							      </span>
+							
+							  </div>
+							  
+						
+							  
+							
+							  
+							  휴대전화<div class="form-group">
+							  <img src="/resources/images/check.jpg" width="25" height="25" id="check3" style="display:none;"/>
+							    <label for="phonee"></label>
+							    
+					
+							      <input type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-primary">전송</button>
+							  
+							  </div>
+							  
+							 <div class="form-group">
+							    <label for="ssn"></label>
+							   <div id="inj" style="display:none">  인증번호
+							      <input type="text" id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
+							      <button id="injb2" type="button" class="btn btn-primary">인증</button>
+							    </div>
+							  </div>
+							  
+							  주소<div id="emailSend" style="display: none;"> 전송중.... </div>		 
+							  <div>
+							    <label for="ssn"></label>
+					 
+							    　 　　　　<input class="col-sm-3" type="text" id="address" name="address" >
+							      <button type="button" class="btn btn-link">주소찾기</button>
+							 
+							      </div>상세주소<br>
+							      <input class="col-sm-3" type="text" id="address2" name="address2" >
+							        <div class="form-group">
+							        <br>
+							    <label for="ssn">위치정보문의</label>
+							    <div>
+							    
+							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
+							     <input type="radio" id= "local" name="local" value="2" /> 비동의
+							    </div>
+							  </div>
+							  
+						
+							  <div class="form-group">
+							   <!--  disabled="disabled" -->
+							      <button id= "join" type="button" class="btn btn-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+								  <a class="btn btn-primary btn" href="#" role="button">취 소</a>
+								
+					 			 </div>
+							
+							  
+							  
+							
+							</form>
+							
+						</div>	
 	<jsp:include page="/layout/footer.jsp"/>
 </body>
 
