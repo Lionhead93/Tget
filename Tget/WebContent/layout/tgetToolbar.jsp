@@ -198,7 +198,7 @@ $(function() {
 					          &times;
 					        </a>
 					      </div>
-					      <div class="modal-body">
+					      <div id="alarmModalBody" class="modal-body">
 					      </div>
 					      <div class="modal-footer">
 					        </div>

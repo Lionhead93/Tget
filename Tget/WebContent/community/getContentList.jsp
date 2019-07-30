@@ -101,73 +101,43 @@
        #footer{
 			background-color: #1B1B1F;
 		}
-	.dropbtn {
-	  background-color: #7FFFD4;
-	  color: white;
-	  padding: 16px;
-	  font-size: 16px;
-	  border: none;
-	}
-	
-	.dropdown {
-	  position: relative;
-	  display: inline-block;
-	}
-	
-	.dropdown-content {
-	  display: none;
-	  position: absolute;
-	  background-color: #f1f1f1;
-	  min-width: 160px;
-	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	  z-index: 1;
-	}
-	
-	.dropdown-content a {
-	  color: black;
-	  padding: 12px 16px;
-	  text-decoration: none;
-	  display: block;
-	}
-	
-	.dropdown-content a:hover {background-color: #7FFFD4;}
-	
-	.dropdown:hover .dropdown-content {display: block;}
-	
-	.dropdown:hover .dropbtn {background-color: #7FFFD4;}
-	
-/* 	게시글 등록 Modal */
+		
+		
+	/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
-	  width: 300%;
-	  height: 100%;
-	  margin: 0;
-	  padding: 0;
-	}
-	
-	.modal-content.modal-80size {
-	  height: auto;
-	  min-height: 80%;
-	  border-radius: 0;
-	}
-	
-	.modal.modal-center {
-	  text-align: center;
-	}
-	
-	@media screen and (min-width: 768px) {
-	  .modal.modal-center:before {
-	    display: inline-block;
-	    vertical-align: middle;
-	    content: " ";
-	    height: 100%;
-	  }
-	}
-	
-	.modal-dialog.modal-center {
-	  display: inline-block;
-	  text-align: left;
-	  vertical-align: middle;
-	}
+		  width: 300%;
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		.modal-content.modal-80size {
+		  color: black;
+		  height: auto;  
+		  min-height: 150%;
+		  border-radius: 0;
+		}
+		
+		.modal.modal-center {
+		  text-align: center;
+		}
+		
+		@media screen and (min-width: 768px) {
+		  .modal.modal-center:before {
+		    display: inline-block;
+		    vertical-align: middle;
+		    content: " ";
+		    height: 100%;
+		   
+		  }
+		}
+		
+		.modal-dialog.modal-center {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
+		}
+		
 
 
 
@@ -177,12 +147,19 @@
 	<script type="text/javascript">
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetUserList(currentPage) {
-			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/community/getContentList").submit();
-		}
-		
- 
+	
+		function fncAddReport(){
+			
+			//alert($("input[name='whiteNickname']").val());
+			$("form[name='addReport']").attr("method" , "POST").attr("action" , "/community/addReport").submit();
+			}
+
+			$(function() {
+				$( "button.btn.btn-info:contains('신고하기')" ).on("click" , function() {
+					fncAddReport();
+				});
+			});
+			
 		 $(function() {
 			
  			 $( "button.btn.btn-info:contains('등록')" ).on("click" , function() {
@@ -196,7 +173,7 @@
 					}
 					
 					alert("등록 되었습니다.")
- 					$("form").attr("method" , "POST").attr("action" , "/community/addContent").submit();
+ 					$("form[name='addContent']").attr("method" , "POST").attr("action" , "/community/addContent").submit();
 					
  				});
 			 
@@ -236,9 +213,24 @@
 				
 				});
 			 
-			 $( ".reportRing" ).on("click" , function() {	
-				 	//alert($(this).val())
-				 	self.location="/community/addReport?contentNo="+$(this).attr("id").trim();
+ 			 $( ".reportRing" ).on("click" , function() {	
+				 	var contentNo = $(this).attr("id").trim();
+				 	$.ajax(
+							{
+								url : "/community/rest/getContent/"+contentNo ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								success : function(data) {
+									$("input[name='contentNo']").val(data.contentNo);
+									$("input[name='blackId']").val(data.userId);
+									$("#reportContentBody").html(data.contentBody);
+									$("#reportBlackId").html(data.userId);
+								}
+							});
 				});
 				
 			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
@@ -435,11 +427,10 @@
 	      <table class="table" >	      
 	        <thead>
 	          <tr>
+	          	
 	            <th>글 제목</th>
-	<!--              <th align="left">글 내용</th>  -->
 	            <th>작성자</th>
-	            <th>작성일</th>
-				
+	            <th>작성일</th>				
 	            <th>공감/비공감</th>	
 	            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
 	            <th>신고</th>
@@ -451,6 +442,7 @@
 			
 			  <c:forEach var="content" items="${list}">
 				<tr>
+				  
 				  <td>${content.contentName}
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
@@ -465,22 +457,23 @@
 			   	  
 			   	  <!-- 공감 -->
 			   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-	<%-- 		   	  <button class="btn btn-info" id="${content.contentNo}">공감</button> --%>
 			   	  <span name="${content.contentNo}">${content.goodCount}</span>
 			   	  
 			   	  <!-- 비공감 -->
 			   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-	<%-- 		   	 <button class="btn btn-danger" id="${content.contentNo}">비공감</button> --%>
 			   	  <a id="${content.contentNo}">${content.badCount}</a> 
 			   	  </td>
-			   	 <!-- 신고 하기 -->
+			   	  
+				   	 <!-- 신고 하기 -->
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	              <td><a href="#" class="reportRing" id="${content.contentNo}"><i class="fas fa-bell"></i></a>
-	<%-- 			  <button type="button" value="${content.contentNo}" class="btn btn-warning">신고</button> --%>
+				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" data-target="#addReportModal"><i class="fas fa-bell"></i></a>	
 				  </td>
-				</c:if>				
-				</tr>
-	          </c:forEach>
+				  </c:if>
+				  	
+			</tr>
+          <tr>
+		</tr>
+          </c:forEach>
 			
 	        </tbody>
 	      
@@ -493,6 +486,7 @@
 	<!-- 날씨 안내 Modal -->
 	<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-md" role="document">
+					    <div class="modal-content modal-80size">
 					    <div class="modal-weather">
 					      <div class="modal-header"> 
 					        <h5 class="modal-title" id="modalCenterTitle"><strong>날씨 안내</strong></h5>
@@ -500,7 +494,7 @@
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body">
+					      <div class="modal-body" id="getWeatherModalBody">
 					     
 					      </div>     
 					   </div>
@@ -511,14 +505,15 @@
 					        
 					      </div>
 					    </div>
+					    </div>
 					  </div> 
 	<!-- 게시글 등록 Modal -->		  
-		<form>
+		<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	  <div class="modal-dialog modal-lg modal-center" role="document">
 	    <div class="modal-content modal-80size">
 
-	      <div class="modal-body">
+	      <div class="modal-body" id="addContentModalBody">
 	      <select id="boardCode" name="boardCode">
    			 	<option value="">게시판 선택</option>
 		   		<c:if test="${sessionScope.user.role == '2'}">
@@ -584,7 +579,57 @@
 	  </div>
 	</div>			  
 	</form>
-	<jsp:include page="/layout/footer.jsp" />
-</body>
+	<!-- 신고하기 Modal -->
+	<div class="modal fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content modal-80size">
+					  <div class="modal-report">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle"><strong>신고하기</strong></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body" id="addReportModalBody"> 	    
+		  
+			    <form name="addReport">
+<!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
+<%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
+					
+			    	<div class="col">작성자 : <span id="reportBlackId"></span></div>
+					
+					<div class="col">내용 :  <div id="reportContentBody"></div></div>
+			    
+				<br>
+				<hr>
+				<input type='hidden' name='blackId' value='' />
+				<input type='hidden' name='contentNo' value=''/>				
+				<input type='hidden' name='whiteId' value='${user.userId}'/>
+				<input type='hidden' name='whiteNickname' value='${user.nickName}'/>
+				<input type='hidden' name='reportCode' value='0'/>				
+				
+				
+				<strong>신고 사유를 선택해주세요</strong>
+			  	<div class='center'>
+				<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
+				<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
+				<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
+				<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
+				</div>
+				
+				</form>		
+				   
+				<div class="modal-footer">
+		        <button type="button" class="btn btn-info" data-dismiss="modal">신고하기</button>
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
+		      </div>
+				</div></div>	        
+						      </div>
+						    </div>
+						  </div>
+							  
+		
 
+</body>
+<jsp:include page="/layout/footer.jsp" />
 </html>

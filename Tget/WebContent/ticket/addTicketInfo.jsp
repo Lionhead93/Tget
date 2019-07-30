@@ -169,7 +169,9 @@
 			<form class="form-horizontal">
 			<input type="hidden" name="event.eventId" value="${event.eventId}" >
 			<input type="hidden" name="event.eventName" value="${event.eventName}" >
-			<input type="hidden" name="seller.userId" value="${user.userId}" >	  
+			<input type="hidden" name="seller.userId" value="${user.userId}" >	
+			<input type="hidden" name="couponNo" value="0" >	
+			<input type="hidden" name="couponCode" value="" >	  
 			<br/>
 			<h1 class="display-4">${event.koName}</h1>
 			  <p class="lead">${event.eventLocation}</p>
@@ -237,25 +239,35 @@
 									"Content-Type" : "application/json"
 								},
 					          	success: function(data){
-					          		alert(data.list.size());
 					          		var displayValue = "";	
 					          		if(data.list==""){
 					          			alert("쿠폰이 없습니다.");
 					          			return;
 					          		}else{
 					          			$(".addCoupon").html("");
-					          			if(data.listA.size() != 0){
-					          				displayValue += "<a href='#' id='0' class='btn btn-outline-info checkCoupon'>상단출력    <span class='badge badge-light'>"+data.listA.size()+"</span></a>&nbsp;";
+					          			displayValue += "<div>"
+					          			if(data.listA.length != 0){
+					          				displayValue += "<a id='"+data.listA[0].couponNo+"' class='btn btn-outline-info useCouponA'>상단출력    <span class='badge badge-light'>"+data.listA.length+"</span></a>&nbsp;";
 					          			}
-					          		    if(data.listB.size() != 0){
-					          				displayValue += "<a href='#' id='1' class='btn btn-outline-info checkCoupon'>강조권   <span class='badge badge-light'>"+data.listB.size()+"</span></a>";
+					          		    if(data.listB.length != 0){
+					          				displayValue += "<a id='"+data.listB[0].couponNo+"' class='btn btn-outline-info useCouponB'>강조권   <span class='badge badge-light'>"+data.listB.length+"</span></a>";
 					          			}
-					          		       		
+					          		 	displayValue += "</div>"
 					          		}
 								    $(".addCoupon").append(displayValue);
-								    $(".checkCoupon").on("click",function(){
-								    	var code = $(this).attr("id").trim();
-								    	alert(code);
+								    $(".useCouponA").on("click",function(){
+								    	var couponNo = $(this).attr("id").trim();
+								    	$("input[name='couponNo']").val(couponNo);
+								    	$("input[name='couponCode']").val("0");
+								    	alert("상단출력 쿠폰적용");
+								    	$(".addCoupon").html("<p><strong> 적용 쿠폰 :</strong> 상단출력  </p>");
+								    });
+								    $(".useCouponB").on("click",function(){
+								    	var couponNo = $(this).attr("id").trim();	
+								    	$("input[name='couponNo']").val(couponNo);
+								    	$("input[name='couponCode']").val("1");
+								    	alert("강조권 쿠폰적용");
+								    	$(".addCoupon").html("<p><strong> 적용 쿠폰 :</strong> 강조권 </p>");
 								    });
 					          	}
 							});
