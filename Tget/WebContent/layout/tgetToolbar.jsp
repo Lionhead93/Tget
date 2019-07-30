@@ -77,7 +77,6 @@ $( function(){
 	
 	if('${user}'!=''){
 		getNoReadAlarmCount("${user.userId}"); 
-		alert("${user.userId}");
 	}			
 	//알람리스트 madal 출력
 	$("a:contains('Alarm')").on("click", function(){
@@ -221,7 +220,7 @@ $(function() {
 					          &times;
 					        </a>
 					      </div>
-					      <div class="modal-body">
+					      <div id="alarmModalBody" class="modal-body">
 					      </div>
 					      <div class="modal-footer">
 					        </div>

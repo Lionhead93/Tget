@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tget.common.domain.Search;
 import com.tget.service.alarm.AlarmService;
 import com.tget.service.alarm.domain.Alarm;
+import com.tget.service.coupon.CouponService;
+import com.tget.service.coupon.domain.Coupon;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Event;
 import com.tget.service.ticket.TicketService;
@@ -45,6 +47,11 @@ public class TicketController {
 	@Qualifier("alarmServiceImpl")
 	@Autowired
 	private AlarmService alarmService;
+	@Qualifier("couponServiceImpl")
+	@Autowired
+	private CouponService couponService;
+	
+	
 	
 	public TicketController() {
 		System.out.println(this.getClass());
@@ -114,6 +121,12 @@ public class TicketController {
 		session.removeAttribute("sellticketInfo");
 		
 		ticketService.addTicket(ticket);
+						
+		if(ticket.getCouponNo() != 0) {
+			Coupon coupon = new Coupon();
+			coupon.setCouponNo(ticket.getCouponNo());
+			couponService.updateCoupon(coupon);
+		}
 		
 		Search search = new Search();
 		search.setSearchCondition("1");
