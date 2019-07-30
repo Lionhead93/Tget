@@ -9,6 +9,7 @@
 <html lang="ko">
 	
 <head>
+	<title>T-GET</title>
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -17,6 +18,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
+	<link rel="stylesheet" href="/resources/css/login.css" />
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -36,21 +38,35 @@
 	<script src="/resources/javascript/main.js"></script>
 	
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-        #thisTitle{
-        padding-top: 30px;
-      	 padding-bottom: 30px;
-       		background: url(/resources/images/pic10.jpg) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;
-        
-        }
-    
+       body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+		#tranInput{
+			  border: 1px solid #D6CDB7;
+			  background-color: #193147;
+		}
+		a, hr{
+			color: #FBFCFE ;	
+		}
+		.col-lg-3{			
+			margin-bottom: 20px;
+		}
+		
+		section{
+			margin-left: 40px;
+		}
+		#footer{
+			background-color: #1B1B1F;
+		}
+       .list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
+		}
     </style>
     
 	<script type="text/javascript">	
@@ -91,7 +107,7 @@
 			alert("포인트에 숫자입력 바랍니다.");
 			return "noGood";
 		}
-		if(userPoint < usePoint){			
+		if(parseInt(userPoint) < parseInt(usePoint)){			
 			alert("보유 포인트 부족");
 			return "noGood";
 		}
@@ -273,103 +289,117 @@
 <body>
 	
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<div class="container">
-	<br/>
-		
-		<div id="thisTitle" class="text-center">
-		  <h1 class="display-4">${ticket.event.eventName}</h1>
-		  <p class="lead">${ticket.event.eventDate}</p>
-		  <p>${ticket.event.eventLocation}</p>
-		</div>
-		 <hr class="my-4">
-		<form>
-		<input type="hidden" name="ticket.ticketNo" value="${ticket.ticketNo}">
-		<input type="hidden" name="seller.userId" value="${ticket.seller.userId}">
-		<input type="hidden" name="buyer.userId" value="${user.userId}">
-		<input type="hidden" name="event.eventId" value="${ticket.event.eventId}">
-		<input type="hidden" name="event.eventName" value="${ticket.event.eventName}">
-		<input type="hidden" name="paymentOption" value="">
-		<input type="hidden" name="paymentNo" value="">
-		<input type="hidden" name="tranCode" value="">
-		
-		<div class="text-center">
-			<h5><strong>티켓 수량을 선택해주세요.</strong></h5>
-			<small class="text-danger">최대 10장까지 구매가능합니다.<br/></small>
-			<br/>			
-			<div class="btn-group mr-2" role="group" aria-label="First group">
-			  <c:forEach var="i" begin="1" end="${ticket.amount}">
-			  	<c:if test="${i < 11}"> 
-			    <button type="button" class="btn btn-outline-success">${i}</button>
-			  	</c:if>
-			  </c:forEach>
-			</div>
-			<br/>  			    
-		     <div class="form-group" >
-		     <br/>
-		     <strong>구매 가격 : </strong> 	
-		        <span id="ticketPrice"></span> X <input type="text" name="orderAmount" value="" style="width: 50px !important" maxlength="10" readonly/> = 
-		        <span id="orTotalPrice">0</span>
-		    </div>
-		   
-		<br/>  
-		<div>
-		<h5><strong>배송지를 입력해주세요.</strong></h5>
-		<button type="button" class="btn btn-link"><small class="text-secondary">신규 배송지</small></button><button type="button" class="btn btn-link"><small>기존 배송지</small></button>
-		<div class="form-group" >
-		     <br/>
-		     <strong>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소 : </strong> 	
-		        <input type="text" id="deliveryAddr" name="deliveryAddr" value="" style="width: 300px !important" readonly/><br/><br/>
-		      <strong>상세주소 : </strong><input type="text" id="addrDetail" name="deliveryAddr" value="" style="width: 300px !important"/>
-		</div>
-		</div>
-		
-		<br/>  
-		<div>
-		<h5><strong>사용 포인트를 입력해주세요.</strong></h5>
-		
-		<div class="form-group" >
-		     <br/>
-		     <strong>사용포인트 : </strong> 	
-		        <input type="text" id="point" name="usePoint" value="0" style="width: 150px !important"/>&nbsp;&nbsp;보유 : <span class="text-danger" id="user-point">${user.point}</span><br/>
-		        <button type="button" class="btn btn-link"><small>전부 사용</small></button>
-		</div>
-		<div class="form-group" >
-		     <br/>
-		     <strong>최종  금액 : </strong> 	
-		        <input type="text" id="totalPrice" name="totalPrice" value="" style="width: 150px !important" readonly/>
-		</div>
-		
-		</div>
-		
-		
-		
+	<jsp:include page="/layout/tgetHeader.jsp" />
 		<br/>
-		<div class="form-group">
-		      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal">계 속</button>
-			  <a class="btn btn-danger btn" href="#" role="button">취&nbsp;소</a>
-		</div>
-		</div>
-		</form>				
- 	</div>
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="sticky-top">
+		      	<div class='text-center'>
+		      		<br/><br/><br/>
+					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 티켓 구매 </strong></p>
+					<br/>
+												<ul class="list-group list-group-flush">										  
+												  <li class="list-group-item"><a href="#">구매자 가이드</a></li>
+												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
+												  <li></li>											  
+												</ul> 											  
+				</div> 
+				</div>
+			</div>
+			
+			<div id="tranInput" class="col-lg-8">				
+			<form>
+			<div id="thisTitle" class="text-center">
+			  <h1 class="display-4">${ticket.event.eventName}</h1>
+			  <p class="lead">${ticket.event.eventDate}</p>
+			  <p>${ticket.event.eventLocation}</p>
+			</div>
+			 <hr class="my-4">
+			<input type="hidden" name="ticket.ticketNo" value="${ticket.ticketNo}">
+			<input type="hidden" name="seller.userId" value="${ticket.seller.userId}">
+			<input type="hidden" name="buyer.userId" value="${user.userId}">
+			<input type="hidden" name="event.eventId" value="${ticket.event.eventId}">
+			<input type="hidden" name="event.eventName" value="${ticket.event.eventName}">
+			<input type="hidden" name="paymentOption" value="">
+			<input type="hidden" name="paymentNo" value="">
+			<input type="hidden" name="tranCode" value="">
+			
+			<div class="text-center">
+				<h5><strong>티켓 수량을 선택해주세요.</strong></h5>
+				<small class="text-danger">최대 10장까지 구매가능합니다.<br/></small>
+				<br/>			
+				<div class="btn-group mr-2" role="group" aria-label="First group">
+				  <c:forEach var="i" begin="1" end="${ticket.amount}">
+				  	<c:if test="${i < 11}"> 
+				    <button type="button" class="btn btn-outline-success">${i}</button>
+				  	</c:if>
+				  </c:forEach>
+				</div>
+				<br/>  			    
+			     <div class="form-group" >
+			     <br/>
+			     <strong>구매 가격 : </strong> 	
+			        <span id="ticketPrice"></span> X <input type="text" name="orderAmount" value="" style="width: 50px !important" maxlength="10" readonly/> = 
+			        <span id="orTotalPrice">0</span>
+			    </div>
+			   
+			<br/>  
+			<div>
+			<h5><strong>배송지를 입력해주세요.</strong></h5>
+			<button type="button" class="btn btn-link"><small class="text-secondary">신규 배송지</small></button><button type="button" class="btn btn-link"><small>기존 배송지</small></button>
+			<div class="form-group" >
+			     <br/>
+			     <strong>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소 : </strong> 	
+			        <input type="text" id="deliveryAddr" name="deliveryAddr" value="" style="width: 300px !important" readonly/><br/><br/>
+			      <strong>상세주소 : </strong><input type="text" id="addrDetail" name="deliveryAddr" value="" style="width: 300px !important"/>
+			</div>
+			</div>
+			
+			<br/>  
+			<div>
+			<h5><strong>사용 포인트를 입력해주세요.</strong></h5>
+			
+			<div class="form-group" >
+			     <br/>
+			     <strong>사용포인트 : </strong> 	
+			        <input type="text" id="point" name="usePoint" value="0" style="width: 150px !important"/>&nbsp;&nbsp;보유 : <span class="text-danger" id="user-point">${user.point}</span><br/>
+			        <button type="button" class="btn btn-link"><small>전부 사용</small></button>
+			</div>
+			<div class="form-group" >
+			     <br/>
+			     <strong>최종  금액 : </strong> 	
+			        <input type="text" id="totalPrice" name="totalPrice" value="" style="width: 150px !important" readonly/>
+			</div>
+			
+			</div>
+			
+			
+			
+			<br/>
+			<div class="form-group">
+			      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal">계 속</button>
+				  <a class="btn btn-danger btn" href="#" role="button">취&nbsp;소</a>
+			</div>
+			</div>
+			</form>	
+			</div>
+			<div class="col-lg-2"></div>
+		</div>		
  	
 	<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-lg" role="document">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">결제 수단 선택</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
 					      <div class="modal-body">
 					      <div class="text-center">
+					      <div class="text-center">
+					        <h5>결제 수단 선택</h5>					        
+					      </div>
+					      <hr/>
 					      <a class="btn btn-outline-info" role="button">카카오페이</a>
 					      <a class="btn btn-outline-info" role="button">신용카드</a>
 					      <a class="btn btn-outline-info" role="button">무통장입금</a>
+					      <br/><br/>
 					      </div>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					      </div>
 					    </div>
 					  </div>

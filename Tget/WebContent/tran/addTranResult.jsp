@@ -35,10 +35,35 @@
 	<script src="/resources/javascript/main.js"></script>
    
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
+       body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+		#tranResult{
+			  border: 1px solid #D6CDB7;
+			  background-color: #193147;
+		}
+		a, hr{
+			color: #FBFCFE ;	
+		}
+		.col-lg-3{			
+			margin-bottom: 20px;
+		}
+		
+		section{
+			margin-left: 40px;
+		}		 
+		#footer{
+			background-color: #1B1B1F;
+		}
+       .list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
+		}
     
     </style>
     
@@ -63,39 +88,45 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<div class="container">
-	<br/>
-		
-		<div class="text-center">
-		  <h3 class="display-4">구매 해주셔서 감사합니다.</h3>
-		  <hr class="my-4">
-		  <h5> ${transaction.event.eventName}</h5>
-		  <p>배송지 : ${transaction.deliveryAddr}</p>
-		  <p>결제 수단 : 
-		  <c:if test="${transaction.paymentOption==0}">
-		  	신용카드
-		  </c:if>
-		  <c:if test="${transaction.paymentOption==1}">
-		  	카카오페이
-		  </c:if>
-		  <c:if test="${transaction.paymentOption==2}">
-		  	무통장입금
-		  </c:if>		  
-		  </p>
-		  <p>총 금액 : <span id="totalPrice">${transaction.totalPrice}</span></p>
-		  <c:if test="${transaction.paymentOption==2}">
-		  
-		  <p class="text-danger">*아래의 입금계좌로 당일 안에 입금부탁 드립니다.</p> 
-		  <small class="text-secondary">은행 : 비트은행<br/>
-		  	예금주 : Tget<br/>
-		  	계좌번호 : 110-545-120154<br/></small>
-		  </c:if>
-		  
-		  <br/><br/>
-		  <button type="button" class="btn btn-outline-primary">완료</button>
-		</div>
-			
- 	</div>
+	<jsp:include page="/layout/tgetHeader.jsp" />
+		<div class="row">
+			<div class="col-lg-2">				
+			</div>
+			<div id="tranResult" class="col-lg-8">
+				<div class="text-center">
+				<br/>
+				  <h3 class="display-4">구매 해주셔서 감사합니다.</h3>
+				  <hr class="my-4">
+				  <h5> ${transaction.event.eventName}</h5>
+				  <p>배송지 : ${transaction.deliveryAddr}</p>
+				  <p>결제 수단 : 
+				  <c:if test="${transaction.paymentOption==0}">
+				  	신용카드
+				  </c:if>
+				  <c:if test="${transaction.paymentOption==1}">
+				  	카카오페이
+				  </c:if>
+				  <c:if test="${transaction.paymentOption==2}">
+				  	무통장입금
+				  </c:if>		  
+				  </p>
+				  <p>총 금액 : <span id="totalPrice">${transaction.totalPrice}</span></p>
+				  <c:if test="${transaction.paymentOption==2}">
+				  
+				  <p class="text-danger">*아래의 입금계좌로 당일 안에 입금부탁 드립니다.</p> 
+				  <small class="text-secondary">은행 : 비트은행<br/>
+				  	예금주 : Tget<br/>
+				  	계좌번호 : 110-545-120154<br/></small>
+				  </c:if>
+				  
+				  <br/><br/>
+				  <button type="button" class="btn btn-outline-light">완료</button>
+				<br/><br/>	
+					</div>
+			</div>
+			<div class="col-lg-2">				
+			</div>
+		</div>	
 	<jsp:include page="/layout/footer.jsp" />
 </body>
 

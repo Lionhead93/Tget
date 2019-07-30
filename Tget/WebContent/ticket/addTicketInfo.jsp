@@ -57,17 +57,7 @@
 		
 		section{
 			margin-left: 40px;
-		}
-		#tgetHeader{
-		   margin-top:30px;	
-		   color: #FBFCFE;	
-	       padding-bottom:200px; 
-	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
+		} 
 		#footer{
 			background-color: #1B1B1F;
 		}
@@ -142,10 +132,7 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-			
-		<div id="tgetHeader" class="text-center">
-		  
-		</div>
+	<jsp:include page="/layout/tgetHeader.jsp" />	
 		<br/>
 		<div class="row">
 			<div class="col-lg-2">
@@ -231,7 +218,7 @@
 					$(function(){
 						$("a:contains('ÄíÆùÀû¿ë')").on("click",function(){
 							$.ajax({
-								url : "/coupon/rest/getCouponList/${user.userId}" ,
+								url : "/coupon/rest/getCouponList/${user.userId}/" ,
 								method : "GET" ,
 								dataType : "json" ,
 								headers : {
