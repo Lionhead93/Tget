@@ -147,7 +147,6 @@
 	<script type="text/javascript">
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-<<<<<<< HEAD
 	
 		function fncAddReport(){
 			
@@ -158,28 +157,6 @@
 			$(function() {
 				$( "button.btn.btn-info:contains('신고하기')" ).on("click" , function() {
 					fncAddReport();
-=======
-		function fncGetUserList(currentPage) {
-			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/community/getContentList").submit();
-		}
-		
-		function fncAddReport(){
-			
-			//alert($("input[name='whiteNickname']").val());
-			$("form").attr("method" , "POST").attr("action" , "/community/addReport").submit();
-			}
-
-			$(function() {
-				$( "button.btn.btn-info:contains('신고')" ).on("click" , function() {
-					
-					if(sessionScope.user.role == '2'){
-						fncAddReport();
-					}else{
-						alert("신고 접수되었습니다.");
-					}
-			
->>>>>>> refs/remotes/origin/master
 				});
 			});
 			
@@ -196,8 +173,7 @@
 					}
 					
 					alert("등록 되었습니다.")
- 					$("form[name='addContent']").attr("method" , "POST").attr("action" , "/community/addContent").submit();
-					
+					$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
  				});
 			 
 			 $( "button.btn.btn-warning:contains('길 찾기 안내')" ).on("click" , function() {
@@ -236,8 +212,12 @@
 				
 				});
 			 
-<<<<<<< HEAD
- 			 $( ".reportRing" ).on("click" , function() {	
+ 			 $( ".reportRing" ).on("click" , function() {
+ 				 	if('${user}'==''){
+ 				 		alert("로그인을 해주세요");
+ 				 		return;
+ 				 	}
+ 				 	$(this).attr("data-target","#addReportModal");
 				 	var contentNo = $(this).attr("id").trim();
 				 	$.ajax(
 							{
@@ -256,12 +236,6 @@
 								}
 							});
 				});
-=======
-// 			 $( ".reportRing" ).on("click" , function() {	
-// 				 	alert($(this).val())
-// 				 	self.location="/community/addReport?contentNo="+$(this).attr("id").trim();
-// 				});
->>>>>>> refs/remotes/origin/master
 				
 			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
 					self.location="/community/getRefundList";	
@@ -495,12 +469,8 @@
 			   	  </td>
 			   	  
 				   	 <!-- 신고 하기 -->
-<<<<<<< HEAD
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-=======
-			   	 <c:if test="${search.searchCondition=='2'}">
->>>>>>> refs/remotes/origin/master
-				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" data-target="#addReportModal"><i class="fas fa-bell"></i></a>	
+				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-bell"></i></a>	
 				  </td>
 				  </c:if>
 				  	
@@ -612,70 +582,7 @@
 	    </div>
 	  </div>
 	</div>			  
-	
-	<!-- 신고하기 Modal -->
-	<div class="modal modal-center fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
-	  <div class="modal-dialog modal-lg modal-center" role="document">
-	    <div class="modal-content modal-80size">
-					  
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">신고하기</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body"> 	    
-		    
-			    <div class="col">
-			    	<div class="col">신고자</div>
-			      <input type="text" class="form-control" id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly>  
-			    </div>
-			 
-			  
-			  <div class="form-group">
-			    <label for="whiteNickname" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
-			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="whiteNickname" name="whiteNickname" value="${user.nickName}" readonly>
-			      
-			    </div>
-			  </div>
-			<div class="form-group">
-			    <label for="blackId" class="col-sm-offset-1 col-sm-3 control-label">신고 당한 사람</label>
-			    <div class="col-sm-4">
-			      <input type="text" class="form-control" id="blackId" name="blackId" value="${content.userId}" readonly>
-			      
-			    </div>
-			  </div>
-			  
-			  <div class="form-group">
-			    <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">신고글 내용</label>
-			    <div class="col-sm-4">
-			      ${content.contentBody}
-				 </div>
-			  </div>
-			
-			 
-			<strong>신고 사유</strong>
-		  	<div class="col-xs-4">
-			<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
-			<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
-			<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
-			<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
-			</div>
-			
-			
-			   
-			<div class="modal-footer">
-	        <button type="button" class="btn btn-info" data-dismiss="modal">신고</button>
-	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
-	      </div>
-					        
-					      </div>
-					    </div>
-					  </div>
-					</div>			  
 	</form>
-<<<<<<< HEAD
 	<!-- 신고하기 Modal -->
 	<div class="modal fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -726,10 +633,6 @@
 						  </div>
 							  
 		
-=======
-<jsp:include page="/layout/footer.jsp" />
-</body>
->>>>>>> refs/remotes/origin/master
 
 </body>
 <jsp:include page="/layout/footer.jsp" />
