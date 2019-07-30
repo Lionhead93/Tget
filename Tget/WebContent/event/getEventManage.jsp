@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>이벤트 관리</title>
+<title>T-GET</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
@@ -103,22 +103,48 @@
 			
 // 				});			
 		});		
-// 		$("video").on("click", function(){
-// // 			alert($(this));
-// 			$(this).play();
-// 		});
+
+		$("a.category").on("click", function(){
+			$.ajax(
+					{
+						url : "/event/rest/updateCa",
+						method : "POST",
+						data : {
+										 : $("#").val()
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+							alert(status);
+							alert("JSONData : \n"+JSONData);		
+					
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+		});
 	});
 	
 	</script>
 	
 	<style>
+	
+	body{
+		background-color : #062038; 
+		color: #FBFCFE;
+	}	
+	#footer{
+		background-color: #1B1B1F ;
+	}		
+	a, hr{
+		color: #FBFCFE ;	
+	}				
 	.tab-content{
 		min-height: 400px;
-	}
+	}	
       div.container {
         	margin-top: 50px;
-        	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive;
-        	font-size: 25px;
+/*         	font-family: 'Shadows Into Light', 'Nanum pen Script', cursive; */
+        	font-size: 20px;
         }
         #list-recomm, #list-category{  
 			padding : 10px 10px 10px 10px;
@@ -127,15 +153,27 @@
 			padding : 10px  10px 10px 20px;
 		}
         .col-10{
-        	border: 2px solid #5D5D5D;            
-/*         	background-color : #5D5D5D ; */
+        	border: 2px solid #FBFCFE ;            
+/* */        	background-color : #193147 ;
         }
 /*         .row{ */
 /*         	margin-top: 30px;  */
 /*         } */
         .card{
         	padding : 5px 5px 5px 5px;
+        	color: black;
+        	font-weight: bold;
         }        
+        
+        .card-header{
+        	font-weight:bold; background-color:#1B1B1F ; color:#FBFCFE ;
+        }
+        
+        .card-bodys{
+        	background-color:  #FBFCFE; color: #1B1B1F;
+        	padding: 5%;
+        }
+        
         button {
 /*         	 height: 33px; width: 100px;  */
         }
@@ -164,6 +202,7 @@
 			 background-image: -o-linear-gradient(top, #646464, #282828);
 			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
 		}
+	
 		
     </style>
     
@@ -175,13 +214,13 @@
 	<div class="container">
 	
 		<div class="row"  style="margin-top: 30px;">
-		  <div class="col-2" >
+		  <div class="col-2 col-lg-2" >
 		    <div class="list-group" id="list-tab" role="tablist">
 		      <a class="list-group-item list-group-item-action active " id="list-recomm-list" data-toggle="list" href="#list-recomm" role="tab" aria-controls="recomm">추천이벤트</a>
 		      <a class="list-group-item list-group-item-action" id="list-category-list" data-toggle="list" href="#list-category" role="tab" aria-controls="category">카테고리</a>
 		    </div>
 		  </div>
-		  <div class="col-10">
+		  <div class="col-10 col-lg-10">
 		    <div class="tab-content" id="nav-tabContent">
 		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-recomm-list">
 		      <div  class="row" >
@@ -224,53 +263,114 @@
 			      	<div class="col-11"></div>
 			      	<div class="col-1" align="left"><ion-icon id="addCate" name="add" size="large"></ion-icon></div>		      	
 			      </div>
+			      
 		      	<div class="row ">
-		      		<div class="col-3  " style="font-weight:bold; font-size: 30px;" align="right">
-		      			<div>음악공연</div>	      			
-		      		</div>
-		      		<div class="col-8 card  text-white bg-dark mb-3">		      			
-		      			<div class="row">
-		      				 <c:forEach items="${categorylist }"  var="i">
-						    	<c:if test="${i.categoryOneCode == 0}">
-						    		${i.categoryTwoName }<br/>	
-						    	</c:if>
-						  	</c:forEach>	<br/><br/>	
-		      			</div>
-		      		</div>
-		      		<div class="col-1" ></div>
-		      </div>
+		      		<div class="col-1"></div>
+			      	<div class="card col-10">
+					  <h5 class="card-header" >음악공연</h5>
+					  <div class="card-bodys">
+					  	<h5 class="card-title">
+					 	 <c:forEach items="${categorylist }"  var="i">
+						    <c:if test="${i.categoryOneCode == 0}">
+						   		<div><ion-icon name="checkmark"></ion-icon>
+					 			<a class="category" value="${i.categoryTwoNo }">
+						   		${i.categoryTwoName }</a></div><br/>
+					    	</c:if>
+					  	</c:forEach></h5>				    
+					  </div>
+					</div>
+					<div class="col-1"></div>
+				   </div>
+					
+					<div class="row ">
+					<div class="col-1"></div>
+			      	<div class="card col-10">
+					  <h5 class="card-header">스포츠</h5>
+					  <div class="card-bodys">
+					  	<h5 class="card-title">
+					 	 <c:forEach items="${categorylist }"  var="i">
+						    <c:if test="${i.categoryOneCode ==1}">
+						   		<div><ion-icon name="checkmark"></ion-icon>
+					 			<a class="category" value="${i.categoryTwoNo }">
+						   		${i.categoryTwoName }</a></div><br/>
+					    	</c:if>
+					  	</c:forEach></h5>			    
+					  </div>
+					</div>
+					<div class="col-1"></div>
+				   </div>
+					
+					<div class="row " >
+					<div class="col-1"></div>
+			      	<div class="card col-10">
+					  <h5 class="card-header" >기타예술공연</h5>
+					  <div class="card-bodys">
+					  	<h5 class="card-title">
+					 	 <c:forEach items="${categorylist }"  var="i">
+						    <c:if test="${i.categoryOneCode ==2}">
+						   		<div><ion-icon name="checkmark"></ion-icon>
+					 			<a class="category" value="${i.categoryTwoNo }">
+						   		${i.categoryTwoName }</a></div><br/>
+					    	</c:if>
+					  	</c:forEach></h5>				    
+					  </div>
+					</div>
+					<div class="col-1"></div>
+				   </div>
+			      	
+		      	
+<!-- 		      		<div class="col-3  " style="font-weight:bold; font-size: 30px;" align="right"> -->
+<!-- 		      			<div>음악공연</div>	      			 -->
+<!-- 		      		</div> -->
+<!-- 		      		<div class="col-8 card mb-3">		      			 -->
+<!-- 		      			<div class="row"> -->
+<%-- 		      				 <c:forEach items="${categorylist }"  var="i"> --%>
+<%-- 						    	<c:if test="${i.categoryOneCode == 0}"> --%>
+<!-- 						    		<div><ion-icon name="checkmark"></ion-icon> -->
+<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
+<%-- 						    		${i.categoryTwoName }</a></div><br/><br/>	 --%>
+<%-- 						    	</c:if> --%>
+<%-- 						  	</c:forEach>	<br/><br/>	 --%>
+<!-- 		      			</div> -->
+<!-- 		      		</div> -->
+<!-- 		      		<div class="col-1" ></div> -->
+<!-- 		      </div> -->
 		      
-		      <div class="row ">
-		      	<div class="col-3 " style="font-weight:bold; font-size: 30px;" align="right">
-		      		<div>스포츠</div>	      			
-		      	</div>
-		      	<div class="col-8  card  text-white bg-dark mb-3">		      			
-		      		<div class="row">
-		      			 <c:forEach items="${categorylist }"  var="i">
-						   	<c:if test="${i.categoryOneCode == 1}">
-						   		${i.categoryTwoName }<br/>	
-						   	</c:if>
-						</c:forEach>	<br/><br/>	
-		      		</div>
-		      	 </div>
-		      	 <div class="col-1" ></div>
-		      </div>
+<!-- 		      <div class="row "> -->
+<!-- 		      	<div class="col-3 " style="font-weight:bold; font-size: 30px;" align="right"> -->
+<!-- 		      		<div>스포츠</div>	      			 -->
+<!-- 		      	</div> -->
+<!-- 		      	<div class="col-8  card  mb-3">		      			 -->
+<!-- 		      		<div class="row"> -->
+<%-- 		      			 <c:forEach items="${categorylist }"  var="i"> --%>
+<%-- 						   	<c:if test="${i.categoryOneCode == 1}"> --%>
+<!-- 						   		<div><ion-icon name="checkmark"></ion-icon> -->
+<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
+<%-- 						    		${i.categoryTwoName }</a></div><br/>	 --%>
+<%-- 						   	</c:if> --%>
+<%-- 						</c:forEach>	<br/><br/>	 --%>
+<!-- 		      		</div> -->
+<!-- 		      	 </div> -->
+<!-- 		      	 <div class="col-1" ></div> -->
+<!-- 		      </div> -->
 		      
-		      <div class="row">
-		      	<div class="col-3" style="font-weight:bold; font-size: 30px;" align="right">
-		      		<div>기타예술공연</div>	 	
-		      	</div>
-		      	<div class="col-8   card  text-white bg-dark mb-3">		      			
-		      		<div class="row">
-		      			 <c:forEach items="${categorylist }"  var="i">
-						   	<c:if test="${i.categoryOneCode == 2}">
-						   		${i.categoryTwoName }<br/>	
-						   	</c:if>
-						</c:forEach>	<br/><br/>	
-		      		</div>
-		      	 </div>
-		      	 <div class="col-1" ></div>
-		      </div>
+<!-- 		      <div class="row"> -->
+<!-- 		      	<div class="col-3" style="font-weight:bold; font-size: 30px;" align="right"> -->
+<!-- 		      		<div>기타예술공연</div>	 	 -->
+<!-- 		      	</div> -->
+<!-- 		      	<div class="col-8   card  mb-3">		      			 -->
+<!-- 		      		<div class="row"> -->
+<%-- 		      			 <c:forEach items="${categorylist }"  var="i"> --%>
+<%-- 						   	<c:if test="${i.categoryOneCode == 2}"> --%>
+<!-- 						   		<div><ion-icon name="checkmark"></ion-icon> -->
+<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
+<%-- 						    		${i.categoryTwoName }</a></div><br/>	 --%>
+<%-- 						   	</c:if> --%>
+<%-- 						</c:forEach>	<br/><br/>	 --%>
+<!-- 		      		</div> -->
+<!-- 		      	 </div> -->
+<!-- 		      	 <div class="col-1" ></div> -->
+<!-- 		      </div> -->
 		      
   			</div>
   			  

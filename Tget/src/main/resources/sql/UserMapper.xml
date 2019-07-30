@@ -157,6 +157,18 @@
 
 </select> 
 
+<select id="selectNaver" parameterType="string" resultMap="userSelectMap">
+	SELECT 
+		*
+	FROM
+		users
+		
+	where naver_Id = #{value}
+
+</select> 
+
+
+
 <select id="selectCode" parameterType="string" resultMap="userSelectMap">
 	SELECT 
 		code

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 
 
 <script type="text/javascript">
@@ -37,7 +40,7 @@
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("input[id='signin']").on("click" , function() {
 			
-		//	alert("눌리니");
+			//alert("눌리니");
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
@@ -100,6 +103,17 @@
 				
 		});
 	});
+	
+	$( function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("a[id='naver' ]").on("click" , function() {
+				
+				var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
+				window.open("https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=AziWQOW7S2sZhD1PEBi9&state=STATE_STRING&redirect_uri=http://192.168.0.24:8080/user/callback","Naver login",popOption);
+				
+				
+		});
+	});
 </script>
 
 
@@ -128,9 +142,12 @@
 				<div class="group">
 					<input id="signin" class="button" value="Sign In">
 				</div>
-				     <a id="kakao" href = "#2">
-<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="200"/>
-</a><br></br>
+				
+				<div class="text-center">
+				     <a id="kakao"><img src="/resources/images/kakaos.jpg" style="max-width: 100%; height: auto;"/></a>
+     <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
+		<a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a>
+		</div>
 			<div class="foot-lnk">Not a member?   
 					<a href="#signUp">Sign up</a>
 				</div>			<br>
@@ -183,4 +200,8 @@
 				   </div>
 	  </div>
 		 </div>  
-		 </form>
+		 
+		 	
+		 
+		 
+</form>

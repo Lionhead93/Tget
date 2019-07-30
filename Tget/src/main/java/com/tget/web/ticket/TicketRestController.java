@@ -45,6 +45,24 @@ public class TicketRestController {
 		System.out.println(this.getClass());
 	}
 	
+	
+	@RequestMapping(value = "rest/addTicketPrice/{price}", method = RequestMethod.GET)	
+	public Map<String, Object> addTicketPrice(@PathVariable("price") int price, 
+								HttpSession session) throws Exception {
+		
+		System.out.println("rest/addTicketPrice/"+price);
+		
+		Ticket ticket = (Ticket) session.getAttribute("sellticketInfo");		
+		ticket.setPrice(price);
+		
+		session.setAttribute("sellticketInfo", ticket);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", "ok");
+				
+		return map;
+	}
+	
 	@RequestMapping(value = "rest/getTicketSellProb/{price}/{eventId}", method = RequestMethod.GET)
 	public SellProb getTicketSellProb( @PathVariable("price") int price,
 									   @PathVariable("eventId") String eventId) throws Exception{

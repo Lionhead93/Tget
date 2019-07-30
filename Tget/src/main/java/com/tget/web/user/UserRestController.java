@@ -6,7 +6,16 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpHost;
@@ -22,22 +31,18 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.codehaus.jackson.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tget.common.domain.Search;
 import com.tget.service.user.Config;
 import com.tget.service.user.UserService;
-import com.tget.service.user.kakao_restapi;
 import com.tget.service.user.domain.User;
 
 
@@ -47,8 +52,6 @@ import com.tget.service.user.domain.User;
 @RequestMapping("/user/*")
 public class UserRestController {
 	
-	User user = new User();
-
 	///Field
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -88,12 +91,14 @@ public class UserRestController {
 	}*/
 	
 	@RequestMapping(value= "json/sendSms", method=RequestMethod.POST ) 
-	public String sendSms(String receiver) { 
-	System.out.println("뜨냐?");
+	public Map<String,Object> sendSms(String receiver)throws Exception { 
+	
+		Map<String,Object> map = new HashMap<String,Object>();
 		
+		System.out.println("뜨냐?");
+		
+	
 		int rand = (int) (Math.random() * 899999) + 100000; 
-		
-	     user.setCode(String.valueOf(rand));
 		
 		  String hostname = "api.bluehouselab.com";
 	        String url = "https://"+hostname+"/smscenter/v1.0/sendsms";
@@ -102,30 +107,30 @@ public class UserRestController {
 	        credsProvider.setCredentials(
 	            new AuthScope(hostname, 443, AuthScope.ANY_REALM),
 	            new UsernamePasswordCredentials(Config.appid, Config.apikey));
-			
+	        
 	        // Create AuthCache instance
 	        AuthCache authCache = new BasicAuthCache();
 	        authCache.put(new HttpHost(hostname, 443, "https"), new BasicScheme());
-	     
+
 	        // Add AuthCache to the exe.put(new Hecution context
 	        HttpClientContext context = HttpClientContext.create();
 	        context.setCredentialsProvider(credsProvider);
 	        context.setAuthCache(authCache);
-
+	    
 	        DefaultHttpClient client = new DefaultHttpClient();
 
 	        try {
 	            HttpPost httpPost = new HttpPost(url);
 	            httpPost.setHeader("Content-type", "application/json; charset=EUC-KR");
-	            String json = "{\"sender\":\""+Config.sender+"\",\"receivers\":[\""+receiver+"\",],\"content\":\""+Config.content+"\"}";
-	         
+	            String json = "{\"sender\":\""+Config.sender+"\",\"receivers\":[\""+receiver+"\"],\"content\":\""+rand+"\"}";
+	            
 	            StringEntity se = new StringEntity(json, "EUC-KR");
 	            httpPost.setEntity(se);
- 
+	       
 	            HttpResponse httpResponse = client.execute(httpPost, context);
-	            
+	         
 	            System.out.println(httpResponse.getStatusLine().getStatusCode());
-	
+	       
 	            InputStream inputStream = httpResponse.getEntity().getContent();
 	            if(inputStream != null) {
 	                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
@@ -138,10 +143,10 @@ public class UserRestController {
 	        } finally {
 	            client.getConnectionManager().shutdown();
 	        }
-	        return "true";
-
-	         
 	        
+	        map.put("rand", String.valueOf(rand));
+	        
+	        return map;
 	}  
 	
 	@RequestMapping( value="json/finduserId" , method=RequestMethod.POST)
@@ -176,10 +181,11 @@ public class UserRestController {
 		
 		return "yes";
 		
-	}      
+	}    
+	
 
-	@RequestMapping(value = "json/smsCheck" , method=RequestMethod.POST) 
-	public String smsCheck(String code ){ 
+	/*@RequestMapping(value = "json/smsCheck", produces="application/json" , method=RequestMethod.POST) 
+	public String smsCheck(String code){ 
 	
 		
 		
@@ -193,7 +199,7 @@ public class UserRestController {
 				System.out.println("불일치");
 				return "false"; 
 				} 
-	}
+	}*/
 	
 
 	@RequestMapping(value = "json/checknickNameDuplication", method=RequestMethod.POST)
@@ -280,29 +286,61 @@ public class UserRestController {
 		}
 
 	}
+	@RequestMapping(value = "rest/mailSender")
+	public Map<String,Object> mailSender(String Email , String emailcode, HttpServletRequest request, ModelMap mo, HttpSession session2) throws AddressException, MessagingException {
 	
-	/* @RequestMapping(value = "oauth", produces = "application/json")
-	    public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
-	        System.out.println("로그인 할때 임시 코드값");
-	        //카카오 홈페이지에서 받은 결과 코드
-	        System.out.println(code);
-	        System.out.println("로그인 후 결과값");
-	        
-	        //카카오 rest api 객체 선언
-	        kakao_restapi kr = new kakao_restapi();
-	        //결과값을 node에 담아줌
-	        JsonNode node = kr.getAccessToken(code);
-	        //결과값 출력
-	        System.out.println(node);
-	        //노드 안에 있는 access_token값을 꺼내 문자열로 변환
-	        String token = node.get("access_token").toString();
-	        //세션에 담아준다.
-	        session.setAttribute("token", token);
-	        
-	        return "forward:/user/logininfo.jsp";
-	    }*/
+		
+		System.out.println("이메일 인증 들어왔다"+Email);
+		Map<String,Object> map = new HashMap<String,Object>();
+		String host = "smtp.gmail.com"; 
+		
+		final String username = "gogo1705";
+		final String password = "qkqhsl135!"; 
+	
+		int port=465; //포트번호 
+		
+		StringBuffer buffer = new StringBuffer();
+		for ( int i = 0; i<= 6; i++) {
+			int n = (int) (Math.random() * 10);
+			buffer.append(n);
+		}
+		buffer.toString();
+		String check = buffer.toString();
+		// 메일 내용 
+		String recipient = Email;
+		//받는 사람의 메일주소를 입력해주세요. 
+		String subject = "T-GET 인증번호 확인 메일입니다."; //메일 제목 입력해주세요. 
+		String body = "T-GET 이메일 인증번호 ["+check+"]"; //메일 내용 입력해주세요. 
+		Properties props = System.getProperties(); // 정보를 담기 위한 객체 생성
+		// SMTP 서버 정보 설정 
+		props.put("mail.smtp.host", host); 
+		props.put("mail.smtp.port", port); 
+		props.put("mail.smtp.auth", "true"); 
+		props.put("mail.smtp.ssl.enable", "true"); 
+		props.put("mail.smtp.ssl.trust", host); 
+		//Session 생성 
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
+			String un=username; 
+			String pw=password; 
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(un, pw); } }); 
+		session.setDebug(true); 
+		//for debug 
+		Message mimeMessage = new MimeMessage(session);
+		//MimeMessage 생성 
+		mimeMessage.setFrom(new InternetAddress("XXXXXXXX@naver.com")); 
+		//발신자 셋팅 , 보내는 사람의 이메일주소를 한번 더 입력합니다. 이때는 이메일 풀 주소를 다 작성해주세요. 
+		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+		//수신자셋팅  //.TO 외에 .CC(참조) .BCC(숨은참조) 도 있음 
+		mimeMessage.setSubject(subject);//제목셋팅 
+		mimeMessage.setText(body);//내용셋팅
+		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용 }
+	
+		System.out.println("받은거"+check);
+		
+		map.put("check", check);
+		
+		return map;
+	}
 
-
-	
-	
 }

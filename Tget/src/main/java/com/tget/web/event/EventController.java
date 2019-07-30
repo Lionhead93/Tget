@@ -114,7 +114,7 @@ public class EventController {
 		if (search.getSearchCondition().equals("0")) {
 			model.addAttribute("category", search.getSearchKeyword());
 			
-			List<StubhubEvent> tempList = (List<StubhubEvent>)session.getAttribute(search.getSearchKeyword());
+			List<StubhubEvent> tempList = (List<StubhubEvent>)session.getAttribute(search.getSearchKeyword()+requestPageToken);
 			
 			if (tempList != null) {
 				
@@ -126,8 +126,8 @@ public class EventController {
 				int totalResult = (Integer)map.get("totalResults");
 				if (totalResult != 0 && list != null) {
 					list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
-					session.setAttribute( search.getSearchKeyword(), list);
-					session.setAttribute( search.getSearchKeyword()+"TotalResults", (Integer)map.get("totalResults"));
+					session.setAttribute( search.getSearchKeyword()+requestPageToken, list);
+					session.setAttribute( search.getSearchKeyword()+requestPageToken+"TotalResults", (Integer)map.get("totalResults"));
 					model.addAttribute("totalResults",(Integer)map.get("totalResults"));
 				}			
 //				list = (List<StubhubEvent>)map.get("eventList");

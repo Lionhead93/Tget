@@ -7,11 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Searching Stubhub Event</title>
+<title>T-GET</title>
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
+	
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -32,16 +33,21 @@
 	$(function(){
 		$("input[type='text']").on("keyup",function(){
 			$("#searchKeyword").val($("input[type='text']").val());
-// 			alert("keyup : "+$("#searchKeyword").val());
+		});
+		
+		$("input[type='text']").on("keypress",function(){
+			if (event.keyCode ==13) {
+				$("#searchCondition").val("1");
+				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+			}
 		});
 		
 		$("#button-addon2").on("click",function(){
 			$("#searchCondition").val("1");
-			$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 		});
 		
-		$("button.button_black").on("click",function(){
-			
+		$("button.btn-light").on("click",function(){			
 			arr = $(this).parent().children("input.category").val().split(' ');
 			$("#category").val(arr[arr.length-1]);
 			$("#eventName").val($(this).val());
@@ -50,7 +56,7 @@
 			$("#koPerformer").val($(this).parent().children(".kp").val());
 // 			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
 // 			$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
-			$("form").attr("method" , "POST").attr("action" , "/event/getEvent").submit();
+			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEvent").submit();
 
 		});		
 		
@@ -62,6 +68,7 @@
 						url : "/event/rest/getEventList/"+requestPT,
 						method : "POST",
 						data : {
+										searchCondition : $("#searchCondition").val(),
 										searchKeyword : $("#searchKeyword").val()
 									},
 						dataType : "json",
@@ -75,14 +82,23 @@
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
 				});			
-		});		
-		
+		});				
 		
 	});
 	
 	</script>
 	<style type="text/css">
-	
+	#footer{
+		background-color: #1B1B1F ;
+	}
+	a, hr{
+			color: #FBFCFE ;	
+		}
+		
+	button.btn-light:hover{
+		background-color: gray;
+		color: #FBFCFE ;
+	}	
 	#tgetHeader{
 		   color: #FBFCFE;	
 	       padding-top: 30px;
@@ -106,41 +122,20 @@
 			color: #FBFCFE;		
 		}
 		
+		td:hover{
+			background-color : #041625; 
+		}
+		
 		th, td{
 			color: #FBFCFE;		
 			font-size:20px;
 		}
 
-		 .button_black{
-			border:1px solid #616261; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;
-			font-size:15px;font-family: 'Nanum Pen Script', cursive; padding: 0px 15px 0px 15px; 
-			/* text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 border-radius: 3px; color: white;
-			 font-size:25px;font-family: 'Nanum Pen Script', cursive; 
-/* 			 text-decoration:none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF; */
-			 background-color: #7d7e7d; background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
-			 background-image: -webkit-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -moz-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -ms-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: -o-linear-gradient(top, #7d7e7d, #0e0e0e);
-			 background-image: linear-gradient(to bottom, #7d7e7d, #0e0e0e);
-			 filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d, endColorstr=#0e0e0e);
-		}
-			
-		.button_black:hover{
-			 border:1px solid #4a4b4a;
-			 background-color: #646464; background-image: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#282828));
-			 background-image: -webkit-linear-gradient(top, #646464, #282828);
-			 background-image: -moz-linear-gradient(top, #646464, #282828);
-			 background-image: -ms-linear-gradient(top, #646464, #282828);
-			 background-image: -o-linear-gradient(top, #646464, #282828);
-			 background-image: linear-gradient(to bottom, #646464, #282828);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#646464, endColorstr=#282828);
-		}
 	</style>
 <body>	
 <jsp:include page="/layout/tgetToolbar.jsp" />
 
-<form>
+<form name="searchEvent">
 
 	<div class="container-fluid" align="center">	
 		<div id="tgetHeader" class="text-center">
@@ -148,81 +143,67 @@
 			<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
 			<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 			<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-<!-- 			<h3><strong> -->
-<!-- 							<input type="text"  />							 -->
-<!-- 								 <button class="btn btn-secondary" type="button" id="button-addon2">검색</button> -->
-<!-- 						</strong></h3><br/><br/> -->
-						
-					<div class="row">
-					<div class="col-lg-3  col-md-3 col-1">	
-					</div>
-					<div class="col-lg-6 col-md-6 col-10">	
-						<div class="input-group mb-1">
-					  <input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
-					  <div class="input-group-append">
-					    <span class="input-group-text btn"  id="button-addon2">검색</span>
-					  </div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-1">	
-					</div>
-					</div>
+			<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
+			<div class="col-lg-6 col-md-6 col-10">	
+				<div class="input-group mb-1">
+			  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
+			  		<div class="input-group-append">
+			    		<span class="input-group-text btn"  id="button-addon2">검색</span>
+			 		 </div>
 				</div>
-<!-- 				</div> -->
-				<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-3"></div> -->
-		</div>
-		</div>
-		</div>
-		
-					
-					
-
-		<div class="row" >
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8" align="center">
-				
-				<table class="table ">
-				  <thead>
-				    <tr align="center">
-				      <th scope="col"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  <c:forEach items="${eventList}"  var="i">
-				    <tr>
-				      <td align="center">
-						<div class="event" align="left">
-							<div  style="margin-left:10%; margin-right:10%" >
-								이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
-								이벤트 장소 : ${i.venueName }</br>
-								<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">
-									출연진 : ${i.performersName }
-								</c:if>								
-							</div>						 
-							<div align="right"  style="padding: 20px  70px ;">				
-								<input type="hidden"  class="kn"  value="${i.koName}" >
-								<input type="hidden"  class="el"  value="${i.venueName}" >
-								<input type="hidden" class="kp"  value="${i.performersName}" >			
-								<input type="hidden" class="category"  value="${i.ancestorsCategory}" >			
-								<button class="button_black" type="button" name="getEvent"  value="${i.name }">상세보기</button></br>
-							</div>
-						</div>			
-				  </td>
-			    </tr>
-			   </c:forEach>
-				<input type="hidden"  id="eventName" name="eventName"  value="" >
-				<input type="hidden"  id="koName" name="koName"  value="" >
-				<input type="hidden"  id="koLocation" name="koLocation"  value="" >
-				<input type="hidden"  id="koPerformer" name="koPerformer"  value="" >
-		  		 </tbody>
-				</table>
+				<div class="col-lg-3 col-md-3 col-1"></div>
 			</div>
-			<div class="col-lg-2"></div>
 		</div>
-
-		
+		<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
 	</div>
+		
+					
+					
+
+	<div class="row" >
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8" align="center">
+			
+			<table class="table ">
+			  <thead>
+			    <tr align="center">
+			      <th scope="col"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  <c:forEach items="${eventList}"  var="i">
+			    <tr>
+			      <td align="center" >
+					<div  align="left"  >
+						<div  style="margin-left:10%; margin-right:10%" >
+							이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
+							이벤트 장소 : ${!empty i.koLocation? i.koLocation:i.venueName }</br>
+							<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">
+								출연진 : ${i.performersName }
+							</c:if>								
+						</div>						 
+						<div align="right"  style="padding: 20px  70px ;">				
+							<input type="hidden"  class="kn"  value="${i.koName}" >
+							<input type="hidden"  class="el"  value="${i.venueName}" >
+							<input type="hidden" class="kp"  value="${i.performersName}" >			
+							<input type="hidden" class="category"  value="${i.ancestorsCategory}" >			
+<%-- 								<button class="button_black" type="button" name="getEvent"  value="${i.name }">상세보기</button> --%>
+							<button type="button" class="btn btn-light" name="getEvent"  value="${i.name }">상세보기</button></br>
+						</div>
+					</div>			
+			  </td>
+		    </tr>
+		   </c:forEach>
+			<input type="hidden"  id="eventName" name="eventName"  value="" >
+			<input type="hidden"  id="koName" name="koName"  value="" >
+			<input type="hidden"  id="koLocation" name="koLocation"  value="" >
+			<input type="hidden"  id="koPerformer" name="koPerformer"  value="" >
+	  		 </tbody>
+			</table>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>		
+</div><!-- container -->
 </form>
 <jsp:include page="/layout/footer.jsp" />
 </body>

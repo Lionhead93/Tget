@@ -28,5 +28,6 @@ public interface UserDao {
 		public User findPassword(String userId)throws Exception;
 		public void updatePassword(User user)throws Exception;
 		public User selectKakao(String kakaoId)throws Exception;
+		public User selectNaver(String naverId)throws Exception;
 
 }

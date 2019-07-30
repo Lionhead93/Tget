@@ -227,6 +227,12 @@ boolean result=true;
 		// TODO Auto-generated method stub
 		return userDao.selectKakao(kakaoId);
 	}
+	@Override
+	public User getNaver(String naverId) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.selectNaver(naverId);
+	}
+	
 	}
 
 

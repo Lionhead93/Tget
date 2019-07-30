@@ -48,6 +48,7 @@ import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
+import com.tget.service.event.domain.StubhubEvent;
 
 
 //==> 회원관리 Controller
@@ -87,6 +88,65 @@ public class EventRestController {
 	}
 	
 	///Method
+	@RequestMapping(value="rest/getEventList")
+	public Map<String,Object> getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,HttpSession session,Model model) throws Exception {
+		System.out.println("===============rest/getEventList===============");
+		System.out.println("search:"+search);
+		
+		Map<String,Object> map = null;
+		Map<String,Object> map2 = new HashMap<String,Object>();
+		List<StubhubEvent> list = null;
+		if (search.getSearchCondition().equals("0")) {
+//			model.addAttribute("category", search.getSearchKeyword());
+			map2.put("category", search.getSearchKeyword());
+			
+			List<StubhubEvent> tempList = (List<StubhubEvent>)session.getAttribute(search.getSearchKeyword()+requestPageToken);
+			
+			if (tempList != null) {
+				
+				list = tempList;				
+				map2.put("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
+//				model.addAttribute("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
+			}else {
+				map = eventService.getEventList(search, requestPageToken, stubhubKey);
+				list = (List<StubhubEvent>)map.get("eventList");
+				int totalResult = (Integer)map.get("totalResults");
+				if (totalResult != 0 && list != null) {
+					list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
+					session.setAttribute( search.getSearchKeyword()+requestPageToken, list);
+					session.setAttribute( search.getSearchKeyword()+requestPageToken+"TotalResults", (Integer)map.get("totalResults"));
+					map2.put("totalResults",(Integer)map.get("totalResults"));
+				}			
+//				list = (List<StubhubEvent>)map.get("eventList");
+//				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null, (List<StubhubEvent>)map.get("eventList"))).get("result");
+				
+			}
+		}else {
+			search.setSearchKeyword(((String)eventService.translate("ko", "en", search.getSearchKeyword(),null).get("result")));
+			map = eventService.getEventList(search, requestPageToken, stubhubKey);
+			list = (List<StubhubEvent>)map.get("eventList");
+			int totalResult = (Integer)map.get("totalResults");
+			if (totalResult != 0 && list != null) {
+				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
+//				model.addAttribute("totalResults",(Integer)map.get("totalResults"));
+				map2.put("totalResults",(Integer)map.get("totalResults"));
+			}			
+		}
+		
+//		model.addAttribute("eventList",list);
+//		model.addAttribute("search", search);
+//		model.addAttribute("requestPageToken",requestPageToken);				
+
+		
+		map2.put("eventList",list);
+		map2.put("search", search);
+		map2.put("requestPageToken", requestPageToken);
+		
+		return map2;
+	}
+	
+	
+	
 	@RequestMapping(value="rest/addInterestedEvent/{eventId}")
 	public Map<String,Object> addInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {
 		System.out.println("===============rest/addInterestedEvent/{eventId}===============");
@@ -133,17 +193,6 @@ public class EventRestController {
 		return map;
 	}
 	
-//	@RequestMapping(value="rest/shareUrl")
-//	public Map<String,Object> shareUrl(@RequestBody Review review) throws Exception {
-//		System.out.println("===============shareUrl===============");
-//		
-//		eventService.shareUrl
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("review", review);
-//		
-//		return map;
-//	}
 	
 	@RequestMapping(value="rest/deleteInterestedEvent/{eventId}")
 	public Map<String,Object> deleteInterestedEvent(@PathVariable String eventId, HttpSession session) throws Exception {

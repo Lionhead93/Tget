@@ -16,10 +16,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>T-GET</title>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
@@ -37,12 +37,71 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	
-	body {
-            margin-top: 70px;
-            
-       }
-			.dropbtn {
+	body{	
+		      color: #FBFCFE ;		  
+			  background-color: #062038;
+			  margin-top: 50px;				
+			  font-family: 'Nanum Gothic', sans-serif;
+		}
+		a{
+			color: #FBFCFE ;	
+		}
+		hr{
+			border: 1px groove white;
+		}
+		.list-group-item{
+			  margin-left:50px;	
+			  color: #FBFCFE ;
+			  border: 1px groove white;		  
+			  background-color: #062038;
+		}
+		table{
+			background-color: #193147;
+		}
+		td, th{
+			border: 1px solid white;
+			color: #FBFCFE ;
+		}
+		.col-md-2{
+			padding-left: 50px;
+		}	
+		.col-lg-3{			
+			margin-bottom: 20px;
+		}
+		.col-md-10{
+			padding-left: 100px;
+			padding-right: 100px;
+		}
+		.row.in{
+			margin-left:50px;
+			margin-right: 50px;
+		}
+		.border{
+			padding-top: 20px;
+			background-color: #193147;
+		}
+		section{
+			margin-left: 100px;
+		}
+		#inputGroupSelect01, nav{
+			background: rgba(4, 22, 37, 0.75);
+			color: #c0c5c9;
+		} 
+		#tgetHeader{
+			margin-top:30px;
+		   color: #FBFCFE;	
+	       padding-bottom: 200px;
+	       margin-bottom: 30px;
+	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
+				  -webkit-background-size: cover;
+				  -moz-background-size: cover;
+				  -o-background-size: cover;
+				  background-size: cover;	
+       } 
+       #footer{
+			background-color: #1B1B1F;
+		}
+	.dropbtn {
 	  background-color: #7FFFD4;
 	  color: white;
 	  padding: 16px;
@@ -123,23 +182,6 @@
 			$("form").attr("method" , "POST").attr("action" , "/community/getContentList").submit();
 		}
 		
-		function fncAddReport(){
-			
-			//alert($("input[name='whiteNickname']").val());
-			$("form").attr("method" , "POST").attr("action" , "/community/addReport").submit();
-			}
-
-			$(function() {
-				$( "button.btn.btn-info:contains('신고')" ).on("click" , function() {
-					
-					if(sessionScope.user.role == '2'){
-						fncAddReport();
-					}else{
-						alert("신고 접수되었습니다.");
-					}
-			
-				});
-			});
  
 		 $(function() {
 			
@@ -194,10 +236,10 @@
 				
 				});
 			 
-// 			 $( ".reportRing" ).on("click" , function() {	
-// 				 	//alert($(this).val())
-// 				 	self.location="/community/addReport?contentNo="+$(this).attr("id").trim();
-// 				});
+			 $( ".reportRing" ).on("click" , function() {	
+				 	//alert($(this).val())
+				 	self.location="/community/addReport?contentNo="+$(this).attr("id").trim();
+				});
 				
 			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
 					self.location="/community/getRefundList";	
@@ -207,11 +249,12 @@
 				
 	 
 			// 상세 조회
-			$( "td:nth-child(2)" ).on("click" , function() {
+			$( "td:nth-child(1)" ).on("click" , function() {
 				self.location ="/community/getContent?contentNo="+$(this).children('#contentNo').text().trim();
 			});
 
-			$( "td:nth-child(2)" ).css("color" , "black");
+			$( "td:nth-child(1)" ).css("color" , "black");
+			
 			$("h7").css("color" , "red");
 			
 			$(".ct_list_pop:nth-child(n)").on("mouseenter", function(){
@@ -327,132 +370,121 @@
 <body>
 	
 	<jsp:include page="/layout/tgetToolbar.jsp" />
+	
+	<div id="tgetHeader" class="text-center">
+	</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
-<div class="container">		
-		
-		<div class="page-header text-info">
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
-	       		<h3>Community > 공지사항</h3>
-	       </c:if>
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
-	       		<h3>Community > 공지사항</h3>
-	       </c:if>
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
-	       		<h3>Community > 공지사항</h3>
-	       </c:if>
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
-	       		<h3>Community > 자유게시판</h3>
-	       </c:if>
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
-	       		<h3>Community > 자유게시판</h3>
-	       </c:if>
-	       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	       		<h3>Community > 자유게시판</h3>
-	       </c:if>
-	      
-	    </div>
-	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	  
-		    	<p class="text-primary">
+	<div class="text-center">	    
+	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
+		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
+				<button type="button" class="btn btn-warning">길 찾기 안내</button>
+				<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
-		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>
-				
-				<button type="button" class="btn btn-warning">길 찾기 안내</button>
 		<br/><br/><br/>
-		   
+	</div>	   
 				
 		   
 	 <div class="row">
-	  <div class="col-md-2 text-center">
-	  <br/>
-	  
-		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
-			<ul class="list-group list-group-flush">
-			<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
-			<li class="list-group-item"><a href="#">자유게시판 이용 공지</a></li>
-			<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
-			</ul>
-		</c:if>
-		  
-		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-			<ul class="list-group list-group-flush">
-			<li class="list-group-item"><a href="#">삽니다</a></li>
-			<li class="list-group-item"><a href="#">팝니다</a></li>
-			<li class="list-group-item"><a href="#">수다방</a></li>
-			</ul>
-		</c:if>
+	  <div class="col-md-2 text-center">	  
+	      <div class="sticky-top">
+		  <br/>
+			 <div>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		      
+		   	 </div>
+			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
+				<li class="list-group-item"><a href="#">자유게시판 이용 공지</a></li>
+				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
+				</ul>
+			</c:if>
+			  
+			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item"><a href="#">삽니다</a></li>
+				<li class="list-group-item"><a href="#">팝니다</a></li>
+				<li class="list-group-item"><a href="#">수다방</a></li>
+				</ul>
+			</c:if>
+			</div>
 		</div>	
 		
       <!--  table Start /////////////////////////////////////-->
-     	<div class="col-md-10 text-center">
+     <div class="col-md-10 text-center">
      	
-      <table class="table table-hover table-striped" >
-      
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left">글 제목</th>
-<!--              <th align="left">글 내용</th>  -->
-            <th align="left">작성자</th>
-            <th align="left">작성일</th>
-			
-            <th align="left">공감/비공감</th>	
-            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-            <th align="left">신고</th>
-            </c:if>	
-          </tr>
-        </thead>
-       
-		<tbody>
-		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="content" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left" class="btn btn-link">${content.contentName}
-			  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
-			  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-			 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
-			   
-<%--  			  <td align="left">${content.contentBody}</td> --%>
-			  <td align="left">${content.userId}</td>
-			  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
-			  <td align="left">${content.regDate}</td> 
-			    
-		   	  
-		   	  
-		   	  <!-- 공감 -->
-		   	  <td align="left"><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-<%-- 		   	  <button class="btn btn-info" id="${content.contentNo}">공감</button> --%>
-		   	  <span name="${content.contentNo}">${content.goodCount}</span>
-		   	  
-		   	  <!-- 비공감 -->
-		   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-<%-- 		   	 <button class="btn btn-danger" id="${content.contentNo}">비공감</button> --%>
-		   	 <a id="${content.contentNo}">${content.badCount}</a> 
-		   	 
-		   	 <!-- 신고 하기 -->
-		   	 <c:if test="${search.searchCondition=='2'}">
-			  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" data-target="#addReportModal"><i class="fas fa-bell"></i></a>
-<%-- 			  <button type="button" value="${content.contentNo}" class="btn btn-warning">신고</button> --%>
+	      <table class="table" >	      
+	        <thead>
+	          <tr>
+	            <th>글 제목</th>
+	<!--              <th align="left">글 내용</th>  -->
+	            <th>작성자</th>
+	            <th>작성일</th>
 				
-			  </td>
-			  </c:if>
-				</td>
-  					 
+	            <th>공감/비공감</th>	
+	            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+	            <th>신고</th>
+	            </c:if>	
+	          </tr>
+	        </thead>
+	       
+			<tbody>
 			
-			</tr>
-          <tr>
-		</tr>
-          </c:forEach>
-		
-        </tbody>
-      
-      </table>
+			  <c:forEach var="content" items="${list}">
+				<tr>
+				  <td>${content.contentName}
+				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
+				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
+				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
+				   
+	<%--  		  <td align="left">${content.contentBody}</td> --%>
+				  <td>${content.userId}</td>
+				  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
+				  <td>${content.regDate}</td> 
+				    
+			   	  
+			   	  
+			   	  <!-- 공감 -->
+			   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
+	<%-- 		   	  <button class="btn btn-info" id="${content.contentNo}">공감</button> --%>
+			   	  <span name="${content.contentNo}">${content.goodCount}</span>
+			   	  
+			   	  <!-- 비공감 -->
+			   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
+	<%-- 		   	 <button class="btn btn-danger" id="${content.contentNo}">비공감</button> --%>
+			   	  <a id="${content.contentNo}">${content.badCount}</a> 
+			   	  </td>
+			   	 <!-- 신고 하기 -->
+			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+	              <td><a href="#" class="reportRing" id="${content.contentNo}"><i class="fas fa-bell"></i></a>
+	<%-- 			  <button type="button" value="${content.contentNo}" class="btn btn-warning">신고</button> --%>
+				  </td>
+				</c:if>				
+				</tr>
+	          </c:forEach>
+			
+	        </tbody>
+	      
+	      </table>
       </div>
 	  <!--  table End /////////////////////////////////////-->
 	</div>  
@@ -550,79 +582,9 @@
 	      </div>
 	    </div>
 	  </div>
-	</div>
-	<!-- 신고하기 Modal -->
-	<div class="modal modal-center fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
-	  <div class="modal-dialog modal-lg modal-center" role="document">
-	    <div class="modal-content modal-80size">
-					  
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">신고하기</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body"> 	    
-<!-- 			 <div class="form-group"> -->
-<!-- 			    <label for="contentNo">게시글 번호</label> -->
-<!-- 			    <div class="col-sm-4"> -->
-<%-- 			      <input type="text" class="form-control" id="contentNo" name="contentNo" value="${content.contentNo}" readonly> --%>
-			      
-<!-- 			    </div> -->
-<!-- 			  </div> -->
-			  
-			    
-			    
-			    <div class="col-sm-4">
-			    	<div class="col-sm">신고자</div>
-			      <input type="text" class="form-control" id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly>  
-			    </div>
-			 
-			  
-			  <div class="form-group">
-			    <label for="whiteNickname" class="col-sm-offset-1 col-sm-3 control-label">신고자 닉네임</label>
-			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="whiteNickname" name="whiteNickname" value="${user.nickName}" readonly>
-			      
-			    </div>
-			  </div>
-			<div class="form-group">
-			    <label for="blackId" class="col-sm-offset-1 col-sm-3 control-label">신고 당한 사람</label>
-			    <div class="col-sm-4">
-			      <input type="text" class="form-control" id="blackId" name="blackId" value="${content.userId}" readonly>
-			      
-			    </div>
-			  </div>
-			  
-			  <div class="form-group">
-			    <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">신고글 내용</label>
-			    <div class="col-sm-4">
-			      ${content.contentBody}
-				 </div>
-			  </div>
-			
-			 
-			<strong>신고 사유</strong>
-		  	<div class="col-xs-4">
-			<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
-			<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
-			<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
-			<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
-			</div>
-			
-			
-			   
-			<div class="modal-footer">
-	        <button type="button" class="btn btn-info" data-dismiss="modal">신고</button>
-	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
-	      </div>
-					        
-					      </div>
-					    </div>
-					  </div>
-					</div>			  
+	</div>			  
 	</form>
-</div>
+	<jsp:include page="/layout/footer.jsp" />
 </body>
 
 </html>

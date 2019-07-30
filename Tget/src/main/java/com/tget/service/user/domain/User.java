@@ -20,6 +20,19 @@ public class User {
 	private Date lastConnDate;
 	private String kakaoId;
 	private String kakaoToken;
+	private String naverToken;
+	
+	
+	
+	public String getNaverToken() {
+		return naverToken;
+	}
+
+	public void setNaverToken(String naverToken) {
+		this.naverToken = naverToken;
+	}
+
+
 	public String getKakaoToken() {
 		return kakaoToken;
 	}
