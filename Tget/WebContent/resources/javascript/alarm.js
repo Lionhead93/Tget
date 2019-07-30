@@ -1,10 +1,10 @@
 	
 function getAlarmModal(userId) {	
-	$(".modal-body").html("<ul class='list-group'>"+
+	$("#alarmModalBody").html("<ul class='list-group'>"+
 					        "</ul>");
 	$.ajax(
 			{
-				url : "/alarm/rest/getAlarmList/"+userId ,
+				url : "/alarm/rest/getAlarmList/"+userId+"/" ,
 				method : "GET" ,
 				dataType : "json" ,
 				async: false,
@@ -49,7 +49,7 @@ function getAlarmModal(userId) {
 											if(alarmCode==0)
 												self.location="/tran/getTranList?menu=user";
 											if(alarmCode==1)
-												self.location="/event/getEventTicketList?eventId="+alarmKeyword;							
+												self.location="/event/getEventTicketList?eventIds="+alarmKeyword;							
 											if(alarmCode==2)
 												self.location="/tran/getTranList?menu=user";							
 											if(alarmCode==3)
@@ -99,7 +99,7 @@ function getAlarmModal(userId) {
 function getNoReadAlarmCount(userId) {	
 	$.ajax(
 			{
-				url : "/alarm/rest/getNoReadAlarm/"+userId ,
+				url : "/alarm/rest/getNoReadAlarm/"+userId+"/" ,
 				method : "GET" ,
 				dataType : "json" ,
 				headers : {

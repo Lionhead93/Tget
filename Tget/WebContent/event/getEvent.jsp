@@ -19,7 +19,7 @@
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -99,43 +99,70 @@
 // 		$(document).on("click", "#editImage",function(){			
 			
 // 		});		
-		$("#editImage").on("click",function(){		
-			popWin = window.open("/event/addEventImage?eventName="+$("#eventName").val()
-					+"&eventImage="+$("#eventImage").val(),"popWin",
-					"left=500, top=100, width=600, height=600, "
-					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-// 			popWin = window.open("addEventImageGET.jsp",
-// 					"popWin",
+			
+// 		$('#exampleModalCenter').on('show.bs.modal', function(e) {
+				
+// 				var button = $(e.relatedTarget);
+// 				var modal = $(this);
+				
+// 				modal.find('.modal-body').load(button.data("remote"));
+		
+// 			});
+		
+		
+// 		$("#editImage").on("click",function(){		
+// 			popWin = window.open("/event/addEventImage?eventName="+$("#eventName").val()
+// 					+"&eventImage="+$("#eventImage").val(),"popWin",
 // 					"left=500, top=100, width=600, height=600, "
 // 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-		});		
+// 			$('#theModal').modal('show');			
+// 		});	
 		
-// 		$("#updateImage").on("click",function(){			
-// 			openChild();
-// 		});		
-		
-// 		$("#deleteImage").on("click",function(){			
+		$("#submit").on("click",function(){	
+			var formData = new FormData($("#editEventImage")[0]);
 			
-// 		});		
-
-// 		$("#eventImage").on("change",function(){			
-// 			alert("onChange");
-// 	 	});	
+			$.ajax(
+					{
+						url : "/event/rest/addEventImage",
+						method : "POST",
+						data : formData,
+						processData: false,
+						contentType: false,
+						dataType : "json",
+						success : function(JSONData,status){
+// 							alert(JSONData.eventImage);
+							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
+							$("button.close").click();
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});		
+		})	;
 		
 		
-		$('#theModal').on('show.bs.modal', function(e) {
+		$("#delete").on("click",function(){	
 			
-			var button = $(e.relatedTarget);
-			var modal = $(this);
-			
-			modal.find('.modal-body').load(button.data("remote"));
-	
-		});
-		
+			$.ajax(
+					{
+						url : "/event/rest/deleteEventImage",
+						method : "POST",
+						data : {
+								eventName : $("#eventName").val()
+							},
+						dataType : "json",
+						success : function(JSONData,status){
+							$("img.main").attr("src","/resources/images/uploadFiles/logo.png");
+							$("button.close").click();
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});		
+		})	;
 	});
 	
-	</script>
-	
+	</script>	
 	<style>
 	
 	#footer{
@@ -143,28 +170,22 @@
 	}
 	a, hr{
 			color: #FBFCFE ;	
-		}
-		
+		}		
 	button.btn-light:hover{
 		background-color: gray;
 		color: #FBFCFE ;
-	}	
-	
+	}		
 	body{
 			background-color : #062038; 
 			color: #FBFCFE;
-		}
-		
+		}		
 		div.border{
 			background-color : #193147; 
-		}
-		
+		}		
 		div.border:hover{
 			background-color : #041625; 
-		}
-		
+		}		
       div.container{
-/*         	font-family: 'Sunflower', sans-serif; */
 	 		font-size: 20px;    
         }
         
@@ -172,7 +193,6 @@
         	border: 1px; color: black;
       	}
       	div.list{
-/*         	font-family: 'Sunflower', sans-serif; */
 	 		font-size: 20px;
       	}
         
@@ -180,14 +200,6 @@
          	width: 400px; 			
  	 		hieght: 250px; 
         }
-
-	/*	@media all and (max-width: 700px) {
-		    img.main { width:50%; }
- 		} */
- 		
- 		
- 		
-		
 		.neon {
 		  font-family: neon;
 		  color: #FB4264;
@@ -199,18 +211,14 @@
 		.flux {
 		  font-family: neon;
 		  color: #426DFB;
-/* 		  font-size: 9vw; */
-/* 		  line-height: 9vw; */
 		  text-shadow: 0 0 3vw #2356FF;
 		}
 		
-/* */ 		.neon {
+		.neon {
 		  animation: neon 1s ease infinite;
 		  -moz-animation: neon 1s ease infinite;
 		  -webkit-animation: neon 1s ease infinite;
-		}
-		
-		
+		}		
 		@keyframes neon {
 		  0%,
 		  50% {
@@ -221,15 +229,13 @@
 		    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
 		    color: #806914;
 		  }
-		}
-		
+		}		
 		.flux {
 		  animation: flux 2s linear infinite;
 		  -moz-animation: flux 2s linear infinite;
 		  -webkit-animation: flux 2s linear infinite;
 		  -o-animation: flux 2s linear infinite;
-		}
-		
+		}		
 		@keyframes flux {
 		  0%,
 		  100% {
@@ -241,6 +247,19 @@
 		    color: #146C80;
 		  }
   		}
+  		.modal-wrap{
+			width:100%;
+			margin:auto;
+			max-width:525px;
+ 			position:relative; 
+			background-color: black;
+			background:url(/resources/images/logins.jpg) no-repeat center;
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			overflow:auto;
+		}
+		.modal-html{
+			background:rgba(40,57,101,.9);			
+		}
     </style>
 	
 </head>
@@ -289,7 +308,7 @@
 							<img class="main" src="/resources/images/uploadFiles/${eventImage}" style="" />
 						</c:if>
 						<c:if test="${empty eventImage}">
-							<img src="/resources/images/logo.png"  style="width:400px; height=250px;"/>
+							<img class="main" src="/resources/images/logo.jpg"  style="width:400px; height=250px;"/>
 <!-- 							<img src = "http://placehold.it/500x280" class="img-rounded"/> -->
 						</c:if>
 						<br/>
@@ -297,11 +316,12 @@
 							<div align="right">조회수 : ${viewCount}회<br/></div>
 							
 							<c:if test="${user.role == 2 }">
-								<!-- Call Modal Button -->	
-								<button type="button" class="nav-link btn btn-light"  data-remote="/event/addEventImageGET.jsp"
-		data-toggle="modal" data-target="#theModal">편집</button><br/>
+<!-- 								Call Modal Button	 -->
+								<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-light"							
+								 data-target="#exampleModalCenter">편집</button><br/>
+		
 							</c:if>
-							
+
 							
 						</div>
 					</div>	
@@ -345,23 +365,7 @@
 							 </div>
 						</section>
 				
-				
-				
-
-	<!-- Modal -->
-	<div class="modal fade" id="theModal" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header"></div>
-				<div class="modal-body">... remote content from "data-remote"
-					loads here ...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 				
 <!-- 					<table class="table table-striped"> -->
 <!-- 					  <thead> -->
@@ -392,8 +396,42 @@
 <!-- 				<div class="col-lg-1"></div> -->
 		</div>
 		
+		
+		
+		
 	</div>
 </form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">이미지 편집</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <jsp:include page="/event/addEventImageGET.jsp" />
+<%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-light"  id="delete" >삭제</button>
+        <button type="button" class="btn btn-light"  id="submit" >저장</button>
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
+
 <jsp:include page="/layout/footer.jsp" />
 </body>
 </html>

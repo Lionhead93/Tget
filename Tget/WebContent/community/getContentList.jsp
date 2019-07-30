@@ -447,7 +447,11 @@
 			
 			  <c:forEach var="content" items="${list}">
 				<tr>
+<<<<<<< HEAD
 <%-- 					<c:if test="${report.check=='0'}"> --%>
+=======
+				  
+>>>>>>> refs/remotes/origin/master
 				  <td>${content.contentName}
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>

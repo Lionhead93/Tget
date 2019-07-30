@@ -4,6 +4,9 @@
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 
 <script type="text/javascript">
 
@@ -35,9 +38,16 @@
 	
 	$( function() {
 		
+		 $("input[name='password']").on("keypress",function(){
+				if (event.keyCode ==13) {
+					$("input[id='signin']").click();
+// 					$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
+				}
+			});
+		
+		
 		$("#userId").focus();
 		
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("input[id='signin']").on("click" , function() {
 			
 			//alert("눌리니");
@@ -73,24 +83,29 @@
 						  alert("ID/password error");
 						  return;
 			  		 }else if (JSONData.msg == "true") { 
-					
-					  $('#black').modal('show');
-					  
-					// alert("응 너 블랙이야~");
-					 $("#nickName").text(JSONData.nickName);
-					 $("#startDate").text(JSONData.startDate);
-					 $("#endDate").text(JSONData.endDate);
-					 
+			  			
+			  			swal({
+			  	          title: JSONData.nickName,
+			  	          text: "블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n"+
+			  	        "블랙리스트 종료일자"+JSONData.endDate,
+			  	          icon: "error",
+			  	          buttons: true,
+			  	          dangerMode: true,
+			  	        })
+			  	
 				   } else if (JSONData.msg == "false")
 				  		 { 
 					   		$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				  	 	
 				  		 }
-		
+				   
 		
 			   }
 				   });
 	});	
+		
+		
+		
 		});
 	
 	$( function() {
@@ -98,7 +113,7 @@
 		$("a[id='kakao' ]").on("click" , function() {
 				
 				var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
-				window.open("https://kauth.kakao.com/oauth/authorize?client_id=ea9f389c17a2bd4b4fd122a0c9184bc2&redirect_uri=http://192.168.0.16:8080/user/oauth&response_type=code","Kakao login",popOption);
+				window.open("https://kauth.kakao.com/oauth/authorize?client_id=ea9f389c17a2bd4b4fd122a0c9184bc2&redirect_uri=http://127.0.0.1:8080/user/oauth&response_type=code","Kakao login",popOption);
 				
 				
 		});
@@ -140,7 +155,7 @@
 					<input id="password"  name="password"  type="password" class="input" data-type="password" placeholder="Password">
 				</div>
 				<div class="group">
-					<input id="signin" class="button" value="Sign In">
+					<input id="signin" class="button" value="Sign In" data-toggle="modal" style="readOnly=true;">
 				</div>
 				
 				<div class="text-center">
@@ -166,7 +181,7 @@
 </div> <!-- ---로그인창--- -->
 
 
-<div class="modal fade" id="black" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="black" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 				  <div class="modal-dialog modal-lg" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -199,7 +214,7 @@
 
 				   </div>
 	  </div>
-		 </div>  
+		 </div>   -->
 		 
 		 	
 		 
