@@ -100,7 +100,7 @@ public class UserRestController {
 		System.out.println(receiver+"번호 뭐 들왔냐?");
 		
 		int rand = (int) (Math.random() * 899999) + 100000; 
-		
+		System.out.println(rand+"랜덤번호 머냐");
 		  String hostname = "api.bluehouselab.com";
 	        String url = "https://"+hostname+"/smscenter/v1.0/sendsms";
 
@@ -271,7 +271,7 @@ public class UserRestController {
 			
 //			model.addAttribute("user", user);
 			map.put("msg", "true");
-			map.put("nickName", user.getNickName()+"님은 블랙리스트 상태입니다.");
+			map.put("nickName", user.getNickName()+"님은 블랙리스트입니다.");
 			map.put("startDate", user.getBlacklistStartDate().toLocaleString());
 			map.put("endDate", user.getBlacklistEndDate().toLocaleString());
 	

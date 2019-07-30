@@ -86,6 +86,10 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
+	var ch = 0;
+	
+	var cch = 0;
+	
 		  $(function() {
 			 
 		 		var rand = "";
@@ -135,9 +139,10 @@
 					   
 					   $("#inj").hide();
 						phone.style.border = "3px solid gold";
-						phone.disabled = true;
-					   
-			
+						phone.readOnly = true;
+						$("#pij").hide();
+					   	cch = 1;
+						
 				   } else
 				  		 { 
 					   alert("인증 실패"); 
@@ -172,8 +177,8 @@
 			             }
 			         });
 			     });
-
-
+						
+							
 			
 			  
 			     $(function() {
@@ -219,13 +224,32 @@
 							return;
 						}
 						
+						/* if( $("#injb").show() ) {
+						 
+							alert("반드시 이메일 인증을 해야함.");
+							return;
+						} */
+						
+						if(ch !=1 ){
+							alert("반드시 이메일 인증을 해야함.");
+							return;
+							
+						}
+						
+						if(cch !=1 ){
+							alert("반드시 휴대전화 인증을 해야함.");
+							return;
+							
+						}
+						
+						
 						var userId = id+id2;
 						
-			/* 			var address = address1+address2;
+			 			var address = address1+address2;
 						
-						$("input[name='userId']").val(userId); */
 						
-						$("input[name='address']").val(address);
+						
+					 	$("input[name='address']").val(address); 
 						
 						$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 					}
@@ -233,12 +257,12 @@
 			     
 			     
 			     
-				  /* $(function() {
+				   $(function() {
 						//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 						$("a:contains('취 소')").on("click" , function() {
-							
+							self.location = "/TgetMain.jsp"
 						});
-					});	  */				 
+					});	  				 
 			     
 					$(function() {
 						
@@ -384,10 +408,11 @@
 													alert("인증성공");
 													userId.value = id+id2;
 													userId.style.border = "3px solid gold";
-												
+													userId.readOnly = true;
 													 $("#divemail").hide();
 													 $("#userId2").hide();
 													 $("#injb").hide();
+													 ch = 1;
 													 
 												}else{
 													alert("인증실패");  
@@ -412,16 +437,9 @@
 	</div>
 			 <div class="text-center">아이디
 							  <form class="form-horizontal">
-							  
-							 <!--  <div class="form-group">
-							    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아이디</label>
-							    <div class="col-sm-4">
-							      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
-							    </div>
-							  </div> -->
-							   <div class="form-group" >
+						   <div class="form-group" >
 							   
-						    <input type="text" name="userId" id="userId" maxlength="15" > 
+						    <input type="text" class="col-sm-2" name="userId" id="userId" maxlength="15" > 
 							 <select name="userId2" id="userId2" >
 							      <option  id = "ig" value="@naver.com">@naver.com</option>
 							      <option  id = "ig" value="@daum.net">@daum.net</option>
@@ -437,7 +455,7 @@
 							    
 							     <div class="form-group">
 							        <div id="divemail" style="display:none;">인증번호
-							      <input type="text" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-primary">확인</button>
+							      <input type="text"  id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-primary">확인</button>
 							    </div>
 							  </div>
 							    
@@ -446,13 +464,13 @@
 							  	  <div class="form-group">
 							  	  
 					
-							      <input type="password"  id="password" name="password" placeholder="비밀번호">
+							      <input type="password" class="col-sm-2" id="password" name="password" placeholder="비밀번호">
 							    
 							  </div>
 							  비밀번호확인
 							  <div class="form-group">
 						
-							      <input type="password" id="password2" name="password2" placeholder="비밀번호 확인">
+							      <input type="password" class="col-sm-2" id="password2" name="password2" placeholder="비밀번호 확인">
 							      
 							  
 							  </div>
@@ -472,16 +490,16 @@
 							    이름<div class="form-group">
 							    <label for="userName"></label>
 					
-							      <input type="text" id="userName" name="userName" placeholder="회원이름">
+							      <input type="text" class="col-sm-2" id="userName" name="userName" placeholder="회원이름">
 							 
 							  </div>
 							  
 							  닉네임<div class="form-group">
-							  <img src="/resources/images/check.jpg" width="25" height="25" id="check2" style="display:none;"/>
+							  
 							    <label for="nickName"></label>
 							    
 					
-							      <input type="text" id="nickName" name="nickName" placeholder="닉네임"><br>
+							      <input type="text" class="col-sm-2" id="nickName" name="nickName" placeholder="닉네임"><br>
 							      <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
 							      </span>
 							
@@ -496,7 +514,7 @@
 							    <label for="phonee"></label>
 							    
 					
-							      <input type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-primary">전송</button>
+							      <input  class="col-sm-2" type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button id="pij" type="button" class="btn btn-primary">전송</button>
 							  
 							  </div>
 							  
