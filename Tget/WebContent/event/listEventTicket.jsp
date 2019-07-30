@@ -200,7 +200,7 @@
 							method : "GET" ,
 							data : {
 								
-								requestUrl : newURL+"?eventId="+$("#eventId").val(),
+								requestUrl : newURL+"?eventIds="+$("#eventId").val(),
 								eventId : $("#eventId").val()
 							},
 							dataType : "json" ,							
