@@ -97,7 +97,8 @@ public class UserRestController {
 		
 		System.out.println("뜨냐?");
 		
-	
+		System.out.println(receiver+"번호 뭐 들왔냐?");
+		
 		int rand = (int) (Math.random() * 899999) + 100000; 
 		
 		  String hostname = "api.bluehouselab.com";
@@ -287,11 +288,22 @@ public class UserRestController {
 
 	}
 	@RequestMapping(value = "rest/mailSender")
-	public Map<String,Object> mailSender(String Email , String emailcode, HttpServletRequest request, ModelMap mo, HttpSession session2) throws AddressException, MessagingException {
+	public Map<String,Object> mailSender(String Email , String emailcode, HttpServletRequest request, ModelMap mo, HttpSession session2) throws Exception {
 	
 		
 		System.out.println("이메일 인증 들어왔다"+Email);
 		Map<String,Object> map = new HashMap<String,Object>();
+		User user = new User();
+		
+		 user = userService.getUser(Email);
+		
+		 System.out.println(user+"유저 뭐찍힘?");
+		
+		 if(user !=null) {
+				map.put("msg", "bad");
+				return map;
+			}
+		 
 		String host = "smtp.gmail.com"; 
 		
 		final String username = "gogo1705";
@@ -337,10 +349,13 @@ public class UserRestController {
 		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용 }
 	
 		System.out.println("받은거"+check);
+	
 		
+		
+	
 		map.put("check", check);
 		
 		return map;
 	}
-
-}
+		
+	}

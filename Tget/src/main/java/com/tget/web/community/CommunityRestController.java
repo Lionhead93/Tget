@@ -206,7 +206,17 @@ public class CommunityRestController {
 		
 		weather = GetSearchWeather.getSearchweather(weather);
 		
+		//List<String> list = eventService.getAllLocation();
+		
 		return weather;
 	}
-
+	
+//	@RequestMapping(value="rest/getSearchLoad/")
+//	public List<String> getSearchLoad() throws Exception{
+//		System.out.println("/community/rest/getSearchLoad: ");
+//		
+//		List<String> loadList = eventService.getAllLocation();
+//		
+//		return loadList;
+//	}
 }
