@@ -40,7 +40,7 @@
 	<body>
 		
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
-	<jsp:include page="/user/xx.jsp" />	
+ 	 <jsp:include page="/user/xx.jsp" />
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without

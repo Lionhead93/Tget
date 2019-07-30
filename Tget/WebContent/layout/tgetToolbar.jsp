@@ -120,9 +120,9 @@ $(function() {
 			self.location="/community/getRefundList";	
 		
 		});
-	 
 });
 </script>
+
 		<!-- Header -->
 			<header id="header">
 				<h1><a id="brand" href="#">T-GET <span>by MFC</span></a></h1>
@@ -205,6 +205,6 @@ $(function() {
 					    </div>
 					  </div>
 					</div>
-		
+
 		
 		

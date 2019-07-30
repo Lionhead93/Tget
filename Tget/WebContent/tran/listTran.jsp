@@ -288,7 +288,7 @@
 	
 	
 	<section class="wrapper style1">
-	<div class="inner">	
+	
 	<div class="row">
 		<section class="2u$">
 		<div class="sticky-top">
@@ -305,13 +305,13 @@
 											<li><a href="#">판매티켓 목록</a></li>
 											</c:if>
 											<li><a href="#">티켓거래 공지</a></li>
-											<li><a href="#">카톡 문의하기</a></li>
 										</ul>
 		</div>
 		</div>
 		</section>
 		
 		<section class="9u$">
+		<div class="inner">	
 		 <table class='alt'>
 			  <thead>
 			    <tr>
@@ -384,9 +384,9 @@
 			  </c:forEach> 
 			  </tbody>
 		</table>
+		</div>
 		</section>
 		</div>		
-	</div>
 	</div>
 	</section>
  

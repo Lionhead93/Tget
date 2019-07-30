@@ -30,9 +30,15 @@ public class CouponDaoImpl implements CouponDao{
 		sqlSession.insert("CouponMapper.insertCoupon", coupon);
 		
 	}
+	
+	@Override
+	public Coupon selectCoupon(int couponNo) throws Exception {
+		return sqlSession.selectOne("CouponMapper.selectCoupon", couponNo);		
+	}
+	
 	@Override
 	public List<Coupon> selectCouponList(String userId) throws Exception {
-		return sqlSession.selectList("CouponMapper.selectCoupon", userId);
+		return sqlSession.selectList("CouponMapper.selectListCoupon", userId);
 	}
 	@Override
 	public void updateCoupon(Coupon coupon) throws Exception {

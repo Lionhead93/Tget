@@ -1,5 +1,6 @@
 package com.tget.service.coupon.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +41,29 @@ public class CouponServiceImpl implements CouponService{
 
 	@Override
 	public Map<String, Object> getCouponList(String userId) throws Exception {
+		
 		List<Coupon> list= couponDao.selectCouponList(userId);
 		
+		List<Coupon> listA = new ArrayList<Coupon>();
+		List<Coupon> listB = new ArrayList<Coupon>();
+		
+		if(list.size()!=0) {
+			
+			for(Coupon coupon:list) {
+				if(coupon.getCouponCode().equals("0")) {
+					listA.add(coupon);
+				}else if(coupon.getCouponCode().equals("1")) {
+					listB.add(coupon);
+				}
+			}
+			
+		}
+		
 		Map<String,Object> map = new HashMap<String,Object>();
+		
 		map.put("list", list);
+		map.put("listA", listA);
+		map.put("listB", listB);
 		
 		return map;
 	}
@@ -52,6 +72,12 @@ public class CouponServiceImpl implements CouponService{
 	public void updateCoupon(Coupon coupon) throws Exception {
 	couponDao.updateCoupon(coupon);
 		
+	}
+
+	@Override
+	public Coupon getCoupon(int couponNo) throws Exception {
+		// TODO Auto-generated method stub
+		return couponDao.selectCoupon(couponNo);
 	}
 
 

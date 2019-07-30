@@ -121,17 +121,17 @@ public class TicketController {
 		
 		List<String> list = eventService.getInterestedByUser(search);
 		
-		for(String userId : list) {
-			
-			Alarm alarm = new Alarm();
-			alarm.setAlarmCode(1);
-			alarm.setAlarmKeyword(ticket.getEvent().getEventId());
-			alarm.setUserId(userId);
-			alarmService.addAlarm(alarm);	
-			
+		if(list.size()!=0) {
+			for(String userId : list) {				
+				Alarm alarm = new Alarm();
+				alarm.setAlarmCode(1);
+				alarm.setAlarmKeyword(ticket.getEvent().getEventId());
+				alarm.setUserId(userId);
+				alarmService.addAlarm(alarm);					
+			}
 		}
 		
-		return "forward:/ticket/addTicketResult.jsp";
+		return "forward:/ticket/getTicketList?menu=seller";
 	}
 	
 	@RequestMapping(value = "getTicket", method = RequestMethod.GET)	
