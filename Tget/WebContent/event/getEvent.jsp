@@ -118,9 +118,20 @@
 			
 // 		});		
 
-		$("#eventImage").on("change",function(){			
-			alert("onChange");
-	 	});	
+// 		$("#eventImage").on("change",function(){			
+// 			alert("onChange");
+// 	 	});	
+		
+		
+		$('#theModal').on('show.bs.modal', function(e) {
+			
+			var button = $(e.relatedTarget);
+			var modal = $(this);
+			
+			modal.find('.modal-body').load(button.data("remote"));
+	
+		});
+		
 	});
 	
 	</script>
@@ -286,8 +297,11 @@
 							<div align="right">조회수 : ${viewCount}회<br/></div>
 							
 							<c:if test="${user.role == 2 }">
-								<button type="button" class="btn btn-light"  id="editImage">편집</button><br/>
+								<!-- Call Modal Button -->	
+								<button type="button" class="nav-link btn btn-light"  data-remote="/event/addEventImageGET.jsp"
+		data-toggle="modal" data-target="#theModal">편집</button><br/>
 							</c:if>
+							
 							
 						</div>
 					</div>	
@@ -333,6 +347,21 @@
 				
 				
 				
+
+	<!-- Modal -->
+	<div class="modal fade" id="theModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<div class="modal-body">... remote content from "data-remote"
+					loads here ...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 				
 <!-- 					<table class="table table-striped"> -->
 <!-- 					  <thead> -->
