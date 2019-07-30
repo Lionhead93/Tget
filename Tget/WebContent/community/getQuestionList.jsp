@@ -14,10 +14,17 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
+		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
+		<meta name="author" content="Codrops" />
     <title>T-GET</title>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabstyles.css" />
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -33,7 +40,7 @@
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>	
 		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-	
+		<script src="/resources/javascript/modernizr.custom.js"></script>
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -43,11 +50,8 @@
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
+		a, hr{
 			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
 		}
 		.list-group-item{
 			  margin-left:50px;	
@@ -77,11 +81,10 @@
 			margin-right: 50px;
 		}
 		.border{
-			padding-top: 20px;
 			background-color: #193147;
 		}
 		section{
-			margin-left: 100px;
+			margin-left: 40px;
 		}
 		#inputGroupSelect01, nav{
 			background: rgba(4, 22, 37, 0.75);
@@ -98,7 +101,10 @@
 				  -o-background-size: cover;
 				  background-size: cover;	
        } 
-       #footer{
+       #cyberWidget{
+       		background-color: white;
+       }       
+		#footer{
 			background-color: #1B1B1F;
 		}
 		
@@ -148,17 +154,7 @@
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 	
-		function fncAddReport(){
-			
-			//alert($("input[name='whiteNickname']").val());
-			$("form[name='addReport']").attr("method" , "POST").attr("action" , "/community/addReport").submit();
-			}
-
-			$(function() {
-				$( "button.btn.btn-info:contains('신고하기')" ).on("click" , function() {
-					fncAddReport();
-				});
-			});
+		
 			
 		 $(function() {
 			
@@ -176,11 +172,7 @@
 					$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
  				});
 			 
-			 $( "button.btn.btn-warning:contains('길 찾기 안내')" ).on("click" , function() {
-				 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
-		             window.open("/community/getSearchLoad","T-get 길 찾기 ",popOption);	
-				 
-				});
+			 
 			 
 			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
@@ -193,7 +185,7 @@
 				});
 			 
 			 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
-					self.location="/community/getQuestionList";	
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 				
 				});
 			 
@@ -212,30 +204,7 @@
 				
 				});
 			 
- 			 $( ".reportRing" ).on("click" , function() {
- 				 	if('${user}'==''){
- 				 		alert("로그인을 해주세요");
- 				 		return;
- 				 	}
- 				 	$(this).attr("data-target","#addReportModal");
-				 	var contentNo = $(this).attr("id").trim();
-				 	$.ajax(
-							{
-								url : "/community/rest/getContent/"+contentNo ,
-								method : "GET" ,
-								dataType : "json" ,
-								headers : {
-									"Accept" : "application/json",
-									"Content-Type" : "application/json"
-								},
-								success : function(data) {
-									$("input[name='contentNo']").val(data.contentNo);
-									$("input[name='blackId']").val(data.userId);
-									$("#reportContentBody").html(data.contentBody);
-									$("#reportBlackId").html(data.userId);
-								}
-							});
-				});
+ 			 
 				
 			 $( "a[href='#']:contains('환불 게시판')" ).on("click" , function() {
 					self.location="/community/getRefundList";	
@@ -326,39 +295,7 @@
 			    	});
 				});
 		 });
- 		  
- 		 $(function getSearchWeather(lat, lon) {
-			
-				$("button.btn.btn-info:contains('날씨 안내')").on("click" , function() {
-						
- 								
-						$.ajax( 
-								
-								{
-									url : "/community/rest/getSearchWeather/",
-									method : "POST" ,
-
-									data : JSON.stringify({
-										lat : lat,
-										lon : lon,
-									}),
-									headers : {
-										
-										"Accept" : "application/json",
-										"Content-Type" : "application/json"
-									},
-									success : function(JSONData , status) {
-									
-										var displayValue ="날씨 : "+JSONData.weather+"<br/>"
-														+"온도 : "+JSONData.temp+"℃<br/>"
-														+"풍속 : "+JSONData.wind+"m/s<br/>"
-														+"흐림 : "+JSONData.clouds+"%<br/>";
-										
-										$(".modal-body").html(displayValue);
-									}
-							});
-				});		
-			});	
+ 		
 	</script>
 	
 </head>
@@ -366,22 +303,157 @@
 <body>
 	
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-
 	
 	<div id="tgetHeader" class="text-center">
 	</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="text-center">	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
+		    	<c:if test="${sessionScope.user.role == '2'}">
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
-				<button type="button" class="btn btn-warning">길 찾기 안내</button>
+		    	</c:if>
 				<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
-		<br/><br/><br/>
+		
 	</div>	   
-				
+	
+	<div class="col-8">	
+			<section>
+				<br/>
+				<div class="tabs tabs-style-topline">
+					<nav>
+						<ul>
+							<li><a href="#section-topline-1"><h6><strong>전체 거래 보기</strong></h6></a></li>
+							<li><a href="#section-topline-2"><h6><strong>티켓 Check</strong></h6></a></li>
+							<li><a href="#section-topline-3"><h6><strong>무통장 입금 확인</strong></h6></a></li>
+							<li><a href="#section-topline-4"><h6><strong>판매자 입금</strong></h6></a></li>
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-topline-1">
+						  <div class="input-group-prepend">
+						  <label class="input-group-text" for="inputGroupSelect01">검색</label>						  
+						  <select class="custom-select" id="inputGroupSelect01" style="width :150px;">
+						    <option selected>All</option>
+						    <option value="0">입금 대기</option>
+						    <option value="1">배송 대기</option>
+						    <option value="2">배송 중</option>
+						    <option value="3">배송 완료</option>
+						    <option value="4">환불 및 취소</option>
+						  </select>
+						  </div>
+						<hr/>
+							 <div class="row">
+								 <c:forEach var="tran" items="${list}" varStatus="j">
+								 	<div name="${tran.tranCode}" class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${tran.event.koName}</strong></h5>
+								 			<hr/>
+								 			<div><small>${tran.orderDate}</small></div>
+								 			<div><small>${tran.seller.userId} <i class="far fa-handshake"></i> ${tran.buyer.userId}</small></div>
+								 			<c:if test="${tran.tranCode=='0'}">
+								 				<div class="progress">
+												  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+								 				<div class="text-danger"><small>*무통장입금 대기중</small></div>
+								 			</c:if>
+								 			<c:if test="${tran.tranCode=='1'}">
+									 			<div class="progress">
+													<div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+								 				<div class="text-warning"><small>*결제완료 (배송대기)</small></div>
+								 			</c:if>
+								 			<c:if test="${tran.tranCode=='2'}">
+								 				<div class="progress">
+													<div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+								 				<div class="text-info"><small>*배송중</small></div>
+								 			</c:if>
+								 			<c:if test="${tran.tranCode=='3'}">
+								 				<div class="progress">
+													<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+								 				<div class="text-success"><small>*배송완료</small></div>
+								 			</c:if>
+								 			<c:if test="${tran.tranCode=='4'}">
+								 				<div class="text-secondary"><small>*환불 및 취소</small></div>
+								 			</c:if>
+								 			
+								 			<div><small></small></div>
+								 			<div><small></small></div>
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:forEach>
+							 </div>
+						</section>
+						<section id="section-topline-2">
+									
+									 <div class="text-center">
+								    
+								      <div class="row" id="ticketCheckRow">
+								      </div>
+								    </div>
+						</section>
+						<section id="section-topline-3">
+							<div class="row">
+								 <c:forEach var="tran" items="${list}" varStatus="j">
+								 <c:if test="${tran.tranCode=='0'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${tran.event.eventName}</strong></h5>
+								 			<hr/>
+								 			<div><small>${tran.orderDate}</small></div>
+								 			<div><small><i class="far fa-user"></i> ${tran.buyer.userId}</small></div>
+								 			<div><small>이름 : ${tran.buyer.userName}</small></div>
+								 			<div><small>금액 : ${tran.totalPrice}</small></div>
+								 			<br/>
+								 			<div><button type="button" name="depositCheck" id="${tran.tranNo}" class="btn btn-outline-success"><i class='fas fa-check'></i></button>
+								 			  &nbsp;<button type="button" name="tranDelete" id="${tran.tranNo}" class="btn btn-outline-danger"><i class='fas fa-trash-alt'></i></button></div>
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+							 </div>
+						</section>
+						<section id="section-topline-4">
+							<div class="row">
+								 <c:forEach var="tran" items="${list}" varStatus="j">
+								 <c:if test="${tran.tranCode=='3'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${tran.event.eventName}</strong></h5>
+								 			<hr/>
+								 			<div><small>${tran.orderDate}</small></div>
+								 			<div><small><i class="far fa-user"></i> ${tran.seller.userId}</small></div>
+								 			<div><small>이름 : ${tran.seller.userName}</small></div>
+								 			<div><small>예금은행 : ${tran.seller.accountBank}</small></div>
+								 			<div><small>예금계좌 : ${tran.seller.accountNo}</small></div>
+								 			<div><small>금액 : ${tran.totalPrice}</small></div>
+								 			<br/>
+								 			<div><button type="button" name="depositSeller" id="${seller.sellerId}" class="btn btn-outline-success"><i class="fas fa-money-check-alt"></i></button></div>
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+							 </div>
+						</section>
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			</section>
+			</div>		
 		   
 	 <div class="row">
 	  <div class="col-md-2 text-center">	  
@@ -415,14 +487,7 @@
 				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
 				</ul>
 			</c:if>
-			  
-			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">삽니다</a></li>
-				<li class="list-group-item"><a href="#">팝니다</a></li>
-				<li class="list-group-item"><a href="#">수다방</a></li>
-				</ul>
-			</c:if>
+	
 			</div>
 		</div>	
 		
@@ -447,12 +512,12 @@
 			
 			  <c:forEach var="content" items="${list}">
 				<tr>
-<%-- 					<c:if test="${report.check=='0'}"> --%>
+				  
 				  <td>${content.contentName}
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
-<%-- 				  </c:if> --%>
+				   
 	<%--  		  <td align="left">${content.contentBody}</td> --%>
 				  <td>${content.userId}</td>
 				  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
@@ -468,13 +533,7 @@
 			   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
 			   	  <a id="${content.contentNo}">${content.badCount}</a> 
 			   	  </td>
-			   	  
-				   	 <!-- 신고 하기 -->
-			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-bell"></i></a>	
-				  </td>
-				  </c:if>
-				  	
+			  	
 			</tr>
           <tr>
 		</tr>
@@ -488,30 +547,7 @@
 	</div>  
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
-	<!-- 날씨 안내 Modal -->
-	<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-md" role="document">
-					    <div class="modal-content modal-80size">
-					    <div class="modal-weather">
-					      <div class="modal-header"> 
-					        <h5 class="modal-title" id="modalCenterTitle"><strong>날씨 안내</strong></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body" id="getWeatherModalBody">
-					     
-					      </div>     
-					   </div>
-					          
-					      <div class="modal-footer">
-<!-- 					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button> -->
-<!-- 					        <button type="button" class="btn btn-primary">확인</button> -->
-					        
-					      </div>
-					    </div>
-					    </div>
-					  </div> 
+	 
 	<!-- 게시글 등록 Modal -->		  
 		<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
@@ -584,57 +620,6 @@
 	  </div>
 	</div>			  
 	</form>
-	<!-- 신고하기 Modal -->
-	<div class="modal fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content modal-80size">
-					  <div class="modal-report">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle"><strong>신고하기</strong></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body" id="addReportModalBody"> 	    
-		  
-			    <form name="addReport">
-<!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
-<%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
-					
-			    	<div class="col">작성자 : <span id="reportBlackId"></span></div>
-					
-					<div class="col">내용 :  <div id="reportContentBody"></div></div>
-			    
-				<br>
-				<hr>
-				<input type='hidden' name='blackId' value='' />
-				<input type='hidden' name='contentNo' value=''/>				
-				<input type='hidden' name='whiteId' value='${user.userId}'/>
-				<input type='hidden' name='whiteNickname' value='${user.nickName}'/>
-				<input type='hidden' name='reportCode' value='0'/>				
-				
-				
-				<strong>신고 사유를 선택해주세요</strong>
-			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
-				<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
-				<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
-				<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
-				</div>
-				
-				</form>		
-				   
-				<div class="modal-footer">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">신고하기</button>
-		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
-		      </div>
-				</div></div>	        
-						      </div>
-						    </div>
-						  </div>
-							  
-		
-
 </body>
 <jsp:include page="/layout/footer.jsp" />
 </html>

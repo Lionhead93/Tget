@@ -23,6 +23,7 @@ import com.tget.common.domain.Search;
 import com.tget.service.community.CommunityService;
 import com.tget.service.community.domain.Content;
 import com.tget.service.community.domain.Reply;
+import com.tget.service.community.domain.Report;
 import com.tget.service.community.domain.Weather;
 import com.tget.service.event.EventService;
 import com.tget.service.event.domain.Event;
@@ -53,18 +54,13 @@ public class CommunityRestController {
 	
 	
 	@RequestMapping( value="rest/getContent/{contentNo}", method=RequestMethod.GET ) //GET방식은 {prodNo}처럼 명시를 해줘야하지만
-	public Map getContent( @PathVariable int contentNo ) throws Exception{//       POST방식의 경우 Body로 바로 가므로 명시하지않고 바로 접근이 가능
+	public Content getContent( @PathVariable int contentNo ) throws Exception{//       POST방식의 경우 Body로 바로 가므로 명시하지않고 바로 접근이 가능
 		
-		System.out.println("/community/json/getContent : GET");
-		
-		Content content = communityService.getContent(contentNo);
-		
-		Map<String,Object> map = new HashMap<String, Object>();
-		
-		map.put("content", content);
-		
-		return map;
+		System.out.println("/community/rest/getContent : GET");
+				
+		return communityService.getContent(contentNo);
 	}
+
 	
 	@RequestMapping( value="rest/getRefund/{contentNo}", method=RequestMethod.GET ) 
 	public Map getRefund( @PathVariable int contentNo ) throws Exception{
