@@ -51,16 +51,6 @@
 			background: rgba(4, 22, 37, 0.75);
 			color: #c0c5c9;
 		} 
-		#tgetHeader{
-		   margin-top:30px;	
-		   color: #FBFCFE;	
-	       padding-bottom:200px; 
-	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
        #cyberWidget{
        		background-color: white;
        }       
@@ -98,10 +88,7 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	
-	<div id="tgetHeader" class="text-center">
-	
-	</div>
+	<jsp:include page="/layout/tgetHeader.jsp" />
 	
 		<div class="row">
 		<div class="col-2">
@@ -291,7 +278,7 @@ function ticketModalClick(){
 		var ticketNo= $(this).attr('id').trim();
 		var content = $(this).closest('.col-lg-3');
 		$.ajax({
-			url : "/ticket/rest/checkTicket/"+ticketNo ,
+			url : "/ticket/rest/checkTicket/"+ticketNo+"/" ,
 			method : "GET" ,
 			dataType : "json" ,
 			headers : {
@@ -310,7 +297,7 @@ function getSellerInfo(){
 	$("a[name='sellerInfo']").on("click",function(){
 		var sellerId = $(this).text().trim();
 		$.ajax({
-			url : "/user/json/getUser/"+sellerId ,
+			url : "/user/json/getUser/"+sellerId+"/" ,
 			method : "GET" ,
 			dataType : "json" ,
 			headers : {

@@ -54,21 +54,21 @@
 					}
 		});
 		
-		$("input[type='text']").on("keyup",function(){
-			$("#searchKeyword").val($("input[type='text']").val());
-		});
+// 		$("input[type='text']").on("keyup",function(){
+// 			$("#searchKeyword").val($("input[type='text']").val());
+// 		});
 		
-		$("input[type='text']").on("keypress",function(){
-			if (event.keyCode ==13) {
-				$("#searchCondition").val("1");
-				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-			}
-		});
+// 		$("input[type='text']").on("keypress",function(){
+// 			if (event.keyCode ==13) {
+// 				$("#searchCondition").val("1");
+// 				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+// 			}
+// 		});
 		
-		$("#button-addon2").on("click",function(){
-			$("#searchCondition").val("1");
-			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-		});
+// 		$("#button-addon2").on("click",function(){
+// 			$("#searchCondition").val("1");
+// 			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+// 		});
 		
 		
 	
@@ -188,7 +188,9 @@
       div.container{
 	 		font-size: 20px;    
         }
-        
+        .col-lg-6{
+        	margin-top: 10px;
+        }
         div.col-md-4{
         	border: 1px; color: black;
       	}
@@ -199,6 +201,7 @@
        img.main {
          	width: 400px; 			
  	 		hieght: 250px; 
+
         }
 		.neon {
 		  font-family: neon;
@@ -266,27 +269,28 @@
 
 <body>
 <jsp:include page="/layout/tgetToolbar.jsp" />
+<jsp:include page="/layout/tgetHeader.jsp" />
 
-<form name="searchEvent">
-			<div id="tgetHeader" class="text-center">
-			<br/><br/><br/>
-				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
-				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
-				<div class="col-lg-6 col-md-6 col-10">	
-					<div class="input-group mb-1">
-				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
-				  		<div class="input-group-append">
-				    		<span class="input-group-text btn"  id="button-addon2">검색</span>
-				 		 </div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-1"></div>
-				</div>
-			</div>
-			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
-		</div>
-	</form>
+<!-- <form name="searchEvent"> -->
+<!-- 			<div id="tgetHeader" class="text-center"> -->
+<!-- 			<br/><br/><br/> -->
+<%-- 				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" > --%>
+<%-- 				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" > --%>
+<%-- 				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" > --%>
+<!-- 				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div> -->
+<!-- 				<div class="col-lg-6 col-md-6 col-10">	 -->
+<!-- 					<div class="input-group mb-1"> -->
+<!-- 				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2"> -->
+<!-- 				  		<div class="input-group-append"> -->
+<!-- 				    		<span class="input-group-text btn"  id="button-addon2">검색</span> -->
+<!-- 				 		 </div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-lg-3 col-md-3 col-1"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/> --%>
+<!-- 		</div> -->
+<!-- 	</form> -->
 
 
 <form name="main">
@@ -305,7 +309,7 @@
 					<input type="hidden" id="eventImage" name="eventImage" value="${eventImage}"/>
 					<div align="right" style="padding:10px">
 						<c:if test="${!empty eventImage}">
-							<img class="main" src="/resources/images/uploadFiles/${eventImage}" style="" />
+							<img class="main" src="/resources/images/uploadFiles/${eventImage}" />
 						</c:if>
 						<c:if test="${empty eventImage}">
 							<img class="main" src="/resources/images/logo.jpg"  style="width:400px; height=250px;"/>
@@ -344,7 +348,7 @@
 								 		<div align="left" >
 								 			<%-- 											<small>${i.eventDate }, <span id="time">${i.eventTimeStr}</span></small><br/> --%>
 											<ion-icon name="checkmark"></ion-icon><small>개최장소</small><br/>
-											<small>${!empty event.koLocation? event.koLocation: i.eventLocation }</small><br/><br/>
+											<small>${!empty event.koLocation? event.koLocation: i.koLocation }</small><br/><br/>
 											<ion-icon name="checkmark"></ion-icon>
 											<small>현재 등록된 티켓</small><br/> ${i.totalTicketCount } 건<br/><br/>
 											<ion-icon name="checkmark"></ion-icon>

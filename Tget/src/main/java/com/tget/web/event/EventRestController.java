@@ -49,6 +49,7 @@ import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.event.domain.StubhubEvent;
+import com.tget.service.event.domain.YoutubeVideo;
 
 
 //==> 회원관리 Controller
@@ -270,38 +271,14 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getRecommendedEvent")
-	public Map<String,Object> getRecommendedEvent(@RequestBody int recommEventNo) throws Exception {
+	public Map<String,Object> getRecommendedEvent(@ModelAttribute("recommEventNo") int recommEventNo) throws Exception {
 		System.out.println("===============rest/getRecommendedEvent===============");
-		
+		System.out.println("recommEventNo-"+recommEventNo);
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEventNo));
+		map.put("recommEvent", eventService.getRecommendedEvent(recommEventNo));
 		
 		return map;
 	}
-	
-//	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
-//	public Map<String,Object> addRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-//		System.out.println("===============rest/addRecommendedEvent===============");
-//		
-//		eventService.addRecommendedEvent(recommEvent);
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-//		
-//		return map;
-//	}
-	
-//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
-//	public Map<String,Object> updateRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-//		System.out.println("===============rest/updateRecommendedEvent===============");
-//		
-//		eventService.updateRecommendedEvent(recommEvent);
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-//		map.put("recommEventlist", eventService.getRecommendedEventList());
-//		return map;
-//	}
 	
 	@RequestMapping(value="rest/deleteRecommendedEvent")
 	public Map<String,Object> deleteRecommendedEvent(@ModelAttribute("recommEventNo") int recommEventNo) throws Exception {
@@ -316,8 +293,8 @@ public class EventRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="rest/addCategoryTwo", method=RequestMethod.POST)
-	public Map<String,Object> addCategoryTwo(@RequestBody Category category) throws Exception {
+	@RequestMapping(value="rest/addCategoryTwo")
+	public Map<String,Object> addCategoryTwo(@ModelAttribute("category") Category category) throws Exception {
 		System.out.println("===============rest/addCategoryTwo===============");
 		
 		eventService.addCategoryTwo(category);
@@ -329,29 +306,30 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.GET)
-	public Map<String,Object> updateCategoryTwo(@RequestParam String categoryTwoEng) throws Exception {
-		System.out.println("===============rest/updateCategoryTwo===============");
+	public Map<String,Object> updateCategoryTwo(@RequestParam int categoryTwoNo) throws Exception {
+		System.out.println("===============rest/updateCategoryTwo GET===============");
 
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("category", eventService.getCategory(categoryTwoEng));
+		map.put("category", eventService.getCategory(categoryTwoNo));
 		
 		return map;
 	}
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.POST)
-	public Map<String,Object> updateCategoryTwo(@RequestBody Category category) throws Exception {
-		System.out.println("===============rest/updateCategoryTwo===============");
-		
-		eventService.updateCategoryTwo(category);
-		
+	public Map<String,Object> updateCategoryTwo(@ModelAttribute("category") Category category) throws Exception {
+		System.out.println("===============rest/updateCategoryTwo POST===============");
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("category", eventService.getCategory(category.getCategoryTwoEng()));
+//		Category existing = eventService.getCategory(category.getCategoryTwoNo());
+		map.put("existingCode",eventService.getCategory(category.getCategoryTwoNo()).getCategoryOneCode());		
+		
+		eventService.updateCategoryTwo(category);		
+		map.put("category", eventService.getCategory(category.getCategoryTwoNo()));
 		
 		return map;
 	}
 	
 	@RequestMapping(value="rest/deleteCategoryTwo")
-	public Map<String,Object> deleteCategoryTwo(@RequestBody String categoryTwoEng) throws Exception {
+	public Map<String,Object> deleteCategoryTwo(@RequestParam String categoryTwoEng) throws Exception {
 		System.out.println("===============rest/deleteCategoryTwo===============");
 		
 		eventService.deleteCategoryTwo(categoryTwoEng);
@@ -607,6 +585,98 @@ public class EventRestController {
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		System.out.println(jsonobj);
 
+		
+		return null;
+	}
+	
+	@RequestMapping(value="rest/addRecommendedEvent")
+	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
+		System.out.println("===============rest/addRecommendedEvent POST===============");
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		List<RecommEvent> list = eventService.getRecommendedEventList();
+		if (list != null && list.size() !=0) {
+			for (int i=0; i<list.size(); i++) {
+				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					break;
+				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					eventService.addRecommendedEvent(recommEvent);
+				}
+			}	
+		}else {
+			eventService.addRecommendedEvent(recommEvent);
+		}
+		
+		System.out.println("recommEventNo - "+recommEvent.getRecommEventNo());
+		
+//		eventService.addRecommendedEvent(recommEvent);
+		System.out.println(recommEvent);
+		map.put("recommEvent", recommEvent);
+		map.put("videoName", recommEvent.getVideoName());
+//		model.addAttribute("recommEvent",recommEvent);
+//		model.addAttribute("videoName",recommEvent.getVideoName());
+//		model.addAttribute("file",file);
+		return map;
+	}
+	
+//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.GET)
+//	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
+//		System.out.println("===============rest/updateRecommendedEvent GET===============");
+//		System.out.println(recommEventNo);
+////		eventService.getRecommendedEvent(recommEventNo);
+//		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
+//		return "forward:/event/addRecommVideoGET.jsp";
+//	}	
+	
+	@RequestMapping(value="rest/updateRecommendedEvent")
+	public Map<String,Object> updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
+		System.out.println("===============rest/updateRecommendedEvent===============");
+		System.out.println(recommEvent);
+		Map<String,Object> map = new HashMap<String,Object>();
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		eventService.updateRecommendedEvent(recommEvent);
+		
+		System.out.println(recommEvent);
+		map.put("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		map.put("recommEventlist", eventService.getRecommendedEventList());
+		map.put("videoName", recommEvent.getVideoName());
+
+		return map;
+	}
+	
+	
+	@RequestMapping(value="rest/addYoutubeVideo")
+	public Map<String,Object> addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
+		System.out.println("===============rest/addYoutubeVideo===============");
+		
+		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
+
+		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
+		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
+		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
+		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+		model.addAttribute("eventName",  eventName);
+		model.addAttribute("requestPageToken",  requestPageToken);
+		
 		
 		return null;
 	}

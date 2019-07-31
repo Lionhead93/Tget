@@ -35,11 +35,13 @@ public interface EventDao {
 	public void insertCategoryTwo(Category category) throws Exception;
 	public void updateCategoryTwo(Category category) throws Exception;
 	public Category selectCategory(String categoryTwoEng) throws Exception;
+	public Category selectCategory(int categoryTwoNo) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
 	public List<String> selectInterestedByUser(Search search) throws Exception;
 	public int selectInterestedByUserCount(Search search) throws Exception;
 	public void insertInterestedCategory(String categoryTwoEng, String userId) throws Exception;
 	public Map<String,Object> getEventList(Search search, String requestPageToken, String apiKey) throws Exception;
+	public Map<String,Object> getEvent(Search search, String requestPageToken, String apiKey) throws Exception;
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception;
 	public void deleteInterestedEventAll(String userId) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;

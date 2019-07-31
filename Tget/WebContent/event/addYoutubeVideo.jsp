@@ -95,9 +95,9 @@
 			margin : 5px;
 		}
 	</style>
-</head>
+<!-- </head> -->
 
-<body>
+<!-- <body> -->
 
 <form id="youtubeSearchForm">
 	<div class="container" align="center">
@@ -117,8 +117,7 @@
 			<div class="input-group-append">
 		 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
 		 	</div>
-		</div>
-		
+		</div>		
 <!-- 		</th> -->
 <!-- 		</tr> -->
 <!-- 	</thead> -->
@@ -126,19 +125,19 @@
 		
 		<div class="row">
 		<ul class="list-unstyled">
-			<c:forEach items="${youtubeList}"  var="i">
-			<tr>
+
+			<tr id="tr0">
 				<td align="left" >
 				<li class="media" >
-					<img src="${i.thumbnails}"/>
+					<img id="img0" src="${i.thumbnails}"/>
 			   		<div class="media-body">
-			      		<h6 class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
-			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/>
-			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/>
-						 : ${i.description} <br/>
+			      		<h6 id="h0"  class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
+<%-- 			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/> --%>
+<%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
+						 <div id="desc0">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer" value="${i.videoId}"
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/-iDOez7D1tY" 
+							<button name="getYoutubePlayer" 
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
 							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
 							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
 						</div>
@@ -146,11 +145,86 @@
 			 	 </li>
 			   </td>
 			</tr>
-<!-- 			  ===========================================================<br/> -->
-			</c:forEach>		
+			<tr id="tr1">
+				<td align="left" >
+				<li class="media" >
+					<img id="img1" src="${i.thumbnails}"/>
+			   		<div class="media-body">
+			      		<h6 id="h1" class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
+<%-- 			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/> --%>
+<%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
+						 <div id="desc1">: ${i.description}</div> <br/>
+						<div align="right">			
+							<button name="getYoutubePlayer" 
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
+							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
+							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+						</div>
+			    	</div>
+			 	 </li>
+			   </td>
+			</tr>
+			<tr id="tr2">
+				<td align="left" >
+				<li class="media" >
+					<img id="img2" src="${i.thumbnails}"/>
+			   		<div class="media-body">
+			      		<h6 id="h2" class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
+<%-- 			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/> --%>
+<%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
+						<div id="desc2">: ${i.description}</div> <br/>
+						<div align="right">			
+							<button name="getYoutubePlayer"
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
+							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
+							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+						</div>
+			    	</div>
+			 	 </li>
+			   </td>
+			</tr>
+			<tr id="tr3">
+				<td align="left" >
+				<li class="media" >
+					<img id="img3" src="${i.thumbnails}"/>
+			   		<div class="media-body">
+			      		<h6 id="h3" class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
+<%-- 			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/> --%>
+<%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
+						<div id="desc3">: ${i.description}</div> <br/>
+						<div align="right">			
+							<button name="getYoutubePlayer"
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
+							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
+							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+						</div>
+			    	</div>
+			 	 </li>
+			   </td>
+			</tr>
+			<tr id="tr4">
+				<td align="left" >
+				<li class="media" >
+					<img id="img4" src="${i.thumbnails}"/>
+			   		<div class="media-body">
+			      		<h6 id="h4" class="mt-0 mb-1" style="font-weight: bold;">${i.title}</h6>			      		
+<%-- 			      		<input type="hidden" id="titleByList" name="titleByList" value="${i.title}"/> --%>
+<%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
+						<div id="desc4">: ${i.description}</div> <br/>
+						<div align="right">			
+							<button name="getYoutubePlayer" 
+							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
+							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
+							data-bmdVideoFullscreen="true">동영상보기</button>
+						</div>
+			    	</div>
+			 	</li>
+			    </td>
+			</tr>
+
 			
 		</ul>
-		</div><br/>
+		</div>
 		</tbody>
 	</table>
 	</div>
@@ -161,5 +235,5 @@
 	</div>
 </form>
 
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->
