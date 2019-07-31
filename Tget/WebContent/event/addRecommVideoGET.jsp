@@ -61,11 +61,11 @@
 	</script>
 </head>
 
-<body>
+<!-- <body> -->
 	<form id="editRecommEvent" style="margin-left: 30px; margin-right: 30px;">		
 		<div class="form-group">
     		<label for="recommEventName"><ion-icon name="checkmark"></ion-icon>추천이벤트명</label>
-<%--     		<input type="hidden" name="recommEventNo" value="${recommEvent.recommEventName }"> --%>
+    		<input type="hidden" name="recommEventNo" value="${recommEvent.recommEventName }">
     		<input type="text" class="form-control" name="recommEventName" id="recommEventName" 
     		value="${recommEvent.recommEventName }" placeholder="추천 이벤트의 이름을 입력해주세요">
  		 </div>
@@ -76,9 +76,9 @@
 		 </div>
  		 <div class="form-group">
     		<label for="recommEventUrl"><ion-icon name="checkmark"></ion-icon>상세조회 url</label>
-    		<c:if test="${empty recommEvent }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
+    		<c:if test="${empty recommEventNo }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
     			placeholder="추천 이벤트로 등록할 페이지의 url을 입력하세요"></c:if>
-    		<c:if test="${!empty recommEvent }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
+    		<c:if test="${!empty recommEventNo }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
     			value="http://192.168.0.82:8080/event/getEvent?category=&eventName=${recommEvent.eventName }"></c:if>
  		 </div>
  		 <div class="form-group">
@@ -100,5 +100,5 @@
 	</form>
 
 
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->

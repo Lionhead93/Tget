@@ -95,9 +95,9 @@
 			margin : 5px;
 		}
 	</style>
-</head>
+<!-- </head> -->
 
-<body>
+<!-- <body> -->
 
 <form id="youtubeSearchForm">
 	<div class="container" align="center">
@@ -235,5 +235,5 @@
 	</div>
 </form>
 
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->
