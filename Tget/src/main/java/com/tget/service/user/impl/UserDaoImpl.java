@@ -105,7 +105,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User selectuserId(String userId) throws Exception {
 		
-		return	sqlSession.selectOne("UserMapper.selectnickName",userId);
+		return	sqlSession.selectOne("UserMapper.selectuserId",userId);
 	}
 
 	@Override

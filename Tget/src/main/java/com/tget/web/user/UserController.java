@@ -1,31 +1,11 @@
 package com.tget.web.user;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.AuthCache;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.codehaus.jackson.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,11 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tget.common.domain.Page;
 import com.tget.common.domain.Search;
-import com.tget.service.user.Config;
+import com.tget.service.community.CommunityService;
+import com.tget.service.community.domain.Report;
 import com.tget.service.user.KakaoUserInfo;
 import com.tget.service.user.UserService;
 import com.tget.service.user.kakao_restapi;
@@ -56,8 +36,8 @@ public class UserController {
 	User user = new User();
 	@Autowired
 	@Qualifier("userServiceImpl")
-	private UserService userService;
 	
+	private UserService userService;
 		
 	public UserController(){
 		System.out.println(this.getClass());
@@ -105,6 +85,10 @@ public class UserController {
 		
 		
 		userService.addUser(user);
+		
+		String userId = user.getUserId();
+		
+		user= userService.getUser(userId);
 		
 		session.setAttribute("user", user);
 	
@@ -239,9 +223,10 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="listUser" )
-	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String listUser( @ModelAttribute("search") Search search , @ModelAttribute("search") Search search2, Model model , HttpServletRequest request) throws Exception{
 		
 		System.out.println("/user/listUser : GET / POST");
+	
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -256,6 +241,8 @@ public class UserController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		
+		System.out.println(map.get("list")+"유저 리스트 어떻게 들옴?");
 		
 		return "forward:/user/listUser.jsp";
 	}

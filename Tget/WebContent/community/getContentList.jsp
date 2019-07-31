@@ -380,50 +380,6 @@
 		    	</p>
 		<br/><br/><br/>
 	</div>	   
-				
-		   
-	 <div class="row">
-	  <div class="col-md-2 text-center">	  
-	      <div class="sticky-top">
-		  <br/>
-			 <div>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
-		       		<h5>Community > 자유게시판</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
-		       		<h5>Community > 자유게시판</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
-		       		<h5>Community > 자유게시판</h5>
-		       </c:if>
-		      
-		   	 </div>
-			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
-				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
-				<li class="list-group-item"><a href="#">자유게시판 이용 공지</a></li>
-				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
-				</ul>
-			</c:if>
-			  
-			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">삽니다</a></li>
-				<li class="list-group-item"><a href="#">팝니다</a></li>
-				<li class="list-group-item"><a href="#">수다방</a></li>
-				</ul>
-			</c:if>
-			</div>
-		</div>	
 		
       <!--  table Start /////////////////////////////////////-->
      <div class="col-md-10 text-center">
