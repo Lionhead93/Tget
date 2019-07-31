@@ -271,38 +271,14 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getRecommendedEvent")
-	public Map<String,Object> getRecommendedEvent(@RequestBody int recommEventNo) throws Exception {
+	public Map<String,Object> getRecommendedEvent(@ModelAttribute("recommEventNo") int recommEventNo) throws Exception {
 		System.out.println("===============rest/getRecommendedEvent===============");
-		
+		System.out.println("recommEventNo-"+recommEventNo);
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEventNo));
+		map.put("recommEvent", eventService.getRecommendedEvent(recommEventNo));
 		
 		return map;
 	}
-	
-//	@RequestMapping(value="rest/addRecommendedEvent", method=RequestMethod.POST)
-//	public Map<String,Object> addRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-//		System.out.println("===============rest/addRecommendedEvent===============");
-//		
-//		eventService.addRecommendedEvent(recommEvent);
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-//		
-//		return map;
-//	}
-	
-//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.POST)
-//	public Map<String,Object> updateRecommendedEvent(@RequestBody RecommEvent recommEvent) throws Exception {
-//		System.out.println("===============rest/updateRecommendedEvent===============");
-//		
-//		eventService.updateRecommendedEvent(recommEvent);
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("recommendedEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-//		map.put("recommEventlist", eventService.getRecommendedEventList());
-//		return map;
-//	}
 	
 	@RequestMapping(value="rest/deleteRecommendedEvent")
 	public Map<String,Object> deleteRecommendedEvent(@ModelAttribute("recommEventNo") int recommEventNo) throws Exception {
