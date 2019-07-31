@@ -39,18 +39,18 @@
 			  background-color: #062038;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-       #tgetHeader{
+      #tgetHeader{
 		   margin-top:30px;	
 		   color: #FBFCFE;	
-	       padding-bottom:80px; 
-	       background: url(/resources/images/pic02.jpg) no-repeat center center fixed; 
+	       padding-bottom:70px; 
+	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
 				  -moz-background-size: cover;
 				  -o-background-size: cover;
 				  background-size: cover;	
        }
 		
-       strong, h1, h2, h5, h6 {
+       h1, h2, h5, h6 {
        		color: black;
        }
        #footer{
@@ -77,6 +77,14 @@
 		.img_wrap img {
 			max-width: 100%;
 		} 
+		.modal-content{
+			background:rgba(40,57,101,.9);	
+			color: #FBFCFE;	
+		}
+		select{
+			background:rgba(40,57,101,.9);	
+			color: #FBFCFE;	
+		}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -96,7 +104,7 @@
 			return;
 		} */
 		alert("등록 완료!");
-		$("form").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();
+		$("form[name='addDelivery']").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();
 	}	
 	
 	
@@ -174,8 +182,8 @@
                     }else{
                     	myInvoiceData += ('<table class="table">');      
                         myInvoiceData += ('<tr>');                
-                        myInvoiceData += ('<th style="color: black;">'+"송장번호"+'</td>');                     
-                        myInvoiceData += ('<th style="color: black;">'+data.invoiceNo+'</td>');                     
+                        myInvoiceData += ('<th>'+"송장번호"+'</td>');                     
+                        myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                     
                         myInvoiceData += ('</tr>');     
                         myInvoiceData += ('</table>');
                     }                
@@ -216,7 +224,7 @@
 	    });
 	    $("#file").change(function(){
 	    	readURL(this);
-	    	var form = $("form")[0];
+	    	var form = $("form[name='addDelivery']")[0];
 	    	var formData = new FormData(form);
 	    	$.ajax(
 					{
@@ -391,7 +399,7 @@
  
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-md" role="document">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h3>
@@ -400,11 +408,11 @@
 					        </a>
 					      </div>
 					      <div class="modal-body">
-					      <form enctype="multipart/form-data"> 
+					      <form name="addDelivery" enctype="multipart/form-data"> 
 					      	<input type="hidden" id="tranNo" name="tranNo" value=""/>
 					      	<div class="form-group" >
 							     <br/>
-							     <strong>배송 사</strong> 	
+							     <strong>배송 사</strong> <br/><br/>	
 							        <select id="deliveryCompany" name="deliveryCompany">
 									    <option value="">선택</option>
 									    <option value="04">CJ대한통운</option>									    
@@ -417,7 +425,7 @@
 									    <option value="23">경동택배</option>
 									    <option value="53">농협택배</option>
 									</select><br/><br/>
-							      <strong>운송장 번호</strong><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; border: 1px solid black;"/>
+							      <strong>운송장 번호</strong><br/><br/><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; border: 1px solid black;"/>
 							      <br/><br/>
 							      <div class="text-center" id="loading"></div>
 							      <br/><br/>
@@ -438,7 +446,7 @@
 					</div>
 	<!-- 배송 조회 모달 -->
 					<div class="modal fade" id="searchDeliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-lg" role="document">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h3>

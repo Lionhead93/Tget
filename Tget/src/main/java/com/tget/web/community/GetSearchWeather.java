@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,6 +25,7 @@ public class GetSearchWeather {
 
 	public static Weather getSearchweather(Weather weather)throws Exception{
 		
+		//List<String> lon = new ArrayList<String>();
 		
 		String lon = "127.027567";  //°æµµ , 
         String lat = "37.497985";	//37.498424 126.867240

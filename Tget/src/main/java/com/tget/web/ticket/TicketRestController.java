@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -162,17 +163,18 @@ public class TicketRestController {
 	}
 	
 	@RequestMapping(value = "rest/addSeller", method = RequestMethod.POST)	
-	public User addSeller(@ModelAttribute("user") User user, HttpSession session) throws Exception {
+	public User addSeller(@RequestBody User user, HttpSession session) throws Exception {
 		
 		System.out.println("addSeller : POST user="+user);
-		/*user.setSellerCode("0");
+		
+		user.setSellerCode("0");
 		user.setRole("1");
 		userService.updateSeller(user);
 		
 		User updateUser = userService.getUser(user.getUserId());
 		
 		session.setAttribute("user", updateUser);
-		*/
-		return user;
+		
+		return updateUser;
 	}
 }
