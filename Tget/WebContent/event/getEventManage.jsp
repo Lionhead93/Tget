@@ -63,15 +63,38 @@
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
 				});			
-// 			var temp = parseInt($("#recommEventlistSize").val())-1;
 			
 		});
 		
-		$("button:contains('수정하기')").on("click",function(){			
-			popWin = window.open("/event/updateRecommendedEvent?recommEventNo="+$(this).val(),"popWin",
-					"left=500, top=100, width=600, height=600, "
-					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-		});
+// 		$("button:contains('수정하기')").on("click",function(){	
+// 			alert($(this).val());
+// 			$("#recommEventNo").val($(this).val());
+	
+// 			$.ajax(
+// 					{
+// 						url : "/event/rest/getRecommendedEvent",
+// 						method : "POST",
+// 						data : {
+// 							recommEventNo : $(this).val()							
+// 						},
+// 						dataType : "json",
+// 						success : function(JSONData,status){
+// 							$("input[name='recommEventNo']").val(JSONData.recommEvent.recommEventNo);
+// 							$("#recommEventName").val(JSONData.recommEvent.recommEventName);
+// 							$("#videoName").val(JSONData.recommEvent.videoName);
+// 							$("#recommEventDetail").val(JSONData.recommEvent.recommEventDetail);
+// 							$("#recommEventUrl").val("http://192.168.0.82:8080/event/getEvent?category=&eventName="+JSONData.recommEvent.eventName);	
+		 
+// 						},
+// 						error : function(request, status, error ) {   
+// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 						}			
+// 				});	
+// 		});
+// 			popWin = window.open("/event/updateRecommendedEvent?recommEventNo="+$(this).val(),"popWin",
+// 					"left=500, top=100, width=600, height=600, "
+// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+		
 		
 // 		$("a.category").on("click", function(){
 // 			$.ajax(
@@ -97,9 +120,8 @@
 // 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
 // 			alert("submit");
 			var formData = new FormData($("#editRecommEvent")[0]);			
-			
+			if($("#recommEventNo").val()==""){
 				if (parseInt($("#recommEventlistSize").val()) < 3) {
-// 					alert("recommEventlistSize<3");
 					$.ajax(
 						{
 							url : "/event/rest/addRecommendedEvent",
@@ -109,8 +131,6 @@
 							contentType: false,
 							dataType : "json",
 							success : function(JSONData,status){
-// 							alert(JSONData.eventImage);
-//  							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
 								$("button.close").click();
 							},
 							error : function(request, status, error ) {   
@@ -120,6 +140,28 @@
 				}else{					
 	 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
 				}
+			}else{
+// 				alert('"#recommEventNo").val()!=""');
+				$.ajax(
+						{
+							url : "/event/rest/updateRecommendedEvent",
+							method : "POST",
+							data : formData,
+							processData: false,
+							contentType: false,
+							dataType : "json",
+							success : function(JSONData,status){
+								$("#recommEventNo").val("");
+								$("button.close").click();
+							},
+							error : function(request, status, error ) {   
+							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}			
+					});				
+			}
+		});
+		$("button.close").on("click",function(){
+			$("#recommEventNo").val("");	
 		});
 
 	});
@@ -179,7 +221,7 @@
 
 <body>
 <jsp:include page="/layout/tgetToolbar.jsp" />
-<form>
+<!-- <form> -->
 	<div class="container">
 	
 		<div class="row"  style="margin-top: 30px;">
@@ -194,11 +236,12 @@
 		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-recomm-list">
 		      <div  class="row" >
 		      	<div class="col-11"></div>
-		      	<div class="col-1" align="left" data-toggle="modal"  class="btn btn-light"							
+		      	<div class="col-1" align="left"  class="btn btn-light"	data-toggle="modal" 						
 								 data-target="#exampleModalCenter"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
 		      </div>
 
   			<input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
+  			<input type="hidden" id="recommEventNo" />
   
 			<div class="row" align="center" >		      	
 				<c:forEach items="${recommEventlist}"  var="i">			
@@ -210,8 +253,8 @@
 							<input type="hidden" name="eventName" value="${i.eventName }"/>
 							<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
 							<p class="card-text">${i.recommEventDetail }</p>
-							<button class="btn btn-dark" value="${i.recommEventNo }">수정하기</button>
-							<button class="btn btn-dark" value="${i.recommEventNo }">삭제하기</button>
+							<button class="btn btn-light" value="${i.recommEventNo }" >수정하기</button>
+							<button class="btn btn-light" value="${i.recommEventNo }">삭제하기</button>
 						</div>
 					</div>
 				</c:forEach>	
@@ -342,7 +385,7 @@
 	</div>
 	
   </div>
-</form>
+<!-- </form> -->
 
 
 <!-- Modal -->
@@ -372,6 +415,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
    </div>
   </div>
 </div>
+
+
 
 <jsp:include page="/layout/footer.jsp" />
 </body>

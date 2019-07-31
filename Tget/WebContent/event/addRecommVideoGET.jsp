@@ -65,6 +65,7 @@
 	<form id="editRecommEvent" style="margin-left: 30px; margin-right: 30px;">		
 		<div class="form-group">
     		<label for="recommEventName"><ion-icon name="checkmark"></ion-icon>추천이벤트명</label>
+<%--     		<input type="hidden" name="recommEventNo" value="${recommEvent.recommEventName }"> --%>
     		<input type="text" class="form-control" name="recommEventName" id="recommEventName" 
     		value="${recommEvent.recommEventName }" placeholder="추천 이벤트의 이름을 입력해주세요">
  		 </div>
