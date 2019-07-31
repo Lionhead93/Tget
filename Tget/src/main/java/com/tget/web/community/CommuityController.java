@@ -110,7 +110,11 @@ public class CommuityController {
 			}
 			communityService.addContent(content);
 			
-			return "forward:/community/getContentList?searchCondition=2&searchKeyword="+content.getContentCode();
+			if(content.getContentCode().equals("8")||content.getContentCode().equals("9")||content.getContentCode().equals("10")||content.getContentCode().equals("11")) {
+				return "forward:/community/getContentList?searchCondition=3";
+			}else {
+				return "forward:/community/getContentList?searchCondition=2&searchKeyword="+content.getContentCode();
+		}
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.GET)
@@ -199,7 +203,7 @@ public class CommuityController {
 			model.addAttribute("totalCount", map.get("totalCount"));
 			model.addAttribute("search", search);
 			
-			if(search.getSearchCondition().equals("2")&&search.getSearchKeyword().equals("2")) {
+			if(search.getSearchCondition().equals("3")) {
 				return "forward:/community/getQuestionList.jsp";
 			}else {
 				return "forward:/community/getContentList.jsp";

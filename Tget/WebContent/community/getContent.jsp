@@ -96,15 +96,16 @@
 	}
 	  */
 	 
-	 $(function() {
-		 
-		 //a[href='#']:contains('수 &nbsp;정')
-		 $("button.btn.btn-warning").on("click" , function() {
-			 //fncUpdateContent();
-			 self.location = "/community/updateContent?contentNo=${content.contentNo}"
+	  function fncUpdateContent(){
 			
-			});
-		}); 
+			$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+			}
+
+			$(function() {
+				$( "button.btn.btn-info:contains('수정')" ).on("click" , function() {
+					fncUpdateContent();
+				});
+			}); 
 	 
 	 $(function() {
 			
@@ -114,7 +115,30 @@
 				history.go(-1); 
 			});
 		});
-		
+	
+	 $( "button.btn.btn-warning:contains('수 &nbsp;정')" ).on("click" , function() {
+		 	
+		 	$(this).attr("data-target","#updateContentModal");
+		 	var contentNo = $(this).attr("id").trim();
+		 	
+		 	$.ajax(
+					{
+						url : "/community/rest/getContent/"+contentNo ,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(data) {
+							alert(data);
+							$("input[name='contentNo']").html(data.contentNo);
+							$("#contentUserNickname").val(data.userNickname);
+							$("#contentName").html(data.contentName);
+							$("#contentBody").html(data.contentBody);
+						}
+					});
+		});
 	
 	
 	 
@@ -134,15 +158,8 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>게시글 상세조회</h3>
-	       
+	       <h3>게시글 상세조회</h3>	       
 	    </div>
-	
-<!-- 		<div class="row"> -->
-<!-- 	  		<div class="col-xs-4 col-md-2"><strong>게시글 번호</strong></div> -->
-<%-- 			<div class="col-xs-8 col-md-4">${content.contentNo}</div> --%>
-<!-- 		</div> -->
-		
 		<hr/>
 		
 		<div class="row">
@@ -162,7 +179,6 @@
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>게시글 내용</strong></div>
 	  		<div class="col-xs-8 col-md-4">${content.contentBody}</div>
-			<!-- <img src="/images/uploadFiles/${product.fileName}"> -->
 		</div>
 		
 		
@@ -172,20 +188,61 @@
 		<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
-			 <button type="button" class="btn btn-warning"  >수 &nbsp;정</button>
-			 <!-- <a class="btn btn-warning" href="#" role="button">수 &nbsp;정</a> --> 
+			 <button type="button" id="updateContent" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 &nbsp;정</button>
+			  
 		    </div>
 		</div>
-		
-		
+
 		<jsp:include page="/community/reply.jsp"/>
-      	
-
-
-		<br/>
-		
- 	</div> 
+		<br/>	
+ 	</div>
  	
+ 		<div class="modal fade" id="updateContentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content modal-80size">
+					  <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="modalCenterTitle"><strong>수정하기</strong></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body" id="updateContentModalBody"> 	    
+		  
+			    <form name="updateContent">
+			
+			    	<div class="col">작성자 : <span id="contentUserNickname"></span></div>
+					
+					<div class="col">글 제목 :  <div id="contentName"></div></div>
+					
+					<div class="col">글 내용 :  <div id="contentBody"></div></div>
+			    
+				<br>
+				<hr>
+				<input type='hidden' name='contentNo' value='${content.contentNo}'/>				
+				<input type='hidden' name='userId' value='${content.userId}'/>
+				<input type='hidden' name='videoName' value=''/>
+				<input type='hidden' name='fileName' value=''/>
+				<input type='hidden' name='regDate' value='${content.regDate}'/>
+				<input type='hidden' name='viewCount' value='0'/>
+				<input type='hidden' name='boardCode' value='${content.boardCode}'/>
+				<input type='hidden' name='contentCode' value='${content.contentCode}'/>
+				<input type='hidden' name='goodCount' value='${content.goodCount}'/>
+				<input type='hidden' name='badCount' value='${content.badCount}'/>
+				<input type='hidden' name='refundTranNo' value='0'/>
+				<input type='hidden' name='refundCheck' value=''/>
+				<input type='hidden' name='open' value='0'/>				
+				</form>		
+				   
+				<div class="modal-footer">
+		        <button type="button" class="btn btn-info" data-dismiss="modal">수정</button>
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
+		      </div>
+				</div></div>	        
+						      </div>
+						    </div>
+						  </div>
+ 	 
 </body>
 <jsp:include page="/layout/footer.jsp" />
 </html>
