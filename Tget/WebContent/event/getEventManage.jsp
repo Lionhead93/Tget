@@ -34,12 +34,8 @@
 	$( function() {
 	    $( "#tabs" ).tabs();
 	  } );
-
+	
 	$(function(){
-		$("#addCate").on("click",function(){			
-			alert("카테고리 추가");
-		});
-		
 		$("button:contains('삭제하기')").on("click",function(){			
 // 			alert("삭제하기");
 			var temp = $(this).val();
@@ -62,65 +58,44 @@
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
-				});			
-			
+				});					
 		});
 		
-// 		$("button:contains('수정하기')").on("click",function(){	
+		$("button:contains('수정하기')").on("click",function(){	
 // 			alert($(this).val());
-// 			$("#recommEventNo").val($(this).val());
-	
-// 			$.ajax(
-// 					{
-// 						url : "/event/rest/getRecommendedEvent",
-// 						method : "POST",
-// 						data : {
-// 							recommEventNo : $(this).val()							
-// 						},
-// 						dataType : "json",
-// 						success : function(JSONData,status){
-// 							$("input[name='recommEventNo']").val(JSONData.recommEvent.recommEventNo);
-// 							$("#recommEventName").val(JSONData.recommEvent.recommEventName);
-// 							$("#videoName").val(JSONData.recommEvent.videoName);
-// 							$("#recommEventDetail").val(JSONData.recommEvent.recommEventDetail);
-// 							$("#recommEventUrl").val("http://192.168.0.82:8080/event/getEvent?category=&eventName="+JSONData.recommEvent.eventName);	
-		 
-// 						},
-// 						error : function(request, status, error ) {   
-// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 						}			
-// 				});	
-// 		});
+			$("#recommEventNo").val($(this).val());	
+			$.ajax(
+					{
+						url : "/event/rest/getRecommendedEvent",
+						method : "POST",
+						data : {
+							recommEventNo : $(this).val()							
+						},
+						dataType : "json",
+						success : function(JSONData,status){
+// 							alert(JSONData.recommEvent.recommEventNo);
+// 							alert(JSONData.recommEvent.recommEventName);
+// 							alert(JSONData.recommEvent.videoName);
+// 							alert(JSONData.recommEvent.recommEventDetail);
+							$("input[name='recommEventNo']").val(JSONData.recommEvent.recommEventNo);
+							$("input[name='recommEventName']").val(JSONData.recommEvent.recommEventName);							
+							$("textarea[name='recommEventDetail']").text(JSONData.recommEvent.recommEventDetail);
+							$("input[name='recommEventUrl']").val("http://192.168.0.82:8080/event/getEvent?category=&eventName="+JSONData.recommEvent.eventName);	
+// 							$("input[name='file']").val(JSONData.recommEvent.videoName);
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});	
+		});
 // 			popWin = window.open("/event/updateRecommendedEvent?recommEventNo="+$(this).val(),"popWin",
 // 					"left=500, top=100, width=600, height=600, "
 // 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-		
-		
-// 		$("a.category").on("click", function(){
-// 			$.ajax(
-// 					{
-// 						url : "/event/rest/updateCa",
-// 						method : "POST",
-// 						data : {
-// 										 : $("#").val()
-// 									},
-// 						dataType : "json",
-// 						success : function(JSONData, status){
-// 							alert(status);
-// 							alert("JSONData : \n"+JSONData);		
-					
-// 						},
-// 						error : function(request, status, error ) {   
-// 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 						}
-// 		});
-
-
 		$("#submit").on("click",function(){	
 // 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
 // 			alert("submit");
 			var formData = new FormData($("#editRecommEvent")[0]);			
-			if($("#recommEventNo").val()==""){
+			if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
 				if (parseInt($("#recommEventlistSize").val()) < 3) {
 					$.ajax(
 						{
@@ -131,7 +106,9 @@
 							contentType: false,
 							dataType : "json",
 							success : function(JSONData,status){
+								$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
 								$("button.close").click();
+								location.reload();
 							},
 							error : function(request, status, error ) {   
 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -141,7 +118,7 @@
 	 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
 				}
 			}else{
-// 				alert('"#recommEventNo").val()!=""');
+				alert('"#recommEventNo").val()!=""');
 				$.ajax(
 						{
 							url : "/event/rest/updateRecommendedEvent",
@@ -150,9 +127,9 @@
 							processData: false,
 							contentType: false,
 							dataType : "json",
-							success : function(JSONData,status){
-								$("#recommEventNo").val("");
+							success : function(JSONData,status){								
 								$("button.close").click();
+								location.reload();
 							},
 							error : function(request, status, error ) {   
 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -161,11 +138,148 @@
 			}
 		});
 		$("button.close").on("click",function(){
-			$("#recommEventNo").val("");	
+// 			$("#recommEventNo").val("");	
+			$("input[name='recommEventNo']").val("");
+			$("input[name='recommEventName']").val("");
+			$("input[name='file']").val("");
+			$("textarea[name='recommEventDetail']").text("");
+			$("input[name='recommEventUrl']").val("");	
+			$("#categoryTwoNo").val("");
+			$("#categoryOneCode").val("");
+			$("#categoryTwoName").val("");
+			$("#categoryTwoEng").val("");		
 		});
-
 	});
 	
+	$(function(){
+		
+		$("div.category").on("click", function(){
+// 			alert($(this).children("input[type='hidden']").val());
+			var tempCateNo = $(this).children("input[type='hidden']").val();
+			$.ajax(
+					{
+						url : "/event/rest/updateCategoryTwo",
+						method : "GET",
+						data : {
+									categoryTwoNo : tempCateNo
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+// 							alert("JSONData : \n"+JSONData.category);				
+								$("input[name='categoryTwoNo']").val(tempCateNo);
+								$("select[name='categoryOneCode']").val(JSONData.category.categoryOneCode);
+								$("input[name='categoryTwoName']").val(JSONData.category.categoryTwoName);
+								$("input[name='categoryTwoEng']").val(JSONData.category.categoryTwoEng);
+								
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+			});
+		});
+		
+		$("#submit2").on("click",function(){
+			if ($("#categoryTwoNo").val() == "") {
+// 				alert('$("#categoryTwoNo").val() == ""');
+				$.ajax(
+						{
+							url : "/event/rest/addCategoryTwo",
+							method : "POST",
+							data : {
+										categoryOneCode : $("select[name='categoryOneCode']").val(),
+										categoryTwoName : $("input[name='categoryTwoName']").val(),
+										categoryTwoEng : $("input[name='categoryTwoEng']").val()
+										},
+							dataType : "json",
+							success : function(JSONData, status){
+								
+								location.reload();
+								$("#list-category-list").attr("class","list-group-item list-group-item-action active");
+								$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
+								$("button.close").click();			
+							},
+							error : function(request, status, error ) {   
+							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+				});
+			}else{
+				$.ajax(
+						{
+							url : "/event/rest/updateCategoryTwo",
+							method : "POST",
+							data : {
+										categoryTwoNo : $("#categoryTwoNo").val(),
+										categoryOneCode : $("#categoryOneCode").val(),
+										categoryTwoName : $("#categoryTwoName").val(),
+										categoryTwoEng : $("#categoryTwoEng").val()
+										},
+							dataType : "json",
+							success : function(JSONData, status){
+								var tempHtml = '<ion-icon name="checkmark"></ion-icon>'
+								+'<div class="category"   data-toggle="modal"  data-target="#categoryModal" onClick="updateCategoryGET('+$("#categoryTwoNo").val()+')">'
+								+'<input type="hidden"  value="'+$("#categoryTwoNo").val()+'">'
+								+JSONData.category.categoryTwoName+'</div>';
+								
+								if (JSONData.existingCode==JSONData.category.categoryOneCode) {
+									alert('JSONData.existingCode==JSONData.category.categoryOneCode');
+									$("#div"+JSONData.category.categoryTwoNo).html(tempHtml);
+								} else {
+									alert('JSONData.existingCode!=JSONData.category.categoryOneCode');
+									$("#div"+JSONData.category.categoryTwoNo).remove();
+									$("#div"+JSONData.category.categoryOneCode).append('<div class="row"  id="div'+JSONData.category.categoryTwoNo+'">'
+											+tempHtml+'</div>');
+								}
+								$("button.close").click();					
+							},
+							error : function(request, status, error ) {   
+							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+				});
+			}			
+		});
+		
+		$("#delete").on("click",function(){
+			$.ajax(
+					{
+						url : "/event/rest/deleteCategoryTwo",
+						method : "POST",
+						data : {
+									categoryTwoEng : $("#categoryTwoEng").val()
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+							$("#div"+$("#categoryTwoNo").val()).remove();
+							$("button.close").click();						
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+			});
+		});
+	});
+	
+	function updateCategoryGET(recommNo){
+		$.ajax(
+				{
+					url : "/event/rest/updateCategoryTwo",
+					method : "GET",
+					data : {
+								categoryTwoNo : recommNo
+								},
+					dataType : "json",
+					success : function(JSONData, status){
+//							alert("JSONData : \n"+JSONData.category);				
+							$("input[name='categoryTwoNo']").val(recommNo);
+							$("select[name='categoryOneCode']").val(JSONData.category.categoryOneCode);
+							$("input[name='categoryTwoName']").val(JSONData.category.categoryTwoName);
+							$("input[name='categoryTwoEng']").val(JSONData.category.categoryTwoEng);
+							
+					},
+					error : function(request, status, error ) {   
+					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+		});
+	}
 	</script>
 	
 	<style>
@@ -241,7 +355,10 @@
 		      </div>
 
   			<input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
-  			<input type="hidden" id="recommEventNo" />
+  			<input type="hidden" id="recommEventNo"  name="recommEventNo"  />
+  			<input type="hidden" name="recommEventName" />
+  			<input type="hidden" name="recommEventDetail" />
+  			<input type="hidden" name="recommEventUrl" />
   
 			<div class="row" align="center" >		      	
 				<c:forEach items="${recommEventlist}"  var="i">			
@@ -253,7 +370,8 @@
 							<input type="hidden" name="eventName" value="${i.eventName }"/>
 							<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
 							<p class="card-text">${i.recommEventDetail }</p>
-							<button class="btn btn-light" value="${i.recommEventNo }" >수정하기</button>
+							<button class="btn btn-light"  data-toggle="modal" 						
+								 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
 							<button class="btn btn-light" value="${i.recommEventNo }">삭제하기</button>
 						</div>
 					</div>
@@ -265,8 +383,10 @@
 		      <div class="tab-pane fade" id="list-category" role="tabpanel" aria-labelledby="list-category-list">
 		      	<div  class="row" >
 			      	<div class="col-11"></div>
-			      	<div class="col-1" align="left"><ion-icon id="addCate" name="add" size="large"></ion-icon></div>		      	
-			      </div>
+			      	<div class="col-1" align="left" data-toggle="modal"  data-target="#categoryModal" >
+			      		<ion-icon id="addCate" name="add" size="large"></ion-icon>
+			      	</div>		      	
+			    </div>
 			      
 		      	<div class="row ">
 		      		<div class="col-1"></div>
@@ -274,119 +394,72 @@
 					  <h5 class="card-header" >음악공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
+					  	<div id="div0">
 					 	 <c:forEach items="${categorylist }"  var="i">
 						    <c:if test="${i.categoryOneCode == 0}">
-						   		<div class="row">
+						   		<div class="row"  id="div${i.categoryTwoNo }">
 							        <ion-icon name="checkmark"></ion-icon>
-									<a class="category" value="${i.categoryTwoNo }">
-								   	 ${i.categoryTwoName }</a>
+									<div class="category"   data-toggle="modal"  data-target="#categoryModal" >
+									<input type="hidden"  value="${i.categoryTwoNo }">
+								   	 ${i.categoryTwoName }</div>
 						   		</div>
 					    	</c:if>
-					  	</c:forEach></h5>				    
+					  	</c:forEach></div></h5>				    
 					  </div>
 					</div>
 					<div class="col-1"></div>
 				   </div>
 					
 					<div class="row ">
-					<div class="col-1"></div>
+		      		<div class="col-1"></div>
 			      	<div class="card col-10">
-					  <h5 class="card-header">스포츠</h5>
+					  <h5 class="card-header" >스포츠</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
+					  	<div id="div1">
 					 	 <c:forEach items="${categorylist }"  var="i">
-						    <c:if test="${i.categoryOneCode ==1}">
-						   		<div><ion-icon name="checkmark"></ion-icon>
-					 			<a class="category" value="${i.categoryTwoNo }">
-						   		${i.categoryTwoName }</a></div><br/>
+						    <c:if test="${i.categoryOneCode == 1}">
+						   		<div class="row" id="div${i.categoryTwoNo }">
+							        <ion-icon name="checkmark"></ion-icon>
+									<div class="category"   data-toggle="modal"  data-target="#categoryModal" >
+										<input type="hidden"  value="${i.categoryTwoNo }">
+								   	 ${i.categoryTwoName }</div>
+						   		</div>
 					    	</c:if>
-					  	</c:forEach></h5>			    
+					  	</c:forEach></div></h5>				    
 					  </div>
 					</div>
 					<div class="col-1"></div>
 				   </div>
 					
-					<div class="row " >
-					<div class="col-1"></div>
+					<div class="row ">
+		      		<div class="col-1"></div>
 			      	<div class="card col-10">
 					  <h5 class="card-header" >기타예술공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
+					  	<div id="div2">
 					 	 <c:forEach items="${categorylist }"  var="i">
-						    <c:if test="${i.categoryOneCode ==2}">
-						   		<div><ion-icon name="checkmark"></ion-icon>
-					 			<a class="category" value="${i.categoryTwoNo }">
-						   		${i.categoryTwoName }</a></div><br/>
+						    <c:if test="${i.categoryOneCode == 2}">
+						   		<div class="row"  id="div${i.categoryTwoNo }">
+							        <ion-icon name="checkmark"></ion-icon>
+									<div class="category"   data-toggle="modal"  data-target="#categoryModal" >
+									<input type="hidden"  value="${i.categoryTwoNo }">
+								   	 ${i.categoryTwoName }</div>
+						   		</div>
 					    	</c:if>
-					  	</c:forEach></h5>				    
+					  	</c:forEach></div></h5>				    
 					  </div>
 					</div>
 					<div class="col-1"></div>
 				   </div>
-			      	
-		      	
-<!-- 		      		<div class="col-3  " style="font-weight:bold; font-size: 30px;" align="right"> -->
-<!-- 		      			<div>음악공연</div>	      			 -->
-<!-- 		      		</div> -->
-<!-- 		      		<div class="col-8 card mb-3">		      			 -->
-<!-- 		      			<div class="row"> -->
-<%-- 		      				 <c:forEach items="${categorylist }"  var="i"> --%>
-<%-- 						    	<c:if test="${i.categoryOneCode == 0}"> --%>
-<!-- 						    		<div><ion-icon name="checkmark"></ion-icon> -->
-<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
-<%-- 						    		${i.categoryTwoName }</a></div><br/><br/>	 --%>
-<%-- 						    	</c:if> --%>
-<%-- 						  	</c:forEach>	<br/><br/>	 --%>
-<!-- 		      			</div> -->
-<!-- 		      		</div> -->
-<!-- 		      		<div class="col-1" ></div> -->
-<!-- 		      </div> -->
-		      
-<!-- 		      <div class="row "> -->
-<!-- 		      	<div class="col-3 " style="font-weight:bold; font-size: 30px;" align="right"> -->
-<!-- 		      		<div>스포츠</div>	      			 -->
-<!-- 		      	</div> -->
-<!-- 		      	<div class="col-8  card  mb-3">		      			 -->
-<!-- 		      		<div class="row"> -->
-<%-- 		      			 <c:forEach items="${categorylist }"  var="i"> --%>
-<%-- 						   	<c:if test="${i.categoryOneCode == 1}"> --%>
-<!-- 						   		<div><ion-icon name="checkmark"></ion-icon> -->
-<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
-<%-- 						    		${i.categoryTwoName }</a></div><br/>	 --%>
-<%-- 						   	</c:if> --%>
-<%-- 						</c:forEach>	<br/><br/>	 --%>
-<!-- 		      		</div> -->
-<!-- 		      	 </div> -->
-<!-- 		      	 <div class="col-1" ></div> -->
-<!-- 		      </div> -->
-		      
-<!-- 		      <div class="row"> -->
-<!-- 		      	<div class="col-3" style="font-weight:bold; font-size: 30px;" align="right"> -->
-<!-- 		      		<div>기타예술공연</div>	 	 -->
-<!-- 		      	</div> -->
-<!-- 		      	<div class="col-8   card  mb-3">		      			 -->
-<!-- 		      		<div class="row"> -->
-<%-- 		      			 <c:forEach items="${categorylist }"  var="i"> --%>
-<%-- 						   	<c:if test="${i.categoryOneCode == 2}"> --%>
-<!-- 						   		<div><ion-icon name="checkmark"></ion-icon> -->
-<%-- 						   			<a class="category" value="${i.categoryTwoNo }"> --%>
-<%-- 						    		${i.categoryTwoName }</a></div><br/>	 --%>
-<%-- 						   	</c:if> --%>
-<%-- 						</c:forEach>	<br/><br/>	 --%>
-<!-- 		      		</div> -->
-<!-- 		      	 </div> -->
-<!-- 		      	 <div class="col-1" ></div> -->
-<!-- 		      </div> -->
-		      
-  			</div>
   			  
 		 </div>
 	  </div>
 	</div>
-	
   </div>
+ </div>
 <!-- </form> -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
@@ -403,11 +476,60 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       </div>
       <div class="modal-body">
         <jsp:include page="/event/addRecommVideoGET.jsp" />
-<%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
       </div>
-      <div class="modal-footer">
-       
+      <div class="modal-footer">       
         <button type="button" class="btn btn-light"  id="submit" >저장</button>
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"  
+aria-labelledby="categoryModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalTitle">카테고리 편집</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<input type="hidden"  id="categoryTwoNo"  name="categoryTwoNo" />
+        <div style="margin:30px; ">
+			<div class="form-group">
+			   <label  for="categoryOneCode"><ion-icon name="checkmark"></ion-icon>카테고리명</label>			  
+			   <select class="custom-select" id="categoryOneCode" name="categoryOneCode">
+			     <option disabled>--------------------------선택---------------------------</option>
+			     <option value="0">음악공연</option>
+        		 <option value="1">스포츠</option>
+        		 <option value="2">기타예술공연</option>
+			   </select>
+			</div>
+        	
+        	<div class="form-group">
+			   <label  for="categoryTwoName"><ion-icon name="checkmark"></ion-icon>세부 카테고리명</label>			  
+			   <input type="text" class="form-control"  id="categoryTwoName"   name="categoryTwoName"
+			   placeholder="세부 카테고리명을 입력해주세요" />
+			</div>
+			
+			<div class="form-group">
+			   <label  for="categoryTwoEng"><ion-icon name="checkmark"></ion-icon>영문명</label>			  
+			   <input type="text" class="form-control"  id="categoryTwoEng" name="categoryTwoEng"
+			   placeholder="세부 카테고리 영문명을 입력해주세요" />
+			</div>
+        	
+        </div>
+      </div>
+      <div class="modal-footer">       
+      	 <button type="button" class="btn btn-light"  id="delete" >삭제</button>
+         <button type="button" class="btn btn-light"  id="submit2" >저장</button>
          <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>

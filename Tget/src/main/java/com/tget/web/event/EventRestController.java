@@ -293,8 +293,8 @@ public class EventRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="rest/addCategoryTwo", method=RequestMethod.POST)
-	public Map<String,Object> addCategoryTwo(@RequestBody Category category) throws Exception {
+	@RequestMapping(value="rest/addCategoryTwo")
+	public Map<String,Object> addCategoryTwo(@ModelAttribute("category") Category category) throws Exception {
 		System.out.println("===============rest/addCategoryTwo===============");
 		
 		eventService.addCategoryTwo(category);
@@ -306,29 +306,30 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.GET)
-	public Map<String,Object> updateCategoryTwo(@RequestParam String categoryTwoEng) throws Exception {
-		System.out.println("===============rest/updateCategoryTwo===============");
+	public Map<String,Object> updateCategoryTwo(@RequestParam int categoryTwoNo) throws Exception {
+		System.out.println("===============rest/updateCategoryTwo GET===============");
 
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("category", eventService.getCategory(categoryTwoEng));
+		map.put("category", eventService.getCategory(categoryTwoNo));
 		
 		return map;
 	}
 	
 	@RequestMapping(value="rest/updateCategoryTwo", method=RequestMethod.POST)
-	public Map<String,Object> updateCategoryTwo(@RequestBody Category category) throws Exception {
-		System.out.println("===============rest/updateCategoryTwo===============");
-		
-		eventService.updateCategoryTwo(category);
-		
+	public Map<String,Object> updateCategoryTwo(@ModelAttribute("category") Category category) throws Exception {
+		System.out.println("===============rest/updateCategoryTwo POST===============");
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("category", eventService.getCategory(category.getCategoryTwoEng()));
+//		Category existing = eventService.getCategory(category.getCategoryTwoNo());
+		map.put("existingCode",eventService.getCategory(category.getCategoryTwoNo()).getCategoryOneCode());		
+		
+		eventService.updateCategoryTwo(category);		
+		map.put("category", eventService.getCategory(category.getCategoryTwoNo()));
 		
 		return map;
 	}
 	
 	@RequestMapping(value="rest/deleteCategoryTwo")
-	public Map<String,Object> deleteCategoryTwo(@RequestBody String categoryTwoEng) throws Exception {
+	public Map<String,Object> deleteCategoryTwo(@RequestParam String categoryTwoEng) throws Exception {
 		System.out.println("===============rest/deleteCategoryTwo===============");
 		
 		eventService.deleteCategoryTwo(categoryTwoEng);
@@ -640,6 +641,7 @@ public class EventRestController {
 	@RequestMapping(value="rest/updateRecommendedEvent")
 	public Map<String,Object> updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
 		System.out.println("===============rest/updateRecommendedEvent===============");
+		System.out.println(recommEvent);
 		Map<String,Object> map = new HashMap<String,Object>();
 		System.out.println(multipartFile.getOriginalFilename( ));
 		File file = null;

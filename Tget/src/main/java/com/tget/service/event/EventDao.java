@@ -35,6 +35,7 @@ public interface EventDao {
 	public void insertCategoryTwo(Category category) throws Exception;
 	public void updateCategoryTwo(Category category) throws Exception;
 	public Category selectCategory(String categoryTwoEng) throws Exception;
+	public Category selectCategory(int categoryTwoNo) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
 	public List<String> selectInterestedByUser(Search search) throws Exception;
 	public int selectInterestedByUserCount(Search search) throws Exception;

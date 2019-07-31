@@ -224,6 +224,14 @@
 		  ORDER BY category_one_code, category_two_no
 	 </select>
 	 
+	 <select 	id="selectCategoryByNo"	parameterType="int"	resultMap="categorySelectMap">
+		 SELECT category_one_code, category_two_name, category_two_eng, category_two_no
+		 FROM category_two
+		 WHERE category_two_no = #{categoryTwoNo:NUMERIC}
+		 ORDER BY category_one_code, category_two_no
+	 </select>
+	 
+	 
 	 <select 	id="selectListCategoryCount"	resultType="int">
 		SELECT COUNT(*)
 	  	FROM( SELECT category_one_code,category_two_name,category_two_eng 

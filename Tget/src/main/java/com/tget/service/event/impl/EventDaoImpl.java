@@ -180,6 +180,11 @@ public class EventDaoImpl implements EventDao {
 		return sqlSession.selectOne("EventMapper.selectCategory", categoryTwoEng);
 	}
 	
+	public Category selectCategory(int categoryTwoNo) throws Exception{
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("categoryTwoEng",categoryTwoEng);
+		return sqlSession.selectOne("EventMapper.selectCategoryByNo", categoryTwoNo);
+	}
 	
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception{
 		sqlSession.delete("EventMapper.deleteCategoryTwo",categoryTwoEng);

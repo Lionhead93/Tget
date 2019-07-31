@@ -148,6 +148,11 @@ public class EventServiceImpl implements EventService{
 	}
 	
 	
+	public Category getCategory(int categoryTwoNo) throws Exception{
+		return eventDao.selectCategory(categoryTwoNo);
+	}
+	
+	
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception{
 		eventDao.deleteCategoryTwo(categoryTwoEng);
 	}

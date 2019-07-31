@@ -36,6 +36,7 @@ public interface EventService {
 	public void addCategoryTwo(Category category) throws Exception;
 	public void updateCategoryTwo(Category category) throws Exception;
 	public Category getCategory(String categoryTwoEng) throws Exception;
+	public Category getCategory(int categoryTwoNo) throws Exception;
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception;
 	public List<String> getInterestedByUser(Search search) throws Exception;
 	public int getInterestedByUserCount(Search search) throws Exception;
