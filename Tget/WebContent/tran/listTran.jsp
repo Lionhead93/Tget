@@ -36,23 +36,28 @@
 	<style>
 		
 		body {
-			
+			  background-color: #062038;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-	
-       #titleSection {       
-       		margin-top:30px;
-       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;			  
-			padding-bottom:110px; 
+       #tgetHeader{
+		   margin-top:30px;	
+		   color: #FBFCFE;	
+	       padding-bottom:80px; 
+	       background: url(/resources/images/pic02.jpg) no-repeat center center fixed; 
+				  -webkit-background-size: cover;
+				  -moz-background-size: cover;
+				  -o-background-size: cover;
+				  background-size: cover;	
        }
-       
-       strong, h1, h2, h3, h5, h6 {
+		
+       strong, h1, h2, h5, h6 {
        		color: black;
        }
+       #footer{
+			color: #FBFCFE;	
+			background-color: #1B1B1F;
+		}
+       
        
        .modal-content{ 			
 			color: black;			  
@@ -256,10 +261,7 @@
 	});
 	
 	$(function(){
-		$("a[href='#']:contains('판매자 등록')").on("click", function(){
-			var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
-	             window.open("/ticket/addSeller","T-get 판매자등록 ",popOption);
-		});
+		
 		$("a[href='#']:contains('후기작성 내역')").on("click", function(){
 			
 		});
@@ -277,14 +279,11 @@
 </head>
 
 <body>
-	<jsp:include page="/layout/tgetToolbar.jsp" />
+	<jsp:include page="/layout/tgetToolbar.jsp" />	
 	<br/>
-	
+	<jsp:include page="/layout/tgetHeader.jsp" />
 	<div id="main">
 	
-	
-	<section id="titleSection" class="wrapper style2">
-	</section>
 	
 	
 	<section class="wrapper style1">
@@ -297,7 +296,7 @@
 			<p><strong>${user.nickName} > 거래내역조회 </strong></p>
 										<ul class="alt">										
 											<c:if test="${user.role=='0'}">
-											<li><a href="#">판매자 등록</a></li>
+											<li><a href="#" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a></li>
 											</c:if>
 											<li><a href="#">후기작성 내역</a></li>
 											<li><a href="#">포인트 사용내역</a></li>
@@ -341,11 +340,11 @@
 			      <td>${tran.orderAmount}</td>
 			      <td>${tran.orderDate}</td>
 			      <td id="${tran.tranCode}">			      
-			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.userId}
+			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.nickName}
 			      <a class="chat" id="${tran.buyer.userId}" href="#" >
 			      <i class="far fa-comment-alt"></i>
 			      </c:if>
-			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.userId}
+			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.nickName}
 			      <a class="chat" id="${tran.seller.userId}" href="#" >
 			      <i class="far fa-comment-alt"></i>
 			      </c:if>
@@ -455,47 +454,11 @@
 					      </div>
 					    </div>
 					  </div>
-					</div>
-					
-					
-	<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<div class="flex flex-3">
-						<div class="col">
-							<h4>공지사항</h4>
-							<ul class="alt">
-								<li><a href="#">티켓거래 공지</a></li>
-								<li><a href="#">자유게시판 이용공지</a></li>
-								<li><a href="#">자주묻는질문</a></li>
-							</ul>
-						</div>
-						<div class="col">
-							<h4>자유게시판</h4>
-							<ul class="alt">
-								<li><a href="#">삽니다</a></li>
-								<li><a href="#">팝니다</a></li>
-								<li><a href="#">수다방</a></li>
-							</ul>
-						</div>
-						<div class="col">
-							<h4>고객센터</h4>
-							<ul class="alt">
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
-								<li><a href="#">link</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="copyright">
-					<ul class="icons">
-						<li><a href="#" >Back to Top</a></li>
-					</ul>
-					&copy; T-GET. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
-				</div>
-			</footer>
+					</div>	
+	<!-- 판매자 등록 모달 -->
+	<jsp:include page="/ticket/addSeller.jsp" />				
+	<jsp:include page="/layout/footer.jsp" />			
+
 	
 </body>
 

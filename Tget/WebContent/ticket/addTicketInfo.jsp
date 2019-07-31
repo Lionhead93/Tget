@@ -105,7 +105,6 @@
 	}		
 	
 	$(function(){
-		
 		if(${user.role=='0'}){
 			alert("첫 판매는 판매자 등록이 필요합니다.");
 			 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
