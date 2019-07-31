@@ -16,10 +16,11 @@
 		<link rel="icon" href="/resources/images/logo.png">		  	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/login.css" />
-
+		<link rel="stylesheet" href="/resources/css/yr.css" />
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
 		<link rel="stylesheet" href="/resources/css/main.css" />
-		
+		<link rel="stylesheet" href="/resources/css/neon.css" />
+		<script src="/resources/javascript/yr.js" ></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -58,10 +59,10 @@
 					<input type="hidden"  id="searchKeyword" name="searchKeyword"  
 					placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 					
-							<div class="input-group">		    
+							<div class="input-group" >		    
 							    <input name="searching" type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
 							    <div class="input-group-append">
-							    	<a class="input-group-text" href="#">검색</a>
+							    	<a class="input-group-text" href="#" style="color:black;">검색</a>
 								</div>							
 						     </div>
 					</form>	     
@@ -93,7 +94,14 @@
 				<section class="wrapper style1">
 					<div class="inner">
 						<header class="align-center">
-							<h2>인기 이벤트</h2>
+							<h2>
+								<span class="textcontainer">
+									<span class="particletext fire">
+										인기 이벤트
+									<span class="particle" style="top:45%; left:13%;width:12px; height:12px;animation-delay: 0.2s;"></span><span class="particle" style="top:55%; left:87%;width:10px; height:10px;animation-delay: 0.3s;"></span><span class="particle" style="top:53%; left:-5%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:53%; left:77%;width:8px; height:8px;animation-delay: 1.5s;"></span><span class="particle" style="top:69%; left:24%;width:8px; height:8px;animation-delay: 0.3s;"></span><span class="particle" style="top:57%; left:98%;width:9px; height:9px;animation-delay: 1.8s;"></span><span class="particle" style="top:66%; left:70%;width:8px; height:8px;animation-delay: 0.2s;"></span><span class="particle" style="top:64%; left:75%;width:8px; height:8px;animation-delay: 1.3s;"></span><span class="particle" style="top:41%; left:57%;width:11px; height:11px;animation-delay: 0.4s;"></span><span class="particle" style="top:50%; left:5%;width:10px; height:10px;animation-delay: 1.2s;"></span><span class="particle" style="top:48%; left:6%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:60%; left:82%;width:8px; height:8px;animation-delay: 0.7s;"></span><span class="particle" style="top:57%; left:70%;width:8px; height:8px;animation-delay: 1s;"></span><span class="particle" style="top:45%; left:43%;width:9px; height:9px;animation-delay: 0.3s;"></span><span class="particle" style="top:48%; left:3%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:72%;width:8px; height:8px;animation-delay: 0s;"></span><span class="particle" style="top:40%; left:79%;width:11px; height:11px;animation-delay: 1.4s;"></span><span class="particle" style="top:49%; left:54%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:48%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:58%; left:26%;width:8px; height:8px;animation-delay: 2s;"></span><span class="particle" style="top:41%; left:57%;width:10px; height:10px;animation-delay: 0.2s;"></span><span class="particle" style="top:66%; left:15%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:60%; left:22%;width:10px; height:10px;animation-delay: 0.9s;"></span><span class="particle" style="top:40%; left:25%;width:12px; height:12px;animation-delay: 0.6s;"></span><span class="particle" style="top:62%; left:93%;width:8px; height:8px;animation-delay: 0.9s;"></span><span class="particle" style="top:47%; left:9%;width:10px; height:10px;animation-delay: 0.7s;"></span><span class="particle" style="top:43%; left:-2%;width:8px; height:8px;animation-delay: 0.8s;"></span><span class="particle" style="top:69%; left:2%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:9%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:43%; left:22%;width:11px; height:11px;animation-delay: 0.8s;"></span><span class="particle" style="top:64%; left:37%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:70%; left:84%;width:8px; height:8px;animation-delay: 1.1s;"></span></span>
+								</span>
+								<span class='neon' style='font-family: FontAwesome;font-weight:bold;font-size:23px'>HOT</span>
+							</h2>
 							<p>조회수 Top 3</p>
 						</header>
 						
@@ -147,7 +155,13 @@
 				<section id="popular" class="wrapper style2">
 					<div class="inner">
 						<header>
-							<h2>추천 이벤트</h2>
+							<h2>
+								<span class="textcontainer">
+									<span class="particletext confetti">
+										추천 이벤트
+									<span class="particle c2" style="top:23%; left:77%;width:8px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:10%; left:17%;width:7px; height:4px;animation-delay: 0.4s;"></span><span class="particle c1" style="top:16%; left:71%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c2" style="top:23%; left:4%;width:7px; height:4px;animation-delay: 0.2s;"></span><span class="particle c1" style="top:35%; left:21%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c1" style="top:36%; left:61%;width:6px; height:3px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:20%; left:76%;width:6px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:10%; left:87%;width:7px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:10%; left:82%;width:7px; height:4px;animation-delay: 2.1s;"></span><span class="particle c1" style="top:26%; left:60%;width:6px; height:3px;animation-delay: 0.1s;"></span><span class="particle c1" style="top:33%; left:82%;width:8px; height:3px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:22%; left:68%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:14%; left:91%;width:7px; height:4px;animation-delay: 1.2s;"></span><span class="particle c2" style="top:46%; left:95%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c2" style="top:40%; left:55%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c2" style="top:34%; left:37%;width:6px; height:3px;animation-delay: 2s;"></span><span class="particle c2" style="top:36%; left:16%;width:7px; height:3px;animation-delay: 0.8s;"></span><span class="particle c2" style="top:45%; left:92%;width:6px; height:3px;animation-delay: 2.3s;"></span><span class="particle c1" style="top:28%; left:49%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c1" style="top:17%; left:79%;width:6px; height:4px;animation-delay: 0.3s;"></span><span class="particle c2" style="top:39%; left:15%;width:6px; height:4px;animation-delay: 1.7s;"></span><span class="particle c1" style="top:20%; left:86%;width:7px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:38%; left:54%;width:6px; height:4px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:25%; left:60%;width:6px; height:4px;animation-delay: 0.4s;"></span><span class="particle c2" style="top:21%; left:29%;width:7px; height:4px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:43%; left:78%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c1" style="top:28%; left:79%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:33%; left:16%;width:8px; height:3px;animation-delay: 3s;"></span><span class="particle c1" style="top:49%; left:79%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c2" style="top:17%; left:9%;width:7px; height:4px;animation-delay: 1.1s;"></span><span class="particle c2" style="top:12%; left:95%;width:6px; height:3px;animation-delay: 1.1s;"></span><span class="particle c1" style="top:15%; left:62%;width:6px; height:3px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:13%; left:58%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:42%; left:39%;width:8px; height:4px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:50%; left:95%;width:6px; height:4px;animation-delay: 0.6s;"></span></span>
+								</span>
+							</h2>
 							<p>T-GET이 추천하는 이달의 이벤트 Top 3</p>							
 						</header>
 						
@@ -452,7 +466,8 @@
 				$("a:contains('Click Me')").on("click",function(){
 					$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category=&eventName="+$(this).val()).submit();
 				});
-				
+
+				initparticles();
 			});	
 			
 	 </script>
