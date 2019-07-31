@@ -187,8 +187,7 @@
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 														AND content_code = #{searchKeyword} 
-													</if>
-													
+													</if>	
 												</where>
 											</if>
 											ORDER BY content_no ) inner_table)

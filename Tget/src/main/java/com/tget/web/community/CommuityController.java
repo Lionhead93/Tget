@@ -126,7 +126,7 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
-		public String addReport(@ModelAttribute("report") Report report, HttpSession session, Search search) throws Exception {
+		public String addReport(@ModelAttribute("report") Report report, Content content, HttpSession session, Search search) throws Exception {
 
 			System.out.println("community/addReport: POST");
 			//User user = userService.getUser("userId");
@@ -143,7 +143,7 @@ public class CommuityController {
 			if(role.equals("2")) {
 				return "forward:/community/getReportList";
 			}else {
-				return "forward:/community/getContentList?SearchCondition=";
+				return "forward:/community/getContentList?searchCondition=2&searchKeyword="+content.getContentCode();
 			}
 			
 		}
@@ -187,7 +187,7 @@ public class CommuityController {
 		}
 	
 		@RequestMapping(value="getContentList")
-		public String getContentList( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+		public String getContentList( @ModelAttribute("search") Search search , Model model , Content content, HttpServletRequest request) throws Exception{
 			
 			System.out.println("/community/getContentList: GET/ POST");
 
@@ -199,10 +199,13 @@ public class CommuityController {
 			model.addAttribute("totalCount", map.get("totalCount"));
 			model.addAttribute("search", search);
 			
-			return "forward:/community/getContentList.jsp";
+			if(search.getSearchCondition().equals("2")&&search.getSearchKeyword().equals("2")) {
+				return "forward:/community/getQuestionList.jsp";
+			}else {
+				return "forward:/community/getContentList.jsp";
+			}
 		}
-		
-		
+
 		@RequestMapping(value="getReportList")
 		public String getReportList(  @ModelAttribute("search") Search search , User user, Report report, Model model , HttpServletRequest request, HttpSession session) throws Exception{
 			
@@ -250,6 +253,7 @@ public class CommuityController {
 			communityService.updateReport(report);
 			System.out.println("@@@@@@@/////////"+report);
 			System.out.println("@@@@@@@@@@@@@@@하...좀....");
+			
 			return "forward:/user/listUser.jsp";
 		}
 		//환불 게시판 환불 검증 여부 처리

@@ -18,7 +18,7 @@
 							<br/>
 								<a href="#">티켓거래 공지</a><br/><br/>
 								<a href="#">자유게시판 이용공지</a><br/><br/>
-								<a href="#">자주묻는질문</a>
+								<a href="#">자주 묻는 질문</a>
 							
 						</div>
 						<div class="col">

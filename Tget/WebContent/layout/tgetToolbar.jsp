@@ -97,8 +97,8 @@ $(function() {
 	
 	});
  
-	 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
-			self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
+	 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=2";
 		
 		});
 	 
