@@ -137,8 +137,9 @@
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>	
-		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 		<script src="/resources/javascript/modernizr.custom.js"></script>
+		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+		
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -169,8 +170,8 @@
 				
 				});
 			 
-			 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
-					self.location="/community/getQuestionList";	
+			 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
+					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 				
 				});
 			 
@@ -303,14 +304,15 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="text-center">	    
+	<div class="text-right" style="margin-right: 130px; margin-top: 30px;">	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
-		    	<c:if test="${sessionScope.user.role == '2'}">
-		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				</c:if>
+		    	
 				<p class="text-primary">
 		    		전체  ${totalCount } 건수
-		    	</p>	
+		    	</p>
+		    	<c:if test="${sessionScope.user.role == '2'}">
+		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+				</c:if>	
 	</div>
 	
 	 <div class="row">
@@ -318,30 +320,19 @@
 	      <div class="sticky-top">
 		  <br/>
 			 <div>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>
-		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
-		       		<h5>Community > 공지사항</h5>
-		       </c:if>   
+		       		<h6><strong>Community > 자주묻는질문</strong></h6>		          
 		   	 </div>
 		   	 
-			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
+			
 				<ul class="list-group list-group-flush">
 				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
 				<li class="list-group-item"><a href="#">자유게시판 이용공지</a></li>
 				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
 				</ul>
-			</c:if>
 			</div>
 		</div>		
       <!--  table Start /////////////////////////////////////-->
      <div class="col-md-10 text-center">	
-	      <table class="table" >
-			<thead>
 			<section>
 				<br/>
 				<div class="tabs tabs-style-topline">
@@ -355,148 +346,97 @@
 					</nav>
 					<div class="content-wrap">
 						<section id="section-topline-1">
-						<c:forEach var="content" items="${list}">
-							<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='8'}">
-							<tr>	
-							<td>${content.contentName}
-							  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-							  <td>${content.userNickname}
-							  <div id="userId" style="display:none;">${user.userId}</div></td>
-							  <td>${content.regDate}</td> 
-				   	  
-						   	  <!-- 공감 -->
-						   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-						   	  <span name="${content.contentNo}">${content.goodCount}</span>
-						   	  
-						   	  <!-- 비공감 -->
-						   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-						   	  <a id="${content.contentNo}">${content.badCount}</a> 
-						   	  </td>		  	
-						</tr>
-			          <tr>
-					</tr>
-					</c:if>
-			          </c:forEach>
+						<div class="row">
+								 <c:forEach var="content" items="${list}" varStatus="j">
+								 <c:if test="${content.contentCode=='8'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${content.contentName}</strong></h5>
+								 				<br/>
+								 				<small>작성자: ${content.userNickname}</small>
+								 				<br/>
+								 				<small>작성일: ${content.regDate}</small>
+								 				
+								 			<hr/>
+								 			
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+						</div>
 						</section>
 						
 						<section id="section-topline-2">
-						<c:forEach var="content" items="${list}">
-							<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='9'}">
-							<tr>	
-							<td>${content.contentName}
-							  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-							  <td>${content.userNickname}
-							  <div id="userId" style="display:none;">${user.userId}</div></td>
-							  <td>${content.regDate}</td> 
-				   	  
-						   	  <!-- 공감 -->
-						   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-						   	  <span name="${content.contentNo}">${content.goodCount}</span>
-						   	  
-						   	  <!-- 비공감 -->
-						   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-						   	  <a id="${content.contentNo}">${content.badCount}</a> 
-						   	  </td>		  	
-						</tr>
-			          <tr>
-					</tr>
-					</c:if>
-			          </c:forEach>			
+						<div class="row">
+								 <c:forEach var="content" items="${list}" varStatus="j">
+								 <c:if test="${content.contentCode=='9'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<hr/>
+								 			
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+						</div>			
 						</section>
 						<section id="section-topline-3">
-						<c:forEach var="content" items="${list}">
-							<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='10'}">
-							<tr>	
-							<td>${content.contentName}
-							  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-							  <td>${content.userNickname}
-							  <div id="userId" style="display:none;">${user.userId}</div></td>
-							  <td>${content.regDate}</td> 
-				   	  
-						   	  <!-- 공감 -->
-						   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-						   	  <span name="${content.contentNo}">${content.goodCount}</span>
-						   	  
-						   	  <!-- 비공감 -->
-						   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-						   	  <a id="${content.contentNo}">${content.badCount}</a> 
-						   	  </td>		  	
-						</tr>
-			          <tr>
-					</tr>
-					</c:if>
-			          </c:forEach>	
+						<div class="row">
+								 <c:forEach var="content" items="${list}" varStatus="j">
+								 <c:if test="${content.contentCode=='10'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<hr/>
+								 			
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+						</div>	
 						</section>
 						<section id="section-topline-4">
-						<c:forEach var="content" items="${list}">
-							<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='11'}">
-							<tr>	
-							<td>${content.contentName}
-							  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-							  <td>${content.userNickname}
-							  <div id="userId" style="display:none;">${user.userId}</div></td>
-							  <td>${content.regDate}</td> 
-				   	  
-						   	  <!-- 공감 -->
-						   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-						   	  <span name="${content.contentNo}">${content.goodCount}</span>
-						   	  
-						   	  <!-- 비공감 -->
-						   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-						   	  <a id="${content.contentNo}">${content.badCount}</a> 
-						   	  </td>		  	
-						</tr>
-			          <tr>
-					</tr>
-					</c:if>
-			          </c:forEach>	
+						<div class="row">
+								 <c:forEach var="content" items="${list}" varStatus="j">
+								 <c:if test="${content.contentCode=='11'}">
+								 	<div class="col-lg-3">
+								 	<div class="text-center">
+								 		<div class="border">
+								 		<br/>
+								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<hr/>
+								 			
+								 			<br/>
+								 		</div>
+								 	</div>	
+								 	</div>
+								 </c:if>	
+								 </c:forEach>
+						</div>	
 						</section>
 					</div><!-- /content -->
 				</div><!-- /tabs -->
-			</section>      
-	          <tr>   	
-	            <th>글 제목</th>
-	            <th>작성자</th>
-	            <th>작성일</th>				
-	            <th>공감/비공감</th>	
-	            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	            <th>신고</th>
-	            </c:if>	
-	          </tr>
-	        </thead>
-	       
-			<tbody>
-			
-			  <c:forEach var="content" items="${list}">
-				<tr>
-				<td>${content.contentName}
-				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-				  <td>${content.userNickname}
-				  <div id="userId" style="display:none;">${user.userId}</div></td>
-				  <td>${content.regDate}</td> 
-				   
-			   	  <!-- 공감 -->
-			   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-			   	  <span name="${content.contentNo}">${content.goodCount}</span>
-			   	  
-			   	  <!-- 비공감 -->
-			   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-			   	  <a id="${content.contentNo}">${content.badCount}</a> 
-			   	  </td>		  	
-			</tr>
-          <tr>
-		</tr>
-          </c:forEach>
-			
-	        </tbody>
-	      
-	      </table>
+		</section>      
+	         
       </div>
 	  <!--  table End /////////////////////////////////////-->
 	</div>  
  	<!--  화면구성 div End /////////////////////////////////////--> 
 	<!-- 게시글 등록 Modal -->		  
-		<form name='addContent'>
+	<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	  <div class="modal-dialog modal-lg modal-center" role="document">
 	    <div class="modal-content modal-80size">
@@ -552,6 +492,19 @@
 	  </div>
 	</div>			  
 	</form>
+	
+<script src="/resources/javascript/cbpFWTabs.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+</script>	
+	
 </body>
 <jsp:include page="/layout/footer.jsp" />
 </html>

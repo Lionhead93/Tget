@@ -143,8 +143,6 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-	
 		function fncAddReport(){
 			
 			//alert($("input[name='whiteNickname']").val());
@@ -189,7 +187,7 @@
 				
 				});
 			 
-			 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
+			 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 				
 				});
@@ -366,16 +364,16 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="text-center">	    
+	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
+		    	<p class="text-primary">
+		    		전체  ${totalCount } 건수
+		    	</p>
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
 				<button type="button" class="btn btn-warning">길 찾기 안내</button>
-				<p class="text-primary">
-		    		전체  ${totalCount } 건수
-		    	</p>
-		
-	</div>	   
+	</div>
+	<br/>	   
 	 <div class="row">
 	  <div class="col-md-2 text-center">	  
 	      <div class="sticky-top">
@@ -405,7 +403,7 @@
 				<ul class="list-group list-group-flush">
 				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
 				<li class="list-group-item"><a href="#">자유게시판 이용공지</a></li>
-				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
+				<li class="list-group-item"><a href="#">자주묻는질문</a></li>
 				</ul>
 			</c:if>
 			  
@@ -524,7 +522,7 @@
 		   			 <c:if test="${sessionScope.user.role == '2'}">   			 		
 			   			 	<option value="0">티켓 거래 공지</option>
 			   			 	<option value="1">자유게시판 이용 공지</option>
-			   				<option value="2">자주 찾는 질문</option>
+			   				<option value="2">자주묻는질문</option>
 			   		</c:if>
 	   		
 	   			 	<option value="3">삽니다</option>	
