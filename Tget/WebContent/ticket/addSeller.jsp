@@ -9,27 +9,33 @@
 	$(function(){
 				
 		$("#addSellerSubmit").on("click",function(){	
-			var accountBank = $("#accountBank option:selected").val();
-			var accountNo = $("input[name='accountNo']").val();
-			if(accountBank == null || accountBank.length<1){
+			var userAccountBank = $("#accountBank option:selected").val();
+			var userAccountNo = $("input[name='accountNo']").val();
+			if(userAccountBank == null || userAccountBank.length<1){
 				alert("은행을 선택해주세요.");
 				return;
 			}
-			if(accountNo == null || accountNo.length<1){
-				alert("계좌번호는 반드시 입력하셔야 합니다.");
+			if(userAccountNo == null || userAccountNo.length<11 || isNaN(userAccountNo)==true){
+				alert("계좌번호는 10자 이상 숫자만 입력하셔야 합니다.");
 				return;
 			}
-			var form = $("form[name='addSeller']")[0];
-	    	var formData = new FormData(form);
-			$.ajax(
+	    	$.ajax(
 					{
 						url : "/ticket/rest/addSeller/" ,
-						processData: false,
-	                    contentType: false,
-						method : "POST" ,						
-						data : formData ,
+						method : "POST" ,
+						data : JSON.stringify({
+							userId : "${user.userId}",
+							accountBank : userAccountBank,
+							accountNo : userAccountNo
+						}) ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
 						success : function(data) {	
-							alert(data);
+							alert("등록성공!");
+							history.go(0);
 						}							 
 			});
 			
@@ -84,8 +90,8 @@
 										 </div>
 										 <br/>
 										<div align="center">
-											<button class="button_black"  id="addSellerSubmit">등록</button>
-											<button class="button_black" data-dismiss="modal"  id="cancel">취소</button>											
+											<a class="btn btn-outline-light btn" href="#" role="button" id="addSellerSubmit">등록</a>
+											<a class="btn btn-outline-light btn" href="#" role="button" id="addSellerCancle" data-dismiss="modal">취소</a>						
 										</div>
 									</form>
 								</div>			      	      
