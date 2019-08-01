@@ -142,7 +142,7 @@
 								 			<h5><strong>${tran.event.koName}</strong></h5>
 								 			<hr/>
 								 			<div><small>${tran.orderDate}</small></div>
-								 			<div><small>${tran.seller.userId} <i class="far fa-handshake"></i> ${tran.buyer.userId}</small></div>
+								 			<div><small>${tran.seller.nickName} <i class="far fa-handshake"></i> ${tran.buyer.nickName}</small></div>
 								 			<c:if test="${tran.tranCode=='0'}">
 								 				<div class="progress">
 												  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
