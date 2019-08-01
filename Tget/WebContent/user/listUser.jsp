@@ -1,43 +1,41 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+ <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<!DOCTYPE html>
-
-<html lang="ko">
-	
+<html>
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>T-GET</title>
+    	<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
+		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
+		<meta name="author" content="Codrops" />
+    	
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
-	
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabstyles.css" />
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-				
-		<script src="/resources/javascript/common.js" ></script>
+		
+				<script src="/resources/javascript/common.js" ></script>
 		<script src="/resources/javascript/alarm.js" ></script>
 		<script src="/resources/javascript/jquery.min.js"></script>
 		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>	
-		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-	
-
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	body{	
+		<style>
+		
+body{	
 		      color: #FBFCFE ;		  
 			  background-color: #062038;
 			  margin-top: 50px;				
@@ -140,41 +138,95 @@
 		
 
 
-
     </style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-	
-	 $(function() {
-			$("button").on("click" , function() {
-				 
-				
-				var userId = $(this).next().val();
-			 
-				$("form").attr("method" , "POST").attr("action" , "/user/addblacklist?userId="+userId).submit();
-				  
-				
-			});
-	 });		
-	
-	</script>
-	
-</head>
+				</head>
+			<body>
+			
+<script type="text/javascript">
 
-<body>
+	window.onload = function(){
+		
+		if(${user.role==0}){
+			
+			document.getElementById("cc").style.display = "none" ;
+			document.getElementById("cc2").style.display = "none" ;
+			
+		}
+	}
 
+
+
+
+$(function() {
+	
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("button:contains('회원정보 수정')").on("click" , function() {
+
+		var popOption = "left=500, top=100, width=800, height=600, resizable=no, location=no;"		
+		window.open("/user/updateUser.jsp","회원정보 수정",popOption);
+				
+	});
+});	
+
+
+function fncUpdateUser() {
+	var name=$("input[name='userName']").val();
+	
+	if(name == null || name.length <1){
+		alert("이름은  반드시 입력하셔야 합니다.");
+		return;
+	}
+		
+	$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+}
+
+
+$(function() {
+	
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("button:contains('판매내역 조회')").on("click" , function() {
+
+				
+		window.open("/ticket/getTicketList?menu=seller");
+				
+	});
+});	
+
+
+
+
+
+
+
+
+
+				</script>
+			
 	<jsp:include page="/layout/tgetToolbar.jsp" />
+	<jsp:include page="/layout/tgetHeader.jsp" />
 	
+			
+	<!-- <div class="text-right" style="margin-right: 130px; margin-top: 30px;">	  
 	
+	</div> -->
+		   <!--  table Start /////////////////////////////////////-->
+			 <div class="col-md-10 text-center" >	
+			<section>
+				<br/>
+				<div class="tabs tabs-style-topline">
+			
+					<nav>
+						<ul>
+							<li><a href="#section-topline-1"><h6><strong>회원목록 보기</strong></h6></a></li>
+							<li><a href="#section-topline-2"><h6><strong>블랙리스트 보기</strong></h6></a></li>
+						</ul>
+					</nav>
+				
+			<div class="content-wrap">
+				<section id="section-topline-1">
+						<div class= "text-center">
+						           <div class="container">
 	
-<form class="form-inline" name="detailForm">
-
-	<div class="container">
-	
-		<div class="page-header text-info">
-	       <h3>블랙리스트</h3>
-	    </div>
 	    
 	    <div class="row">
 	    
@@ -192,10 +244,10 @@
           <tr>
             <th align="center">No</th>
             <th align="left" >회원 ID</th>
-            <th align="left">블랙리스트코드</th>
-            <th align="left">블랙리스트신고사유</th>
-            <th align="left">블랙리스트시작일</th>
-            <th align="left">블랙리스트종료일</th>
+            <th align="left">이름</th>
+            <th align="left">　닉네임</th>
+            <th align="left">휴대전화</th>
+            <th align="left">주소</th>
             
             
           </tr>
@@ -208,11 +260,30 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
-			  <td align="left">${user.blacklistCode}</td>
-			  <td align="left">신고사유?</td>
-			  <td align="left">${user.blacklistStartDate.toLocaleString()}</td>
-			  <td align="left">${user.blacklistEndDate.toLocaleString()}
+			  <td align="left">
+			  
+			  <c:choose>
+			  
+			  <c:when test="${user.blacklistCode ne null }">
+			  
+			   <span style="color: red;">
+${user.userId}
+</span>
+			  
+			  </c:when>
+	
+			<c:otherwise>
+			
+			 ${user.userId}
+			
+		</c:otherwise>
+		</c:choose>
+		
+			  </td>
+			  <td align="left">${user.userName}</td>
+			  <td align="left">${user.nickName}</td>
+			  <td align="left">${user.phone}</td>
+			  <td align="left">${user.address}
 			  	<input type="hidden" value="${user.userId}">
 			
 			  </td>
@@ -225,7 +296,100 @@
       </table>
 	  
  	</div>
-</form>	
-</body>
+						</div>		
+										
+						</section>
+				
+				
+				<section id="section-topline-2">
+					<div class= "text-center">
+						           <div class="container">
+	
+	    
+	    <div class="row">
+	    
+		
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
+				
+	    
+	    	
+		</div>
+		
+      <table class="table table-hover table-striped" >
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >회원 ID</th>
+            <th align="left">블랙리스트 누적 횟수</th>
+           
+            <th align="left">블랙리스트시작일</th>
+            <th align="left">블랙리스트종료일</th>
+            
+            
+          </tr>
+        </thead>
+       
+		<tbody>
+		
+		  <c:set var="i" value="0" />
+		  <c:forEach var="user" items="${list}">
+			<c:set var="i" value="${ i+1 }" />
+			<c:if test="${user.blacklistCode ne null }">
+				<tr>
+			  <td align="center">${ i }</td>
+			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
+			 <td align="left">${user.blacklistCode}</td>
+			
+			  <td align="left">${user.blacklistStartDate.toLocaleString()}</td>
+			  <td align="left">${user.blacklistEndDate.toLocaleString()}
+			  	<input type="hidden" value="${user.userId}">
+			
+			  </td>
+			
+			  	
+			</tr>
+			</c:if>
+          </c:forEach>
+        </tbody>
+      
+      </table>
+	  
+ 	</div>
+						</div>		
+				</section>
+						
+						
+								
+								
+								
+								
+								
+								
+								</div><!-- /content -->
+								</div><!-- /tabs -->
+								
+								 		</section>
+				
+				</div>	
+				
+ 
+<script src="/resources/javascript/cbpFWTabs.js"></script>
+<script type="text/javascript"> src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+</script>	
+	 
+<jsp:include page="/ticket/addSeller.jsp" /> 
 <jsp:include page="/layout/footer.jsp" />
-</html>
+</body>
+
+
+</html> 
