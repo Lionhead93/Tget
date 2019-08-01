@@ -24,6 +24,7 @@
 		
 		$("button:contains('확인')").on("click",function(){	
 			window.close();
+			window.opener.location="/tran/getTranList?menu=user";
 		})	;
 		
 		$("button:contains('포인트조회')").on("click",function(){	

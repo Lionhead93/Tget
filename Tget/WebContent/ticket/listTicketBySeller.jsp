@@ -47,7 +47,7 @@
 		hr{
 			border: 1px groove white;
 		}
-		.list-group-item{
+		.list-group > .list-group-item{
 			  margin-left:50px;	
 			  color: #FBFCFE ;
 			  border: 1px groove white;		  

@@ -85,6 +85,9 @@
 			background:rgba(40,57,101,.9);	
 			color: #FBFCFE;	
 		}
+		ul.alt{
+			  border: 1px groove white;	
+		}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -375,7 +378,7 @@
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
 				      <c:if test="${tran.tranCode==2}">-</c:if>
-				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#">후기 확인</a></c:if>
+				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#" data-target="#getReviewModal" data-toggle="modal" >후기 확인</a></c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">
@@ -399,7 +402,7 @@
  
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
+					  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h3>
@@ -462,7 +465,17 @@
 					      </div>
 					    </div>
 					  </div>
-					</div>	
+					</div>
+	<!-- 후기 확인 모달 -->
+					<div class="modal fade" id="getReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-body" id="getReviewModalBody">
+					      	 	      
+					      </div>
+					    </div>
+					  </div>
+					</div>					
 	<!-- 판매자 등록 모달 -->
 	<jsp:include page="/ticket/addSeller.jsp" />				
 	<jsp:include page="/layout/footer.jsp" />			
