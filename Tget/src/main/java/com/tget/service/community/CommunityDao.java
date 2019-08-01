@@ -33,7 +33,7 @@ public interface CommunityDao {
     // 댓글 삭제
     public void deleteReply(int replyNo) throws Exception;
     // 댓글 리스트 조회
-    public List<Reply> selectListReply(Reply reply) throws Exception; 
+    public Map<String, Object> selectListReply(int replyNo) throws Exception;
 	// 공감수 
     public void updateGoodCount(int contentNo)throws Exception;
     // 비공감수
@@ -48,7 +48,7 @@ public interface CommunityDao {
 	// 신고글 리스트 조회(관리자)
 	public List<Report> selectListReport(Search search) throws Exception;
 	// 댓글 리스트 조회(수정 필요)
-	//List<Reply> selectListReply(Search search) throws Exception;
+	
 	
 	//public List<Content> selectListRefund(Search search) throws Exception;
 	

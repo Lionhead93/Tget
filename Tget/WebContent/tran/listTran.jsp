@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
 	<link rel="stylesheet" href="/resources/css/main.css" />
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-	
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -33,6 +33,7 @@
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>
 		
+		
 	<style>
 		
 		body {
@@ -42,7 +43,7 @@
       #tgetHeader{
 		   margin-top:30px;	
 		   color: #FBFCFE;	
-	       padding-bottom:70px; 
+	       padding-bottom:60px; 
 	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
 				  -moz-background-size: cover;
@@ -85,6 +86,16 @@
 			background:rgba(40,57,101,.9);	
 			color: #FBFCFE;	
 		}
+		ul.alt{
+			  border: 1px groove white;	
+		}
+		button.btn-light{
+			color: black ;
+		}	
+		button.btn-light:hover{
+			background-color: gray;
+			color: #FBFCFE ;
+		}		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -152,17 +163,8 @@
 	            }
 	    	});
 	    });
+
 	    
-	    $("a.getReview").on("click", function(){	    	
-	    });
-	    $("a.endDelivery").on("click", function(){
-	    	var tranNo = $(this).attr("id").trim();
-	    	
-	    	popWin = window.open("/rnp/addReview?tranNo="+tranNo ,"popWin",
-					"left=500, top=100, width=600, height=500, "
-					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-			
-	    });
 	    $("a.searchDelivery").on("click", function(){
 	    	tranNo = $(this).attr("id").trim();	    	
 	    	
@@ -280,6 +282,48 @@
 			self.location = "/ticket/getTicketList?menu=seller";
 		});
 		
+		
+	});
+	
+	$(function(){
+		$("a.endDelivery").on("click", function(){
+	    	var tranNo = $(this).attr("id").trim();
+	    	$("#reviewTranNo").val(tranNo);
+// 	    	popWin = window.open("/rnp/addReview?tranNo="+tranNo ,"popWin",
+// 					"left=500, top=100, width=600, height=500, "
+// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			
+	    });
+		
+		$("button.close").on("click",function(){
+			$("select[name='score']").val("");
+			$("textarea[name='reviewBody']").text("");
+			$("#reviewTranNo").val("");
+		});
+		
+		$("#submit").on("click",function(){
+			alert('$("#reviewTranNo").val() : '+$("#reviewTranNo").val()+', $("#score").val() : '+$("#score").val()+', reviewBody : $("#reviewBody").val() : '+$("#reviewBody").val());
+			$.ajax(
+					{
+						url : "/rnp/rest/addReview",
+						method : "POST",
+						data : {
+								tranNo : $("#reviewTranNo").val(),
+								score : $("#score").val(),
+								reviewBody : $("#reviewBody").val()
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+							$("#"+$("#reviewTranNo").val()).text("-");
+// 							alert(status);
+							$("button.close").click();
+// 							alert("JSONData : \n"+JSONData.stringify());		
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});	
+		});
 	});
 		
 	</script>		
@@ -288,7 +332,6 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />	
-	<br/>
 	<jsp:include page="/layout/tgetHeader.jsp" />
 	<div id="main">
 	
@@ -381,7 +424,8 @@
 			      <c:if test="${user.userId==tran.buyer.userId}">
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}">-</c:if>
-				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}" href="#">배송도착</a></c:if>
+				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}"  data-toggle="modal" 						
+								 data-target="#exampleModalCenter" >배송도착</a></c:if>
 				      <c:if test="${tran.tranCode==3}">-</c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
@@ -466,6 +510,32 @@
 	<!-- 판매자 등록 모달 -->
 	<jsp:include page="/ticket/addSeller.jsp" />				
 	<jsp:include page="/layout/footer.jsp" />			
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalCenterTitle"  style="color: white;">리뷰 등록</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <jsp:include page="/rnp/addReview.jsp" />
+      </div>
+      <div class="modal-footer" style="color: black;" >       
+        <button type="button"  class="btn btn-light" id="submit" style="color: black;" >저장</button>
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
 
 	
 </body>

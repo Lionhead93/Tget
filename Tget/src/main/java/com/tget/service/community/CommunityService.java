@@ -45,7 +45,7 @@ public interface CommunityService {
 		public Map<String,Object> getContentList(Search search) throws Exception;
 		
 		// 댓글 리스트 조회
-		public List<Reply> getReplyList(Reply reply) throws Exception;
+		public Map<String, Object> getReplyList(int replyNo) throws Exception;
 		
 		// 신고 리스트 조회
 		public Map<String,Object> getReportList(Search search) throws Exception; //getTotalCount, getReportList 
@@ -61,5 +61,7 @@ public interface CommunityService {
 		
 		// 환불 게시판 환불 처리
 		public void updateRefund(Content content) throws Exception;
+
+		
 		
 }
