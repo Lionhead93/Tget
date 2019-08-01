@@ -7,16 +7,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>내 관심 이벤트</title>
+<title>T-GET</title>
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<link rel="stylesheet" href="/resources/css/yr.css" />
-	
-	
-	
+	<link rel="shortcut icon" href="/resources/images/logo.png">
+	<link rel="icon" href="/resources/images/logo.png">		  	
+	<link rel="stylesheet" href="/resources/css/login.css" />
+	<link rel="stylesheet" href="/resources/css/videoBox.css" />
+	<link rel="stylesheet" href="/resources/css/main.css" />
+    
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -25,39 +32,51 @@
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
 	<script src="/resources/javascript/yr.js" ></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    
     <script type="text/javascript">
 
     $(function(){
     	
     	
-    	$("#checkAll").on("click", function(){
+//     	$("#checkAll").on("click", function(){
     		
-    		if ($(this).prop("checked")) {
-    			$(".check").prop("checked","checked");    			
-			}else{
-				$(".check").prop("checked",false);
-			}    		
-    	});
+//     		if ($(this).prop("checked")) {
+//     			$(".check").prop("checked","checked");    			
+// 			}else{
+// 				$(".check").prop("checked",false);
+// 			}    		
+//     	});
     	
-    	$(".check").on("click", function(){
-    		if ($(".check:checked").length=="${interestedEventListCount}") {
-    			$("#checkAll").prop("checked","checked");   
-			}else{
-				$("#checkAll").prop("checked",false);   
-			}
-    	})
+//     	$(".check").on("click", function(){
+//     		if ($(".check:checked").length=="${interestedEventListCount}") {
+//     			$("#checkAll").prop("checked","checked");   
+// 			}else{
+// 				$("#checkAll").prop("checked",false);   
+// 			}
+//     	})
     	
     	$("button.btn-outline-primary").on("click", function(){
-//     		alert("바로가기");
-//     		$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
-    		self.location = "/event/getEventTicketList?eventIds="+$(this).val();
+    		var temp = $(this).val();
+    		$.ajax(
+					{
+						url : "/event/rest/deleteInterestedEvent/"+temp,
+						method : "POST",
+						dataType : "json",
+						success : function(JSONData, status){
+// 							alert(status);
+							$("#"+temp).remove();
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});	
         });
+    	
+    	$("td.record").on("click",function(){
+//     		alert($(this).children("input[type='hidden']").val());
+// 			$("form").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventId="+$(this).val()).submit();
+    		self.location = "/event/getEventTicketList?eventIds="+$(this).children("input[type='hidden']").val();
+
+    	});
     	
     	$("#all").on("click", function(){
     		$("form").attr("method" , "POST").attr("action" , "/event/deleteInterestedEventAll").submit();
@@ -111,11 +130,19 @@
     	});
 	</script>
 	<style type="text/css">
-	
+		table{
+			background-color : #193147; 
+			border: 1px solid #FBFCFE;	
+			color: #FBFCFE;		
+		}
+ 		tr.record:hover{
+			background-color : #041625; 
+		}
 		body{
 				margin-top: 70px;
 				background-color : #062038; 
 				color: #FBFCFE ;
+				font-size: 20px;    
 		}
 		#footer{
 			background-color: #1B1B1F ;
@@ -123,22 +150,14 @@
 		a, hr{
 				color: #FBFCFE ;	
 			}	
-		th, td{
-			padding: 10px;
+		th, td, tr{
+			padding: 20px;
 			color: #FBFCFE ;
 		}
-		tr:hover{
-			background-color : #041625; 
-		}
+		
 		h1{
 			font-weight: bold; 
 		}
-		
- 		.container{ 
- 			padding: 50px;
-/*  			font-family: 'Sunflower', sans-serif; */
-	 		font-size: 20px;    
- 		} 
 		ul {overflow:hidden;} 
 		li { 
 			margin: 5px 5px 5px 5px;
@@ -149,10 +168,10 @@
 		} 
 		li:first-child { margin-left:20px;  } 
 
-		
 	</style>
 <body>	
 <jsp:include page="/layout/tgetToolbar.jsp" />
+<jsp:include page="/layout/tgetHeader.jsp" />
 <form>
 	<div class="container" align="center">	
 		<div class="row" >
@@ -177,22 +196,24 @@
 				<table class="table ">
 				  <thead>
 				    <tr align="center">
-				      <th scope="col"  style="padding-left: 40px"><h4><input type="checkbox" id="checkAll"  /></h4></th>
-				      <th scope="col" ><h4>관심이벤트</h4></th>
-				      <th scope="col"><h4>바로가기</h4></th>
+<!-- 				      <th scope="col"  style="padding-left: 40px"><input type="checkbox" id="checkAll"  /></th> -->
+				      <th scope="col" >관심이벤트</th>
+				      <th scope="col" >바로가기</th>
 <!-- 				      <th scope="col"><h4>카운트다운</h4></th> -->
 				    </tr>
 				  </thead>
 				  <tbody>
 				  <c:forEach items="${interestedEventList}"  var="i">
-				    <tr>
-				      <td>
-						<div align="center" style="padding-left: 30px">
-							<br/>
-							<input type="checkbox" class="check"  value="${i.eventId }"/>
-						</div>			
-				  	  </td>
-				  	  <td>
+<%-- 				    <tr class="record" id="${i.eventId }">				     --%>
+<!-- 				      <td class="record" >				       -->
+<%-- 				      	<input type="hidden" value="${i.eventId }"  /> --%>
+<!-- 						<div align="center" style="padding-left: 30px"> -->
+<!-- 							<br/> -->
+<%-- 							<input type="checkbox" class="check"  value="${i.eventId }"/> --%>
+<!-- 						</div>			 -->
+<!-- 				  	  </td> -->
+				  	  <td class="record" >
+				  	  	<input type="hidden" value="${i.eventId }"  />
 						<div class="event" align="left" style="padding-left: 60px">
 							${i.koName}<br/>
 							${i.eventDate }, ${i.eventTimeStr}<br/>
@@ -205,7 +226,7 @@
 							<div style="font-size: 15px; font-weight: bold; margin: 10px;">
 								최저가 ${i.ticketLowestPriceStr }원, 총 ${i.totalTicketCount }건
 							</div>
-							<button type="button" class="btn btn-outline-primary"  value="${i.eventId }">바로가기</button>						
+							<button type="button" class="btn btn-outline-primary"  value="${i.eventId }">삭제</button>						
 						</div>			
 				  	  </td>
 			    </tr>
@@ -215,10 +236,10 @@
 			</div>
 <!-- 			<div class="col-lg-1"></div> -->
 		</div>	
-		<div class="floating"  align="center">
-			<button id="all"  class="btn btn-outline-light">전체삭제</button>
-			<button id="select" class="btn btn-outline-light">선택삭제</button>			
-		</div>	
+<!-- 		<div class="floating"  align="center"> -->
+<!-- 			<button id="all"  class="btn btn-outline-light">전체삭제</button> -->
+<!-- 			<button id="select" class="btn btn-outline-light">선택삭제</button>			 -->
+<!-- 		</div>	 -->
 	</div>
 	</form>
 	
