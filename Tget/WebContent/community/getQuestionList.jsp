@@ -378,7 +378,11 @@
 								 	<div class="text-center">
 								 		<div class="border">
 								 		<br/>
-								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<h5><strong>${content.contentName}</strong></h5>
+								 				<br/>
+								 				<small>작성자: ${content.userNickname}</small>
+								 				<br/>
+								 				<small>작성일: ${content.regDate}</small>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -397,7 +401,11 @@
 								 	<div class="text-center">
 								 		<div class="border">
 								 		<br/>
-								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<h5><strong>${content.contentName}</strong></h5>
+								 				<br/>
+								 				<small>작성자: ${content.userNickname}</small>
+								 				<br/>
+								 				<small>작성일: ${content.regDate}</small>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -416,7 +424,11 @@
 								 	<div class="text-center">
 								 		<div class="border">
 								 		<br/>
-								 			<h5><strong>${content.contentNo}</strong></h5>
+								 			<h5><strong>${content.contentName}</strong></h5>
+								 				<br/>
+								 				<small>작성자: ${content.userNickname}</small>
+								 				<br/>
+								 				<small>작성일: ${content.regDate}</small>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -460,7 +472,7 @@
 			</select>	
 			
 			<div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label"><strong>작성자</strong></label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
@@ -468,8 +480,7 @@
 		  </div>
  
 		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>
-		    
+		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label> 
 		      <input type="text" class="form-control" id="contentName" name="contentName">
 		    
 		  </div>
