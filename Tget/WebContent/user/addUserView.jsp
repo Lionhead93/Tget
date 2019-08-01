@@ -158,8 +158,8 @@
 			         $("#alert-success").hide();
 			         $("#alert-danger").hide();
 			         $("input").keyup(function(){
-			             var pwd1=$("#password").val();
-			             var pwd2=$("#password2").val();
+			             var pwd1=$("#password01").val();
+			             var pwd2=$("#password02").val();
 			             if(pwd1 != "" || pwd2 != ""){
 			                 if(pwd1 == pwd2){
 			                	 
@@ -194,10 +194,10 @@
 			     
 			     function fncAddUser() {
 						
-						var id=$("input[name='userId']").val();
-						var id2=$("select[id='userId2']").val();
-						var pw=$("input[name='password']").val();
-						var pw_confirm=$("input[name='password2']").val();
+						var id=$("input[id='userId01']").val();
+						var id2=$("select[id='userId02']").val();
+						var pw=$("input[name='password01']").val();
+						var pw_confirm=$("input[name='password02']").val();
 						var name=$("input[name='userName']").val();
 						var address1=$("input[name='address']").val();
 						var address2=$("input[name='address2']").val();
@@ -220,7 +220,7 @@
 						
 						if( pw != pw_confirm ) {				
 							alert("비밀번호 확인이 일치하지 않습니다.");
-							$("input:text[name='password2']").focus();
+							$("input:text[name='password02']").focus();
 							return;
 						}
 						
@@ -349,8 +349,10 @@
 												var check = "";
 										
 												$("button:contains('인 증')").on("click" , function() {
-													var userId = document.getElementById("userId");
-													var Id = $("#userId").val();
+													
+													var Id = $("input[id='userId01']").val();
+													
+												
 													
 													if(Id == null || Id.length <1){
 														alert("아이디는 반드시 입력하셔야 합니다.");
@@ -370,8 +372,8 @@
 														   type: "post",
 														   dataType:"json" ,
 														   data: { 
-															  Email: $("#userId").val()+
-															  $("#userId2").val(),
+															  Email: $("input[id='userId01']").val()+
+															  $("#userId02").val(),
 															 
 														   },
 														   beforeSend : function(){
@@ -400,17 +402,17 @@
 												
 											$("button:contains('확인')").on("click" , function() {
 												
-												var id=$("input[name='userId']").val();
-												var id2=$("select[id='userId2']").val();
+												var id=$("input[id='userId01']").val();
+												var id2=$("select[id='userId02']").val();
 												var userCheck = $("#emailcode").val();		
-												var userId = document.getElementById("userId");
+												var userId = document.getElementById("userId01");
 												if(check.trim()==userCheck.trim()){
 													alert("인증성공");
 													userId.value = id+id2;
 													userId.style.border = "3px solid gold";
 													userId.readOnly = true;
 													 $("#divemail").hide();
-													 $("#userId2").hide();
+													 $("#userId02").hide();
 													 $("#injb").hide();
 													 ch = 1;
 													 
@@ -424,6 +426,19 @@
 												
 									});
 							
+									
+									
+									$(function() {
+										$("input[name='phone']").on('keyup',function() {
+
+											
+									 $(this).val($(this).val().replace(/[^0-9]/g,""));
+									 //alert("숫자만 입력하셔야 합니다.");
+									 
+										});
+									   });
+	
+									
 	</script>		
     
 </head>
@@ -439,8 +454,8 @@
 							  <form class="form-horizontal">
 						   <div class="form-group" >
 							   
-						    <input type="text" class="col-sm-2" name="userId" id="userId" maxlength="15" > 
-							 <select name="userId2" id="userId2" >
+						    <input type="text" class="col-sm-2" name="userId" id="userId01" maxlength="15" > 
+							 <select name="userId2" id="userId02" >
 							      <option  id = "ig" value="@naver.com">@naver.com</option>
 							      <option  id = "ig" value="@daum.net">@daum.net</option>
 							      <option  id = "ig" value="@nate.com">@nate.com</option>
@@ -464,13 +479,13 @@
 							  	  <div class="form-group">
 							  	  
 					
-							      <input type="password" class="col-sm-2" id="password" name="password" placeholder="비밀번호">
+							      <input type="password" class="col-sm-2" id="password01" name="password" placeholder="비밀번호">
 							    
 							  </div>
 							  비밀번호확인
 							  <div class="form-group">
 						
-							      <input type="password" class="col-sm-2" id="password2" name="password2" placeholder="비밀번호 확인">
+							      <input type="password" class="col-sm-2" id="password02" name="password2" placeholder="비밀번호 확인">
 							      
 							  
 							  </div>
