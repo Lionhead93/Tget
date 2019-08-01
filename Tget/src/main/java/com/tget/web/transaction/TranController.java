@@ -111,10 +111,6 @@ public class TranController {
 		
 		User user = (User) session.getAttribute("user");
 		
-		if(user==null) {
-			return "redirect:/user/login";
-		}
-		
 		String result = "";
 		
 		if(search.getMenu().equals("user")){
