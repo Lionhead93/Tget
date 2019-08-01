@@ -95,33 +95,12 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetUserList(currentPage) {
-			$("#currentPage").val(currentPage)
-			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
-		}
-		
-		
-		//============= "검색"  Event  처리 =============	
-		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
-		 });
-		
 		
 	
 		 $(function() {
 			
 			
-				
-/* 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(3)" ).on("click" , function() {
-// 				alert($(this).children('input[type="hidden"]').val());
-				self.location ="/community/getContent?contentNo="+$(this).children('input[type="hidden"]').val();
-			});
-			 */
+
 						
 			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
 					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
@@ -191,7 +170,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>신고 리스트</h3>
+	       <h3><span style="color:white;">신고 리스트</span></h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -199,7 +178,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${Page.totalCount } 건수, 현재 ${Page.currentPage}  페이지
+		    		<span style="color:white;">전체  ${totalCount} 건수</span>
 		    	</p>
 		    </div>
 		    
@@ -279,9 +258,7 @@
 			  <div style="display: none;">${report.reportNo}</div>
 			  상세보기 </button>
 			  </td>
-			  <td align="left">
-			  
-			  </td> 
+			   
 			  
 			
 			</tr>
