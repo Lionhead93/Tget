@@ -44,6 +44,12 @@ $( function(){
 	$("a:contains('티켓관리')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=check";
 	});
+	$("a:contains('회원관리')").on("click",function(){		
+		self.location = "/user/listUser";
+	});
+	$("a:contains('신고리스트관리')").on("click",function(){		
+		self.location = "/community/getReportList";
+	});
 	$("a:contains('거래내역 조회')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=user";
 	});
@@ -120,7 +126,46 @@ $(function() {
 			self.location="/community/getRefundList";	
 		
 		});
+	 
+	 $( "a[href='#']:contains('길 찾기 안내')" ).on("click" , function() {
+		 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
+             window.open("/community/getSearchLoad","T-get 길 찾기 ",popOption);	
+		 
+		});
+	 
 });
+$(function getSearchWeather(lat, lon) {
+	
+	$("a[href='#']:contains('날씨 안내')").on("click" , function() {
+			
+						
+			$.ajax( 
+					
+					{
+						url : "/community/rest/getSearchWeather/",
+						method : "POST" ,
+
+						data : JSON.stringify({
+							lat : lat,
+							lon : lon,
+						}),
+						headers : {
+							
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData , status) {
+						
+							var displayValue ="날씨 : "+JSONData.weather+"<br/>"
+											+"온도 : "+JSONData.temp+"℃<br/>"
+											+"풍속 : "+JSONData.wind+"m/s<br/>"
+											+"흐림 : "+JSONData.clouds+"%<br/>";
+							
+							$(".modal-body").html(displayValue);
+						}
+				});
+	});		
+});	
 </script>
 <style>
 	/*Modal*/
@@ -158,6 +203,8 @@ $(function() {
 					<a href="#" data-target="#alarmModal" data-toggle="modal">
 							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
+					<a href="#">길 찾기 안내</a>
+					<a href="#" data-target="#weatherModal" data-toggle="modal">날씨 안내</a>
 				</c:if>	
 				<c:if test="${user.role == 2 }">
 				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
@@ -194,7 +241,7 @@ $(function() {
 				          <a href="#">회원관리</a>				          
 				          <a href="#">티켓관리</a>
 				          <a href="#">이벤트관리</a>
-				          <a href="#">게시글관리</a>
+				          <a href="#">신고리스트관리</a>
 					</li> 
 				 </ul>
 				 </c:if>
@@ -221,6 +268,31 @@ $(function() {
 					    </div>
 					  </div>
 					</div>
+					
+<!-- 날씨 안내 Modal -->
+					<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+									    <div class="modal-content modal-80size" style="color: white;">
+									    <div class="modal-weather">
+									      <div class="modal-header"> 
+									        <h5 class="modal-title" id="modalCenterTitle"><strong>날씨 안내</strong></h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body" id="getWeatherModalBody">
+									     
+									      </div>     
+									   </div>
+									          
+									      <div class="modal-footer">
+				<!-- 					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button> -->
+				<!-- 					        <button type="button" class="btn btn-primary">확인</button> -->
+									        
+									      </div>
+									    </div>
+									    </div>
+									  </div>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
@@ -401,7 +473,7 @@ $(function() {
 </div> <!-- ---로그인창--- -->
 </form>	
 
-<<jsp:include page="/coupon/addCoupon.jsp"></jsp:include>	
+<jsp:include page="/coupon/addCoupon.jsp"></jsp:include>	
 		 
 		 
 

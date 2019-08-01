@@ -294,33 +294,28 @@
 			        
 			    	});
 				});
-		 });
- 		  
- 		 $( ".contentDetail" ).on("click" , function() {
-// 			 	if('${user}'==''){
-// 			 		alert("로그인을 해주세요");
-// 			 		return;
-// 			 	}
-			 	$(this).attr("data-target","#contentDetailModal");
-			 	var contentNo = $(this).attr("id").trim();
-			 	$.ajax(
-						{
-							url : "/community/rest/getContent/"+contentNo ,
-							method : "GET" ,
-							dataType : "json" ,
-							headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							},
-							success : function(data) {
-								$("input[name='contentNo']").val(data.contentNo);
-								$("input[name='blackId']").val(data.userId);
-								$("#reportContentBody").html(data.contentBody);
-								$("#reportBlackId").html(data.userId);
-							}
-						});
-			});
-
+		 		 $( ".contentDetail" ).on("click" , function() {
+		 			 
+					 	var contentNo = $(this).attr("id").trim();
+					 	
+					 	$.ajax(
+								{
+									url : "/community/rest/getContent/"+contentNo ,
+									method : "GET" ,
+									dataType : "json" ,
+									headers : {
+										"Accept" : "application/json",
+										"Content-Type" : "application/json"
+									},
+									success : function(data) {
+										
+										$("#contentUserNickname").html(data.userNickname);
+										$("#getContentName").html(data.contentName);
+										$("#getContentBody").html(data.contentBody);
+									}
+								});
+					});
+		 	});
 	</script>
 </head>
 <body>
@@ -384,7 +379,7 @@
 								 				<br/>
 								 				<small>작성일: ${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-search-plus"></i></a>
+								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -410,7 +405,7 @@
 								 				<br/>
 								 				<small>작성일: ${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-search-plus"></i></a>
+								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -435,7 +430,7 @@
 								 				<br/>
 								 				<small>작성일: ${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-search-plus"></i></a>
+								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -460,7 +455,7 @@
 								 				<br/>
 								 				<small>작성일: ${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-search-plus"></i></a>
+								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -539,45 +534,32 @@
 <!-- 상세보기 Modal -->
 	<div class="modal fade" id="contentDetailModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content modal-80size">
+				<div class="modal-content modal-80size" style="color:white;">
 					  <div class="modal-report">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle"><strong>신고하기</strong></h5>
+					        <h5 class="modal-title" id="modalCenterTitle"></h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body" id="addReportModalBody"> 	    
+					      <div class="modal-body" id="getContentModalBody"> 	    
 		  
-			    <form name="addReport">
 <!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
 <%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
 					
-			    	<div class="col">작성자 : <span id="reportBlackId"></span></div>
+			    	<div class="col">작성자 : <span id="contentUserNickname"></span></div>
+					<br/>
+					<div class="col">제목 :<hr/> <span id="getContentName"></span></div>
+					<br/>
+					<div class="col">내용 :<hr/> <span id="getContentBody"></span></div>
+					<br/>
 					
-					<div class="col">내용 :  <div id="reportContentBody"></div></div>
 			    
 				<br>
-				<hr>
-				<input type='hidden' name='blackId' value='' />
-				<input type='hidden' name='contentNo' value=''/>				
-				<input type='hidden' name='whiteId' value='${user.userId}'/>
-				<input type='hidden' name='whiteNickname' value='${user.nickName}'/>
-				<input type='hidden' name='reportCode' value='0'/>				
-				
-				
-				<strong>신고 사유를 선택해주세요</strong>
-			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
-				<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
-				<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
-				<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
-				</div>
-				
-				</form>		
+				<hr>	
 				   
 				<div class="modal-footer">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">신고하기</button>
+		        <button type="button" class="btn btn-info" data-dismiss="modal">확인</button>
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
 		      </div>
 				</div></div>	        
@@ -585,17 +567,17 @@
 						    </div>
 						  </div>
 	
-<script src="/resources/javascript/cbpFWTabs.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
-			(function() {
-
-				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
-					new CBPFWTabs( el );
-				});
-
-			})();
-</script>	
+		<script src="/resources/javascript/cbpFWTabs.js"></script>
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+		<script>
+					(function() {
+		
+						[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+							new CBPFWTabs( el );
+						});
+		
+					})();
+		</script>	
 	
 </body>
 <jsp:include page="/layout/footer.jsp" />

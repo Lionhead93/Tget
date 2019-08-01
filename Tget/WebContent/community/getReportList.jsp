@@ -95,33 +95,12 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetUserList(currentPage) {
-			$("#currentPage").val(currentPage)
-			$("form[name='detailForm']").attr("method" , "POST").attr("action" , "/community/getReportList").submit();
-		}
-		
-		
-		//============= "검색"  Event  처리 =============	
-		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
-		 });
-		
 		
 	
 		 $(function() {
 			
 			
-				
-/* 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(3)" ).on("click" , function() {
-// 				alert($(this).children('input[type="hidden"]').val());
-				self.location ="/community/getContent?contentNo="+$(this).children('input[type="hidden"]').val();
-			});
-			 */
+
 						
 			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
 					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
@@ -165,10 +144,10 @@
 										"Accept" : "application/json",
 										"Content-Type" : "application/json"
 									},
-									success : function(JSONData , status) {
-
-										var displayValue ="게시글 제목 : "+JSONData.content.contentName+"<br/>"
-														+"게시글 내용 : "+JSONData.content.contentBody+"<br/>";
+									success : function(data) {
+										
+										$("#reportBlackId").html(data.userId);
+										$("#reportContentBody").html(data.contentBody);
 										
 										$(".modal-body").html(displayValue);
 									}
@@ -191,7 +170,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>신고 리스트</h3>
+	       <h3><span style="color:white;">신고 리스트</span></h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -199,7 +178,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${Page.totalCount } 건수, 현재 ${Page.currentPage}  페이지
+		    		<span style="color:white;">전체  ${totalCount} 건수</span>
 		    	</p>
 		    </div>
 		    
@@ -256,7 +235,7 @@
 			<tr>
 			  
 			  <td align="center">${ i }</td>
-			  <td align="left">${report.whiteId}
+			  <td align="left" ><span style="color:white;">${report.whiteId}</span>
 			  </td>
 			  <td align="left">			  	
 			  <c:if test="${report.reportReasonCode==0}">
@@ -279,9 +258,7 @@
 			  <div style="display: none;">${report.reportNo}</div>
 			  상세보기 </button>
 			  </td>
-			  <td align="left">
-			  
-			  </td> 
+			   
 			  
 			
 			</tr>
@@ -296,22 +273,26 @@
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
 	<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">게시글 내용</h5>
+					        <h5 class="modal-title" id="modalCenterTitle">신고글</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					      </div>
+					      <div class="col" style="color:white;">작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
+						<hr>
+						  <div class="col" style="color:white;">내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
+					    
+						<br>
+						
+						<input type='hidden' name='contentNo' value='${content.contentNo}'/>
+						  </div>
+						  
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					        <button type="button" class="btn btn-primary">검증 확인</button>

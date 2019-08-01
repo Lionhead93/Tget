@@ -318,10 +318,8 @@
 // 							alert(status);
 							$("button.close").click();
 							alert("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.");
-// 							alert("JSONData : \n"+JSONData.stringify());		
-						},
-						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 							alert("JSONData : \n"+JSONData.stringify());
+							history.go(0);
 						}			
 				});	
 		});
@@ -419,7 +417,14 @@
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
 				      <c:if test="${tran.tranCode==2}">-</c:if>
-				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#">후기 확인</a></c:if>
+				      <c:if test="${tran.tranCode==3}">
+				      <c:if test="${user.userId==tran.seller.userId}">
+				      <a class="getReview" href="/rnp/getSellerEstimationList?sellerId=${user.userId}">후기 확인</a>
+				      </c:if>
+				      <c:if test="${user.userId==tran.buyer.userId}">
+				      <a class="getReview" href="/rnp/getReviewList">후기 확인</a>
+				      </c:if>
+				      </c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">
@@ -529,7 +534,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <jsp:include page="/rnp/addReview.jsp" />
       </div>
       <div class="modal-footer" style="color: black;" >       
-        <button type="button"  class="btn btn-light" id="submit" style="color: black;" >저장</button>
+        <button type="button"  class="btn btn-light" id="submit" >저장</button>
          <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>

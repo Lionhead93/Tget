@@ -243,6 +243,7 @@
 	  									 content_no, reply_no, report_reason_code , reg_date, 
 	  									 report_code, check_yn
 											FROM report
+											WHERE check_yn = '1'
 											<!-- <if test="searchCondition != null">
 												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
@@ -290,6 +291,8 @@
 	  										, content_code , open , good_count , bad_count
 	  										, refund_tran_no, refund_check
 											FROM content
+											WHERE refund_check = '1' AND content_code = '7'	
+											ORDER BY content_no 
 											) countTable
 	</select>
 	 
