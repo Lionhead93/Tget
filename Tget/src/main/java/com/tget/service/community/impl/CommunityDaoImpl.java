@@ -103,6 +103,18 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 	
 	@Override
+	public int selectTotalCountRefund(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("CommunityMapper.selectTotalCountRefund", search);
+	}
+	
+	@Override
+	public int selectTotalCountReport(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("CommunityMapper.selectTotalCountReport", search);
+	}
+	
+	@Override
 	public void updateRefund(Content content) throws Exception {
 		sqlSession.update("CommunityMapper.updateRefund", content);
 	}

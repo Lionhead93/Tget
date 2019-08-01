@@ -373,7 +373,7 @@
 				
 		<br/><br/><br/>
 	</div>	   
-	</div>
+
 	<br/>	   
 	 <div class="row">
 	  <div class="col-md-2 text-center">	  
@@ -438,7 +438,7 @@
 			
 			  <c:forEach var="content" items="${list}">
 				<tr>
-				<td>${content.contentName}
+				<td><span style="color:white;">${content.contentName}</span>
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
@@ -459,7 +459,7 @@
 			   	  <a id="${content.contentNo}">${content.badCount}</a> 
 			   	  </td>
 			   	  
-				   	 <!-- 신고 하기 -->
+				  <!-- 신고 하기 -->
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
 				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-bell"></i></a>	
 				  </td>

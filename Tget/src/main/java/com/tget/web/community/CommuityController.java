@@ -205,6 +205,8 @@ public class CommuityController {
 			
 			if(search.getSearchCondition().equals("3")) {
 				return "forward:/community/getQuestionList.jsp";
+			}else if(search.getSearchCondition().equals("2")&&search.getSearchKeyword().equals("7")){
+				return "forward:/community/getRefundList.jsp";
 			}else {
 				return "forward:/community/getContentList.jsp";
 			}
@@ -274,7 +276,7 @@ public class CommuityController {
 			communityService.updateRefund(refundContent);
 			System.out.println(refundContent);
 		
-			return "forward:/community/getRefundList.jsp";
+			return "forward:/community/getRefundList";
 		}
 		
 		@RequestMapping(value="getSearchLoad")
