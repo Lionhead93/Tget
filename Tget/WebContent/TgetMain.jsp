@@ -16,43 +16,45 @@
 		<link rel="icon" href="/resources/images/logo.png">		  	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/login.css" />
-		<link rel="stylesheet" href="/resources/css/yr.css" />
 		<link rel="stylesheet" href="/resources/css/videoBox.css" />
-		<link rel="stylesheet" href="/resources/css/main.css" />
+		<link rel="stylesheet" href="/resources/css/main.css" />				
+		<link rel="stylesheet" href="/resources/css/yr.css" />
 		<link rel="stylesheet" href="/resources/css/neon.css" />
+		<link rel="stylesheet" href="/resources/css/yr_neon.css" />		
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption:700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="/resources/css/yr_neon.css" />
-		<script src="/resources/javascript/yr.js" ></script>
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-		<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>		
+		<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>	
 		<script src="/resources/javascript/common.js" ></script>
 		<script src="/resources/javascript/alarm.js" ></script>
-		<script src="/resources/javascript/jquery.min.js"></script>
 		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>
+		<script src="/resources/javascript/yr.js" ></script>
 		<style type="text/css">
 			img{
 				height: 300px;
+			}
+			#plusfriend-chat-button{
+				display: none;
 			}
 		</style>
 	</head>
 	<body>
 		
  	 <jsp:include page="/layout/tgetToolbar.jsp" />
- 	 <jsp:include page="/user/xx.jsp" />
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without
 				its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
 				formats to work correctly.
 			-->
-				<section id="banner" data-video="/resources/video/main">
+				<section id="banner" data-video="/resources/video/UEFA">
 					<div class="inner">
 					<form name="searchEvent">
 					<input type="hidden" id="requestPageToken" name="requestPageToken" value="${requestPageToken }"/>
@@ -61,15 +63,18 @@
 					<input type="hidden"  id="searchKeyword" name="searchKeyword"  
 					placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 							<h1>
-							<div style="font-family: 'PT Sans Caption', sans-serif;font-size:80px;">
+							<div style="color:#020B13; font-family: 'PT Sans Caption', sans-serif;font-size:80px;">							
 								<span class="textcontainer">
 									<span class="particletext bubbles">
 									
 									<span class="yr-blue  " ><span class="yr-blue-off ">T</span>-GET</span><br/>
+									</span>
 <!-- 									T-GET -->
 <!-- 									<span class="particle" style="top:29%; left:82%;width:5.2px; height:5.2px;animation-delay: 3s;"></span><span class="particle" style="top:67%; left:53%;width:4.8px; height:4.8px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:90%;width:5.5px; height:5.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:56%; left:64%;width:7.2px; height:7.2px;animation-delay: 2.5s;"></span><span class="particle" style="top:80%; left:77%;width:7.1px; height:7.1px;animation-delay: 2.2s;"></span><span class="particle" style="top:31%; left:58%;width:5.4px; height:5.4px;animation-delay: 0.5s;"></span><span class="particle" style="top:28%; left:95%;width:6.1px; height:6.1px;animation-delay: 2.7s;"></span><span class="particle" style="top:57%; left:58%;width:7.9px; height:7.9px;animation-delay: 2.3s;"></span><span class="particle" style="top:72%; left:61%;width:7.6px; height:7.6px;animation-delay: 0s;"></span><span class="particle" style="top:49%; left:51%;width:4.9px; height:4.9px;animation-delay: 1.9s;"></span><span class="particle" style="top:42%; left:43%;width:7.4px; height:7.4px;animation-delay: 1.1s;"></span><span class="particle" style="top:69%; left:39%;width:4.7px; height:4.7px;animation-delay: 1.8s;"></span><span class="particle" style="top:61%; left:92%;width:7.2px; height:7.2px;animation-delay: 0s;"></span><span class="particle" style="top:28%; left:16%;width:4.9px; height:4.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:69%; left:24%;width:5.4px; height:5.4px;animation-delay: 0.4s;"></span><span class="particle" style="top:51%; left:59%;width:6.5px; height:6.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:74%; left:67%;width:7.4px; height:7.4px;animation-delay: 2.5s;"></span><span class="particle" style="top:63%; left:16%;width:6.8px; height:6.8px;animation-delay: 1.3s;"></span><span class="particle" style="top:31%; left:29%;width:5.9px; height:5.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:23%; left:42%;width:4.5px; height:4.5px;animation-delay: 1.3s;"></span><span class="particle" style="top:71%; left:76%;width:5.7px; height:5.7px;animation-delay: 1.5s;"></span><span class="particle" style="top:76%; left:79%;width:5.7px; height:5.7px;animation-delay: 0.5s;"></span><span class="particle" style="top:71%; left:1%;width:5.3px; height:5.3px;animation-delay: 1.8s;"></span><span class="particle" style="top:77%; left:11%;width:7.7px; height:7.7px;animation-delay: 2.1s;"></span><span class="particle" style="top:68%; left:34%;width:4px; height:4px;animation-delay: 2.3s;"></span><span class="particle" style="top:49%; left:78%;width:6.6px; height:6.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:37%; left:41%;width:5.1px; height:5.1px;animation-delay: 2.3s;"></span><span class="particle" style="top:57%; left:75%;width:4.9px; height:4.9px;animation-delay: 2.4s;"></span><span class="particle" style="top:62%; left:58%;width:7.9px; height:7.9px;animation-delay: 0.6s;"></span><span class="particle" style="top:25%; left:6%;width:5.3px; height:5.3px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:52%;width:5.6px; height:5.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:22%;width:7.9px; height:7.9px;animation-delay: 0.1s;"></span><span class="particle" style="top:30%; left:59%;width:6.2px; height:6.2px;animation-delay: 0.7s;"></span><span class="particle" style="top:60%; left:90%;width:6px; height:6px;animation-delay: 0.1s;"></span><span class="particle" style="top:45%; left:79%;width:6.2px; height:6.2px;animation-delay: 0.1s;"></span></span> -->
 								</span>
-							</div></h1><br/>
+							</div>
+							</h1>
+							<br/>
 							<div class="input-group" >		    
 							    <input name="searching" type="text" class="form-control" width="100%"  placeholder="이벤트/아티스트/팀">
 							    <div class="input-group-append">
@@ -349,43 +354,7 @@
 			
 			</div>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<div class="flex flex-3">
-						<div class="col">
-							<h3>공지사항</h3>
-							<ul class="alt">
-								<li><a href="#">티켓거래 공지</a></li>
-								<li><a href="#">자유게시판 이용공지</a></li>
-								<li><a href="#">자주묻는질문</a></li>
-							</ul>
-						</div>
-						<div class="col">
-							<h3>자유게시판</h3>
-							<ul class="alt">
-								<li><a href="#">삽니다</a></li>
-								<li><a href="#">팝니다</a></li>
-								<li><a href="#">수다방</a></li>
-							</ul>
-						</div>
-						<div class="col">
-							<h3>고객센터</h3>
-							<ul class="alt">
-								<li><a href="#">1:1 문의하기</a></li>
-								<li><a href="#">환불게시판</a></li>
-							
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="copyright">
-					<ul class="icons">
-						<li><a href="#" >Back to Top</a></li>
-					</ul>
-					&copy; T-GET. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
-				</div>
-			</footer>
+		<jsp:include page="/layout/footer.jsp"></jsp:include>
 
 		<!-- Scripts -->	
 		
@@ -494,5 +463,6 @@
 			});	
 			
 	 </script>
+	 
 	</body>
 </html>

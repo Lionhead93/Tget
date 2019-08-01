@@ -6,8 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <form name="searchEvent">
-			<div id="tgetHeader" class="text-center">
-			<br/><br/><br/>
+
+				<div id="tgetHeader" class="text-center">
+				<br/><br/><br/>
 				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
 				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
