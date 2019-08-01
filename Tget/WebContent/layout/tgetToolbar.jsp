@@ -44,6 +44,12 @@ $( function(){
 	$("a:contains('티켓관리')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=check";
 	});
+	$("a:contains('회원관리')").on("click",function(){		
+		self.location = "/user/listUser";
+	});
+	$("a:contains('신고리스트관리')").on("click",function(){		
+		self.location = "/community/getReportList";
+	});
 	$("a:contains('거래내역 조회')").on("click",function(){		
 		self.location = "/tran/getTranList?menu=user";
 	});
@@ -194,7 +200,7 @@ $(function() {
 				          <a href="#">회원관리</a>				          
 				          <a href="#">티켓관리</a>
 				          <a href="#">이벤트관리</a>
-				          <a href="#">게시글관리</a>
+				          <a href="#">신고리스트관리</a>
 					</li> 
 				 </ul>
 				 </c:if>
