@@ -9,10 +9,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -151,37 +149,51 @@ public class UserRestController {
 	}  
 	
 	@RequestMapping( value="json/finduserId" , method=RequestMethod.POST)
-	public String finduserId (String phone )throws Exception{
+	public Map<String, Object> finduserId (String userName, String phone)throws Exception{
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		User user = userService.finduserId(phone);
 		
-		if (user==null){
-			return "no";
+		String checkName =user.getUserName();
+		
+		String Id = user.getUserId();
+		
+		System.out.println(userName+"¹¹ ÃÆ³Ä ½Ê»õ²¥?");
+		
+		System.out.println( checkName+"³»°¡ ¹» Àß¸øÇß´ÂÁö?");
+		
+		if (checkName.equals(userName)){
+			
+			map.put("msg","yes");
+			map.put("Id", Id);
 		}
 		
 		
-		String check = user.getUserId();
-		
-		System.out.println(check);
-		
-		return check;
-		
+		else {
+			
+			map.put("msg","no");
+			
+			return map;
+		}
+		return map;
 	}      
 	
 	@RequestMapping( value="json/findPassword" , method=RequestMethod.POST)
-	public String findPassword (String userId)throws Exception{
+	public String findPassword (String userId, String phone)throws Exception{
 		
 		System.out.println("µé¾î¿Ô´Ï"); 
 		
-		User user = userService.getUser(userId);
-		System.out.println(user);
+		User user = userService.finduserId(phone);
 		
-		if (user==null){
+		System.out.println("user´Â ¹»±ø"+user);
+		System.out.println(userId+"¾ÆÀÌµð ¹¹½è³Ä");
+		
+		if (!user.getUserId().equals(userId)){
 			return "no";
-		}
-		
+		}else {
 		return "yes";
-		
+		}
 	}    
 	
 
