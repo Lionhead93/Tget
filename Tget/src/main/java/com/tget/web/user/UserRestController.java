@@ -159,7 +159,7 @@ public class UserRestController {
 		
 		String Id = user.getUserId();
 		
-		System.out.println(userName+"¹¹ ÃÆ³Ä ½Ê»õ²¥?");
+		System.out.println(userName+"¹¹ ÃÆ³Ä");
 		
 		System.out.println( checkName+"³»°¡ ¹» Àß¸øÇß´ÂÁö?");
 		
@@ -189,7 +189,7 @@ public class UserRestController {
 		System.out.println("user´Â ¹»±ø"+user);
 		System.out.println(userId+"¾ÆÀÌµð ¹¹½è³Ä");
 		
-		if (!user.getUserId().equals(userId)){
+		if (user==null){
 			return "no";
 		}else {
 		return "yes";

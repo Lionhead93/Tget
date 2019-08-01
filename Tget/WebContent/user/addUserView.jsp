@@ -93,12 +93,24 @@
 		  $(function() {
 			 
 		 		var rand = "";
-			
+		 		
+
 				
 				$("button:contains('전송')").on("click" , function() {
-					alert("인증번호 전송");
+					var phone = $("input[name='phone']").val();	
 					
-			
+					
+					if (phone == null || phone.length != 11) {
+						alert("올바른 전화번호를 입력하세요.");
+						return;
+					}
+
+					
+					
+					
+					alert("인증번호 전송");
+				
+
 					
 					
 					$("#inj").show();
@@ -160,6 +172,11 @@
 			         $("input").keyup(function(){
 			             var pwd1=$("#password01").val();
 			             var pwd2=$("#password02").val();
+			             if(pwd1.length<8){
+			            	 
+			            	 
+			            	 
+			             }
 			             if(pwd1 != "" || pwd2 != ""){
 			                 if(pwd1 == pwd2){
 			                	 
@@ -196,8 +213,8 @@
 						
 						var id=$("input[id='userId01']").val();
 						var id2=$("select[id='userId02']").val();
-						var pw=$("input[name='password01']").val();
-						var pw_confirm=$("input[name='password02']").val();
+						var pw=$("input[id='password01']").val();
+						var pw_confirm=$("input[id='password02']").val();
 						var name=$("input[name='userName']").val();
 						var address1=$("input[name='address']").val();
 						var address2=$("input[name='address2']").val();
@@ -220,7 +237,7 @@
 						
 						if( pw != pw_confirm ) {				
 							alert("비밀번호 확인이 일치하지 않습니다.");
-							$("input:text[name='password02']").focus();
+							$("input:text[id='password02']").focus();
 							return;
 						}
 						
@@ -352,6 +369,7 @@
 													
 													var Id = $("input[id='userId01']").val();
 													
+													
 												
 													
 													if(Id == null || Id.length <1){
@@ -438,7 +456,17 @@
 										});
 									   });
 	
-									
+									$(function() {
+										$("input[name='userName']").on('keyup',function() {
+
+											
+											  if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+									               var inputVal = $(this).val();
+									               $(this).val(inputVal.replace(/[^(ㄱ-히a-zA-Z)]/gi, ''));
+									            }
+									         });
+									 });
+	
 	</script>		
     
 </head>
@@ -490,11 +518,10 @@
 							  
 							  </div>
 							 
-							  
-							  
 							  <div class="form-group">
 							  <label for="password3"></label>
 							<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+							
 							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
 							      </span>
 								<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->

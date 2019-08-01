@@ -137,7 +137,7 @@
 					
 					var code = $("#sms").val();
 					
-						alert("오예");
+						//alert("오예");
 					
 		
 					   
@@ -198,8 +198,27 @@
 					});
 				
 			   
-			   
-			   
+				$(function() {
+					$("input[name='userName']").on('keyup',function() {
+
+						
+						  if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+				               var inputVal = $(this).val();
+				               $(this).val(inputVal.replace(/[^(ㄱ-히a-zA-Z)]/gi, ''));
+				            }
+				         });
+				 });
+
+				$(function() {
+					$("input[name='phone']").on('keyup',function() {
+
+						
+				 $(this).val($(this).val().replace(/[^0-9]/g,""));
+				 //alert("숫자만 입력하셔야 합니다.");
+				 
+					});
+				   });
+
 			   
 			   
 			   
