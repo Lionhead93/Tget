@@ -124,8 +124,7 @@
 												</where>
 											</if>
 											ORDER BY user_id ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+											)
 	 </select>
 	
 	<select id="selectnickName" resultType="string" resultMap="userSelectMap">

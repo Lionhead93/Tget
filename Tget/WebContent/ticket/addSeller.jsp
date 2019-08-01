@@ -50,7 +50,7 @@
 					       <div class="modal-body">
 					      		
 									<div align="center"><h3 style="font-weight: bold;">
-										판매자 정보 등록
+										판매자 정보 입력
 									</h3></div>
 									<form name="addSeller">	
 									<input type="hidden" name="userId" id="userId" value="${user.userId}">
