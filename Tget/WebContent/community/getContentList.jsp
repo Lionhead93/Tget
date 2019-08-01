@@ -369,6 +369,13 @@
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
 				<button type="button" class="btn btn-warning">길 찾기 안내</button>
+<<<<<<< HEAD
+				<p class="text-primary">
+		    		전체  ${totalCount } 건수
+		    	</p>
+		<br/><br/><br/>
+	</div>	   
+=======
 	</div>
 	<br/>	   
 	 <div class="row">
@@ -413,6 +420,7 @@
 			</c:if>
 			</div>
 		</div>	
+>>>>>>> refs/remotes/origin/master
 		
       <!--  table Start /////////////////////////////////////-->
      <div class="col-md-10 text-center">
