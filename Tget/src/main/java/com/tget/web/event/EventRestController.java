@@ -664,20 +664,12 @@ public class EventRestController {
 	}
 	
 	
-	@RequestMapping(value="rest/addYoutubeVideo")
-	public Map<String,Object> addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
-		System.out.println("===============rest/addYoutubeVideo===============");
+	@RequestMapping(value="rest/getYoutubeSearchList")
+	public Map<String,Object> getYoutubeSearchList(@RequestParam String requestPageToken,@ModelAttribute("search") Search search,Model model) throws Exception {
+		System.out.println("===============rest/getYoutubeSearchList===============");
 		
 		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
-
-		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
-		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
-		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
-		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
-		model.addAttribute("eventName",  eventName);
-		model.addAttribute("requestPageToken",  requestPageToken);
 		
-		
-		return null;
+		return map;
 	}
 }

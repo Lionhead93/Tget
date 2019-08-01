@@ -135,13 +135,13 @@
 
 
 <!-- 80%size Modal at Center -->
-<form name="user-login" class="form-horizontal">
-<div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
-  <div class="modal-dialog modal-80size modal-center" role="document">
-    <div class="modal-content modal-80size">
-     
+
+<div class="modal fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content ">
     <div class="login-wrap">
 	<div class="login-html">
+<form name="user-login" class="form-horizontal">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input style="display: none;" id="tab-2" type="radio" name="tab" class="sign-up"><label style="display: none;" for="tab-2" class="tab"></label>
 		<div class="login-form">
@@ -157,7 +157,8 @@
 				<div class="group">
 					<input id="signin" class="button" value="Sign In" data-toggle="modal" style="readOnly=true;">
 				</div>
-				
+						 
+</form>
 				<div class="text-center">
 				     <a id="kakao"><img src="/resources/images/kakaos.jpg" style="max-width: 100%; height: auto;"/></a>
      <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
@@ -218,5 +219,3 @@
 		 
 		 	
 		 
-		 
-</form>

@@ -2,6 +2,8 @@ package com.tget.service.rnp.domain;
 
 import java.sql.Date;
 
+import com.tget.common.util.CommonUtil;
+
 public class PointHistory {
 
 	///F
@@ -12,6 +14,8 @@ public class PointHistory {
 	private int totalPoint;
 	private int updatePoint;
 	private int pointHistoryNo;
+	private String totalPointStr;
+	private String updatePointStr;
 	
 	///C
 	public PointHistory() {
@@ -56,6 +60,7 @@ public class PointHistory {
 
 	public void setTotalPoint(int totalPoint) {
 		this.totalPoint = totalPoint;
+		this.setTotalPointStr(CommonUtil.toAmountStr(String.valueOf(totalPoint)));
 	}
 
 	public int getUpdatePoint() {
@@ -64,6 +69,7 @@ public class PointHistory {
 
 	public void setUpdatePoint(int updatePoint) {
 		this.updatePoint = updatePoint;
+		this.setUpdatePointStr(CommonUtil.toAmountStr(String.valueOf(updatePoint)));
 	}
 
 	public int getPointHistoryNo() {
@@ -72,6 +78,19 @@ public class PointHistory {
 
 	public void setPointHistoryNo(int pointHistoryNo) {
 		this.pointHistoryNo = pointHistoryNo;
+	}
+	
+	public String getTotalPointStr() {
+		return totalPointStr;
+	}
+	public void setTotalPointStr(String totalPointStr) {
+		this.totalPointStr = totalPointStr;
+	}
+	public String getUpdatePointStr() {
+		return updatePointStr;
+	}
+	public void setUpdatePointStr(String updatePointStr) {
+		this.updatePointStr = updatePointStr;
 	}
 
 	public String toString() {
