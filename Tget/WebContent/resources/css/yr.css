@@ -5,7 +5,7 @@ body {
   body .textcontainer {
     padding: 40px 0;
     text-align: center; }
-  body .particletext {
+  body .textcontainer > .particletext {
     text-align: center;
     font-size: 48px;
     position: relative; }

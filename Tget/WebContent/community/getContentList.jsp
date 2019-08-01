@@ -12,7 +12,6 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     	<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
 		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
@@ -42,8 +41,6 @@
 		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 		<script src="/resources/javascript/modernizr.custom.js"></script>
 	
-
-	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	body{	
 		      color: #FBFCFE ;		  
@@ -555,10 +552,8 @@
 		  </div>
  
 		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>
-		    
+		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>   
 		      <input type="text" class="form-control" id="contentName" name="contentName">
-		    
 		  </div>
 		
 		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">글 내용</label>
