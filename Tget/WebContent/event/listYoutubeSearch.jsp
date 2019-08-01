@@ -20,33 +20,30 @@
 <!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 <!-- 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
 	<script type="text/javascript">
-	
-	var videoList = [];
-	
-	function requestTokenSubmit(requestPageToken){
-		$("#requestPageToken").val(requestPageToken);
-		$("#youtubeSearchForm").attr("method" , "POST").attr("action" , "/event/addYoutubeVideo").submit();
-	}
-	
-	function getYoutubePlayerSubmit(videoId,description,title){
-		$("#description").val(description);
-		$("#title").val(title);
-		$("#youtubeSearchForm").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?videoId="+videoId).submit();
-	}
+
 	
 	$(function(){
 // 		alert("eventName : "+$("#eventName").val());
 		$.ajax(
 			{
-				url : "/event/rest/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
-				method : "GET",
+				url : "/event/rest/getYoutubeSearchList?requestPageToken=",
+				method : "POST",
 				data : {
 					searchKeyword : $("#searchKeyword").val()
 				},
 				dataType : "json",
 				success : function(JSONData, status){
-					alert(status);
-					alert("JSONData : \n"+JSONData);		
+// 					alert(status);
+// 					alert(JSONData.youtubeList);		
+					$("#prevPageToken").val(JSONData.prevPageToken);
+					$("#nextPageToken").val(JSONData.nextPageToken);
+					$.each(JSONData.youtubeList, function(index,value){
+// 						availableTags[index] = value;
+						$("#h"+index).text(value.title);
+						$("#img"+index).attr("src",value.thumbnails);
+						$("#desc"+index).text(value.description);
+						$("#button"+index).attr("data-bmdSrc","https://www.youtube.com/embed/"+value.videoId );
+					 });
 				}		
 		 });		
 		
@@ -54,7 +51,8 @@
 			if ($(this).val() == "") {
 				alert("첫번째 페이지 입니다.");
 			}else{
-				requestTokenSubmit($(this).val());				
+				$("#requestPageToken").val($(this).val());			
+				$("button:contains('검색')").click();
 			}
 		});
 		
@@ -62,23 +60,92 @@
 			if ($(this).val() == "") {
 				alert("마지막 페이지 입니다.");
 			}else{
-				requestTokenSubmit($(this).val());				
+				$("#requestPageToken").val($(this).val());			
+				$("button:contains('검색')").click();
 			}
 		});
 		
 		$("button[name='getYoutubePlayer']").on("click",function(){
-			getYoutubePlayerSubmit($(this).val(),$(this).parent().parent().children("input[name='descriptionByList']").val(),$(this).parent().parent().children("input[name='titleByList']").val());
+			youtubeId = $(this).val();
+			$("#searchList").attr("style","display:none;");
+			
 // 			$(this).parent().parent().children("input[name='titleByList']").val();
 // 			$(this).parent().parent().children("input[name='descriptionByList']").val();
 // 			$("form").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?youtubeId="+$(this).val()).submit();
 		});
 		
+		
 		$("button:contains('검색')").on("click",function(){
-			$("#searchKeyword").val($("input[type='text']").val());
-			requestTokenSubmit("");
+// 			$("#searchKeyword").val($("#inputKeyword").val());
+			$.ajax(
+					{
+						url : "/event/rest/getYoutubeSearchList?requestPageToken="+$("#requestPageToken").val(),
+						method : "GET",
+						data : {
+							searchKeyword : $("#searchKeyword").val()
+						},
+						dataType : "json",
+						success : function(JSONData, status){
+//		 					alert(status);
+//		 					alert(JSONData.youtubeList);									
+							$.each(JSONData.youtubeList, function(index,value){
+//		 						availableTags[index] = value;
+								$("#h"+index).text(value.title);
+								$("#img"+index).attr("src",value.thumbnails);
+								$("#desc"+index).text(value.description);
+								$("#button"+index).attr("data-bmdSrc","https://www.youtube.com/embed/"+value.videoId );
+							 });
+							$("#prevPageToken").val(JSONData.prevPageToken);
+							$("#nextPageToken").val(JSONData.nextPageToken);
+							$("#inputKeyword").focus();
+						}		
+				 });
 		});
 		
 	});
+	
+	
+	
+	var tag = document.createElement('script');
+	
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[3];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    var youtubeId;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '260',
+        width: '460',
+        videoId: youtubeId,
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING && !done) {
+        setTimeout(stopVideo, 6000);
+        done = true;
+      }
+    }
+    function stopVideo() {
+      player.stopVideo();
+    }
 	
 	</script>
 	<style type="text/css">
@@ -94,15 +161,17 @@
 		img{
 			margin : 5px;
 		}
+		
+		
+
 	</style>
 <!-- </head> -->
 
 <!-- <body> -->
 
-<form id="youtubeSearchForm">
-	<div class="container" align="center">
+<div class="container" align="center"  id="searchList">
 <!-- 	 <div><h2 style="margin-top: 10px;">Searching</h2></div> -->
-		<table class="table ">
+	<table class="table ">
 <!-- 			<thead> -->
 <!-- 			    <tr align="center"> -->
 <!-- 					<th scope="col"> -->
@@ -112,7 +181,7 @@
 		<input type="hidden" id="description" name="description" />
 		<div class="input-group mb-3">
 			<input type="hidden" id="searchKeyword" name="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}"/>
-			<input type="text" class="form-control"  placeholder="검색어" 
+			<input type="text"  id="inputKeyword" class="form-control"  placeholder="검색어" 
 			 aria-label="searchKeyword" aria-describedby="button-addon2">
 			<div class="input-group-append">
 		 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
@@ -125,7 +194,6 @@
 		
 		<div class="row">
 		<ul class="list-unstyled">
-
 			<tr id="tr0">
 				<td align="left" >
 				<li class="media" >
@@ -136,10 +204,8 @@
 <%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
 						 <div id="desc0">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer" 
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
-							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
-							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+							<button name="getYoutubePlayer"  id="button0"
+							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -155,10 +221,8 @@
 <%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
 						 <div id="desc1">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer" 
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
-							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
-							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+							<button name="getYoutubePlayer"   id="button1"
+							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -174,10 +238,8 @@
 <%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
 						<div id="desc2">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer"
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
-							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
-							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+							<button name="getYoutubePlayer"  id="button2"
+							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -193,10 +255,8 @@
 <%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
 						<div id="desc3">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer"
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
-							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
-							 data-bmdVideoFullscreen="true">동영상보기</button><br/>
+							<button name="getYoutubePlayer"  id="button3"
+							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -212,28 +272,23 @@
 <%-- 			      		<input type="hidden" id="descriptionByList" name="descriptionByList" value="${i.description}"/> --%>
 						<div id="desc4">: ${i.description}</div> <br/>
 						<div align="right">			
-							<button name="getYoutubePlayer" 
-							type="button" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://www.youtube.com/embed/${i.videoId}" 
-							data-bmdWidth="640" data-bmdHeight="480" data-target="#myModal" 
-							data-bmdVideoFullscreen="true">동영상보기</button>
+							<button name="getYoutubePlayer"  id="button4"
+							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button>
 						</div>
 			    	</div>
 			 	</li>
 			    </td>
 			</tr>
-
-			
 		</ul>
 		</div>
 		</tbody>
 	</table>
-	</div>
 	<div align="center">
 		<input type="hidden" id="requestPageToken" name="requestPageToken" value="${!empty requestPageToken? requestPageToken:'' }"/>
-		<button class="button_black"  id="prevPageToken" name="prevPageToken" value="${!empty prevPageToken? prevPageToken : ''}">◀</button>&nbsp;&nbsp;
-		<button class="button_black"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
+		<button class="btn btn-outline-light"  id="prevPageToken" name="prevPageToken" value="${!empty prevPageToken? prevPageToken : ''}">◀</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-light"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
 	</div>
-</form>
-
-<!-- </body> -->
-<!-- </html> -->
+</div>
+<div id="getPlayer">
+	<div id="player"></div> 
+</div>
