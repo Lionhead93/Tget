@@ -317,6 +317,7 @@
 							$("#"+$("#reviewTranNo").val()).text("-");
 // 							alert(status);
 							$("button.close").click();
+							alert("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.");
 // 							alert("JSONData : \n"+JSONData.stringify());		
 						},
 						error : function(request, status, error ) {   

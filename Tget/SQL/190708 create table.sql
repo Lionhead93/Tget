@@ -121,7 +121,7 @@ CREATE TABLE content(
 	reg_date 		DATE 		NOT NULL,
 	view_count 	NUMBER(10),
 	board_code 	CHAR(1) 		NOT NULL,
-	content_code 	CHAR(2) 		NOT NULL,
+	content_code 	VARCHAR(2) 		NOT NULL,
 	open 		CHAR(1) 		NOT NULL,
 	good_count 	NUMBER(10),
 	bad_count	NUMBER(10),

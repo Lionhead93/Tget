@@ -123,14 +123,13 @@
 		 $(function() {
 					
 			 $( "button.btn.btn-primary:contains('확인')" ).on("click" , function() {
-				 alert("확인");
 				 $("form[name='refundCheck']").attr("method" , "POST").attr("action" , "/community/updateRefund").submit();	
 			});
 			 
 			 $( "button.btn.btn-info:contains('검증')" ).on("click" , function() {
-			 	 alert("검증");
+			 	 
 				 var contentNo = $(this).children("div").text().trim();
-			 	 alert(contentNo);
+			 	 
 			 	 $("input[name='contentNo']").val(contentNo);
 			});
 			 
@@ -247,7 +246,7 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left" class="btn btn-link">${content.contentName}
+			  <td align="left">${content.contentName}
 			  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 			  <td align="left">${content.userId}</td>
 			  <td align="left">${content.regDate}</td>
@@ -258,15 +257,13 @@
 						</video></a>
 					
 				</td>
-			  <td align="left">
 			  <c:if test="${sessionScope.user.role == '2'}">
+			  <td align="left">			  
 			  <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal">
 				<div style="display: none;">${content.contentNo}</div>검증</button>
-			  </c:if>
 			  </td>
-			  <td align="left">
+			  </c:if>
 			  
-			  </td> 
 			  
 			
 			</tr>

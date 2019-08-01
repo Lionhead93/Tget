@@ -95,9 +95,9 @@ public class CommunityServiceImpl implements CommunityService{
 
 
 	@Override
-	public List<Reply> getReplyList(Reply reply) throws Exception {
+	public Map<String, Object> getReplyList(int replyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return communityDao.selectListReply(reply);
+		return communityDao.selectListReply(replyNo);
 		//int totalCount = communityDao.selectTotalCount(search);
 		
 //		Map<String, Object> map = new HashMap<String, Object>();

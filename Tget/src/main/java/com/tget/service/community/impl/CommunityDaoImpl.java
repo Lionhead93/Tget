@@ -120,8 +120,10 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 
 	@Override
-	public List<Reply> selectListReply(Reply reply) throws Exception {
+	public Map<String, Object> selectListReply(int replyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("CommunityMapper.selectListReply", reply);
+		return (Map<String, Object>) sqlSession.selectList("CommunityMapper.selectListReply", replyNo);
 	}
+
+	
 }

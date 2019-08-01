@@ -116,28 +116,19 @@
 			});
 		
 	
-			 $( "button.btn.btn-warning:contains('수 &nbsp;정')" ).on("click" , function() {
+			 $( "#updateSubmit" ).on("click" , function() {
 				 	
-				 	$(this).attr("data-target","#updateContentModal");
-				 	var contentNo = $(this).attr("id").trim();
-				 	alert(contentNo)
-				 	$.ajax(
-							{
-								url : "/community/rest/getContent/"+contentNo ,
-								method : "GET" ,
-								dataType : "json" ,
-								headers : {
-									"Accept" : "application/json",
-									"Content-Type" : "application/json"
-								},
-								success : function(data) {
-									alert(data);
-									$("input[name='contentNo']").html(data.contentNo);
-									$("#contentUserNickname").val(data.userNickname);
-									$("#contentName").html(data.contentName);
-									$("#contentBody").html(data.contentBody);
-								}
-							});
+				 	var contentName= $("input[name='contentName']").val();
+					var contentBody= $("textarea[name='contentBody']").val();
+					
+					if(contentName == null || contentName.length<1){
+						alert("제목을 입력해 주세요.");
+						return;
+					}
+					
+					alert("수정 되었습니다.")
+					$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+ 											
 				});
 	 });
 	
@@ -150,11 +141,6 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
 	
-	<!-- ToolBar Start /////////////////////////////////////-->
-	
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
-	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-info">
@@ -189,12 +175,12 @@
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
 			 
-			 <button type="button" id="updateContent" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 &nbsp;정</button>
+			 <button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
 		   
 		    </div>
 		</div>
 
-<%-- 		<jsp:include page="/community/reply.jsp"/> --%>
+<%--  		<jsp:include page="/community/reply5.jsp"/>  --%>
 		<br/>	
  	</div>
  	
@@ -214,33 +200,20 @@
 			
 			    	<div class="col">작성자 : <span id="contentUserNickname"></span>${content.userNickname}</div>
 					<br/>
-					<div class="col">글 제목 :  <input type="text" id="contentName" name="contentName" value="${content.contentName}"></div>
+					<div class="col">글 제목 :<hr/>  <input class="col" type="text" id="contentName" name="contentName" value="${content.contentName}"></div>
 					<br/>
 					<div class="col">글 내용 :<hr/>  <textarea id="contentBody" name="contentBody">${content.contentBody}</textarea>
 					<script type="text/javascript">
 					CKEDITOR.replace('contentBody'
 							, {height: 200});
-					</script></div>
-			    
-				<br>
-				<hr>
-				<input type='hidden' name='contentNo' value='${content.contentNo}'/>				
-				<input type='hidden' name='userId' value='${content.userId}'/>
-				<input type='hidden' name='videoName' value=''/>
-				<input type='hidden' name='fileName' value=''/>
-				<input type='hidden' name='regDate' value='${content.regDate}'/>
-				<input type='hidden' name='viewCount' value='0'/>
-				<input type='hidden' name='boardCode' value='${content.boardCode}'/>
-				<input type='hidden' name='contentCode' value='${content.contentCode}'/>
-				<input type='hidden' name='goodCount' value='${content.goodCount}'/>
-				<input type='hidden' name='badCount' value='${content.badCount}'/>
-				<input type='hidden' name='refundTranNo' value='0'/>
-				<input type='hidden' name='refundCheck' value=''/>
-				<input type='hidden' name='open' value='0'/>				
+					</script></div>			    
+					<br>
+					<hr>
+					<input type='hidden' name='contentNo' value='${content.contentNo}'/>
 				</form>		
 				   
 				<div class="modal-footer">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">수정</button>
+		        <button type="button" id="updateSubmit" class="btn btn-info" data-dismiss="modal">수정</button>
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
 		      </div>
 				</div></div>	        
