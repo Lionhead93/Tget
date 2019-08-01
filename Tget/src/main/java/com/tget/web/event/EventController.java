@@ -155,6 +155,7 @@ public class EventController {
 	@RequestMapping(value="getEvent")
 	public String getEvent(@RequestParam String category, @ModelAttribute("event") Event event, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
+		System.out.println(event);
 		int viewCount = 0;
 //		int ticketLowestPrice = 0;
 		Search search = new Search();
@@ -167,12 +168,18 @@ public class EventController {
 			search.setSearchCondition("2");
 			search.setSearchKeyword(eventName);
 //			Map<String,Object> map = eventService.getEventList(search, "0", stubhubKey);
-			List<StubhubEvent> list = (List<StubhubEvent>)eventService.getEventList(search, "0", stubhubKey).get("eventList");
+			List<StubhubEvent> list = (List<StubhubEvent>)eventService.getEvent(search, "0", stubhubKey).get("eventList");
+			System.out.println("#################list size : "+list.size());
+//			StubhubEvent stubhubEvent=null;
 			for (StubhubEvent stubhubEvent : list) {
+//				stubhubEvent = list.get(i);
+				System.out.println("============for¹®============");
+				System.out.println("stubhubEvent : "+stubhubEvent);
 				stubhubEvent.setCategoryTwoEng(category.toLowerCase());
 				stubhubEvent.setKoLocation(event.getKoLocation());
 				stubhubEvent.setKoName(event.getKoName());
 				eventService.addEvent(stubhubEvent);
+//				System.out.println("addEvent : "+stubhubEvent);
 			}
 			eventListByName = eventService.getEventByName(eventName);
 			model.addAttribute("totalResults", eventListByName.size());	
@@ -367,80 +374,80 @@ public class EventController {
 //		return "forward:/event/addEventImagePOST.jsp";
 //	}
 	
-	@RequestMapping(value="addRecommendedEvent", method=RequestMethod.GET)
-	public String addRecommendedEvent(Model model) throws Exception {
-		System.out.println("===============addRecommendedEvent GET===============");
-		
-		return "forward:/event/addRecommVideoGET.jsp";
-	}
+//	@RequestMapping(value="addRecommendedEvent", method=RequestMethod.GET)
+//	public String addRecommendedEvent(Model model) throws Exception {
+//		System.out.println("===============addRecommendedEvent GET===============");
+//		
+//		return "forward:/event/addRecommVideoGET.jsp";
+//	}
 	
-	@RequestMapping(value="addRecommendedEvent", method=RequestMethod.POST)
-	public String addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
-		System.out.println("===============addRecommendedEvent POST===============");
-		
-		System.out.println(multipartFile.getOriginalFilename( ));
-		File file = null;
-				
-		if(!multipartFile.isEmpty()) {
-			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
-					
-			file = new File(videoPath,multipartFile.getOriginalFilename());
-			FileCopyUtils.copy(multipartFile.getBytes(), file);
-			
-		}
-		List<RecommEvent> list = eventService.getRecommendedEventList();
-		if (list != null && list.size() !=0) {
-			for (int i=0; i<list.size(); i++) {
-				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
-					break;
-				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
-					eventService.addRecommendedEvent(recommEvent);
-				}
-			}	
-		}else {
-			eventService.addRecommendedEvent(recommEvent);
-		}
-		
-//		eventService.addRecommendedEvent(recommEvent);
-		System.out.println(recommEvent);
-		model.addAttribute("recommEvent",recommEvent);
-		model.addAttribute("videoName",recommEvent.getVideoName());
-//		model.addAttribute("file",file);
-		return "forward:/event/addRecommVideoPOST.jsp";
-	}
-	
-	@RequestMapping(value="updateRecommendedEvent", method=RequestMethod.GET)
-	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
-		System.out.println("===============updateRecommendedEvent GET===============");
-		System.out.println(recommEventNo);
-//		eventService.getRecommendedEvent(recommEventNo);
-		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
-		return "forward:/event/addRecommVideoGET.jsp";
-	}	
-	
-	@RequestMapping(value="updateRecommendedEvent", method=RequestMethod.POST)
-	public String updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
-		System.out.println("===============rest/updateRecommendedEvent===============");
-		
-		System.out.println(multipartFile.getOriginalFilename( ));
-		File file = null;
-				
-		if(!multipartFile.isEmpty()) {
-			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
-					
-			file = new File(videoPath,multipartFile.getOriginalFilename());
-			FileCopyUtils.copy(multipartFile.getBytes(), file);
-			
-		}
-		eventService.updateRecommendedEvent(recommEvent);
-		
-		System.out.println(recommEvent);
-		model.addAttribute("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-		model.addAttribute("recommEventlist",eventService.getRecommendedEventList());
-		model.addAttribute("videoName",recommEvent.getVideoName());
-//		model.addAttribute("file",file);
-		return "forward:/event/addRecommVideoPOST.jsp";
-	}
+//	@RequestMapping(value="addRecommendedEvent", method=RequestMethod.POST)
+//	public String addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+//		System.out.println("===============addRecommendedEvent POST===============");
+//		
+//		System.out.println(multipartFile.getOriginalFilename( ));
+//		File file = null;
+//				
+//		if(!multipartFile.isEmpty()) {
+//			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+//					
+//			file = new File(videoPath,multipartFile.getOriginalFilename());
+//			FileCopyUtils.copy(multipartFile.getBytes(), file);
+//			
+//		}
+//		List<RecommEvent> list = eventService.getRecommendedEventList();
+//		if (list != null && list.size() !=0) {
+//			for (int i=0; i<list.size(); i++) {
+//				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+//					break;
+//				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+//					eventService.addRecommendedEvent(recommEvent);
+//				}
+//			}	
+//		}else {
+//			eventService.addRecommendedEvent(recommEvent);
+//		}
+//		
+////		eventService.addRecommendedEvent(recommEvent);
+//		System.out.println(recommEvent);
+//		model.addAttribute("recommEvent",recommEvent);
+//		model.addAttribute("videoName",recommEvent.getVideoName());
+////		model.addAttribute("file",file);
+//		return "forward:/event/addRecommVideoPOST.jsp";
+//	}
+//	
+//	@RequestMapping(value="updateRecommendedEvent", method=RequestMethod.GET)
+//	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
+//		System.out.println("===============updateRecommendedEvent GET===============");
+//		System.out.println(recommEventNo);
+////		eventService.getRecommendedEvent(recommEventNo);
+//		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
+//		return "forward:/event/addRecommVideoGET.jsp";
+//	}	
+//	
+//	@RequestMapping(value="updateRecommendedEvent", method=RequestMethod.POST)
+//	public String updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent,Model model) throws Exception {
+//		System.out.println("===============rest/updateRecommendedEvent===============");
+//		
+//		System.out.println(multipartFile.getOriginalFilename( ));
+//		File file = null;
+//				
+//		if(!multipartFile.isEmpty()) {
+//			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+//					
+//			file = new File(videoPath,multipartFile.getOriginalFilename());
+//			FileCopyUtils.copy(multipartFile.getBytes(), file);
+//			
+//		}
+//		eventService.updateRecommendedEvent(recommEvent);
+//		
+//		System.out.println(recommEvent);
+//		model.addAttribute("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		model.addAttribute("recommEventlist",eventService.getRecommendedEventList());
+//		model.addAttribute("videoName",recommEvent.getVideoName());
+////		model.addAttribute("file",file);
+//		return "forward:/event/addRecommVideoPOST.jsp";
+//	}
 	
 	@RequestMapping(value="deleteInterestedEventAll")
 	public String deleteInterestedEventAll(HttpSession session) throws Exception {

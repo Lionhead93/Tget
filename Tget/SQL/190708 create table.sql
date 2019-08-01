@@ -57,29 +57,29 @@ CREATE TABLE event(
 	event_id		VARCHAR2(10) 	NOT NULL,
 	view_count	NUMBER(10) 	DEFAULT 1,
 	category_two_eng	VARCHAR2(30) 	NOT NULL REFERENCES category_two(category_two_eng),
-	event_image	VARCHAR2(200),
+	event_image	VARCHAR2(500),
 	event_name	VARCHAR2(200) 	NOT NULL,
-	event_location	VARCHAR2(200) ,
+	event_location	VARCHAR2(500) ,
 	event_date	DATE 		NOT NULL,
 	event_time	VARCHAR2(10) 	NOT NULL,
-	ko_name VARCHAR2(200) 	NOT NULL,
-	ko_location VARCHAR2(200) ,
+	ko_name VARCHAR2(500) 	NOT NULL,
+	ko_location VARCHAR2(500) ,
 	PRIMARY KEY(event_id)
 );
 
 CREATE TABLE recommended_event(
 	recomm_event_no		NUMBER(5) 	NOT NULL,
-	event_name		VARCHAR2(200) 	NOT NULL,
-	video_name		VARCHAR2(100) 	NOT NULL,
-	recomm_event_name	VARCHAR2(200) 	NOT NULL,
-	recomm_event_detail	VARCHAR2(500),
+	event_name		VARCHAR2(500) 	NOT NULL,
+	video_name		VARCHAR2(500) 	NOT NULL,
+	recomm_event_name	VARCHAR2(500) 	NOT NULL,
+	recomm_event_detail	VARCHAR2(1000),
 	PRIMARY KEY(recomm_event_no)
 );
 
 CREATE TABLE youtube(
 	youtube_no	NUMBER(5) 	NOT NULL,
 	youtube_id	VARCHAR2(20) 	NOT NULL,
-	event_name	VARCHAR2(200) 	NOT NULL,
+	event_name	VARCHAR2(500) 	NOT NULL,
 	PRIMARY KEY(youtube_no)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE users(
 	password 		VARCHAR2(20) 	NOT NULL,
 	phone 			VARCHAR2(20) 	NOT NULL,
 	nickname 		VARCHAR2(20) 	UNIQUE,
-	address 			VARCHAR2(100),
+	address 			VARCHAR2(500),
 	postal_code 		VARCHAR2(5),
 	role 			CHAR(1)		NOT NULL,
 	local 			CHAR(1) 		NOT NULL,
@@ -116,12 +116,12 @@ CREATE TABLE content(
 	user_nickname 	VARCHAR2(20) 	NOT NULL,
 	content_name 	VARCHAR2(1000) 	NOT NULL,
 	content_body 	VARCHAR2(4000) 		NOT NULL,
-	file_name 	VARCHAR2(100),
-	video_name 	VARCHAR2(100),
+	file_name 	VARCHAR2(500),
+	video_name 	VARCHAR2(500),
 	reg_date 		DATE 		NOT NULL,
 	view_count 	NUMBER(10),
 	board_code 	CHAR(1) 		NOT NULL,
-	content_code 	CHAR(1) 		NOT NULL,
+	content_code 	CHAR(2) 		NOT NULL,
 	open 		CHAR(1) 		NOT NULL,
 	good_count 	NUMBER(10),
 	bad_count	NUMBER(10),
@@ -131,7 +131,7 @@ CREATE TABLE content(
 
 CREATE TABLE image_file(
 	file_no		NUMBER(5) 	NOT NULL,
-	file_name		VARCHAR2(50) 	NOT NULL,
+	file_name		VARCHAR2(500) 	NOT NULL,
 	content_no	NUMBER(5) 	NOT NULL 	REFERENCES content(content_no),
 	PRIMARY KEY(file_no));
 
@@ -214,7 +214,7 @@ CREATE TABLE transaction (
 	payment_option		CHAR(1)			NOT NULL ,	
 	payment_no		VARCHAR2(20) ,
 	tran_code		CHAR(1) 			NOT NULL ,
-	delivery_add		VARCHAR2(100) 		NOT NULL ,
+	delivery_add		VARCHAR2(500) 		NOT NULL ,
 	delivery_company		VARCHAR2(10) ,
 	delivery_no		NUMBER(20) ,
 	delivery_start_date		DATE ,
@@ -239,10 +239,11 @@ CREATE TABLE point_history(
 
 
 
-INSERT INTO users VALUES ('admin','관리자','1111','01000000000','나관리자얌','서울시 강남구', '00000','2', '0', 10000000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO users VALUES ('manager','관리자2','1111','01000000000','관리자','서울시 강남구', '00000', '2', '0', 10000000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO users VALUES ('buyer','구매자','1111','01000000000','구매자얌','서울시 강남구', '00000', '0', '0', 0, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO users VALUES ('seller','판매자','1111','01000000000','판매자얌','서울시 강남구', '00000','1', '0', 0, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,'2',1000000,10,'비트은행','123456789');
+INSERT INTO users VALUES ('admin@naver.com','관리자','1111','01001121127','나관리자얌','서울시 강남구', '01110','2', '0', 10000000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO users VALUES ('manager@naver.com','관리자2','1111','01004080506','관리자','서울시 강남구', '01010', '2', '0', 10000000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO users VALUES ('buyer@naver.com','구매자','1111','01001140921','구매자얌','서울시 강남구', '01234', '0', '0', 100000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO users VALUES ('seller@naver.com','판매자','1111','01004120522','판매자얌','서울시 강남구', '22222','1', '0', 50000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,'2',1000000,10,'국민은행','123456789');
+INSERT INTO users VALUES ('user01@naver.com','유저','1111','01010070326','유저얌','서울시 강남구', '33333','1', '0',50000, 0, SYSDATE, NULL, NULL, NULL, NULL,NULL,NULL,'2',1000000,10,'국민은행','123456789');
 
 
 INSERT INTO category_two VALUES (seq_category_two_no.nextval,'0','콘서트','concert'); 
@@ -261,11 +262,67 @@ INSERT INTO event	VALUES ('104175345',120408,'concert',NULL,'EXO Seoul','Seoul O
 INSERT INTO event	VALUES ('104175822',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/27', 'YYYY/MM/DD'),'1800','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
 INSERT INTO event	VALUES ('104175824',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/28', 'YYYY/MM/DD'),'1600','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175823',100 ,'seller',200000,'1','1','스탠딩E1','알콜프리존', sysdate , 'aaa.png','1', null , null); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','스탠딩X2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller',200000,'1','1','스탠딩O2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller',200000,'1','1','8구역','알콜프리존', sysdate , 'aaa.png','1', null , null); 
-INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175824',100 ,'seller',200000,'1','1','15구역','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175823',100 ,'seller@naver.com',200000,'1','1','스탠딩E1','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller@naver.com',200000,'1','1','스탠딩X2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175345',100 ,'seller@naver.com',200000,'1','1','스탠딩O2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller@naver.com',200000,'1','1','8구역','알콜프리존', sysdate , 'aaa.png','1', null , null); 
+INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175824',100 ,'seller@naver.com',200000,'1','1','15구역','알콜프리존', sysdate , 'aaa.png','1', null , null ); 
+
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'seller@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'seller@naver.com' , SYSDATE, '0' );
+
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'user01@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'user01@naver.com' , SYSDATE, '0' );
+
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'admin@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'admin@naver.com' , SYSDATE, '0' );
+
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'buyer@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'buyer@naver.com' , SYSDATE, '0' );
+
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '0' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
+INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
+
 
 
 commit;

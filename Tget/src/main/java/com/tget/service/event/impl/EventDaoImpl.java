@@ -180,6 +180,11 @@ public class EventDaoImpl implements EventDao {
 		return sqlSession.selectOne("EventMapper.selectCategory", categoryTwoEng);
 	}
 	
+	public Category selectCategory(int categoryTwoNo) throws Exception{
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("categoryTwoEng",categoryTwoEng);
+		return sqlSession.selectOne("EventMapper.selectCategoryByNo", categoryTwoNo);
+	}
 	
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception{
 		sqlSession.delete("EventMapper.deleteCategoryTwo",categoryTwoEng);
@@ -226,7 +231,7 @@ public class EventDaoImpl implements EventDao {
 		}
 		url+="&start=0";
 		
-		System.out.println("getEventList URL - "+url+"\n");
+		System.out.println("getEventListTotalCount URL - "+url+"\n");
 
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
@@ -258,7 +263,7 @@ public class EventDaoImpl implements EventDao {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://api.stubhub.com/sellers/search/events/v3?";
+		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title";
 		
 //		if (totalEventCount > 500) {
 //			url += "rows="+500;
@@ -266,7 +271,7 @@ public class EventDaoImpl implements EventDao {
 //			url += "rows="+totalEventCount;
 //		}
 		
-		url+="rows="+10;
+		url+="&rows="+10;
 		
 		if (search.getSearchCondition().equals("0")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
@@ -328,6 +333,75 @@ public class EventDaoImpl implements EventDao {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("eventList", returnList);
+//		map.put("eventList", list);
+		map.put("totalResults", returnList.size());
+//		map.put("totalResults", totalEventCount);
+//		map.put("totalResults", list.size());
+		
+		return map;
+	}
+	
+	
+	public Map<String,Object> getEvent(Search search, String requestPageToken, String apiKey) throws Exception{
+		
+		int totalEventCount = this.getEventListTotalCount(search, requestPageToken, apiKey);		
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title";
+		
+//		if (totalEventCount > 500) {
+//			url += "rows="+500;
+//		}else {
+//			url += "rows="+totalEventCount;
+//		}
+		
+		url+="&rows="+10;
+		
+		if (search.getSearchCondition().equals("0")) {
+			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+				url+="&categoryName="+search.getSearchKeyword().replace(" ", "%20");
+			}
+		}else if(search.getSearchCondition().equals("1")) {
+			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+			}
+		}else if(search.getSearchCondition().equals("2")) {
+			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+//				url+="&name="+search.getSearchKeyword();
+				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
+			}
+		}
+		
+		if (requestPageToken !=null && requestPageToken !="") {
+			url+="&start="+requestPageToken;
+		}
+		
+		url+="&country=KR";
+		System.out.println("#####getEvent URL - "+url+"\n");
+
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Authorization","Bearer "+apiKey);
+//		httpGet.setHeader("Authorization","Bearer tiY4GRmhcjvBYdRHhr8YmCrXOuSN");
+		httpGet.setHeader("Referer","https://developer.stubhub.com/searchevent/apis/get/search/events/v3");
+		
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+//		System.out.println(httpResponse+"\n");
+
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		ObjectMapper objectMapper = new ObjectMapper();
+		StubhubSearchList stubhubSearchList = objectMapper.readValue(jsonobj.toString(), StubhubSearchList.class);
+		
+		List<StubhubEvent> list = stubhubSearchList.getEvents();
+//		System.out.println("returnList : " +returnList);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("eventList", list);
 //		map.put("eventList", list);
 //		map.put("totalResults", returnList.size());
 		map.put("totalResults", totalEventCount);
@@ -504,6 +578,7 @@ public class EventDaoImpl implements EventDao {
 //				str += stubhubEvent.getName()+"//"+stubhubEvent.getVenueName()+"//"+stubhubEvent.getPerformersName()+" /////";			
 //				str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			}
+			map.put("result", list);
 //			System.out.println("query///////////////////////////"+str);
 //			json.put("q",str);
 		}		
@@ -562,7 +637,7 @@ public class EventDaoImpl implements EventDao {
 //			return map;
 //		}	
 //		return null;
-		map.put("result", list);
+		
 		return map;
 	}
 	

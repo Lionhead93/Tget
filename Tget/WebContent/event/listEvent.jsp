@@ -184,7 +184,7 @@
 						</div>						 
 						<div align="right"  style="padding: 20px  70px ;">				
 							<input type="hidden"  class="kn"  value="${i.koName}" >
-							<input type="hidden"  class="el"  value="${i.venueName}" >
+							<input type="hidden"  class="el"  value="${i.koLocation}" >
 							<input type="hidden" class="kp"  value="${i.performersName}" >			
 							<input type="hidden" class="category"  value="${i.ancestorsCategory}" >			
 <%-- 								<button class="button_black" type="button" name="getEvent"  value="${i.name }">상세보기</button> --%>

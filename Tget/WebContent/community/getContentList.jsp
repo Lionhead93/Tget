@@ -14,11 +14,18 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>T-GET</title>
+    	<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
+		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
+		<meta name="author" content="Codrops" />
+    	<title>T-GET</title>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
-	
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/tabstyles.css" />
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -33,6 +40,7 @@
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>	
 		<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+		<script src="/resources/javascript/modernizr.custom.js"></script>
 	
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -43,11 +51,8 @@
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
+		a, hr{
 			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
 		}
 		.list-group-item{
 			  margin-left:50px;	
@@ -81,23 +86,15 @@
 			background-color: #193147;
 		}
 		section{
-			margin-left: 100px;
+			margin-left: 40px;
 		}
 		#inputGroupSelect01, nav{
 			background: rgba(4, 22, 37, 0.75);
 			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-bottom: 200px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
+		}
+		#cyberWidget{
+       		background-color: white;
+       }  
        #footer{
 			background-color: #1B1B1F;
 		}
@@ -146,8 +143,6 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-	
 		function fncAddReport(){
 			
 			//alert($("input[name='whiteNickname']").val());
@@ -192,7 +187,7 @@
 				
 				});
 			 
-			 $( "a[href='#']:contains('자주 묻는 질문')" ).on("click" , function() {
+			 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
 				
 				});
@@ -366,20 +361,69 @@
 <body>
 	
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	
-	<div id="tgetHeader" class="text-center">
-	</div>
+	<jsp:include page="/layout/tgetHeader.jsp" />
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="text-center">	    
+	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
+		    	<p class="text-primary">
+		    		전체  ${totalCount } 건수
+		    	</p>
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
 				<button type="button" class="btn btn-warning">길 찾기 안내</button>
+<<<<<<< HEAD
 				<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
 		<br/><br/><br/>
 	</div>	   
+=======
+	</div>
+	<br/>	   
+	 <div class="row">
+	  <div class="col-md-2 text-center">	  
+	      <div class="sticky-top">
+		  <br/>
+			 <div>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
+		       		<h5>Community > 공지사항</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
+		       		<h5>Community > 자유게시판</h5>
+		       </c:if>
+		      
+		   	 </div>
+			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
+				<li class="list-group-item"><a href="#">자유게시판 이용공지</a></li>
+				<li class="list-group-item"><a href="#">자주묻는질문</a></li>
+				</ul>
+			</c:if>
+			  
+			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item"><a href="#">삽니다</a></li>
+				<li class="list-group-item"><a href="#">팝니다</a></li>
+				<li class="list-group-item"><a href="#">수다방</a></li>
+				</ul>
+			</c:if>
+			</div>
+		</div>	
+>>>>>>> refs/remotes/origin/master
 		
       <!--  table Start /////////////////////////////////////-->
      <div class="col-md-10 text-center">
@@ -387,7 +431,6 @@
 	      <table class="table" >	      
 	        <thead>
 	          <tr>
-	          	
 	            <th>글 제목</th>
 	            <th>작성자</th>
 	            <th>작성일</th>				
@@ -402,15 +445,14 @@
 			
 			  <c:forEach var="content" items="${list}">
 				<tr>
-				  
-				  <td>${content.contentName}
+				<td>${content.contentName}
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
-				   
+
 	<%--  		  <td align="left">${content.contentBody}</td> --%>
-				  <td>${content.userId}</td>
-				  <!-- <div id="userId" style="display:none;">${content.userId}</div></td> -->
+				  <td>${content.userNickname}
+				  <div id="userId" style="display:none;">${user.userId}</div></td>
 				  <td>${content.regDate}</td> 
 				    
 			   	  
@@ -488,7 +530,7 @@
 		   			 <c:if test="${sessionScope.user.role == '2'}">   			 		
 			   			 	<option value="0">티켓 거래 공지</option>
 			   			 	<option value="1">자유게시판 이용 공지</option>
-			   				<option value="2">자주 찾는 질문</option>
+			   				<option value="2">자주묻는질문</option>
 			   		</c:if>
 	   		
 	   			 	<option value="3">삽니다</option>	
@@ -520,8 +562,7 @@
 		  </div>
 		
 		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">글 내용</label>
-		  <hr>
-		
+	
 		<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
 		<script type="text/javascript">
 		CKEDITOR.replace('contentBody'
@@ -529,8 +570,7 @@
 		</script>
 		<br/>  		
 	      </div>
-	      
-	      
+      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
 	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
@@ -587,8 +627,6 @@
 						      </div>
 						    </div>
 						  </div>
-							  
-		
 
 </body>
 <jsp:include page="/layout/footer.jsp" />

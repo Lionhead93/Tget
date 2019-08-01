@@ -148,6 +148,11 @@ public class EventServiceImpl implements EventService{
 	}
 	
 	
+	public Category getCategory(int categoryTwoNo) throws Exception{
+		return eventDao.selectCategory(categoryTwoNo);
+	}
+	
+	
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception{
 		eventDao.deleteCategoryTwo(categoryTwoEng);
 	}
@@ -171,6 +176,9 @@ public class EventServiceImpl implements EventService{
 		return eventDao.getEventList(search,requestPageToken,apiKey);
 	}
 	
+	public Map<String,Object> getEvent(Search search, String requestPageToken, String apiKey) throws Exception{
+		return eventDao.getEvent(search,requestPageToken,apiKey);
+	}
 	
 	public Map<String,Object> getYoutubeList(Search search, String requestPageToken, String apiKey) throws Exception{
 		return eventDao.getYoutubeList(search,requestPageToken,apiKey);

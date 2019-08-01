@@ -14,7 +14,7 @@
 				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
 				<div class="col-lg-6 col-md-6 col-10">	
 					<div class="input-group mb-1">
-				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
+				  		<input type="text" class="form-control searchEventHeader" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
 				  		<div class="input-group-append">
 				    		<span class="input-group-text btn"  id="button-addon2">검색</span>
 				 		 </div>

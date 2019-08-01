@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
 import com.tget.service.ticket.domain.Ticket;
+import com.tget.service.user.UserService;
 import com.tget.service.user.domain.User;
 
 @RestController
@@ -35,7 +37,9 @@ public class TicketRestController {
 	@Qualifier("eventServiceImpl")
 	@Autowired
 	private EventService eventService;
-	
+	@Qualifier("userServiceImpl")
+	@Autowired
+	private UserService userService;
 	@Qualifier("alarmServiceImpl")
 	@Autowired
 	private AlarmService alarmService;
@@ -127,15 +131,13 @@ public class TicketRestController {
 		
 		Map<String, Object> map = ticketService.getTicketList(search);
 		
-		List<Ticket> list = (List<Ticket>) map.get("list");
-		
+		List<Ticket> list = (List<Ticket>) map.get("list");		
 		int a = 0;
 		int b = 0;
 		int c = 0;
 		int d = 0;
 		int e = 0;
-		int f = 0;
-		
+		int f = 0;		
 		for( Ticket ticket : list) {			
 			if(ticket.getPrice()<=50000) {
 				a += ticket.getAmount();
@@ -150,8 +152,7 @@ public class TicketRestController {
 			}else if( ticket.getPrice()>400000) {
 				f += ticket.getAmount();
 			}
-		}
-		
+		}		
 		map.put("a", a);
 		map.put("b", b);
 		map.put("c", c);
@@ -161,4 +162,19 @@ public class TicketRestController {
 		return map;
 	}
 	
+	@RequestMapping(value = "rest/addSeller", method = RequestMethod.POST)	
+	public User addSeller(@RequestBody User user, HttpSession session) throws Exception {
+		
+		System.out.println("addSeller : POST user="+user);
+		
+		user.setSellerCode("0");
+		user.setRole("1");
+		userService.updateSeller(user);
+		
+		User updateUser = userService.getUser(user.getUserId());
+		
+		session.setAttribute("user", updateUser);
+		
+		return updateUser;
+	}
 }

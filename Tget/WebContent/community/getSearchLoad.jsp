@@ -95,7 +95,7 @@
             </div>
         <div class="input-group">		    
 							    <input type="text" id="start" class="form-control" width="100%" value="${user.address}">
-							   <select type="text" id="end" class="form-control" width="100%">
+							   <select id="end" class="form-control">
 							   		<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
 							   		<option value="${location}">${location}</option>
 							   		</c:forEach>

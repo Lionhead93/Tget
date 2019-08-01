@@ -317,14 +317,16 @@
 								
 									    // The data for our dataset
 									    data: {
-									        labels: ['5만원 이하', '5만원~10만원', '10만원~20만원', '20만원~30만원', '30만원~40만원', '40만원이상'],
+									        labels: ['5만원 이하', '5만원~10만원', '10만원~20만원', '20만원~30만원', '30만원~40만원', '40만원이상'],									        
 									        datasets: [{
 									            label: '판매 현황',
-									            borderColor: 'rgb(255, 99, 132)',
+									            borderColor: 'rgb(143, 255, 227)',									            
 									            data: [JSONdata.a, JSONdata.b, JSONdata.c, JSONdata.d, JSONdata.e, JSONdata.f]
 									        }]
 									    },					
-									    options: {}
+									    options: {
+									    	fontColor: 'white'
+									    }
 									});					          		
 					          	}
 							});
