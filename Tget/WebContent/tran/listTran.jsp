@@ -89,6 +89,13 @@
 		ul.alt{
 			  border: 1px groove white;	
 		}
+		button.btn-light{
+			color: black ;
+		}	
+		button.btn-light:hover{
+			background-color: gray;
+			color: #FBFCFE ;
+		}		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -156,17 +163,8 @@
 	            }
 	    	});
 	    });
+
 	    
-	    $("a.getReview").on("click", function(){	    	
-	    });
-	    $("a.endDelivery").on("click", function(){
-	    	var tranNo = $(this).attr("id").trim();
-	    	
-	    	popWin = window.open("/rnp/addReview?tranNo="+tranNo ,"popWin",
-					"left=500, top=100, width=600, height=500, "
-					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-			
-	    });
 	    $("a.searchDelivery").on("click", function(){
 	    	tranNo = $(this).attr("id").trim();	    	
 	    	
@@ -284,6 +282,48 @@
 			self.location = "/ticket/getTicketList?menu=seller";
 		});
 		
+		
+	});
+	
+	$(function(){
+		$("a.endDelivery").on("click", function(){
+	    	var tranNo = $(this).attr("id").trim();
+	    	$("#reviewTranNo").val(tranNo);
+// 	    	popWin = window.open("/rnp/addReview?tranNo="+tranNo ,"popWin",
+// 					"left=500, top=100, width=600, height=500, "
+// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+			
+	    });
+		
+		$("button.close").on("click",function(){
+			$("select[name='score']").val("");
+			$("textarea[name='reviewBody']").text("");
+			$("#reviewTranNo").val("");
+		});
+		
+		$("#submit").on("click",function(){
+			alert('$("#reviewTranNo").val() : '+$("#reviewTranNo").val()+', $("#score").val() : '+$("#score").val()+', reviewBody : $("#reviewBody").val() : '+$("#reviewBody").val());
+			$.ajax(
+					{
+						url : "/rnp/rest/addReview",
+						method : "POST",
+						data : {
+								tranNo : $("#reviewTranNo").val(),
+								score : $("#score").val(),
+								reviewBody : $("#reviewBody").val()
+									},
+						dataType : "json",
+						success : function(JSONData, status){
+							$("#"+$("#reviewTranNo").val()).text("-");
+// 							alert(status);
+							$("button.close").click();
+// 							alert("JSONData : \n"+JSONData.stringify());		
+						},
+						error : function(request, status, error ) {   
+						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}			
+				});	
+		});
 	});
 		
 	</script>		
@@ -378,13 +418,14 @@
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
 				      <c:if test="${tran.tranCode==2}">-</c:if>
-				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#" data-target="#getReviewModal" data-toggle="modal" >후기 확인</a></c:if>
+				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#">후기 확인</a></c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}">-</c:if>
-				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}" href="#">배송도착</a></c:if>
+				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}"  data-toggle="modal" 						
+								 data-target="#exampleModalCenter" >배송도착</a></c:if>
 				      <c:if test="${tran.tranCode==3}">-</c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
@@ -402,7 +443,7 @@
  
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송정보를 등록해주세요.</h3>
@@ -465,20 +506,36 @@
 					      </div>
 					    </div>
 					  </div>
-					</div>
-	<!-- 후기 확인 모달 -->
-					<div class="modal fade" id="getReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					      <div class="modal-body" id="getReviewModalBody">
-					      	 	      
-					      </div>
-					    </div>
-					  </div>
-					</div>					
+					</div>	
 	<!-- 판매자 등록 모달 -->
 	<jsp:include page="/ticket/addSeller.jsp" />				
 	<jsp:include page="/layout/footer.jsp" />			
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     <div class="modal-wrap">
+     <div class="modal-html">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalCenterTitle"  style="color: white;">리뷰 등록</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <jsp:include page="/rnp/addReview.jsp" />
+      </div>
+      <div class="modal-footer" style="color: black;" >       
+        <button type="button"  class="btn btn-light" id="submit" style="color: black;" >저장</button>
+         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>
 
 	
 </body>

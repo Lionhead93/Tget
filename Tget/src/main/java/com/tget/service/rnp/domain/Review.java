@@ -4,6 +4,7 @@ package com.tget.service.rnp.domain;
 import java.sql.Date;
 
 import com.tget.service.event.domain.Category;
+import com.tget.service.user.domain.User;
 
 public class Review {
 
@@ -12,8 +13,10 @@ public class Review {
 	private int score;
 	private String reviewBody;
 	private Date regDate;
-	private String buyerId;
-	private String sellerId;
+//	private String buyerId;
+//	private String sellerId;
+	private User buyer;
+	private User seller;
 	
 	///C
 	public Review() {
@@ -51,25 +54,53 @@ public class Review {
 		this.regDate = regDate;
 	}
 
-	public String getBuyerId() {
-		return buyerId;
+//	public String getBuyerId() {
+//		return buyerId;
+//	}
+//
+//	public void setBuyerId(String buyerId) {
+//		this.buyerId = buyerId;
+//	}
+//
+//	public String getSellerId() {
+//		return sellerId;
+//	}
+//
+//	public void setSellerId(String sellerId) {
+//		this.sellerId = sellerId;
+//	}
+
+	/**
+	 * @return the buyer
+	 */
+	public User getBuyer() {
+		return buyer;
 	}
 
-	public void setBuyerId(String buyerId) {
-		this.buyerId = buyerId;
+	/**
+	 * @param buyer the buyer to set
+	 */
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
 	}
 
-	public String getSellerId() {
-		return sellerId;
+	/**
+	 * @return the seller
+	 */
+	public User getSeller() {
+		return seller;
 	}
 
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
+	/**
+	 * @param seller the seller to set
+	 */
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
 
 	public String toString() {
 		return "[Review] tranNo : "+tranNo+", "+"score : "+score+", " + 
 				"reviewBody : "+reviewBody+", " +"regDate : "+regDate+", " + 
-				"buyerId : "+buyerId+", " + "sellerId : "+sellerId;
+				"buyer : "+buyer+", " + "seller : "+seller;
 	}
 }

@@ -335,6 +335,7 @@
 
 <body>
 <jsp:include page="/layout/tgetToolbar.jsp" />
+<jsp:include page="/layout/tgetHeader.jsp" />
 <!-- <form> -->
 	<div class="container">
 	
