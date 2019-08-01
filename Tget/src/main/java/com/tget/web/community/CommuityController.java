@@ -130,7 +130,7 @@ public class CommuityController {
 		}
 		
 		@RequestMapping(value="addReport", method=RequestMethod.POST)
-		public String addReport(@ModelAttribute("report") Report report, Content content, HttpSession session, Search search) throws Exception {
+		public String addReport(@ModelAttribute("report") Report report, HttpSession session, Search search) throws Exception {
 
 			System.out.println("community/addReport: POST");
 			//User user = userService.getUser("userId");
@@ -143,6 +143,7 @@ public class CommuityController {
 			String role = user.getRole();
 			session.setAttribute("search", search);
 			
+			Content content = communityService.getContent(report.getContentNo());
 			
 			if(role.equals("2")) {
 				return "forward:/community/getReportList";

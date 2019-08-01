@@ -131,9 +131,6 @@
 		  text-align: left;
 		  vertical-align: middle;
 		}
-		
-
-
 
     </style>
     
@@ -168,11 +165,6 @@
 					$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
  				});
 			 
-			 $( "button.btn.btn-warning:contains('길 찾기 안내')" ).on("click" , function() {
-				 var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"	                    
-		             window.open("/community/getSearchLoad","T-get 길 찾기 ",popOption);	
-				 
-				});
 			 
 			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
 					self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
@@ -318,39 +310,7 @@
 			    	});
 				});
 		 });
- 		  
- 		 $(function getSearchWeather(lat, lon) {
-			
-				$("button.btn.btn-info:contains('날씨 안내')").on("click" , function() {
-						
- 								
-						$.ajax( 
-								
-								{
-									url : "/community/rest/getSearchWeather/",
-									method : "POST" ,
-
-									data : JSON.stringify({
-										lat : lat,
-										lon : lon,
-									}),
-									headers : {
-										
-										"Accept" : "application/json",
-										"Content-Type" : "application/json"
-									},
-									success : function(JSONData , status) {
-									
-										var displayValue ="날씨 : "+JSONData.weather+"<br/>"
-														+"온도 : "+JSONData.temp+"℃<br/>"
-														+"풍속 : "+JSONData.wind+"m/s<br/>"
-														+"흐림 : "+JSONData.clouds+"%<br/>";
-										
-										$(".modal-body").html(displayValue);
-									}
-							});
-				});		
-			});	
+		
 	</script>
 	
 </head>
@@ -367,8 +327,7 @@
 		    		전체  ${totalCount } 건수
 		    	</p>
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				<button type="button" id="weatherModalButton" class="btn btn-info" data-toggle="modal" data-target="#weatherModal">날씨 안내</button>				
-				<button type="button" class="btn btn-warning">길 찾기 안내</button>
+				
 
 				
 		<br/><br/><br/>
@@ -477,31 +436,7 @@
 	  <!--  table End /////////////////////////////////////-->
 	</div>  
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
-	<!-- 날씨 안내 Modal -->
-	<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-md" role="document">
-					    <div class="modal-content modal-80size">
-					    <div class="modal-weather">
-					      <div class="modal-header"> 
-					        <h5 class="modal-title" id="modalCenterTitle"><strong>날씨 안내</strong></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body" id="getWeatherModalBody">
-					     
-					      </div>     
-					   </div>
-					          
-					      <div class="modal-footer">
-<!-- 					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button> -->
-<!-- 					        <button type="button" class="btn btn-primary">확인</button> -->
-					        
-					      </div>
-					    </div>
-					    </div>
-					  </div> 
+ 
 	<!-- 게시글 등록 Modal -->		  
 		<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
@@ -576,7 +511,7 @@
 					    <div class="modal-content modal-80size">
 					  <div class="modal-report">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle"><strong>신고하기</strong></h5>
+					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:white;">신고하기</span></strong></h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -587,9 +522,9 @@
 <!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
 <%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
 					
-			    	<div class="col">작성자 : <span id="reportBlackId"></span></div>
+			    	<div class="col" style="color:white;">작성자 : <span id="reportBlackId"></span></div>
 					
-					<div class="col">내용 :  <div id="reportContentBody"></div></div>
+					<div class="col" style="color:white;">내용 :  <div id="reportContentBody"></div></div>
 			    
 				<br>
 				<hr>
@@ -600,12 +535,12 @@
 				<input type='hidden' name='reportCode' value='0'/>				
 				
 				
-				<strong>신고 사유를 선택해주세요</strong>
+				<span style="color:white;"><strong>신고 사유를 선택해주세요</strong></span>
 			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0'>부적절한 홍보 게시물<br>
-				<input type='checkbox' name='reportReasonCode' value='1'>음란성 또는 청소년에게 부적합한 내용<br>
-				<input type='checkbox' name='reportReasonCode' value='2' >특정인 대상의 비방/욕설<br>
-				<input type='checkbox' name='reportReasonCode' value='3' >명예훼손/사생활 침해 및 저작권침해 등<br>
+				<input type='checkbox' name='reportReasonCode' value='0' ><span style="color:white;">부적절한 홍보 게시물</span><br>
+				<input type='checkbox' name='reportReasonCode' value='1'><span style="color:white;">음란성 또는 청소년에게 부적합한 내용</span><br>
+				<input type='checkbox' name='reportReasonCode' value='2' ><span style="color:white;">특정인 대상의 비방/욕설</span><br>
+				<input type='checkbox' name='reportReasonCode' value='3' ><span style="color:white;">명예훼손/사생활 침해 및 저작권침해 등</span><br>
 				</div>
 				
 				</form>		

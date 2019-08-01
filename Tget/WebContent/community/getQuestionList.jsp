@@ -295,9 +295,9 @@
 			    	});
 				});
 		 		 $( ".contentDetail" ).on("click" , function() {
-		 			 alert("asdjflksdajflks");
+		 			 
 					 	var contentNo = $(this).attr("id").trim();
-					 	alert(contentNo);
+					 	
 					 	$.ajax(
 								{
 									url : "/community/rest/getContent/"+contentNo ,
@@ -308,7 +308,7 @@
 										"Content-Type" : "application/json"
 									},
 									success : function(data) {
-										alert(data);
+										
 										$("#contentUserNickname").html(data.userNickname);
 										$("#getContentName").html(data.contentName);
 										$("#getContentBody").html(data.contentBody);
