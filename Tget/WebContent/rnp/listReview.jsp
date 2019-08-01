@@ -11,22 +11,20 @@
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/resources/css/toolbar.css" />
-	<link rel="stylesheet" href="/resources/css/yr.css" />
+	<link rel="stylesheet" href="/resources/css/main.css" />
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />	
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">		  	
 	<link rel="stylesheet" href="/resources/css/login.css" />
-	<link rel="stylesheet" href="/resources/css/videoBox.css" />
-		<link rel="stylesheet" href="/resources/css/main.css" />
+	<link rel="stylesheet" href="/resources/css/videoBox.css" />	
+	<link rel="stylesheet" href="/resources/css/yr.css" />
 		
-	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -157,6 +155,8 @@
 		a, hr{
 				color: #FBFCFE ;	
 			}	
+			
+			
  		
 	</style>
 <body>	
@@ -168,7 +168,7 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6 col-12">
 				<input type="hidden"  id="userId" name="userId"  value="${user.userId}" >
-				<h1>${user.nickName}<small>님의 </small>
+				<h1><span style="font-weight:bold;font-size:30px">${user.nickName}</span><small>님의 </small>
 					<span class="textcontainer" style="font-weight: bold; ">
 						<span class="particletext bubbles">리뷰내역<span class="particle" style="top:29%; left:82%;width:5.2px; height:5.2px;animation-delay: 3s;"></span><span class="particle" style="top:67%; left:53%;width:4.8px; height:4.8px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:90%;width:5.5px; height:5.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:56%; left:64%;width:7.2px; height:7.2px;animation-delay: 2.5s;"></span><span class="particle" style="top:80%; left:77%;width:7.1px; height:7.1px;animation-delay: 2.2s;"></span><span class="particle" style="top:31%; left:58%;width:5.4px; height:5.4px;animation-delay: 0.5s;"></span><span class="particle" style="top:28%; left:95%;width:6.1px; height:6.1px;animation-delay: 2.7s;"></span><span class="particle" style="top:57%; left:58%;width:7.9px; height:7.9px;animation-delay: 2.3s;"></span><span class="particle" style="top:72%; left:61%;width:7.6px; height:7.6px;animation-delay: 0s;"></span><span class="particle" style="top:49%; left:51%;width:4.9px; height:4.9px;animation-delay: 1.9s;"></span><span class="particle" style="top:42%; left:43%;width:7.4px; height:7.4px;animation-delay: 1.1s;"></span><span class="particle" style="top:69%; left:39%;width:4.7px; height:4.7px;animation-delay: 1.8s;"></span><span class="particle" style="top:61%; left:92%;width:7.2px; height:7.2px;animation-delay: 0s;"></span><span class="particle" style="top:28%; left:16%;width:4.9px; height:4.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:69%; left:24%;width:5.4px; height:5.4px;animation-delay: 0.4s;"></span><span class="particle" style="top:51%; left:59%;width:6.5px; height:6.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:74%; left:67%;width:7.4px; height:7.4px;animation-delay: 2.5s;"></span><span class="particle" style="top:63%; left:16%;width:6.8px; height:6.8px;animation-delay: 1.3s;"></span><span class="particle" style="top:31%; left:29%;width:5.9px; height:5.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:23%; left:42%;width:4.5px; height:4.5px;animation-delay: 1.3s;"></span><span class="particle" style="top:71%; left:76%;width:5.7px; height:5.7px;animation-delay: 1.5s;"></span><span class="particle" style="top:76%; left:79%;width:5.7px; height:5.7px;animation-delay: 0.5s;"></span><span class="particle" style="top:71%; left:1%;width:5.3px; height:5.3px;animation-delay: 1.8s;"></span><span class="particle" style="top:77%; left:11%;width:7.7px; height:7.7px;animation-delay: 2.1s;"></span><span class="particle" style="top:68%; left:34%;width:4px; height:4px;animation-delay: 2.3s;"></span><span class="particle" style="top:49%; left:78%;width:6.6px; height:6.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:37%; left:41%;width:5.1px; height:5.1px;animation-delay: 2.3s;"></span><span class="particle" style="top:57%; left:75%;width:4.9px; height:4.9px;animation-delay: 2.4s;"></span><span class="particle" style="top:62%; left:58%;width:7.9px; height:7.9px;animation-delay: 0.6s;"></span><span class="particle" style="top:25%; left:6%;width:5.3px; height:5.3px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:52%;width:5.6px; height:5.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:22%;width:7.9px; height:7.9px;animation-delay: 0.1s;"></span><span class="particle" style="top:30%; left:59%;width:6.2px; height:6.2px;animation-delay: 0.7s;"></span><span class="particle" style="top:60%; left:90%;width:6px; height:6px;animation-delay: 0.1s;"></span><span class="particle" style="top:45%; left:79%;width:6.2px; height:6.2px;animation-delay: 0.1s;"></span></span> 
 					</span>
@@ -178,16 +178,16 @@
 		</div>
 
 		<div class="row" >
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8" align="center">
+			<div class="col-lg-2 col-12"></div>
+			<div class="col-lg-8 col-12" align="center">
 				
-				<table class="table ">
+				<table class="table">
 				  <thead>
-				    <tr  align="center">
-				      <th scope="col" ><span>판매자</span></th>
-				      <th scope="col"><span>리뷰</span></th>
-				      <th scope="col"><span>평점</span></th>
-				      <th scope="col"><span>등록일</span></th>
+				    <tr  align="center" >
+				      <th scope="col" ><h4  align="center" style="font-weight: bold;margin:0%;">판매자</h4></th>
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">리뷰</h4></th>
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">평점</h4></th>
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">등록일</h4></th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -212,11 +212,9 @@
 								 data-target="#exampleModalCenter" >
 				  	  	<input type="hidden"  value="${i.tranNo }"/>
 						<div align="center" id="score${i.tranNo}" >
-<!-- 							<div style="font-size: 15px; font-weight: bold; margin: 10px;"> -->
 								${i.score}.0
 							</div>
-<%-- 							<button type="button" class="btn btn-outline-primary"  value="${i.tranNo }">바로가기</button>						 --%>
-						</div>			
+<%-- 							<button type="button" class="btn btn-outline-primary"  value="${i.tranNo }">바로가기</button>						 --%>		
 				  	  </td>
 				  	  <td class="record"  data-toggle="modal" 						
 								 data-target="#exampleModalCenter" >
@@ -230,7 +228,7 @@
 		  		 </tbody>
 				</table>
 			</div>
-			<div class="col-lg-2">
+			<div class="col-lg-2 col-12">
 			
 			</div>
 		</div>	
@@ -287,7 +285,7 @@ aria-labelledby="tranModalTitle" aria-hidden="true">
 			<ion-icon name="checkmark"></ion-icon>수량 : 			
 			<span class=""  id="reviewTranAmount"></span><br/>
 			
-			<ion-icon name="checkmark"></ion-icon>총액 : 
+			<ion-icon name="checkmark"></ion-icon>실결제액 : 
 			<span class=""  id="reviewTranTotalPrice"></span><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>구매일자 : 
