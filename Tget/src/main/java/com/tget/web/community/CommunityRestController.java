@@ -76,100 +76,22 @@ public class CommunityRestController {
 		return map;
 	}
 	
-	@RequestMapping(value="rest/getReplyList/", method=RequestMethod.POST)
-	public List<Reply> getReplyList(@RequestBody Reply reply) throws Exception{
+	@RequestMapping( value="rest/updateContent/{contentNo}", method=RequestMethod.GET ) 
+	public Map<String,Object> updateRefund( @RequestBody Content content, @PathVariable int contentNo  ) throws Exception{
+		
+		System.out.println("/community/rest/updateContent : POST");
+		
+		communityService.getContent(contentNo);
+		
+		communityService.updateContent(content);
 	
-		System.out.println("/community/getReplyList: GET/ POST");
+		Map<String,Object> map = new HashMap<String, Object>();
 		
-		return communityService.getReplyList(reply);
-		
-	}
-	//이거로 하나
-//	@RequestMapping(value="json/addReply/{replyNo}", method=RequestMethod.GET)
-//	public Map<String,Object> addReply(@PathVariable int replyNo, Search search) throws Exception {
-//
-//		System.out.println("community/addReply: GET");
-//		
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		
-//		map.put("list", communityService.getReply(replyNo));
-//		
-//		return map;
-//	}
-	//이거로 하나.....
-	@RequestMapping(value="rest/addReply", method=RequestMethod.POST)
-	public Map<String,Object> addReply( @RequestBody Reply reply) throws Exception {
-
-		System.out.println("community/addReply: POST");
-		
-		//communityService.addReply(reply);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		//map.put("list", communityService.getReply(reply.getReplyNo()));
-		try {
-			communityService.addReply(reply);
-			map.put("status", "OK");
-		}catch(Exception e) {
-			e.printStackTrace();
-			map.put("status", "False");
-		}
+		map.put("content", content);
 		
 		return map;
 	}
-	//// 이것도 안되고 18
-//	@RequestMapping(value="/rest/addReply", method=RequestMethod.POST)
-//    public String addReply(@ModelAttribute("reply") Reply reply, HttpServletRequest request) throws Exception{
-//        
-//        HttpSession session = request.getSession();
-//        User user = (User)session.getAttribute("loginVO");
-//        
-//        try{
-//        
-//        	reply.setUserId(user.getUserId());        
-//            communityService.addReply(reply);
-//            
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        
-//        return "success";
-//    }
-	/// 수정...필요해
-//	@RequestMapping(value="json/updateReply/{replyNo}", method=RequestMethod.GET)
-//	public String updateReply( @PathVariable int replyNo  , Model model) throws Exception{
-//
-//		System.out.println("/community/updateReply: GET");
-//		//Business Logic
-//		
-//		model.addAttribute("reply", communityService.getReply(replyNo));
-//		
-//		return "forward:/content/getContent.jsp";
-//	}
-//	
-//	
-//	@RequestMapping(value="json/updateReply", method=RequestMethod.POST)
-//	public String updateReply( @ModelAttribute("reply") Reply reply  , Model model) throws Exception{
-//
-//		System.out.println("/community/updateReply: POST");
-//		//Business Logic
-//		
-//		communityService.updateReply(reply);
-//		
-//		return "forward:/content/getContent";
-//	}
-//
-//	@RequestMapping(value="json/deleteReply/{replyNo}", method=RequestMethod.GET)
-//	public String deleteReply( @PathVariable int replyNo) throws Exception{
-//
-//		System.out.println("/community/deleteReply: GET");
-//		//Business Logic
-//		
-//		communityService.deleteReply(replyNo);
-//		
-//		return "forward:/content/getContent";
-//	}
-	// 수정필요..
+	
 	@RequestMapping(value="rest/updateGoodCount/{contentNo}", method=RequestMethod.GET)
 	public Map<String, Object> updateGoodCount( @PathVariable("contentNo") int contentNo) throws Exception {
 
@@ -215,4 +137,149 @@ public class CommunityRestController {
 //		
 //		return loadList;
 //	}
+	
+	@RequestMapping(value="rest/addReply/", method=RequestMethod.POST)
+	public Reply addReply(@RequestBody Reply reply, HttpSession session) throws Exception {
+
+		System.out.println(" ============================== rest addReply ==================================");
+
+		User user = (User) session.getAttribute("user");
+		
+		// Set User
+		reply.setUserId(user.getUserId());
+		reply.setUserNickName(user.getNickName());
+		//reply.setProfile(user.getProfile());
+		
+		// Set Code
+		//reply.setBoardCode(boardCode);
+		communityService.addReply(reply);
+		
+		reply = communityService.getReply(reply.getReplyNo());
+		
+		return reply;
+	}
+	
+	@RequestMapping("rest/getReply/{replyNo}")
+	public Reply getReply(@PathVariable("replyNo") int replyNo) throws Exception {
+
+		System.out.println(" ============================== rest getReply ==================================");
+
+		Reply reply = communityService.getReply(replyNo);
+
+		return reply;
+	}
+	
+	@RequestMapping( value="rest/updateReply/", method=RequestMethod.POST)
+	public Reply updateReply(@RequestBody Reply reply, HttpSession session) throws Exception {
+
+		System.out.println(" ============================== rest updateComment ==================================");
+		
+		User user = (User)session.getAttribute("user");
+		
+		reply.setUserId(user.getUserId());
+		reply.setUserNickName(user.getNickName());
+		//reply.setBoardCode(boardCode);
+		
+		System.out.println(" reply : " + reply );
+		
+		communityService.updateReply(reply);
+		
+		reply = communityService.getReply(reply.getReplyNo());
+		
+		return reply;
+	}
+	
+	@RequestMapping( value="rest/deleteReply/{replyNo}", method=RequestMethod.POST)
+	public int deleteReply(@PathVariable int replyNo) throws Exception {
+
+		System.out.println(" ============================== rest deleteReply ==================================");
+		
+		System.out.println(" replyNo : " + replyNo );
+		communityService.deleteReply(replyNo);
+		
+		return replyNo;
+	}
+	
+	
+//	@RequestMapping( value="json/updateLikeCnt/{commentNo}/{check}", method=RequestMethod.POST)
+//	public Comment updateLikeCnt(@PathVariable("commentNo") int commentNo, @PathVariable("check") String check, HttpSession session) throws Exception {
+//
+//		System.out.println(" ============================== rest updateLikeCnt ==================================");
+//		
+//		System.out.println("commentNo : " + commentNo);
+//		System.out.println("check : " + check);
+//		
+//		User user = (User) session.getAttribute("user");
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("commentNo", commentNo);
+//		
+//		if(check.equals("plus")) {
+//			map.put("check", check);
+//		} else {
+//			map.put("check", check);
+//		}
+//
+//		commentService.updateLikeCnt(map);
+//		
+//		Comment comment = new Comment();
+//		comment.setCommentNo(commentNo);
+//		
+//		Interest interest = new Interest();
+//		interest.setBoardCode(boardCode);
+//		interest.setInterestComment(comment);
+//		interest.setInterestId(user);
+//
+//		interestService.addInterest(interest);
+//		
+//		comment = commentService.getComment(commentNo);
+//		
+//		return comment;
+//	}
+//	
+//	@RequestMapping( value="json/check/{commentNo}/{id}", method=RequestMethod.POST)
+//	public int check(@PathVariable("commentNo") int commentNo, @PathVariable("id") String checkId) throws Exception {
+//
+//		System.out.println(" ============================== rest updateLikeCnt ==================================");
+//		
+//		System.out.println("commentNo : " + commentNo);
+//		System.out.println("id : " + checkId);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("id",checkId);
+//		map.put("searchNo",commentNo);
+//		map.put("searchType","comment");
+//		map.put("boardCode",boardCode);
+//		
+//		int result = interestService.getInterestCheck(map);
+//		
+//		return result;
+//	}
+//	
+	@RequestMapping( value="rest/getReplyList/{replyNo}/{currentPage}", method=RequestMethod.POST)
+	public Map<String, Object> getReplyList(@PathVariable("replyNo") int replyNo, @ModelAttribute("search") Search search, @PathVariable("currentPage") int currentPage) throws Exception {
+		
+		System.out.println(" ============================== rest listComment ==================================");
+		
+		if ( search.getCurrentPage() == 0 ) {
+			search.setCurrentPage(1);
+		}
+		
+		search.setPageSize(5);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		System.out.println("replyNo :" + replyNo);
+		
+		
+		Map<String, Object> replyMap = communityService.getReplyList(replyNo);
+	
+		map.put("list", replyMap.get("list"));
+		map.put("totalCount", map.get("totalCount"));
+		map.put("search",search);
+		
+		return map;
+	}
 }
