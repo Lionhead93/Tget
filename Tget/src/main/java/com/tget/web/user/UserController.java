@@ -146,9 +146,8 @@ public class UserController {
 		String sessionId=((User)session.getAttribute("user")).getUserId();
 		if(sessionId.equals(user.getUserId())){
 			session.setAttribute("user", user);
-		}
-		
-		return "redirect:/user/getUser?userId="+user.getUserId();
+		} 
+		return "redirect:/user/updetaUser.jsp";
 	}
 	
 	@RequestMapping( value="updatePassword", method=RequestMethod.GET )

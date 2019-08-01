@@ -1,20 +1,17 @@
 package com.tget.web.coupon;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tget.service.coupon.CouponService;
 import com.tget.service.coupon.domain.Coupon;
-import com.tget.service.user.domain.User;
+import com.tget.service.user.UserService;
 
 @Controller
 @RequestMapping("/coupon/*")
@@ -25,6 +22,10 @@ public class CouponRestController {
 	@Autowired
 	@Qualifier("couponServiceImpl")
 	private CouponService couponService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 		
 	public CouponRestController(){
@@ -39,9 +40,15 @@ public class CouponRestController {
 		return  couponService.getCouponList(userId);
 	}
 	
+/*	@RequestMapping( value="rest/addCoupon", method=RequestMethod.POST )
+	public Map<String,Object> addCoupon(  ) throws Exception {
+		
+		System.out.println("/coupon/rest/addCouponList : POST");
+		
+		return  couponService.getCouponList(userId);
+	}
 	
-	
-	
+	*/
 	
 	
 	
