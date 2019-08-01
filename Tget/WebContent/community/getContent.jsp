@@ -114,32 +114,32 @@
 			
 				history.go(-1); 
 			});
-		});
+		
 	
-	 $( "button.btn.btn-warning:contains('수 &nbsp;정')" ).on("click" , function() {
-		 	
-		 	$(this).attr("data-target","#updateContentModal");
-		 	var contentNo = $(this).attr("id").trim();
-		 	alert(contentNo)
-		 	$.ajax(
-					{
-						url : "/community/rest/getContent/"+contentNo ,
-						method : "GET" ,
-						dataType : "json" ,
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(data) {
-							alert(data);
-							$("input[name='contentNo']").html(data.contentNo);
-							$("#contentUserNickname").val(data.userNickname);
-							$("#contentName").html(data.contentName);
-							$("#contentBody").html(data.contentBody);
-						}
-					});
-		});
-	
+			 $( "button.btn.btn-warning:contains('수 &nbsp;정')" ).on("click" , function() {
+				 	
+				 	$(this).attr("data-target","#updateContentModal");
+				 	var contentNo = $(this).attr("id").trim();
+				 	alert(contentNo)
+				 	$.ajax(
+							{
+								url : "/community/rest/getContent/"+contentNo ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								success : function(data) {
+									alert(data);
+									$("input[name='contentNo']").html(data.contentNo);
+									$("#contentUserNickname").val(data.userNickname);
+									$("#contentName").html(data.contentName);
+									$("#contentBody").html(data.contentBody);
+								}
+							});
+				});
+	 });
 	
 	 
 	</script>
@@ -194,7 +194,7 @@
 		    </div>
 		</div>
 
-		<jsp:include page="/community/reply.jsp"/>
+<%-- 		<jsp:include page="/community/reply.jsp"/> --%>
 		<br/>	
  	</div>
  	

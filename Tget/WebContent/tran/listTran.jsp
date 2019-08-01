@@ -85,6 +85,9 @@
 			background:rgba(40,57,101,.9);	
 			color: #FBFCFE;	
 		}
+		ul.alt{
+			  border: 1px groove white;	
+		}
 		button.btn-light{
 			color: black ;
 		}	
