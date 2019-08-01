@@ -79,13 +79,13 @@ public class YoutubeVideo {
 		return title;
 	}
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title.replaceAll("&quot;", "\"").replaceAll("&#39;", "'");
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = description.replaceAll("&quot;", "\"").replaceAll("&#39;", "'");
 	}
 	public String getChannelTitle() {
 		return channelTitle;

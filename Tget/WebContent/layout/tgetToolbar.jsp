@@ -28,12 +28,12 @@ $( function(){
 	$("a:contains('이벤트관리')").on("click",function(){
 		self.location = "/event/getEventManage";
 	});
-	$("a:contains('마이페이지')").on("click",function(){	
-		
+	$("a:contains('내 정보 보기')").on("click",function(){	
+	
 		self.location = "/user/myPage?userId=${user.userId}";
 	});
 	
-	$("a:contains('관심이벤트')").on("click",function(){		
+	$("a:contains('관심 이벤트')").on("click",function(){		
 		self.location = "/event/getInterestedEventList";
 	});
 });
@@ -56,17 +56,17 @@ $( function(){
 		
 //			self.location = "/rnp/addReview?tranNo=10000";
 	});
-	$("a:contains('내리뷰조회')").on("click",function(){
+	$("a:contains('내 리뷰 조회')").on("click",function(){
 		self.location = "/rnp/getReviewList";
 	});
-	$("a:contains('내평점조회')").on("click",function(){
+	$("a:contains('내 평점 조회')").on("click",function(){
 		self.location = "/rnp/getSellerEstimationList?sellerId=${user.userId}";
 	});
-	$("a:contains('포인트내역조회')").on("click",function(){
+	$("a:contains('포인트 내역 조회')").on("click",function(){
 		self.location = "/rnp/getPointHistory";
 	});
 	
-	$("a[href='#' ]:contains('내쿠폰조회')").on("click" , function() {		
+	$("a[href='#' ]:contains('내 쿠폰 조회')").on("click" , function() {		
 		self.location = "/coupon/getCouponList?userId=${sessionScope.user.userId}";
 	});
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
@@ -159,6 +159,9 @@ $(function() {
 							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
 				</c:if>	
+				<c:if test="${user.role == 2 }">
+				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
+				</c:if>
 				<c:if test="${!empty user}">			
 				<a href="#menu">Menu</a>
 				</c:if>					  
@@ -171,14 +174,14 @@ $(function() {
 					<br/>
 					      <div class="text-center"><strong>My Menu</strong></div>
 					<br/>  
-				          <a href="#">마이페이지</a>
-				          <a href="#">관심이벤트</a>				          
+				          <a href="#">내 정보 보기</a>
+				          <a href="#">관심 이벤트</a>				          
 				          <a href="#">판매목록 조회</a>
 				          <a href="#">거래내역 조회</a>
-				          <a href="#">내쿠폰조회</a>
-				          <a href="#">내리뷰조회</a>
-				          <a href="#">내평점조회</a>
-				          <a href="#">포인트내역조회</a>
+				          <a href="#">내 쿠폰 조회</a>
+				          <a href="#">내 리뷰 조회</a>
+				          <a href="#">내 평점 조회</a>
+				          <a href="#">포인트 내역 조회</a>
 				    </li>     																				
 					
 				</ul>
@@ -188,7 +191,7 @@ $(function() {
 					<li class="text-center">
 						 <div class="text-center"><strong>Admin Menu</strong></div>
 						 <br/>
-				          <a href="#">회원관리</a>
+				          <a href="#">회원관리</a>				          
 				          <a href="#">티켓관리</a>
 				          <a href="#">이벤트관리</a>
 				          <a href="#">게시글관리</a>
@@ -356,8 +359,7 @@ $(function() {
 <form name="user-login" class="form-horizontal">
 <div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
   <div class="modal-dialog modal-80size modal-center" role="document">
-    <div class="modal-content modal-80size">
-     
+    <div class="modal-content">     
     <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -397,45 +399,13 @@ $(function() {
 </div>
 </div>
 </div> <!-- ---로그인창--- -->
+</form>	
 
-
-<!-- <div class="modal fade" id="black" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-				  <div class="modal-dialog modal-lg" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				       <h5 class="modal-title" id="modalCenterTitle"><p id="nickName"></p></h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				
-					      </div>
-					     
-					      
-					     <div class="form-group">
-		    <label for="blacklistStartDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 시작일자</label>
-		    <div class="col-sm-4">
-		
-		   <p id="startDate"></p>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		   <label for="blacklistEndDate" class="col-sm-offset-1 col-sm-3 control-label">블랙리스트 종료일자</label>
-		    <div class="col-sm-4">
-		     <p id="endDate"></p>
-		    </div>
-		  </div>
-    		  <div class="modal-footer">	      
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
-	   	    	</div>
-
-
-				   </div>
-	  </div>
-		 </div>   -->
-		 
-		 	
+<<jsp:include page="/coupon/addCoupon.jsp"></jsp:include>	
 		 
 		 
-</form>		
+
+
+
+	
 		

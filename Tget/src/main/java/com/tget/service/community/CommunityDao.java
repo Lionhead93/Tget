@@ -40,6 +40,10 @@ public interface CommunityDao {
     public void updateBadCount(int contentNo)throws Exception;
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int selectTotalCount(Search search) throws Exception ;
+	
+	public int selectTotalCountRefund(Search search) throws Exception ;
+	
+	public int selectTotalCountReport(Search search) throws Exception ;
 	// 환불 게시판 환불 처리 update
 	public void updateRefund(Content content) throws Exception;
 	// 환불 게시판 리스트 조회
@@ -48,7 +52,6 @@ public interface CommunityDao {
 	// 신고글 리스트 조회(관리자)
 	public List<Report> selectListReport(Search search) throws Exception;
 	// 댓글 리스트 조회(수정 필요)
-	
 	
 	//public List<Content> selectListRefund(Search search) throws Exception;
 	

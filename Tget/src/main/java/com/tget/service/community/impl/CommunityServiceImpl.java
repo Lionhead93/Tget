@@ -112,7 +112,7 @@ public class CommunityServiceImpl implements CommunityService{
 	public Map<String, Object> getReportList(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		List<Report> list= communityDao.selectListReport(search);
-		int totalCount = communityDao.selectTotalCount(search);
+		int totalCount = communityDao.selectTotalCountReport(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
@@ -125,7 +125,7 @@ public class CommunityServiceImpl implements CommunityService{
 	public Map<String, Object> getRefundList(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		List<Content> list= communityDao.selectListRefund(search);
-		int totalCount = communityDao.selectTotalCount(search);
+		int totalCount = communityDao.selectTotalCountRefund(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
