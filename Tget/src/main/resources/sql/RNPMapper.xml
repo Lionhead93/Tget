@@ -10,8 +10,10 @@
 		<result property="score"	column="review_score" 		jdbcType="NUMERIC" />
 		<result property="reviewBody" 	column="review_body" 		jdbcType="VARCHAR" />
 		<result property="regDate" 				column="review_reg_date" 					jdbcType="DATE" />
-		<result property="buyerId" 				column="buyer_id" 					jdbcType="VARCHAR" />
-		<result property="sellerId" 			column="seller_id" 		jdbcType="VARCHAR" />
+		<association property="seller" column="seller_id" javaType="user" select="UserMapper.selectUser"/> 
+ 		<association property="buyer" column="buyer_id" javaType="user" select="UserMapper.selectUser"/>
+<!-- 		<result property="buyerId" 				column="buyer_id" 					jdbcType="VARCHAR" /> -->
+<!-- 		<result property="sellerId" 			column="seller_id" 		jdbcType="VARCHAR" /> -->
 	</resultMap>
  	
 	<resultMap id="pointHistorySelectMap" type="pointHistory">
@@ -91,8 +93,7 @@
 	 	UPDATE transaction 
 	 	<set>
 	 		review_score	= #{score},
-	 		review_body = #{reviewBody},
-	 		review_reg_date = SYSDATE
+	 		review_body = #{reviewBody}
 		</set>
 		WHERE tran_no = #{tranNo}
 	 </update>

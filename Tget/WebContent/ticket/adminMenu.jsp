@@ -57,7 +57,7 @@
 		#footer{
 			background-color: #1B1B1F;
 		}
-		.list-group-item{
+		.list-group > .list-group-item{
 			  margin-left:50px;	
 			  color: #FBFCFE ;
 			  border: 1px groove white;		  
