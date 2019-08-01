@@ -422,14 +422,21 @@ public class EventRestController {
 		System.out.println("===============rest/getInterestedEventList/{eventId}===============");
 
 		Map<String,Object> map = this.getInterestedEventList(session);
-		List<String> eventIdList = (List<String>)map.get("interestedEventList");
+		List<String> eventIdList = null;
+		if (map != null && map.size() != 0) {
+			eventIdList = (List<String>)map.get("interestedEventList");
+		}
+		
 		boolean isInterestedEvent = false;
 		
-		for (String string : eventIdList) {
-			if (eventId.equals(string)) {
-				isInterestedEvent = true;
+		if (eventIdList != null) {
+			for (String string : eventIdList) {
+				if (eventId.equals(string)) {
+					isInterestedEvent = true;
+				}
 			}
 		}
+		
 		System.out.println("isInterestedEvent : "+isInterestedEvent);
 		map.put("isInterestedEvent", isInterestedEvent);
 		
