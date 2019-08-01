@@ -18,8 +18,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
 <!-- 	<link href="/resources/css/neon.css"/> -->
 <!-- 	<link href="/resources/css/neon2.css"/> -->
-	
-	
+	<link rel="stylesheet" href="/resources/css/yr.css" />
+	<script src="/resources/javascript/yr.js" ></script>	
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -44,6 +44,8 @@
 
 	$(function(){
 		
+		
+		
 		$.ajax(
 				{
 					url : "/event/rest/getPopularEventList",
@@ -62,21 +64,21 @@
 					}
 		});
 		
-		$("input[type='text']").on("keyup",function(){
-			$("#searchKeyword").val($("input[type='text']").val());
-		});
+// 		$("input[type='text']").on("keyup",function(){
+// 			$("#searchKeyword").val($("input[type='text']").val());
+// 		});
 		
-		$("input[type='text']").on("keypress",function(){
-			if (event.keyCode ==13) {
-				$("#searchCondition").val("1");
-				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-			}
-		});
+// 		$("input[type='text']").on("keypress",function(){
+// 			if (event.keyCode ==13) {
+// 				$("#searchCondition").val("1");
+// 				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+// 			}
+// 		});
 		
-		$("#button-addon2").on("click",function(){
-			$("#searchCondition").val("1");
-			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-		});
+// 		$("#button-addon2").on("click",function(){
+// 			$("#searchCondition").val("1");
+// 			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+// 		});
 		
 
 		if ("${!empty user}") {
@@ -89,7 +91,10 @@
 	 						if (JSONData.isInterestedEvent == true) {
 								$(".interested").html('<input type="hidden"  value="heart">'
 										+'<ion-icon name="heart" size="large"></ion-icon>');
-							}								
+								
+								$("div.particletext").append('<span class="particle" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
+								hearts2();
+	 						}								
 						},
 						error : function(request, status, error ) {   
 //	 					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -148,7 +153,9 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 등록완료");														
+									alert("관심이벤트 등록완료");							
+									$("div.particletext").append('<span class="particle" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
+									hearts2();
 //	 								alert("JSONData : \n"+JSONData.stringify());		
 								}
 //	 						,
@@ -161,7 +168,7 @@
 				}else{
 					$(this).html('<input type="hidden"  value="heart-empty">'
 							+'<ion-icon name="heart-empty" size="large"></ion-icon>');
-					
+					$("span.particle").remove();
 					$.ajax(
 							{
 								url : "/event/rest/deleteInterestedEvent/"+$("#eventId").val(),
@@ -227,7 +234,6 @@
 
 		$(".coupon1").attr("class", "flux coupon1");
 		
-		initparticles();
 		
 	});
 	var tag = document.createElement('script');
@@ -316,9 +322,8 @@
 	</script>
 	
 	<style>
-		
-		
 		body{
+/* 			margin-top: 50px; */
 			background-color : #062038; 
 			color: #FBFCFE;
 		}
@@ -476,197 +481,206 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
-	<form name="searchEvent">
-			<div id="tgetHeader" class="text-center">
-			<br/><br/><br/>
-				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
-				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
-				<div class="col-lg-6 col-md-6 col-10">	
-					<div class="input-group mb-1">
-				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
-				  		<div class="input-group-append">
-				    		<span class="input-group-text btn"  id="button-addon2">검색</span>
-				 		 </div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-1"></div>
-				</div>
-			</div>
-			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
-		</div>
-	</form>
+	<jsp:include page="/layout/tgetHeader.jsp" />
+<!-- 	<div class="textcontainer"> -->
+		
+<!-- 	</div> -->
+<!-- 	<form name="searchEvent"> -->
+<!-- 			<div id="tgetHeader" class="text-center"> -->
+<!-- 			<br/><br/><br/> -->
+<%-- 				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" > --%>
+<%-- 				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" > --%>
+<%-- 				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" > --%>
+<!-- 				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div> -->
+<!-- 				<div class="col-lg-6 col-md-6 col-10">	 -->
+<!-- 					<div class="input-group mb-1"> -->
+<!-- 				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2"> -->
+<!-- 				  		<div class="input-group-append"> -->
+<!-- 				    		<span class="input-group-text btn"  id="button-addon2">검색</span> -->
+<!-- 				 		 </div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-lg-3 col-md-3 col-1"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/> --%>
+<!-- 		</div> -->
+<!-- 	</form> -->
 	
 	<form name="main">	
-	<div class="container" align="center">
-		<input type="hidden" id="eventId" name="eventId" value="${event.eventId}">
-		<input type="hidden" id="eventName" name="eventName" value="${event.eventName }">
-		<input type="hidden" id="koName" name="koName" value="${event.koName }">
-		<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }">		
-		
-		<div class="row" >		
-			<div class="col-lg-8 col-md-8 col-8"></div>
-			<div class="col-lg-2 col-md-2 col-2">
-<%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
-				<div class="interested"  value="heart-empty" align="right">
-					<input type="hidden"  value="heart-empty">
-					<ion-icon name="heart-empty" size="large"></ion-icon>					
-				</div>
-				<div align="right" style="font-size: 10px; color: black;" >
-					<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
-					
-				</div>
-			 </div>			
-			 <div class="col-lg-2 col-md-2 col-2 dropdown" >
-				<div  align="left" class=" dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<ion-icon name="share" size="large"></ion-icon>
-				</div>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenu">
-				    <h6 class="dropdown-header">공유하기</h6>
-<!-- 					<a class="dropdown-item" href="#">Action</a> -->
-<!-- 					<a class="dropdown-item" href="#">Another action</a> -->
-					<a class="dropdown-item"  href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/images/twitter.png" style="width:30px">트위터 공유</a>
-    		    	<a class="dropdown-item"  href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/images/facebook.png" style="width:30px">페이스북 공유</a>
-    	   			<a class="dropdown-item"  href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/images/kakaotalk.png"  style="width:30px">나에게 보내기</a>	
-				</div>
-			</div>			
-		</div>		
-		
-		<div class="container">
-			<div class="row" align="center">			
-				<div class="col-lg-5 " >
-					<div class="sticky-top">
-						<div class="textcontainer">
-							<h1><span id="title">${!empty event.koName? event.koName:event.eventName }</span></h1>
-						</div>
-						<div id="player"></div> <br/>
-<!-- 						<span id="deleteYoutube"> -->
-<!-- 						<ion-icon name="remove-circle-outline"  size="large"></ion-icon> -->
-<!-- 						</span> -->
-						<span id="addYoutube" name="addYoutube" data-toggle="modal"  						
-								 data-target="#exampleModalCenter">
-						<ion-icon name="add-circle-outline"  size="large"></ion-icon>
-						</span>
-						<br/><br/>
-						${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
-						${event.eventDate } &nbsp; 
-						${event.eventTimeStr}<br/><br/><br/>
-
-	
-					</div>				
-				</div>
+		<div class="particletext hearts ">
+			
+			<div class="container" align="center">
+				<input type="hidden" id="eventId" name="eventId" value="${event.eventId}">
+				<input type="hidden" id="eventName" name="eventName" value="${event.eventName }">
+				<input type="hidden" id="koName" name="koName" value="${event.koName }">
+				<input type="hidden" id="eventImage" name="eventImage" value="${event.eventImage }">		
 				
-				<div class="col-lg-7 ">
-					<div class="row" align="center">
-						<div class="col-lg-3"></div>
-						<div class="col-lg-6" align="center"><h4>총 ${totalTicketCount}건</h4></div>
-						<div class="col-lg-3"></div>
-					</div><br/>
-									
-					<section id="section-topline-1" align="center">
-						<div class="row" align="center">	
-							<c:forEach var="i" items="${ticketList}" >			
-								<c:if test="${i.couponCode == 0 }">											
-								<div class="col-lg-6">
-									<div class="text-center">
-										<div class="border ">
-								 			<br/>
-								 			<h5  class="coupon${i.couponCode }"><strong>
-								 				<a  class="getSellerEstimation">
-								 					<input type="hidden" value="${i.seller.userId}">
-								 					${i.seller.nickName}
-								 				</a>
-								 			</strong><small>(총 ${i.amount }장)</small></h5>
-								 			<hr/>								 
-								 			<div  align="center" style="margin-left:10%;margin-right:10%">	
-											 	<div class="list" align="left">
-													<ion-icon name="checkmark"></ion-icon>가격<br/>
-													<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
-													<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
-													<div class="coupon${i.couponCode }">
-														<c:if test="${i.type == 0}">
-															종이티켓
-														</c:if>
-														<c:if test="${i.type == 1 }">
-															전자티켓
-														</c:if> 
+				<div class="row" >		
+					<div class="col-lg-8 col-md-8 col-8"></div>
+					<div class="col-lg-2 col-md-2 col-2">
+		<%-- 				<div style="font-size: 10px">${interestedCount}</div> --%>
+						<div class="interested"  value="heart-empty" align="right">
+							<input type="hidden"  value="heart-empty">
+							<ion-icon name="heart-empty" size="large"></ion-icon>					
+						</div>
+						<div align="right" style="font-size: 10px; color: black;" >
+							<input type="hidden" id="interestedCount" name="interestedCount" value="${interestedCount}"/>
+							
+						</div>
+					 </div>			
+					 <div class="col-lg-2 col-md-2 col-2 dropdown" >
+						<div  align="left" class=" dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<ion-icon name="share" size="large"></ion-icon>
+						</div>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenu">
+						    <h6 class="dropdown-header">공유하기</h6>
+		<!-- 					<a class="dropdown-item" href="#">Action</a> -->
+		<!-- 					<a class="dropdown-item" href="#">Another action</a> -->
+							<a class="dropdown-item"  href="#"  id="twitter"  title="트위터로 공유"><img src="/resources/images/twitter.png" style="width:30px">트위터 공유</a>
+		    		    	<a class="dropdown-item"  href="#" id="facebook" title="페이스북으로 공유"><img src="/resources/images/facebook.png" style="width:30px">페이스북 공유</a>
+		    	   			<a class="dropdown-item"  href="#"  id="kakaoSendToMe" title="카카오톡으로 공유"> <img src="/resources/images/kakaotalk.png"  style="width:30px">나에게 보내기</a>	
+						</div>
+					</div>			
+				</div>		
+				
+				<div class="container">
+					<div class="row" align="center">			
+						<div class="col-lg-5 " >
+							<div class="sticky-top">
+								<div class="textcontainer">
+									<h1><span id="title">${!empty event.koName? event.koName:event.eventName }</span></h1>
+								</div>
+								<div id="player"></div> <br/>
+		<!-- 						<span id="deleteYoutube"> -->
+		<!-- 						<ion-icon name="remove-circle-outline"  size="large"></ion-icon> -->
+		<!-- 						</span> -->
+								<span id="addYoutube" name="addYoutube" data-toggle="modal"  						
+										 data-target="#exampleModalCenter">
+								<ion-icon name="add-circle-outline"  size="large"></ion-icon>
+								</span>
+								<br/><br/>
+								${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
+								${event.eventDate } &nbsp; 
+								${event.eventTimeStr}<br/><br/><br/>
+		
+			
+							</div>				
+						</div>
+						
+						<div class="col-lg-7 ">
+							<div class="row" align="center">
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6" align="center"><h4>총 ${totalTicketCount}건</h4></div>
+								<div class="col-lg-3"></div>
+							</div><br/>
+											
+							<section id="section-topline-1" align="center">
+								<div class="row" align="center">	
+									<c:forEach var="i" items="${ticketList}" >			
+										<c:if test="${i.couponCode == 0 }">											
+										<div class="col-lg-6">
+											<div class="text-center">
+												<div class="border ">
+										 			<br/>
+										 			<h5  class="coupon${i.couponCode }"><strong>
+										 				<a  class="getSellerEstimation">
+										 					<input type="hidden" value="${i.seller.userId}">
+										 					${i.seller.nickName}
+										 				</a>
+										 			</strong><small>(총 ${i.amount }장)</small></h5>
+										 			<hr/>								 
+										 			<div  align="center" style="margin-left:10%;margin-right:10%">	
+													 	<div class="list" align="left">
+															<ion-icon name="checkmark"></ion-icon>가격
+															<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span>
+															<ion-icon name="checkmark"></ion-icon>티켓타입
+															<div class="coupon${i.couponCode }">
+																<c:if test="${i.type == 0}">
+																	종이티켓
+																</c:if>
+																<c:if test="${i.type == 1 }">
+																	전자티켓
+																</c:if> 
+															</div>
+															<ion-icon name="checkmark"></ion-icon>
+															구역 정보
+															<div  class="coupon${i.couponCode }">${i.seat }</div>
+															<ion-icon name="checkmark"></ion-icon>													
+															특이사항
+															<div  class="coupon${i.couponCode }">${i.options }</div>
+														</div>		
+													</div>	
+													<div class="list" align="right">
+														<c:if test="${i.seller.userId!=user.userId}">
+															<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+														</c:if>					
 													</div>
-													<br/><br/>
-													<ion-icon name="checkmark"></ion-icon>
-													구역 정보<br/>
-													<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
-													<ion-icon name="checkmark"></ion-icon>													
-													특이사항<br/>
-													<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
-												</div>		
-											</div>	
-											<div class="list" align="right">
-												<c:if test="${i.seller.userId!=user.userId}">
-													<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
-												</c:if>					
-											</div>
-										</div><!-- border -->	
-									 </div>									
-									</div><!-- col-md-6 -->		
-									<div><small></small></div>
-									<div><small></small></div><br/>
-									</c:if>
-								</c:forEach>
-								
-								<c:forEach var="i" items="${ticketList}" >			
-								<c:if test="${i.couponCode != 0 }">											
-								<div class="col-lg-6">
-									<div class="text-center">
-										<div class="border ">
-								 			<br/>
-								 			<h5  class="coupon${i.couponCode }"><strong>
-								 				<a  class="getSellerEstimation">
-								 					<input type="hidden" value="${i.seller.userId}">
-								 					${i.seller.nickName}
-								 				</a>
-								 			</strong><small>(총 ${i.amount }장)</small></h5>
-								 			<hr/>								 
-								 			<div  align="center" style="margin-left:10%;margin-right:10%">	
-											 	<div class="list" align="left">
-													<ion-icon name="checkmark"></ion-icon>가격<br/>
-													<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
-													<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
-													<div class="coupon${i.couponCode }">
-														<c:if test="${i.type == 0}">
-															종이티켓
-														</c:if>
-														<c:if test="${i.type == 1 }">
-															전자티켓
-														</c:if> 
-													</div>
-													<br/><br/>
-													<ion-icon name="checkmark"></ion-icon>
-													구역 정보<br/>
-													<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
-													<ion-icon name="checkmark"></ion-icon>													
-													특이사항<br/>
-													<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
-												</div>		
-											</div>	
-											<div class="list" align="right">
-												<c:if test="${i.seller.userId!=user.userId}">
-													<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
-												</c:if>					
-											</div>
-										</div><!-- border -->	
-									 </div>									
-									</div><!-- col-md-6 -->		
-									<div><small></small></div>
-									<div><small></small></div><br/>
-									</c:if>
-								</c:forEach>
-							</div><!-- row -->
-						</section>					
-					</div>	<!-- col-lg-6 -->
-				</div><!-- row -->		  
-			</div><!-- container-fluid -->					
-		</div><!-- row -->
-		<input type="hidden"  id="ticketNo" name="ticketNo"/>		
+												</div><!-- border -->	
+											 </div>									
+											</div><!-- col-md-6 -->		
+											<div><small></small></div>
+											<div><small></small></div><br/>
+											</c:if>
+										</c:forEach>
+										
+										<c:forEach var="i" items="${ticketList}" >			
+										<c:if test="${i.couponCode != 0 }">											
+										<div class="col-lg-6">
+											<div class="text-center">
+												<div class="border ">
+										 			<br/>
+										 			<h5  class="coupon${i.couponCode }"><strong>
+										 				<a  class="getSellerEstimation">
+										 					<input type="hidden" value="${i.seller.userId}">
+										 					${i.seller.nickName}
+										 				</a>
+										 			</strong><small>(총 ${i.amount }장)</small></h5>
+										 			<hr/>								 
+										 			<div  align="center" style="margin-left:10%;margin-right:10%">	
+													 	<div class="list" align="left">
+															<ion-icon name="checkmark"></ion-icon>가격<br/>
+															<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
+															<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
+															<div class="coupon${i.couponCode }">
+																<c:if test="${i.type == 0}">
+																	종이티켓
+																</c:if>
+																<c:if test="${i.type == 1 }">
+																	전자티켓
+																</c:if> 
+															</div>
+															<br/><br/>
+															<ion-icon name="checkmark"></ion-icon>
+															구역 정보<br/>
+															<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
+															<ion-icon name="checkmark"></ion-icon>													
+															특이사항<br/>
+															<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
+														</div>		
+													</div>	
+													<div class="list" align="right">
+													<c:if test="${i.seller.userId!=user.userId}">
+														<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+													</c:if>					
+												</div>
+											</div><!-- border -->	
+										 </div>									
+										</div><!-- col-md-6 -->		
+										<div><small></small></div>
+										<div><small></small></div><br/>
+										</c:if>
+									</c:forEach>
+								</div><!-- row -->
+							</section>					
+						</div>	<!-- col-lg-6 -->
+					</div><!-- row -->		  
+				</div><!-- container-fluid -->					
+			</div><!-- row -->
+			<input type="hidden"  id="ticketNo" name="ticketNo"/>		
+			
+<!-- 			<span class="particle" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span> -->
+		
+		</div>
 	</form>
 	
 	

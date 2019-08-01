@@ -182,7 +182,7 @@
 	
 	<select id="finduserId" parameterType="string" resultMap="userSelectMap">
 	SELECT 
-		user_id
+		user_id , user_name
 	FROM
 		users
 	where phone = #{value}

@@ -188,7 +188,9 @@
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 														AND content_code = #{searchKeyword} 
 													</if>
-													
+													<if test="searchCondition == 3 ">
+														AND content_code in('8','9','10','11')
+													</if>		
 												</where>
 											</if>
 											ORDER BY content_no ) inner_table)
@@ -215,8 +217,12 @@
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 														AND content_code = #{searchKeyword} 
 													</if>
-													</where>
-									</if>) countTable
+													<if test="searchCondition == 3 ">
+														AND content_code in('8','9','10','11')
+													</if>		
+												</where>
+											</if>
+											) countTable
 	</select>
 	 
 	  <select  id="selectListReport"  parameterType="search"	resultMap="reportSelectMap">
