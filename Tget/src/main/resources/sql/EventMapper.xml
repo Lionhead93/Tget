@@ -38,6 +38,25 @@
 		<result property="categoryTwoEng" 				column="category_two_eng" 					jdbcType="VARCHAR" />
 	</resultMap>
 	
+<!-- 	<resultMap id="ticketSelectMap" type="ticket"> -->
+<!-- 		<result property="ticketNo" 			column="TICKET_NO" 			jdbcType="NUMERIC"/> -->
+<!-- 		<result property="amount"	column="TICKET_AMOUNT" 		jdbcType="NUMERIC" /> -->
+<!-- 		<result property="price" 	column="TICKET_PRICE" 		jdbcType="NUMERIC" /> -->
+<!-- 		<result property="type" 	column="TICKET_TYPE" 					jdbcType="CHAR" /> -->
+<!-- 		<result property="code" 		column="TICKET_CODE" 					jdbcType="CHAR" /> -->
+<!-- 		<result property="seat" 		column="TICKET_SEAT" 		jdbcType="VARCHAR" /> -->
+<!-- 		<result property="options" 		column="TICKET_OPTION" 					jdbcType="VARCHAR" /> -->
+<!-- 		<result property="regDate" 			column="REG_DATE" 				jdbcType="DATE"  /> -->
+<!-- 		<result property="ticketImage" 		column="TICKET_IMAGE" 			jdbcType="VARCHAR" /> -->
+<!-- 		<result property="checkCode" 			column="CHECK_YN" 			jdbcType="CHAR"/> -->
+<!-- 		<result property="couponNo" 			column="COUPON_NO" 			jdbcType="NUMERIC"/> -->
+<!-- 		<result property="couponCode" 			column="COUPON_CODE" 			jdbcType="CHAR"/> -->
+<!-- 		<association property="event" column="EVENT_ID" javaType="event" select="EventMapper.selectEventById"/>  -->
+<!--  		<association property="seller" column="SELLER_ID" javaType="user" select="UserMapper.selectUser"/> -->
+<!--   	</resultMap> -->
+  	
+  	
+	
 	
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
@@ -129,17 +148,17 @@
 		VALUES	 (seq_youtube_youtube_no.nextval , #{youtubeId} , #{eventName})
 	 </insert>	 
 	 
-	 <delete id="deleteYoutubeVideo" parameterType="int">
+	 <delete id="deleteYoutubeVideo" parameterType="map">
 	  	DELETE 
 	  	FROM youtube 
-	  	WHERE youtube_no = #{youtubeNo} 
+	  	WHERE youtube_id = #{youtubeId} AND event_name = #{eventName}   
   	</delete>
 	 
 	 <select 	id="selectListYoutubeId"	parameterType="string"	resultType="string">
 		 SELECT youtube_id 
 		 FROM youtube
 		 WHERE event_name = #{eventName} 
-		 ORDER BY youtube_no
+		 ORDER BY youtube_no DESC
 	 </select>
 	 
 	 <select 	id="selectListYoutubeIdCount"	parameterType="string"	resultType="int">
@@ -266,5 +285,22 @@
 		 FROM event
 	 </select>
 	 
-	 
+<!-- 	 <select id="selectTicketList" parameterType="search"	 resultType="ticket"> -->
+<!-- 		 SELECT ticket_no, event_id, ticket_amount, seller_id	, ticket_price , ticket_type, TICKET_CODE , TICKET_SEAT , TICKET_OPTION -->
+<!-- 	  	, REG_DATE , TICKET_IMAGE , CHECK_YN , COUPON_NO , COUPON_CODE -->
+<!-- 		FROM ticket -->
+<!-- 		<where>										 -->
+<!-- 			<if test="searchCondition != null">												 -->
+<!-- 				<choose>	 -->
+<!-- 					<when test="searchCondition == 0 and searchKeyword !='' "> -->
+<!-- 						ticket_code = '0' AND event_id = #{searchKeyword} -->
+<!-- 					 </when> -->
+<!-- 					<when test="searchCondition == 1 and searchKeyword !='' "> -->
+<!-- 						ticket_code != '0' AND event_id = #{searchKeyword} -->
+<!-- 					</when> -->
+<!-- 				</choose> -->
+<!-- 			</if>												 -->
+<!-- 		</where> -->
+<!-- 		ORDER BY reg_date DESC -->
+<!-- 	 </select> -->
 </mapper>

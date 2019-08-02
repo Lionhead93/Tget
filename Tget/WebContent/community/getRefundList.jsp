@@ -28,8 +28,8 @@
 		
 	<style>
 	body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
+		      color: #020B13 ;		  
+			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
@@ -80,6 +80,42 @@
 		
        #footer{
 			background-color: #1B1B1F;
+		}
+		
+		/* 	게시글 등록 Modal */
+		.modal-dialog.modal-80size {
+		  width: 300%;
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		.modal-content.modal-80size {
+		  color: black;
+		  background-color: #D9E5FF;
+		  height: auto;  
+		  min-height: 150%;
+		  border-radius: 0;
+		}
+		
+		.modal.modal-center {
+		  text-align: center;
+		}
+		
+		@media screen and (min-width: 768px) {
+		  .modal.modal-center:before {
+		    display: inline-block;
+		    vertical-align: middle;
+		    content: " ";
+		    height: 100%;
+		   
+		  }
+		}
+		
+		.modal-dialog.modal-center {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
 		}
     </style>
    	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -152,7 +188,8 @@
 	      <div class="sticky-top">
 		  <br/>
 			 <div>
-		       		<h5><strong>Community > 환불게시판</strong></h5>		          
+		       		<h5><strong>Community > 환불게시판</strong></h5>
+		      	          
 		   	 </div>
 			</div>
 		</div>		
@@ -239,11 +276,10 @@
 			</select>	
 			
 			<div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">작성자</label> 
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
-		    </div>
+		    
 		  </div>
  
 		  <div class="form-group">
@@ -265,7 +301,7 @@
 	      </div>
 	      
 	      <div class="form-group">
-    		<label for="videoName">동영상</label>
+    		<label for="videoName">동영상 업로드</label>
     		<input type="file" class="form-control" id="videoName" name="file" value="${!empty content.videoName? content.videoName : ''}">
  		 </div>
  		 

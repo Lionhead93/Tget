@@ -255,12 +255,15 @@ INSERT INTO category_two VALUES (seq_category_two_no.nextval,'2','뮤지컬','music
 INSERT INTO category_two VALUES (seq_category_two_no.nextval,'2','클래식/오페라','opera');
 
 
-INSERT INTO event	VALUES ('104175821',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/19', 'YYYY/MM/DD'),'2000','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
-INSERT INTO event	VALUES ('104175823',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/20', 'YYYY/MM/DD'),'1800','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
-INSERT INTO event	VALUES ('104175819',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/21', 'YYYY/MM/DD'),'1600','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
-INSERT INTO event	VALUES ('104175345',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/26', 'YYYY/MM/DD'),'2000','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
-INSERT INTO event	VALUES ('104175822',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/27', 'YYYY/MM/DD'),'1800','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
-INSERT INTO event	VALUES ('104175824',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/28', 'YYYY/MM/DD'),'1600','EXO 서울 ','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175821',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/19', 'YYYY/MM/DD'),'2000','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175823',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/20', 'YYYY/MM/DD'),'1800','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175819',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/21', 'YYYY/MM/DD'),'1600','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175345',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/26', 'YYYY/MM/DD'),'2000','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175822',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/27', 'YYYY/MM/DD'),'1800','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+INSERT INTO event	VALUES ('104175824',120408,'concert',NULL,'EXO Seoul','Seoul Olympic Park Gymnastics Stadium (KSPO DOME)',to_date('2019/07/28', 'YYYY/MM/DD'),'1600','EXO 서울','서울 올림픽 공원 체조 경기장 (KSPO DOME)' ); 
+
+INSERT INTO event	VALUES ('104057671',120408,'festival','logo.png','RAPBEAT FESTIVAL 2019','Seoul Land',to_date('2019/09/28', 'YYYY/MM/DD'),'1200','RAPBEAT FESTIVAL 2019','서울 랜드' ); 
+
 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175823',100 ,'seller@naver.com',200000,'1','1','스탠딩E1','알콜프리존', sysdate , 'aaa.png','1', null , null); 
 INSERT INTO ticket VALUES (seq_ticket_ticket_no.nextval,'104175822',100 ,'seller@naver.com',200000,'1','1','스탠딩X2','알콜프리존', sysdate , 'aaa.png','1', null , null); 
@@ -324,5 +327,12 @@ INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_
 INSERT INTO coupon( coupon_no , coupon_code , user_id , coupon_reg_date, coupon_statement)  VALUES	 (	seq_coupon_coupon_no.nextval,  '1' , 'manager@naver.com' , SYSDATE, '0' );
 
 
+INSERT
+		INTO youtube( youtube_no , youtube_id , event_name) 
+		VALUES	 (seq_youtube_youtube_no.nextval ,'qHQ681fxXnA' , 'RAPBEAT FESTIVAL 2019')
 
+INSERT
+		INTO recommended_event( recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail) 
+		VALUES	 (	seq_recomm_event_no.nextval , 'RAPBEAT FESTIVAL 2019' ,'LOVESHOT.mp4', '2019 랩비트 페스티벌', '빵빵한 라인업과 함께 여름을 시원하게 보내세요!' );
+		
 commit;

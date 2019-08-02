@@ -33,8 +33,8 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
+		      color: #020B13;		  
+			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
@@ -89,6 +89,7 @@
 		
 	/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
+		  color: #020B13;
 		  width: 300%;
 		  height: 100%;
 		  margin: 0;
@@ -96,7 +97,8 @@
 		}
 		
 		.modal-content.modal-80size {
-		  color: black;
+		  color: #020B13;
+		  background-color: #D9E5FF;
 		  height: auto;  
 		  min-height: 150%;
 		  border-radius: 0;
@@ -295,9 +297,9 @@
 			    	});
 				});
 		 		 $( ".contentDetail" ).on("click" , function() {
-		 			 alert("asdjflksdajflks");
+		 			 
 					 	var contentNo = $(this).attr("id").trim();
-					 	alert(contentNo);
+					 	
 					 	$.ajax(
 								{
 									url : "/community/rest/getContent/"+contentNo ,
@@ -308,7 +310,7 @@
 										"Content-Type" : "application/json"
 									},
 									success : function(data) {
-										alert(data);
+										
 										$("#contentUserNickname").html(data.userNickname);
 										$("#getContentName").html(data.contentName);
 										$("#getContentBody").html(data.contentBody);
@@ -481,38 +483,47 @@
 	    <div class="modal-content modal-80size">
 
 	      <div class="modal-body" id="addContentModalBody">
-	      <select id="boardCode" name="boardCode">
-	   			 	<option value="2">고객센터</option>
-   			 	</select> 
-   			 	
-   			 <select id="contentCode" name="contentCode">
-			   		<option value="8">회원</option>
-			   		<option value="9">판매/구매</option>
-			   		<option value="10">취소/환불</option>
-			   		<option value="11">이벤트/혜택</option>  		
-   			 	</select>
-   			 	
-   			 <select id="open" name="open">
-				<option value="">공개 여부</option>
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-			</select>	
+	      
+	      <div style="margin-bottom:10px;">
+					<select class="btn btn-outline-dark custom-select" id="boardCode" name="boardCode" style="width:200px;">
+						<option selected>게시판 선택</option>
+			    	   	  <option value="2">고객센터</option>	    
+	  				</select>
+
+		   			<select class="btn btn-outline-dark custom-select" id="contentCode" name="contentCode" style="width:200px;">
+							<option selected>게시글 선택</option>
+					    	   <option value="8">회원</option>
+					    	   <option value="9">판매/구매</option>
+					    	   <option value="10">취소/환불</option>
+					    	   <option value="11">이벤트/혜택</option>
+			  		</select>
+			  		
+			  		<select class="btn btn-outline-dark custom-select" id="open" name="open" style="width:200px;">
+							<option selected>게시글 선택</option>
+					    	   <option value="0">공개</option>
+					    	   <option value="1">비공개</option>
+			  		</select> 
+			  		</div>	 	
+			  		<hr style="background-color:white"/>
 			
-			<div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label"><strong>작성자</strong></label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
-		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
-		    </div>
-		  </div>
+<!-- 			<div class="form-group"> -->
+<!-- 		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">작성자</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly> --%>
+<%-- 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}"> --%>
+<!-- 		    </div> -->
+<!-- 		  </div> -->
+
+			<label for="userNickname" class="col" style="color:#020B13;font-size:17px;"><strong>작성자</strong></label><br/> 
+				 <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" style=width:200px; readonly>	     
+				 <input type="hidden" name="userId" value="${sessionScope.user.userId}"><br/>
  
 		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label> 
-		      <input type="text" class="form-control" id="contentName" name="contentName">
-		    
+		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label"><strong>글 제목</strong></label> 
+		      	  <input type="text" class="form-control" id="contentName" name="contentName">
 		  </div>
 		
-		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">글 내용</label>
+		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label"><strong>글 내용</strong></label>
 	
 		<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
 		<script type="text/javascript">
@@ -520,7 +531,7 @@
 				, {height: 200});
 		</script>
 		<br/>  		
-	      </div>
+	    
       
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
@@ -528,17 +539,18 @@
 	      </div>
 	    </div>
 	  </div>
+	</div>
 	</div>			  
 	</form>
 
 <!-- 상세보기 Modal -->
 	<div class="modal fade" id="contentDetailModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-80size" style="color:white;">
+				<div class="modal-content modal-80size">
 					  <div class="modal-report">
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="modalCenterTitle"></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#020B13">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
@@ -547,16 +559,16 @@
 <!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
 <%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
 					
-			    	<div class="col">작성자 : <span id="contentUserNickname"></span></div>
+			    	<div class="col"><strong>작성자 :</strong> <span id="contentUserNickname"></span></div>
 					<br/>
-					<div class="col">제목 :<hr/> <span id="getContentName"></span></div>
+					<div class="col"><strong>제목 :</strong> <hr style="background-color:#020B13"/> <span id="getContentName"></span></div>
 					<br/>
-					<div class="col">내용 :<hr/> <span id="getContentBody"></span></div>
+					<div class="col"><strong>내용 :</strong> <hr style="background-color:#020B13"/> <span id="getContentBody"></span></div>
 					<br/>
 					
 			    
 				<br>
-				<hr>	
+				<hr style="background-color:#020B13"/>	
 				   
 				<div class="modal-footer">
 		        <button type="button" class="btn btn-info" data-dismiss="modal">확인</button>

@@ -37,8 +37,8 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
+		      color: #020B13 ;		  
+			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
@@ -89,6 +89,41 @@
 		 
        #footer{
 			background-color: #1B1B1F;
+		}
+		/* 	게시글 등록 Modal */
+		.modal-dialog.modal-80size {
+		  width: 300%;
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		.modal-content.modal-80size {
+		  color: black;
+		  background-color: #D9E5FF;
+		  height: auto;  
+		  min-height: 150%;
+		  border-radius: 0;
+		}
+		
+		.modal.modal-center {
+		  text-align: center;
+		}
+		
+		@media screen and (min-width: 768px) {
+		  .modal.modal-center:before {
+		    display: inline-block;
+		    vertical-align: middle;
+		    content: " ";
+		    height: 100%;
+		   
+		  }
+		}
+		
+		.modal-dialog.modal-center {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
 		}
     </style>
     
@@ -144,10 +179,10 @@
 										"Accept" : "application/json",
 										"Content-Type" : "application/json"
 									},
-									success : function(JSONData , status) {
-
-										var displayValue ="게시글 제목 : "+JSONData.content.contentName+"<br/>"
-														+"게시글 내용 : "+JSONData.content.contentBody+"<br/>";
+									success : function(data) {
+										
+										$("#reportBlackId").html(data.userId);
+										$("#reportContentBody").html(data.contentBody);
 										
 										$(".modal-body").html(displayValue);
 									}
@@ -235,7 +270,7 @@
 			<tr>
 			  
 			  <td align="center">${ i }</td>
-			  <td align="left">${report.whiteId}
+			  <td align="left" ><span style="color:white;">${report.whiteId}</span>
 			  </td>
 			  <td align="left">			  	
 			  <c:if test="${report.reportReasonCode==0}">
@@ -273,22 +308,26 @@
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
 	<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle">게시글 내용</h5>
+					        <h5 class="modal-title" id="modalCenterTitle">신고글</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					      </div>
+					      <div class="col" style="color:white;">작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
+						<hr>
+						  <div class="col" style="color:white;">내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
+					    
+						<br>
+						
+						<input type='hidden' name='contentNo' value='${content.contentNo}'/>
+						  </div>
+						  
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					        <button type="button" class="btn btn-primary">검증 확인</button>

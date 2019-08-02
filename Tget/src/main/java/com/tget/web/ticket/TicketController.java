@@ -144,7 +144,7 @@ public class TicketController {
 			}
 		}
 		
-		return "forward:/ticket/getTicketList?menu=seller";
+		return "redirect:/ticket/getTicketList?menu=seller";
 	}
 	
 	@RequestMapping(value = "getTicket", method = RequestMethod.GET)	

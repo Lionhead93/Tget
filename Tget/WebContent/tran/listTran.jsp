@@ -16,8 +16,9 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
-	<link rel="stylesheet" href="/resources/css/main.css" />
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -35,67 +36,13 @@
 		
 		
 	<style>
-		
 		body {
-			  background-color: #062038;
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-      #tgetHeader{
-		   margin-top:30px;	
-		   color: #FBFCFE;	
-	       padding-bottom:60px; 
-	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       }
-		
-       h1, h2, h5, h6 {
-       		color: black;
-       }
-       #footer{
-			color: #FBFCFE;	
-			background-color: #1B1B1F;
+		a{
+			color: #041625;
 		}
-       
-       
-       .modal-content{ 			
-			color: black;			  
-			border: 3px solid #D6CDB7;          	
-       }
-       
-       input, select{
-       		border: 1px solid black;
-       }
-       .row{
-       	margin-left: 30px;
-       }
-    	.img_wrap {
-			width: 300px;
-			margin: auto;
-		}
-		.img_wrap img {
-			max-width: 100%;
-		} 
-		.modal-content{
-			background:rgba(40,57,101,.9);	
-			color: #FBFCFE;	
-		}
-		select{
-			background:rgba(40,57,101,.9);	
-			color: #FBFCFE;	
-		}
-		ul.alt{
-			  border: 1px groove white;	
-		}
-		button.btn-light{
-			color: black ;
-		}	
-		button.btn-light:hover{
-			background-color: gray;
-			color: #FBFCFE ;
-		}		
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -318,10 +265,8 @@
 // 							alert(status);
 							$("button.close").click();
 							alert("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.");
-// 							alert("JSONData : \n"+JSONData.stringify());		
-						},
-						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 							alert("JSONData : \n"+JSONData.stringify());
+							history.go(0);
 						}			
 				});	
 		});
@@ -334,52 +279,70 @@
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />	
 	<jsp:include page="/layout/tgetHeader.jsp" />
-	<div id="main">
 	
-	
-	
-	<section class="wrapper style1">
-	
+	<div class="container">
 	<div class="row">
-		<section class="2u$">
+		<div class="col-lg-3">
 		<div class="sticky-top">
 		<br/><br/>
-		<div class='text-center'>
-			<p><strong>${user.nickName} > 거래내역조회 </strong></p>
-										<ul class="alt">										
-											<c:if test="${user.role=='0'}">
-											<li><a href="#" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a></li>
-											</c:if>
-											<li><a href="#">후기작성 내역</a></li>
-											<li><a href="#">포인트 사용내역</a></li>
-											<c:if test="${user.role=='1'}">
-											<li><a href="#">판매티켓 목록</a></li>
-											</c:if>
-											<li><a href="#">티켓거래 공지</a></li>
-										</ul>
-		</div>
-		</div>
-		</section>
+			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+			  <div class="card-header">
+			   <strong>${user.nickName} <i class="far fa-handshake"></i> 거래내역 조회 </strong>
+			  </div>
+			  <ul class="list-group list-group-flush">								
+				<c:if test="${user.role=='0'}">
+				<li class="list-group-item"><a href="#" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a></li>
+				</c:if>
+				<li class="list-group-item"><a href="#">후기작성 내역</a></li>
+				<li class="list-group-item"><a href="#">포인트 사용내역</a></li>
+				<c:if test="${user.role=='1'}">
+				<li class="list-group-item"><a href="#">판매티켓 목록</a></li>
+				</c:if>
+				<li class="list-group-item"><a href="#">티켓거래 공지</a></li>
+			  </ul>		  
+			</div>
 		
-		<section class="9u$">
-		<div class="inner">	
-		 <table class='alt'>
+		  </div>
+		  </div>
+		<div class="col-lg-9">
+		<div class="row">
+		<c:forEach var="tran" items="${list}" varStatus="j">
+			<div class="col-sm-6" style="margin-bottom: 20px;">
+				<div class="card text-center shadow rounded">
+			      <div class="card-body">
+			        <h5 class="card-title">				       
+				        <div id="${tran.event.eventId}">					      
+					      <span class="badge badge-info">
+						      <c:if test="${user.userId==tran.seller.userId}">판매</c:if>
+					       	 <c:if test="${user.userId==tran.buyer.userId}">구매</c:if>
+						  </span>
+						  <a class="getEvent" href="#">${tran.event.eventName}</a>
+					     </div>					     
+				     </h5>
+			        <p class="card-text">
+			        <strong>${tran.orderAmount} 매 / ${tran.orderDate}</strong>	
+			        </p>
+			        <a href="#" class="btn btn-primary">Go somewhere</a>
+			      </div>	      
+			    </div>			    
+		    </div>
+		</c:forEach>
+		</div>
+		 <table class="table table-bordered text-center">
 			  <thead>
 			    <tr>
-			      <th>#</th>
-			      <th>종류</th>
-			      <th>이벤트명</th>
-			      <th>수량</th>
-			      <th>구매/판매일자</th>
-			      <th>거래상대</th>
-			      <th>진행상태</th>
-			      <th>-</th>
+			      <th scope="col">종류</th>
+			      <th scope="col">이벤트명</th>
+			      <th scope="col">수량</th>
+			      <th scope="col">구매/판매일자</th>
+			      <th scope="col">거래상대</th>
+			      <th scope="col">진행상태</th>
+			      <th scope="col">-</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach var="tran" items="${list}" varStatus="j">
 			    <tr>
-			      <td>${j.index+1}</td>
 			      <td>
 			      <c:if test="${user.userId==tran.seller.userId}">판매</c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">구매</c:if>
@@ -419,7 +382,14 @@
 				      <c:if test="${tran.tranCode==0}">-</c:if>
 				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
 				      <c:if test="${tran.tranCode==2}">-</c:if>
-				      <c:if test="${tran.tranCode==3}"><a class="getReview" href="#">후기 확인</a></c:if>
+				      <c:if test="${tran.tranCode==3}">
+				      <c:if test="${user.userId==tran.seller.userId}">
+				      <a class="getReview" href="/rnp/getSellerEstimationList?sellerId=${user.userId}">후기 확인</a>
+				      </c:if>
+				      <c:if test="${user.userId==tran.buyer.userId}">
+				      <a class="getReview" href="/rnp/getReviewList">후기 확인</a>
+				      </c:if>
+				      </c:if>
 				      <c:if test="${tran.tranCode==4}">-</c:if>
 			      </c:if>
 			      <c:if test="${user.userId==tran.buyer.userId}">
@@ -436,12 +406,9 @@
 			  </c:forEach> 
 			  </tbody>
 		</table>
-		</div>
-		</section>
 		</div>		
 	</div>
-	</section>
- 
+ </div>
 	<!-- 배송정보입력 모달창  -->
 					<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -529,7 +496,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <jsp:include page="/rnp/addReview.jsp" />
       </div>
       <div class="modal-footer" style="color: black;" >       
-        <button type="button"  class="btn btn-light" id="submit" style="color: black;" >저장</button>
+        <button type="button"  class="btn btn-light" id="submit" >저장</button>
          <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
