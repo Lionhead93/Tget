@@ -205,14 +205,14 @@
 							alert("아이디는 반드시 입력하셔야 합니다.");
 							return;
 						}
-						if(pw == null || pw.length <1){
+						/* if(pw == null || pw.length <1){
 							alert("패스워드는  반드시 입력하셔야 합니다.");
 							return;
 						}
 						if(pw_confirm == null || pw_confirm.length <1){
 							alert("패스워드 확인은  반드시 입력하셔야 합니다.");
 							return;
-						}
+						} */
 						if(name == null || name.length <1){
 							alert("이름은  반드시 입력하셔야 합니다.");
 							return;
