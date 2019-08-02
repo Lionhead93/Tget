@@ -29,7 +29,7 @@
 				url : "/event/rest/getYoutubeSearchList?requestPageToken=",
 				method : "POST",
 				data : {
-					searchKeyword : $("#searchKeyword").val()
+					searchKeyword : ""
 				},
 				dataType : "json",
 				success : function(JSONData, status){
@@ -42,8 +42,9 @@
 						$("#h"+index).text(value.title);
 						$("#img"+index).attr("src",value.thumbnails);
 						$("#desc"+index).text(value.description);
-						$("#button"+index).attr("data-bmdSrc","https://www.youtube.com/embed/"+value.videoId );
+						$("#button"+index).val(value.videoId );
 					 });
+					
 				}		
 		 });		
 		
@@ -67,16 +68,37 @@
 		
 		$("button[name='getYoutubePlayer']").on("click",function(){
 			youtubeId = $(this).val();
-			$("#searchList").attr("style","display:none;");
-			
+			$("#searchList").attr("style","display : none;");
+			$("#getYoutubePlayer").attr("style","display:block;");
+			$("#getYoutubePlayer").children("iframe").attr("src","https://www.youtube.com/embed/"+youtubeId);
+			$("#addThis").val(youtubeId);
 // 			$(this).parent().parent().children("input[name='titleByList']").val();
 // 			$(this).parent().parent().children("input[name='descriptionByList']").val();
 // 			$("form").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?youtubeId="+$(this).val()).submit();
 		});
+		$("#back").on("click",function(){
+			$("#searchList").attr("style","display:block;");
+			$("#getYoutubePlayer").attr("style","display:none;");
+		});
 		
+		$("#addThis").on("click",function(){
+			$.ajax(
+     				{
+     					url : "/event/rest/addYoutubeVideo/ "+$("#addThis").val(),
+     					method : "POST",
+     					data : {
+     						eventName : $("#eventName").val()
+     					},
+     					dataType : "json",
+     					success : function(JSONData, status){
+     						alert("등록완료");
+//	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
+     					}	    		
+     		 });	
+		});
 		
-		$("button:contains('검색')").on("click",function(){
-// 			$("#searchKeyword").val($("#inputKeyword").val());
+		$("#searchYoutubeSubmit").on("click",function(){
+			$("#searchKeyword").val($("#inputKeyword").val());
 			$.ajax(
 					{
 						url : "/event/rest/getYoutubeSearchList?requestPageToken="+$("#requestPageToken").val(),
@@ -93,7 +115,7 @@
 								$("#h"+index).text(value.title);
 								$("#img"+index).attr("src",value.thumbnails);
 								$("#desc"+index).text(value.description);
-								$("#button"+index).attr("data-bmdSrc","https://www.youtube.com/embed/"+value.videoId );
+								$("#button"+index).val(value.videoId );
 							 });
 							$("#prevPageToken").val(JSONData.prevPageToken);
 							$("#nextPageToken").val(JSONData.nextPageToken);
@@ -106,46 +128,46 @@
 	
 	
 	
-	var tag = document.createElement('script');
+// 	var tag = document.createElement('script');
 	
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[3];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+//     tag.src = "https://www.youtube.com/iframe_api";
+//     var firstScriptTag = document.getElementsByTagName('script')[3];
+//     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    var youtubeId;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '260',
-        width: '460',
-        videoId: youtubeId,
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      });
-    }
+//     // 3. This function creates an <iframe> (and YouTube player)
+//     //    after the API code downloads.
+//     var player;
+//     var youtubeId;
+//     function onYouTubeIframeAPIReady() {
+//       player = new YT.Player('player', {
+//         height: '260',
+//         width: '460',
+//         videoId: youtubeId,
+//         events: {
+//           'onReady': onPlayerReady,
+//           'onStateChange': onPlayerStateChange
+//         }
+//       });
+//     }
 
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      event.target.playVideo();
-    }
+//     // 4. The API will call this function when the video player is ready.
+//     function onPlayerReady(event) {
+//       event.target.playVideo();
+//     }
 
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
-      }
-    }
-    function stopVideo() {
-      player.stopVideo();
-    }
+//     // 5. The API calls this function when the player's state changes.
+//     //    The function indicates that when playing a video (state=1),
+//     //    the player should play for six seconds and then stop.
+//     var done = false;
+//     function onPlayerStateChange(event) {
+//       if (event.data == YT.PlayerState.PLAYING && !done) {
+//         setTimeout(stopVideo, 6000);
+//         done = true;
+//       }
+//     }
+//     function stopVideo() {
+//       player.stopVideo();
+//     }
 	
 	</script>
 	<style type="text/css">
@@ -169,22 +191,19 @@
 
 <!-- <body> -->
 
-<div class="container" align="center"  id="searchList">
+<div class="container" align="center"  id="searchList" >
 <!-- 	 <div><h2 style="margin-top: 10px;">Searching</h2></div> -->
 	<table class="table ">
 <!-- 			<thead> -->
 <!-- 			    <tr align="center"> -->
 <!-- 					<th scope="col"> -->
 			      
-		<input type="hidden" id="eventName" name="eventName" value="${!empty event.eventName? event.eventName : eventName}"/>
-		<input type="hidden" id="title" name="title" />
-		<input type="hidden" id="description" name="description" />
 		<div class="input-group mb-3">
 			<input type="hidden" id="searchKeyword" name="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}"/>
 			<input type="text"  id="inputKeyword" class="form-control"  placeholder="검색어" 
-			 aria-label="searchKeyword" aria-describedby="button-addon2">
+			 aria-label="searchKeyword" aria-describedby="searchYoutubeSubmit">
 			<div class="input-group-append">
-		 		<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+		 		<button class="btn btn-outline-secondary" type="button" id="searchYoutubeSubmit">검색</button>
 		 	</div>
 		</div>		
 <!-- 		</th> -->
@@ -192,7 +211,7 @@
 <!-- 	</thead> -->
 	<tbody>
 		
-		<div class="row">
+		<div class="row" >
 		<ul class="list-unstyled">
 			<tr id="tr0">
 				<td align="left" >
@@ -289,6 +308,10 @@
 		<button class="btn btn-outline-light"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
 	</div>
 </div>
-<div id="getPlayer">
-	<div id="player"></div> 
+<div id="getYoutubePlayer"  style="display:none;">
+<!-- 	<iframe width="400" height="250" src="https://www.youtube.com/embed/${i.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+	<iframe width="400" height="250" src="https://www.youtube.com/embed/AtNBhPxVwh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<button  class="btn btn-outline-light" id="back">뒤로가기</button>&nbsp;&nbsp;&nbsp;
+	<button  class="btn btn-outline-light" id="addThis">등록하기</button>
+<!-- 	<div id="player"></div>  -->
 </div>

@@ -8,34 +8,29 @@
 <head>
 	<meta charset="EUC-KR">
 	<title>T-GET</title>
-	
-	<!-- 참조 : http://getbootstrap.com/css/   -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="/resources/css/toolbar.css" />
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">	
-	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet">
-<!-- 	<link href="/resources/css/neon.css"/> -->
-<!-- 	<link href="/resources/css/neon2.css"/> -->
+	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<link rel="stylesheet" href="/resources/css/yr.css" />
-	<script src="/resources/javascript/yr.js" ></script>	
-	<script src="/resources/javascript/common.js" ></script>
+	<link rel="shortcut icon" href="/resources/images/logo.png">
+	<link rel="icon" href="/resources/images/logo.png">		
+    
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<!-- KAKAO -->
-<!--    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
-
-
+	<script src="/resources/javascript/yr.js" ></script>
 	<script type="text/javascript">
 	
 	var videoList = [];
@@ -56,13 +51,33 @@
 								if(value=="${event.eventName}"){
 									$("#title").append("<span class='neon' style='font-weight:bold;font-size:23px'>HOT</span>");
 // 									$("#title").attr("class","neon");
-									
 								}
 							});
 					}
 		});
 		
-		
+// 		$.ajax(
+// 				{
+// 					url : "/event/rest/getYoutubeSearchList?requestPageToken=",
+// 					method : "POST",
+// 					data : {
+// 						searchKeyword : $("#searchKeyword").val()
+// 					},
+// 					dataType : "json",
+// 					success : function(JSONData, status){
+// //	 					alert(status);
+// //	 					alert(JSONData.youtubeList);		
+// 						$("#prevPageToken").val(JSONData.prevPageToken);
+// 						$("#nextPageToken").val(JSONData.nextPageToken);
+// 						$.each(JSONData.youtubeList, function(index,value){
+// //	 						availableTags[index] = value;
+// 							$("#h"+index).text(value.title);
+// 							$("#img"+index).attr("src",value.thumbnails);
+// 							$("#desc"+index).text(value.description);
+// 							$("#button"+index).val(value.videoId );
+// 						 });
+// 					}		
+// 			 });		
 		
 // 		$("input[type='text']").on("keyup",function(){
 // 			$("#searchKeyword").val($("input[type='text']").val());
@@ -94,8 +109,8 @@
 								$(".interested").html('<input type="hidden"  value="heart">'
 										+'<ion-icon name="heart" size="large"></ion-icon>');
 								
-								$("div.particletext").append('<span class="particle" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
-								hearts2();
+								$("div.particletext").append('<span class="particle interestedHeart" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
+
 	 						}								
 						},
 						error : function(request, status, error ) {   
@@ -156,8 +171,7 @@
 								dataType : "json",
 								success : function(JSONData, status){
 									alert("관심이벤트 등록완료");							
-									$("div.particletext").append('<span class="particle" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
-									hearts2();
+									$("div.particletext").append('<span class="particle interestedHeart" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
 //	 								alert("JSONData : \n"+JSONData.stringify());		
 								}
 //	 						,
@@ -178,13 +192,13 @@
 								dataType : "json",
 								success : function(JSONData, status){
 									alert("관심이벤트 삭제완료");									
-									if (i == 1 || i =="1") {
-										$("#interestedCount").val("0");
-										$("#interestedCount").parent("div").text("0");			
-									} else {
-										$("#interestedCount").val(i-1);
-										$("#interestedCount").parent("div").text(i);			
-									}															
+// 									if (i == 1 || i =="1") {
+// 										$("#interestedCount").val("0");
+// 										$("#interestedCount").parent("div").text("0");			
+// 									} else {
+// 										$("#interestedCount").val(i-1);
+// 										$("#interestedCount").parent("div").text(i);			
+// 									}															
 								}
 //	 						,
 //	 							error : function(request, status, error ) {   
@@ -498,7 +512,8 @@
 							<section id="section-topline-1" align="center">
 								<div class="row" align="center">	
 									<c:forEach var="i" items="${ticketList}" >			
-										<c:if test="${i.couponCode == 0 }">											
+										<c:if test="${i.couponCode == 0 }">	
+										<c:if test="${i.amount != 0 }">												
 										<div class="col-lg-6">
 											<div class="text-center">
 												<div class="border ">
@@ -542,10 +557,12 @@
 											<div><small></small></div>
 											<div><small></small></div><br/>
 											</c:if>
+											</c:if>
 										</c:forEach>
 										
 										<c:forEach var="i" items="${ticketList}" >			
-										<c:if test="${i.couponCode != 0 }">											
+										<c:if test="${i.couponCode != 0 }">		
+										<c:if test="${i.amount != 0 }">											
 										<div class="col-lg-6">
 											<div class="text-center">
 												<div class="border ">
@@ -589,6 +606,7 @@
 										</div><!-- col-md-6 -->		
 										<div><small></small></div>
 										<div><small></small></div><br/>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</div><!-- row -->
