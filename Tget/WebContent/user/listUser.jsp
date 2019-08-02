@@ -85,17 +85,6 @@ body{
 			background: rgba(4, 22, 37, 0.75);
 			color: #c0c5c9;
 		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-bottom: 200px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
        #footer{
 			background-color: #1B1B1F;
 		}
@@ -387,7 +376,6 @@ ${user.userId}
 			})();
 </script>	
 	 
-<jsp:include page="/ticket/addSeller.jsp" /> 
 <jsp:include page="/layout/footer.jsp" />
 </body>
 

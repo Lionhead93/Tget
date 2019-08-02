@@ -190,27 +190,27 @@ $(function getSearchWeather(lat, lon) {
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a id="brand" href="#">T-GET <span>by MFC</span></a></h1>
+				<h1><a id="brand" href="#" style="color: white;">T-GET <span>by MFC</span></a></h1>
 				
 				
-					<a href="#">Home</a>
+					<a href="#" style="color: white;">Home</a>
 				<c:if test="${empty user}">
-					<a href="#">Sign Up</a>
-					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" >Login</a>
+					<a href="#" style="color: white;">Sign Up</a>
+					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
 				</c:if>
 				<c:if test="${!empty user}">
-					<a href="#">Logout</a>
-					<a href="#" data-target="#alarmModal" data-toggle="modal">
+					<a href="#" style="color: white;">Logout</a>
+					<a href="#" data-target="#alarmModal" data-toggle="modal" style="color: white;">
 							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
-					<a href="#">길 찾기 안내</a>
-					<a href="#" data-target="#weatherModal" data-toggle="modal">날씨 안내</a>
+					<a href="#" style="color: white;">길 찾기 안내</a>
+					<a href="#" data-target="#weatherModal" data-toggle="modal" style="color: white;">날씨 안내</a>
 				</c:if>	
 				<c:if test="${user.role == 2 }">
-				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
+				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
 				</c:if>
 				<c:if test="${!empty user}">			
-				<a href="#menu">Menu</a>
+				<a href="#menu" style="color: white;">Menu</a>
 				</c:if>					  
 			</header>
 

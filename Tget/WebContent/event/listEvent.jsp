@@ -112,51 +112,111 @@
        } 
        
 		body{
-			background-color : #062038; 
-			color: #FBFCFE;
+			padding-top:22px;
+			background-color: #EBF7FF;
+			color: #041625;
 		}
 		
 		table{
-			background-color : #193147; 
-			border: 1px solid #FBFCFE;	
-			color: #FBFCFE;		
+			background-color : #F8FFFF;   
+			border: 1px solid #193147;	
+			color: #041625;
 		}
 		
 		td:hover{
-			background-color : #041625; 
+			background-color : #D9E5FF; 
 		}
 		
 		th, td{
-			color: #FBFCFE;		
+			color: #041625;
 			font-size:20px;
 		}
 
+@import 'https://fonts.googleapis.com/css?family=Oswald';
+
+
+#loading {
+/*   background: #005C97; */
+/*   background: linear-gradient(to left, #005C97 , #363795); */
+/*   height: 30%; */
+/*   width: 30%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  overflow: hidden;
+  position: absolute;
+}
+
+.water-fill {
+  animation: wave 0.8s infinite linear, 
+             fill-up 10s infinite ease-out alternate;
+}
+
+@keyframes wave {
+  0% { x: -400px; }
+  100% { x: 0; }
+}
+
+
+@keyframes fill-up {
+  0% {
+    height: 0;
+    y: 130px;
+  }
+  100% {
+    height: 160px;
+    y: -30px;
+  }
+}
 	</style>
 <body>	
 <jsp:include page="/layout/tgetToolbar.jsp" />
+<jsp:include page="/layout/tgetHeader.jsp" />
 
-<form name="searchEvent">
+<div id="loading" >
+	<svg class="loading" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	     width="200px" height="70px" viewBox="0 0 574.558 120" enable-background="new 0 0 574.558 120" xml:space="preserve">
+	  <defs>
+	    <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+	      <path fill="#fff" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
+	    </pattern>
+	    
+	    <text id="text" transform="matrix(1 0 0 1 -8.0684 100)" font-size="120">LOADING</text>
+	    
+	    <mask id="text_mask">
+	      <use x="0" y="0" xlink:href="#text" opacity="1" fill="#3498db"/>
+	    </mask>
+	  </defs>
+	 
+	  <use x="0" y="0" xlink:href="#text" fill="#3498db"/>
+	  
+	  <rect class="water-fill" mask="url(#text_mask)" fill="url(#water)" x="-400" y="0" width="1600" height="120"/>
+	</svg>
+</div>
+<!-- <form name="searchEvent"> -->
 
-	<div class="container-fluid" align="center">	
-		<div id="tgetHeader" class="text-center">
-		<br/><br/>
-			<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
-			<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
-			<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >
-			<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
-			<div class="col-lg-6 col-md-6 col-10">	
-				<div class="input-group mb-1">
-			  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
-			  		<div class="input-group-append">
-			    		<span class="input-group-text btn"  id="button-addon2">검색</span>
-			 		 </div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-1"></div>
-			</div>
-		</div>
-		<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/>
-	</div>
+<!-- 	<div class="container-fluid" align="center">	 -->
+<!-- 		<div id="tgetHeader" class="text-center"> -->
+<!-- 		<br/><br/> -->
+<%-- 			<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" > --%>
+<%-- 			<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" > --%>
+<%-- 			<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" > --%>
+<!-- 			<div class="row"><div class="col-lg-3  col-md-3 col-1"></div> -->
+<!-- 			<div class="col-lg-6 col-md-6 col-10">	 -->
+<!-- 				<div class="input-group mb-1"> -->
+<!-- 			  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2"> -->
+<!-- 			  		<div class="input-group-append"> -->
+<!-- 			    		<span class="input-group-text btn"  id="button-addon2">검색</span> -->
+<!-- 			 		 </div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-3 col-md-3 col-1"></div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<%-- 		<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/> --%>
+<!-- 	</div> -->
 		
+					
 					
 					
 
@@ -166,16 +226,16 @@
 			
 			<table class="table ">
 			  <thead>
-			    <tr align="center">
-			      <th scope="col"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
+			    <tr align="center" >
+			      <th scope="col"  style="border: 1px solid #193147;"><h4>검색 결과 총 ${!empty totalResults? totalResults: 0}건</h4></th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach items="${eventList}"  var="i">
 			    <tr>
-			      <td align="center" >
+			      <td align="center"   style="border: 1px solid #193147;">
 					<div  align="left"  >
-						<div  style="margin-left:10%; margin-right:10%" >
+						<div  style="margin-top:2%;margin-left:10%; margin-right:10%" >
 							이벤트명 : ${!empty i.koName? i.koName:i.name}</br>
 							이벤트 장소 : ${!empty i.koLocation? i.koLocation:i.venueName }</br>
 							<c:if test="${!empty i.performersName and i.performersName.trim() != 'null'}">
