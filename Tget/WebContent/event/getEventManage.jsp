@@ -107,7 +107,7 @@
 			var formData = new FormData($("#editRecommEvent")[0]);			
 			if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
 				if (parseInt($("#recommEventlistSize").val()) < 3) {
-// 					alert('parseInt($("#recommEventlistSize").val()) < 3');
+					alert('parseInt($("#recommEventlistSize").val()) < 3');
 					$.ajax(
 						{
 							url : "/event/rest/addRecommendedEvent",
@@ -117,6 +117,10 @@
 							contentType: false,
 // 							contentType: 'multipart/form-data', 
 							dataType : "json",
+							beforeSend : function(){
+								alert("추가추가추가");
+								alert(formData);
+							},
 							success : function(JSONData,status){
 								$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
 								$("button.close").click();
@@ -269,10 +273,10 @@
 			});
 		});
 	});
-	
+	/* 
 	$( function() {
 	    $( "#tabs" ).tabs();
-	  } );
+	  } ); */
 	
 	function updateCategoryGET(recommNo){
 		$.ajax(

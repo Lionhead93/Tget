@@ -308,9 +308,10 @@
 		<button class="btn btn-outline-light"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
 	</div>
 </div>
-<div id="getYoutubePlayer"  style="display:none;">
+<div id="getYoutubePlayer"  align="center" style="display:none;">
 <!-- 	<iframe width="400" height="250" src="https://www.youtube.com/embed/${i.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 	<iframe width="400" height="250" src="https://www.youtube.com/embed/AtNBhPxVwh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<br/>
 	<button  class="btn btn-outline-light" id="back">뒤로가기</button>&nbsp;&nbsp;&nbsp;
 	<button  class="btn btn-outline-light" id="addThis">등록하기</button>
 <!-- 	<div id="player"></div>  -->

@@ -56,6 +56,24 @@
 					}
 		});
 		
+		$.ajax(
+				{
+					url : "/event/rest/getYoutubeList",
+					method : "POST",
+					data:{
+						eventName : "${event.eventName}"
+					},
+					dataType : "json",
+					success : function(JSONData, status){
+// 							alert(status);
+							$.each(JSONData.youtubeList, function(index,value){
+								videoList[index] = value;
+// 								alert(value);
+							});
+// 							alert(videoList.length);
+					}
+		});
+		
 // 		$.ajax(
 // 				{
 // 					url : "/event/rest/getYoutubeSearchList?requestPageToken=",
@@ -120,7 +138,43 @@
 		}
 		
 		$("#deleteYoutube").on("click",function(){
-			
+			var temp=parseInt($("#youtubeVideoId").val());
+// 			alert(videoList[temp]);
+			$.ajax(
+     				{
+     					url : "/event/rest/deleteYoutubeVideo/ "+videoList[temp],
+     					method : "POST",
+     					data : {
+     						eventName : $("#eventName").val()
+     					},
+     					dataType : "json",
+     					success : function(JSONData, status){
+     						alert("삭제가 완료되었습니다.");
+//	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
+     					}	    		
+     		 });
+		});
+		
+		$("#prevYoutube").on("click",function(){			
+			var temp=parseInt($("#youtubeVideoId").val());
+// 			alert(temp);
+			if (temp==0) {
+				alert("첫 영상입니다.");
+			} else {
+				$("#youtubeVideoId").val(temp-1);
+				$("#youtubeVideoPlayer").attr("src","https://www.youtube.com/embed/"+videoList[temp-1]);
+			}
+		});
+		
+		$("#nextYoutube").on("click",function(){
+// 			alert($("#youtubeVideoId").val());
+			var temp=parseInt($("#youtubeVideoId").val());
+			if (temp==videoList.length-1) {
+				alert("마지막 영상입니다.");
+			} else {
+				$("#youtubeVideoId").val(temp+1);
+				$("#youtubeVideoPlayer").attr("src","https://www.youtube.com/embed/"+videoList[temp+1]);
+			}
 		});
 
 // 		$("#addYoutube").on("click",function(){
@@ -255,45 +309,45 @@
 	    });         
 		
 	});
-	var tag = document.createElement('script');
+// 	var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[3];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+//     tag.src = "https://www.youtube.com/iframe_api";
+//     var firstScriptTag = document.getElementsByTagName('script')[3];
+//     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '250',
-        width: '400',
-        videoId: '${videoId}',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      });
-    }
+//     // 3. This function creates an <iframe> (and YouTube player)
+//     //    after the API code downloads.
+//     var player;
+//     function onYouTubeIframeAPIReady() {
+//       player = new YT.Player('player', {
+//         height: '250',
+//         width: '400',
+//         videoId: '${videoId}',
+//         events: {
+//           'onReady': onPlayerReady,
+//           'onStateChange': onPlayerStateChange
+//         }
+//       });
+//     }
 
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      event.target.playVideo();
-    }
+//     // 4. The API will call this function when the video player is ready.
+//     function onPlayerReady(event) {
+//       event.target.playVideo();
+//     }
 
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 600000);
-        done = true;
-      }
-    }
-    function stopVideo() {
-      player.stopVideo();
-    }
+//     // 5. The API calls this function when the player's state changes.
+//     //    The function indicates that when playing a video (state=1),
+//     //    the player should play for six seconds and then stop.
+//     var done = false;
+//     function onPlayerStateChange(event) {
+//       if (event.data == YT.PlayerState.PLAYING && !done) {
+//         setTimeout(stopVideo, 600000);
+//         done = true;
+//       }
+//     }
+//     function stopVideo() {
+//       player.stopVideo();
+//     }
     
    
 	</script>
@@ -485,14 +539,20 @@
 								<div class="textcontainer">
 									<h1><span id="title">${!empty event.koName? event.koName:event.eventName }</span></h1>
 								</div>
-								<div id="player"></div> <br/>
-		<!-- 						<span id="deleteYoutube"> -->
-		<!-- 						<ion-icon name="remove-circle-outline"  size="large"></ion-icon> -->
-		<!-- 						</span> -->
-								<span id="addYoutube" name="addYoutube" data-toggle="modal"  						
+								<div>
+									<input type="hidden" id="youtubeVideoId" value="0"> 
+								
+<!-- 								<div id="player"></div> <br/> -->
+									<iframe id="youtubeVideoPlayer" width="400" height="250" src="https://www.youtube.com/embed/${videoId }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen value="${videoId }"></iframe>
+								</div>
+								<br/>
+								<span style="margin:20px;"   id="prevYoutube"><ion-icon name="arrow-round-back"  size="large"></ion-icon></span>
+								<span style="margin:20px;" id="deleteYoutube"><ion-icon name="remove-circle-outline"  size="large"></ion-icon></span>
+								<span style="margin:20px;"  id="addYoutube" name="addYoutube" data-toggle="modal"  						
 										 data-target="#exampleModalCenter">
 								<ion-icon name="add-circle-outline"  size="large"></ion-icon>
 								</span>
+								<span style="margin:20px;" id="nextYoutube"><ion-icon name="arrow-round-forward"  size="large"></ion-icon></span>
 								<br/><br/>
 								${!empty event.koLocation? event.koLocation: event.eventLocation}<br/>
 								${event.eventDate } &nbsp; 

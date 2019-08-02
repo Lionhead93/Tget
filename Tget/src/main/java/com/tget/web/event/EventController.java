@@ -241,7 +241,10 @@ public class EventController {
 		
 		List<String> youtubeList = eventService.getYoutubeIdList(event.getEventName());
 		if (youtubeList != null && youtubeList.size() != 0 ) {
-			model.addAttribute("videoId", youtubeList.get(youtubeList.size()-1));
+			model.addAttribute("videoId", youtubeList.get(0));
+			model.addAttribute("videoIdList", youtubeList);
+		}else {
+			model.addAttribute("videoId", "ZfRaUS9cixo");//기본동영상
 		}
 		search.setSearchCondition("1");
 //		search.setSearchKeyword(eventId);
