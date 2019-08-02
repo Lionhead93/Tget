@@ -208,7 +208,7 @@
 											<div class="row mb-1">											    
 											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static" style="width: 1000px;">
+											        <div class="col p-4 d-flex flex-column position-static" style="width: 900px;">
 											          <strong class="d-inline-block mb-2 text-primary">À½¾Ç°ø¿¬</strong>
 											          <h3 class="mb-0"  id="goRecommEvent0">EXO Seoul</h3>
 											          <div class="mb-1 text-muted" id="recommDetail0">2019-07-27</div>
@@ -232,7 +232,7 @@
 											<div class="row mb-1">											    
 											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
+											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
 											          <strong class="d-inline-block mb-2 text-primary">À½¾Ç°ø¿¬</strong>
 											          <h3 class="mb-0" id="goRecommEvent1">EXO Seoul</h3>
 											          <div class="mb-1 text-muted">2019-07-27</div>
@@ -253,7 +253,7 @@
 											<div class="row mb-1">											    
 											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
+											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
 											          <strong class="d-inline-block mb-2 text-primary">À½¾Ç°ø¿¬</strong>
 											          <h3 class="mb-0" id="goRecommEvent2">EXO Seoul</h3>
 											          <div class="mb-1 text-muted">2019-07-27</div>

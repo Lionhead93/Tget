@@ -167,10 +167,11 @@ public class EventRestController {
 	}
 	
 	@RequestMapping(value="rest/getYoutubeList")
-	public List<String> getYoutubeList( @RequestBody String eventName) throws Exception {
+	public	Map<String,Object> getYoutubeList( @RequestParam String eventName) throws Exception {
 		System.out.println("===============rest/getYoutubeList===============");
-		
-		return eventService.getYoutubeIdList(eventName);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("youtubeList",  eventService.getYoutubeIdList(eventName));
+		return map;
 	}
 	
 //	@RequestMapping(value="rest/addYoutubeVideo", method=RequestMethod.GET)
@@ -190,6 +191,20 @@ public class EventRestController {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("youtubeListByName", list);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="rest/deleteYoutubeVideo/{videoId}", method=RequestMethod.POST)
+	public  Map<String,Object> deleteYoutubeVideo(@PathVariable String videoId,@ModelAttribute("event") Event event) throws Exception {
+		System.out.println("===============rest/addYoutubeVideo/{videoId}===============");
+		System.out.println("eventName : "+event.getEventName());
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("youtubeId", videoId);
+		map.put("eventName", event.getEventName());
+		
+		eventService.deleteYoutubeVideo(map);
 		
 		return map;
 	}
@@ -596,7 +611,7 @@ public class EventRestController {
 		return null;
 	}
 	
-	@RequestMapping(value="rest/addRecommendedEvent")
+	@RequestMapping(value="rest/addRecommendedEvent", method = RequestMethod.POST)
 	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
 		System.out.println("===============rest/addRecommendedEvent===============");
 		Map<String,Object> map = new HashMap<String,Object>();

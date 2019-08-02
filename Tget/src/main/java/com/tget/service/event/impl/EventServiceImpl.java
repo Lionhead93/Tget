@@ -14,6 +14,7 @@ import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.event.domain.StubhubEvent;
+import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.user.domain.User;
 import com.tget.service.event.EventDao;
 import com.tget.service.event.EventService;
@@ -200,7 +201,11 @@ public class EventServiceImpl implements EventService{
 		return eventDao.selectAllLocation();
 	}
 	
-	
-	
+//	public List<Ticket> getTicketList(Search search) throws Exception{
+//		return eventDao.selectTicketList(search);
+//	}
+	public void deleteYoutubeVideo(Map<String,Object> map) throws Exception{
+		eventDao.deleteYoutubeVideo(map);
+	}
 	
 }
