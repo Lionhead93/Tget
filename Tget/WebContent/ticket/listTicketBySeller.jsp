@@ -34,46 +34,19 @@
 	<script src="/resources/javascript/main.js"></script>   
 	
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
-			color: #FBFCFE ;	
+			color: #041625;
 		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group > .list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		.col-2{
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-       #footer{
-			background-color: #1B1B1F;
+		.overImage{
+			position: absolute;
+			text-align: center;
+			top: 30px;
+			left: 80px;
+			width: 250px;
 		}
     </style>
     
@@ -82,7 +55,12 @@
 		
 		
 		 $(function() {
-			
+				
+			 $("a.getEvent").on("click", function(){
+			    	var eventId = $(this).closest("div").attr("id").trim();
+			    	
+			    	self.location = "/event/getEventTicketList?eventIds="+eventId;	    	
+			    });
 			 
 			 
 		 });
@@ -95,69 +73,62 @@
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />	
 	<jsp:include page="/layout/tgetHeader.jsp" />
-	    
+
+	<div class="container">	    
 <div class="row">	  		
       <!-- Three columns of text below the carousel -->
-      <div class="col-2">
+      <div class="col-lg-3">
       <div class="sticky-top">
-      	<div class='text-center'>
-      		<br/><br/><br/>
-			<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user.nickName} > My Ticket </strong></p>
-			<br/>
-										<ul class="list-group list-group-flush">
-										  <li class="list-group-item"><a href="#">거래내역 조회</a></li>
-										  <li class="list-group-item"><a href="#">자유게시판> 삽니다</a></li>
-										  <li class="list-group-item"><a href="#">티켓판매 공지</a></li>
-										  <li></li>
-										  
-										</ul> 
-										  
-										  
-		</div> 
+      <br/><br/><br/><br/>
+      	<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+			  <div class="card-header">
+			   <strong>${user.nickName} <i class="far fa-user"></i> My Ticket </strong>
+			  </div>
+			  <ul class="list-group list-group-flush">								
+				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
+				<li class="list-group-item"><a href="#">자유게시판<i class="fas fa-check"></i> 삽니다</a></li>
+				<li class="list-group-item"><a href="#">티켓판매 공지</a></li>
+			  </ul>		  
+		</div>
 		</div>    	
       </div>
       
-      <div class="col-10">
-      
+      <div class="col-lg-9">      
       	<div class="text-center">
-      		<button class="btn btn-outline-light" disabled><strong>총  ${sellProb.totalCount} 건</strong></button>			 		 
+      		<strong>총  ${sellProb.totalCount} 건</strong>	<br/><br/>	 		 
 		</div>
-		<br/> 
-      <div class="row in">
-       <c:forEach var="ticket" items="${list}" varStatus="j" > 
-        <div class="col-lg-3">
-        <div class="text-center">
-        <div class="border">
-          <div class="myTicket" id="${ticket.ticketNo}">
-	          <img class="img-circle" src="/resources/images/uploadFiles/${ticket.ticketImage}" onerror="this.src='/resources/images/logo.png'"  width="140" height="140">
-	          <h2>${ticket.event.eventName}</h2>         
-	          <hr class="my-4">
-	          <p>좌석 : ${ticket.seat}</p>
-	          <p>수량 : ${ticket.amount}</p>
-	          <p>가격 : ${ticket.price} 원</p>	          
-	          <c:if test="${ticket.code=='0'}">
-		          <p class="text-warning">	         
-		          	*검증 대기중		          
-		          </p>
-		          </c:if>
-		          <c:if test="${ticket.code=='1'}">
-		          <p class="text-success">
-		          	*판매중	
-		          </p>
-		          </c:if>
-		          <c:if test="${ticket.code=='2'}">
-		          <p class="text-danger">
-		          	*등록취소	
-		          </p>
-		      </c:if> 	    	
-	      </div>
-	      </div>
-	      </div>
-        </div><!-- /.col-lg-4 -->
-        </c:forEach>
+		<div class="row">
+		<c:forEach var="ticket" items="${list}" varStatus="j">
+		<c:if test="${ticket.amount != 0}">
+			<div class="col-sm-6" style="margin-bottom: 20px;">			
+			  <div class="myTicket" id="${ticket.ticketNo}">
+				<div class="card text-center shadow rounded">
+				  
+				  <img src="/resources/images/uploadFiles/${ticket.ticketImage}" class="card-img-top" onerror="this.src='/resources/images/logo.png'" height="200px;">
+				  <c:if test="${ticket.code != '0'}">
+				  <img class="overImage" src="/resources/images/approved.png">
+				  </c:if>
+				  						
+			      <div class="card-body" id="${ticket.event.eventId}">
+			        <h5 class="card-title">				       
+				   		  <strong><a class="getEvent" href="#">${ticket.event.eventName}</a></strong>
+				     </h5>
+			        <p class="card-text">
+			        </p>
+			        <p><strong>좌석 <i class="fas fa-check"></i> ${ticket.seat}</strong></p>
+			        <p><strong>수량 <i class="fas fa-check"></i> ${ticket.amount}</strong> </p>
+			        <p><strong>가격 <i class="fas fa-check"></i> ${ticket.price}원</strong> </p>
+			      </div>
+			        
+			     </div>	      
+			   </div>			    
+		    </div>
+		  </c:if>  
+		 </c:forEach>
+		 </div>     
     </div>
-    </div>
-</div>	  
+</div>	
+</div>  
 <jsp:include page="/layout/footer.jsp" />
 </body>
 
