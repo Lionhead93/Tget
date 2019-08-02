@@ -210,11 +210,9 @@
 											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
 											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-<<<<<<< HEAD
+
 											        <div class="col p-4 d-flex flex-column position-static">
-=======
-											        <div class="col p-4 d-flex flex-column position-static" style="width: 900px;">
->>>>>>> refs/remotes/origin/master
+
 											          <strong class="d-inline-block mb-2 text-primary">À½¾Ç°ø¿¬</strong>
 											          <h3 class="mb-0"  id="goRecommEvent0" style="color:#041625;">EXO Seoul</h3>
 											          <div class="mb-1 text-muted" id="recommDetail0" style="color:#193147;">2019-07-27</div>
