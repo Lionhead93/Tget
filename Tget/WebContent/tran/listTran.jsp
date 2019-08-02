@@ -43,6 +43,13 @@
 		a{
 			color: #041625;
 		}
+		.img_wrap {
+			width: 300px;
+			margin: auto;
+		}
+		.img_wrap img {
+			max-width: 100%;
+		} 
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -78,7 +85,7 @@
 	    });
 	    $("a.chat").on("click", function(){
 	    	
-	    	var tranCode = $(this).closest("td").attr("id").trim();
+	    	var tranCode = $(this).closest("p").attr("id").trim();
 	    	if(tranCode=='0'){
 	    		alert("입금완료 후 채팅을 신청하세요.");
 	    		return;
@@ -284,7 +291,7 @@
 	<div class="row">
 		<div class="col-lg-3">
 		<div class="sticky-top">
-		<br/><br/>
+		<br/><br/><br/><br/>
 			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 			  <div class="card-header">
 			   <strong>${user.nickName} <i class="far fa-handshake"></i> 거래내역 조회 </strong>
@@ -305,10 +312,13 @@
 		  </div>
 		  </div>
 		<div class="col-lg-9">
+		<div class="text-center">
+      		<strong>총  ${totalCount} 건</strong>	<br/><br/>	 		 
+		</div>
 		<div class="row">
 		<c:forEach var="tran" items="${list}" varStatus="j">
 			<div class="col-sm-6" style="margin-bottom: 20px;">
-				<div class="card text-center shadow rounded">
+				<div class="card text-center shadow rounded" style="height: 234px;">
 			      <div class="card-body">
 			        <h5 class="card-title">				       
 				        <div id="${tran.event.eventId}">					      
@@ -316,96 +326,67 @@
 						      <c:if test="${user.userId==tran.seller.userId}">판매</c:if>
 					       	 <c:if test="${user.userId==tran.buyer.userId}">구매</c:if>
 						  </span>
-						  <a class="getEvent" href="#">${tran.event.eventName}</a>
+						  <strong><a class="getEvent" href="#">${tran.event.eventName}</a></strong>
 					     </div>					     
 				     </h5>
 			        <p class="card-text">
 			        <strong>${tran.orderAmount} 매 / ${tran.orderDate}</strong>	
 			        </p>
-			        <a href="#" class="btn btn-primary">Go somewhere</a>
+			        <p id="${tran.tranCode}" class="card-text">
+			        <strong>
+			          <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.nickName}
+				      <a class="chat" id="${tran.buyer.userId}" href="#" >
+				      <i class="far fa-comment-alt"></i></a>
+				      </c:if>
+				      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.nickName}
+				      <a class="chat" id="${tran.seller.userId}" href="#" >
+				      <i class="far fa-comment-alt"></i></a>
+				      </c:if>
+				     </strong> 
+				    </p>  
+				    <p>
+				    <strong>
+				    	  <c:if test="${tran.tranCode==0}">* 무통장 입금대기</c:if>
+					      <c:if test="${tran.tranCode==1}">* 결제완료</c:if>
+					      <c:if test="${tran.tranCode==2}">* 배송 중 
+					      <a class="searchDelivery" id="${tran.tranNo}" href="#" data-toggle="modal" data-target="#searchDeliveryModal">
+					      <i class="fas fa-truck"></i>
+					      <div id="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</div>
+					      <div id="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</div></a>
+					      </c:if>
+					      <c:if test="${tran.tranCode==3}">* 배송 완료</c:if>
+					      <c:if test="${tran.tranCode==4}">* 환불 및 취소</c:if>
+					 </strong>     
+				     </p>
+						<div id="${tran.tranNo}">
+					      <c:if test="${user.userId==tran.seller.userId}">
+						      <c:if test="${tran.tranCode==0}">-</c:if>
+						      <c:if test="${tran.tranCode==1}"><a class="btn btn-outline-info startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
+						      <c:if test="${tran.tranCode==2}">-</c:if>
+						      <c:if test="${tran.tranCode==3}">
+						      <c:if test="${user.userId==tran.seller.userId}">
+						      <a class="btn btn-outline-info getReview" href="/rnp/getSellerEstimationList?sellerId=${user.userId}">후기 확인</a>
+						      </c:if>
+						      <c:if test="${user.userId==tran.buyer.userId}">
+						      <a class="getReview" href="/rnp/getReviewList">후기 확인</a>
+						      </c:if>
+						      </c:if>
+						      <c:if test="${tran.tranCode==4}">-</c:if>
+					      </c:if>
+					      <c:if test="${user.userId==tran.buyer.userId}">
+						      <c:if test="${tran.tranCode==0}">-</c:if>
+						      <c:if test="${tran.tranCode==1}">-</c:if>
+						      <c:if test="${tran.tranCode==2}"><a class="btn btn-outline-info endDelivery" id="${tran.tranNo}"  data-toggle="modal" 						
+										 data-target="#exampleModalCenter" >배송도착</a></c:if>
+						      <c:if test="${tran.tranCode==3}">-</c:if>
+						      <c:if test="${tran.tranCode==4}">-</c:if>
+					      </c:if>
+					      </div>
 			      </div>	      
 			    </div>			    
 		    </div>
 		</c:forEach>
-		</div>
-		 <table class="table table-bordered text-center">
-			  <thead>
-			    <tr>
-			      <th scope="col">종류</th>
-			      <th scope="col">이벤트명</th>
-			      <th scope="col">수량</th>
-			      <th scope="col">구매/판매일자</th>
-			      <th scope="col">거래상대</th>
-			      <th scope="col">진행상태</th>
-			      <th scope="col">-</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  <c:forEach var="tran" items="${list}" varStatus="j">
-			    <tr>
-			      <td>
-			      <c:if test="${user.userId==tran.seller.userId}">판매</c:if>
-			      <c:if test="${user.userId==tran.buyer.userId}">구매</c:if>
-			      </td>
-			      <td>
-			      <div id="${tran.event.eventId}">
-			      <a class="getEvent" href="#">${tran.event.eventName}</a>
-			      </div>
-			      </td>
-			      <td>${tran.orderAmount}</td>
-			      <td>${tran.orderDate}</td>
-			      <td id="${tran.tranCode}">			      
-			      <c:if test="${user.userId==tran.seller.userId}">${tran.buyer.nickName}
-			      <a class="chat" id="${tran.buyer.userId}" href="#" >
-			      <i class="far fa-comment-alt"></i>
-			      </c:if>
-			      <c:if test="${user.userId==tran.buyer.userId}">${tran.seller.nickName}
-			      <a class="chat" id="${tran.seller.userId}" href="#" >
-			      <i class="far fa-comment-alt"></i>
-			      </c:if>
-			      </td>
-			      <td>
-			      <c:if test="${tran.tranCode==0}">무통장 입금대기</c:if>
-			      <c:if test="${tran.tranCode==1}">결제완료</c:if>
-			      <c:if test="${tran.tranCode==2}">배송 중 
-			      <a class="searchDelivery" id="${tran.tranNo}" href="#" data-toggle="modal" data-target="#searchDeliveryModal">
-			      <i class="fas fa-truck"></i>
-			      <div id="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</div>
-			      <div id="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</div></a>
-			      </c:if>
-			      <c:if test="${tran.tranCode==3}">배송 완료</c:if>
-			      <c:if test="${tran.tranCode==4}">환불 및 취소</c:if>
-				  </td>
-			      <td>
-			      <div id="${tran.tranNo}">
-			      <c:if test="${user.userId==tran.seller.userId}">
-				      <c:if test="${tran.tranCode==0}">-</c:if>
-				      <c:if test="${tran.tranCode==1}"><a class="startDelivery" href="#" data-toggle="modal" data-target="#deliveryModal">배송시작</a></c:if>
-				      <c:if test="${tran.tranCode==2}">-</c:if>
-				      <c:if test="${tran.tranCode==3}">
-				      <c:if test="${user.userId==tran.seller.userId}">
-				      <a class="getReview" href="/rnp/getSellerEstimationList?sellerId=${user.userId}">후기 확인</a>
-				      </c:if>
-				      <c:if test="${user.userId==tran.buyer.userId}">
-				      <a class="getReview" href="/rnp/getReviewList">후기 확인</a>
-				      </c:if>
-				      </c:if>
-				      <c:if test="${tran.tranCode==4}">-</c:if>
-			      </c:if>
-			      <c:if test="${user.userId==tran.buyer.userId}">
-				      <c:if test="${tran.tranCode==0}">-</c:if>
-				      <c:if test="${tran.tranCode==1}">-</c:if>
-				      <c:if test="${tran.tranCode==2}"><a class="endDelivery" id="${tran.tranNo}"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter" >배송도착</a></c:if>
-				      <c:if test="${tran.tranCode==3}">-</c:if>
-				      <c:if test="${tran.tranCode==4}">-</c:if>
-			      </c:if>
-			      </div>
-			      </td>
-			    </tr>
-			  </c:forEach> 
-			  </tbody>
-		</table>
+		</div>		
 		</div>		
 	</div>
  </div>

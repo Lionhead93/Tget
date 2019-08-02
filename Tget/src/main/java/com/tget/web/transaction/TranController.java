@@ -124,7 +124,7 @@ public class TranController {
 		Map<String, Object> map = tranService.getTranList(search);
 
 		model.addAttribute("list", map.get("list"));
-		model.addAttribute("totalCount", map.get("sellProb"));
+		model.addAttribute("totalCount", map.get("totalCount"));
 		
 		return result;
 	}	
