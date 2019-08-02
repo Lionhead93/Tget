@@ -144,7 +144,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>게시글 상세조회</h3>	       
+	       <h3><span style="color:white;">게시글 상세조회</span></h3>	       
 	    </div>
 		<hr/>
 		

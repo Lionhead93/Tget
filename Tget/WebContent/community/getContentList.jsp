@@ -326,9 +326,8 @@
 		    	<p class="text-primary">
 		    		전체  ${totalCount } 건수
 		    	</p>
+		    	
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				
-
 				
 		<br/><br/><br/>
 	</div>	   
@@ -444,50 +443,65 @@
 	    <div class="modal-content modal-80size">
 
 	      <div class="modal-body" id="addContentModalBody">
-	      <select id="boardCode" name="boardCode">
-   			 	<option value="">게시판 선택</option>
+	      <select id="boardCode" name="boardCode" >
+<!--    			 	<option value="" >게시판 선택</option> -->
 		   		<c:if test="${sessionScope.user.role == '2'}">
 		   			<option value="0">공지사항</option>
 		   			</c:if>
+	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}"> 	
 	   			 	<option value="1">자유게시판</option>
+	   			 </c:if>
+	   			 <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}">	
 	   			 	<option value="2">고객센터</option>
+	   			 </c:if>
    			 	</select> 
    			 	
    			 <select id="contentCode" name="contentCode">
-   			 	<option value="">게시글 선택</option>
+<!--    			 	<option value="">게시글 선택</option> -->
 		   			 <c:if test="${sessionScope.user.role == '2'}">   			 		
 			   			 	<option value="0">티켓 거래 공지</option>
 			   			 	<option value="1">자유게시판 이용 공지</option>
 			   				<option value="2">자주묻는질문</option>
 			   		</c:if>
-	   		
-	   			 	<option value="3">삽니다</option>	
+	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
+	   			 	<option value="3">삽니다</option>
+	   			</c:if>
+	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
 	   			 	<option value="4">팝니다</option>
+	   			 </c:if>
+	   			 <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
 	   			 	<option value="5">수다방</option>
+	   			 </c:if>
+	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}"> 	
 	   			 	<option value="6">1:1 문의하기</option>
 	   			 	<option value="7">환불 게시판</option>
+	   			 </c:if>
    			 	</select>
    			 	
    			 <select id="open" name="open">
 				<option value="">공개 여부</option>
 					<option value="0">공개</option>
 					<option value="1">비공개</option>
-			</select>	
+			</select>
+			<hr>	
 			
 			<div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
-		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
-		    </div>
+		    <label for="userNickname" class="col" style="color:white;">작성자 : ${sessionScope.user.nickName}</label>
+		    
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>	      --%>
+<%-- 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}"> --%>
+<!-- 		     </div> -->    
+		  
 		  </div>
- 
+ 		  
 		  <div class="form-group">
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>   
+		  
+		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label" style="color:white;">글 제목</label>   
 		      <input type="text" class="form-control" id="contentName" name="contentName">
 		  </div>
 		
-		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label">글 내용</label>
+		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label" style="color:white;">글 내용</label>
 	
 		<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
 		<script type="text/javascript">
