@@ -68,14 +68,34 @@
 		
 		$("button[name='getYoutubePlayer']").on("click",function(){
 			youtubeId = $(this).val();
-			$("#searchList").attr("style","display:none;");
+			$("#searchList").attr("style","display : none;");
 			$("#getYoutubePlayer").attr("style","display:block;");
 			$("#getYoutubePlayer").children("iframe").attr("src","https://www.youtube.com/embed/"+youtubeId);
+			$("#addThis").val(youtubeId);
 // 			$(this).parent().parent().children("input[name='titleByList']").val();
 // 			$(this).parent().parent().children("input[name='descriptionByList']").val();
 // 			$("form").attr("method" , "POST").attr("action" , "/event/getYoutubePlayer?youtubeId="+$(this).val()).submit();
 		});
+		$("#back").on("click",function(){
+			$("#searchList").attr("style","display:block;");
+			$("#getYoutubePlayer").attr("style","display:none;");
+		});
 		
+		$("#addThis").on("click",function(){
+			$.ajax(
+     				{
+     					url : "/event/rest/addYoutubeVideo/ "+$("#addThis").val(),
+     					method : "POST",
+     					data : {
+     						eventName : $("#eventName").val()
+     					},
+     					dataType : "json",
+     					success : function(JSONData, status){
+     						alert("등록완료");
+//	     						alert("JSONData : \n"+JSONData.youtubeListByName);		
+     					}	    		
+     		 });	
+		});
 		
 		$("#searchYoutubeSubmit").on("click",function(){
 			$("#searchKeyword").val($("#inputKeyword").val());
@@ -171,7 +191,7 @@
 
 <!-- <body> -->
 
-<div class="container" align="center" >
+<div class="container" align="center"  id="searchList" >
 <!-- 	 <div><h2 style="margin-top: 10px;">Searching</h2></div> -->
 	<table class="table ">
 <!-- 			<thead> -->
@@ -191,7 +211,7 @@
 <!-- 	</thead> -->
 	<tbody>
 		
-		<div class="row"  id="searchList">
+		<div class="row" >
 		<ul class="list-unstyled">
 			<tr id="tr0">
 				<td align="left" >
@@ -291,7 +311,7 @@
 <div id="getYoutubePlayer"  style="display:none;">
 <!-- 	<iframe width="400" height="250" src="https://www.youtube.com/embed/${i.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 	<iframe width="400" height="250" src="https://www.youtube.com/embed/AtNBhPxVwh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	<button  class="btn btn-outline-light">뒤로가기</button>&nbsp;&nbsp;&nbsp;
-	<button  class="btn btn-outline-light">등록하기</button>
+	<button  class="btn btn-outline-light" id="back">뒤로가기</button>&nbsp;&nbsp;&nbsp;
+	<button  class="btn btn-outline-light" id="addThis">등록하기</button>
 <!-- 	<div id="player"></div>  -->
 </div>
