@@ -43,6 +43,9 @@
 			#plusfriend-chat-button{
 				display: none;
 			}
+			.modal-content{
+			background:rgba(40,57,101,.9);
+			}
 		</style>
 	</head>
 	<body>
@@ -115,11 +118,9 @@
 
 				</section>
 
-		<!-- Main -->
-			<div id="main">
-
+		
 			<!-- One -->
-				<section class="wrapper style1">
+				<section id="main" class="wrapper style1" >
 					<div class="inner">
 						<header class="align-center">
 							<h2>
@@ -134,40 +135,40 @@
 						</header>
 						
 						<!-- 2 Column Video Section -->
-							<div class="flex flex-3">
+							<div class="flex flex-3" style="background-color: #062038">
 							
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage0" />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe0">
+									<p class="caption text-center" id="pe0">
 										이벤트
 									</p>
 									<a id="pelink0" class="link"><span>Click Me</span></a>
 								</div>
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage1" />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe1">
+									<p class="caption text-center" id="pe1">
 										이벤트
 									</p>
 									<a id="pelink1" class="link"><span>Click Me</span></a>
 								</div>
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage2"   />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe2">
+									<p class="caption text-center" id="pe2">
 										이벤트
 									</p>
 									<a id="pelink2"  class="link"><span>Click Me</span></a>
@@ -182,7 +183,7 @@
 			<!-- Two -->
 				<section id="popular" class="wrapper style2">
 					<div class="inner">
-						<header>
+						<header class="text-center">
 							<h2>
 								<span class="textcontainer">
 									<span class="particletext confetti">
@@ -196,9 +197,9 @@
 						<!-- Tabbed Video Section -->
 							<div class="flex flex-tabs">
 								<ul class="tab-list">
-									<li><a id="tab0"  href="#" data-tab="tab-1" class="active" style="display:none;">추천이벤트1</a></li>
-									<li><a id="tab1" href="#" data-tab="tab-2" style="display:none;">추천이벤트2</a></li>
-									<li><a  id="tab2"  href="#" data-tab="tab-3" style="display:none;">추천이벤트3</a></li>
+									<li><a id="tab0"  href="#" data-tab="tab-1" class="active text-center" style="display:none;"># 1</a></li>
+									<li><a id="tab1" href="#" data-tab="tab-2" class="text-center" style="display:none;"># 2</a></li>
+									<li><a  id="tab2"  href="#" data-tab="tab-3" class="text-center" style="display:none;"># 3</a></li>
 								</ul>
 								<div class="tabs">
 
@@ -351,11 +352,7 @@
 							</div>
 					</div>
 				</section>
-			
-			</div>
-
-		<jsp:include page="/layout/footer.jsp"></jsp:include>
-
+		
 		<!-- Scripts -->	
 		
 		<script type="text/javascript">
