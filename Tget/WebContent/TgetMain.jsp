@@ -43,6 +43,9 @@
 			#plusfriend-chat-button{
 				display: none;
 			}
+			.modal-content{
+			background:rgba(40,57,101,.9);
+			}
 		</style>
 	</head>
 	<body>
@@ -115,11 +118,9 @@
 
 				</section>
 
-		<!-- Main -->
-			<div id="main">
-
+		
 			<!-- One -->
-				<section class="wrapper style1">
+				<section id="main" class="wrapper style1" >
 					<div class="inner">
 						<header class="align-center">
 							<h2>
@@ -134,40 +135,40 @@
 						</header>
 						
 						<!-- 2 Column Video Section -->
-							<div class="flex flex-3">
+							<div class="flex flex-3" style="background-color: #062038">
 							
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage0" />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe0">
+									<p class="caption text-center" id="pe0">
 										이벤트
 									</p>
 									<a id="pelink0" class="link"><span>Click Me</span></a>
 								</div>
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage1" />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe1">
+									<p class="caption text-center" id="pe1">
 										이벤트
 									</p>
 									<a id="pelink1" class="link"><span>Click Me</span></a>
 								</div>
-								<div class="video col">
+								<div class="video col" style="background-color: #062038">
 									<div class="image fit">
 										<img src="/resources/images/logo.jpg"  id="peImage2"   />
 										<div class="arrow">
 <!-- 											<div class="icon fa-play"></div> -->
 										</div>
 									</div>
-									<p class="caption" id="pe2">
+									<p class="caption text-center" id="pe2">
 										이벤트
 									</p>
 									<a id="pelink2"  class="link"><span>Click Me</span></a>
@@ -182,7 +183,7 @@
 			<!-- Two -->
 				<section id="popular" class="wrapper style2">
 					<div class="inner">
-						<header>
+						<header class="text-center">
 							<h2>
 								<span class="textcontainer">
 									<span class="particletext confetti">
@@ -196,9 +197,9 @@
 						<!-- Tabbed Video Section -->
 							<div class="flex flex-tabs">
 								<ul class="tab-list">
-									<li><a id="tab0"  href="#" data-tab="tab-1" class="active" style="display:none;">추천이벤트1</a></li>
-									<li><a id="tab1" href="#" data-tab="tab-2" style="display:none;">추천이벤트2</a></li>
-									<li><a  id="tab2"  href="#" data-tab="tab-3" style="display:none;">추천이벤트3</a></li>
+									<li><a id="tab0"  href="#" data-tab="tab-1" class="active text-center" style="display:none;"># 1</a></li>
+									<li><a id="tab1" href="#" data-tab="tab-2" class="text-center" style="display:none;"># 2</a></li>
+									<li><a  id="tab2"  href="#" data-tab="tab-3" class="text-center" style="display:none;"># 3</a></li>
 								</ul>
 								<div class="tabs">
 
@@ -207,13 +208,13 @@
 											<div class="row mb-1">											    
 											    <div class="col-md-12">
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static">
-<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
+											        <div class="col p-4 d-flex flex-column position-static" style="width: 1000px;">
+											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0"  id="goRecommEvent0">EXO Seoul</h3>
 											          <div class="mb-1 text-muted" id="recommDetail0">2019-07-27</div>
 											          <a id="getEvent0" href="#" class="">상세보기</a>
 											        </div>
-											        <video controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <video controls id="videoName0" autoplay="autoplay"  style="width:700px;"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
 											        	
 <!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
@@ -222,50 +223,7 @@
 											      </div>
 											    </div>
 									
-<!-- 											    <div class="col-md-12"> -->
-<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
-<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
-<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
-<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
-<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
-<!-- 											          <a href="#" class="">상세보기</a> -->
-<!-- 											        </div> -->
-<!-- 											        <div class="col-auto d-none d-lg-block"> -->
-<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
-<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-<!-- 											        </div> -->
-<!-- 											      </div> -->
-<!-- 											    </div> -->
-											    
-<!-- 											    <div class="col-md-6"> -->
-<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
-<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
-<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
-<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
-<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
-<!-- 											          <a href="#" class="">상세보기</a> -->
-<!-- 											        </div> -->
-<!-- 											        <div class="col-auto d-none d-lg-block"> -->
-<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
-<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-<!-- 											        </div> -->
-<!-- 											      </div> -->
-<!-- 											    </div> -->
-											    
-<!-- 											    <div class="col-md-6"> -->
-<!-- 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
-<!-- 											        <div class="col p-4 d-flex flex-column position-static"> -->
-<!-- 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong> -->
-<!-- 											          <h3 class="mb-0">EXO Seoul</h3> -->
-<!-- 											          <div class="mb-1 text-muted">2019-07-27</div> -->
-<!-- 											          <a href="#" class="">상세보기</a> -->
-<!-- 											        </div> -->
-<!-- 											        <div class="col-auto d-none d-lg-block"> -->
-<!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
-<!-- 											          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-<!-- 											        </div> -->
-<!-- 											      </div> -->
-<!-- 											    </div> -->
+
 											</div>
 										</div>
 
@@ -276,11 +234,11 @@
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 											        <div class="col p-4 d-flex flex-column position-static">
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
+											          <h3 class="mb-0" id="goRecommEvent1">EXO Seoul</h3>
 											          <div class="mb-1 text-muted">2019-07-27</div>
 											          <a id="getEvent1" href="#" class="">상세보기</a>
 											        </div>
-											        <video id="videoName1"  autoplay="autoplay"  controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <video id="videoName1" style="width:700px;"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
 											        	
 <!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
@@ -297,11 +255,11 @@
 											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 											        <div class="col p-4 d-flex flex-column position-static">
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
-											          <h3 class="mb-0">EXO Seoul</h3>
+											          <h3 class="mb-0" id="goRecommEvent2">EXO Seoul</h3>
 											          <div class="mb-1 text-muted">2019-07-27</div>
 											          <a id="getEvent2"  href="#" class="">상세보기</a>
 											        </div>
-											        <video id="videoName1"  autoplay="autoplay"  controls id="videoName0"  src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <video id="videoName2"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
 											        	
 <!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
@@ -351,11 +309,7 @@
 							</div>
 					</div>
 				</section>
-			
-			</div>
-
-		<jsp:include page="/layout/footer.jsp"></jsp:include>
-
+		
 		<!-- Scripts -->	
 		
 		<script type="text/javascript">

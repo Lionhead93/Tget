@@ -598,7 +598,7 @@ public class EventRestController {
 	
 	@RequestMapping(value="rest/addRecommendedEvent")
 	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
-		System.out.println("===============rest/addRecommendedEvent POST===============");
+		System.out.println("===============rest/addRecommendedEvent===============");
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		System.out.println(multipartFile.getOriginalFilename( ));
