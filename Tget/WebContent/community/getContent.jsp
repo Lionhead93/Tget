@@ -39,8 +39,8 @@
 		<script src="/resources/javascript/modernizr.custom.js"></script>
 	<style>
 	body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
+		      color: #020B13;		  
+			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
@@ -91,6 +91,43 @@
 		
        #footer{
 			background-color: #1B1B1F;
+		}
+		
+		/* 	게시글 등록 Modal */
+		.modal-dialog.modal-80size {
+		  color: #020B13;
+		  width: 300%;
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		.modal-content.modal-80size {
+		  color: #020B13;
+		  background-color: #D9E5FF;
+		  height: auto;  
+		  min-height: 150%;
+		  border-radius: 0;
+		}
+		
+		.modal.modal-center {
+		  text-align: center;
+		}
+		
+		@media screen and (min-width: 768px) {
+		  .modal.modal-center:before {
+		    display: inline-block;
+		    vertical-align: middle;
+		    content: " ";
+		    height: 100%;
+		   
+		  }
+		}
+		
+		.modal-dialog.modal-center {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
 		}
      </style>
     

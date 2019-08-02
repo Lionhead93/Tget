@@ -37,6 +37,41 @@
           padding: 5px;
           border: 1px solid #999;
         }
+        /* 	게시글 등록 Modal */
+		.modal-dialog.modal-80size {
+		  width: 300%;
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		.modal-content.modal-80size {
+		  color: black;
+		  background-color: #D9E5FF;
+		  height: auto;  
+		  min-height: 150%;
+		  border-radius: 0;
+		}
+		
+		.modal.modal-center {
+		  text-align: center;
+		}
+		
+		@media screen and (min-width: 768px) {
+		  .modal.modal-center:before {
+		    display: inline-block;
+		    vertical-align: middle;
+		    content: " ";
+		    height: 100%;
+		   
+		  }
+		}
+		
+		.modal-dialog.modal-center {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
+		}
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA_L7YCMev735YseqFdkMfkmFz49H-a7To" ></script> 

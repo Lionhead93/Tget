@@ -43,8 +43,8 @@
 	
 	<style>
 	body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
+		      color: #020B13 ;		  
+			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
@@ -99,6 +99,7 @@
 		
 	/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
+		  color: black;
 		  width: 300%;
 		  height: 100%;
 		  margin: 0;
@@ -106,7 +107,8 @@
 		}
 		
 		.modal-content.modal-80size {
-		  color: black;
+		  color: #020B13;
+		  background-color: #D9E5FF;
 		  height: auto;  
 		  min-height: 150%;
 		  border-radius: 0;
@@ -152,6 +154,7 @@
 		 $(function() {
 			
  			 $( "button.btn.btn-info:contains('등록')" ).on("click" , function() {
+ 				 
  					//self.location="/community/addContent"	
 	 				var contentName= $("input[name='contentName']").val();
 					var contentBody= $("textarea[name='contentBody']").val();
@@ -321,11 +324,8 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
-		    	<p class="text-primary">
-		    		전체  ${totalCount } 건수
-		    	</p>
+	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">       	
+		    	<p class="text-dark" ><strong>전체  ${totalCount } 건수</strong></p>
 		    	
 		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				
@@ -334,27 +334,27 @@
 
 	<br/>	   
 	 <div class="row">
-	  <div class="col-md-2 text-center">	  
-	      <div class="sticky-top">
+	  <div class="col-md-2 text-center" >	  
+	      <div class="sticky-top" >
 		  <br/>
 			 <div>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
-		       		<h5>Community > 공지사항</h5>
+		       		<h6><strong>Community > 공지사항</strong></h6>
 		       </c:if>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='1'}">
-		       		<h5>Community > 공지사항</h5>
+		       		<h6><strong>Community > 공지사항</strong></h6>
 		       </c:if>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='2'}">
-		       		<h5>Community > 공지사항</h5>
+		       		<h6><strong>Community > 공지사항</strong></h6>
 		       </c:if>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
-		       		<h5>Community > 자유게시판</h5>
+		       		<h6><strong>Community > 자유게시판</strong></h6>
 		       </c:if>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
-		       		<h5>Community > 자유게시판</h5>
+		       		<h6><strong>Community > 자유게시판</strong></h6>
 		       </c:if>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
-		       		<h5>Community > 자유게시판</h5>
+		       		<h6><strong>Community > 자유게시판</strong></h6>
 		       </c:if>
 		      
 		   	 </div>
@@ -390,10 +390,8 @@
 	            <th>신고</th>
 	            </c:if>	
 	          </tr>
-	        </thead>
-	       
-			<tbody>
-			
+	        </thead>       
+			<tbody>	
 			  <c:forEach var="content" items="${list}">
 				<tr>
 				<td><span style="color:white;">${content.contentName}</span>
@@ -405,9 +403,7 @@
 				  <td>${content.userNickname}
 				  <div id="userId" style="display:none;">${user.userId}</div></td>
 				  <td>${content.regDate}</td> 
-				    
-			   	  
-			   	  
+  
 			   	  <!-- 공감 -->
 			   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
 			   	  <span name="${content.contentNo}">${content.goodCount}</span>
@@ -421,8 +417,7 @@
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
 				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-bell"></i></a>	
 				  </td>
-				  </c:if>
-				  	
+				  </c:if> 	
 			</tr>
           <tr>
 		</tr>
@@ -432,97 +427,99 @@
 	      
 	      </table>
       </div>
-	  <!--  table End /////////////////////////////////////-->
 	</div>  
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 
 	<!-- 게시글 등록 Modal -->		  
 		<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	  <div class="modal-dialog modal-lg modal-center" role="document">
 	    <div class="modal-content modal-80size">
 
-	      <div class="modal-body" id="addContentModalBody">
-	      <select id="boardCode" name="boardCode" >
-<!--    			 	<option value="" >게시판 선택</option> -->
-		   		<c:if test="${sessionScope.user.role == '2'}">
-		   			<option value="0">공지사항</option>
-		   			</c:if>
-	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}"> 	
-	   			 	<option value="1">자유게시판</option>
-	   			 </c:if>
-	   			 <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}">	
-	   			 	<option value="2">고객센터</option>
-	   			 </c:if>
-   			 	</select> 
-   			 	
-   			 <select id="contentCode" name="contentCode">
-<!--    			 	<option value="">게시글 선택</option> -->
-		   			 <c:if test="${sessionScope.user.role == '2'}">   			 		
-			   			 	<option value="0">티켓 거래 공지</option>
-			   			 	<option value="1">자유게시판 이용 공지</option>
-			   				<option value="2">자주묻는질문</option>
-			   		</c:if>
-	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
-	   			 	<option value="3">삽니다</option>
-	   			</c:if>
-	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
-	   			 	<option value="4">팝니다</option>
-	   			 </c:if>
-	   			 <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	   			 	<option value="5">수다방</option>
-	   			 </c:if>
-	   			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}"> 	
-	   			 	<option value="6">1:1 문의하기</option>
-	   			 	<option value="7">환불 게시판</option>
-	   			 </c:if>
-   			 	</select>
-   			 	
-   			 <select id="open" name="open">
-				<option value="">공개 여부</option>
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-			</select>
-			<hr>	
+			<div class="modal-body" id="addContentModalBody" style="padding:30px;">
 			
-			<div class="form-group">
-		    <label for="userNickname" class="col" style="color:white;">작성자 : ${sessionScope.user.nickName}</label>
-		    
-<!-- 		    <div class="col-sm-4"> -->
-<%-- 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>	      --%>
-<%-- 		      <input type="hidden" name="userId" value="${sessionScope.user.userId}"> --%>
-<!-- 		     </div> -->    
-		  
-		  </div>
+				<div style="margin-bottom:10px;">
+					<select class="btn btn-outline-dark custom-select" id="boardCode" name="boardCode" style="width:200px;">
+						<option selected>게시판 선택</option>
+			    	    <c:if test="${sessionScope.user.role == '2'}">	  
+			    		  <option value="0">공지사항</option>
+			    	    </c:if>
+			    	 	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+			    		  <option value="1">자유게시판</option>
+			    		</c:if>
+			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}">
+			    		  <option value="2">고객센터</option>
+			    		</c:if>
+	  				</select>
+	  			
+		  			<select class="btn btn-outline-dark custom-select" id="contentCode" name="contentCode" style="width:200px;">
+						<option selected>게시글 선택</option>
+			    	  <c:if test="${sessionScope.user.role == '2'}">	  
+			    		<option value="0">티켓 거래 공지</option>
+			    		<option value="1">자유게시판 이용 공지</option>
+			    		<option value="2">자주묻는질문</option>
+			    	  </c:if>
+			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'}">
+			    		<option value="3">삽니다</option>
+			    		</c:if>
+			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='4'}">
+			    		<option value="4">팝니다</option>
+			    		</c:if>
+			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='5'}">
+			    		<option value="5">수다방</option>
+			    		</c:if>
+			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}">
+			    		<option value="6">1:1 문의하기</option>
+			    		<option value="7">환불 게시판</option>
+			    		</c:if>	
+		  			</select>
+	  			
+		  			<select class="btn btn-outline-dark custom-select" id="open" name="open" style="width:200px;">
+						<option selected>공개 여부</option> 
+			    		<option value="0">공개</option>
+			    	  	<option value="1">비공개</option>
+		  			</select>
+				</div>
+				<hr style="background-color:white"/>
+
+			
+			
+<!-- 				<div class="form-group"> -->
+			    <label for="userNickname" class="col" style="color:#020B13;font-size:17px;"><strong>작성자</strong></label><br/>
+			    
+			      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" style=width:200px; readonly>	     
+			      <input type="hidden" name="userId" value="${sessionScope.user.userId}"><br/>
+			        
+			  
+<!-- 			  	</div> -->
  		  
-		  <div class="form-group">
-		  
-		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label" style="color:white;">글 제목</label>   
-		      <input type="text" class="form-control" id="contentName" name="contentName">
-		  </div>
-		
-		  <label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label" style="color:white;">글 내용</label>
+			  <div class="form-group">
+			  
+			    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label" style="color:#020B13;"><strong>글 제목</strong></label>   
+			      <input type="text" class="form-control" id="contentName" name="contentName">
+			  </div>
+			
+		  	<label for="contentBody" class="col-sm-offset-1 col-sm-3 control-label" style="color:#020B13;"><strong>글 내용</strong></label>
 	
-		<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
-		<script type="text/javascript">
-		CKEDITOR.replace('contentBody'
-				, {height: 200});
-		</script>
-		<br/>  		
-	      </div>
-      
+			<textarea class="form-control" id="contentBody" name="contentBody"></textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace('contentBody'
+					, {height: 200});
+			</script>
+			<br/>  		
+	      
+      	
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
 	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
 	      </div>
-	    </div>
+	      </div>
+		</div>	
 	  </div>
 	</div>			  
 	</form>
 	<!-- 신고하기 Modal -->
 	<div class="modal fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content modal-80size">
+			<div class="modal-content modal-80size">
 					  <div class="modal-report">
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:white;">신고하기</span></strong></h5>
