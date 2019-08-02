@@ -186,30 +186,30 @@
 			top: 0;
 		}
 
-			#header > h1 a {
-				color: #c1c7cd;
-				font-size: 1.25em;
-			}
+/* 			#header > h1 a { */
+/* 				color: #c1c7cd; */
+/* 				font-size: 1.25em; */
+/* 			} */
 
-				#header > h1 a:hover {
-					color: #ffffff;
-				}
+/* 				#header > h1 a:hover { */
+/* 					color: #ffffff; */
+/* 				} */
 
 			#header > h1 span {
 				font-weight: 300;
 				font-size: .8em;
 			}
 
-		#header > a {
-			-moz-transition: color 0.2s ease-in-out;
-			-webkit-transition: color 0.2s ease-in-out;
-			-ms-transition: color 0.2s ease-in-out;
-			transition: color 0.2s ease-in-out;
-			display: inline-block;
-			padding: 0 0.75em;
-			color: inherit;
-			text-decoration: none;
-		}
+/* 		#header > a { */
+/* 			-moz-transition: color 0.2s ease-in-out; */
+/* 			-webkit-transition: color 0.2s ease-in-out; */
+/* 			-ms-transition: color 0.2s ease-in-out; */
+/* 			transition: color 0.2s ease-in-out; */
+/* 			display: inline-block; */
+/* 			padding: 0 0.75em; */
+/* 			color: inherit; */
+/* 			text-decoration: none; */
+/* 		} */
 
 			#header > a:hover {
 				color: #ffffff;
@@ -235,7 +235,7 @@
 				}
 
 			#header > a + a[href="#menu"]:last-child {
-				border-left: solid 1px rgba(255, 255, 255, 0.15);
+/* 				border-left: solid 1px rgba(255, 255, 255, 0.15); */
 				padding-left: 1.25em;
 				margin-left: 0.5em;
 			}
@@ -414,11 +414,11 @@
 
 		}
 		.modal-content{
-			background:rgba(40,57,101,.9);
+			background-color:#D9E5FF;
 		}
 		#tgetHeader{
 		   margin-top:30px;	
-		   color: #FBFCFE;	
+/* 		   color: #FBFCFE;	 */
 	       padding-bottom:30px; 
 	       background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
 				  -webkit-background-size: cover;
