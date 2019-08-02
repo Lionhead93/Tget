@@ -152,7 +152,8 @@
 	      <div class="sticky-top">
 		  <br/>
 			 <div>
-		       		<h5><strong>Community > 환불게시판</strong></h5>		          
+		       		<h5><strong>Community > 환불게시판</strong></h5>
+		      	          
 		   	 </div>
 			</div>
 		</div>		
@@ -237,11 +238,14 @@
 					<option value="0">공개</option>
 					<option value="1">비공개</option>
 			</select>	
-			<hr/>
+			
 			<div class="form-group">
-		    <label for="userNickname" class="col" style="color:white;">작성자 : ${sessionScope.user.nickName}</label>
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">작성자</label> 
+		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
+		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+		    
 		  </div>
-<!--  			<hr/> -->
+ 
 		  <div class="form-group">
 		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>
 		    
@@ -261,7 +265,7 @@
 	      </div>
 	      
 	      <div class="form-group">
-    		<label for="videoName" class="col-sm-offset-1 col-sm-3 control-label">동영상 등록</label>
+    		<label for="videoName">동영상 업로드</label>
     		<input type="file" class="form-control" id="videoName" name="file" value="${!empty content.videoName? content.videoName : ''}">
  		 </div>
  		 
