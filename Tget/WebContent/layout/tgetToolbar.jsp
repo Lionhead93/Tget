@@ -427,20 +427,22 @@ $(function getSearchWeather(lat, lon) {
   <div class="modal-dialog modal-80size modal-center" role="document">
     <div class="modal-content">     
     <div class="login-wrap">
-	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-		<input style="display: none;" id="tab-2" type="radio" name="tab" class="sign-up"><label style="display: none;" for="tab-2" class="tab"></label>
+	<br><br>
+	<div class="text-center" style="color:white;">
+		<i class="far fa-address-card fa-4x"></i>
+		</div>
 		<div class="login-form">
 			<div class="sign-in-htm">
-				<div class="group">
-					<label for="user" class="label">UserId</label>
+			<br><br>
+				<div class="group col-md-12">
+					<label for="user" class="label"><span><h4>¡¡Id</h4></span></label>
 					<input id="userId" name="userId" type="text" class="input" placeholder="Email">
 				</div>
-				<div class="group">
-					<label for="pass" class="label">Password</label>
+				<div class="group col-md-12">
+					<label for="pass" class="label"><span><h4>¡¡Password</h4></span></label>
 					<input id="password"  name="password"  type="password" class="input" data-type="password" placeholder="Password">
-				</div>
-				<div class="group">
+				</div><br>
+				<div class="group col-md-12">
 					<input id="signin" class="button" value="Sign In" data-toggle="modal" style="readOnly=true;">
 				</div>
 				
@@ -449,18 +451,18 @@ $(function getSearchWeather(lat, lon) {
      <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
 		<a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a>
 		</div>
-			<div class="foot-lnk">Not a member?   
-					<a href="#signUp">Sign up</a>
+			<div class="foot-lnk"><span style="color:white;">Not a member?</span>   
+					<a href="#signUp" style="color:aqua;">Sign up</a>
 				</div>			<br>
-				<div class="foot-lnk">
-					<a href="#forgotId">Forgot Id?   </a>
-				<br>	<a href="#forgotPassword">Forgot Password?</a>
+				<div class="foot-lnk" >
+					<a href="#forgotId" style="color:aqua;">Forgot Id?   </a>
+				<br>	<a href="#forgotPassword" style="color:LightSkyBlue;">Forgot Password?</a>
 			</div>
 		
 		</div>
 	</div>
 	
-</div>
+
 </div>
 </div>
 </div>

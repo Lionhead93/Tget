@@ -511,7 +511,7 @@
                         </div>
 			 <div class="text-center" style="background-color: white;"><br/><br/>
 					<div class="row">	
-					<div class="col-md-2" style="margin-left: 10px;">
+					<div class="col-md-3" style="margin-left: 10px;">
 					<span style="color: black;"><Strong>아이디</Strong> </span>
 					<br/><br/><br/>
 					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
@@ -643,7 +643,7 @@
 							        <div class="form-group">
 							        <br>
 							        
-							    <label for="ssn">	<span style="color: black;"><Strong>위치정보문의</Strong> </span></label>
+							    <label for="ssn">	<span style="color: black;"><Strong>위치정보 문의</Strong> </span></label>
 							    <div>
 							    
 							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
