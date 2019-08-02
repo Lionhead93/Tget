@@ -256,12 +256,9 @@
 							   console.log(result);
 							   
 							   if(result == "no"){
-								   
-								   $('#find').modal('hide');
-								   
-								   alert("입력하신 정보의 회원정보가 없습니다");
-							
-								   
+								   alert("잘못된 회원정보 입니다.");
+								   $('#find').modal("hide");
+								 
 							   }
 							   
 						   }
@@ -309,6 +306,20 @@
 			   
 			   });
 			   });
+			   
+			   
+				$(function() {
+					$("input[name='phone']").on('keyup',function() {
+
+						
+				 $(this).val($(this).val().replace(/[^0-9]/g,""));
+				 //alert("숫자만 입력하셔야 합니다.");
+				 
+					});
+				   });
+
+			   
+			   
 		     </script>
 				
 		  <form class="form-horizontal">
@@ -345,7 +356,7 @@
 		  
 	<br/><br/><br/>
 			
-			<div id= "ff" class="form-group" align="center" style="display:none;">
+			<div id= "ff" class="form-group" align="center">
 		      <button type="button" id= "btn" class="btn btn-outline-primary" 
 		      data-toggle="modal" data-target="#find" style="display:none;">찾기</button>
 		     </div><div>

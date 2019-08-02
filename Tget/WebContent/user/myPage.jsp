@@ -275,8 +275,8 @@ $(function() {
 							<c:when test="${sc eq '2' }"> V.I.P </c:when>
 							
 							<c:otherwise>
-								판매자 등록 후 조회.
-								<button id= "add" type="button" class="btn btn-primary">등록</button>
+								
+								
 								</c:otherwise>		
 							</c:choose>
 				
