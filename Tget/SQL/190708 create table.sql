@@ -331,5 +331,8 @@ INSERT
 		INTO youtube( youtube_no , youtube_id , event_name) 
 		VALUES	 (seq_youtube_youtube_no.nextval ,'qHQ681fxXnA' , 'RAPBEAT FESTIVAL 2019')
 
-
+INSERT
+		INTO recommended_event( recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail) 
+		VALUES	 (	seq_recomm_event_no.nextval , 'RAPBEAT FESTIVAL 2019' ,'LOVESHOT.mp4', '2019 랩비트 페스티벌', '빵빵한 라인업과 함께 여름을 시원하게 보내세요!' );
+		
 commit;

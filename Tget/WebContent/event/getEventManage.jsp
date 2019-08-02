@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>T-GET</title>
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -16,8 +17,14 @@
 	<link rel="stylesheet" href="/resources/css/yr.css" />
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">	
-<!--   	<link rel="stylesheet" href="/resources/demos/style.css"> -->
-  	
+	
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--  	<link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+
   	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -25,6 +32,9 @@
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     
+<!--      <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  
   	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -34,9 +44,6 @@
 	<script src="/resources/javascript/main.js"></script>
 	<script src="/resources/javascript/yr.js" ></script>
 	<script type="text/javascript">
-	$( function() {
-	    $( "#tabs" ).tabs();
-	  } );
 	
 	$(function(){
 		$("button:contains('삭제하기')").on("click",function(){			
@@ -95,11 +102,12 @@
 // 					"left=500, top=100, width=600, height=600, "
 // 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		$("#submit").on("click",function(){	
-// 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
+			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
 // 			alert("submit");
 			var formData = new FormData($("#editRecommEvent")[0]);			
 			if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
 				if (parseInt($("#recommEventlistSize").val()) < 3) {
+// 					alert('parseInt($("#recommEventlistSize").val()) < 3');
 					$.ajax(
 						{
 							url : "/event/rest/addRecommendedEvent",
@@ -107,6 +115,7 @@
 							data : formData,
 							processData: false,
 							contentType: false,
+// 							contentType: 'multipart/form-data', 
 							dataType : "json",
 							success : function(JSONData,status){
 								$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
@@ -260,6 +269,10 @@
 			});
 		});
 	});
+	
+	$( function() {
+	    $( "#tabs" ).tabs();
+	  } );
 	
 	function updateCategoryGET(recommNo){
 		$.ajax(
