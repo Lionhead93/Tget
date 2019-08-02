@@ -34,6 +34,7 @@ import com.tget.service.event.domain.StubhubEvent;
 import com.tget.service.event.domain.StubhubSearchList;
 import com.tget.service.event.domain.YoutubeVideo;
 import com.tget.service.event.domain.YoutubeVideoList;
+import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.user.domain.User;
 import com.tget.service.event.EventDao;
 
@@ -114,8 +115,8 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	
-	public void deleteYoutubeVideo(int youtubeNo) throws Exception{
-		sqlSession.delete("EventMapper.deleteYoutubeVideo",youtubeNo);
+	public void deleteYoutubeVideo(Map<String,Object>  map) throws Exception{
+		sqlSession.delete("EventMapper.deleteYoutubeVideo",map);
 	}
 	
 	
@@ -641,10 +642,12 @@ public class EventDaoImpl implements EventDao {
 		return map;
 	}
 	
-	
-	
-	
 	public List<String> selectAllLocation() throws Exception{
 		return sqlSession.selectList("EventMapper.selectAllLocation");
 	}
+	
+//	public List<Ticket> selectTicketList(Search search) throws Exception{
+//		return sqlSession.selectList("EventMapper.selectTicketList",search);
+//	}
+	
 }

@@ -250,25 +250,19 @@ $(function getSearchWeather(lat, lon) {
 <!-- 알림내역 모달창  -->
 					<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
+					    <div class="modal-content" style="background-color:#D9E5FF;">
 					    <div class="modal-wrap">
-     					 <div class="modal-html">
-					      <div class="modal-header">
-					        <h3 class="modal-title" id="modalCenterTitle"><span class="text-secondary"><i class="far fa-bell"></i> My Alarm </span></h3>
-					        <a href="#" class="close" data-dismiss="modal">
-					          &times;
-					        </a>
+     					 <div class="modal-html" style="background-color:#D9E5FF;">
+					       <div class="text-secondary text-center" style="padding-top: 30px;"><h3 style="color: #041625;"><i class="far fa-bell"></i> My Alarm</span></h3>
+					     <div id="alarmModalBody" class="modal-body" style="background-color:#D9E5FF;">
 					      </div>
-					      <div id="alarmModalBody" class="modal-body">
-					      </div>
-					      <div class="modal-footer">
-					        </div>
+					      
 					      </div>
 					     </div>
 					    </div>
 					  </div>
 					</div>
-					
+					</div>
 <!-- 날씨 안내 Modal -->
 					<div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered modal-md" role="document">

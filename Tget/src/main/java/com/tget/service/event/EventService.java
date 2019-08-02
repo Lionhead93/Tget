@@ -9,6 +9,7 @@ import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.event.domain.StubhubEvent;
+import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.user.domain.User;
 
 
@@ -48,5 +49,6 @@ public interface EventService {
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception;
 	public List<String> getAllLocation() throws Exception;
-	
+	public void deleteYoutubeVideo(Map<String,Object> map) throws Exception;
+//	public List<Ticket> getTicketList(Search search) throws Exception;
 }

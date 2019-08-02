@@ -7,6 +7,7 @@ import com.tget.service.event.domain.Category;
 import com.tget.service.event.domain.Event;
 import com.tget.service.event.domain.RecommEvent;
 import com.tget.service.event.domain.StubhubEvent;
+import com.tget.service.ticket.domain.Ticket;
 import com.tget.service.user.domain.User;
 import com.tget.common.domain.Search;
 
@@ -23,7 +24,7 @@ public interface EventDao {
 	public void insertInterestedEvent(String eventId, String userId) throws Exception;
 	public void deleteInterestedEvent(String eventId, String userId) throws Exception;
 	public void insertYoutubeVideo(String youtubeId, String eventName) throws Exception;
-	public void deleteYoutubeVideo(int youtubeNo) throws Exception;
+	public void deleteYoutubeVideo(Map<String,Object> map) throws Exception;
 	public List<String> selectListYoutubeId(String eventName) throws Exception;
 	public List<Event> selectListPopularEvent() throws Exception;
 	public List<RecommEvent> selectListRecommendedEvent() throws Exception;
@@ -47,5 +48,5 @@ public interface EventDao {
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception;
 	public List<String> selectAllLocation() throws Exception;
-	
+//	public List<Ticket> selectTicketList(Search search) throws Exception;
 }

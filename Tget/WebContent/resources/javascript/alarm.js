@@ -27,7 +27,7 @@ function getAlarmModal(userId) {
 							displayValue += "<a name='delete' href='#' class='btn btn-outline-danger'>";
 							displayValue +=	"<i class='fas fa-trash-alt'></i></a></p></div></li>";	
 							
-						    $(".modal-body").append(displayValue);
+						    $("#alarmModalBody").append(displayValue);
 							
 						});	
 						$("a[name='check']").on("click",function(){
