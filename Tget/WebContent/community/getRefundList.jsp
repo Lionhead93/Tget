@@ -237,15 +237,11 @@
 					<option value="0">공개</option>
 					<option value="1">비공개</option>
 			</select>	
-			
+			<hr/>
 			<div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
-		      <input type="hidden" name="userId" value="${sessionScope.user.userId}">
-		    </div>
+		    <label for="userNickname" class="col" style="color:white;">작성자 : ${sessionScope.user.nickName}</label>
 		  </div>
- 
+<!--  			<hr/> -->
 		  <div class="form-group">
 		    <label for="contentName" class="col-sm-offset-1 col-sm-3 control-label">글 제목</label>
 		    
@@ -265,7 +261,7 @@
 	      </div>
 	      
 	      <div class="form-group">
-    		<label for="videoName">동영상</label>
+    		<label for="videoName" class="col-sm-offset-1 col-sm-3 control-label">동영상 등록</label>
     		<input type="file" class="form-control" id="videoName" name="file" value="${!empty content.videoName? content.videoName : ''}">
  		 </div>
  		 
