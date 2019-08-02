@@ -53,19 +53,22 @@
 		}
 		.list-group-item{
 			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
+			  color: #020B13;
+ 			  border: 1px solid #88e3f7;		   
+ 			  background-color: #EBF7FF; 
 		}
 		table{
-			background-color: #193147;
+			color: #020B13;
+ 			border: 1px solid #88e3f7;		   
+ 			background-color: #EBF7FF;
 		}
 		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
+			border: 1px solid #88e3f7;
+			color: #EBF7FF ;
 		}
 		.col-md-2{
 			padding-left: 50px;
+			color: #020B13 ;
 		}	
 		.col-lg-3{			
 			margin-bottom: 20px;
@@ -323,17 +326,16 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">       	
 		    	<p class="text-dark" ><strong>전체  ${totalCount } 건수</strong></p>
 		    	
-		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				
 		<br/><br/><br/>
 	</div>	   
 
 	<br/>	   
-	 <div class="row">
+	 <div class="row" >
 	  <div class="col-md-2 text-center" >	  
 	      <div class="sticky-top" >
 		  <br/>
@@ -360,17 +362,17 @@
 		   	 </div>
 			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'||search.searchCondition=='2'&&search.searchKeyword=='2'}">
 				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
-				<li class="list-group-item"><a href="#">자유게시판 이용공지</a></li>
-				<li class="list-group-item"><a href="#">자주묻는질문</a></li>
+				<li class="list-group-item" ><a href="#" style=color:#020B13;>티켓 거래 공지</a></li>
+				<li class="list-group-item"><a href="#" style=color:#020B13;>자유게시판 이용공지</a></li>
+				<li class="list-group-item"><a href="#" style=color:#020B13;>자주묻는질문</a></li>
 				</ul>
 			</c:if>
 			  
 			<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
 				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">삽니다</a></li>
-				<li class="list-group-item"><a href="#">팝니다</a></li>
-				<li class="list-group-item"><a href="#">수다방</a></li>
+				<li class="list-group-item"><a href="#" style=color:#020B13;>삽니다</a></li>
+				<li class="list-group-item"><a href="#" style=color:#020B13;>팝니다</a></li>
+				<li class="list-group-item"><a href="#" style=color:#020B13;>수다방</a></li>
 				</ul>
 			</c:if>
 			</div>
@@ -378,44 +380,54 @@
 		
       <!--  table Start /////////////////////////////////////-->
      <div class="col-md-10 text-center">
-     	
+     		
+     		<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px;">
+		 <div class="card-body">	
+			<div class="row">
+				<div class="col-md-3"><p><strong>티켓 삽니다</strong></p></div>		     			        
+				<div class="col-md-3"><p><strong>판매자얌</strong></p></div>	        
+				<div class="col-md-3"><p><strong>2019-08-02</strong></p></div>
+				<div class="col-md-3"><p><strong>공감버튼 비공감버튼 신고버튼</strong></p></div>		
+		    </div>
+		</div>        
+	</div>	
 	      <table class="table" >	      
 	        <thead>
-	          <tr>
-	            <th>글 제목</th>
-	            <th>작성자</th>
-	            <th>작성일</th>				
-	            <th>공감/비공감</th>	
+	          <tr >
+	            <th style=color:#020B13;>글 제목</th>
+	            <th style=color:#020B13;>작성자</th>
+	            <th style=color:#020B13;>작성일</th>				
+	            <th style=color:#020B13;>공감/비공감</th>	
 	            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	            <th>신고</th>
+	            <th style=color:#020B13;>신고</th>
 	            </c:if>	
 	          </tr>
 	        </thead>       
-			<tbody>	
+			<tbody >	
 			  <c:forEach var="content" items="${list}">
 				<tr>
-				<td><span style="color:white;">${content.contentName}</span>
+				<td><span style="color:black;">${content.contentName}</span>
 				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
 				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
 				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
 
 	<%--  		  <td align="left">${content.contentBody}</td> --%>
-				  <td>${content.userNickname}
+				  <td style=color:#020B13;>${content.userNickname}
 				  <div id="userId" style="display:none;">${user.userId}</div></td>
-				  <td>${content.regDate}</td> 
+				  <td style=color:#020B13;>${content.regDate}</td> 
   
 			   	  <!-- 공감 -->
-			   	  <td><a href="#" class="good" id="${content.contentNo}"><i class="fas fa-thumbs-up"></i></a>
-			   	  <span name="${content.contentNo}">${content.goodCount}</span>
+			   	  <td><a href="#" class="good" id="${content.contentNo}"  style=color:#020B13;><i class="fas fa-thumbs-up"></i></a>
+			   	  <span name="${content.contentNo}" style=color:#020B13;>${content.goodCount}</span>
 			   	  
 			   	  <!-- 비공감 -->
-			   	  <a href="#" class="bad" id="${content.contentNo}"><i class="fas fa-thumbs-down"></i></a>
-			   	  <a id="${content.contentNo}">${content.badCount}</a> 
+			   	  <a href="#" class="bad" id="${content.contentNo}" style=color:#020B13;><i class="fas fa-thumbs-down"></i></a>
+			   	  <a id="${content.contentNo}"  style=color:#020B13;>${content.badCount}</a> 
 			   	  </td>
 			   	  
 				  <!-- 신고 하기 -->
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				  <td align="left"><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal" ><i class="fas fa-bell"></i></a>	
+				  <td align="left"  style=color:#eb1e07;><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal"  style=color:#eb1e07;><i class="fas fa-bell"></i></a>	
 				  </td>
 				  </c:if> 	
 			</tr>
