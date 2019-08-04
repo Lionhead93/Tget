@@ -53,24 +53,7 @@
 							});
 					}
 		});
-		
-// 		$("input[type='text']").on("keyup",function(){
-// 			$("#searchKeyword").val($("input[type='text']").val());
-// 		});
-		
-// 		$("input[type='text']").on("keypress",function(){
-// 			if (event.keyCode ==13) {
-// 				$("#searchCondition").val("1");
-// 				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-// 			}
-// 		});
-		
-// 		$("#button-addon2").on("click",function(){
-// 			$("#searchCondition").val("1");
-// 			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-// 		});
-		
-		
+
 	
 		$(".addTicket").on("click",function(){			
 			var eventId = $(this).val(); 			
@@ -84,9 +67,6 @@
 // 				self.location="/ticket/addTicketInfo?eventId="+eventId;
 // 				self.location="/user/login";
 			}
-// 			$("#eventId").val($(this).val());
-// 			$("form").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo?eventId="+$(this).val()).submit();
-// 			self.location="/ticket/addTicketInfo?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
 		$(".getTicketList").on("click",function(){
@@ -96,28 +76,7 @@
 // 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
 		});		
 		
-// 		$(document).on("click", "#editImage",function(){			
-			
-// 		});		
-			
-// 		$('#exampleModalCenter').on('show.bs.modal', function(e) {
-				
-// 				var button = $(e.relatedTarget);
-// 				var modal = $(this);
-				
-// 				modal.find('.modal-body').load(button.data("remote"));
-		
-// 			});
-		
-		
-// 		$("#editImage").on("click",function(){		
-// 			popWin = window.open("/event/addEventImage?eventName="+$("#eventName").val()
-// 					+"&eventImage="+$("#eventImage").val(),"popWin",
-// 					"left=500, top=100, width=600, height=600, "
-// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
-// 			$('#theModal').modal('show');			
-// 		});	
-		
+
 		$("#submit").on("click",function(){	
 			var formData = new FormData($("#editEventImage")[0]);
 			
@@ -176,15 +135,16 @@
 			color: #FBFCFE ;
 		}		
 		body{
-				margin-top: 50px;
-				background-color : #062038; 
-				color: #FBFCFE;
-		}		
-		div.border{
-			background-color : #193147; 
-		}		
+			margin-top: 50px;
+			background-color: #EBF7FF;
+			color: #041625;
+		}	
+		div.border{ 
+			background-color : white; 
+			color:  #041625;
+ 		}		
 		div.border:hover{
-			background-color : #041625; 
+			background-color : #EBF7FF; 
 		}		
       div.container{
 	 		font-size: 20px;    
@@ -192,9 +152,9 @@
         .col-lg-6{
         	margin-top: 10px;
         }
-        div.col-md-4{
-        	border: 1px; color: black;
-      	}
+/*         div.col-md-4{ */
+/*         	border: 1px; color: black; */
+/*       	} */
       	div.list{
 	 		font-size: 20px;
       	}
@@ -300,7 +260,7 @@
 				<div class="col-lg-5  col-12" align="center">
 					<div class="sticky-top">
 						<div class="textcontainer">
-							<div id="title"><h1>${event.koName}</h1></div>
+							<div id="title" style="color: #041625;"><h1>${event.koName}</h1></div>
 						</div>
 					<input type="hidden"  id="eventId" name="eventId" />
 					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
@@ -322,7 +282,7 @@
 							
 							<c:if test="${user.role == 2 }">
 <!-- 								Call Modal Button	 -->
-								<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-light"							
+								<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-outline-dark"		style="margin:10px;"			
 								 data-target="#exampleModalCenter">편집</button><br/>
 		
 							</c:if>
@@ -338,7 +298,7 @@
 
 					<div class="row" align="center">
 						<c:forEach var="i" items="${eventListByName}" varStatus="j">
-							<div class="col-lg-6">
+							<div class="col-lg-6 col shadow p-3 mb-5 bg-white rounded"">
 								<div class="text-center">
 									<div class="border">
 								 		<br/>
@@ -355,8 +315,8 @@
 											<ion-icon name="checkmark"></ion-icon>
 											<small>티켓최저가</small><br/>${i.ticketLowestPriceStr } 원<br/>	<br/>	<br/>	
 											<div class="container" align="center">			
-												<button type="button" class="btn btn-light addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
-												<button type="button" class="btn btn-light getTicketList"  value="${i.eventId}">구매</button><br/>
+												<button type="button" class="btn btn-outline-primary addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
+												<button type="button" class="btn btn-outline-primary getTicketList"  value="${i.eventId}">구매</button><br/>
 											</div>	
 								 		</div>									
 										</div>		

@@ -74,46 +74,6 @@
 					}
 		});
 		
-// 		$.ajax(
-// 				{
-// 					url : "/event/rest/getYoutubeSearchList?requestPageToken=",
-// 					method : "POST",
-// 					data : {
-// 						searchKeyword : $("#searchKeyword").val()
-// 					},
-// 					dataType : "json",
-// 					success : function(JSONData, status){
-// //	 					alert(status);
-// //	 					alert(JSONData.youtubeList);		
-// 						$("#prevPageToken").val(JSONData.prevPageToken);
-// 						$("#nextPageToken").val(JSONData.nextPageToken);
-// 						$.each(JSONData.youtubeList, function(index,value){
-// //	 						availableTags[index] = value;
-// 							$("#h"+index).text(value.title);
-// 							$("#img"+index).attr("src",value.thumbnails);
-// 							$("#desc"+index).text(value.description);
-// 							$("#button"+index).val(value.videoId );
-// 						 });
-// 					}		
-// 			 });		
-		
-// 		$("input[type='text']").on("keyup",function(){
-// 			$("#searchKeyword").val($("input[type='text']").val());
-// 		});
-		
-// 		$("input[type='text']").on("keypress",function(){
-// 			if (event.keyCode ==13) {
-// 				$("#searchCondition").val("1");
-// 				$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-// 			}
-// 		});
-		
-// 		$("#button-addon2").on("click",function(){
-// 			$("#searchCondition").val("1");
-// 			$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
-// 		});
-		
-
 
 
 		if ("${!empty user}") {
@@ -177,12 +137,6 @@
 			}
 		});
 
-// 		$("#addYoutube").on("click",function(){
-// 			popWin = window.open("/event/addYoutubeVideo?requestPageToken=&eventName="+$("#eventName").val(),
-// 						"popWin",
-// 						"left=500, top=100, width=600, height=600, "
-// 						+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");		
-// 		});
 		
 		$("button.addTran").on("click",function(){
 			if ("${empty user}"=="true") {
@@ -192,9 +146,6 @@
 				$("#ticketNo").val($(this).val());
 				$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
 			}
-// 			$("#ticketNo").val($(this).val());
-// 			$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
-// 			self.location = "/tran/addTran?ticketNo="+$(this).val();
 
 		});
 		
@@ -354,9 +305,8 @@
 	
 	<style>
 		body{
-/* 			margin-top: 50px; */
-			background-color : #062038; 
-			color: #FBFCFE;
+			background-color: #EBF7FF;
+			color: #041625;
 		}
 	
 		#footer{
@@ -366,23 +316,14 @@
 		a, hr{
 				color: #FBFCFE ;	
 		}			
-		
-		button.btn-light:hover{
-			background-color: gray;
-			color: #FBFCFE ;
-		}
-	
-      div.container {
-/* */         	margin-top: 20px;
-        }
-        
-        div.border{
-			background-color : #193147; 
+        	
+		div.border{ 
+			background-color : white; 
+			color:  #041625;
 			margin-top:20px;
-		}
-		
+ 		}		
 		div.border:hover{
-			background-color : #041625; 
+			background-color : #EBF7FF; 
 		}		
         
         .getSellerEstimation:hover{
@@ -451,19 +392,19 @@
 		    color: #146C80;
 		  }
   		}
-  		.modal-wrap{
-			width:100%;
-			margin:auto;
-			max-width:525px;
- 			position:relative; 
-			background-color: black;
-			background:url(/resources/images/logins.jpg) no-repeat center;
-			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-			overflow:auto;
-		}
-		.modal-html{
-			background:rgba(40,57,101,.9);			
-		}
+/*   		.modal-wrap{ */
+/* 			width:100%; */
+/* 			margin:auto; */
+/* 			max-width:525px; */
+/*  			position:relative;  */
+/* 			background-color: black; */
+/* 			background:url(/resources/images/logins.jpg) no-repeat center; */
+/* 			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19); */
+/* 			overflow:auto; */
+/* 		} */
+/* 		.modal-html{ */
+/* 			background:rgba(40,57,101,.9);			 */
+/* 		} */
   	
     </style>
 </head>
@@ -693,9 +634,7 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-top:40px">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-     <div class="modal-wrap">
-     <div class="modal-html">
+    <div class="modal-content"  style="background-color:#F8FFFF; color: #041625;">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">유튜브 동영상 등록</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
@@ -709,12 +648,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-top:4
       <div class="modal-footer">       
 <!--         <button type="button" class="btn btn-light"  id="delete" >삭제</button> -->
 <!--         <button type="button" class="btn btn-light"  id="submit" >저장</button> -->
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
