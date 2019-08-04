@@ -37,6 +37,7 @@
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>
 		<script src="/resources/javascript/yr.js" ></script>
+
 		<style type="text/css">
 		a{
 			color: black;
@@ -69,7 +70,7 @@
 					<input type="hidden"  id="searchKeyword" name="searchKeyword"  
 					placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 							<h1>
-							<div style="color:#020B13; font-family: 'PT Sans Caption', sans-serif;font-size:80px;">							
+							<div style="color:#020B13; font-family:  clipneon ;font-size:80px;">							
 <!-- 								<span class="textcontainer"> -->
 <!-- 									<span class="particletext bubbles"> -->
 									
@@ -131,7 +132,7 @@
 										인기 이벤트
 									<span class="particle" style="top:45%; left:13%;width:12px; height:12px;animation-delay: 0.2s;"></span><span class="particle" style="top:55%; left:87%;width:10px; height:10px;animation-delay: 0.3s;"></span><span class="particle" style="top:53%; left:-5%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:53%; left:77%;width:8px; height:8px;animation-delay: 1.5s;"></span><span class="particle" style="top:69%; left:24%;width:8px; height:8px;animation-delay: 0.3s;"></span><span class="particle" style="top:57%; left:98%;width:9px; height:9px;animation-delay: 1.8s;"></span><span class="particle" style="top:66%; left:70%;width:8px; height:8px;animation-delay: 0.2s;"></span><span class="particle" style="top:64%; left:75%;width:8px; height:8px;animation-delay: 1.3s;"></span><span class="particle" style="top:41%; left:57%;width:11px; height:11px;animation-delay: 0.4s;"></span><span class="particle" style="top:50%; left:5%;width:10px; height:10px;animation-delay: 1.2s;"></span><span class="particle" style="top:48%; left:6%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:60%; left:82%;width:8px; height:8px;animation-delay: 0.7s;"></span><span class="particle" style="top:57%; left:70%;width:8px; height:8px;animation-delay: 1s;"></span><span class="particle" style="top:45%; left:43%;width:9px; height:9px;animation-delay: 0.3s;"></span><span class="particle" style="top:48%; left:3%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:72%;width:8px; height:8px;animation-delay: 0s;"></span><span class="particle" style="top:40%; left:79%;width:11px; height:11px;animation-delay: 1.4s;"></span><span class="particle" style="top:49%; left:54%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:48%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:58%; left:26%;width:8px; height:8px;animation-delay: 2s;"></span><span class="particle" style="top:41%; left:57%;width:10px; height:10px;animation-delay: 0.2s;"></span><span class="particle" style="top:66%; left:15%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:60%; left:22%;width:10px; height:10px;animation-delay: 0.9s;"></span><span class="particle" style="top:40%; left:25%;width:12px; height:12px;animation-delay: 0.6s;"></span><span class="particle" style="top:62%; left:93%;width:8px; height:8px;animation-delay: 0.9s;"></span><span class="particle" style="top:47%; left:9%;width:10px; height:10px;animation-delay: 0.7s;"></span><span class="particle" style="top:43%; left:-2%;width:8px; height:8px;animation-delay: 0.8s;"></span><span class="particle" style="top:69%; left:2%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:9%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:43%; left:22%;width:11px; height:11px;animation-delay: 0.8s;"></span><span class="particle" style="top:64%; left:37%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:70%; left:84%;width:8px; height:8px;animation-delay: 1.1s;"></span></span>
 								</span>
-								<span class='neon' style='font-family: FontAwesome;font-weight:bold;font-size:18px;'>HOT</span>
+								<span class=' jackpots'  style='font-size:25px;'>HOT</span>
 							</h2>
 							<p style="color: #062038;font-weight: bold;">조회수 Top 3</p>
 						</header>

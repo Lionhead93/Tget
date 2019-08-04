@@ -139,7 +139,6 @@
 			background-color : #D9E5FF; 
 		}
 		body{
-			margin-top: 70px;
 			background-color: #EBF7FF;
 			color: #041625;
 /*     */ 				
@@ -148,7 +147,7 @@
 			background-color: #1B1B1F ;
 		}
 		a, hr{
-				color: #FBFCFE ;	
+				color: #041625;
 			}	
 		th, td, tr{
 			padding: 20px;
@@ -194,6 +193,7 @@
 				  </thead>
 				  <tbody>
 				  <c:forEach items="${interestedEventList}"  var="i">
+				  <tr class="record">
 <%-- 				    <tr class="record" id="${i.eventId }">				     --%>
 <!-- 				      <td class="record" >				       -->
 <%-- 				      	<input type="hidden" value="${i.eventId }"  /> --%>

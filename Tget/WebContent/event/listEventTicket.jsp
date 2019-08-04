@@ -637,7 +637,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-top:4
     <div class="modal-content"  style="background-color:#F8FFFF; color: #041625;">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">유튜브 동영상 등록</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

@@ -372,12 +372,12 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color:#D9E5FF; color: #041625;">
      <div class="modal-wrap">
      <div class="modal-html">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">이미지 편집</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -387,8 +387,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       </div>
       <div class="modal-footer">
        
-        <button type="button" class="btn btn-light"  id="delete" >삭제</button>
-        <button type="button" class="btn btn-light"  id="submit" >저장</button>
+        <button type="button" class="btn btn-outline-primary"  id="delete" >삭제</button>
+        <button type="button" class="btn btn-outline-primary"  id="submit" >저장</button>
          <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>

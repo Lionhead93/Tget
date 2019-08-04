@@ -252,12 +252,12 @@ html,
 
 
   .jackpots {
-    animation: jackpots 1s 0s ease infinite;
-    -moz-animation: jackpots 1s 0s ease infinite;
+    animation: jackpots 3s 0s ease infinite;
+    -moz-animation: jackpots 3s 0s ease infinite;
     /* Firefox */
-    -webkit-animation: jackpots 1s 0s ease infinite;
+    -webkit-animation: jackpots 3s 0s ease infinite;
     /* Safari and Chrome */
-    -o-animation: jackpots 1s 0s ease infinite;
+    -o-animation: jackpots 3s 0s ease infinite;
     /* Opera */
   }
 
