@@ -17,7 +17,6 @@
 	<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
 	<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
 	<meta name="author" content="Codrops" />
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />	
