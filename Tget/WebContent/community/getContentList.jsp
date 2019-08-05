@@ -387,7 +387,7 @@
       <!--  table Start /////////////////////////////////////-->
  <div class="col-md-10 text-center">
      		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px;">
+     		<div style="margin-bottom: 10px; height:70px;">
 		 <div class="card-body">	
 			<div class="row">
 				<div class="col-md-4"><p><strong>±Û Á¦¸ñ</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        

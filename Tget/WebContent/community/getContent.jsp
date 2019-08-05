@@ -172,48 +172,57 @@
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
-	
-	<div class="container">
-	
-		<div class="page-header text-info">
-	       <h3><span style="color:#020B13;">게시글 상세조회</span></h3>	       
-	    </div>
-		<hr/>
+
+	 <div class="row" >
+	  <div class="col-md-2 text-center" >	  
+	      <div class="sticky-top" ><!--  sticky-top-->
+		  <br/>
+			 <div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+						  <div class="card-header">
+						 <div>
+		       		<h6><strong>게시글 > 상세조회 </strong></h6>
+
+			   	 </div>
+			</div>
+		</div>
+		<br/>
+		</div></div>
 		
+		<div class="col-md-10 text-center">
+      <div class="card text-center shadow-lg rounded">
+
+		 <div class="card-body">
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>작성자</strong></div>
-			<div class="col-xs-8 col-md-4">${content.userNickname}</div>
+			<div class="col-xs-8 col-md-4 text-left">${content.userNickname}</div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>글 제목 </strong></div>
-			<div class="col-xs-8 col-md-4">${content.contentName}</div>
+			<div class="col-xs-8 col-md-4 text-left">${content.contentName}</div>
 		</div>
 		
 		<hr/>
 	
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>글 내용</strong></div>
-	  		<div class="col-xs-8 col-md-4">${content.contentBody}</div>
+	  		<div class="col-xs-8 col-md-4 text-left">${content.contentBody}</div>
 		</div>
-		
 		
 		<hr/>
-
-		
-		<div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
-			 
-			 <button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
-			
-		    </div>
+		<div class="col-xs-8 col-md-4">
+		    <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
+			<button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
 		</div>
-
 <%--  		<jsp:include page="/community/reply5.jsp"/>  --%>
 		<br/>	
+		
+ 					</div>
+ 				
+ 			</div>
+ 		</div>
  	</div>
  	
  		<div class="modal fade" id="updateContentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">

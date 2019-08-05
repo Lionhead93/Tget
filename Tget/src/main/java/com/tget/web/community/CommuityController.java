@@ -286,6 +286,7 @@ public class CommuityController {
 			System.out.println("/community/getSearchLoad");
 			List<Event> list = eventService.getAllLocation();
 			
+			
 			model.addAttribute("list", list);
 			
 			return "forward:/community/getSearchLoad.jsp";

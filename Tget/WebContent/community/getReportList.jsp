@@ -287,9 +287,9 @@
 					        </button>
 					      </div>
 					      <div class="modal-body" >
-					      <div class="col" style=color:#020B13;>작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
+					      <div class="col" style=color:#020B13;>작성자 : <span id="reportBlackId">${content.userNickname}</span></div>
 						<hr/>
-						  <div class="col" style=color:#020B13;>내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
+						  <div class="col" style=color:#020B13;>내용 :  <div id="reportContentBody">${content.contentBody}</div></div>
 					    
 						<br>
 						
