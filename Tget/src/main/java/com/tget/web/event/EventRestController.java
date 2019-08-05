@@ -147,8 +147,6 @@ public class EventRestController {
 				session.setAttribute(search.getSearchKeyword()+"IsTheLast", "false");
 			}
 		}
-		
-		
 //		model.addAttribute("eventList",list);
 //		model.addAttribute("search", search);
 //		model.addAttribute("requestPageToken",requestPageToken);				

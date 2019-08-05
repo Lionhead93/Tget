@@ -79,7 +79,7 @@
 										 </div>
 										 <br/>
 										 <div>
-										 	계좌 번호&nbsp; : &nbsp;<input type="text" name="accountNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important"> 
+										 	계좌 번호&nbsp; : &nbsp;<input type="text" name="accountNo" value="" placeholder="(-) 제외 입력" maxlength="15" style="width: 300px !important"> 
 										 </div>
 										 <br/>
 										 <div class="text-danger">
@@ -90,8 +90,8 @@
 										 </div>
 										 <br/>
 										<div align="center">
-											<a class="btn btn-outline-light btn" href="#" role="button" id="addSellerSubmit">등록</a>
-											<a class="btn btn-outline-light btn" href="#" role="button" id="addSellerCancle" data-dismiss="modal">취소</a>						
+											<a class="btn btn-light btn" href="#" role="button" id="addSellerSubmit">등록</a>
+											<a class="btn btn-light btn" href="#" role="button" id="addSellerCancle" data-dismiss="modal">취소</a>						
 										</div>
 									</form>
 								</div>			      	      

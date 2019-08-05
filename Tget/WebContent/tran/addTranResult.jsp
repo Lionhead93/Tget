@@ -35,35 +35,13 @@
 	<script src="/resources/javascript/main.js"></script>
    
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+     body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		#tranResult{
-			  border: 1px solid #D6CDB7;
-			  background-color: #193147;
-		}
-		a, hr{
-			color: #FBFCFE ;	
-		}
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		
-		section{
-			margin-left: 40px;
-		}		 
-		#footer{
-			background-color: #1B1B1F;
-		}
-       .list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
+		a{
+			color: #041625;
+		}	
     
     </style>
     
@@ -93,13 +71,14 @@
 			<div class="col-lg-2">				
 			</div>
 			<div id="tranResult" class="col-lg-8">
+			<div class="card text-center shadow rounded">
 				<div class="text-center">
 				<br/>
 				  <h3 class="display-4">구매 해주셔서 감사합니다.</h3>
 				  <hr class="my-4">
-				  <h5> ${transaction.event.eventName}</h5>
-				  <p>배송지 : ${transaction.deliveryAddr}</p>
-				  <p>결제 수단 : 
+				  <h4><strong> ${transaction.event.eventName}</strong></h4><br/>
+				  <p>배송지 <i class="fas fa-check"></i> ${transaction.deliveryAddr}</p>
+				  <p>결제 수단 <i class="fas fa-check"></i> 
 				  <c:if test="${transaction.paymentOption==0}">
 				  	신용카드
 				  </c:if>
@@ -110,7 +89,7 @@
 				  	무통장입금
 				  </c:if>		  
 				  </p>
-				  <p>총 금액 : <span id="totalPrice">${transaction.totalPrice}</span></p>
+				  <p>총 금액 <i class="fas fa-check"></i> <span id="totalPrice">${transaction.totalPrice}</span></p>
 				  <c:if test="${transaction.paymentOption==2}">
 				  
 				  <p class="text-danger">*아래의 입금계좌로 당일 안에 입금부탁 드립니다.</p> 
@@ -120,9 +99,10 @@
 				  </c:if>
 				  
 				  <br/><br/>
-				  <button type="button" class="btn btn-outline-light">완료</button>
+				  <button type="button" class="btn btn-outline-dark">완료</button>
 				<br/><br/>	
 					</div>
+			</div>
 			</div>
 			<div class="col-lg-2">				
 			</div>

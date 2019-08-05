@@ -38,35 +38,13 @@
 	<script src="/resources/javascript/main.js"></script>
 	
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+      body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		#tranInput{
-			  border: 1px solid #D6CDB7;
-			  background-color: #193147;
-		}
-		a, hr{
-			color: #FBFCFE ;	
-		}
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		
-		section{
-			margin-left: 40px;
-		}
-		#footer{
-			background-color: #1B1B1F;
-		}
-       .list-group > .list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
+		a{
+			color: #041625;
+		}	
     </style>
     
 	<script type="text/javascript">	
@@ -292,24 +270,28 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />
 		<br/>
 		<div class="row">
-			<div class="col-lg-2">
-				<div class="sticky-top">
-		      	<div class='text-center'>
-		      		<br/><br/><br/>
-					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 티켓 구매 </strong></p>
-					<br/>
-												<ul class="list-group list-group-flush">										  
-												  <li class="list-group-item"><a href="#">구매자 가이드</a></li>
-												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
-												  <li></li>											  
-												</ul> 											  
-				</div> 
-				</div>
+		<div class="col-lg-3">
+      	<div class="sticky-top">
+		<br/><br/><br/><br/>
+			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625; margin-left: 100px;">
+			  <div class="card-header">
+			   <strong>티켓  <i class="fas fa-ticket-alt"></i> 티켓 구매</strong>
+			  </div>
+			  <ul class="list-group list-group-flush">								
+				<li class="list-group-item"><a href="#" data-target="#buyerGuideModal" data-toggle="modal">구매자 가이드</a></li>
+				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
+			  </ul>		  
 			</div>
+		
+		  </div>   	
+     	 </div>
 			
-			<div id="tranInput" class="col-lg-8">				
+			
+			<div id="tranInput" class="col-lg-7">				
 			<form>
-			<div id="thisTitle" class="text-center">
+			<div class="card text-center shadow rounded" style="width: 800px; ">
+			<div id="thisTitle" class="text-center">	
+			<br/>		
 			  <h1 class="display-4">${ticket.event.eventName}</h1>
 			  <p class="lead">${ticket.event.eventDate}</p>
 			  <p>${ticket.event.eventLocation}</p>
@@ -335,50 +317,75 @@
 				  	</c:if>
 				  </c:forEach>
 				</div>
-				<br/>  			    
-			     <div class="form-group" >
-			     <br/>
-			     <strong>구매 가격 : </strong> 	
-			        <span id="ticketPrice"></span> X <input type="text" name="orderAmount" value="" style="width: 50px !important" maxlength="10" readonly/> = 
-			        <span id="orTotalPrice">0</span>
-			    </div>
+				<br/><br/>	
+				<div class="form-group row">	
+				  <div class="col-sm-3"></div>	    
+				    <label for="amount" class="col-sm-2 col-form-label"><strong>구매 가격 </strong></label>			    
+				    <div class="col-sm-7">
+				    <div align="left">
+				         <span id="ticketPrice"></span> X <input type="text" id="orderAmount" name="orderAmount" value="" style="width: 50px !important" maxlength="10" readonly/> = 
+				         <span id="orTotalPrice">0</span>
+				    </div>     
+				    </div>
+				    		    
+				  </div>	 
 			   
-			<br/>  
+			<hr/>  
 			<div>
 			<h5><strong>배송지를 입력해주세요.</strong></h5>
 			<button type="button" class="btn btn-link"><small class="text-secondary">신규 배송지</small></button><button type="button" class="btn btn-link"><small>기존 배송지</small></button>
-			<div class="form-group" >
-			     <br/>
-			     <strong>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소 : </strong> 	
-			        <input type="text" id="deliveryAddr" name="deliveryAddr" value="" style="width: 300px !important" readonly/><br/><br/>
-			      <strong>상세주소 : </strong><input type="text" id="addrDetail" name="deliveryAddr" value="" style="width: 300px !important"/>
-			</div>
+			<br/><br/>
+			<div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="deliveryAddr" class="col-sm-2 col-form-label"><strong>주소 </strong></label>			    
+			    <div class="col-sm-4">
+			        <input type="text" class="form-control" id="deliveryAddr" name="deliveryAddr" value="" readonly/>
+			    </div>	
+			    <div class="col-sm-3"></div>	 		    		    
+			  </div>
+			  <div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="deliveryAddr" class="col-sm-2 col-form-label"><strong>상세 주소 </strong></label>			    
+			    <div class="col-sm-4">
+			        <input type="text" class="form-control" id="addrDetail" name="deliveryAddr" value="" /><br/><br/>
+			    </div>
+			   <div class="col-sm-3"></div>	  		    		    
+			  </div>
 			</div>
 			
-			<br/>  
+			<hr/>  
 			<div>
-			<h5><strong>사용 포인트를 입력해주세요.</strong></h5>
+			<h5><strong>사용 포인트를 입력해주세요.</strong></h5><br/>
 			
-			<div class="form-group" >
-			     <br/>
-			     <strong>사용포인트 : </strong> 	
-			        <input type="text" id="point" name="usePoint" value="0" style="width: 150px !important"/>&nbsp;&nbsp;보유 : <span class="text-danger" id="user-point">${user.point}</span><br/>
+			<div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="usePoint" class="col-sm-2 col-form-label"><strong>사용포인트 </strong></label>			    
+			    <div class="col-sm-3">
+			        <input type="text" class="form-control" id="point" name="usePoint" value="0"/>
 			        <button type="button" class="btn btn-link"><small>전부 사용</small></button>
-			</div>
-			<div class="form-group" >
-			     <br/>
-			     <strong>최종  금액 : </strong> 	
-			        <input type="text" id="totalPrice" name="totalPrice" value="" style="width: 150px !important" readonly/>
-			</div>
+			    </div>
+			   <div class="col-sm-4 text-left" style="padding-top: 8px;">보유 <span class="text-danger" id="user-point">${user.point}</span></div>	  		    		    
+			  </div>
+			  
 			
+			
+			<div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="totalPrice" class="col-sm-2 col-form-label"><strong>최종 금액 </strong></label>			    
+			    <div class="col-sm-3">
+			         <input type="text" class="form-control" id="totalPrice" name="totalPrice" value="" readonly/>
+			    </div>
+			   <div class="col-sm-4 text-left" style="padding-top: 8px;"></div>	  		    		    
+			  </div>
 			</div>
 			
 			
 			
 			<br/>
 			<div class="form-group">
-			      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payModal">계 속</button>
-				  <a class="btn btn-danger btn" href="#" role="button">취&nbsp;소</a>
+			      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#payModal">계 속</button>
+				  <a class="btn btn-outline-danger btn" href="#" role="button">취&nbsp;소</a>
+			</div>
 			</div>
 			</div>
 			</form>	
