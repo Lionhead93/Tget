@@ -48,7 +48,7 @@ public interface EventService {
 	public void deleteInterestedEventAll(String userId) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception;
-	public List<String> getAllLocation() throws Exception;
+	public List<Event> getAllLocation() throws Exception;
 	public void deleteYoutubeVideo(Map<String,Object> map) throws Exception;
 //	public List<Ticket> getTicketList(Search search) throws Exception;
 }

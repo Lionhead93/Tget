@@ -47,6 +47,6 @@ public interface EventDao {
 	public void deleteInterestedEventAll(String userId) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception;
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception;
-	public List<String> selectAllLocation() throws Exception;
+	public List<Event> selectAllLocation() throws Exception;
 //	public List<Ticket> selectTicketList(Search search) throws Exception;
 }
