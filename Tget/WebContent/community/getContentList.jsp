@@ -49,13 +49,7 @@
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a, hr{
-			color: #FBFCFE ;	
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #020B13;
- 			  border: 1px solid #88e3f7;		   
- 			  background-color: #EBF7FF; 
+			color: black;	
 		}
 		table{
 			color: #020B13;
@@ -99,9 +93,7 @@
 		#cyberWidget{
        		background-color: white;
        }  
-       #footer{
-			background-color: #1B1B1F;
-		}
+       
 		
 		
 	/* 	게시글 등록 Modal */
@@ -351,7 +343,9 @@
 	  <div class="col-md-2 text-center" >	  
 	      <div class="sticky-top" ><!--  sticky-top-->
 		  <br/>
-			 <div>
+		  <div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+			  <div class="card-header">
+			 
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
 		       		<h6><strong>Community > 공지사항</strong></h6>
 		       </c:if>
@@ -376,7 +370,7 @@
 				<ul class="list-group list-group-flush">
 				<li class="list-group-item" ><a href="#" style=color:#020B13;>티켓 거래 공지</a></li>
 				<li class="list-group-item"><a href="#" style=color:#020B13;>자유게시판 이용공지</a></li>
-				<li class="list-group-item"><a href="#" style=color:#020B13;>자주묻는질문</a></li>
+				
 				</ul>
 			</c:if>
 			  
@@ -388,6 +382,7 @@
 				</ul>
 			</c:if>
 			</div>
+		</div>
 		</div>	
 		
       <!--  table Start /////////////////////////////////////-->
@@ -625,6 +620,7 @@
 						    </div>
 						  </div>
 
-</body>
+
 <jsp:include page="/layout/footer.jsp" />
+</body>
 </html>

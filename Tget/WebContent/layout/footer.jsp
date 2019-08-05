@@ -18,7 +18,7 @@
 							<br/>
 								<a href="#">티켓거래 공지</a><br/><br/>
 								<a href="#">자유게시판 이용공지</a><br/><br/>
-								<a href="#">자주묻는질문</a>
+								
 							
 						</div>
 						<div class="col">
@@ -33,7 +33,7 @@
 							<h3>고객센터</h3>
 							<hr/>
 							<br/>
-								<a href="#">1:1 문의하기</a><br/><br/>
+								<a href="#">자주묻는질문</a><br/><br/>
 								<a href="#">환불게시판</a><br/><br/>
 								<div id="plusfriend-chat-button"></div><br/>
 								<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>

@@ -44,11 +44,8 @@
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
+		a, hr{
+			color: black;	
 		}
 		.list-group-item{
 			  margin-left:50px;	
@@ -89,9 +86,7 @@
 			color: #c0c5c9;
 		} 
 		
-       #footer{
-			background-color: #1B1B1F;
-		}
+       
 		
 		/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
@@ -211,9 +206,9 @@
 		<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
-
+			 
 			 <button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
-
+			
 		    </div>
 		</div>
 
@@ -250,7 +245,9 @@
 				</form>		
 				   
 				<div class="modal-footer">
+		       
 		        <button type="button" id="updateSubmit" class="btn btn-info" data-dismiss="modal">수정</button>
+
 		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
 		      </div>
 				</div></div>	        

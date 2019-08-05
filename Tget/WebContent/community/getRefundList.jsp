@@ -34,14 +34,9 @@
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a, hr{
-			color: #FBFCFE ;	
+			color: black;	
 		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #020B13;
- 			  border: 1px solid #88e3f7;		   
- 			  background-color: #EBF7FF; 
-		}
+		
 		table{
 			color: #020B13;
  			border: 1px solid #88e3f7;		   
@@ -76,9 +71,7 @@
 		#cyberWidget{
        		background-color: white;
        }  
-       #footer{
-			background-color: #1B1B1F;
-		}
+       
 		
 		/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
@@ -191,13 +184,15 @@
 			  		<div class="col-md-2 text-center">	  
 			      		<div class="sticky-top">
 				  		<br/>
-					 <div>
-				       		<h6><strong>Community > 환불게시판</strong></h6>
+					 <div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+						  <div class="card-header">
+						 <div>
+				       		<h6><strong>고객센터  > 환불게시판</strong></h6>
 				   	 </div>
 					</div>
 				</div>	   
 				<br/> 
-				
+				</div></div>
 		      <div class="col-md-10 text-center">
 		       <div class="row">
 		       <c:forEach var="content" items="${list}" varStatus="j" > 
@@ -216,7 +211,7 @@
 				          <p class="text-danger">         
 				          	*검증 대기중&ensp;	
 				          	<c:if test="${sessionScope.user.role=='2'}">
-				          	<a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="fas fa-user-check" style="color:#FFFF00"></i></a></c:if>			          
+				          	<a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="far fa-check-circle" style="color:#020B13;font-size:20px;"></i></a></c:if>			          
 				          </p>
 				          	</c:if>
 				          <c:if test="${content.refundCheck=='0'}">
@@ -244,7 +239,7 @@
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body">환불 처리 하시겠습니까?</div>
+					      <div class="modal-body"><strong>환불 처리 하시겠습니까?</strong></div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					        <button type="button" class="btn btn-primary">확인</button>
