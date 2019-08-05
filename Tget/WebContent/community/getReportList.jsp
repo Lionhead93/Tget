@@ -49,14 +49,9 @@
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a, hr{
-			color: #FBFCFE ;	
+			color: black;	
 		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #020B13;
- 			  border: 1px solid #88e3f7;		   
- 			  background-color: #EBF7FF; 
-		}
+		
 		table{
 			color: #020B13;
  			border: 1px solid #88e3f7;		   
@@ -95,9 +90,7 @@
 		#cyberWidget{
        		background-color: white;
        }  
-       #footer{
-			background-color: #1B1B1F;
-		}
+       
 		
 		
 	/* 	게시글 등록 Modal */
@@ -221,22 +214,25 @@
 	  <div class="col-md-2 text-center" >	  
 	      <div class="sticky-top" ><!--  sticky-top-->
 		  <br/>
-			 <div>
-		       		<h6><strong>Community > 신고 접수 리스트 </strong></h6>
+			 <div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
+						  <div class="card-header">
+						 <div>
+		       		<h6><strong>관리자 페이지 > 신고 리스트 </strong></h6>
 
 			   	 </div>
 			</div>
-		</div>	
+		</div>
+		<br/>
+		</div></div>	
 	
 	  <!--  table Start /////////////////////////////////////-->
       <div class="col-md-10 text-center">
       
-      <div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+      <div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px;">
 		 <div class="card-body">	
 			<div class="row">
-    			<div class="col-md-2"><p><strong>No</strong></p></div>		     			        
-				<div class="col-md-2"><p><strong>신고자</strong>&ensp;<i class="fas fa-user-edit"></i></p></div>	        
-				<div class="col-md-4"><p><strong>신고 사유</strong>&ensp;<i class="fas fa-align-justify"></i></div>
+    			<div class="col-md-3"><p><strong>신고자</strong>&ensp;<i class="fas fa-user-edit"></i></p></div>	        
+				<div class="col-md-5"><p><strong>신고 사유</strong>&ensp;<i class="fas fa-align-justify"></i></div>
 				<div class="col-md-2"><p><strong>신고 일자</strong>&ensp;<i class="far fa-calendar-alt"></i></p></div>
 				<div class="col-md-2"><p><strong>검증 여부</strong>&ensp;<i class="fas fa-user-check"></i></p></div>		
 		    </div>
@@ -251,9 +247,9 @@
 		<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
 		 <div class="card-body" style="padding-top:10px;">	
 			<div class="row">
-				<div class="col-md-2" ><p>${ i }</p></div>	     			        
-				<div class="col-md-2"><p>${report.whiteId}</p></div>        
-				<div class="col-md-4">
+					     			        
+				<div class="col-md-3"><p>${report.whiteId}</p></div>        
+				<div class="col-md-5">
 				<c:if test="${report.reportReasonCode==0}">
 			     부적절한 홍보 게시물
 			  </c:if>
@@ -285,14 +281,14 @@
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle" style=color:#020B13;>신고글</h5>
+					        <h5 class="modal-title" id="modalCenterTitle" style=color:#020B13;><strong>신고 접수 검증</strong></h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
 					      <div class="modal-body" >
 					      <div class="col" style=color:#020B13;>작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
-						<hr>
+						<hr/>
 						  <div class="col" style=color:#020B13;>내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
 					    
 						<br>

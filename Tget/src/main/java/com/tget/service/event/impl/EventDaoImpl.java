@@ -264,7 +264,7 @@ public class EventDaoImpl implements EventDao {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title";
+		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title%20desc";
 		
 //		if (totalEventCount > 500) {
 //			url += "rows="+500;
@@ -315,7 +315,15 @@ public class EventDaoImpl implements EventDao {
 		
 		List<StubhubEvent> list = stubhubSearchList.getEvents();
 		List<StubhubEvent> returnList = new ArrayList<StubhubEvent>();
-//		나중에 중복제거
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("isTheLast", "false");
+		if(requestPageToken!=null&&(!requestPageToken.equals(""))) {
+			if (Integer.parseInt(requestPageToken)*10>=totalEventCount) {
+				map.put("isTheLast", "true");
+			}			
+		}
+		
+		//중복제거
 		for (StubhubEvent event : list) {
 			if (returnList.size()==0) {
 				returnList.add(event);
@@ -332,11 +340,11 @@ public class EventDaoImpl implements EventDao {
 
 //		System.out.println("returnList : " +returnList);
 		
-		Map<String,Object> map = new HashMap<String,Object>();
+		
 		map.put("eventList", returnList);
 //		map.put("eventList", list);
-		map.put("totalResults", returnList.size());
-//		map.put("totalResults", totalEventCount);
+//		map.put("totalResults", stubhubSearchList.getNumFound());
+		map.put("totalResults", totalEventCount);
 //		map.put("totalResults", list.size());
 		
 		return map;
@@ -642,7 +650,7 @@ public class EventDaoImpl implements EventDao {
 		return map;
 	}
 	
-	public List<String> selectAllLocation() throws Exception{
+	public List<Event> selectAllLocation() throws Exception{
 		return sqlSession.selectList("EventMapper.selectAllLocation");
 	}
 	

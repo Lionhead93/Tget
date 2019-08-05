@@ -116,10 +116,10 @@ public class EventController {
 			
 			List<StubhubEvent> tempList = (List<StubhubEvent>)session.getAttribute(search.getSearchKeyword()+requestPageToken);
 			
-			if (tempList != null) {
-				
+			if (tempList != null) {				
 				list = tempList;				
 				model.addAttribute("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
+				model.addAttribute("isTheLast",(String)session.getAttribute(search.getSearchKeyword()+"IsTheLast"));
 			}else {
 				map = eventService.getEventList(search, requestPageToken, stubhubKey);
 				list = (List<StubhubEvent>)map.get("eventList");
@@ -145,17 +145,28 @@ public class EventController {
 			}			
 		}
 		
+		if (map != null) {
+			if(((String)map.get("isTheLast")).equals("true")) {
+				System.out.println("*****************map.get(\"isTheLast\") => true");
+				model.addAttribute("isTheLast", "true");
+				session.setAttribute(search.getSearchKeyword()+"IsTheLast", "true");
+			}else {
+				model.addAttribute("isTheLast", "false");
+				session.setAttribute(search.getSearchKeyword()+"IsTheLast", "false");
+			}
+		}
+		
 		model.addAttribute("eventList",list);
 		model.addAttribute("search", search);
-		model.addAttribute("requestPageToken",requestPageToken);				
-
+		model.addAttribute("requestPageToken",1);				
+ 
 		return "forward:/event/listEvent.jsp";
 	}
 	
 	@RequestMapping(value="getEvent")
 	public String getEvent(@RequestParam String category, @ModelAttribute("event") Event event, Model model) throws Exception {
 		System.out.println("===============getEvent===============");
-		System.out.println(event);
+		System.out.println("category : "+category+","+event);
 		int viewCount = 0;
 //		int ticketLowestPrice = 0;
 		Search search = new Search();

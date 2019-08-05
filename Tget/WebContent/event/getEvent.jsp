@@ -211,19 +211,6 @@
 		    color: #146C80;
 		  }
   		}
-  		.modal-wrap{
-			width:100%;
-			margin:auto;
-			max-width:525px;
- 			position:relative; 
-			background-color: black;
-			background:url(/resources/images/logins.jpg) no-repeat center;
-			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-			overflow:auto;
-		}
-		.modal-html{
-			background:rgba(40,57,101,.9);			
-		}
     </style>
 	
 </head>
@@ -373,8 +360,6 @@
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="background-color:#D9E5FF; color: #041625;">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">이미지 편집</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
@@ -389,12 +374,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
        
         <button type="button" class="btn btn-outline-primary"  id="delete" >삭제</button>
         <button type="button" class="btn btn-outline-primary"  id="submit" >저장</button>
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 <jsp:include page="/layout/footer.jsp" />

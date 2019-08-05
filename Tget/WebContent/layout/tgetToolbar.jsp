@@ -136,6 +136,23 @@ $(function() {
 		 
 		});
 	 
+	 $( "a[href='#']:contains('공지사항')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
+		
+		});
+	  
+	 $( "a[href='#']:contains('자유게시판')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
+		
+		});
+	 
+	 $( "a[href='#']:contains('고객센터')" ).on("click" , function() {
+			self.location="/community/getContentList?searchCondition=3";
+		
+		});
+	 
+	 
+	 
 });
 $(function getSearchWeather(lat, lon) {
 	
@@ -200,7 +217,7 @@ $(function getSearchWeather(lat, lon) {
 				<h1><a id="brand" href="#" style="color: white;">T-GET <span>by MFC</span></a></h1>
 				
 				
-					<a href="#" style="color: white;">Home</a>
+					<a href="#" style="color: white;"><i class="fas fa-home"></i>&nbsp; Home &nbsp;</a>
 				<c:if test="${empty user}">
 					<a href="#" style="color: white;">Sign Up</a>
 					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
@@ -208,10 +225,20 @@ $(function getSearchWeather(lat, lon) {
 				<c:if test="${!empty user}">
 					<a href="#" style="color: white;">Logout</a>
 					<a href="#" data-target="#alarmModal" data-toggle="modal" style="color: white;">
-							<i class="far fa-bell"></i> Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
+							<i class="far fa-bell"></i>&nbsp; Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
-					<a href="#" style="color: white;">길 찾기 안내</a>
-					<a href="#" data-target="#weatherModal" data-toggle="modal" style="color: white;">날씨 안내</a>
+					
+					
+					
+					  <button class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;padding-top:0px;">
+					    <i class="fas fa-user-edit"></i>&nbsp; Community &nbsp;</button>					  	
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="#">공지사항</a>
+					    <a class="dropdown-item" href="#">자유게시판</a>
+					    <a class="dropdown-item" href="#">고객센터</a>
+					    <a class="dropdown-item" href="#">길 찾기 안내</a>
+					  </div>
+
 				</c:if>	
 				<c:if test="${user.role == 2 }">
 				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
@@ -219,6 +246,7 @@ $(function getSearchWeather(lat, lon) {
 				<c:if test="${!empty user}">			
 				<a href="#menu" style="color: white;">Menu</a>
 				</c:if>					  
+			
 			</header>
 
 		<!-- Nav -->

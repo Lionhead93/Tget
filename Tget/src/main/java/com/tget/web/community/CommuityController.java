@@ -284,7 +284,7 @@ public class CommuityController {
 		public String getSearchLoad(Model model) throws Exception{
 			
 			System.out.println("/community/getSearchLoad");
-			List<String> list = eventService.getAllLocation();
+			List<Event> list = eventService.getAllLocation();
 			
 			model.addAttribute("list", list);
 			

@@ -91,9 +91,10 @@ public class TranController {
 		pointHistory.setUserId(user.getUserId());
 		pointHistory.setTranNo(selectKey);
 		pointHistory.setTotalPoint(user.getPoint());
-		pointHistory.setUpdatePoint(transaction.getUsePoint());
-		rNPService.addPoint(pointHistory);
-		
+		pointHistory.setUpdatePoint(transaction.getUsePoint());	
+		if(transaction.getUsePoint()!=0) {
+			rNPService.addPoint(pointHistory);
+		}
 		Alarm alarm = new Alarm();
 		alarm.setAlarmCode(0);
 		alarm.setAlarmKeyword(Integer.toString(transaction.getTicket().getTicketNo()));

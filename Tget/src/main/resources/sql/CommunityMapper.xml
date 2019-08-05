@@ -195,7 +195,7 @@
 										 				AND board_code = #{searchKeyword} 
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
-														AND content_code = #{searchKeyword} 
+														AND content_code in (#{searchKeyword},'1','0')
 													</if>
 													<if test="searchCondition == 3 ">
 														AND content_code in('8','9','10','11')

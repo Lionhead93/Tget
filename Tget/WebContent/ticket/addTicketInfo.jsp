@@ -36,37 +36,13 @@
 	
    
 	<style>
-			
-		body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		#ticketInput{
-			  border: 1px solid #D6CDB7;
-			  background-color: #193147;
-		}
-		a, hr{
-			color: #FBFCFE ;	
-		}
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		
-		section{
-			margin-left: 40px;
-		} 
-		#footer{
-			background-color: #1B1B1F;
-		}
-       .list-group > .list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-    
+		a{
+			color: #041625;
+		}			
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -91,8 +67,8 @@
 			alert("수량은 최대 99장까지 밖에 등록할 수 없습니다.");
 			return;
 		}
-		if(isNaN(amount)==true) {
-			alert("수량에 숫자입력 바랍니다.");
+		if(isNaN(amount)==true || amount < 1) {
+			alert("수량에 1이상 숫자입력 바랍니다.");
 			return;
 		}
 		if(type == null || type.length<1){
@@ -132,24 +108,26 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />	
 		<br/>
 		<div class="row">
-			<div class="col-lg-2">
-				<div class="sticky-top">
-		      	<div class='text-center'>
-		      		<br/><br/><br/>
-					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 티켓 판매 </strong></p>
-					<br/>
-												<ul class="list-group list-group-flush">										  
-												  <li class="list-group-item"><a href="#">판매자 가이드</a></li>
-												  <li class="list-group-item"><a href="#">내 판매티켓</a></li>
-												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
-												  <li></li>											  
-												</ul> 											  
-				</div> 
-				</div>
+		<div class="col-lg-3">
+      	<div class="sticky-top">
+		<br/><br/><br/><br/>
+			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625; margin-left: 100px;">
+			  <div class="card-header">
+			   <strong>티켓  <i class="fas fa-ticket-alt"></i> 티켓 판매</strong>
+			  </div>
+			  <ul class="list-group list-group-flush">								
+				<li class="list-group-item"><a href="#" data-target="#sellerGuideModal" data-toggle="modal">판매자 가이드</a></li>
+				<li class="list-group-item"><a href="#">판매목록 조회</a></li>
+				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
+			  </ul>		  
 			</div>
+		
+		  </div>   	
+     	 </div>
 			
-			<div id="ticketInput" class="col-lg-8">
+			<div id="ticketInput" class="col-lg-7">
 			<div class="text-center">
+			<div class="card text-center shadow rounded" style="width: 800px; ">
 			<form class="form-horizontal">
 			<input type="hidden" name="event.eventId" value="${event.eventId}" >
 			<input type="hidden" name="event.eventName" value="${event.eventName}" >
@@ -157,35 +135,50 @@
 			<input type="hidden" name="couponNo" value="0" >	
 			<input type="hidden" name="couponCode" value="" >	  
 			<br/>
-			<h1 class="display-4">${event.koName}</h1>
+			<h1 class="display-4">${event.eventName}</h1>
 			  <p class="lead">${event.eventLocation}</p>
 			  <p>${event.eventDate}</p>
 			<hr class="my-4">
-			  <div class="form-group">
-			 
-			    <div>
-			    <strong>수량 : </strong>      <input type="text" id="amount" name="amount" style="width: 90px !important" >
+			  <div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="amount" class="col-sm-1 col-form-label"><strong>수량 </strong></label>			    
+			    <div class="col-sm-4">
+			         <input type="text" class="form-control" id="amount" name="amount" style="width: 90px !important" >
 			    </div>
-			    <small class="text-danger">*연석 일 경우만 한번에 등록</small>
+			    <div class="col-sm-4"></div>
+			    		    
 			  </div>
-			<br/>  
-			  <div class="form-group">
-			    <strong>형태 : </strong>
+			  <div class="row">
+				  <div class="col-sm-3"></div>
+				  <div class="col-sm-5">	 
+				  <small class="text-danger">*연석 일 경우만 한번에 등록</small>
+				  </div>
+				  <div class="col-sm-4"></div>	 
+			  </div>				  
+			<br/>
+			  <br/> 
+			  <div class="form-group row">
+			   <div class="col-sm-3"></div>	    	
+			   <label for="type" class="col-sm-1 col-form-label"> <strong>형태 </strong></label>
+			    <div class="col-sm-4 text-left" style="padding-top: 8px;">			   
 			      <input type="radio" name="type" value="0" checked="checked" /> 종이티켓
 				  <input type="radio" name="type" value="1" /> 전자티켓
+				</div> 
+				<div class="col-sm-4"></div> 
 			  </div>
 			<br/>  
-			  <div class="form-group" >
-			    <strong>좌석 : </strong>
-			    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) B2">  구역 (존/블럭)		  
-			    <input type="text" id="seat" name="seat" style="width: 90px !important" maxlength="10" placeholder="예) 6"> 열
-			    
-			  </div>
+			  <div class="form-group row" >
+			  <div class="col-sm-3"></div>	
+			   <label for="seat" class="col-sm-1 col-form-label"> <strong>좌석 </strong></label>
+			   <div class="col-sm-8 text-left" style="padding-top: 8px;">
+			    <input type="text" class="rounded-pill text-center" id="seat" name="seat" style="width: 70px !important" maxlength="10" placeholder="예) B2">  구역 		  
+			     &nbsp;&nbsp;&nbsp;<input type="text" class="rounded-pill text-center" id="seat" name="seat" style="width: 70px !important" maxlength="10" placeholder="예) 6"> 열			    
+			   </div>
+			  </div>	
 			<br/>
-			<strong>특이사항(선택)</strong>  
-			  <div class="form-group">
-			     
-			      <textarea name="options" cols="40" rows="8" ></textarea>
+			<strong>특이사항</strong> 
+			  <div class="form-group" style="margin-top: 10px;">
+			      <textarea name="options" cols="30" rows="5" ></textarea>
 			  </div>
 			<br/>
 				<div class="form-group">
@@ -202,8 +195,8 @@
 			<br/>			  
 			  <div class="form-group">
 			    
-			      <button type="button" class="btn btn-outline-light">계 속</button>
-				  <a class="btn btn-outline-light btn" href="#" role="button">취 소</a>
+			      <button type="button" class="btn btn-outline-dark">계 속</button>
+				  <a class="btn btn-outline-dark btn" href="#" role="button">취 소</a>
 			      <a href="#" role="button" id="addSellerShow" style="display:none;" data-target="#addSellerModal" data-toggle="modal">addSeller</a>	
 			 	  <jsp:include page="/ticket/addSeller.jsp" />	
 			 	  <script>
@@ -219,10 +212,12 @@
 			  </div>		  
 			</form>
 			</div>
+			</div>
 			</div>	
 			<div class="col-2">
 			</div>
-		</div>					<script>
+			</div>
+		<script>
 					$(function(){
 						$("a:contains('쿠폰적용')").on("click",function(){
 							$.ajax({

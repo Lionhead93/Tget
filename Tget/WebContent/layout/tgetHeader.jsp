@@ -15,7 +15,7 @@
 				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div>
 				<div class="col-lg-6 col-md-6 col-10">	
 					<div class="input-group mb-1">
-				  		<input type="text" class="form-control searchEventHeader" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
+				  		<input type="text"  id="inputKeyword" class="form-control searchEventHeader" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2">
 				  		<div class="input-group-append">
 				    		<span class="input-group-text btn"  id="button-addon2">검색</span>
 				 		 </div>
@@ -28,11 +28,11 @@
 </form>
 <br/>
 <script>
-$("input[type='text']").on("keyup",function(){
+$("#inputKeyword").on("keyup",function(){
 	$("#searchKeyword").val($("input[type='text']").val());
 });
 
-$("input[type='text']").on("keypress",function(){
+$("#inputKeyword").on("keypress",function(){
 	if (event.keyCode ==13) {
 		$("#searchCondition").val("1");
 		$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
