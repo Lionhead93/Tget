@@ -280,7 +280,7 @@
 		 				<if test="searchCondition == 1" >WHERE event_id = #{searchKeyword}</if>)  countTable	
 	 </select>
 	 
-	 <select 	id="selectAllLocation"	resultType="event">
+	 <select 	id="selectAllLocation"	resultMap="eventSelectMap">
 		 SELECT DISTINCT event_location , ko_location
 		 FROM event
 	 </select>

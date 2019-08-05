@@ -335,11 +335,11 @@
         .getSellerEstimation:hover{
         	font-size:25px;
         }
-
-        #player { /**/
-         	padding: 10px 10px; /**/
-				padding: 25px 25px 25px  25px ;
-     	  }
+/*
+        #player {
+         	padding: 10px 10px;
+			padding: 25px 25px 25px  25px ;
+     	  } */
 		.interested{
 			color : red;
 		}

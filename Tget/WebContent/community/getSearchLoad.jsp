@@ -166,8 +166,8 @@
 							    <br/><br/><span><font size="3">&ensp;<strong>공연장/경기장 찾기 :&ensp; </strong></font></span>
 							   <select class="btn btn-outline-light custom-select" id="end" name="end" style="height:30px;font-size:13px;">
 								<option selected>목적지 선택&ensp;</option>
-			    					<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
-			    				<option value="${location}">${location}</option>
+			    					<c:forEach var="event" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
+			    				<option value="${event.eventLocation}">${event.koLocation}</option>
 			    				</c:forEach>
 			    	   			</select>
 			    	   			

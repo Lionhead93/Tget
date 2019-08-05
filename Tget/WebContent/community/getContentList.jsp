@@ -17,7 +17,6 @@
 		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
 		<meta name="author" content="Codrops" />
     	<title>T-GET</title>
-
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
 		<link rel="shortcut icon" href="../favicon.ico">
@@ -388,7 +387,7 @@
       <!--  table Start /////////////////////////////////////-->
  <div class="col-md-10 text-center">
      		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px;">
+     		<div style="margin-bottom: 10px; height:70px;">
 		 <div class="card-body">	
 			<div class="row">
 				<div class="col-md-4"><p><strong>±Û Á¦¸ñ</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        

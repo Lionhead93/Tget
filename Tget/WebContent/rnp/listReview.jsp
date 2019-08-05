@@ -41,6 +41,7 @@
     	$("td.record").on("click",function(){
 //     		alert($(this).children("input[type='hidden']").val());
     		$("#reviewTranNo").val($(this).children("input[type='hidden']").val());
+    		$("#reviewRegDate").val($(this).parent().children("input.regdate").val());
     		$.ajax(
 					{
 						url : "/rnp/rest/updateReview",
@@ -72,6 +73,7 @@
 			$("#reviewTranAmount").text("");
 			$("#reviewTranTotalPrice").text("");
 			$("#reviewTranOrderDate").text("");
+			$("#reviewRegDate").val("");
 		});
 		
     	$("#submit").on("click",function(){
@@ -84,7 +86,8 @@
 						data : {
 								tranNo : temp,
 								score : $("#score").val(),
-								reviewBody : $("#reviewBody").val()
+								reviewBody : $("#reviewBody").val(),
+								regDate : $("#reviewRegDate").val()
 									},
 						dataType : "json",
 						success : function(JSONData, status){
@@ -220,8 +223,10 @@
 				  	  <input type="hidden"  value="${i.tranNo }"/>
 				  	  	<div align="center" >
 				  	  		${i.regDate}
+				  	  		
 				  	  	</div>
 				  	  </td>
+				  	  <input  type="hidden"  class="regdate" value="${i.regDate }">
 			    </tr>
 			   </c:forEach>
 		  		 </tbody>
@@ -233,17 +238,15 @@
 		</div>	
 	</div>
 	</form>
-	
+<input type="hidden" id="reviewRegDate" name="regDate"/>
 	<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalCenterTitle"  style="color: white;">∏Æ∫‰ µÓ∑œ</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -251,13 +254,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <jsp:include page="/rnp/addReview.jsp" />
       </div>
       <div class="modal-footer" style="color: black;" >       
-        <button type="button"  class="btn btn-light" id="submit" style="color: black;" >¿˙¿Â</button>
-         <button type="button" class="btn btn-dark" data-dismiss="modal">¥›±‚</button>
+        <button type="button"  class="btn btn-outline-primary" id="submit" style="color: black;" >¿˙¿Â</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">¥›±‚</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
@@ -265,11 +266,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 aria-labelledby="tranModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="font-size: 20px">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <div class="modal-title" id="tranModalTitle"  style="padding:0px;font-weight: bold;">∞≈∑° ¡∂»∏</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -292,12 +291,10 @@ aria-labelledby="tranModalTitle" aria-hidden="true">
         </div>
       </div>
       <div class="modal-footer">       
-         <button type="button" class="btn btn-dark" data-dismiss="modal">¥›±‚</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">¥›±‚</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
