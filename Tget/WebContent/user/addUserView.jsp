@@ -28,60 +28,17 @@
    				
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		.col-2{
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 70px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
-       #footer{
-			background-color: #1B1B1F;
+			color: #041625;
 		}
     </style>
+
+
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -501,17 +458,23 @@
 		<!-- <i class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
                             <i class="far fa-angry fa-2x" style="color:maroon;"></i> -->
                           
-	
-	
-	 <div class="login-card" style="margin-left:400px; margin-right: 400px; color:black;">
+		<div class="container">
+	<div class="row">
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8">
+	 <div class="login-card" style="color:black;">
                     <div class="card form" id="form1">
-                        <div class="card-header" align="center" style="background-color: LightSkyBlue;">
+                        <div class="card-header" align="center" style="background-color: SkyBlue;">
                             <h3><i class="fas fa-user-check"></i><br/></h3>
                             
                         </div>
-			 <div class="text-center" style="background-color: white;"><br/><br/>
+			 <div style="background-color: white;">
+			
+			 
+			 <br/><br/>
 					<div class="row">	
-					<div class="col-md-3" style="margin-left: 10px;">
+					 <div class="col-md-1"></div>
+					<div class="col-md-2" >
 					<span style="color: black;"><Strong>아이디</Strong> </span>
 					<br/><br/><br/>
 					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
@@ -526,8 +489,10 @@
 						<br/><br/><br/><br/>
 					<span id= "h2" style="color: black;  display: none;" >인증번호<br/><br/><br/><br/></span>
 		
-					<span style="color: black;"><Strong>주소</Strong> </span>
+					<span style="color: black;"><Strong>주소</Strong> </span><br/><br/><br/><br/>
+				<span style="color: black;"><Strong>상세주소</Strong> </span><br/><br/><br/>
 				</div>
+			
 					
 					<div class="col-md-8">
 							
@@ -670,11 +635,18 @@
 							</form>
 						
 							</div>
+							<div class="col-md-1"></div>
 							</div>
-							</div>
-							</div>
-						</div>	
 						
+							</div>
+							</div>
+							
+						</div>	
+					</div>
+					<div class="col-lg-2">
+					</div>
+					</div>
+	</div>					
 	<jsp:include page="/layout/footer.jsp"/>
 </body>
 

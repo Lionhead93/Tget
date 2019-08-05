@@ -35,15 +35,15 @@
 		<script src="/resources/javascript/main.js"></script>	
 		<style>
 		
-body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
-			color: #FBFCFE ;	
+
+			a{
+			color: #041625;
 		}
+
 		hr{
 			border: 1px groove white;
 		}
@@ -81,21 +81,6 @@ body{
 		section{
 			margin-left: 100px;
 		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-bottom: 200px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
        #footer{
 			background-color: #1B1B1F;
 		}
@@ -139,8 +124,7 @@ body{
 
 
     </style>
-				</head>
-			<body>
+				
 			
 <script type="text/javascript">
 
@@ -162,7 +146,7 @@ $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button:contains('회원정보 수정')").on("click" , function() {
 
-		var popOption = "left=500, top=100, width=800, height=600, resizable=no, location=no;"		
+		var popOption = "left=500, top=100, width=1800, height=1600, resizable=no, location=no;"		
 		window.open("/user/updateUser.jsp","회원정보 수정",popOption);
 				
 	});
@@ -201,7 +185,8 @@ $(function() {
 
 
 				</script>
-			
+			</head>
+			<body>
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
 	
@@ -216,16 +201,19 @@ $(function() {
 				<div class="tabs tabs-style-topline">
 			
 					<nav>
-						<ul>
-							<li><a href="#section-topline-1"><h6><strong>내 프로필 보기</strong></h6></a></li>
-							<li><a href="#section-topline-2"><h6><strong>판매자 정보 보기</strong></h6></a></li>
+						<ul style="color:black;">
+							<li><a href="#section-topline-1"><h6><strong style="color:black;">내 프로필 보기</strong></h6></a></li>
+							<li><a href="#section-topline-2"><h6><strong style="color:black;">판매자 정보 보기</strong></h6></a></li>
 						</ul>
 					</nav>
 				
 			<div class="content-wrap">
 				<section id="section-topline-1">
-						<div class= "text-center">
-						            <div class="border">
+						 <div class="col-md-10 text-center">
+     		
+     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+		 <div class="card-body">	
+		
 						                      
 						                        	 <h4>${user.nickName}님 프로필</h4><hr/>
 													
@@ -245,20 +233,24 @@ $(function() {
 												
 							  		<div class="text-center">
 							  			<button type="button" class="btn btn-outline-primary">회원정보 수정</button><br>
+							  			<div class="col-md-3"></div>	
 							  		</div>
 						                        
-						                 
-											 
-										</div>	 
-										</div>						
-						</section>
+						                 </div>
+											 </div>
+									 
+										</div>		
+							</section>
 				
 				
 				<section id="section-topline-2">
-					<div class="row">
-					<div class="col-6">	
-						<div class= "text-center">
-				           <div class="border">
+				<div class="row">
+				 <div class="col-md-6 text-center">
+					
+						
+     		
+     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+		 <div class="card-body">	
 				                      
 										
 					  		<h4>${user.nickName}님 판매자정보</h4><hr/>
@@ -288,12 +280,14 @@ $(function() {
 							<div>${user.salesCount}</div><br>
 							
 							<button id="sb" type="button" class="btn btn-outline-primary" >판매내역 조회</button>	<br>					  </div>
-						 </div> 
+						
 						 </div>
 					</div>	
-					<div class="col-6">			
-						<div class= "text-center">
-						           <div class="border">
+					
+			</div>
+			 <div class="col-md-6 text-center">
+						<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+		 <div class="card-body">	
 									
 									<div class="title">
 													<h4>${user.nickName}님 계좌정보</h4><hr/>
@@ -323,7 +317,7 @@ $(function() {
 									<c:when test="${sc eq '081' }"> 하나은행 </c:when>
 									<c:otherwise>
 										판매자 등록 후 조회가능.
-										<button id= "add" type="button" class="btn btn-primary" data-target="#addSellerModal" data-toggle="modal">판매자 등록</button>
+										<button id= "add" type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal">판매자 등록</button>
 										</c:otherwise>		
 									</c:choose>
 									
@@ -335,173 +329,15 @@ $(function() {
 							  </div> 
 						</div>
 						</div>
-							
-					</div>		
-					</div>		
-				</section>
+							</div>
+							</div>
+							</section>
+					</div>		</div>
+					</section>
+					</div>
+				
 						
-						<!-- <section id="section-topline-3">
-						<div class="row">
-								
-								 	<div class="col-lg-3">
-								 	<div class="text-center">
-								 		<div class="border">
-								 		<br/>
-								 			
-								 			
-								 			
-								 		</div>
-								 	</div>	
-								 	</div>
-						
-						</div>	
-						
-						</section>
-						
-						<section id="section-topline-4">
-							<div class="text-center">
-								 <div class="border">
-								 		<br/>
-								 			
-								 			
-								 			
-								 </div>
-							</div>	
-								
-						</section> -->
-								
-								
-								
-								
-								
-								
-								
-								</div><!-- /content -->
-								</div><!-- /tabs -->
-								
-								 		</section>
-				
-				</div>	
-				  <!--  table End /////////////////////////////////////-->
-			
-			 
-			
-			    <%-- <div class="container">
-			     	
-	
-			   
-         		
-					<div class= "text-center">
-                        
-                      
-                        	 <h4>${user.nickName}님 프로필</h4>
-							
-						
-	  		<div class="col-xs-8 col-md-4"><strong>아이디</strong></div>
-			<div class="text-center">${user.userId}</div><hr/>
-			<div class="col-xs-8 col-md-4 "><strong>닉네임</strong></div>
-			<div class="text-center">${user.nickName}</div>	<hr/>
-            <div class="col-xs-8 col-md-4 "><strong>이 름</strong></div>
-			<div class="text-center">${user.userName}</div>  <hr/>
-			<div class="col-xs-8 col-md-4 "><strong>주소</strong></div>
-			<div class="text-center">${user.address}</div>   <hr/> 
-			
-			<div class="col-xs-8 col-md-4"><strong>전화번호</strong></div>
-			<div class="col-xs-8 col-md-40">${ !empty user.phone ? user.phone : ''}	</div> <hr/> 
-			
-						
-	  		<div class="text-center">
-	  			<button type="button" class="btn btn-primary">회원정보 수정</button>
-	  		</div>
-                        
-					 
-				</div>	 
-				
-				
-				
-               
-						<div class="content-wrap">
-						<section id="section-topline-1">
-						  <div class="input-group-prepend">
-
-                        
-                      
-                        
-						<div class="title">
-							<h4>${user.nickName}님 계좌정보</h4>
-						</div>
-             <div class="col-xs-8 col-md-4 "><strong>이 름</strong></div>
-			<div class="col-xs-8 col-md-8">${user.userName}</div>  <hr/>          
-	  		<div class="col-xs-8 col-md-4"><strong>은행명</strong></div><hr/>
-			<div class="col-xs-8 col-md-8">${user.accountBank}</div><hr/>
-			<div class="col-xs-8 col-md-4 "><strong>계좌번호</strong></div> <hr/>
-			<div class="col-xs-8 col-md-8">${user.accountNo}</div>	<hr/>
-      
-	<div class="col-xs-8 col-md-4">
-	  			<button type="button" id ="btn" class="btn btn-primary" >계좌정보 수정</button>
-	  		</div> 
-					 
-				</div>	 
-				</div>
-				
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-               
-					<div class="box-part">
-                        
-                      
-                        
-						<div class="title">
-							<h4>${user.nickName}님 판매자정보</h4>
-						</div>
-             <div class="col-xs-8 col-md-8 "><strong>판매자등급</strong></div>
-			<div class="col-xs-8 col-md-8">
-			
-		
-			<c:set var="sc" value ="${user.sellerCode}"/>
-			
-			<c:choose>
-			<c:when test="${sc eq '0' }"> 새싹 </c:when>
-			<c:when test="${sc eq '1' }"> 우수 </c:when>
-			<c:when test="${sc eq '2' }"> V.I.P </c:when>
-			
-			<c:otherwise>
-				판매자 등록 후 조회.
-				<button id= "add" type="button" class="btn btn-primary">등록</button>
-				</c:otherwise>		
-			</c:choose>
-
-			</div> 
-			 <hr/>          
-	  		<div class="col-xs-8 col-md-8"><strong>총 판매금액</strong></div><hr/>
-			<div class="col-xs-8 col-md-8">${user.salesAmount}</div><hr/>
-			<div class="c ol-xs-8 col-md-8 "><strong>총 판매횟수</strong></div> <hr/>
-			<div class="col-xs-8 col-md-8">${user.salesCount}</div>	<hr/>
-				</div>	 
-				</div>
-			 	 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-               
-					<div class="box-part text-center">
-					    
-					    <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
-                    
-						<div class="title">
-							<h4>Google</h4>
-						</div>
-                        
-						<div class="text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-                        
-						<a href="#">Learn More</a>
-                        
-					 </div>
-				</div>	 
-				
-				
-		
-		</div>		
- </div> --%>
- 
+					
 <script src="/resources/javascript/cbpFWTabs.js"></script>
 <script type="text/javascript"> src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>

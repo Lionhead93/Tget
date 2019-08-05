@@ -73,8 +73,11 @@ $( function(){
 	});
 	
 	$("a[href='#' ]:contains('³» ÄíÆù Á¶È¸')").on("click" , function() {		
-		self.location = "/coupon/getCouponList?userId=${sessionScope.user.userId}";
+		
+		var popOption = "left=500, top=100, width=800, height=600, resizable=no, location=no;"		
+			window.open("/coupon/getCouponList?userId=${sessionScope.user.userId}","³» ÄíÆù Á¶È¸",popOption);
 	});
+	
 	$("a[href='#' ]:contains('Logout')").on("click" , function() {
 		self.location = "/user/logout"
 	});
@@ -170,21 +173,25 @@ $(function getSearchWeather(lat, lon) {
 <style>
 	/*Modal*/
 		
-		.modal-wrap{
+		.login-wrap{
 			width:100%;
 			margin:auto;
 			max-width:525px;
  			position:relative; 
 			background-color: black;
-			background:url(/resources/images/logins.jpg) no-repeat center;
-			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			
+			background:url(/resources/images/logins2.jpg) no-repeat center;
+	
+
+
 			overflow:auto;
+			
 		}
-		.modal-html{
+		.login-html{
 			background:rgba(40,57,101,.9);			
 		}
 		.close{
-			color: white;
+			color: black;
 		}
 </style>
 
@@ -427,16 +434,18 @@ $(function getSearchWeather(lat, lon) {
   <div class="modal-dialog modal-80size modal-center" role="document">
     <div class="modal-content">     
     <div class="login-wrap">
-	<br><br>
-	<div class="text-center" style="color:white;">
-		<i class="far fa-address-card fa-4x"></i>
-		</div>
+	<br><br><div class="text-center" >
+	
+	<h3><a id="brand" href="#" style="color: white;">T-GET <span>Login</span></a></h3>
+			</div>
 		<div class="login-form">
 			<div class="sign-in-htm">
-			<br><br>
-				<div class="group col-md-12">
+			<br>
+				<div class="group col-md-12" >
+
 					<label for="user" class="label"><span><h4>¡¡Id</h4></span></label>
-					<input id="userId" name="userId" type="text" class="input" placeholder="Email">
+					<input id="userId" name="userId" type="text" class="input" placeholder="Email" >
+
 				</div>
 				<div class="group col-md-12">
 					<label for="pass" class="label"><span><h4>¡¡Password</h4></span></label>
@@ -447,16 +456,16 @@ $(function getSearchWeather(lat, lon) {
 				</div>
 				
 				<div class="text-center">
-				     <a id="kakao"><img src="/resources/images/kakaos.jpg" style="max-width: 100%; height: auto;"/></a>
-     <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
-		<a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a>
+				     <a id="kakao"><img src="/resources/images/kakaologin.png" style="width:230px; height: 45px; border-radius: 30px;"/></a>
+    				 <a id="naver"><img src="/resources/images/naverlogin.PNG"  style="width:230px; height: 45px; border-radius: 30px;"/></a>
+		
 		</div>
-			<div class="foot-lnk"><span style="color:white;">Not a member?</span>   
-					<a href="#signUp" style="color:aqua;">Sign up</a>
+			<div class="foot-lnk"><span style="color:gray;">Not a member?</span>   
+					<a href="#signUp" style="color:white;">Sign up</a>
 				</div>			<br>
 				<div class="foot-lnk" >
-					<a href="#forgotId" style="color:aqua;">Forgot Id?   </a>
-				<br>	<a href="#forgotPassword" style="color:LightSkyBlue;">Forgot Password?</a>
+					<a href="#forgotId" style="color:white;">Forgot Id?   </a>
+				<br>	<a href="#forgotPassword" style="color:white;">Forgot Password?</a>
 			</div>
 		
 		</div>

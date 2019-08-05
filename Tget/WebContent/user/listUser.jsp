@@ -35,15 +35,15 @@
 		<script src="/resources/javascript/main.js"></script>	
 		<style>
 		
-body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
-			color: #FBFCFE ;	
+
+			a{
+			color: #041625;
 		}
+
 		hr{
 			border: 1px groove white;
 		}
@@ -53,18 +53,10 @@ body{
 			  border: 1px groove white;		  
 			  background-color: #062038;
 		}
-		table{
-			background-color: #193147;
-		}
-		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
-		}
+	
+	
 		.col-md-2{
 			padding-left: 50px;
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
 		}
 		.col-md-10{
 			padding-left: 100px;
@@ -81,10 +73,7 @@ body{
 		section{
 			margin-left: 100px;
 		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
+	
        #footer{
 			background-color: #1B1B1F;
 		}
@@ -206,15 +195,15 @@ $(function() {
 			
 					<nav>
 						<ul>
-							<li><a href="#section-topline-1"><h6><strong>회원목록 보기</strong></h6></a></li>
-							<li><a href="#section-topline-2"><h6><strong>블랙리스트 보기</strong></h6></a></li>
+							<li><a href="#section-topline-1"><h6><strong style="color:black;">회원목록 보기</strong></h6></a></li>
+							<li><a href="#section-topline-2"><h6><strong style="color:black;">블랙리스트 보기</strong></h6></a></li>
 						</ul>
 					</nav>
 				
 			<div class="content-wrap">
 				<section id="section-topline-1">
 						<div class= "text-center">
-						           <div class="container">
+						         <div class="card text-center shadow rounded" >
 	
 	    
 	    <div class="row">
@@ -292,7 +281,7 @@ ${user.userId}
 				
 				<section id="section-topline-2">
 					<div class= "text-center">
-						           <div class="container">
+						          <div class="card text-center shadow rounded" >
 	
 	    
 	    <div class="row">

@@ -27,58 +27,13 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		.col-2{
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 70px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
-       #footer{
-			background-color: #1B1B1F;
+			color: #041625;
 		}
     </style>
     
@@ -128,6 +83,8 @@
 												
 													"<strong  class=\"text-danger\">회원 정보가 없습니다.</strong>");
 												document.getElementById("ff").style.display = "none" ;
+												document.getElementById("p1").style.display = "none" ;
+												document.getElementById("p2").style.display = "none" ;
 												
 											} else {
 												

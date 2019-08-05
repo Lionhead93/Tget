@@ -313,7 +313,200 @@
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
-			 <div class="text-center">아이디
+	    
+	     <div class="login-card" style="margin-left:400px; margin-right: 400px; color:black;">
+                    <div class="card form" id="form1">
+                        <div class="card-header" align="center" style="background-color: Lime;">
+                            <h3><i class="fas fa-user-edit"></i><br/></h3>
+                            
+                        </div>
+			 <div class="text-center" style="background-color: white;"><br/><br/>
+					<div class="row">	
+					<div class="col-md-3" style="margin-left: 10px;">
+					<span style="color: black;"><Strong>아이디</Strong> </span>
+					<br/><br/><br/>
+					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
+					
+					<span style="color: black;"><Strong>비밀번호</Strong> </span>
+					<br/><br/><br/><br/><br/><br/>
+					<span style="color: black;"><Strong>이름</Strong> </span>
+				<br/><br/><br/>
+					<span style="color: black;"><Strong>닉네임</Strong> </span>
+				<br/><br/><br/>
+					<span style="color: black;"><Strong>휴대전화</Strong> </span>
+						<br/><br/><br/><br/>
+					<span id= "h2" style="color: black;  display: none;" >인증번호<br/><br/><br/><br/></span>
+		
+					<span style="color: black;"><Strong>주소</Strong> </span>
+				</div>
+					
+					<div class="col-md-8">
+							
+							
+					
+						<form class="form-horizontal">
+						
+						   <div class="form-group" >
+							    <div class="input-group-prepend">
+							<input type="text" class="form-control col-md-5" name="userId" id="userId01" maxlength="15" style="width:23%" > 
+    							<span class="input-group-text" id="addon-wrapping">@</span>
+  
+							 <select class="custom-select col-md-3" name="userId2" id="userId02" style="width:23%" >
+							      <option  id = "ig" value="@naver.com">naver.com</option>
+							      <option  id = "ig" value="@daum.net">daum.net</option>
+							      <option  id = "ig" value="@nate.com">nate.com</option>
+							      <option id = "ig"  value="@gmail.com">gmail.com</option>
+							      <option id = "ih" value="">직접입력</option>							     
+							  </select>
+							     　<button id="injb" type="button" class="btn btn-outline-primary">인 증</button><i id="sm1" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
+							    <div id="loading"></div>
+									</div>
+
+							    </div>
+							    
+							     <div class="form-group">
+							     <div class="input-group-prepend">
+							        <div id="divemail" style="display:none;">인증번호
+							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-outline-primary">확인</button>
+							    </div>
+							  </div>
+							  </div>
+							    
+							  
+							  	  <div class="form-group">
+							  	  <div class="input-group-prepend">
+					
+							      <input type="password" class="form-control col-md-10"  id="password01" name="password" placeholder="비밀번호">
+							    </div>
+							  </div>
+							  
+							  
+							  
+							  <div class="form-group">
+						 <div class="input-group-prepend">
+							      <input type="password"  class="form-control col-md-10"   id="password02" name="password2" placeholder="비밀번호 확인">
+							      
+							  </div>
+							  </div>
+							 
+							  <div class="form-group">
+							  <label for="password3"></label>
+							<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+							
+							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
+							      </span>
+								<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+								<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
+							      </span>
+							</div>
+								
+							    <div class="form-group">
+							      <div class="input-group-prepend">
+							    <label for="userName"></label>
+					
+							      <input type="text" class="form-control col-md-10"  id="userName" name="userName" placeholder="회원이름">
+							   </div>
+							  </div>
+							  
+							  <div class="form-group">
+							  <div class="input-group-prepend">
+							  
+							  
+							    <label for="nickName"></label>
+							      <input type="text" class="form-control col-md-10"   id="nickName" name="nickName" placeholder="닉네임"><br>
+							     
+							
+							  </div>
+							   <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
+							      </span>
+							    </div>
+						
+							  
+							
+							  
+							  <div class="form-group"> 
+							  <div class="input-group-prepend">
+							
+							    
+					
+							      <input class="form-control col-md-10"   type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요.">　<button id="pij" type="button" class="btn btn-outline-primary">전송</button>
+							      <i id="sm2" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
+							  
+							  </div>
+							   </div>
+							 <div class="form-group">
+							   <div class="input-group-prepend">
+							    <label for="ssn"></label>
+							   <div id="inj" class="text-center" style="display:none">  인증번호
+							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
+							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
+							    </div>
+							  </div>
+							  </div>
+							  <div id="emailSend" style="display: none;"> 전송중.... </div>		 
+							  <div>
+							    <label for="ssn"></label>
+					 
+								<input class="form-control col-md-10"  type="text" id="address" name="address" >
+	<button type="button" class="btn btn-link">주소찾기</button>
+							      </div><br>
+								<input class="form-control col-md-10"  type="text" id="address2" name="address2" >
+							        <div class="form-group">
+							        <br>
+							        
+							    <label for="ssn">	<span style="color: black;"><Strong>위치정보 문의</Strong> </span></label>
+							    <div>
+							    
+							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
+							     <input type="radio" id= "local" name="local" value="2" /> 비동의
+							    </div>
+							  </div>
+							  
+						
+							  <div class="form-group">
+							   <!--  disabled="disabled" -->
+							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a>
+								
+					 			 </div>
+					 			
+					 			 
+							
+		
+	
+	<br/>
+	<br/>
+	
+						  
+							</form>
+						
+							</div>
+							</div>
+							</div>
+							</div>
+						</div>	
+						
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+			 <%-- <div class="text-center">아이디
 							  <form class="form-horizontal">
 						   <div class="form-group" >
 							   
@@ -426,7 +619,7 @@
 							
 							</form>
 							
-						</div>	
+						</div>	 --%>
 </body>
 
 </html>

@@ -162,7 +162,7 @@
 				<div class="text-center">
 				     <a id="kakao"><img src="/resources/images/kakaos.jpg" style="max-width: 100%; height: auto;"/></a>
      <a id="naver"><img src="/resources/images/navers.jpg" style="max-width: 100%; height: auto;"/></a>
-		<a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a>
+		<!-- <a id="google"><img src="/resources/images/googles.jpg" style="max-width: 100%; height: auto;"/></a> -->
 		</div>
 			<div class="foot-lnk">Not a member?   
 					<a href="#signUp">Sign up</a>

@@ -41,60 +41,18 @@
 		<script src="/resources/javascript/main.js"></script>	
 		<style>
 		
-body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		table{
-			background-color: #193147;
+
+				table{
+			background-color: white;
 		}
 		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
+			color: black ;
 		}
-		.col-md-2{
-			padding-left: 50px;
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.col-md-10{
-			padding-left: 100px;
-			padding-right: 100px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
 		
-       #footer{
-			background-color: #1B1B1F;
-		}
 		
 		
 	/* 	게시글 등록 Modal */
@@ -142,13 +100,14 @@ body{
 <form class="form-inline" name="detailForm">
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-	
+	<br>
 		<div class="page-header text-info">
 	       <h3>내 쿠폰 조회</h3>
-	    </div>
+	       <h7><span style="color : red;">쿠폰 유효기간은 발급일로 부터 3개월입니다.</span></h7>
+	    </div><br>
 	  
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
+      <table class="table" >
       
         <thead>
           <tr>
@@ -185,11 +144,11 @@ body{
 			  <td align="left">${coupon.couponRegDate}
 			  <td align="left">  <c:set var ="State" value="${coupon.couponStatement}"/>
 			  <c:if test="${State eq '0'}">
-			   사용가능</c:if>
+			   <span style="color:blue;">사용가능</span></c:if>
 			 <c:if test="${State eq '1'}">
-			 	사용됨</c:if>
+			 	<span style="color:red;">사용됨</span></c:if>
 			<c:if test="${State eq '2'}">
-			 	기간만료</c:if>
+			 	<span style="color:red;">기간만료</span></c:if>
 			  	<input type="hidden" value="${coupon.userId}">
 			
 			  </td>

@@ -27,61 +27,19 @@
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
    				
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+	<style>
+
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		.col-2{
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 70px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
-       #footer{
-			background-color: #1B1B1F;
+			color: #041625;
 		}
     </style>
+
+
+    
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -219,7 +177,13 @@
 					});
 				   });
 
-			   
+				 $(function() {
+					   $("button:contains('취소')").on("click" , function() {
+						
+					   		self.close();
+					   
+					   });
+					   });
 			   
 			   
 		     </script>
@@ -229,26 +193,26 @@
 			<hr/><br/>
 			<div class="text-center">
 		<div>
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label"><Strong>이름</Strong></label>
 		    <div class="text-center">
-		      <input type="text" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" id="userName" name="userName" class="input" placeholder="회원이름">
 		    </div>
 		  </div>
 		
 		
 		  <br/>
 		  <div>
-		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화</label>
+		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label"><Strong>휴대전화</Strong></label>
 		    <div class="text-center">
-		      <input type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-outline-primary">전송</button>
+		      <input type="text" id="phone" name="phone" class="input" placeholder="'-' 없이 입력해주세요."><button type="button" class="btn btn-outline-primary">전송</button>
 		       
 		    </div>
 		  </div>
 		  <br/>
 		  <div id = "injj">
-		    <label for="sms" class="col-sm-offset-1 col-sm-3 control-label">인증번호</label>
+		    <label for="sms" class="col-sm-offset-1 col-sm-3 control-label"><Strong>인증번호</Strong></label>
 		    <div class="text-center">
-		      <input type="text" class="text-center" id="sms" name="sms" placeholder="인증번호">
+		      <input type="text" class="text-center"  class="input" id="sms" name="sms" placeholder="인증번호">
 		      <button type="button" class="btn btn-outline-primary">인증</button>
 		    </div>
 		  </div>
@@ -260,7 +224,7 @@
 		     
 		      <button type="button" id ="btn" class="btn btn-outline-primary" disabled="disabled">찾기</button> 
 		      
-		  			  <a class="btn btn-outline-primary btn" href="#" role="button">취 소</a>
+		  			 <button type="button" id ="btn" class="btn btn-outline-danger btn">취소</button> 
 			 
 			  
 		    </div>
