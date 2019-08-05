@@ -90,10 +90,13 @@ public class EventRestController {
 	
 	///Method
 	@RequestMapping(value="rest/getEventList")
-	public Map<String,Object> getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,HttpSession session,Model model) throws Exception {
+	public Map<String,Object> getEventList(@ModelAttribute("search") Search search,@RequestParam String requestPageToken,HttpSession session) throws Exception {
 		System.out.println("===============rest/getEventList===============");
 		System.out.println("search:"+search);
-		
+		System.out.println("requestPageToken : "+requestPageToken);
+		if (requestPageToken==null || requestPageToken.equals("")) {
+			requestPageToken="0";
+		}
 		Map<String,Object> map = null;
 		Map<String,Object> map2 = new HashMap<String,Object>();
 		List<StubhubEvent> list = null;
@@ -107,6 +110,7 @@ public class EventRestController {
 				
 				list = tempList;				
 				map2.put("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
+				map2.put("isTheLast",(String)session.getAttribute(search.getSearchKeyword()+"IsTheLast"));
 //				model.addAttribute("totalResults",(Integer)session.getAttribute(search.getSearchKeyword()+"TotalResults"));
 			}else {
 				map = eventService.getEventList(search, requestPageToken, stubhubKey);
@@ -116,11 +120,10 @@ public class EventRestController {
 					list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
 					session.setAttribute( search.getSearchKeyword()+requestPageToken, list);
 					session.setAttribute( search.getSearchKeyword()+requestPageToken+"TotalResults", (Integer)map.get("totalResults"));
-					map2.put("totalResults",(Integer)map.get("totalResults"));
+					map2.put("totalResults",totalResult);
 				}			
 //				list = (List<StubhubEvent>)map.get("eventList");
-//				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null, (List<StubhubEvent>)map.get("eventList"))).get("result");
-				
+//				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null, (List<StubhubEvent>)map.get("eventList"))).get("result");			
 			}
 		}else {
 			search.setSearchKeyword(((String)eventService.translate("ko", "en", search.getSearchKeyword(),null).get("result")));
@@ -130,19 +133,31 @@ public class EventRestController {
 			if (totalResult != 0 && list != null) {
 				list = (List<StubhubEvent>)(eventService.translate("en", "ko", null,list)).get("result");	
 //				model.addAttribute("totalResults",(Integer)map.get("totalResults"));
-				map2.put("totalResults",(Integer)map.get("totalResults"));
+				map2.put("totalResults",totalResult);
 			}			
 		}
+//		String temp= (String)map.get("isTheLast");
+		if (map != null) {
+			if(((String)map.get("isTheLast")).equals("true")) {
+				System.out.println("*****************map.get(\"isTheLast\") => true");
+				map2.put("isTheLast", "true");
+				session.setAttribute(search.getSearchKeyword()+"IsTheLast", "true");
+			}else {
+				map2.put("isTheLast", "false");
+				session.setAttribute(search.getSearchKeyword()+"IsTheLast", "false");
+			}
+		}
+		
 		
 //		model.addAttribute("eventList",list);
 //		model.addAttribute("search", search);
 //		model.addAttribute("requestPageToken",requestPageToken);				
-
 		
 		map2.put("eventList",list);
 		map2.put("search", search);
-		map2.put("requestPageToken", requestPageToken);
-		
+		if (requestPageToken!=null&&requestPageToken!="") {
+			map2.put("requestPageToken", Integer.parseInt(requestPageToken)+1);
+		}
 		return map2;
 	}
 	
