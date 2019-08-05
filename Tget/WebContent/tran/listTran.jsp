@@ -256,7 +256,6 @@
 		});
 		
 		$("#submit").on("click",function(){
-			alert('$("#reviewTranNo").val() : '+$("#reviewTranNo").val()+', $("#score").val() : '+$("#score").val()+', reviewBody : $("#reviewBody").val() : '+$("#reviewBody").val());
 			$.ajax(
 					{
 						url : "/rnp/rest/addReview",
@@ -300,7 +299,6 @@
 				<c:if test="${user.role=='0'}">
 				<li class="list-group-item"><a href="#" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a></li>
 				</c:if>
-				<li class="list-group-item"><a href="#">후기작성 내역</a></li>
 				<li class="list-group-item"><a href="#">포인트 사용내역</a></li>
 				<c:if test="${user.role=='1'}">
 				<li class="list-group-item"><a href="#">판매티켓 목록</a></li>
@@ -465,14 +463,8 @@
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-     <div class="modal-wrap">
-     <div class="modal-html">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle"  style="color: white;">리뷰 등록</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <br/>
+      <h4 class="text-center"> <strong>리뷰 등록</strong></h4>
       <div class="modal-body">
         <jsp:include page="/rnp/addReview.jsp" />
       </div>
@@ -483,8 +475,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     </div>
     </div>
    </div>
-  </div>
-</div>
 
 	
 </body>
