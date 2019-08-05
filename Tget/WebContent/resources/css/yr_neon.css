@@ -15,14 +15,14 @@
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/lasenter.ttf);
 }
 html,
-  body {
-    background-color: black;
-    display: table;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
+/*   body { */
+/*     background-color: black; */
+/*     display: table; */
+/*     height: 100%; */
+/*     margin: 0; */
+/*     padding: 0; */
+/*     width: 100%; */
+/*   } */
 
   #container {
     display: table-cell;
@@ -45,12 +45,12 @@ html,
   }
 
   .sign-one {
-    padding-top: 3.5vw;
-    padding-right: 4vw;
-    font-family: lasenter;
-    font-size: 5vw;
-    line-height: 4vw;
-    padding-top: ;
+/*     padding-top: 3.5vw; */
+/*     padding-right: 4vw; */
+/*     font-family: lasenter; */
+/*     font-size: 5vw; */
+/*     line-height: 4vw; */
+/*     padding-top: ; */
     text-shadow: 
     .1vw 0vw .25vw #28D7FE, .2vw 0vw .25vw #28D7FE, .4vw 0vw .25vw #28D7FE, 
     .1vw 0vw .1vw #1041FF, .2vw 0vw 0vw #1041FF, .4vw 0vw 0vw #1041FF,
@@ -64,8 +64,8 @@ html,
 
   .and {
       color: #FED128;
-      padding-left: 5vw;
-      padding-top: .5vw;
+/*       padding-left: 5vw; */
+/*       padding-top: .5vw; */
       text-shadow: 
     -.1vw 0vw .25vw #FED128, -.2vw 0vw .25vw #FED128, -.4vw 0vw .25vw #FED128, 
     -.1vw 0vw .1vw #F0130B, -.2vw 0vw .1vw #F0130B, -.4vw 0vw .1vw #F0130B,
@@ -278,4 +278,5 @@ html,
       color: #705C12;
     }
   }
+
 

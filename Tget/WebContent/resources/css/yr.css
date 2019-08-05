@@ -1,13 +1,11 @@
 body {
-  padding: 40px 0;
   font-family: 'bebas', sans-serif;
   background-color: #fff; }
   body .textcontainer {
-    padding: 40px 0;
     text-align: center; }
   body .textcontainer > .particletext {
     text-align: center;
-    font-size: 48px;
+/*     font-size: 48px; */
     position: relative; }
     body .particletext.bubbles > .particle {
       opacity: 0;

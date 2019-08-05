@@ -71,11 +71,11 @@
 									+'<div class="card-body text-primary"><h5 class="card-title"><strong>'							
 									+value.koName+'</strong></h5><p class="card-text">'
 									+value.koLocation+'<br/></p></div>'
-										'<input type="hidden"  class="kn"  value="'+value.koName+'" >'
-										'<input type="hidden"  class="el"  value="'+value.koLocation+'" >'
-										'<input type="hidden" class="kp"  value="'+value.performersName+'">'
-										'<input type="hidden" class="category"  value="'+value.ancestorsCategory+'" >'	
-										'<input type="hidden"  class="getEvent"  value="'+value.name+'"></div>';
+										'<input type="hidden"  class="kn" value="'+value.koName+'" >'
+										'<input type="hidden"  class="el" value="'+value.koLocation+'" >'
+										'<input type="hidden" class="kp" value="'+value.performersName+'">'
+										'<input type="hidden" class="category" value="'+value.ancestorsCategory+'" >'	
+										'<input type="hidden"  class="getEvent" value="'+value.name+'"></div>';
 								$("div.eList").append(tempStr);
 							});		
 							$("#loading").attr("style","display:none;");
@@ -91,6 +91,11 @@
 	
 	</script>
 	<style type="text/css">
+	button{
+		width: 800px;
+		height:50px;
+		font-weight:bold;
+	}
 	#footer{
 		background-color: #1B1B1F ;
 	}
@@ -194,16 +199,15 @@
 	</div>
 	</form>	
 </div><!-- container -->
-<!-- <div align="center"> -->
-<!-- 	<div align="center"> -->
-<!-- 		<button id="addEvent" class="btn btn-primary">더보기</button> -->
-<!-- 	</div> -->
-<!-- </div> -->
-
-<div align="center" style="margin-left:45%;margin-right:45%;">
+<div align="center">
 	<div align="center">
 		<button id="addEvent" class="btn btn-primary">더보기</button>
 	</div>
+</div>
+<!-- <div align="center"> -->
+<!-- 		<button id="addEvent" class="btn btn-primary">더보기</button> -->
+<!-- </div> -->
+<div align="center" style="margin-left:45%;margin-right:45%;">	
 	<div align="center"  id="loading"  style="display:none;">
 		<svg  align="center" class="loading" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 		     width="200px" height="70px" viewBox="0 0 574.558 100" enable-background="new 0 0 574.558 100" xml:space="preserve">

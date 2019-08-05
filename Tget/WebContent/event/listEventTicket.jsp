@@ -13,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Acme|Bungee+Shade|Fredericka+the+Great&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<link rel="stylesheet" href="/resources/css/yr.css" />
+	<link rel="stylesheet" href="/resources/css/yr_neon.css" />
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">		
     
@@ -216,6 +217,9 @@
 		
 		
 			$("#kakaoSendToMe").on("click",function(){
+				if ("${user.kakaoToken}"==null || "${user.kakaoToken}"=="") {
+					alert("카카오로 로그인 해주세요.");
+				}
 // 				alert($("#eventId").val());
 				$.ajax( 
 						{
@@ -253,7 +257,8 @@
 // 	         sendLinkKakao()
 // 	      }); 
 
-		$(".coupon1").attr("class", "flux coupon1");
+// 		$(".coupon1").attr("class", "flux coupon1");
+		$(".coupon1").attr("style", "color:#002187;font-weight:bold;");
 		
 		$("button.close").on("click" , function() {
 			$("#inputKeyword").val("");
@@ -319,11 +324,12 @@
         	
 		div.border{ 
 			background-color : white; 
+/* 			color: white; */
 			color:  #041625;
-			margin-top:20px;
  		}		
 		div.border:hover{
 			background-color : #EBF7FF; 
+			color:  #041625; 
 		}		
         
         .getSellerEstimation:hover{
@@ -512,12 +518,13 @@
 											
 							<section id="section-topline-1" align="center">
 								<div class="row" align="center">	
+								
 									<c:forEach var="i" items="${ticketList}" >			
 										<c:if test="${i.couponCode == 0 }">	
 										<c:if test="${i.amount != 0 }">												
 										<div class="col-lg-6">
 											<div class="text-center">
-												<div class="border ">
+												<div class="border " style="height: 450px;">
 										 			<br/>
 										 			<h5  class="coupon${i.couponCode }"><strong>
 										 				<a  class="getSellerEstimation">
@@ -529,7 +536,7 @@
 										 			<div  align="center" style="margin-left:10%;margin-right:10%">	
 													 	<div class="list" align="left">
 															<ion-icon name="checkmark"></ion-icon>가격
-															<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span>
+															<div class="coupon${i.couponCode }">${i.price }원(per ticket)</div><br/>
 															<ion-icon name="checkmark"></ion-icon>티켓타입
 															<div class="coupon${i.couponCode }">
 																<c:if test="${i.type == 0}">
@@ -538,13 +545,13 @@
 																<c:if test="${i.type == 1 }">
 																	전자티켓
 																</c:if> 
-															</div>
+															</div><br/>
 															<ion-icon name="checkmark"></ion-icon>
 															구역 정보
-															<div  class="coupon${i.couponCode }">${i.seat }</div>
+															<div  class="coupon${i.couponCode }">${i.seat }</div><br/>
 															<ion-icon name="checkmark"></ion-icon>													
 															특이사항
-															<div  class="coupon${i.couponCode }">${i.options }</div>
+															<div  class="coupon${i.couponCode }">${i.options }</div><br/>
 														</div>		
 													</div>	
 													<div class="list" align="right">
@@ -562,11 +569,11 @@
 										</c:forEach>
 										
 										<c:forEach var="i" items="${ticketList}" >			
-										<c:if test="${i.couponCode != 0 }">		
-										<c:if test="${i.amount != 0 }">											
+										<c:if test="${i.couponCode != 0 }">	
+										<c:if test="${i.amount > 0 }">												
 										<div class="col-lg-6">
 											<div class="text-center">
-												<div class="border ">
+												<div class="border "  style="height: 450px;">
 										 			<br/>
 										 			<h5  class="coupon${i.couponCode }"><strong>
 										 				<a  class="getSellerEstimation">
@@ -577,9 +584,9 @@
 										 			<hr/>								 
 										 			<div  align="center" style="margin-left:10%;margin-right:10%">	
 													 	<div class="list" align="left">
-															<ion-icon name="checkmark"></ion-icon>가격<br/>
-															<span class="coupon${i.couponCode }">${i.price }원(per ticket)</span><br/><br/>
-															<ion-icon name="checkmark"></ion-icon>티켓타입<br/>
+															<ion-icon name="checkmark"></ion-icon>가격
+															<div class="coupon${i.couponCode }">${i.price }원(per ticket)</div><br/>
+															<ion-icon name="checkmark"></ion-icon>티켓타입
 															<div class="coupon${i.couponCode }">
 																<c:if test="${i.type == 0}">
 																	종이티켓
@@ -587,29 +594,30 @@
 																<c:if test="${i.type == 1 }">
 																	전자티켓
 																</c:if> 
-															</div>
-															<br/><br/>
+															</div><br/>
 															<ion-icon name="checkmark"></ion-icon>
-															구역 정보<br/>
-															<div  class="coupon${i.couponCode }">${i.seat }</div><br/><br/>
+															구역 정보
+															<div  class="coupon${i.couponCode }">${i.seat }</div><br/>
 															<ion-icon name="checkmark"></ion-icon>													
-															특이사항<br/>
-															<div  class="coupon${i.couponCode }">${i.options }</div><br/><br/>
+															특이사항
+															<div  class="coupon${i.couponCode }">${i.options }</div><br/>
 														</div>		
 													</div>	
 													<div class="list" align="right">
-													<c:if test="${i.seller.userId!=user.userId}">
-														<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
-													</c:if>					
-												</div>
-											</div><!-- border -->	
-										 </div>									
-										</div><!-- col-md-6 -->		
-										<div><small></small></div>
-										<div><small></small></div><br/>
-										</c:if>
-										</c:if>
-									</c:forEach>
+														<c:if test="${i.seller.userId!=user.userId}">
+															<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+														</c:if>					
+													</div>
+												</div><!-- border -->	
+											 </div>									
+											</div><!-- col-md-6 -->		
+											<div><small></small></div>
+											<div><small></small></div><br/>
+											</c:if>
+											</c:if>
+										</c:forEach>
+									
+									
 								</div><!-- row -->
 							</section>					
 						</div>	<!-- col-lg-6 -->

@@ -20,7 +20,7 @@
 		<link rel="stylesheet" href="/resources/css/main.css" />				
 		<link rel="stylesheet" href="/resources/css/yr.css" />
 		<link rel="stylesheet" href="/resources/css/neon.css" />
-		<link rel="stylesheet" href="/resources/css/yr_neon.css" />		
+		<link rel="stylesheet" href="/resources/css/yr_neon.css" />			
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption:700&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 		
@@ -48,6 +48,33 @@
 			#plusfriend-chat-button{
 				display: none;
 			}
+			
+			.neon2 {
+/* 			  color: #FB4264; */
+			  font-size: 9vw;
+			  line-height: 9vw;
+/* 			  text-shadow: 0 0 3vw #F40A35; */
+/* 			  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914; */
+    			color: #FF8224;
+			}
+			.neon2 {
+			  animation: neon2 2s linear infinite;
+			  -moz-animation: neon2 2s linear infinite;
+			  -webkit-animation: neon2 2s linear infinite;
+			  -o-animation: neon2 2s linear infinite;
+			}
+			@keyframes neon2 {
+				  0%,
+				  100% {
+				    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16,  0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FF8224;
+				    color: #FED128;
+				  }
+				  50% {
+				    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B;
+				    color: #806914;
+				  }
+			}		
+		
 		</style>
 	</head>
 	<body>
@@ -132,7 +159,8 @@
 										인기 이벤트
 									<span class="particle" style="top:45%; left:13%;width:12px; height:12px;animation-delay: 0.2s;"></span><span class="particle" style="top:55%; left:87%;width:10px; height:10px;animation-delay: 0.3s;"></span><span class="particle" style="top:53%; left:-5%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:53%; left:77%;width:8px; height:8px;animation-delay: 1.5s;"></span><span class="particle" style="top:69%; left:24%;width:8px; height:8px;animation-delay: 0.3s;"></span><span class="particle" style="top:57%; left:98%;width:9px; height:9px;animation-delay: 1.8s;"></span><span class="particle" style="top:66%; left:70%;width:8px; height:8px;animation-delay: 0.2s;"></span><span class="particle" style="top:64%; left:75%;width:8px; height:8px;animation-delay: 1.3s;"></span><span class="particle" style="top:41%; left:57%;width:11px; height:11px;animation-delay: 0.4s;"></span><span class="particle" style="top:50%; left:5%;width:10px; height:10px;animation-delay: 1.2s;"></span><span class="particle" style="top:48%; left:6%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:60%; left:82%;width:8px; height:8px;animation-delay: 0.7s;"></span><span class="particle" style="top:57%; left:70%;width:8px; height:8px;animation-delay: 1s;"></span><span class="particle" style="top:45%; left:43%;width:9px; height:9px;animation-delay: 0.3s;"></span><span class="particle" style="top:48%; left:3%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:72%;width:8px; height:8px;animation-delay: 0s;"></span><span class="particle" style="top:40%; left:79%;width:11px; height:11px;animation-delay: 1.4s;"></span><span class="particle" style="top:49%; left:54%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:48%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:58%; left:26%;width:8px; height:8px;animation-delay: 2s;"></span><span class="particle" style="top:41%; left:57%;width:10px; height:10px;animation-delay: 0.2s;"></span><span class="particle" style="top:66%; left:15%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:60%; left:22%;width:10px; height:10px;animation-delay: 0.9s;"></span><span class="particle" style="top:40%; left:25%;width:12px; height:12px;animation-delay: 0.6s;"></span><span class="particle" style="top:62%; left:93%;width:8px; height:8px;animation-delay: 0.9s;"></span><span class="particle" style="top:47%; left:9%;width:10px; height:10px;animation-delay: 0.7s;"></span><span class="particle" style="top:43%; left:-2%;width:8px; height:8px;animation-delay: 0.8s;"></span><span class="particle" style="top:69%; left:2%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:9%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:43%; left:22%;width:11px; height:11px;animation-delay: 0.8s;"></span><span class="particle" style="top:64%; left:37%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:70%; left:84%;width:8px; height:8px;animation-delay: 1.1s;"></span></span>
 								</span>
-								<span class=' jackpots'  style='font-size:25px;'>HOT</span>
+								
+								<span class='neon2'  style='font-size:25px; '>HOT</span>
 							</h2>
 							<p style="color: #062038;font-weight: bold;">조회수 Top 3</p>
 						</header>

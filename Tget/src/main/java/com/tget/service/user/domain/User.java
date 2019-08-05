@@ -21,26 +21,6 @@ public class User {
 	private String kakaoId;
 	private String kakaoToken;
 	private String naverToken;
-	
-	
-	
-	public String getNaverToken() {
-		return naverToken;
-	}
-
-	public void setNaverToken(String naverToken) {
-		this.naverToken = naverToken;
-	}
-
-
-	public String getKakaoToken() {
-		return kakaoToken;
-	}
-
-	public void setKakaoToken(String kakaoToken) {
-		this.kakaoToken = kakaoToken;
-	}
-
 	private String naverId;
 	private String facebookId;
 	private String blacklistCode;
@@ -298,6 +278,27 @@ public class User {
 		this.code = code;
 	}
 
+
+	
+	
+	public String getNaverToken() {
+		return naverToken;
+	}
+
+	public void setNaverToken(String naverToken) {
+		this.naverToken = naverToken;
+	}
+
+
+	public String getKakaoToken() {
+		return kakaoToken;
+	}
+
+	public void setKakaoToken(String kakaoToken) {
+		this.kakaoToken = kakaoToken;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", phone=" + phone
@@ -307,12 +308,7 @@ public class User {
 				+ ", blacklistCode=" + blacklistCode + ", blacklistStartDate=" + blacklistStartDate
 				+ ", blacklistEndDate=" + blacklistEndDate + ", sellerCode=" + sellerCode + ", salesAmount="
 				+ salesAmount + ", salesCount=" + salesCount + ", accountBank=" + accountBank + ", accountNo="
-				+ accountNo + ", code=" + code + "]";
+				+ accountNo + ", code=" + code +", kakaoToken="+kakaoToken+", naverToken="+naverToken+ "]";
 	}
-
-	
-	
-	
-	
 	
 }
