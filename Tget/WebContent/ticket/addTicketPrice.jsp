@@ -33,35 +33,20 @@
 	<script src="/resources/javascript/main.js"></script>
     
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+       body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		#ticketInput{
-			  border: 1px solid #D6CDB7;
-			  background-color: #193147;
+		a{
+			color: #041625;
 		}
-		a, hr{
-			color: #FBFCFE ;	
+		.img_wrap {
+			width: 300px;
+			margin: auto;
 		}
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		
-		section{
-			margin-left: 40px;
-		} 
-		#footer{
-			background-color: #1B1B1F;
-		}
-       .list-group > .list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
+		.img_wrap img {
+			max-width: 100%;
+		}	
     
     </style>
     
@@ -152,13 +137,13 @@
 						success : function(data) {	
 							var sellProb = data.sellprob;
 							if(sellProb == 0){
-								$("#sellProb").html("추천가격 : 적당한 가격입니다. 해당 가격의 티켓은 판매 확률이 더 높습니다.").css("color" , "blue");
+								$("#sellProb").html('<div class="alert alert-primary" role="alert">적당한 가격입니다. 해당 가격의 티켓은 판매 확률이 더 높습니다.</div>');
 							}else if(sellProb == 1){
-								$("#sellProb").html("평균가격 : 해당 가격의 티켓은 판매 확률이 낮습니다.").css("color" , "green");
+								$("#sellProb").html("<div class='alert alert-success' role='alert'>해당 가격의 티켓은 판매 확률이 낮습니다.</div>");
 							}else if(sellProb == 2){
-								$("#sellProb").html("높은가격 : 해당 가격의 티켓은 판매 확률이 매우 낮습니다.").css("color" , "orange");
+								$("#sellProb").html("<div class='alert alert-warning' role='alert'>해당 가격의 티켓은 판매 확률이 매우 낮습니다.</div>");
 							}else{
-								$("#sellProb").html("최고가격 : 주의하세요! 해당 가격의 티켓은 판매 확률이 희박합니다.").css("color" , "red");
+								$("#sellProb").html("<div class='alert alert-danger' role='alert'>주의하세요! 해당 가격의 티켓은 판매 확률이 희박합니다.</div>");
 							}
 						}							 
 			});
@@ -175,57 +160,82 @@
 	<jsp:include page="/layout/tgetHeader.jsp" />
 	<br/>
 	<div class="row">
-		<div class="col-lg-2">
-			   <div class="sticky-top">
-		      	<div class='text-center'>
-		      		<br/><br/><br/>
-					<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;티켓 > 판매가격 결정 </strong></p>
-					<br/>
-												<ul class="list-group list-group-flush">										  
-												  <li class="list-group-item"><a href="#">판매자 가이드</a></li>
-												  <li class="list-group-item"><a href="#">내 판매티켓</a></li>
-												  <li class="list-group-item"><a href="#">내 거래내역</a></li>
-												  <li></li>											  
-												</ul> 											  
-				</div> 
-				</div>
+		<div class="col-lg-3">
+		<div class="sticky-top">
+		<br/><br/><br/><br/>
+			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625; margin-left: 100px;">
+			  <div class="card-header">
+			   <strong>티켓  <i class="fas fa-ticket-alt"></i> 판매가격 결정</strong>
+			  </div>
+			  <ul class="list-group list-group-flush">								
+				<li class="list-group-item"><a href="#" data-target="#sellerGuideModal" data-toggle="modal">판매자 가이드</a></li>
+				<li class="list-group-item"><a href="#">판매목록 조회</a></li>
+				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
+			  </ul>		  
+			</div>
+		
+		  </div>
 		</div>
-		<div id="ticketInput" class="col-lg-8">	
+		<div id="ticketInput" class="col-lg-7">	
+		<div class="text-center">
+		<div class="card text-center shadow rounded" style="width: 800px; ">
 		<br/>
 		<h1 class="text-center">${ticket.event.eventName}</h1>
-				
+		<hr/>		
 		<div class="text-center">				  
 		<br/>
-		  <div class="form-group">
-		    <strong>희망 가격 : </strong>
-		     <input type="text" id="price" name="price" placeholder="판매가격입력">
-		  </div>
-		  <div class="form-group">
-		  <strong>등록 최저가 : </strong>
-		  	<span id="lowPrice"></span>
-		  </div>
-		  <div class="form-group">		 
-		  <strong>등록 최고가 : </strong>
-		  	<span id="highPrice"></span>
-		  </div>
-		  <div class="form-group">
-		  <strong>평균 가 : </strong>
-		  	<span id="avgPrice"></span>		  
-		  </div>
-		  <div class="form-group">
+			<div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="price" class="col-sm-2 col-form-label"><strong>희망 가격 </strong></label>			    
+			    <div class="col-sm-3">
+			         <input type="text" class="form-control" id="price" name="price" style="width: 200px !important" >
+			    </div>
+			    <div class="col-sm-4"></div>			    		    
+			  </div>
+		  <div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="price" class="col-sm-2 col-form-label"><strong>등록 최저가 </strong></label>			    
+			    <div class="col-sm-3" style="padding-top: 7px;">
+			         <strong><span id="lowPrice"></span> 원</strong>
+			    </div>
+			    <div class="col-sm-4"></div>			    		    
+		   </div>
+		    <div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="price" class="col-sm-2 col-form-label"><strong>등록 최고가 </strong></label>			    
+			    <div class="col-sm-3" style="padding-top: 7px;">
+			         <strong><span id="highPrice"></span> 원</strong>
+			    </div>
+			    <div class="col-sm-4"></div>			    		    
+		   </div>
+		   <div class="form-group row">	
+			  <div class="col-sm-3"></div>	    
+			    <label for="price" class="col-sm-2 col-form-label"><strong>평균 가 </strong></label>			    
+			    <div class="col-sm-3" style="padding-top: 7px;">
+			         <strong><span id="avgPrice"></span> 원</strong>
+			    </div>
+			    <div class="col-sm-4"></div>			    		    
+		   </div>
+		  <div class="form-group row">
+		  <div class="col-sm-2"></div>
+		   <div class="col-sm-8">
 		  	<span id="sellProb"></span>
 		  </div>
+		  <div class="col-sm-2"></div>
+		  </div>
 		<br/>
-		   <div class="form-group">
+		   <div class="form-group">   
 			  <a class="btn btn-outline-danger btn" href="#" id="${ticket.event.eventId}" name="sellModal" role="button" data-target="#sellModal" data-toggle="modal">게시된 &nbsp;판매현황 &nbsp;보기</a>
+		   
 		  </div>
 		 <br/>
 		  <div class="form-group">
-		      <button type="button" class="btn btn-outline-light" data-toggle="modal" >결 정</button>
-			  <a class="btn btn-outline-light btn" href="#" role="button">취&nbsp;소</a>
+		      <button type="button" class="btn btn-outline-dark" data-toggle="modal" >결 정</button>
+			  <a class="btn btn-outline-dark btn" href="#" role="button">취&nbsp;소</a>
 		  </div>
 		  </div>
 		</div>
+		</div>		
 		<div class="col-lg-2">
 		</div>
 	</div>
@@ -248,7 +258,7 @@
 								  </div>
 								<br/>
 									<div class="text-center">
-								      <button type="button" class="btn btn-primary">요 청</button>
+								      <button type="button" class="btn btn-outline-primary">요 청</button>
 									</div>							   
 								</form>
 						  </div>		
@@ -320,7 +330,7 @@
 									        labels: ['5만원 이하', '5만원~10만원', '10만원~20만원', '20만원~30만원', '30만원~40만원', '40만원이상'],									        
 									        datasets: [{
 									            label: '판매 현황',
-									            borderColor: 'rgb(143, 255, 227)',									            
+									            borderColor: '#1E90FF',									            
 									            data: [JSONdata.a, JSONdata.b, JSONdata.c, JSONdata.d, JSONdata.e, JSONdata.f]
 									        }]
 									    },					
