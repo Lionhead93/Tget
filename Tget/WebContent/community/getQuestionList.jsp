@@ -27,10 +27,7 @@
 		<link rel="stylesheet" type="text/css" href="/resources/css/tabstyles.css" />
 		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		
-		
-	
 
-	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	body{	
 		      color: #020B13;		  
@@ -43,16 +40,18 @@
 		}
 		.list-group-item{
 			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
+			  color: #020B13;
+ 			  border: 1px solid #88e3f7;		   
+ 			  background-color: #EBF7FF; 
 		}
 		table{
-			background-color: #193147;
+			color: #020B13;
+ 			border: 1px solid #88e3f7;		   
+ 			background-color: #EBF7FF;
 		}
 		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
+			border: 1px solid #88e3f7;
+			color: #EBF7FF ;
 		}
 		.col-md-2{
 			padding-left: 50px;
@@ -70,15 +69,12 @@
 		}
 		.border{
 			padding-top: 20px;
-			background-color: #193147;
+			background-color: white;
 		}
 		section{
 			margin-left: 40px;
 		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		}
+		
 		#cyberWidget{
        		background-color: white;
        }  
@@ -329,11 +325,9 @@
 	<div class="text-right" style="margin-right: 130px; margin-top: 30px;">	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
 		    	
-				<p class="text-primary">
-		    		전체  ${totalCount } 건수
-		    	</p>
+				<p class="text-dark"><strong>전체  ${totalCount } 건수</strong></p>
 		    	<c:if test="${sessionScope.user.role == '2'}">
-		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				</c:if>	
 	</div>
 	
@@ -347,9 +341,9 @@
 		   	 
 			
 				<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="#">티켓 거래 공지</a></li>
-				<li class="list-group-item"><a href="#">자유게시판 이용공지</a></li>
-				<li class="list-group-item"><a href="#">자주 묻는 질문</a></li>
+				<li class="list-group-item" ><a href="#" style=color:#020B13;>티켓 거래 공지</a></li>
+				<li class="list-group-item" ><a href="#" style=color:#020B13;>자유게시판 이용공지</a></li>
+				<li class="list-group-item" ><a href="#" style=color:#020B13;>자주묻는질문</a></li>
 				</ul>
 			</div>
 		</div>		
@@ -357,31 +351,32 @@
      <div class="col-md-10 text-center">	
 			<section>
 				<br/>
-				<div class="tabs tabs-style-topline">
+				<div class="tabs tabs-style-topline " >
 					<nav>
 						<ul>
-							<li><a href="#section-topline-1"><h6><strong>회원</strong></h6></a></li>
+							<li><a href="#section-topline-1 "><h6><strong>회원</strong></h6></a></li>
 							<li><a href="#section-topline-2"><h6><strong>판매/구매</strong></h6></a></li>
 							<li><a href="#section-topline-3"><h6><strong>취소/환불</strong></h6></a></li>
 							<li><a href="#section-topline-4"><h6><strong>이벤트/혜택</strong></h6></a></li>
 						</ul>
 					</nav>
 					<div class="content-wrap">
-						<section id="section-topline-1">
+						<section id="section-topline-1" >
 						<div class="row">
 								 <c:forEach var="content" items="${list}" varStatus="j">
 								 <c:if test="${content.contentCode=='8'}">
-								 	<div class="col-lg-3">
-								 	<div class="text-center">
+								 	<div class="col-lg-3 " >
+								 	<div>
 								 		<div class="border">
 								 		<br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
+								 				<div style="text-align: left; padding-left: 30px;">
 								 				<small>작성자: ${content.userNickname}</small>
 								 				<br/>
-								 				<small>작성일: ${content.regDate}</small>
-								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
+								 				<small>작성일: ${content.regDate}</small></div>
+								 				<br/>
+								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus" style=color:#000000;></i></a>
 								 			<hr/>
 								 			
 								 			<br/>
@@ -424,10 +419,11 @@
 								 <c:if test="${content.contentCode=='10'}">
 								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border">
+								 		<div class="border " >
 								 		<br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
+								 				
 								 				<small>작성자: ${content.userNickname}</small>
 								 				<br/>
 								 				<small>작성일: ${content.regDate}</small>
@@ -549,7 +545,7 @@
 				<div class="modal-content modal-80size">
 					  <div class="modal-report">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle"></h5>
+					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:#020B13;">자주 묻는 질문 </span></strong></h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#020B13">
 					          <span aria-hidden="true">&times;</span>
 					        </button>

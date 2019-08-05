@@ -180,7 +180,7 @@
 		    <div class="text-right" style="margin-right: 130px; margin-top: 30px;">
 		    	
 		    	
-		    	<button type="button" id="addContent" class="btn btn-danger" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>	    	
+		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>	    	
 		    </div>
 		    
 <div class="row">
@@ -188,7 +188,7 @@
 	      <div class="sticky-top">
 		  <br/>
 			 <div>
-		       		<h5><strong>Community > 환불게시판</strong></h5>
+		       		<h6><strong>Community > 환불게시판</strong></h6>
 		      	          
 		   	 </div>
 			</div>

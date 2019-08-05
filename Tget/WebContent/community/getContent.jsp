@@ -181,7 +181,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3><span style="color:white;">게시글 상세조회</span></h3>	       
+	       <h3><span style="color:#020B13;">게시글 상세조회</span></h3>	       
 	    </div>
 		<hr/>
 		
@@ -211,9 +211,9 @@
 		<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
-			 
+
 			 <button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
-		   
+
 		    </div>
 		</div>
 

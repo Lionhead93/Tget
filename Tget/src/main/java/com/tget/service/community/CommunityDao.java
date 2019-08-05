@@ -10,48 +10,51 @@ import com.tget.service.community.domain.Report;
 
 
 public interface CommunityDao {
-	// °Ô½Ã±Û µî·Ï 
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ 
 	public void InsertContent(Content content) throws Exception;
-	// ½Å°í µî·Ï
+	// ï¿½Å°ï¿½ ï¿½ï¿½ï¿½
 	public void InsertReport(Report report) throws Exception;
-	// ´ñ±Û µî·Ï
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public void InsertReply(Reply reply) throws Exception;
-    // °Ô½Ã±Û »ó¼¼Á¶È¸
+    // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½È¸
     public Content selectContent(int contentNo) throws Exception;
-    // ½Å°í Á¶È¸
+    // ï¿½Å°ï¿½ ï¿½ï¿½È¸
     public Report selectReport(int reportNo) throws Exception;
-    // ´ñ±Û Á¶È¸
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
     public Reply selectReply(int replyNo) throws Exception;
-    // °Ô½Ã±Û ¼öÁ¤
+    // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateContent(Content content) throws Exception;
-	// ½Å°í ¾÷µ¥ÀÌÆ®
+	// ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	public void updateReport(Report report)	throws Exception;
-    // °Ô½Ã±Û ¸®½ºÆ® Á¶È¸
+    // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
     public List<Content> selectListContent(Search search) throws Exception;
-    // ´ñ±Û ¼öÁ¤
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void updateReply(Reply reply) throws Exception;
-    // ´ñ±Û »èÁ¦
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void deleteReply(int replyNo) throws Exception;
-    // ´ñ±Û ¸®½ºÆ® Á¶È¸
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
     public Map<String, Object> selectListReply(int replyNo) throws Exception;
-	// °ø°¨¼ö 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
     public void updateGoodCount(int contentNo)throws Exception;
-    // ºñ°ø°¨¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void updateBadCount(int contentNo)throws Exception;
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return
+    
+    public void updateViewCount(int contentNo)throws Exception;
+    
+	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼Row(totalCount)  return
 	public int selectTotalCount(Search search) throws Exception ;
 	
 	public int selectTotalCountRefund(Search search) throws Exception ;
 	
 	public int selectTotalCountReport(Search search) throws Exception ;
-	// È¯ºÒ °Ô½ÃÆÇ È¯ºÒ Ã³¸® update
+	// È¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ Ã³ï¿½ï¿½ update
 	public void updateRefund(Content content) throws Exception;
-	// È¯ºÒ °Ô½ÃÆÇ ¸®½ºÆ® Á¶È¸
+	// È¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 	public List<Content> selectListRefund(Search search) throws Exception;
 	
-	// ½Å°í±Û ¸®½ºÆ® Á¶È¸(°ü¸®ÀÚ)
+	// ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	public List<Report> selectListReport(Search search) throws Exception;
-	// ´ñ±Û ¸®½ºÆ® Á¶È¸(¼öÁ¤ ÇÊ¿ä)
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸(ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
 	
 	//public List<Content> selectListRefund(Search search) throws Exception;
 	

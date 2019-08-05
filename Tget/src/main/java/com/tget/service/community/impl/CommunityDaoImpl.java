@@ -75,7 +75,7 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 	
 
-	//// ´ñ±Û »èÁ¦
+	//// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void deleteReply(int replyNo) throws Exception{
 		sqlSession.delete("CommunityMapper.deleteReply", replyNo);
@@ -84,6 +84,11 @@ public class CommunityDaoImpl implements CommunityDao{
 	@Override
 	public void updateGoodCount(int contentNo) throws Exception {
 		sqlSession.update("CommunityMapper.updateGoodCount", contentNo);		
+	}
+	
+	@Override
+	public void updateViewCount(int contentNo) throws Exception {
+		sqlSession.update("CommunityMapper.updateViewCount", contentNo);		
 	}
 	
 	@Override

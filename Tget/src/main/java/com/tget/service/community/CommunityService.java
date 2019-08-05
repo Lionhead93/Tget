@@ -11,55 +11,57 @@ import com.tget.service.community.domain.Weather;
 
 public interface CommunityService {
 	
-		// °Ô½Ã±Û µî·Ï ok
+		// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ ok
 		public void addContent(Content content) throws Exception;
 		
-		// ½Å°í µî·Ï ok
+		// ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ ok
 		public void addReport(Report report) throws Exception;
 		
-		// ´ñ±Û µî·Ï ok
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ok
 		public void addReply(Reply reply) throws Exception;
 		
-		// °Ô½Ã±Û Á¶È¸
+		// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È¸
 		public Content getContent(int contentNo) throws Exception;
 		
-		// °Ô½Ã±Û ¼öÁ¤
+		// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 		public void updateContent(Content content) throws Exception;
 			
-		// ½Å°í ¾÷µ¥ÀÌÆ®
+		// ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 		public void updateReport(Report report) throws Exception;
 		
-		// ´ñ±Û ¼öÁ¤
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		public void updateReply(Reply reply) throws Exception;
 		
-		// ´ñ±Û Á¶È¸
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public Reply getReply(int replyNo) throws Exception;
 		
-		// ½Å°í Á¶È¸
+		// ï¿½Å°ï¿½ ï¿½ï¿½È¸
 		public Report getReport(int reportNo) throws Exception;
 		
-		// ´ñ±Û »èÁ¦
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		public void deleteReply(int replyNo) throws Exception;
 		
-		// °Ô½Ã±Û ¸®½ºÆ® Á¶È¸
+		// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 		public Map<String,Object> getContentList(Search search) throws Exception;
 		
-		// ´ñ±Û ¸®½ºÆ® Á¶È¸
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 		public Map<String, Object> getReplyList(int replyNo) throws Exception;
 		
-		// ½Å°í ¸®½ºÆ® Á¶È¸
+		// ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 		public Map<String,Object> getReportList(Search search) throws Exception; //getTotalCount, getReportList 
 		
-		// È¯ºÒ °Ô½ÃÆÇ Á¶È¸
+		// È¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public Map<String,Object> getRefundList(Search search) throws Exception;
 		
-		// °ø°¨¼ö
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void updateGoodCount(int contentNo)throws Exception;
 		
-		// ºñ °ø°¨¼ö
+		public void updateViewCount(int contentNo)throws Exception;
+		
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void updateBadCount(int contentNo)throws Exception;
 		
-		// È¯ºÒ °Ô½ÃÆÇ È¯ºÒ Ã³¸®
+		// È¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ Ã³ï¿½ï¿½
 		public void updateRefund(Content content) throws Exception;
 
 		

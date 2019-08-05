@@ -64,6 +64,7 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public Content getContent(int contentNo) throws Exception {
 		// TODO Auto-generated method stub
+		communityDao.updateViewCount(contentNo);
 		return communityDao.selectContent(contentNo);
 	}
 	
@@ -163,6 +164,12 @@ public class CommunityServiceImpl implements CommunityService{
 	public void updateGoodCount(int contentNo) throws Exception {
 		// TODO Auto-generated method stub
 		communityDao.updateGoodCount(contentNo);
+	}
+	
+	@Override
+	public void updateViewCount(int contentNo) throws Exception {
+		// TODO Auto-generated method stub
+		communityDao.updateViewCount(contentNo);
 	}
 
 

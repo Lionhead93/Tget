@@ -102,7 +102,7 @@
 		
 	/* 	게시글 등록 Modal */
 		.modal-dialog.modal-80size {
-		  color: black;
+		  color: #020B13;
 		  width: 300%;
 		  height: 100%;
 		  margin: 0;
@@ -136,6 +136,8 @@
 		  text-align: left;
 		  vertical-align: middle;
 		}
+		
+		
 
     </style>
     
@@ -156,6 +158,11 @@
 			
 		 $(function() {
 			
+// 			 $( "button.btn.btn-info:contains('최신순')" ).on("click" , function() {
+// 					$("#currentRegDate").val("0");
+// 					fncGetUserList("1");
+// 				});
+			 
  			 $( "button.btn.btn-info:contains('등록')" ).on("click" , function() {
  				 
  					//self.location="/community/addContent"	
@@ -235,11 +242,12 @@
 				
 	 
 			// 상세 조회
-			$( "td:nth-child(1)" ).on("click" , function() {
-				self.location ="/community/getContent?contentNo="+$(this).children('#contentNo').text().trim();
+			$( ".col-md-4" ).on("click" , function() {
+				self.location ="/community/getContent?contentNo="+$(this).parent().children('#contentNo').text().trim();
+				
 			});
 
-			$( "td:nth-child(1)" ).css("color" , "black");
+			$( ".col-md-4" ).css("color" , "black");
 			
 			$("h7").css("color" , "red");
 			
@@ -328,16 +336,16 @@
 
 	<div class="text-right" style="margin-right: 85px; margin-top: 20px;">       	
 		    	<p class="text-dark" ><strong>전체  ${totalCount } 건수</strong></p>
-		    	
+<!-- 		    	<button type="button" id="currentRegDate" class="btn btn-info">최신순</button> -->
 		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
 				
-		<br/><br/><br/>
+		
 	</div>	   
 
 	<br/>	   
 	 <div class="row" >
 	  <div class="col-md-2 text-center" >	  
-	      <div class="sticky-top" >
+	      <div class="sticky-top" ><!--  sticky-top-->
 		  <br/>
 			 <div>
 		       <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'}">
@@ -379,67 +387,56 @@
 		</div>	
 		
       <!--  table Start /////////////////////////////////////-->
-     <div class="col-md-10 text-center">
+ <div class="col-md-10 text-center">
      		
-     		<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px;">
+     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
 		 <div class="card-body">	
 			<div class="row">
-				<div class="col-md-3"><p><strong>티켓 삽니다</strong></p></div>		     			        
-				<div class="col-md-3"><p><strong>판매자얌</strong></p></div>	        
-				<div class="col-md-3"><p><strong>2019-08-02</strong></p></div>
-				<div class="col-md-3"><p><strong>공감버튼 비공감버튼 신고버튼</strong></p></div>		
+				<div class="col-md-4"><p><strong>글 제목</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        
+				<div class="col-md-2"><p><strong>작성자</strong>&ensp;<i class="fas fa-user-edit"></i></p></div>	        
+				<div class="col-md-2"><p><strong>작성일</strong>&ensp;<i class="far fa-calendar-alt"></i></p></div>
+				<div class="col-md-1"><p><strong>조회수</strong></div>
+				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<div class="col-md-3"></div>		
+				</c:if>
 		    </div>
 		</div>        
 	</div>	
-	      <table class="table" >	      
-	        <thead>
-	          <tr >
-	            <th style=color:#020B13;>글 제목</th>
-	            <th style=color:#020B13;>작성자</th>
-	            <th style=color:#020B13;>작성일</th>				
-	            <th style=color:#020B13;>공감/비공감</th>	
-	            <c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-	            <th style=color:#020B13;>신고</th>
-	            </c:if>	
-	          </tr>
-	        </thead>       
-			<tbody >	
-			  <c:forEach var="content" items="${list}">
-				<tr>
-				<td><span style="color:black;">${content.contentName}</span>
-				  <!--  <div id="contentNo" name="contentNo">${content.contentNo}</div>-->
-				  <div id="contentNo" style="display:none;">${content.contentNo}</div></td>
-				 <!-- <input type="hidden" id="contentNo" name=contentNo value="${content.contentNo}" /> --> 
-
-	<%--  		  <td align="left">${content.contentBody}</td> --%>
-				  <td style=color:#020B13;>${content.userNickname}
-				  <div id="userId" style="display:none;">${user.userId}</div></td>
-				  <td style=color:#020B13;>${content.regDate}</td> 
-  
-			   	  <!-- 공감 -->
-			   	  <td><a href="#" class="good" id="${content.contentNo}"  style=color:#020B13;><i class="fas fa-thumbs-up"></i></a>
+	
+	
+	<c:forEach var="content" items="${list}">
+	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
+		 <div class="card-body" style="padding-top:10px;">	
+			<div class="row">
+				<div class="col-md-4" ><p>${content.contentName}</p></div>
+				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
+				<div class="col-md-2"><p>${content.userNickname}</p></div>
+				<div id="userId" style="display:none;">${user.userId}</div>	        
+				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-1"><p>${content.viewCount }</p></div>
+				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<div class="col-md-3">
+				<p>
+				<!-- 공감 -->
+			   	  <a href="#" class="good" id="${content.contentNo}"  style=color:#020B13;><i class="fas fa-thumbs-up"></i></a>
 			   	  <span name="${content.contentNo}" style=color:#020B13;>${content.goodCount}</span>
 			   	  
 			   	  <!-- 비공감 -->
 			   	  <a href="#" class="bad" id="${content.contentNo}" style=color:#020B13;><i class="fas fa-thumbs-down"></i></a>
 			   	  <a id="${content.contentNo}"  style=color:#020B13;>${content.badCount}</a> 
-			   	  </td>
 			   	  
-				  <!-- 신고 하기 -->
+			   	  <!-- 신고 하기 -->
 			   	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				  <td align="left"  style=color:#eb1e07;><a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal"  style=color:#eb1e07;><i class="fas fa-bell"></i></a>	
-				  </td>
-				  </c:if> 	
-			</tr>
-          <tr>
-		</tr>
-          </c:forEach>
-			
-	        </tbody>
-	      
-	      </table>
-      </div>
-	</div>  
+				  <a href="#" class="reportRing" id="${content.contentNo}" data-toggle="modal"  style=color:#FFBF00>&ensp;<i class="fas fa-bell"></i></a>		  
+				  </c:if> 
+				</p></div>		
+				</c:if>			  
+		    </div>
+		</div>        
+	</div>	
+	</c:forEach>
+</div>
+ </div>    
 	<!-- 게시글 등록 Modal -->		  
 		<form name='addContent'>
 		<div class="modal modal-center fade" id="addContentModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
@@ -528,26 +525,28 @@
 	  </div>
 	</div>			  
 	</form>
+	
 	<!-- 신고하기 Modal -->
 	<div class="modal fade" id="addReportModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content modal-80size">
 					  <div class="modal-report">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:white;">신고하기</span></strong></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:#020B13;">신고하기</span></strong></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#020B13">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
+					      <hr>
 					      <div class="modal-body" id="addReportModalBody"> 	    
 		  
 			    <form name="addReport">
 <!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
 <%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
 					
-			    	<div class="col" style="color:white;">작성자 : <span id="reportBlackId"></span></div>
+			    	<div class="col" style="color:#020B13;">작성자 : <span id="reportBlackId"></span></div>
 					
-					<div class="col" style="color:white;">내용 :  <div id="reportContentBody"></div></div>
+					<div class="col" style="color:#020B13;">내용 :  <div id="reportContentBody"></div></div>
 			    
 				<br>
 				<hr>
@@ -558,12 +557,12 @@
 				<input type='hidden' name='reportCode' value='0'/>				
 				
 				
-				<span style="color:white;"><strong>신고 사유를 선택해주세요</strong></span>
+				<span style="color:#020B13;"><strong>신고 사유를 선택해주세요</strong></span>
 			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0' ><span style="color:white;">부적절한 홍보 게시물</span><br>
-				<input type='checkbox' name='reportReasonCode' value='1'><span style="color:white;">음란성 또는 청소년에게 부적합한 내용</span><br>
-				<input type='checkbox' name='reportReasonCode' value='2' ><span style="color:white;">특정인 대상의 비방/욕설</span><br>
-				<input type='checkbox' name='reportReasonCode' value='3' ><span style="color:white;">명예훼손/사생활 침해 및 저작권침해 등</span><br>
+				<input type='checkbox' name='reportReasonCode' value='0' ><span style="color:#020B13;">&ensp;부적절한 홍보 게시물</span><br>
+				<input type='checkbox' name='reportReasonCode' value='1'><span style="color:#020B13;">&ensp;음란성 또는 청소년에게 부적합한 내용</span><br>
+				<input type='checkbox' name='reportReasonCode' value='2' ><span style="color:#020B13;">&ensp;특정인 대상의 비방/욕설</span><br>
+				<input type='checkbox' name='reportReasonCode' value='3' ><span style="color:#020B13;">&ensp;명예훼손/사생활 침해 및 저작권침해 등</span><br>
 				</div>
 				
 				</form>		

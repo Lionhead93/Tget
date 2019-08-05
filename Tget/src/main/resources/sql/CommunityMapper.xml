@@ -112,6 +112,7 @@
 			content_body = #{contentBody:VARCHAR},
 			file_name	= #{fileName:VARCHAR},
 			video_name = #{videoName:VARCHAR}
+			
 	   	</set>
 	   	WHERE content_no = #{contentNo}
 	 </update>
@@ -147,6 +148,14 @@
 	   	UPDATE content
 	   	<set>
 			good_count = good_count+1
+	   	</set>
+	   	WHERE content_no = #{contentNo}
+	 </update>
+	 
+	 <update 	id="updateViewCount"	parameterType="content"  >
+	   	UPDATE content
+	   	<set>
+			view_count = view_count+1
 	   	</set>
 	   	WHERE content_no = #{contentNo}
 	 </update>
@@ -190,7 +199,12 @@
 													</if>
 													<if test="searchCondition == 3 ">
 														AND content_code in('8','9','10','11')
-													</if>		
+													</if>
+<!-- 													<if	test="regDate != null"> -->
+<!-- 														<if test="regDate == 0"> -->
+<!-- 														and reg_date > SYSDATE-30 -->
+<!-- 														</if> -->
+<!-- 												   </if>		 -->
 												</where>
 											</if>
 											ORDER BY content_no ) inner_table)

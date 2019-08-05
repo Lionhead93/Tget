@@ -122,21 +122,35 @@
     </script>
     </head>
     <body>
-  
-		<div>
+  	
+		<div style="display:none">
                 <select id="mode">
                 <option value="TRANSIT">대중 교통 정보</option>
                 </select>
             </div>
-        <div class="input-group">		    
+            <br/>
+        <div class="input-group" style="padding-bottom:20px">		    
+							    
+							    <span><font size="2">&ensp;<strong>기존 주소 : </strong></font></span>
 							    <input type="text" id="start" class="form-control" width="100%" value="${user.address}">
-							   <select id="end" class="form-control">
-							   		<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
-							   		<option value="${location}">${location}</option>
-							   		</c:forEach>
-							   	</select>
-							    	<input type="button" value="검색" onclick="Javascript:calcRoute();" >							
+							    
+							    <span><font size="2">&ensp;<strong>공연장/경기장 찾기 :  </strong></font></span>
+							   <select class="btn btn-outline-dark custom-select" id="end" name="end" style="width:150px;">
+								<option selected>목적지 선택</option>
+			    					<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 -->
+			    				<option value="${location}">${location}</option>
+			    				</c:forEach>
+			    	   			</select>
+			    	   			
+<!-- 							   <select id="end" class="form-control"> -->
+<%-- 							   		<c:forEach var="location" items="${list}"><!-- 리스트에 담긴 것을 location에 저장하고 출력 --> --%>
+<%-- 							   		<option value="${location}">${location}</option> --%>
+<%-- 							   		</c:forEach> --%>
+<!-- 							   	</select> -->
+							   	
+							    	<input type="button" class="btn btn-info" value="검색" onclick="Javascript:calcRoute();" >							
 						     </div>
         <div id="map-canvas"></div>
+      
     </body>
 </html>
