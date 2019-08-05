@@ -75,7 +75,6 @@
 	</script>
 	<style type="text/css">
 		body{
-			padding-top:30px;
 			background-color: #EBF7FF;
 			color: #041625;	
 		}
@@ -96,7 +95,7 @@
 			background-color: #1B1B1F ;
 		}
 		a, hr,th,td{
-				ccolor: #041625;
+				color: #041625;
 		}	
 	</style>
 </head>

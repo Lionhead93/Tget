@@ -197,7 +197,7 @@ public class EventServiceImpl implements EventService{
 		return eventDao.translate(sourceLang, targetLang, list);
 	}
 	
-	public List<String> getAllLocation() throws Exception{
+	public List<Event> getAllLocation() throws Exception{
 		return eventDao.selectAllLocation();
 	}
 	
