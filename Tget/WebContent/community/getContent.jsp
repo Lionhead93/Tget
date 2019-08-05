@@ -147,7 +147,7 @@
 	 $(function() {
 			
 			
-			$( "button.btn.btn-primary" ).on("click" , function() {
+			$( "button.btn.btn-primary:contains('»Æ &nbsp;¿Œ')" ).on("click" , function() {
 			
 				history.go(-1); 
 			});

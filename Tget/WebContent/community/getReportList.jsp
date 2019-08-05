@@ -146,10 +146,7 @@
 		
 	
 		 $(function() {
-			
-			
-
-						
+								
 			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
 					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
 				});
@@ -231,7 +228,7 @@
 	  <!--  table Start /////////////////////////////////////-->
       <div class="col-md-10 text-center">
       
-      <div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+      <div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px">
 		 <div class="card-body">	
 			<div class="row">
     			<div class="col-md-2"><p><strong>No</strong></p></div>		     			        
@@ -285,7 +282,7 @@
 					  <div class="modal-dialog modal-md" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="modalCenterTitle" style=color:#020B13;>신고글</h5>
+					        <h5 class="modal-title" id="modalCenterTitle" style=color:#020B13;><strong>신고글</strong></h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>

@@ -88,6 +88,10 @@
 		section{
 			margin-left: 40px;
 		}
+/* 		#gradient{ */
+/* 			background: linear-gradient(-45deg, rgba(246, 255, 0, .8), rgba(255, 0, 161, .8)) fixed */
+
+/* 		} */
 		#inputGroupSelect01, nav{
 			background: rgba(4, 22, 37, 0.75);
 			color: #c0c5c9;
@@ -389,7 +393,7 @@
       <!--  table Start /////////////////////////////////////-->
  <div class="col-md-10 text-center">
      		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+     		<div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px;">
 		 <div class="card-body">	
 			<div class="row">
 				<div class="col-md-4"><p><strong>글 제목</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        
@@ -403,8 +407,51 @@
 		</div>        
 	</div>	
 	
+	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='0'||search.searchCondition=='2'&&search.searchKeyword=='1'}">
+		<c:forEach var="content" items="${list}">
+
+	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
+		 <div class="card-body" style="padding-top:10px;">	
+			<div class="row">
+				<div class="col-md-4" ><p>${content.contentName}</p></div>
+				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
+				<div class="col-md-2"><p>${content.userNickname}</p></div>
+				<div id="userId" style="display:none;">${user.userId}</div>	        
+				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-1"><p>${content.viewCount }</p></div>
+				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<div class="col-md-3">
+				</div>		
+				</c:if>	
+				</div>
+				</div>
+				</div>
+	</c:forEach>	
+	</c:if>
 	
+	<c:if test="${search.searchCondition=='2'&&search.searchKeyword!='0'&&search.searchCondition=='2'&&search.searchKeyword!='1'}">
 	<c:forEach var="content" items="${list}">
+	<c:if test="${content.contentCode=='0' || content.contentCode=='1'}">
+	<div class="card text-center shadow rounded-pill" id="gradient" style="margin-bottom: 10px; height:40px; background-color:#cddefa;">
+		 <div class="card-body" style="padding-top:10px;">	
+			<div class="row">
+				<div class="col-md-4" ><p><span class="text-danger"><strong>[공지]&ensp;</strong></span>${content.contentName}</p></div>
+				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
+				<div class="col-md-2"><p>${content.userNickname}</p></div>
+				<div id="userId" style="display:none;">${user.userId}</div>	        
+				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-1"><p>${content.viewCount }</p></div>
+				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
+				<div class="col-md-3">
+				</div>		
+				</c:if>	
+				</div>
+				</div>
+				</div>
+				</c:if>
+	</c:forEach>
+	<c:forEach var="content" items="${list}">
+	<c:if test="${content.contentCode!='0' && content.contentCode!='1'}">
 	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
 		 <div class="card-body" style="padding-top:10px;">	
 			<div class="row">
@@ -433,8 +480,10 @@
 				</c:if>			  
 		    </div>
 		</div>        
-	</div>	
+	</div>
+	</c:if>	
 	</c:forEach>
+	</c:if>
 </div>
  </div>    
 	<!-- 게시글 등록 Modal -->		  
