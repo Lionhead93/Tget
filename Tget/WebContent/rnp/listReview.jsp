@@ -52,7 +52,7 @@
 // 							alert(JSONData.review.reviewBody);
 // 							alert(JSONData.review.score);
 							$("select[name='score']").val(JSONData.review.score);
-							$("textarea[name='reviewBody']").text(JSONData.review.reviewBody);
+							$("textarea[name='reviewBody']").val(JSONData.review.reviewBody);
 // 							alert(JSONData.review.reviewBody);
 // 							$("button.close").click();
 						},
@@ -75,14 +75,15 @@
 		});
 		
     	$("#submit").on("click",function(){
-//     		var temp = $("#reviewTranNo").val();
-// 			alert('$("#reviewTranNo").val() : '+$("#reviewTranNo").val()+', $("#score").val() : '+$("#score").val()+', $("#reviewBody").val() : '+$("#reviewBody").val()+'$("#reviewRegDate").val()'+$("#reviewRegDate").val());
+    		var temp = $("#reviewTranNo").val();
+// 			alert('$("#reviewTranNo").val() : '+$("#reviewTranNo").val()+', $("#score").val() : '+$("#score").val()+', $("#reviewBody").text() : '+$("#reviewBody").text()+', $("#reviewRegDate").val() : '+$("#reviewRegDate").val());
 			$.ajax(
 					{
-						url : "/rnp/rest/updateReview?tranNo="+$("#reviewTranNo").val(),
+						url : "/rnp/rest/updateReview",
 						method : "POST",
 						data : {
-								score : $("#score").val(),
+								tranNo : temp,
+								score :  $("#score").val(),
 								reviewBody : $("#reviewBody").val(),
 								regDate : $("#reviewRegDate").val()
 									},
@@ -97,7 +98,7 @@
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
-				});	
+				});				
 		});
     	
     	
@@ -160,7 +161,7 @@
 <body>	
 <jsp:include page="/layout/tgetToolbar.jsp" />
 <jsp:include page="/layout/tgetHeader.jsp" />
-<form>
+
 	<div class="container-fluid" align="center">	
 		<div class="row" >
 			<div class="col-lg-3"></div>
@@ -204,12 +205,12 @@
 				  				 	<p>${i.seller.nickName }	</p>
 								</div>    		
 								<div class="col-md-6 record"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter" >
+								 data-target="#exampleModalCenter"   id="reviewBody${i.tranNo}">
 									  <input type="hidden"  value="${i.tranNo }"/>
 									 <p>${i.reviewBody}</p>
 								</div>    	
 								<div class="col-md-2 record"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter" >
+								 data-target="#exampleModalCenter"  id="score${i.tranNo}">
 									  <input type="hidden"  value="${i.tranNo }"/>
 									 <p>${i.score}.0</p>
 								</div>    	
@@ -217,7 +218,8 @@
 								 data-target="#exampleModalCenter" >
 									  <input type="hidden"  value="${i.tranNo }"/>
 									 <p>${i.regDate}</p>
-								</div>    			         		
+								</div> 
+								<input  type="hidden"  class="regdate" value="${i.regDate }">   			         		
 							</div>
 						</div>
 					</div>
@@ -259,7 +261,7 @@
 			   </c:forEach>
 <!-- 		  		 </tbody> -->
 <!-- 				</table> -->
-
+	
 <%-- 				<input  type="hidden"  class="score" value="${i.score }"> --%>
 <%-- 				<input  type="hidden"  class="reviewbody" value="${i.reviewBody }"> --%>
 				<input  type="hidden"  id="reviewRegDate" name="regDate" class="regdate" value="${i.regDate }">
@@ -267,7 +269,8 @@
 			<div class="col-lg-2 col-12"></div>
 		</div>	
 	</div>
-	</form>
+
+
 	<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -280,11 +283,37 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         </button>
       </div>
       <div class="modal-body">
+      
+      
+      
+<%--       <input type="hidden" id="reviewTranNo" name="tranNo" value="${!empty tranNo? tranNo:'' }"> --%>
+<!-- 		<div class="form-group row"> -->
+<!--     		<label for="score" class="col-md-3"><ion-icon name="checkmark"></ion-icon><strong>∆Ú¡°</strong> </label> -->
+<!--     		<div class="col-md-9"> -->
+<!--     		<select  class="custom-select"  id="score" name="score">
+    			<option value="5"  selected>5.0</option>
+    			<option value="4">4.0</option>
+    			<option value="3">3.0</option>
+    			<option value="2">2.0</option>
+    			<option value="1">1.0</option> -->
+<!--     		</select> -->
+<!--     		</div> -->
+<!--  		 </div> -->
+<!-- 			<br/> -->
+<!--  		 <div class="form-group row"> -->
+<!-- 		    <label for="reviewBody" class="col-md-3"><ion-icon name="checkmark"></ion-icon><strong>∏Æ∫‰</strong></label> -->
+<!-- 		    <div class="col-md-9"> -->
+<!-- 		    <textarea class="form-control" name="reviewBody" id="reviewBody" -->
+<%-- 		    value="${!empty review.reviewBody?review.reviewBody:''}"  rows="3" placeholder="∏Æ∫‰∏¶ ¿‘∑¬«œººø‰">${!empty review.reviewBody? review.reviewBody:''}</textarea> --%>
+<!-- 		 	</div> -->
+<!-- 		 </div> -->
+      
+      
         <jsp:include page="/rnp/addReview.jsp" />
       </div>
       <div class="modal-footer" style="color: black;" >       
         <button type="button"  class="btn btn-outline-primary" id="submit" style="color: black;" >¿˙¿Â</button>
-         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">¥›±‚</button>
+         <button type="button" class="btn btn-outline-dark  " data-dismiss="modal">¥›±‚</button>
       </div>
     </div>
     </div>
@@ -320,7 +349,7 @@ aria-labelledby="tranModalTitle" aria-hidden="true">
         </div>
       </div>
       <div class="modal-footer">       
-         <button type="button" class="btn btn-outline-dark" data-dismiss="modal" style="color:#041625;">¥›±‚</button>
+         <button type="button" class="btn btn-outline-dark  " data-dismiss="modal" style="color:#041625;">¥›±‚</button>
       </div>
     </div>
     </div>

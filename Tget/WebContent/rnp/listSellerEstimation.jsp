@@ -184,39 +184,35 @@
 aria-labelledby="tranModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="font-size: 20px">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <div class="modal-title" id="tranModalTitle"  style="padding:0px;font-weight: bold;">거래 조회</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div style="margin-left:30px;margin-right:30px; ">
         	<ion-icon name="checkmark"></ion-icon>이벤트명 : 			
-        	<span class=""  id="reviewTranEventName"></span><br/>
+        	<span class=""  id="reviewTranEventName"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>가격 :         	
-			<span class=""  id="reviewTranPrice"></span><br/>
+			<span class=""  id="reviewTranPrice"></span><br/><br/>
         	
 			<ion-icon name="checkmark"></ion-icon>수량 : 			
-			<span class=""  id="reviewTranAmount"></span><br/>
+			<span class=""  id="reviewTranAmount"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>실결제액 : 
-			<span class=""  id="reviewTranTotalPrice"></span><br/>
+			<span class=""  id="reviewTranTotalPrice"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>판매일자 : 
 			<span class=""  id="reviewTranOrderDate"></span>
         </div>
       </div>
       <div class="modal-footer">       
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
