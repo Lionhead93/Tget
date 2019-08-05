@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<form name="addReviewForm"  style="font-size:20px; margin-top:30px;margin-left: 30px; margin-right: 30px;">		
-		<input type="hidden" id="reviewTranNo" name="tranNo" value="${tranNo }">
+		<input type="hidden" id="reviewTranNo" name="tranNo" value="${!empty tranNo? tranNo:'' }">
 <%-- 		<input type="hidden" name="updatePoint" value="${updatePoint}"> --%>
 		<div class="form-group">
     		<label for="score"><ion-icon name="checkmark"></ion-icon>∆Ú¡° </label>

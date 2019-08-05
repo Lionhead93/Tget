@@ -30,7 +30,10 @@
 	<script type="text/javascript">
 	var str = "";
 	var arr = [];
+	
 	$(function(){
+		
+		
 		
 		$("div.card").on("click",function(){			
 			arr = $(this).children("input.category").val().split(' ');
@@ -84,9 +87,8 @@
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
-				});			
-		});				
-		
+				});
+		});						
 	});
 	
 	</script>

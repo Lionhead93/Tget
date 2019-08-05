@@ -412,12 +412,14 @@
 					if (event.keyCode ==13) {
 						$("#searchCondition").val("1");
 						$("form[name='searchEvent']").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+
 					}
 				});
 				
 				$("a:contains('°Ë»ö')").on("click",function(){
 					$("#searchCondition").val("1");
 					$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+
 				});
 				
 				$(".p-2").on("click",function(){
@@ -435,6 +437,7 @@
 		// 								alert(status);
 										$("#searchKeyword").val(JSONData.categoryTwoEng);
 										$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
+										
 									}
 						});
 				});	
