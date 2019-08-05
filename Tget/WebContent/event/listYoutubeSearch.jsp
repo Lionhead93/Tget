@@ -171,13 +171,16 @@
 	
 	</script>
 	<style type="text/css">
-		
+		body{
+			background-color :#F8FFFF;
+		}
 		td:hover{
-			background-color : #041625; 
+			background-color : #D9E5FF; 
+
 		}
 		
 		th, td, tr{
-			color: #FBFCFE;		
+			color: #041625;		
 			font-size:17px;
 		}
 		img{
@@ -224,7 +227,7 @@
 						 <div id="desc0">: ${i.description}</div> <br/>
 						<div align="right">			
 							<button name="getYoutubePlayer"  id="button0"
-							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
+							type="button" class="btn btn-outline-primary"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -241,7 +244,7 @@
 						 <div id="desc1">: ${i.description}</div> <br/>
 						<div align="right">			
 							<button name="getYoutubePlayer"   id="button1"
-							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
+							type="button" class="btn btn-outline-primary"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -258,7 +261,7 @@
 						<div id="desc2">: ${i.description}</div> <br/>
 						<div align="right">			
 							<button name="getYoutubePlayer"  id="button2"
-							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
+							type="button" class="btn btn-outline-primary"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -275,7 +278,7 @@
 						<div id="desc3">: ${i.description}</div> <br/>
 						<div align="right">			
 							<button name="getYoutubePlayer"  id="button3"
-							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button><br/>
+							type="button" class="btn btn-outline-primary"  value="${i.videoId }">동영상보기</button><br/>
 						</div>
 			    	</div>
 			 	 </li>
@@ -292,7 +295,7 @@
 						<div id="desc4">: ${i.description}</div> <br/>
 						<div align="right">			
 							<button name="getYoutubePlayer"  id="button4"
-							type="button" class="btn btn-outline-light"  value="${i.videoId }">동영상보기</button>
+							type="button" class="btn btn-outline-primary"  value="${i.videoId }">동영상보기</button>
 						</div>
 			    	</div>
 			 	</li>
@@ -304,15 +307,15 @@
 	</table>
 	<div align="center">
 		<input type="hidden" id="requestPageToken" name="requestPageToken" value="${!empty requestPageToken? requestPageToken:'' }"/>
-		<button class="btn btn-outline-light"  id="prevPageToken" name="prevPageToken" value="${!empty prevPageToken? prevPageToken : ''}">◀</button>&nbsp;&nbsp;
-		<button class="btn btn-outline-light"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
+		<button class="btn btn-outline-primary"  id="prevPageToken" name="prevPageToken" value="${!empty prevPageToken? prevPageToken : ''}">◀</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-primary"  id="nextPageToken" name="nextPageToken" value="${!empty nextPageToken? nextPageToken : ''}">▶</button>
 	</div>
 </div>
 <div id="getYoutubePlayer"  align="center" style="display:none;">
 <!-- 	<iframe width="400" height="250" src="https://www.youtube.com/embed/${i.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 	<iframe width="400" height="250" src="https://www.youtube.com/embed/AtNBhPxVwh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	<br/>
-	<button  class="btn btn-outline-light" id="back">뒤로가기</button>&nbsp;&nbsp;&nbsp;
-	<button  class="btn btn-outline-light" id="addThis">등록하기</button>
+	<button  class="btn btn-outline-primary" id="back">뒤로가기</button>&nbsp;&nbsp;&nbsp;
+	<button  class="btn btn-outline-primary" id="addThis">등록하기</button>
 <!-- 	<div id="player"></div>  -->
 </div>

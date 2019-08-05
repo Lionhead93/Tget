@@ -130,28 +130,28 @@
 	</script>
 	<style type="text/css">
 		table{
-			background-color : #193147; 
-			border: 1px solid #FBFCFE;	
-			color: #FBFCFE;		
+			background-color : #F8FFFF;   
+			border: 1px solid #193147;	
+			color: #041625;
 		}
  		tr.record:hover{
-			background-color : #041625; 
+ 			color: #041625;
+			background-color : #D9E5FF; 
 		}
 		body{
-				margin-top: 70px;
-				background-color : #062038; 
-				color: #FBFCFE ;
+			background-color: #EBF7FF;
+			color: #041625;
 /*     */ 				
 		}
 		#footer{
 			background-color: #1B1B1F ;
 		}
 		a, hr{
-				color: #FBFCFE ;	
+				color: #041625;
 			}	
 		th, td, tr{
 			padding: 20px;
-			color: #FBFCFE ;
+			color: #041625;
 		}
 		
 		h1{
@@ -193,6 +193,7 @@
 				  </thead>
 				  <tbody>
 				  <c:forEach items="${interestedEventList}"  var="i">
+				  <tr class="record">
 <%-- 				    <tr class="record" id="${i.eventId }">				     --%>
 <!-- 				      <td class="record" >				       -->
 <%-- 				      	<input type="hidden" value="${i.eventId }"  /> --%>

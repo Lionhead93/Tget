@@ -76,26 +76,27 @@
 	<style type="text/css">
 		body{
 			padding-top:30px;
-			background-color : #062038; 
-			color: #FBFCFE;			
+			background-color: #EBF7FF;
+			color: #041625;	
 		}
 		table{
-			background-color : #193147; 
-			border: 1px solid #FBFCFE;	
-			color: #FBFCFE;		
+			background-color : #F8FFFF;   
+			border: 1px solid #193147;	
+			color: #041625;
 		}
 		.container-fluid,td,th{ 
 	 		font-size: 20px;
-	 		color: #FBFCFE;    
+	 		color: #041625;    
  		} 
  		tr.record:hover{
-			background-color : #041625; 
+			color: #041625;
+			background-color : #D9E5FF; 
 		}
 		#footer{
 			background-color: #1B1B1F ;
 		}
-		a, hr{
-				color: #FBFCFE ;	
+		a, hr,th,td{
+				ccolor: #041625;
 		}	
 	</style>
 </head>
@@ -109,8 +110,8 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
 				<input type="hidden"  id="userId" name="userId"  value="${user.userId}" >
-				<h1><span style="font-weight:bold;font-size:30px">${user.nickName}</span><small>님의 </small>
-					<span class="textcontainer" style="font-weight: bold; ">
+				<h1><span style="font-weight:bold;font-size:30px ;color: #041625;">${user.nickName}</span><small style="color: #041625;">님의 </small>
+					<span class="textcontainer" style="font-weight: bold; color: #041625; ">
 						<span class="particletext bubbles">포인트 내역<span class="particle" style="top:29%; left:82%;width:5.2px; height:5.2px;animation-delay: 3s;"></span><span class="particle" style="top:67%; left:53%;width:4.8px; height:4.8px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:90%;width:5.5px; height:5.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:56%; left:64%;width:7.2px; height:7.2px;animation-delay: 2.5s;"></span><span class="particle" style="top:80%; left:77%;width:7.1px; height:7.1px;animation-delay: 2.2s;"></span><span class="particle" style="top:31%; left:58%;width:5.4px; height:5.4px;animation-delay: 0.5s;"></span><span class="particle" style="top:28%; left:95%;width:6.1px; height:6.1px;animation-delay: 2.7s;"></span><span class="particle" style="top:57%; left:58%;width:7.9px; height:7.9px;animation-delay: 2.3s;"></span><span class="particle" style="top:72%; left:61%;width:7.6px; height:7.6px;animation-delay: 0s;"></span><span class="particle" style="top:49%; left:51%;width:4.9px; height:4.9px;animation-delay: 1.9s;"></span><span class="particle" style="top:42%; left:43%;width:7.4px; height:7.4px;animation-delay: 1.1s;"></span><span class="particle" style="top:69%; left:39%;width:4.7px; height:4.7px;animation-delay: 1.8s;"></span><span class="particle" style="top:61%; left:92%;width:7.2px; height:7.2px;animation-delay: 0s;"></span><span class="particle" style="top:28%; left:16%;width:4.9px; height:4.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:69%; left:24%;width:5.4px; height:5.4px;animation-delay: 0.4s;"></span><span class="particle" style="top:51%; left:59%;width:6.5px; height:6.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:74%; left:67%;width:7.4px; height:7.4px;animation-delay: 2.5s;"></span><span class="particle" style="top:63%; left:16%;width:6.8px; height:6.8px;animation-delay: 1.3s;"></span><span class="particle" style="top:31%; left:29%;width:5.9px; height:5.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:23%; left:42%;width:4.5px; height:4.5px;animation-delay: 1.3s;"></span><span class="particle" style="top:71%; left:76%;width:5.7px; height:5.7px;animation-delay: 1.5s;"></span><span class="particle" style="top:76%; left:79%;width:5.7px; height:5.7px;animation-delay: 0.5s;"></span><span class="particle" style="top:71%; left:1%;width:5.3px; height:5.3px;animation-delay: 1.8s;"></span><span class="particle" style="top:77%; left:11%;width:7.7px; height:7.7px;animation-delay: 2.1s;"></span><span class="particle" style="top:68%; left:34%;width:4px; height:4px;animation-delay: 2.3s;"></span><span class="particle" style="top:49%; left:78%;width:6.6px; height:6.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:37%; left:41%;width:5.1px; height:5.1px;animation-delay: 2.3s;"></span><span class="particle" style="top:57%; left:75%;width:4.9px; height:4.9px;animation-delay: 2.4s;"></span><span class="particle" style="top:62%; left:58%;width:7.9px; height:7.9px;animation-delay: 0.6s;"></span><span class="particle" style="top:25%; left:6%;width:5.3px; height:5.3px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:52%;width:5.6px; height:5.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:22%;width:7.9px; height:7.9px;animation-delay: 0.1s;"></span><span class="particle" style="top:30%; left:59%;width:6.2px; height:6.2px;animation-delay: 0.7s;"></span><span class="particle" style="top:60%; left:90%;width:6px; height:6px;animation-delay: 0.1s;"></span><span class="particle" style="top:45%; left:79%;width:6.2px; height:6.2px;animation-delay: 0.1s;"></span></span> 
 					</span>
 				</h1>
@@ -126,9 +127,9 @@
 				  <thead>
 				    <tr align="center">
 <!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">거래번호</h4></th> -->
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">적립 및 사용일</h4></th>
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">적립 및 사용 내역</h4></th>
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">포인트 총 합계</h4></th>				      
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용일</h4></th>
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용 내역</h4></th>
+				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">포인트 총 합계</h4></th>				      
 				    </tr>
 				  </thead>
 				  <tbody>

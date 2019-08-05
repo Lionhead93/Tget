@@ -305,8 +305,8 @@
 	<style>
 	
 		body{
-			background-color : #062038; 
-			color: #FBFCFE;
+			background-color: #EBF7FF;
+			color: #041625;
 		}	
 		#footer{
 			background-color: #1B1B1F ;
@@ -332,19 +332,20 @@
 			padding : 10px  10px 10px 20px;
 		}
         .tab-content{
-        	border: 2px solid #FBFCFE ;            
-	       	background-color : #193147 ;
+        	border: 1px solid #D9E5FF ;            
+	       	background-color : #F8FFFF ;
         }
         .card{
         	padding : 5px 5px 5px 5px;
-        	color: black;
+        	color: #041625;
+        	background-color:#D9E5FF;
         	font-weight: bold;
         }                
         .card-header{
-        	font-weight:bold; background-color:#1B1B1F ; color:#FBFCFE ;
+        	font-weight:bold; background-color:#D9E5FF; color:#041625 ;
         }        
         .card-bodys{
-        	background-color:  #FBFCFE; color: #1B1B1F;
+        	background-color:  white; color: #041625;
         	padding: 5%;
         }
 
@@ -390,9 +391,9 @@
 							<input type="hidden" name="eventName" value="${i.eventName }"/>
 							<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
 							<p class="card-text">${i.recommEventDetail }</p>
-							<button class="btn btn-light"  data-toggle="modal" 						
+							<button class="btn btn-outline-primary"  data-toggle="modal" 						
 								 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
-							<button class="btn btn-light" value="${i.recommEventNo }">삭제하기</button>
+							<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>
 						</div>
 					</div>
 				</c:forEach>	
@@ -485,12 +486,10 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-     <div class="modal-wrap">
-     <div class="modal-html">
+    <div class="modal-content"  style="background-color:#D9E5FF; color: #041625;">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">추천이벤트 편집</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -498,25 +497,21 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <jsp:include page="/event/addRecommVideoGET.jsp" />
       </div>
       <div class="modal-footer">       
-        <button type="button" class="btn btn-light"  id="submit" >저장</button>
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-outline-primary"  id="submit" >저장</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
 <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"  
 aria-labelledby="categoryModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-     <div class="modal-wrap">
-     <div class="modal-html">
+    <div class="modal-content"  style="background-color:#D9E5FF; color: #041625;">
       <div class="modal-header">
         <h5 class="modal-title" id="categoryModalTitle">카테고리 편집</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -548,14 +543,12 @@ aria-labelledby="categoryModalTitle" aria-hidden="true">
         </div>
       </div>
       <div class="modal-footer">       
-      	 <button type="button" class="btn btn-light"  id="delete" >삭제</button>
-         <button type="button" class="btn btn-light"  id="submit2" >저장</button>
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      	 <button type="button" class="btn btn-outline-primary"  id="delete" >삭제</button>
+         <button type="button" class="btn btn-outline-primary"  id="submit2" >저장</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 
