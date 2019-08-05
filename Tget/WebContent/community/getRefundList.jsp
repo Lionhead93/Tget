@@ -28,29 +28,28 @@
 		
 	<style>
 	body{	
-		      color: #020B13 ;		  
+		      color: #020B13;		  
 			  background-color: #EBF7FF;
 			  margin-top: 50px;				
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-		a{
+		a, hr{
 			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
 		}
 		.list-group-item{
 			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
+			  color: #020B13;
+ 			  border: 1px solid #88e3f7;		   
+ 			  background-color: #EBF7FF; 
 		}
 		table{
-			background-color: #193147;
+			color: #020B13;
+ 			border: 1px solid #88e3f7;		   
+ 			background-color: #EBF7FF;
 		}
 		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
+			border: 1px solid #88e3f7;
+			color: #EBF7FF ;
 		}
 		.col-md-2{
 			padding-left: 50px;
@@ -68,16 +67,15 @@
 		}
 		.border{
 			padding-top: 20px;
-			background-color: #193147;
+			background-color: white;
 		}
 		section{
-			margin-left: 100px;
+			margin-left: 40px;
 		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
 		
+		#cyberWidget{
+       		background-color: white;
+       }  
        #footer{
 			background-color: #1B1B1F;
 		}
@@ -176,31 +174,32 @@
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
 
-	    
-		    <div class="text-right" style="margin-right: 130px; margin-top: 30px;">
-		    	
-		    	
-		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>	    	
-		    </div>
+	  
 		    
-<div class="row">
-	  <div class="col-md-2 text-center">	  
-	      <div class="sticky-top">
-		  <br/>
-			 <div>
-		       		<h6><strong>Community > 환불게시판</strong></h6>
-		      	          
-		   	 </div>
-			</div>
-		</div>		
+		
       <!--  table Start /////////////////////////////////////-->
-      <div class="col-md-10 text-center">
-		      
-		      	<div class="text-center">
-		      		<button class="btn btn-outline-light" disabled><strong>총  ${totalCount} 건</strong></button>			 		 
+
+		      	<div class="text-right" style="margin-right: 130px; margin-top: 30px;">       	
+		    	<p class="text-dark" ><strong>전체  ${totalCount } 건수</strong></p>
+<!-- 		    	<button type="button" id="currentRegDate" class="btn btn-info">최신순</button> -->
+				<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+		
 				</div>
+				
+				<br/>
+				<div class="row">
+			  		<div class="col-md-2 text-center">	  
+			      		<div class="sticky-top">
+				  		<br/>
+					 <div>
+				       		<h6><strong>Community > 환불게시판</strong></h6>
+				   	 </div>
+					</div>
+				</div>	   
 				<br/> 
-		      <div class="row in">
+				
+		      <div class="col-md-10 text-center">
+		       <div class="row">
 		       <c:forEach var="content" items="${list}" varStatus="j" > 
 		        <div class="col-lg-3">
 		        <div class="text-center">
@@ -208,15 +207,16 @@
 						<video controls id="videoplay"  style="width: 250px;">
 							<source src="/resources/video/${content.videoName}" type="video/mp4">
 						</video>      
-			          <hr class="my-4">
+			          <div style="text-align: left; padding-left: 30px;">
+			          <hr class="my-4" >
 			          <p>작성자 : ${content.userNickname}</p>
 			          <p>글 제목 : ${content.contentName}</p>
-			          <p>작성일 : ${content.regDate}</p>
+			          <p>작성일 : ${content.regDate}</p></div>
 			          <c:if test="${content.refundCheck=='1'}">
-				          <p class="text-warning">         
-				          	*검증 대기중	
+				          <p class="text-danger">         
+				          	*검증 대기중&ensp;	
 				          	<c:if test="${sessionScope.user.role=='2'}">
-				          	<a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="fas fa-user-check"></i></a></c:if>			          
+				          	<a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="fas fa-user-check" style="color:#FFFF00"></i></a></c:if>			          
 				          </p>
 				          	</c:if>
 				          <c:if test="${content.refundCheck=='0'}">
@@ -226,13 +226,13 @@
 				          </c:if>
 	    	
 			      </div>
-			      </div>
-			      
+			      </div>			      
 		        </div><!-- /.col-lg-4 -->
 		        </c:forEach>
+		        </div>
     </div>
  	</div>
- </div>
+
  	
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
