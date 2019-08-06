@@ -112,7 +112,6 @@ public class ReviewAndPointRestController {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("review", review);
-//		map.put("tranNo", review.getTranNo());
 		map.put("updatePoint", updatePoint);
 		
 		return map;
@@ -125,7 +124,6 @@ public class ReviewAndPointRestController {
 		review.setTranNo(tranNo);
 		System.out.println(review);
 		rNPService.updateReview(review);
-//		review = rNPService.getReview(review.getTranNo());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("review", rNPService.getReview(tranNo));
@@ -135,10 +133,8 @@ public class ReviewAndPointRestController {
 	
 	@RequestMapping(value="rest/getReview" )
 	public Map<String,Object> getReview(@RequestParam int tranNo) throws Exception {
-		System.out.println("===============rest/getReview===============");
-		
-		Review review = rNPService.getReview(tranNo);
-		
+		System.out.println("===============rest/getReview===============");		
+		Review review = rNPService.getReview(tranNo);		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("review", review);
 		
@@ -147,10 +143,8 @@ public class ReviewAndPointRestController {
 	
 	@RequestMapping(value="rest/getReviewList" )
 	public Map<String,Object> getReviewList(@RequestParam String buyerId) throws Exception {
-		System.out.println("===============rest/getReviewList===============");
-		
-		List<Review> list = rNPService.getReviewList(buyerId);
-		
+		System.out.println("===============rest/getReviewList===============");		
+		List<Review> list = rNPService.getReviewList(buyerId);		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("reviewList", list);
 		
@@ -159,10 +153,8 @@ public class ReviewAndPointRestController {
 	
 	@RequestMapping(value="rest/getSellerEstimationList")
 	public Map<String,Object> getSellerEstimationList(@RequestParam String sellerId) throws Exception {
-		System.out.println("===============rest/getSellerEstimationList===============");
-		
-		List<Review> list = rNPService.getSellerEstimationList(sellerId);
-		
+		System.out.println("===============rest/getSellerEstimationList===============");		
+		List<Review> list = rNPService.getSellerEstimationList(sellerId);		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		return map;
@@ -170,10 +162,8 @@ public class ReviewAndPointRestController {
 	
 	@RequestMapping(value="rest/getPointHistory")
 	public Map<String,Object> getPointHistory(@RequestParam String userId) throws Exception {
-		System.out.println("===============rest/getPointHistory===============");
-		
-		List<PointHistory> list = rNPService.getPointHistory(userId);
-		
+		System.out.println("===============rest/getPointHistory===============");		
+		List<PointHistory> list = rNPService.getPointHistory(userId);		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("pointHistory", list);
 		
@@ -182,10 +172,8 @@ public class ReviewAndPointRestController {
 	
 	@RequestMapping(value="rest/getTran" )
 	public Map<String,Object> getTran(@RequestParam int tranNo) throws Exception {
-		System.out.println("===============rest/getTran===============");
-		
-		Transaction tran = tranService.getTran(tranNo);
-		
+		System.out.println("===============rest/getTran===============");		
+		Transaction tran = tranService.getTran(tranNo);		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("transaction", tran);
 		

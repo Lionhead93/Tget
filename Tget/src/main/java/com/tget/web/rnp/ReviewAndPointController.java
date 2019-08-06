@@ -63,19 +63,16 @@ public class ReviewAndPointController {
 			}
 			
 			model.addAttribute("pointHistoryList", list);
-			return "forward:/rnp/getPointHistory.jsp";
 			
+			return "forward:/rnp/getPointHistory.jsp";			
 		}
 		
 		@RequestMapping(value="getReviewList")
 		public String getReviewList(HttpSession session, Model model) throws Exception {
-			System.out.println("===============getReviewList===============");
+			System.out.println("===============getReviewList===============");			
+			model.addAttribute("reviewList",rNPService.getReviewList(((User)session.getAttribute("user")).getUserId()));			
 			
-			model.addAttribute("reviewList",rNPService.getReviewList(((User)session.getAttribute("user")).getUserId()));
-			
-			
-			return "forward:/rnp/listReview.jsp";
-			
+			return "forward:/rnp/listReview.jsp";			
 		}
 		
 		@RequestMapping(value="getSellerEstimationList")
@@ -86,54 +83,7 @@ public class ReviewAndPointController {
 			model.addAttribute("sellerId",sellerId);
 			model.addAttribute("sellerNickname",userService.getUser(sellerId).getNickName());
 			
-			return "forward:/rnp/listSellerEstimation.jsp";
-			
+			return "forward:/rnp/listSellerEstimation.jsp";			
 		}
-		
-//		@RequestMapping(value="addReview", method=RequestMethod.GET)
-//		public String addReview(@RequestParam int tranNo,Model model) throws Exception {
-//			System.out.println("===============addReview GET===============");	
-//			
-//			
-//			model.addAttribute("tranNo",tranNo);
-////			model.addAttribute("updatePoint", transaction.getTotalPrice()*0.01);
-////			System.out.println("=============end============");
-//			return "forward:/rnp/addReview.jsp";
-//		}
-		
-//		@RequestMapping(value="addReview", method=RequestMethod.POST)
-//		public String addReview(@ModelAttribute("review") Review review,HttpSession session, Model model) throws Exception {
-//			System.out.println("===============addReview===============");
-//			System.out.println(review);
-//			
-//			rNPService.addReview(review);
-//			User user = (User)session.getAttribute("user");
-//			String userId =user.getUserId();
-//			
-//			Transaction tran =  tranService.getTran(review.getTranNo());
-//			tran.setTranCode("3");
-//			tranService.updateTranCode(tran);
-//			
-//			int updatePoint = tran.getTotalPrice()/100;
-//			
-//			PointHistory pointHistory = new PointHistory();
-//			pointHistory.setTranNo(review.getTranNo());
-//			pointHistory.setPointUpdateCode("0");
-//			pointHistory.setUpdatePoint(updatePoint);
-//			pointHistory.setUserId(userId);
-//			pointHistory.setTotalPoint(user.getPoint()+updatePoint);
-//			user.setPoint(user.getPoint()+updatePoint);
-//			
-//			rNPService.addPoint(pointHistory);
-//			rNPService.updatePoint(user);
-//			
-//			session.setAttribute("user", user);
-//			model.addAttribute("review", review);
-//			model.addAttribute("tranNo", review.getTranNo());
-//			model.addAttribute("updatePoint", updatePoint);
-//			
-//			return "forward:/rnp/addReviewPOST.jsp";
-//		}
-		
 		
 }

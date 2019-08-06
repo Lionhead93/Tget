@@ -42,15 +42,12 @@
 										},
 							dataType : "json",
 							success : function(JSONData, status){
-//	 							alert(status);
 								$("#reviewTranNo").val(JSONData.transaction.tranNo);
 								$("#reviewTranEventName").text(JSONData.transaction.event.koName);
 								$("#reviewTranPrice").text(numberWithCommas(JSONData.transaction.ticket.price)+"원");
 								$("#reviewTranAmount").text(JSONData.transaction.orderAmount);
 								$("#reviewTranTotalPrice").text(numberWithCommas(JSONData.transaction.totalPrice)+"원");
 								$("#reviewTranOrderDate").text(JSONData.transaction.orderDate);
-//	 							$("#").val(JSONData.transaction);
-
 							},
 							error : function(request, status, error ) {   
 							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -124,16 +121,6 @@
 					<div class="col-md-3" ><strong style="color: #041625;"><p>평점</p></strong></div>    
 					<div class="col-md-3" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
 				</div>
-<!-- 				<table class="table"> -->
-<!-- 				  <thead> -->
-<!-- 				    <tr align="center" > -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">구매자</h4></th>				       -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">리뷰</h4></th> -->
-<!-- 				      <th scope="col" ><h4  align="center" style="font-weight: bold;margin:0%;color: #041625;">평점</h4></th> -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">등록일</h4></th> -->
-<!-- 				    </tr> -->
-<!-- 				  </thead> -->
-<!-- 				  <tbody> -->
 				  <c:forEach items="${sellerEstimationList}"  var="i">
 				  	<div class="card text-center shadow rounded-pill"   data-toggle="modal"  data-target="#tranModal"   
 				  	style="margin-bottom: 10px; height:55px;">
@@ -147,33 +134,7 @@
 							</div>
 						</div>
 					</div>
-					
-<!-- 				    <tr class="record" data-toggle="modal"  data-target="#tranModal"  style="color: #041625;"> -->
-<%-- 				      <input type="hidden"  value="${i.tranNo }"/> --%>
-<!-- 				      <td> -->
-<!-- 						<div align="center"> -->
-<%-- 							${i.buyer.nickName} --%>
-<!-- 						</div>			 -->
-<!-- 				  	  </td> -->
-<!-- 				  	  <td> -->
-<!-- 						<div align="left"> -->
-<%-- 							${i.reviewBody} --%>
-<!-- 						</div>			 -->
-<!-- 				  	  </td> -->
-<!-- 				  	  <td> -->
-<!-- 						<div align="center"> -->
-<%-- 							${i.score}.0 --%>
-<!-- 						</div>			 -->
-<!-- 				  	  </td> -->
-<!-- 				  	  <td> -->
-<!-- 						<div align="left"> -->
-<%-- 							${i.regDate} --%>
-<!-- 						</div>			 -->
-<!-- 				  	  </td> -->
-<!-- 			    </tr> -->
 			   </c:forEach>
-<!-- 		  		 </tbody> -->
-<!-- 				</table> -->
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
@@ -214,7 +175,6 @@ aria-labelledby="tranModalTitle" aria-hidden="true">
     </div>
     </div>
 </div>
-
 
 <jsp:include page="/layout/footer.jsp" />
 </body>

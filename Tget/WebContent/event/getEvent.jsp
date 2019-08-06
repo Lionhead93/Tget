@@ -46,40 +46,30 @@
 							recommSize = JSONData.recommEventlistSize;
 							$.each(JSONData.eventNameList, function(index,value){
 								if(value=="${event.eventName}"){
-									$("#title").append("<span class='neon' style='font-weight:bold;font-size:23px'>HOT</span>");
-// 									$("#title").attr("class","neon");
-									
+									$("#title").append("<span class='neon' style='font-weight:bold;font-size:23px'>HOT</span>");									
 								}
 							});
 					}
 		});
-
 	
 		$(".addTicket").on("click",function(){			
 			var eventId = $(this).val(); 			
 			if ("${empty user}"=="true") {
 				alert("로그인을 해주세요.");
 				$("form[name='main']").attr("method" , "GET").attr("action" , "/user/login").submit();
-// 				self.location="/user/login";
 			} else {
 				$("#eventId").val($(this).val());
 				$("form[name='main']").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo").submit();
-// 				self.location="/ticket/addTicketInfo?eventId="+eventId;
-// 				self.location="/user/login";
 			}
 		});		
 		
-		$(".getTicketList").on("click",function(){
-			
+		$(".getTicketList").on("click",function(){			
 			$("#eventId").val($(this).val());
 			$("form[name='main']").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventIds="+$(this).val()).submit();
-// 			self.location="/event/getEventTicketList?eventId="+$(this).parent().children("input[type='hidden']").val();
-		});		
-		
+		});				
 
 		$("#submit").on("click",function(){	
-			var formData = new FormData($("#editEventImage")[0]);
-			
+			var formData = new FormData($("#editEventImage")[0]);			
 			$.ajax(
 					{
 						url : "/event/rest/addEventImage",
@@ -98,10 +88,8 @@
 						}			
 				});		
 		})	;
-		
-		
-		$("#delete").on("click",function(){	
-			
+				
+		$("#delete").on("click",function(){				
 			$.ajax(
 					{
 						url : "/event/rest/deleteEventImage",
@@ -152,13 +140,9 @@
         .col-lg-6{
         	margin-top: 10px;
         }
-/*         div.col-md-4{ */
-/*         	border: 1px; color: black; */
-/*       	} */
       	div.list{
 	 		font-size: 20px;
-      	}
-        
+      	}        
        img.main {
          	width: 400px; 			
  	 		hieght: 250px; 
@@ -167,17 +151,13 @@
 		.neon {
 		  font-family: neon;
 		  color: #FB4264;
-/* 		  font-size: 9vw; */
-/* 		  line-height: 9vw; */
 		  text-shadow: 0 0 3vw #F40A35;
-		}
-		
+		}		
 		.flux {
 		  font-family: neon;
 		  color: #426DFB;
 		  text-shadow: 0 0 3vw #2356FF;
-		}
-		
+		}		
 		.neon {
 		  animation: neon 1s ease infinite;
 		  -moz-animation: neon 1s ease infinite;
@@ -219,140 +199,75 @@
 <jsp:include page="/layout/tgetToolbar.jsp" />
 <jsp:include page="/layout/tgetHeader.jsp" />
 
-<!-- <form name="searchEvent"> -->
-<!-- 			<div id="tgetHeader" class="text-center"> -->
-<!-- 			<br/><br/><br/> -->
-<%-- 				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" > --%>
-<%-- 				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" > --%>
-<%-- 				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" > --%>
-<!-- 				<div class="row"><div class="col-lg-3  col-md-3 col-1"></div> -->
-<!-- 				<div class="col-lg-6 col-md-6 col-10">	 -->
-<!-- 					<div class="input-group mb-1"> -->
-<!-- 				  		<input type="text" class="form-control" placeholder="이벤트명을 입력하세요"  aria-describedby="basic-addon2"> -->
-<!-- 				  		<div class="input-group-append"> -->
-<!-- 				    		<span class="input-group-text btn"  id="button-addon2">검색</span> -->
-<!-- 				 		 </div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-lg-3 col-md-3 col-1"></div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 			<input type="hidden"  id="requestPageToken" name="requestPageToken"  value="${!empty requestPageToken? requestPageToken : ''}"/><br/> --%>
-<!-- 		</div> -->
-<!-- 	</form> -->
-
-
-<form name="main">
-	<div class="container"  align="left" style="margin-top: 50px">
+	<form name="main">
+		<div class="container"  align="left" style="margin-top: 50px">
 			<div class="row">
 				<div class="col-lg-5  col-12" align="center">
 					<div class="sticky-top">
 						<div class="textcontainer">
 							<div id="title" style="color: #041625;"><h1>${event.koName}</h1></div>
 						</div>
-					<input type="hidden"  id="eventId" name="eventId" />
-					<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
-					<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
-					<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
-					<input type="hidden"  id="category" name="category"  value="${category}" >
-					<input type="hidden" id="eventImage" name="eventImage" value="${eventImage}"/>
-					<div align="right" style="padding:10px">
-						<c:if test="${!empty eventImage}">
-							<img class="main" src="/resources/images/uploadFiles/${eventImage}" />
-						</c:if>
-						<c:if test="${empty eventImage}">
-							<img class="main" src="/resources/images/logo.jpg"  style="width:400px; height=250px;"/>
-<!-- 							<img src = "http://placehold.it/500x280" class="img-rounded"/> -->
-						</c:if>
-						<br/>
-						<div >
-							<div align="right">조회수 : ${viewCount}회<br/></div>
-							
-							<c:if test="${user.role == 2 }">
-<!-- 								Call Modal Button	 -->
-								<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-outline-dark"		style="margin:10px;"			
-								 data-target="#exampleModalCenter">편집</button><br/>
-		
+						<input type="hidden"  id="eventId" name="eventId" />
+						<input type="hidden"  id="koName" name="koName"  value="${event.koName}" >
+						<input type="hidden"  id="koPerformer" name="koPerformer"  value="${event.koPerformer}" >
+						<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
+						<input type="hidden"  id="category" name="category"  value="${category}" >
+						<input type="hidden" id="eventImage" name="eventImage" value="${eventImage}"/>
+						<div align="right" style="padding:10px">
+							<c:if test="${!empty eventImage}">
+								<img class="main" src="/resources/images/uploadFiles/${eventImage}" />
 							</c:if>
-
-							
-						</div>
-					</div>	
+							<c:if test="${empty eventImage}">
+								<img class="main" src="/resources/images/logo.jpg"  style="width:400px; height=250px;"/>
+							</c:if>
+							<br/>
+							<div >
+								<div align="right">조회수 : ${viewCount}회<br/></div>							
+								<c:if test="${user.role == 2 }">
+									<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-outline-dark"		style="margin:10px;"			
+									 data-target="#exampleModalCenter">편집</button><br/>		
+								</c:if>						
+							</div>
+						</div>	
 					</div>
 				</div>			
-				<div class="col-lg-7  col-sm-12 col-12">	
-				
-				<section id="section-topline-1" align="center">
-
-					<div class="row" align="center">
-						<c:forEach var="i" items="${eventListByName}" varStatus="j">
-							<div class="col-lg-6 col shadow p-3 mb-5 bg-white rounded"">
-								<div class="text-center">
-									<div class="border">
-								 		<br/>
-								 		<h5><strong>${i.eventDate } <span id="time"> ${i.eventTimeStr}</span></strong></h5>
-								 		<hr/>
-								 		
-								 		<div class="event" align="center" style="margin-left:10%;margin-right:10%">		
-								 		<div align="left" >
-								 			<%-- 											<small>${i.eventDate }, <span id="time">${i.eventTimeStr}</span></small><br/> --%>
-											<ion-icon name="checkmark"></ion-icon><small>개최장소</small><br/>
-											<small>${!empty event.koLocation? event.koLocation: i.koLocation }</small><br/><br/>
-											<ion-icon name="checkmark"></ion-icon>
-											<small>현재 등록된 티켓</small><br/> ${i.totalTicketCount } 건<br/><br/>
-											<ion-icon name="checkmark"></ion-icon>
-											<small>티켓최저가</small><br/>${i.ticketLowestPriceStr } 원<br/>	<br/>	<br/>	
-											<div class="container" align="center">			
-												<button type="button" class="btn btn-outline-primary addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
-												<button type="button" class="btn btn-outline-primary getTicketList"  value="${i.eventId}">구매</button><br/>
-											</div>	
-								 		</div>									
-										</div>		
-								 			<div><small></small></div>
-								 			<div><small></small></div>
-								 			<br/>
-								 		</div>
-								 	</div>	
-								 	</div>
-								 </c:forEach>
-							 </div>
-						</section>
-				
-	
-				
-<!-- 					<table class="table table-striped"> -->
-<!-- 					  <thead> -->
-<!-- 					    <tr align="center"> -->
-<%-- 					      <th scope="col"><h4>검색 결과 총 ${totalResults}건</h4></th> --%>
-<!-- 					    </tr> -->
-<!-- 					  </thead> -->
-<!-- 					  <tbody> -->
-<%-- 					  <c:forEach items="${eventListByName}"  var="i"> --%>
-<!-- 					    <tr> -->
-<!-- 					      <td> -->
-<!-- 							<div class="event" align="left">		 -->
-<%-- 								${i.eventDate }, <span id="time">${i.eventTimeStr}</span><br/> --%>
-<%-- 								${!empty event.koLocation? event.koLocation: i.eventLocation }<br/> --%>
-	
-<%-- 								현재 등록된 티켓 수 : ${i.totalTicketCount }<br/> --%>
-<%-- 								티켓최저가 : ${i.ticketLowestPriceStr }<br/>				 --%>
-<%-- <%-- 								<input type="hidden"  id="category2" name="category2"  value="${i.categoryTwoEng}" > --%>			
-<%-- 								<button class="button_black addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp; --%>
-<%-- 								<button class="button_black getTicketList"  value="${i.eventId}">구매</button><br/> --%>
-<!-- 							</div>			 -->
-<!-- 					  </td> -->
-<!-- 				    </tr> -->
-<%-- 				   </c:forEach> --%>
-<!-- 			  		 </tbody> -->
-<!-- 					</table>					 -->
+				<div class="col-lg-7  col-sm-12 col-12">					
+					<section id="section-topline-1" align="center">
+						<div class="row" align="center">
+							<c:forEach var="i" items="${eventListByName}" varStatus="j">
+								<div class="col-lg-6 col shadow p-3 mb-5 bg-white rounded"">
+									<div class="text-center">
+										<div class="border">
+									 		<br/>
+									 		<h5><strong>${i.eventDate } <span id="time"> ${i.eventTimeStr}</span></strong></h5>
+									 		<hr/>									 		
+									 		<div class="event" align="center" style="margin-left:10%;margin-right:10%">		
+									 			<div align="left" >
+													<ion-icon name="checkmark"></ion-icon><small>개최장소</small><br/>
+													<small>${!empty event.koLocation? event.koLocation: i.koLocation }</small><br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													<small>현재 등록된 티켓</small><br/> ${i.totalTicketCount } 건<br/><br/>
+													<ion-icon name="checkmark"></ion-icon>
+													<small>티켓최저가</small><br/>${i.ticketLowestPriceStr } 원<br/>	<br/>	<br/>	
+													<div class="container" align="center">			
+														<button type="button" class="btn btn-outline-primary addTicket"  value="${i.eventId}">판매</button>&nbsp;&nbsp;&nbsp;&nbsp;
+														<button type="button" class="btn btn-outline-primary getTicketList"  value="${i.eventId}">구매</button><br/>
+													</div>	
+									 			</div>									
+											</div>		
+									 		<div><small></small></div>
+									 		<div><small></small></div>
+									 		<br/>
+									 	</div>
+									 </div>	
+								 </div>
+							 </c:forEach>
+						 </div>
+					</section>
 				</div>
-<!-- 				<div class="col-lg-1"></div> -->
+			</div>		
 		</div>
-		
-		
-		
-		
-	</div>
-</form>
+	</form>
 
 
 <!-- Modal -->
@@ -368,16 +283,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       </div>
       <div class="modal-body">
         <jsp:include page="/event/addEventImageGET.jsp" />
-<%-- 		<input type="file" class="form-control" id="file" name="file" value="${!empty eventImage? eventImage : ''}"><br/><br/> --%>
-      </div>
-      <div class="modal-footer">
-       
+	  </div>
+      <div class="modal-footer">       
         <button type="button" class="btn btn-outline-primary"  id="delete" >삭제</button>
         <button type="button" class="btn btn-outline-primary"  id="submit" >저장</button>
          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
-    </div>
+  </div>
 </div>
 
 <jsp:include page="/layout/footer.jsp" />
