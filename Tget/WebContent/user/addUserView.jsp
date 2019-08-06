@@ -25,7 +25,7 @@
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-   				
+   		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
@@ -58,40 +58,30 @@
 					
 					$("#h2").show();
 					if (phone == null || phone.length != 11) {
-						alert("올바른 전화번호를 입력하세요.");
+						swal("올바른 전화번호를 입력하세요.", "", "error");
 						return;
-					
-						
-						
 					}
 
-					
-					
-					
-					alert("인증번호 전송");
-				
 
-					
-					
+					swal("인증번호 전송", "", "info");
 					$("#inj").show();
-				
 					
-					$.ajax({ 
-						   url: "/user/json/sendSms",
-						   data: { 
-							   receiver: $("#phone").val()
-							   }, 
-							   type: "post",
-							   dataType:"json", 
-					
-							   success : function(JSONData){
-									console.log(JSONData);   
-					
-									rand = JSONData.rand;
+						$.ajax({ 
+							   url: "/user/json/sendSms",
+							   data: { 
+								   receiver: $("#phone").val()
+								   }, 
+								   type: "post",
+								   dataType:"json", 
+						
+								   success : function(JSONData){
+										console.log(JSONData);   
+						
+										rand = JSONData.rand;
 						   
-						   }  
+						 										 }  
 				
-						 }); 
+								 }); 
 					
 						});
 				   
@@ -107,8 +97,7 @@
 						
 					   if (rand == code) { 
 				   
-					   alert("인증 성공");
-					   
+					   swal("인증 성공!", "", "success");
 					   $("#inj").hide();
 						phone.style.border = "2px solid olive";
 						phone.readOnly = true;
@@ -119,7 +108,7 @@
 
 				   } else
 				  		 { 
-					   alert("인증 실패"); 
+					   swal("인증 실패!", "", "error");
 				  	 	} 
 				 	   
 				   });
@@ -163,7 +152,7 @@
 			     $(function() {
 						
 						$("button:contains('가 입')").on("click" , function() {
-						//	alert("오예");
+					
 						 fncAddUser(); 
 						 
 						
@@ -175,48 +164,37 @@
 						
 						var id=$("input[id='userId01']").val();
 						var id2=$("select[id='userId02']").val();
+						var nickName=$("input[name='nickName']").val();
 						var pw=$("input[id='password01']").val();
 						var pw_confirm=$("input[id='password02']").val();
 						var name=$("input[name='userName']").val();
 						var address1=$("input[name='address']").val();
 						var address2=$("input[name='address2']").val();
 						if(id == null || id.length <1){
-							alert("아이디는 반드시 입력하셔야 합니다.");
+							swal("아이디는 반드시 입력하셔야 합니다.", "", "warning");
 							return;
 						}
-						/* if(pw == null || pw.length <1){
-							alert("패스워드는  반드시 입력하셔야 합니다.");
-							return;
-						}
-						if(pw_confirm == null || pw_confirm.length <1){
-							alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-							return;
-						} */
+		
 						if(name == null || name.length <1){
-							alert("이름은  반드시 입력하셔야 합니다.");
+							swal("이름은  반드시 입력하셔야 합니다.", "", "warning");
 							return;
 						}
 						
-						if( pw != pw_confirm ) {				
-							alert("비밀번호 확인이 일치하지 않습니다.");
+						if( pw != pw_confirm ) {
+							swal("비밀번호 확인이 일치하지 않습니다.", "", "warning");
 							$("input:text[id='password02']").focus();
 							return;
 						}
 						
-						/* if( $("#injb").show() ) {
-						 
-							alert("반드시 이메일 인증을 해야함.");
-							return;
-						} */
 						
 						if(ch !=1 ){
-							alert("반드시 이메일 인증을 해야함.");
+							swal("반드시 이메일 인증을 해야함.", "", "warning");
 							return;
 							
 						}
 						
 						if(cch !=1 ){
-							alert("반드시 휴대전화 인증을 해야함.");
+							swal("반드시 휴대전화 인증을 해야함.", "", "warning");
 							return;
 							
 						}
@@ -224,13 +202,17 @@
 						
 						var userId = id+id2;
 						
-			 			var address = address1+address2;
+			 			var address = address1+"/"+address2;
 						
 						
 						
 					 	$("input[name='address']").val(address); 
-						
-						$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+					 	
+					 	swal("가입 성공!", nickName+" 님 환영합니다!", "success")
+					 	.then(function(result){
+					 		$("form[name='addUser']").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+					 	});
+					 	
 					}
 			     
 			     
@@ -239,7 +221,7 @@
 				   $(function() {
 						//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 						$("a:contains('취 소')").on("click" , function() {
-							self.location = "/TgetMain.jsp"
+							self.location = "/"
 						});
 					});	  				 
 			     
@@ -278,42 +260,41 @@
 								url : "/user/json/checknickNameDuplication",
 								method : "POST",
 								dataType : "json",
-									headers : {
-										"Accept" : "application/json",
-									"Content-Type" : "application/json"
-												},
-											data : JSON.stringify({
-												nickName : inputed,
-												}) ,
+								headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+											},
+								data : JSON.stringify({
+								nickName : inputed,
+											}) ,
 
-											success : function(JSONData) {
-																//alert(JSONData); 
-																//alert(typeof(JSONData));
-
-												if (JSONData && inputed != "") {
-													$("#check").children("strong")
-														.remove();
-															$("#check")
-																.append(
-																"<strong class=\"text-success\">사용 가능합니다.</strong>");
-															$("#check2").show();
-														} else {
+								success : function(JSONData) {
+																
+										if (JSONData && inputed != "") {
+											$("#check").children("strong")
+											.remove();
+											$("#check")
+											.append(
+											"<strong class=\"text-success\">사용 가능합니다.</strong>");
+											$("#check2").show();
+											} else {
 															
-															$("#check2").hide();
-															$("#check").children("strong")
-																	.remove();
-															$("#check")
-																.append(
-																"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
-														}
-													if (inputed == "") {
+											$("#check2").hide();
+											$("#check").children("strong")
+											.remove();
+											$("#check")
+											.append(
+											"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
+												}
+										
+											if (inputed == "") {
 														
-														$("#check2").hide();
-														$("#check").children("strong")
-															.remove();
-														$("#check")
-																.append(
-																		"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
+												$("#check2").hide();
+												$("#check").children("strong")
+												.remove();
+												$("#check")
+												.append(
+												"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
 													}
 													}
 
@@ -331,19 +312,16 @@
 													
 													var Id = $("input[id='userId01']").val();
 													
-													$("#h1").show();
-												
 													
 													if(Id == null || Id.length <1){
-														alert("아이디는 반드시 입력하셔야 합니다.");
+														swal("아이디는 반드시 입력하셔야 합니다.", "", "warning");
 														return;
 													}	
 													
 													
 													
 													
-													
-													alert("인증번호 발송");
+													swal("인증번호 발송", "", "info");
 													
 													 $("#divemail").show();
 												 	
@@ -366,11 +344,9 @@
 														   success : function(JSONData){
 															console.log(JSONData);
 															 $('#loading').html("");
-															/* alert(JSONData.check); */
 															
 															if(JSONData.msg== "bad"){
-																
-																alert("이미 존재하는 아이디입니다.");
+																swal("이미 존재하는 아이디입니다.", "", "warning");
 															}else
 															check = JSONData.check;
 															} 
@@ -387,7 +363,7 @@
 												var userCheck = $("#emailcode").val();		
 												var userId = document.getElementById("userId01");
 												if(check.trim()==userCheck.trim()){
-													alert("인증성공");
+													swal("인증성공", "", "success");
 													userId.value = id+id2;
 													userId.style.border = "2px solid olive";
 													userId.readOnly = true;
@@ -395,11 +371,10 @@
 													 $("#userId02").hide();
 													 $("#injb").hide();
 													 ch = 1;
-													 $("#h1").hide();
 													 $("#addon-wrapping").hide();
 													 $("#sm1").show();
 												}else{
-													alert("인증실패");  
+													swal("인증실패", "", "error");
 												}
 												
 												
@@ -415,7 +390,6 @@
 
 											
 									 $(this).val($(this).val().replace(/[^0-9]/g,""));
-									 //alert("숫자만 입력하셔야 합니다.");
 									 
 										});
 									   });
@@ -450,24 +424,22 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp"/>
-	<!-- ToolBar Start /////////////////////////////////////-->	
-	<div id="tgetHeader" class="text-center">
-		 
-		  <br/><br/>
-	</div>
-		<!-- <i class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
-                            <i class="far fa-angry fa-2x" style="color:maroon;"></i> -->
                           
 		<div class="container">
 	<div class="row">
-	<div class="col-lg-2"></div>
-	<div class="col-lg-8">
-	 <div class="login-card" style="color:black;">
-                    <div class="card form" id="form1">
-                        <div class="card-header" align="center" style="background-color: SkyBlue;">
-                            <h3><i class="fas fa-user-check"></i><br/></h3>
+	<div class="col-lg-1"></div>
+	
+	<div class="col-lg-10">
+	<br/><br/><br/><br/>
+	<div class="login-card shadow rounded" style="color:black;">
+	
+    <div class="card form" id="form1">
+    
+    <div class="card-header" align="center" style="background-color: smokegray;">
+    	
+    	<h3><i class="fas fa-user-check"></i> <strong>회원가입</strong><br/></h3>
                             
-                        </div>
+                 </div>
 			 <div style="background-color: white;">
 			
 			 
@@ -477,21 +449,20 @@
 					<div class="col-md-2" >
 					<span style="color: black;"><Strong>아이디</Strong> </span>
 					<br/><br/><br/>
-					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
-					
 					<span style="color: black;"><Strong>비밀번호</Strong> </span>
 					<br/><br/><br/><br/><br/><br/>
 					<span style="color: black;"><Strong>이름</Strong> </span>
-				<br/><br/><br/>
+				<br/><br/>
 					<span style="color: black;"><Strong>닉네임</Strong> </span>
 				<br/><br/><br/>
 					<span style="color: black;"><Strong>휴대전화</Strong> </span>
 						<br/><br/><br/><br/>
 					<span id= "h2" style="color: black;  display: none;" >
-<br/><br/><br/><br/></span>
+<br/><br/></span>
 		
 					<span style="color: black;"><Strong>주소</Strong> </span><br/><br/><br/><br/>
 				<span style="color: black;"><Strong>상세주소</Strong> </span><br/><br/><br/>
+				<span style="color: black;"><Strong>위치정보 문의</Strong> </span><br/><br/><br/>
 				</div>
 			
 					
@@ -499,7 +470,7 @@
 							
 							
 					
-						<form class="form-horizontal">
+						<form name="addUser" class="form-horizontal">
 						
 						   <div class="form-group" >
 							    <div class="input-group-prepend">
@@ -515,18 +486,17 @@
 							  </select>
 							     　<button id="injb" type="button" class="btn btn-outline-primary">인 증</button><i id="sm1" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
 							    <div id="loading"></div>
-									</div>
+								</div>
 
 							    </div>
 							    
-							     <div class="form-group">
-							     <div class="input-group-prepend">
-							        <div id="divemail" style="display:none;">
-							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-outline-primary">확인</button>
-							    </div>
-							  </div>
-							  </div>
-							    
+							      <div class="form-group">							     
+							      <div id="divemail" style="display:none;">
+							      <div class="input-group-prepend">
+							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호" style="width:73%">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-primary">확인</button>
+							      </div>
+								  </div>
+								  </div>
 							  
 							  	  <div class="form-group">
 							  	  <div class="input-group-prepend">
@@ -546,11 +516,11 @@
 							 
 							  <div class="form-group">
 							  <label for="password3"></label>
-							<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+						
 							
 							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
 							      </span>
-								<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+							
 								<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
 							      </span>
 							</div>
@@ -572,7 +542,7 @@
 							     
 							
 							  </div>
-							   <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
+							   <span id = "check"><Strong class= "text-danger">닉네임을 입력해주세요</Strong>
 							      </span>
 							    </div>
 						
@@ -589,13 +559,10 @@
 							  
 							  </div>
 							   </div>
-							 <div class="form-group">
+							 <div id="inj" class="form-group" style="display:none">
 							   <div class="input-group-prepend">
-							    <label for="ssn"></label>
-							   <div id="inj" class="text-center" style="display:none"> 
-							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
+							      <input type="text" class="form-control col-md-10"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">&nbsp;&nbsp;&nbsp;
 							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
-							    </div>
 							  </div>
 							  </div>
 							  <div id="emailSend" style="display: none;"> 전송중.... </div>		 
@@ -603,48 +570,35 @@
 							    <label for="ssn"></label>
 					 
 								<input class="form-control col-md-10"  type="text" id="address" name="address" >
-	<button type="button" class="btn btn-link">주소찾기</button>
+								<button type="button" class="btn btn-link">주소찾기</button>
 							      </div><br>
 								<input class="form-control col-md-10"  type="text" id="address2" name="address2" >
 							        <div class="form-group">
-							        <br>
-							        
-							    <label for="ssn">	<span style="color: black;"><Strong>위치정보 문의</Strong> </span></label>
-							    <div>
-							    
+							        <br/><br/>
+							   
+							    <div style="padding-top: 6px;">
 							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
 							     <input type="radio" id= "local" name="local" value="2" /> 비동의
 							    </div>
 							  </div>
-							  
-						
-							  <div class="form-group">
-							   <!--  disabled="disabled" -->
-							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
-								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a>
-								
-					 			 </div>
-					 			
-					 			 
-							
-		
-	
-	<br/>
 	<br/>
 	
 						  
 							</form>
 						
 							</div>
-							<div class="col-md-1"></div>
+							<div class="col-md-1"></div>							
 							</div>
-						
+							<div class="text-center">							
+							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a><br/>	<br/>								
+					 		</div>
 							</div>
 							</div>
 							
 						</div>	
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 					</div>
 					</div>
 	</div>					

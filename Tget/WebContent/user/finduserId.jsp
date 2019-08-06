@@ -120,10 +120,10 @@
 					
 					$("#userName").focus();
 					
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			
 					$("button:contains('찾기')").on("click" , function() {
 						
-					//	alert("눌리니");
+			
 						
 					
 						

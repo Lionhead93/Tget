@@ -89,35 +89,7 @@
     	  }
         $('#chat_box').scrollTop($('#chat_box')[0].scrollHeight);
       });      
-    </script>
-	<!-- <script>	
-	 
-	 $(function(){ 
-		           		
-     		var socket = io("http://192.168.0.16:82/");
-     		
-     		socket.emit("send_msg", '${chatUser.nickName}¥‘¿Ã ¿‘¿Â«œºÃΩ¿¥œ¥Ÿ.');
-     		            
-     		 $("#msg").keydown(function(key){ 
-                 if(key.keyCode == 13){                   
-                	 socket.emit("send_msg", '${chatUser.nickName} : '+$("#msg").val());                 
-                     $("#msg").val("");
-                 }
-             });
-             
-             $("#msg_process").click(function(){                 
-                  socket.emit("send_msg", '${chatUser.nickName} : '+$("#msg").val());                 
-                 $("#msg").val("");
-             });
-             
-             socket.on('send_msg', function(msg) {
-                 $('<div></div>').text(msg).appendTo("#chat_box");
-                 chatbox.scrollTop(chatbox[0].scrollHeight);
-             });            
-         
-     	});	
-	</script> -->
-	
+    </script>	
 </body>
 
 </html>

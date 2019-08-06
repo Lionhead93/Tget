@@ -70,8 +70,8 @@ public class TranRestController {
         con.setDoOutput(true);
         
         String jsonInputString = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+ticket.getEvent().getEventName()
-        		+"&quantity=1&total_amount="+totalPrice+"&tax_free_amount=0&approval_url=http://192.168.0.16:8080/tran/kakaoAppro.jsp&fail_url=http://192.168.0.16:8080/tran/kakaoFail.jsp"
-        		+"&cancel_url=http://192.168.0.16:8080/tran/kakaoFail.jsp";
+        		+"&quantity=1&total_amount="+totalPrice+"&tax_free_amount=0&approval_url=http://192.168.0.24:8080/tran/kakaoAppro.jsp&fail_url=http://192.168.0.24:8080/tran/kakaoFail.jsp"
+        		+"&cancel_url=http://192.168.0.24:8080/tran/kakaoFail.jsp";
        
         System.out.println("String : "+jsonInputString);
         

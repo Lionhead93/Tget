@@ -25,7 +25,9 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-		
+		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+   		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+   		
 				<script src="/resources/javascript/common.js" ></script>
 		<script src="/resources/javascript/alarm.js" ></script>
 		<script src="/resources/javascript/jquery.min.js"></script>
@@ -56,20 +58,6 @@
 			
 		}
 	}
-
-
-
-
-$(function() {
-	
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button:contains('회원정보 수정')").on("click" , function() {
-
-		var popOption = "left=500, top=100, width=1800, height=1600, resizable=no, location=no;"		
-		window.open("/user/updateUser.jsp","회원정보 수정",popOption);
-				
-	});
-});	
 
 
 function fncUpdateUser() {
@@ -165,7 +153,7 @@ $(function() {
 									
 												
 							  		<div class="text-center">
-							  			<button type="button" class="btn btn-outline-primary">회원정보 수정</button><br>
+							  			<button type="button" class="btn btn-outline-primary" data-target="#updateUserModal" data-toggle="modal">회원정보 수정</button><br>
 							  		</div>
 						            <br/>            
 						            </div>
@@ -292,7 +280,7 @@ $(function() {
 
 			})();
 </script>	
-	 
+<jsp:include page="/user/updateUser.jsp" /> 
 <jsp:include page="/ticket/addSeller.jsp" /> 
 <jsp:include page="/layout/footer.jsp" />
 </body>

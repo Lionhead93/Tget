@@ -90,7 +90,7 @@ public class User {
 
 
 	public String getAddress() {
-		return address;
+		return address.split("/")[0];
 	}
 
 
