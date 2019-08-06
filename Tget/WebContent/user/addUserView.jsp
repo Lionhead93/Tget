@@ -25,7 +25,7 @@
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-   				
+   		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 
@@ -165,6 +165,7 @@
 						
 						var id=$("input[id='userId01']").val();
 						var id2=$("select[id='userId02']").val();
+						var nickName=$("input[name='nickName']").val();
 						var pw=$("input[id='password01']").val();
 						var pw_confirm=$("input[id='password02']").val();
 						var name=$("input[name='userName']").val();
@@ -207,8 +208,13 @@
 						
 						
 					 	$("input[name='address']").val(address); 
+					 	
+					 	swal("가입 성공!<br/> "+ nickName+" 님 환영합니다.", "success")
+					 	.then((value) => {
+						  swal(`The returned value is: ${value}`);
+						});
 						
-						$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+						//$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 					}
 			     
 			     
@@ -217,7 +223,7 @@
 				   $(function() {
 						//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 						$("a:contains('취 소')").on("click" , function() {
-							self.location = "/TgetMain.jsp"
+							self.location = "/"
 						});
 					});	  				 
 			     
@@ -308,8 +314,6 @@
 													
 													var Id = $("input[id='userId01']").val();
 													
-													$("#h1").show();
-												
 													
 													if(Id == null || Id.length <1){
 														alert("아이디는 반드시 입력하셔야 합니다.");
@@ -372,7 +376,6 @@
 													 $("#userId02").hide();
 													 $("#injb").hide();
 													 ch = 1;
-													 $("#h1").hide();
 													 $("#addon-wrapping").hide();
 													 $("#sm1").show();
 												}else{
@@ -427,25 +430,20 @@
 
 <body>
 	<jsp:include page="/layout/tgetToolbar.jsp"/>
-	<!-- ToolBar Start /////////////////////////////////////-->	
-	<div id="tgetHeader" class="text-center">
-		 
-		  <br/><br/>
-	</div>
                           
 		<div class="container">
 	<div class="row">
-	<div class="col-lg-2"></div>
+	<div class="col-lg-1"></div>
 	
-	<div class="col-lg-8">
-	
+	<div class="col-lg-10">
+	<br/><br/><br/><br/>
 	<div class="login-card" style="color:black;">
 	
     <div class="card form" id="form1">
     
-    <div class="card-header" align="center" style="background-color: SkyBlue;">
+    <div class="card-header" align="center" style="background-color: smokegray;">
     	
-    	<h3><i class="fas fa-user-check"></i><br/></h3>
+    	<h3><i class="fas fa-user-check"></i> <strong>회원가입</strong><br/></h3>
                             
                  </div>
 			 <div style="background-color: white;">
@@ -457,21 +455,20 @@
 					<div class="col-md-2" >
 					<span style="color: black;"><Strong>아이디</Strong> </span>
 					<br/><br/><br/>
-					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
-					
 					<span style="color: black;"><Strong>비밀번호</Strong> </span>
 					<br/><br/><br/><br/><br/><br/>
 					<span style="color: black;"><Strong>이름</Strong> </span>
-				<br/><br/><br/>
+				<br/><br/>
 					<span style="color: black;"><Strong>닉네임</Strong> </span>
 				<br/><br/><br/>
 					<span style="color: black;"><Strong>휴대전화</Strong> </span>
 						<br/><br/><br/><br/>
 					<span id= "h2" style="color: black;  display: none;" >
-<br/><br/><br/><br/></span>
+<br/><br/></span>
 		
 					<span style="color: black;"><Strong>주소</Strong> </span><br/><br/><br/><br/>
 				<span style="color: black;"><Strong>상세주소</Strong> </span><br/><br/><br/>
+				<span style="color: black;"><Strong>위치정보 문의</Strong> </span><br/><br/><br/>
 				</div>
 			
 					
@@ -495,18 +492,17 @@
 							  </select>
 							     　<button id="injb" type="button" class="btn btn-outline-primary">인 증</button><i id="sm1" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
 							    <div id="loading"></div>
-									</div>
+								</div>
 
 							    </div>
 							    
-							     <div class="form-group">
-							     <div class="input-group-prepend">
-							        <div id="divemail" style="display:none;">
-							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-outline-primary">확인</button>
-							    </div>
-							  </div>
-							  </div>
-							    
+							      <div class="form-group">							     
+							      <div id="divemail" style="display:none;">
+							      <div class="input-group-prepend">
+							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호" style="width:73%">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-primary">확인</button>
+							      </div>
+								  </div>
+								  </div>
 							  
 							  	  <div class="form-group">
 							  	  <div class="input-group-prepend">
@@ -552,7 +548,7 @@
 							     
 							
 							  </div>
-							   <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
+							   <span id = "check"><Strong class= "text-danger">닉네임을 입력해주세요</Strong>
 							      </span>
 							    </div>
 						
@@ -569,13 +565,10 @@
 							  
 							  </div>
 							   </div>
-							 <div class="form-group">
+							 <div id="inj" class="form-group" style="display:none">
 							   <div class="input-group-prepend">
-							    <label for="ssn"></label>
-							   <div id="inj" class="text-center" style="display:none"> 
-							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
+							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요." style="width:73%">&nbsp;&nbsp;&nbsp;&nbsp;
 							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
-							    </div>
 							  </div>
 							  </div>
 							  <div id="emailSend" style="display: none;"> 전송중.... </div>		 
@@ -583,48 +576,35 @@
 							    <label for="ssn"></label>
 					 
 								<input class="form-control col-md-10"  type="text" id="address" name="address" >
-	<button type="button" class="btn btn-link">주소찾기</button>
+								<button type="button" class="btn btn-link">주소찾기</button>
 							      </div><br>
 								<input class="form-control col-md-10"  type="text" id="address2" name="address2" >
 							        <div class="form-group">
 							        <br>
-							        
-							    <label for="ssn">	<span style="color: black;"><Strong>위치정보 문의</Strong> </span></label>
-							    <div>
-							    
+							   
+							    <div style="padding-top: 12px;">
 							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
 							     <input type="radio" id= "local" name="local" value="2" /> 비동의
 							    </div>
 							  </div>
-							  
-						
-							  <div class="form-group">
-							
-							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
-								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a>
-								
-					 			 </div>
-					 			
-					 			 
-							
-		
-	
-	<br/>
 	<br/>
 	
 						  
 							</form>
 						
 							</div>
-							<div class="col-md-1"></div>
+							<div class="col-md-1"></div>							
 							</div>
-						
+							<div class="text-center">							
+							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a><br/>	<br/>								
+					 		</div>
 							</div>
 							</div>
 							
 						</div>	
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 					</div>
 					</div>
 	</div>					
