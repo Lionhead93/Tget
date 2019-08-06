@@ -40,10 +40,6 @@ public class ReviewAndPointController {
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 		
-		@Autowired
-		@Qualifier("tranServiceImpl")
-		private TranService tranService;
-		
 		
 		///C
 		public ReviewAndPointController(){
@@ -78,7 +74,7 @@ public class ReviewAndPointController {
 		@RequestMapping(value="getSellerEstimationList")
 		public String getSellerEstimationList(@RequestParam String sellerId,Model model) throws Exception {
 			System.out.println("===============getSellerEstimationList===============");
-			System.out.println(userService.getUser(sellerId));
+//			System.out.println(userService.getUser(sellerId));
 			model.addAttribute("sellerEstimationList", rNPService.getSellerEstimationList(sellerId));
 			model.addAttribute("sellerId",sellerId);
 			model.addAttribute("sellerNickname",userService.getUser(sellerId).getNickName());

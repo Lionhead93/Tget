@@ -262,89 +262,89 @@ public class EventController {
 		return "forward:/event/getEventManage.jsp";		
 	}
 	
-	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.GET)
-	public String addYoutubeVideo(@RequestParam String eventName,Model model) throws Exception {
-		System.out.println("===============addYoutubeVideo===============");		
-		Map<String,Object> map = eventService.getYoutubeList(new Search(), null, youtubeKey);
-
-		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
-		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
-		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
-		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
-		model.addAttribute("eventName",  eventName);
-		
-		return "forward:/event/addYoutubeVideoGET.jsp";
-	}
+//	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.GET)
+//	public String addYoutubeVideo(@RequestParam String eventName,Model model) throws Exception {
+//		System.out.println("===============addYoutubeVideo===============");		
+//		Map<String,Object> map = eventService.getYoutubeList(new Search(), null, youtubeKey);
+//
+//		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
+//		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
+//		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
+//		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+//		model.addAttribute("eventName",  eventName);
+//		
+//		return "forward:/event/addYoutubeVideoGET.jsp";
+//	}
 	
-	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.POST)
-	public String addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
-		System.out.println("===============addYoutubeVideo===============");
-		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
-
-		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
-		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
-		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
-		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
-		model.addAttribute("eventName",  eventName);
-		model.addAttribute("requestPageToken",  requestPageToken);
-		
-		return "forward:/event/addYoutubeVideoGET.jsp";
-	}
+//	@RequestMapping(value="addYoutubeVideo", method=RequestMethod.POST)
+//	public String addYoutubeVideo(@RequestParam String requestPageToken,@RequestParam String eventName,@ModelAttribute("search") Search search,Model model) throws Exception {
+//		System.out.println("===============addYoutubeVideo===============");
+//		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
+//
+//		model.addAttribute("youtubeList", (List<YoutubeVideo>)map.get("youtubeList"));
+//		model.addAttribute("nextPageToken",  (String)map.get("nextPageToken"));
+//		model.addAttribute("prevPageToken",  (String)map.get("prevPageToken"));
+//		model.addAttribute("totalResults",  (Integer)map.get("totalResults"));
+//		model.addAttribute("eventName",  eventName);
+//		model.addAttribute("requestPageToken",  requestPageToken);
+//		
+//		return "forward:/event/addYoutubeVideoGET.jsp";
+//	}
 	
-	@RequestMapping(value="getYoutubePlayer")
-	public String getYoutubePlayer( @ModelAttribute("youtubeVideo") YoutubeVideo youtubeVideo,@RequestParam String requestPageToken,
-			@RequestParam String eventName,@RequestParam String searchKeyword,Model model) throws Exception {
-		System.out.println("===============getYoutubePlayer===============");
-		System.out.println(youtubeVideo);
-		
-		System.out.println("eventName ; "+eventName);
-		model.addAttribute("youtubeVideo", youtubeVideo);
-		model.addAttribute("requestPageToken", requestPageToken);
-		model.addAttribute("eventName", eventName);
-		model.addAttribute("searchKeyword", searchKeyword);
-		
-		return "forward:/event/getYoutubePlayer.jsp";
-	}
+//	@RequestMapping(value="getYoutubePlayer")
+//	public String getYoutubePlayer( @ModelAttribute("youtubeVideo") YoutubeVideo youtubeVideo,@RequestParam String requestPageToken,
+//			@RequestParam String eventName,@RequestParam String searchKeyword,Model model) throws Exception {
+//		System.out.println("===============getYoutubePlayer===============");
+//		System.out.println(youtubeVideo);
+//		
+//		System.out.println("eventName ; "+eventName);
+//		model.addAttribute("youtubeVideo", youtubeVideo);
+//		model.addAttribute("requestPageToken", requestPageToken);
+//		model.addAttribute("eventName", eventName);
+//		model.addAttribute("searchKeyword", searchKeyword);
+//		
+//		return "forward:/event/getYoutubePlayer.jsp";
+//	}
 	
-	@RequestMapping(value="deleteInterestedEventAll")
-	public String deleteInterestedEventAll(HttpSession session) throws Exception {
-		System.out.println("===============deleteInterestedEventAll===============");
-		
-		User user = (User)session.getAttribute("user");
-		String userId = user.getUserId();
-		eventService.deleteInterestedEventAll(userId);
+//	@RequestMapping(value="deleteInterestedEventAll")
+//	public String deleteInterestedEventAll(HttpSession session) throws Exception {
+//		System.out.println("===============deleteInterestedEventAll===============");
+//		
+//		User user = (User)session.getAttribute("user");
+//		String userId = user.getUserId();
+//		eventService.deleteInterestedEventAll(userId);
+//	
+//		return "forward:/event/listInterestedEvent.jsp";
+//	}
 	
-		return "forward:/event/listInterestedEvent.jsp";
-	}
-	
-	@RequestMapping(value="deleteInterestedEvent")
-	public String deleteInterestedEvent(@RequestParam String eventId, HttpSession session,Model model) throws Exception {
-		System.out.println("===============deleteInterestedEvent===============");
-		System.out.println(eventId);
-		User user = (User)session.getAttribute("user");
-		String userId = user.getUserId();
-		String[] arr = null;
-		
-		if(eventId.contains(",")) {
-			arr = eventId.split(",");
-			for (String string : arr) {
-				eventService.deleteInterestedEvent(string, userId);
-			} 
-		}		
-		List<Event> list = eventService.getInterestedEventList(userId);		
-		for (Event event : list) {
-			Search search = new Search();
-			search.setSearchCondition("0");
-			search.setSearchKeyword(event.getEventId());
-			event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
-			event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
-		}				
-		
-		model.addAttribute("interestedEventList", list);
-		if (list != null) {
-			model.addAttribute("interestedEventListCount", list.size());
-		}
-		
-		return "forward:/event/listInterestedEvent.jsp";
-	}
+//	@RequestMapping(value="deleteInterestedEvent")
+//	public String deleteInterestedEvent(@RequestParam String eventId, HttpSession session,Model model) throws Exception {
+//		System.out.println("===============deleteInterestedEvent===============");
+//		System.out.println(eventId);
+//		User user = (User)session.getAttribute("user");
+//		String userId = user.getUserId();
+//		String[] arr = null;
+//		
+//		if(eventId.contains(",")) {
+//			arr = eventId.split(",");
+//			for (String string : arr) {
+//				eventService.deleteInterestedEvent(string, userId);
+//			} 
+//		}		
+//		List<Event> list = eventService.getInterestedEventList(userId);		
+//		for (Event event : list) {
+//			Search search = new Search();
+//			search.setSearchCondition("0");
+//			search.setSearchKeyword(event.getEventId());
+//			event.setTicketLowestPrice(((SellProb)ticketService.getTicketList(search).get("sellProb")).getLowPrice());
+//			event.setTotalTicketCount(((SellProb)ticketService.getTicketList(search).get("sellProb")).getTotalCount());
+//		}				
+//		
+//		model.addAttribute("interestedEventList", list);
+//		if (list != null) {
+//			model.addAttribute("interestedEventListCount", list.size());
+//		}
+//		
+//		return "forward:/event/listInterestedEvent.jsp";
+//	}
 }
