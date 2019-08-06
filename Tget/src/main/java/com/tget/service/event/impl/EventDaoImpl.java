@@ -53,7 +53,6 @@ public class EventDaoImpl implements EventDao {
 		System.out.println(this.getClass());
 	}
 
-
 	///M
 	public void insertEvent(StubhubEvent event) throws Exception{
 		sqlSession.insert("EventMapper.insertEvent", event);
@@ -61,144 +60,112 @@ public class EventDaoImpl implements EventDao {
 	
 	
 	public Event selectEvent(String eventId) throws Exception{
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("eventId", eventId);
-//		map.put("searchKeyword", "eventId");
 		return sqlSession.selectOne("EventMapper.selectEventById", eventId);
 	}
 	
 	
 	public List<Event> selectListEvent(String eventName) throws Exception{
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("eventName", eventName);
-//		map.put("searchKeyword", "eventName");
-//		//return sqlSession.selectList("EventMapper.selectListEvent", map);
 		return sqlSession.selectList("EventMapper.selectEventByName", eventName);
 	}
 	
-	
 	public void updateEvent(Search search,String eventName) throws Exception{ 
-		//searchCondition´Â 0ÀÌ¸é viewCount, 1ÀÌ¸é imageName;
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("search", search);
 		map.put("eventName", eventName);
 		sqlSession.update("EventMapper.updateEvent", map);
-	}
-	
+	}	
 	
 	public List<Event> selectListInterestedEvent(String userId) throws Exception{
 		return sqlSession.selectList("EventMapper.selectListInterestedEvent", userId);
-	}
-	
+	}	
 	
 	public void insertInterestedEvent(String eventId, String userId) throws Exception{
 		Event event = this.selectEvent(eventId);
 		event.setUserId(userId);
 		
 		sqlSession.insert("EventMapper.insertInterestedEvent", event);
-	}
-	
+	}	
 	
 	public void deleteInterestedEvent(String eventId, String userId) throws Exception{
 		Event event = new Event();
 		event.setUserId(userId);
 		event.setEventId(eventId);
 		sqlSession.delete("EventMapper.deleteInterestedEvent", event);
-	}
-	
+	}	
 	
 	public void insertYoutubeVideo(String youtubeId, String eventName) throws Exception{ 
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("youtubeId",youtubeId);
 		map.put("eventName", eventName);
 		sqlSession.insert("EventMapper.insertYoutubeVideo", map);
-	}
-	
+	}	
 	
 	public void deleteYoutubeVideo(Map<String,Object>  map) throws Exception{
 		sqlSession.delete("EventMapper.deleteYoutubeVideo",map);
-	}
-	
+	}	
 	
 	public List<String> selectListYoutubeId(String eventName) throws Exception{
 		return sqlSession.selectList("EventMapper.selectListYoutubeId",eventName);
-	}
-	
+	}	
 	
 	public List<Event> selectListPopularEvent() throws Exception{ 
 		return sqlSession.selectList("EventMapper.selectListPopularEvent");
-	}
-	
+	}	
 	
 	public List<RecommEvent> selectListRecommendedEvent() throws Exception{ 
 		Search search = new Search();
 		search.setSearchCondition("0");
 		return sqlSession.selectList("EventMapper.selectRecommendedEvent",search);
-	}
-	
+	}	
 	
 	public RecommEvent selectRecommendedEvent(int recommEventNo) throws Exception{
 		Search search = new Search();
 		search.setSearchCondition("1");
 		search.setSearchKeyno(recommEventNo);
 		return sqlSession.selectOne("EventMapper.selectRecommendedEvent", search);
-	}
-	
+	}	
 	
 	public void insertRecommendedEvent(RecommEvent recommEvent) throws Exception{ 
 		sqlSession.insert("EventMapper.insertRecommendedEvent", recommEvent);
-	}
-	
+	}	
 	
 	public void updateRecommendedEvent(RecommEvent recommEvent) throws Exception{
 		sqlSession.update("EventMapper.updateRecommendedEvent", recommEvent);
-	}
-	
+	}	
 	
 	public void deleteRecommendedEvent(int recommEventNo) throws Exception{ 
 		sqlSession.delete("EventMapper.deleteRecommendedEvent",recommEventNo);
-	}
-	
+	}	
 	
 	public void insertCategoryTwo(Category category) throws Exception{ 
 		sqlSession.insert("EventMapper.insertCategoryTwo",category);
-	}
-	
+	}	
 	
 	public void updateCategoryTwo(Category category) throws Exception{ 
 		sqlSession.update("EventMapper.updateCategoryTwo",category);
-	}
-	
+	}	
 	
 	public List<Category> selectListCategory() throws Exception{
 		return sqlSession.selectList("EventMapper.selectCategory");
-	}
-	
+	}	
 	
 	public Category selectCategory(String categoryTwoEng) throws Exception{
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("categoryTwoEng",categoryTwoEng);
 		return sqlSession.selectOne("EventMapper.selectCategory", categoryTwoEng);
 	}
 	
 	public Category selectCategory(int categoryTwoNo) throws Exception{
-//		Map<String,Object> map = new HashMap<String,Object>();
-//		map.put("categoryTwoEng",categoryTwoEng);
 		return sqlSession.selectOne("EventMapper.selectCategoryByNo", categoryTwoNo);
 	}
 	
 	public void deleteCategoryTwo(String categoryTwoEng) throws Exception{
 		sqlSession.delete("EventMapper.deleteCategoryTwo",categoryTwoEng);
-	}
-	
+	}	
 	
 	public List<String> selectInterestedByUser(Search search) throws Exception{
-		//searchCondition = 0ÀÌ¸é  InterestedCategory, searchCondition = 1ÀÌ¸é InterestedEvent
 		return sqlSession.selectList("EventMapper.selectInterestedByUser",search);
 	}
 	
 	public int selectInterestedByUserCount(Search search) throws Exception{
-		//searchCondition = 0ÀÌ¸é  InterestedCategory, searchCondition = 1ÀÌ¸é InterestedEvent
 		return sqlSession.selectOne("EventMapper.selectInterestedByUserCount",search);
 	}
 	
@@ -208,8 +175,7 @@ public class EventDaoImpl implements EventDao {
 		event.setUserId(userId);
 		
 		sqlSession.insert("EventMapper.insertInterestedEvent", event);
-	}
-	
+	}	
 	
 	public int getEventListTotalCount(Search search, String requestPageToken, String apiKey) throws Exception{
 		
@@ -237,11 +203,9 @@ public class EventDaoImpl implements EventDao {
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Authorization","Bearer "+apiKey);
-//		httpGet.setHeader("Authorization","Bearer tiY4GRmhcjvBYdRHhr8YmCrXOuSN");
 		httpGet.setHeader("Referer","https://developer.stubhub.com/searchevent/apis/get/search/events/v3");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
-//		System.out.println(httpResponse+"\n");
 
 		HttpEntity httpEntity = httpResponse.getEntity();
 		InputStream is = httpEntity.getContent();
@@ -265,13 +229,7 @@ public class EventDaoImpl implements EventDao {
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title%20desc";
-		
-//		if (totalEventCount > 500) {
-//			url += "rows="+500;
-//		}else {
-//			url += "rows="+totalEventCount;
-//		}
-		
+
 		url+="&rows="+10;
 		
 		if (search.getSearchCondition().equals("0")) {
@@ -284,7 +242,6 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-//				url+="&name="+search.getSearchKeyword();
 				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
@@ -299,11 +256,9 @@ public class EventDaoImpl implements EventDao {
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Authorization","Bearer "+apiKey);
-//		httpGet.setHeader("Authorization","Bearer tiY4GRmhcjvBYdRHhr8YmCrXOuSN");
 		httpGet.setHeader("Referer","https://developer.stubhub.com/searchevent/apis/get/search/events/v3");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
-//		System.out.println(httpResponse+"\n");
 
 		HttpEntity httpEntity = httpResponse.getEntity();
 		InputStream is = httpEntity.getContent();
@@ -338,14 +293,8 @@ public class EventDaoImpl implements EventDao {
 			}
 		}
 
-//		System.out.println("returnList : " +returnList);
-		
-		
 		map.put("eventList", returnList);
-//		map.put("eventList", list);
-//		map.put("totalResults", stubhubSearchList.getNumFound());
-		map.put("totalResults", totalEventCount);
-//		map.put("totalResults", list.size());
+		map.put("totalResults", list.size());
 		
 		return map;
 	}
@@ -359,12 +308,6 @@ public class EventDaoImpl implements EventDao {
 		
 		String url= 	"https://api.stubhub.com/sellers/search/events/v3?sort=title";
 		
-//		if (totalEventCount > 500) {
-//			url += "rows="+500;
-//		}else {
-//			url += "rows="+totalEventCount;
-//		}
-		
 		url+="&rows="+10;
 		
 		if (search.getSearchCondition().equals("0")) {
@@ -377,7 +320,6 @@ public class EventDaoImpl implements EventDao {
 			}
 		}else if(search.getSearchCondition().equals("2")) {
 			if (search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
-//				url+="&name="+search.getSearchKeyword();
 				url+="&q="+search.getSearchKeyword().replace(" ", "%20");
 			}
 		}
@@ -392,11 +334,9 @@ public class EventDaoImpl implements EventDao {
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Authorization","Bearer "+apiKey);
-//		httpGet.setHeader("Authorization","Bearer tiY4GRmhcjvBYdRHhr8YmCrXOuSN");
 		httpGet.setHeader("Referer","https://developer.stubhub.com/searchevent/apis/get/search/events/v3");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
-//		System.out.println(httpResponse+"\n");
 
 		HttpEntity httpEntity = httpResponse.getEntity();
 		InputStream is = httpEntity.getContent();
@@ -413,8 +353,8 @@ public class EventDaoImpl implements EventDao {
 		map.put("eventList", list);
 //		map.put("eventList", list);
 //		map.put("totalResults", returnList.size());
-		map.put("totalResults", totalEventCount);
-//		map.put("totalResults", list.size());
+//		map.put("totalResults", totalEventCount);
+		map.put("totalResults", list.size());
 		
 		return map;
 	}
@@ -425,8 +365,6 @@ public class EventDaoImpl implements EventDao {
 		HttpClient httpClient = new DefaultHttpClient();
 		String url= 	"https://www.googleapis.com/youtube/v3/search?"
 				+ "part=snippet&type=video&key="+apiKey;		
-//		String url= 	"https://www.googleapis.com/youtube/v3/search?"
-//				+ "part=snippet&type=video&key=AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A";
 		
 		if (search.getSearchKeyword() != null) {
 			url += "&q="+search.getSearchKeyword().replaceAll(" ", "%20");
@@ -436,8 +374,7 @@ public class EventDaoImpl implements EventDao {
 		}
 
 		System.out.println("#####getYoutubeList URL - "+url+"\n");
-
-		// HttpGet : Http Protocol ÀÇ GET ¹æ½Ä Request
+		
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Content-Type", "application/json");
@@ -473,8 +410,7 @@ public class EventDaoImpl implements EventDao {
 	
 	public void deleteInterestedEventAll(String userId) throws Exception{
 		sqlSession.delete("EventMapper.deleteInterestedEventAll",userId);
-	}
-	
+	}	
 	
 	public String translate(String sourceLang, String targetLang,String queryText) throws Exception{
 		System.out.println("==============translate(source,target,query)===============");
@@ -484,7 +420,6 @@ public class EventDaoImpl implements EventDao {
 		
 		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
 		HttpPost httpPost = new HttpPost(url);
-//		httpPost.setHeader("Authorization", "Bearer AIzaSyD64J615aLBGn7BP1BurRuewagN43Q0j8A");
 		httpPost.setHeader("Content-Type", "application/json");
 		
 		JSONObject json = new JSONObject();
@@ -504,8 +439,6 @@ public class EventDaoImpl implements EventDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 		
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
-		//System.out.println(jsonobj);
-		
 		JSONObject data = (JSONObject) jsonobj.get("data");
 		JSONArray tran = (JSONArray) data.get("translations");
 		JSONObject tranText = (JSONObject) tran.get(0);
@@ -519,16 +452,6 @@ public class EventDaoImpl implements EventDao {
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception{
 		System.out.println("==============translate(source,target,eventList)===============");
 		Map<String, Object> map =  new HashMap<String, Object>();
-//		HttpClient httpClient = new DefaultHttpClient();
-//		
-//		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
-//		HttpPost httpPost = new HttpPost(url);
-//		httpPost.setHeader("Content-Type", "application/json");
-//				
-//		JSONObject json = new JSONObject();
-//		json.put("source", sourceLang);
-//		json.put("target", targetLang);
-//		json.put("format", "text");
 		
 		Event event = null; 
 		String str = "";
@@ -537,38 +460,21 @@ public class EventDaoImpl implements EventDao {
 				event = list.get(i);
 				event.setEventName(translate(sourceLang, targetLang, event.getEventName()));
 				str = event.getEventLocation();
-				str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 				event.setEventLocation(translate(sourceLang, targetLang, str));
 				list.set(i, event);
-//				str += event.getEventName()+"//"+event.getEventLocation()+" /////";				
-//				str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
-//				str = translate(sourceLang, targetLang, str);
 			}
 		}	
 		map.put("result", list);
 		return map;
 	}
 	
-	
-	
 	public Map<String, Object> translate(String sourceLang, String targetLang,String queryText,List<StubhubEvent> list) throws Exception{
 		System.out.println("==============translate(source,target,query,stubhubList)===============");
 		Map<String, Object> map =  new HashMap<String, Object>();
-//		HttpClient httpClient = new DefaultHttpClient();
-//		
-//		String url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWmO_H-zGbKdEyVBLz_XiM21FbUDsWFKY";
-//		HttpPost httpPost = new HttpPost(url);
-//		httpPost.setHeader("Content-Type", "application/json");
-//				
-//		JSONObject json = new JSONObject();
-//		json.put("source", sourceLang);
-//		json.put("target", targetLang);
-//		json.put("format", "text");
 		
 		StubhubEvent stubhubEvent = null; 
 		String str = "";
 		if (queryText != null && queryText != "") {
-//			json.put("q", queryText);
 			str = translate(sourceLang, targetLang, queryText);
 			map.put("result", str);
 		}else if (list != null && list.size() != 0) {
@@ -576,86 +482,38 @@ public class EventDaoImpl implements EventDao {
 				stubhubEvent = (StubhubEvent)list.get(i);
 				stubhubEvent.setKoName(translate(sourceLang, targetLang, stubhubEvent.getName()));
 				if (stubhubEvent.getVenueName() != null) {
-//					str =translate(sourceLang, targetLang, stubhubEvent.getVenueName());
 					stubhubEvent.setKoLocation(translate(sourceLang, targetLang, stubhubEvent.getVenueName()));
-//					stubhubEvent.setVenueName(str);
 				}
 					if (stubhubEvent.getPerformersName() != null) {
 					stubhubEvent.setPerformersName(translate(sourceLang, targetLang, stubhubEvent.getPerformersName()));
 				}				
 				list.set(i, stubhubEvent);
-//				str += stubhubEvent.getName()+"//"+stubhubEvent.getVenueName()+"//"+stubhubEvent.getPerformersName()+" /////";			
-//				str.replace("Charlotte Theater", "»þ·Ôµ¥ ¾¾¾îÅÍ");
 			}
 			map.put("result", list);
-//			System.out.println("query///////////////////////////"+str);
-//			json.put("q",str);
 		}		
-		
-//		HttpEntity httpEntity01 = new StringEntity(json.toString(),"utf-8");
-//
-//		httpPost.setEntity(httpEntity01);
-//		HttpResponse httpResponse = httpClient.execute(httpPost);
-//			
-//		HttpEntity httpEntity = httpResponse.getEntity();
-//		
-//		//System.out.println(httpResponse);
-//		
-//		InputStream is = httpEntity.getContent();
-//		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
-//		
-//		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
-//		//System.out.println(jsonobj);
-//		
-//		JSONObject data = (JSONObject) jsonobj.get("data");
-//		JSONArray tran = (JSONArray) data.get("translations");
-//		JSONObject tranText = (JSONObject) tran.get(0);
-//		String result = (String) tranText.get("translatedText");
-//		System.out.println("result///////////////////////////"+result);
-//		
-//		
-//		String[] translated = null;
-//		String[] tempArr = null;
-//		
-//		if (queryText != null && queryText != "") {
-//			map.put("result", result);
-//			return map;
-//		}else if (list != null && list.size() != 0) {
-//			translated = result.split("/////");
-//			
-////			for (int i=0; i<translated.length-1; i++ ) {
-//			for (int i=0; i<list.size()-1; i++ ) {
-//				tempArr = translated[i].split("//");
-//				stubhubEvent = (StubhubEvent)list.get(i);
-//				
-//				for (int j = 0; j < tempArr.length; j++) {
-//					if (j==0) {
-//						stubhubEvent.setKoName(tempArr[j]);
-//					}else if (j==1) {
-//						stubhubEvent.setVenueName(tempArr[j]);
-//					}else if (j==2) {
-//						stubhubEvent.setPerformersName(tempArr[j]);
-//					}
-//				}
-//				System.out.println("==============================");
-//				System.out.println("tempArr.length : "+tempArr.length);
-//				System.out.println(stubhubEvent);
-//				list.set(i, stubhubEvent);
-//			}
-//			map.put("result", list);
-//			return map;
-//		}	
-//		return null;
 		
 		return map;
 	}
 	
 	public List<Event> selectAllLocation() throws Exception{
-		return sqlSession.selectList("EventMapper.selectAllLocation");
+		List<Event> list = sqlSession.selectList("EventMapper.selectAllLocation");
+		List<Event> returnList = new ArrayList<Event>();
+		
+		for (Event event : list) {
+			if (returnList.size()==0) {
+				returnList.add(event);
+			}else {
+				for (int i = 0; i < returnList.size(); i++) {
+					if (returnList.get(i).getKoLocation().equals(event.getKoLocation())) {
+						break;
+					} else if((i==returnList.size()-1) &&( ! returnList.get(i).getKoLocation().equals(event.getKoLocation()))){
+						returnList.add(event);
+					}
+				}
+			}
+		}		
+		return returnList;
 	}
 	
-//	public List<Ticket> selectTicketList(Search search) throws Exception{
-//		return sqlSession.selectList("EventMapper.selectTicketList",search);
-//	}
 	
 }

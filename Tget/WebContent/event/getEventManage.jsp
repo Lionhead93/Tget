@@ -16,14 +16,8 @@
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
 	<link rel="stylesheet" href="/resources/css/yr.css" />
 	<link rel="shortcut icon" href="/resources/images/logo.png">
-	<link rel="icon" href="/resources/images/logo.png">	
-	
+	<link rel="icon" href="/resources/images/logo.png">		
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!--  	<link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
   	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -31,10 +25,6 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    
-<!--      <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-  
   	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -47,7 +37,6 @@
 	
 	$(function(){
 		$("button:contains('삭제하기')").on("click",function(){			
-// 			alert("삭제하기");
 			var temp = $(this).val();
 			$.ajax(
 					{
@@ -59,11 +48,8 @@
 									},
 						dataType : "json",
 						success : function(JSONData, status){
-// 							alert(status);
-// 							alert("JSONData : \n"+JSONData);		
 							$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())-1);
-							$("#"+temp).html("");
-// 							alert($("#recommEventlistSize").val());					
+							$("#"+temp).html("");		
 						},
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -72,7 +58,6 @@
 		});
 		
 		$("button:contains('수정하기')").on("click",function(){	
-// 			alert($(this).val());
 			$("#recommEventNo").val($(this).val());	
 			$.ajax(
 					{
@@ -83,78 +68,62 @@
 						},
 						dataType : "json",
 						success : function(JSONData,status){
-// 							alert(JSONData.recommEvent.recommEventNo);
-// 							alert(JSONData.recommEvent.recommEventName);
-// 							alert(JSONData.recommEvent.videoName);
-// 							alert(JSONData.recommEvent.recommEventDetail);
 							$("input[name='recommEventNo']").val(JSONData.recommEvent.recommEventNo);
 							$("input[name='recommEventName']").val(JSONData.recommEvent.recommEventName);							
 							$("textarea[name='recommEventDetail']").text(JSONData.recommEvent.recommEventDetail);
 							$("input[name='recommEventUrl']").val("http://192.168.0.82:8080/event/getEvent?category=&eventName="+JSONData.recommEvent.eventName);	
-// 							$("input[name='file']").val(JSONData.recommEvent.videoName);
 						},
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
 				});	
 		});
-// 			popWin = window.open("/event/updateRecommendedEvent?recommEventNo="+$(this).val(),"popWin",
-// 					"left=500, top=100, width=600, height=600, "
-// 					+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
+		
 		$("#submit").on("click",function(){	
 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
-// 			alert("submit");
-			var formData = new FormData($("#editRecommEvent")[0]);			
-			if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
-				if (parseInt($("#recommEventlistSize").val()) < 3) {
-// 					alert('parseInt($("#recommEventlistSize").val()) < 3');
+				var formData = new FormData($("#editRecommEvent")[0]);			
+				if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
+					if (parseInt($("#recommEventlistSize").val()) < 3) {
+						$.ajax(
+							{
+								url : "/event/rest/addRecommendedEvent",
+								method : "POST",
+								data : formData,
+								processData: false,
+								contentType: false,
+								dataType : "json",
+								success : function(JSONData,status){
+									$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
+									$("button.close").click();
+									location.reload();
+								},
+								error : function(request, status, error ) {   
+								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								}			
+							});
+					}else{					
+		 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+					}
+				}else{
 					$.ajax(
-						{
-							url : "/event/rest/addRecommendedEvent",
-							method : "POST",
-							data : formData,
-							processData: false,
-							contentType: false,
-// 							contentType: 'multipart/form-data', 
-							dataType : "json",
-							beforeSend : function(){
-								alert("추가추가추가");
-								alert(formData);
-							},
-							success : function(JSONData,status){
-								$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
-								$("button.close").click();
-								location.reload();
-							},
-							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							}			
-						});
-				}else{					
-	 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+							{
+								url : "/event/rest/updateRecommendedEvent",
+								method : "POST",
+								data : formData,
+								processData: false,
+								contentType: false,
+								dataType : "json",
+								success : function(JSONData,status){								
+									$("button.close").click();
+									location.reload();
+								},
+								error : function(request, status, error ) {   
+								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								}			
+						});				
 				}
-			}else{
-// 				alert('"#recommEventNo").val()!=""');
-				$.ajax(
-						{
-							url : "/event/rest/updateRecommendedEvent",
-							method : "POST",
-							data : formData,
-							processData: false,
-							contentType: false,
-							dataType : "json",
-							success : function(JSONData,status){								
-								$("button.close").click();
-								location.reload();
-							},
-							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							}			
-					});				
-			}
 		});
 		$("button.close").on("click",function(){
-// 			$("#recommEventNo").val("");	
 			$("input[name='recommEventNo']").val("");
 			$("input[name='recommEventName']").val("");
 			$("input[name='file']").val("");
@@ -170,7 +139,6 @@
 	$(function(){
 		
 		$("div.category").on("click", function(){
-// 			alert($(this).children("input[type='hidden']").val());
 			var tempCateNo = $(this).children("input[type='hidden']").val();
 			$.ajax(
 					{
@@ -180,8 +148,7 @@
 									categoryTwoNo : tempCateNo
 									},
 						dataType : "json",
-						success : function(JSONData, status){
-// 							alert("JSONData : \n"+JSONData.category);				
+						success : function(JSONData, status){			
 								$("input[name='categoryTwoNo']").val(tempCateNo);
 								$("select[name='categoryOneCode']").val(JSONData.category.categoryOneCode);
 								$("input[name='categoryTwoName']").val(JSONData.category.categoryTwoName);
@@ -196,7 +163,6 @@
 		
 		$("#submit2").on("click",function(){
 			if ($("#categoryTwoNo").val() == "") {
-// 				alert('$("#categoryTwoNo").val() == ""');
 				$.ajax(
 						{
 							url : "/event/rest/addCategoryTwo",
@@ -207,8 +173,7 @@
 										categoryTwoEng : $("input[name='categoryTwoEng']").val()
 										},
 							dataType : "json",
-							success : function(JSONData, status){
-								
+							success : function(JSONData, status){								
 								location.reload();
 								$("#list-category-list").attr("class","list-group-item list-group-item-action active");
 								$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
@@ -273,10 +238,6 @@
 			});
 		});
 	});
-	/* 
-	$( function() {
-	    $( "#tabs" ).tabs();
-	  } ); */
 	
 	function updateCategoryGET(recommNo){
 		$.ajax(
@@ -288,7 +249,6 @@
 								},
 					dataType : "json",
 					success : function(JSONData, status){
-//							alert("JSONData : \n"+JSONData.category);				
 							$("input[name='categoryTwoNo']").val(recommNo);
 							$("select[name='categoryOneCode']").val(JSONData.category.categoryOneCode);
 							$("input[name='categoryTwoName']").val(JSONData.category.categoryTwoName);
@@ -356,7 +316,6 @@
 <body>
 <jsp:include page="/layout/tgetToolbar.jsp" />
 <jsp:include page="/layout/tgetHeader.jsp" />
-<!-- <form> -->
 	<div class="container">
 	
 		<div class="row"  style="margin-top: 30px;">
@@ -369,38 +328,35 @@
 		  <div class="col-10 col-lg-10">
 		    <div class="tab-content" id="nav-tabContent">
 		      <div class="tab-pane fade show active" id="list-recomm" role="tabpanel" aria-labelledby="list-recomm-list">
-		      <div  class="row" >
-		      	<div class="col-11"></div>
-		      	<div class="col-1" align="left"  class="btn btn-light"	data-toggle="modal" 						
-								 data-target="#exampleModalCenter"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
-		      </div>
-
-  			<input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
-  			<input type="hidden" id="recommEventNo"  name="recommEventNo"  />
-  			<input type="hidden" name="recommEventName" />
-  			<input type="hidden" name="recommEventDetail" />
-  			<input type="hidden" name="recommEventUrl" />
+			      <div  class="row" >
+			      	<div class="col-11"></div>
+			      	<div class="col-1" align="left"  class="btn btn-light"	data-toggle="modal" 						
+									 data-target="#exampleModalCenter"><ion-icon id="addRecomm" name="add" size="large"></ion-icon></div>		      	
+			      </div>	
+		  		  <input type="hidden" id="recommEventlistSize" value="${recommEventlistSize }"/>
+		    	  <input type="hidden" id="recommEventNo"  name="recommEventNo"  />
+		  		  <input type="hidden" name="recommEventName" />
+		  		  <input type="hidden" name="recommEventDetail" />
+			 	  <input type="hidden" name="recommEventUrl" />
   
-			<div class="row" align="center" >		      	
-				<c:forEach items="${recommEventlist}"  var="i">			
-					<div style="width: 18rem; height: 400px;" id="${i.recommEventNo }">
-						<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 300px; height: 170px;">
-							<source src="/resources/video/${i.videoName}" type="video/mp4">
-						</video>
-						<div class="card-body" style="height: 220px;" >
-							<input type="hidden" name="eventName" value="${i.eventName }"/>
-							<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
-							<p class="card-text">${i.recommEventDetail }</p>
-							<button class="btn btn-outline-primary"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
-							<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>
-						</div>
-					</div>
-				</c:forEach>	
-			</div>
-		 </div>
-			  
-			  
+				  <div class="row" align="center" >		      	
+						<c:forEach items="${recommEventlist}"  var="i">			
+							<div style="width: 18rem; height: 400px;" id="${i.recommEventNo }">
+								<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 300px; height: 170px;">
+									<source src="/resources/video/${i.videoName}" type="video/mp4">
+								</video>
+								<div class="card-body" style="height: 220px;" >
+									<input type="hidden" name="eventName" value="${i.eventName }"/>
+									<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
+									<p class="card-text">${i.recommEventDetail }</p>
+									<button class="btn btn-outline-primary"  data-toggle="modal" 						
+										 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
+									<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>
+								</div>
+							</div>
+						</c:forEach>	
+				  </div>
+		 	  </div>
 		      <div class="tab-pane fade" id="list-category" role="tabpanel" aria-labelledby="list-category-list">
 		      	<div  class="row" >
 			      	<div class="col-11"></div>
@@ -408,8 +364,7 @@
 			      		<ion-icon id="addCate" name="add" size="large"></ion-icon>
 			      	</div>		      	
 			    </div>
-			      
-		      	<div class="row ">
+			    <div class="row ">
 		      		<div class="col-1"></div>
 			      	<div class="card col-10">
 					  <h5 class="card-header" >음악공연</h5>
@@ -429,9 +384,9 @@
 					  </div>
 					</div>
 					<div class="col-1"></div>
-				   </div>
+				 </div>
 					
-					<div class="row ">
+				 <div class="row ">
 		      		<div class="col-1"></div>
 			      	<div class="card col-10">
 					  <h5 class="card-header" >스포츠</h5>
@@ -451,9 +406,9 @@
 					  </div>
 					</div>
 					<div class="col-1"></div>
-				   </div>
+				 </div>
 					
-					<div class="row ">
+				 <div class="row ">
 		      		<div class="col-1"></div>
 			      	<div class="card col-10">
 					  <h5 class="card-header" >기타예술공연</h5>
@@ -473,8 +428,7 @@
 					  </div>
 					</div>
 					<div class="col-1"></div>
-				   </div>
-  			  
+				 </div>  			  
 		 </div>
 	  </div>
 	</div>
@@ -526,20 +480,17 @@ aria-labelledby="categoryModalTitle" aria-hidden="true">
         		 <option value="1">스포츠</option>
         		 <option value="2">기타예술공연</option>
 			   </select>
-			</div>
-        	
+			</div>        	
         	<div class="form-group">
 			   <label  for="categoryTwoName"><ion-icon name="checkmark"></ion-icon>세부 카테고리명</label>			  
 			   <input type="text" class="form-control"  id="categoryTwoName"   name="categoryTwoName"
 			   placeholder="세부 카테고리명을 입력해주세요" />
-			</div>
-			
+			</div>			
 			<div class="form-group">
 			   <label  for="categoryTwoEng"><ion-icon name="checkmark"></ion-icon>영문명</label>			  
 			   <input type="text" class="form-control"  id="categoryTwoEng" name="categoryTwoEng"
 			   placeholder="세부 카테고리 영문명을 입력해주세요" />
-			</div>
-        	
+			</div>        	
         </div>
       </div>
       <div class="modal-footer">       
@@ -550,8 +501,6 @@ aria-labelledby="categoryModalTitle" aria-hidden="true">
     </div>
     </div>
 </div>
-
-
 
 <jsp:include page="/layout/footer.jsp" />
 </body>

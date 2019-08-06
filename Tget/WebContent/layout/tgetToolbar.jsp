@@ -435,7 +435,7 @@ $(function getSearchWeather(lat, lon) {
 		$("a[id='kakao' ]").on("click" , function() {
 				
 				var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
-				window.open("https://kauth.kakao.com/oauth/authorize?client_id=ea9f389c17a2bd4b4fd122a0c9184bc2&redirect_uri=http://192.168.0.24:8080/user/oauth&response_type=code","Kakao login",popOption);
+				window.open("https://kauth.kakao.com/oauth/authorize?client_id=ea9f389c17a2bd4b4fd122a0c9184bc2&redirect_uri=http://192.168.0.16:8080/user/oauth&response_type=code","Kakao login",popOption);
 				
 				
 		});

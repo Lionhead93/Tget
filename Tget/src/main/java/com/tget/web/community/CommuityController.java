@@ -261,7 +261,7 @@ public class CommuityController {
 			System.out.println("@@@@@@@/////////"+report);
 			System.out.println("@@@@@@@@@@@@@@@하...좀....");
 			
-			return "forward:/user/listUser.jsp";
+			return "forward:/user/listUser";
 		}
 		//환불 게시판 환불 검증 여부 처리
 		@RequestMapping(value="updateRefund")

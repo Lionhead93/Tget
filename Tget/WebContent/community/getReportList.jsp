@@ -295,9 +295,10 @@
 				</div>
 				<div class="col-md-2"><p>${report.regDate }</p></div>
  				 <div class="col-md-2"><p>
- 				 <a href="#" class="check" id="contentModalButton" data-toggle="modal" data-target="#contentModal"><i class="far fa-check-circle" style=color:#020B13;font-size:20px;></i></a>
+ 				 <a href="#" class="check" id="contentModalButton" data-toggle="modal" data-target="#contentModal"><i class="far fa-check-circle" style=color:#020B13;font-size:20px;></i>
 <!--  				 <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal"></button></p> -->
 			  <input type="hidden" name="reportNo" value="${report.contentNo}"/>
+			  </a>
 			  <div style="display: none;">${report.reportNo}</div>
 			  </div>		  
 		    </div>
@@ -317,9 +318,9 @@
 					        </button>
 					      </div>
 					      <div class="modal-body" >
-					      <div class="col" style=color:#020B13;>작성자 : <span id="reportBlackId">${content.userNickname}</span></div>
+					      <div class="col" style=color:#020B13;>작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
 						<hr/>
-						  <div class="col" style=color:#020B13;>내용 :  <div id="reportContentBody">${content.contentBody}</div></div>
+						  <div class="col" style=color:#020B13;>내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
 					    
 						<br>
 						

@@ -186,25 +186,7 @@
 
 				});
 			 
-// 			 $( "a[href='#section-topline-1']:contains('회원')" ).on("click" , function() {
-// 					self.location="/community/getContentList?searchCondition=2&searchKeyword=8";	
 
-// 				});
-			 
-// 			 $( "a[href='#section-topline-2']:contains('판매/구매')" ).on("click" , function() {
-// 					self.location="/community/getContentList?searchCondition=2&searchKeyword=9";	
-
-// 				});
-			 
-// 			 $( "a[href='#section-topline-3']:contains('취소/환불')" ).on("click" , function() {
-// 					self.location="/community/getContentList?searchCondition=2&searchKeyword=10";	
-
-// 				});
-			 
-// 			 $( "a[href='#section-topline-4']:contains('이벤트/혜택')" ).on("click" , function() {
-// 					self.location="/community/getContentList?searchCondition=2&searchKeyword=11";	
-
-// 				});
 			 
 			 // 상세 조회
 			$( "td:nth-child(2)" ).on("click" , function() {

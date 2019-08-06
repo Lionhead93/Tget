@@ -70,23 +70,6 @@ public class UserRestController {
 	}
 	
 	
-
-
-/*	@RequestMapping( value="json/login", method=RequestMethod.POST )
-	public User login(	@RequestBody User user,
-									HttpSession session ) throws Exception{
-	
-		System.out.println("/user/json/login : POST");
-		//Business Logic
-		System.out.println("::"+user);
-		User dbUser=userService.getUser(user.getUserId());
-		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
-		
-		return dbUser;
-	}*/
 	
 	@RequestMapping(value= "json/sendSms", method=RequestMethod.POST ) 
 	public Map<String,Object> sendSms(String receiver)throws Exception { 
@@ -195,24 +178,6 @@ public class UserRestController {
 		return "yes";
 		}
 	}    
-	
-
-	/*@RequestMapping(value = "json/smsCheck", produces="application/json" , method=RequestMethod.POST) 
-	public String smsCheck(String code){ 
-	
-		
-		
-		System.out.println("받은거"+user.getCode());
-		System.out.println("쓴거"+code);
-		
-		if(code.equals(user.getCode())) {
-			System.out.println("일치");
-			return "true";
-			}else { 
-				System.out.println("불일치");
-				return "false"; 
-				} 
-	}*/
 	
 
 	@RequestMapping(value = "json/checknickNameDuplication", method=RequestMethod.POST)

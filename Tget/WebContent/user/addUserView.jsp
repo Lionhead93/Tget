@@ -60,38 +60,28 @@
 					if (phone == null || phone.length != 11) {
 						alert("올바른 전화번호를 입력하세요.");
 						return;
-					
-						
-						
 					}
 
-					
-					
-					
 					alert("인증번호 전송");
-				
-
-					
 					
 					$("#inj").show();
-				
 					
-					$.ajax({ 
-						   url: "/user/json/sendSms",
-						   data: { 
-							   receiver: $("#phone").val()
-							   }, 
-							   type: "post",
-							   dataType:"json", 
-					
-							   success : function(JSONData){
-									console.log(JSONData);   
-					
-									rand = JSONData.rand;
+						$.ajax({ 
+							   url: "/user/json/sendSms",
+							   data: { 
+								   receiver: $("#phone").val()
+								   }, 
+								   type: "post",
+								   dataType:"json", 
+						
+								   success : function(JSONData){
+										console.log(JSONData);   
+						
+										rand = JSONData.rand;
 						   
-						   }  
+						 										 }  
 				
-						 }); 
+								 }); 
 					
 						});
 				   
@@ -163,7 +153,7 @@
 			     $(function() {
 						
 						$("button:contains('가 입')").on("click" , function() {
-						//	alert("오예");
+					
 						 fncAddUser(); 
 						 
 						
@@ -184,14 +174,7 @@
 							alert("아이디는 반드시 입력하셔야 합니다.");
 							return;
 						}
-						/* if(pw == null || pw.length <1){
-							alert("패스워드는  반드시 입력하셔야 합니다.");
-							return;
-						}
-						if(pw_confirm == null || pw_confirm.length <1){
-							alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-							return;
-						} */
+		
 						if(name == null || name.length <1){
 							alert("이름은  반드시 입력하셔야 합니다.");
 							return;
@@ -203,11 +186,6 @@
 							return;
 						}
 						
-						/* if( $("#injb").show() ) {
-						 
-							alert("반드시 이메일 인증을 해야함.");
-							return;
-						} */
 						
 						if(ch !=1 ){
 							alert("반드시 이메일 인증을 해야함.");
@@ -278,42 +256,41 @@
 								url : "/user/json/checknickNameDuplication",
 								method : "POST",
 								dataType : "json",
-									headers : {
-										"Accept" : "application/json",
-									"Content-Type" : "application/json"
-												},
-											data : JSON.stringify({
-												nickName : inputed,
-												}) ,
+								headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+											},
+								data : JSON.stringify({
+								nickName : inputed,
+											}) ,
 
-											success : function(JSONData) {
-																//alert(JSONData); 
-																//alert(typeof(JSONData));
-
-												if (JSONData && inputed != "") {
-													$("#check").children("strong")
-														.remove();
-															$("#check")
-																.append(
-																"<strong class=\"text-success\">사용 가능합니다.</strong>");
-															$("#check2").show();
-														} else {
+								success : function(JSONData) {
+																
+										if (JSONData && inputed != "") {
+											$("#check").children("strong")
+											.remove();
+											$("#check")
+											.append(
+											"<strong class=\"text-success\">사용 가능합니다.</strong>");
+											$("#check2").show();
+											} else {
 															
-															$("#check2").hide();
-															$("#check").children("strong")
-																	.remove();
-															$("#check")
-																.append(
-																"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
-														}
-													if (inputed == "") {
+											$("#check2").hide();
+											$("#check").children("strong")
+											.remove();
+											$("#check")
+											.append(
+											"<strong  class=\"text-danger\">사용 불가능합니다.</strong>");
+												}
+										
+											if (inputed == "") {
 														
-														$("#check2").hide();
-														$("#check").children("strong")
-															.remove();
-														$("#check")
-																.append(
-																		"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
+												$("#check2").hide();
+												$("#check").children("strong")
+												.remove();
+												$("#check")
+												.append(
+												"<strong class=\"text-muted\">닉네임을 입력해주세요.</strong>");
 													}
 													}
 
@@ -455,19 +432,22 @@
 		 
 		  <br/><br/>
 	</div>
-		<!-- <i class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
-                            <i class="far fa-angry fa-2x" style="color:maroon;"></i> -->
                           
 		<div class="container">
 	<div class="row">
 	<div class="col-lg-2"></div>
+	
 	<div class="col-lg-8">
-	 <div class="login-card" style="color:black;">
-                    <div class="card form" id="form1">
-                        <div class="card-header" align="center" style="background-color: SkyBlue;">
-                            <h3><i class="fas fa-user-check"></i><br/></h3>
+	
+	<div class="login-card" style="color:black;">
+	
+    <div class="card form" id="form1">
+    
+    <div class="card-header" align="center" style="background-color: SkyBlue;">
+    	
+    	<h3><i class="fas fa-user-check"></i><br/></h3>
                             
-                        </div>
+                 </div>
 			 <div style="background-color: white;">
 			
 			 
@@ -546,11 +526,11 @@
 							 
 							  <div class="form-group">
 							  <label for="password3"></label>
-							<!--   <div class="col-sm-4" id="alert-success">비밀번호가 일치합니다.</div> -->
+						
 							
 							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
 							      </span>
-								<!-- <div class="col-sm-4" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+							
 								<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
 							      </span>
 							</div>
@@ -619,7 +599,7 @@
 							  
 						
 							  <div class="form-group">
-							   <!--  disabled="disabled" -->
+							
 							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
 								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a>
 								
