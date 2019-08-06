@@ -56,6 +56,7 @@
 		point_history_no , user_id , point_update_code , reg_date , tran_no, total_point, update_point
 		FROM point_history
 		WHERE user_id = #{userId}
+		ORDER BY reg_date DESC
 	 </select>
 	 
 	 <select 	id="selectPointHistoryCount"	parameterType="string"	resultType="int">
@@ -80,6 +81,7 @@
 		<if test="searchCondition == 0">WHERE buyer_id = #{searchKeyword}</if>
 		<if test="searchCondition == 1">WHERE seller_id = #{searchKeyword}</if>
 		AND review_score IS NOT NULL
+		ORDER BY review_reg_date DESC
 	 </select>
 	 
 	 <select 	id="selectReview"	parameterType="int"	resultMap="reviewSelectMap">
@@ -92,8 +94,10 @@
 	 <update	id="updateReview"  parameterType="review" >
 	 	UPDATE transaction 
 	 	<set>
-	 		review_score	= #{score},
-	 		review_body = #{reviewBody}
+	 		review_score	= #{score}
+	 		,review_body = #{reviewBody}
+	 		<if test="regDate == null">,review_reg_date = SYSDATE</if>
+	 		<if test="regDate != null">,review_reg_date = #{regDate}</if>	 		
 		</set>
 		WHERE tran_no = #{tranNo}
 	 </update>

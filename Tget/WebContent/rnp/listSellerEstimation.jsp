@@ -15,15 +15,13 @@
 	<link rel="stylesheet" href="/resources/css/yr.css" />
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">		  	
-	<link rel="stylesheet" href="/resources/css/login.css" />
-	<link rel="stylesheet" href="/resources/css/videoBox.css" />
-	<link rel="stylesheet" href="/resources/css/main.css" />
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -34,7 +32,7 @@
 	<script src="/resources/javascript/yr.js" ></script>
     <script type="text/javascript">
 		$(function(){
-			$("tr.record").on("click",function(){
+			$("div.card").on("click",function(){
 	    		$.ajax(
 						{
 							url : "/rnp/rest/getTran",
@@ -109,7 +107,7 @@
 			<div class="col-lg-6">
 				<input type="hidden"  id="sellerId" name="sellerId"  value="${sellerId}" >
 				<h1><span style="font-weight:bold;font-size:30px ; color: #041625;">${sellerNickname}</span><small style="color: #041625;;">님의</small> 
-					<span class="textcontainer" style="font-weight: bold; color: #041625;;">
+					<span class="textcontainer" style="font-weight: bold; color: #041625;">
 						<span class="particletext bubbles">평점<span class="particle" style="top:29%; left:82%;width:5.2px; height:5.2px;animation-delay: 3s;"></span><span class="particle" style="top:67%; left:53%;width:4.8px; height:4.8px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:90%;width:5.5px; height:5.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:56%; left:64%;width:7.2px; height:7.2px;animation-delay: 2.5s;"></span><span class="particle" style="top:80%; left:77%;width:7.1px; height:7.1px;animation-delay: 2.2s;"></span><span class="particle" style="top:31%; left:58%;width:5.4px; height:5.4px;animation-delay: 0.5s;"></span><span class="particle" style="top:28%; left:95%;width:6.1px; height:6.1px;animation-delay: 2.7s;"></span><span class="particle" style="top:57%; left:58%;width:7.9px; height:7.9px;animation-delay: 2.3s;"></span><span class="particle" style="top:72%; left:61%;width:7.6px; height:7.6px;animation-delay: 0s;"></span><span class="particle" style="top:49%; left:51%;width:4.9px; height:4.9px;animation-delay: 1.9s;"></span><span class="particle" style="top:42%; left:43%;width:7.4px; height:7.4px;animation-delay: 1.1s;"></span><span class="particle" style="top:69%; left:39%;width:4.7px; height:4.7px;animation-delay: 1.8s;"></span><span class="particle" style="top:61%; left:92%;width:7.2px; height:7.2px;animation-delay: 0s;"></span><span class="particle" style="top:28%; left:16%;width:4.9px; height:4.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:69%; left:24%;width:5.4px; height:5.4px;animation-delay: 0.4s;"></span><span class="particle" style="top:51%; left:59%;width:6.5px; height:6.5px;animation-delay: 1.2s;"></span><span class="particle" style="top:74%; left:67%;width:7.4px; height:7.4px;animation-delay: 2.5s;"></span><span class="particle" style="top:63%; left:16%;width:6.8px; height:6.8px;animation-delay: 1.3s;"></span><span class="particle" style="top:31%; left:29%;width:5.9px; height:5.9px;animation-delay: 2.1s;"></span><span class="particle" style="top:23%; left:42%;width:4.5px; height:4.5px;animation-delay: 1.3s;"></span><span class="particle" style="top:71%; left:76%;width:5.7px; height:5.7px;animation-delay: 1.5s;"></span><span class="particle" style="top:76%; left:79%;width:5.7px; height:5.7px;animation-delay: 0.5s;"></span><span class="particle" style="top:71%; left:1%;width:5.3px; height:5.3px;animation-delay: 1.8s;"></span><span class="particle" style="top:77%; left:11%;width:7.7px; height:7.7px;animation-delay: 2.1s;"></span><span class="particle" style="top:68%; left:34%;width:4px; height:4px;animation-delay: 2.3s;"></span><span class="particle" style="top:49%; left:78%;width:6.6px; height:6.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:37%; left:41%;width:5.1px; height:5.1px;animation-delay: 2.3s;"></span><span class="particle" style="top:57%; left:75%;width:4.9px; height:4.9px;animation-delay: 2.4s;"></span><span class="particle" style="top:62%; left:58%;width:7.9px; height:7.9px;animation-delay: 0.6s;"></span><span class="particle" style="top:25%; left:6%;width:5.3px; height:5.3px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:52%;width:5.6px; height:5.6px;animation-delay: 2.8s;"></span><span class="particle" style="top:71%; left:22%;width:7.9px; height:7.9px;animation-delay: 0.1s;"></span><span class="particle" style="top:30%; left:59%;width:6.2px; height:6.2px;animation-delay: 0.7s;"></span><span class="particle" style="top:60%; left:90%;width:6px; height:6px;animation-delay: 0.1s;"></span><span class="particle" style="top:45%; left:79%;width:6.2px; height:6.2px;animation-delay: 0.1s;"></span></span> 
 					</span>
 				</h1>
@@ -120,44 +118,62 @@
 		<div class="row" >
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
-				
-				<table class="table">
-				  <thead>
-				    <tr align="center" >
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">구매자</h4></th>				      
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">리뷰</h4></th>
-				      <th scope="col" ><h4  align="center" style="font-weight: bold;margin:0%;color: #041625;">평점</h4></th>
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">등록일</h4></th>
-				    </tr>
-				  </thead>
-				  <tbody>
+				<div class="row">
+					<div class="col-md-3" ><strong style="color: #041625;"><p>구매자</p></strong></div>  
+					<div class="col-md-3" ><strong style="color: #041625;"><p>리뷰</p></strong></div>  
+					<div class="col-md-3" ><strong style="color: #041625;"><p>평점</p></strong></div>    
+					<div class="col-md-3" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
+				</div>
+<!-- 				<table class="table"> -->
+<!-- 				  <thead> -->
+<!-- 				    <tr align="center" > -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">구매자</h4></th>				       -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">리뷰</h4></th> -->
+<!-- 				      <th scope="col" ><h4  align="center" style="font-weight: bold;margin:0%;color: #041625;">평점</h4></th> -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">등록일</h4></th> -->
+<!-- 				    </tr> -->
+<!-- 				  </thead> -->
+<!-- 				  <tbody> -->
 				  <c:forEach items="${sellerEstimationList}"  var="i">
-				    <tr class="record" data-toggle="modal"  data-target="#tranModal"  style="color: #041625;">
-				      <input type="hidden"  value="${i.tranNo }"/>
-				      <td>
-						<div align="center">
-							${i.buyer.nickName}
-						</div>			
-				  	  </td>
-				  	  <td>
-						<div align="left">
-							${i.reviewBody}
-						</div>			
-				  	  </td>
-				  	  <td>
-						<div align="center">
-							${i.score}.0
-						</div>			
-				  	  </td>
-				  	  <td>
-						<div align="left">
-							${i.regDate}
-						</div>			
-				  	  </td>
-			    </tr>
+				  	<div class="card text-center shadow rounded-pill"   data-toggle="modal"  data-target="#tranModal"   
+				  	style="margin-bottom: 10px; height:55px;">
+				  		<input type="hidden"  value="${i.tranNo }"/>
+						<div class="card-body" style="padding-top:10px;" >	
+							<div class="row record" data-toggle="modal"  data-target="#tranModal">
+								<div class="col-md-3" ><p>${i.buyer.nickName}</p></div>    		
+								<div class="col-md-3" ><p>${i.reviewBody}</p></div>    			        
+								<div class="col-md-3" ><p>${i.score}.0</p></div>    		
+								<div class="col-md-3" ><p>${i.regDate}</p></div>    		
+							</div>
+						</div>
+					</div>
+					
+<!-- 				    <tr class="record" data-toggle="modal"  data-target="#tranModal"  style="color: #041625;"> -->
+<%-- 				      <input type="hidden"  value="${i.tranNo }"/> --%>
+<!-- 				      <td> -->
+<!-- 						<div align="center"> -->
+<%-- 							${i.buyer.nickName} --%>
+<!-- 						</div>			 -->
+<!-- 				  	  </td> -->
+<!-- 				  	  <td> -->
+<!-- 						<div align="left"> -->
+<%-- 							${i.reviewBody} --%>
+<!-- 						</div>			 -->
+<!-- 				  	  </td> -->
+<!-- 				  	  <td> -->
+<!-- 						<div align="center"> -->
+<%-- 							${i.score}.0 --%>
+<!-- 						</div>			 -->
+<!-- 				  	  </td> -->
+<!-- 				  	  <td> -->
+<!-- 						<div align="left"> -->
+<%-- 							${i.regDate} --%>
+<!-- 						</div>			 -->
+<!-- 				  	  </td> -->
+<!-- 			    </tr> -->
 			   </c:forEach>
-		  		 </tbody>
-				</table>
+<!-- 		  		 </tbody> -->
+<!-- 				</table> -->
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
@@ -168,39 +184,35 @@
 aria-labelledby="tranModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="font-size: 20px">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <div class="modal-title" id="tranModalTitle"  style="padding:0px;font-weight: bold;">거래 조회</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div style="margin-left:30px;margin-right:30px; ">
         	<ion-icon name="checkmark"></ion-icon>이벤트명 : 			
-        	<span class=""  id="reviewTranEventName"></span><br/>
+        	<span class=""  id="reviewTranEventName"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>가격 :         	
-			<span class=""  id="reviewTranPrice"></span><br/>
+			<span class=""  id="reviewTranPrice"></span><br/><br/>
         	
 			<ion-icon name="checkmark"></ion-icon>수량 : 			
-			<span class=""  id="reviewTranAmount"></span><br/>
+			<span class=""  id="reviewTranAmount"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>실결제액 : 
-			<span class=""  id="reviewTranTotalPrice"></span><br/>
+			<span class=""  id="reviewTranTotalPrice"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>판매일자 : 
 			<span class=""  id="reviewTranOrderDate"></span>
         </div>
       </div>
       <div class="modal-footer">       
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 

@@ -34,96 +34,15 @@
 		<script src="/resources/javascript/util.js"></script>
 		<script src="/resources/javascript/main.js"></script>	
 		<style>
-		
-body {
+		body {
 			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
-
-			a{
+		a{
 			color: #041625;
 		}
 
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		table{
-			background-color: #193147;
-		}
-		td, th{
-			border: 1px solid white;
-			color: #FBFCFE ;
-		}
-		.col-md-2{
-			padding-left: 50px;
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.col-md-10{
-			padding-left: 100px;
-			padding-right: 100px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-       #footer{
-			background-color: #1B1B1F;
-		}
-		
-		
-	/* 	게시글 등록 Modal */
-		.modal-dialog.modal-80size {
-		  width: 300%;
-		  height: 100%;
-		  margin: 0;
-		  padding: 0;
-		}
-		
-		.modal-content.modal-80size {
-		  color: black;
-		  height: auto;  
-		  min-height: 150%;
-		  border-radius: 0;
-		}
-		
-		.modal.modal-center {
-		  text-align: center;
-		}
-		
-		@media screen and (min-width: 768px) {
-		  .modal.modal-center:before {
-		    display: inline-block;
-		    vertical-align: middle;
-		    content: " ";
-		    height: 100%;
-		   
-		  }
-		}
-		
-		.modal-dialog.modal-center {
-		  display: inline-block;
-		  text-align: left;
-		  vertical-align: middle;
-		}
-		
-
-
-    </style>
+    	</style>
 				
 			
 <script type="text/javascript">
@@ -195,7 +114,6 @@ $(function() {
 	
 	</div> -->
 		   <!--  table Start /////////////////////////////////////-->
-			 <div class="col-md-10 text-center" >	
 			<section>
 				<br/>
 				<div class="tabs tabs-style-topline">
@@ -209,133 +127,158 @@ $(function() {
 				
 			<div class="content-wrap">
 				<section id="section-topline-1">
-						 <div class="col-md-10 text-center">
-     		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
-		 <div class="card-body">	
-		
-						                      
-						                        	 <h4>${user.nickName}님 프로필</h4><hr/>
+				<div class="row">
+				<div class="col-lg-3"></div>
+				<div class="col-lg-6">
+								<div class="text-center">
+					     		<br/>
+					     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+							 	<div class="card-body">	              
+						        <h3><i class="far fa-user"></i><strong> ${user.nickName}님 프로필</strong></h3><hr/><br/>
 													
-												
-							  		<div class="col-xs-8 col-md-4"><strong>아이디</strong></div>
-									<div class="text-center">${user.userId}</div><hr/>
-									<div class="col-xs-8 col-md-4 "><strong>닉네임</strong></div>
-									<div class="text-center">${user.nickName}</div>	<hr/>
-						            <div class="col-xs-8 col-md-4 "><strong>이 름</strong></div>
-									<div class="text-center">${user.userName}</div>  <hr/>
-									<div class="col-xs-8 col-md-4 "><strong>주소</strong></div>
-									<div class="text-center">${user.address}</div>   <hr/> 
+									<div class="row">		
+										<div class="col-md-2"></div>	
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 아이디</strong></h5></div>
+										<div class="col-md-6 text-left">${user.userId}</div>
+									</div><br/>
+									<div class="row">	
+									<div class="col-md-2"></div>			
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 닉네임</strong></h5></div>
+										<div class="col-md-6 text-left">${user.nickName}</div>
+									</div><br/>
+									<div class="row">	
+									<div class="col-md-2"></div>			
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 이 름</strong></h5></div>
+										<div class="col-md-6 text-left">${user.userName}</div>
+									</div><br/>
+									<div class="row">
+									<div class="col-md-2"></div>				
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 주소</strong></h5></div>
+										<div class="col-md-6 text-left">${user.address}</div>
+									</div><br/>
+									<div class="row">		
+									<div class="col-md-2"></div>		
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 전화번호</strong></h5></div>
+										<div class="col-md-6 text-left">${ !empty user.phone ? user.phone : ''}</div>
+									</div><br/><br/>
 									
-									<div class="col-xs-8 col-md-4"><strong>전화번호</strong></div>
-									<div class="col-xs-8 col-md-40">${ !empty user.phone ? user.phone : ''}	</div> <br>
 									
 												
 							  		<div class="text-center">
 							  			<button type="button" class="btn btn-outline-primary">회원정보 수정</button><br>
-							  			<div class="col-md-3"></div>	
 							  		</div>
-						                        
-						                 </div>
-											 </div>
-									 
-										</div>		
-							</section>
-				
+						            <br/>            
+						            </div>
+									</div>									 
+								</div>
+					</div>
+					<div class="col-lg-3"></div>
+					</div>										
+					</section>
 				
 				<section id="section-topline-2">
 				<div class="row">
-				 <div class="col-md-6 text-center">
-					
-						
-     		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
-		 <div class="card-body">	
-				                      
-										
-					  		<h4>${user.nickName}님 판매자정보</h4><hr/>
-										
-				             <div class="text-center"><strong>판매자등급</strong></div>
-							<div class="text-center">
-							
-						
-							<c:set var="sc" value ="${user.sellerCode}"/>
-							
-							<c:choose>
-							<c:when test="${sc eq '0' }"> 새싹 </c:when>
-							<c:when test="${sc eq '1' }"> 우수 </c:when>
-							<c:when test="${sc eq '2' }"> V.I.P </c:when>
-							
-							<c:otherwise>
-								
-								
-								</c:otherwise>		
-							</c:choose>
-				
-							</div> 
-							 <hr/>  <div class="text-center">        
-					  		<div ><strong>총 판매금액</strong></div>
-							<div>${user.salesAmount}</div><hr/>
-							<div><strong>총 판매횟수</strong></div> 
-							<div>${user.salesCount}</div><br>
-							
-							<button id="sb" type="button" class="btn btn-outline-primary" >판매내역 조회</button>	<br>					  </div>
-						
-						 </div>
+				 <div class="col-md-6 text-center">     		
+		     			<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+						 <div class="card-body">	
+						                      
+									<h4><i class="far fa-user"></i><strong> ${user.nickName}님 판매자정보</strong></h4><hr/><br/>
+									<c:if test="${user.role != 0}">
+									<div class="row">		
+												<div class="col-md-2"></div>	
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 판매자등급</strong></h5></div>
+												<div class="col-md-6 text-left">
+													<c:set var="sc" value ="${user.sellerCode}"/>							
+													<c:choose>
+													<c:when test="${sc eq '0' }"> 새싹 </c:when>
+													<c:when test="${sc eq '1' }"> 우수 </c:when>
+													<c:when test="${sc eq '2' }"> V.I.P </c:when>											
+													<c:otherwise>											
+													</c:otherwise>		
+													</c:choose>
+												</div>
+									</div><br/>
+									<div class="row">
+											<div class="col-md-2"></div>				
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 총 판매금액</strong></h5></div>
+												<div class="col-md-6 text-left">${user.salesAmount}</div>
+									</div><br/>
+									<div class="row">
+											<div class="col-md-2"></div>				
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 총 판매횟수</strong></h5></div>
+												<div class="col-md-6 text-left">${user.salesCount}</div>
+									</div><br/>
+									
+									<button id="sb" type="button" class="btn btn-outline-primary" >판매내역 조회</button>	<br>
+									</c:if>
+									<c:if test="${user.role == 0}">
+										<div class="text-danger text-center">*판매자 등록을 해주세요.</div><br/><br/>
+										<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >판매자 등록</button>
+										<br/>
+									</c:if>
+								</div>									
+							</div>
 					</div>	
 					
-			</div>
-			 <div class="col-md-6 text-center">
-						<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
-		 <div class="card-body">	
-									
-									<div class="title">
-													<h4>${user.nickName}님 계좌정보</h4><hr/>
-												</div>
-												<div id="cc">
-						             <div class="col-xs-8 col-md-4 "><strong>예금주명</strong></div>
-									<div class="col-xs-8 col-md-8">${user.userName}</div>  <hr/>          
-							  		<div class="col-xs-8 col-md-4"><strong>은행명</strong></div>
+							 <div class="col-md-6 text-center">
+										<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+								 <div class="card-body">	
+													<h4><i class="far fa-user"></i><strong> ${user.nickName}님 계좌정보</strong></h4><hr/><br/>
+													<c:if test="${user.role != 0}">
+													<div class="row">
+															<div class="col-md-2"></div>				
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 예금주명</strong></h5></div>
+															<div class="col-md-6 text-left">${user.userName}</div>
+													</div><br/>
+													<div class="row">
+															<div class="col-md-2"></div>				
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 은행명</strong></h5></div>
+															<div class="col-md-6 text-left">
+															<c:set var="sc" value ="${user.accountBank}"/>													
+															<c:choose>
+															<c:when test="${sc eq '039' }"> 경남은행 </c:when>
+															<c:when test="${sc eq '004' }"> 국민은행 </c:when>
+															<c:when test="${sc eq '034' }"> 광주은행 </c:when>
+															<c:when test="${sc eq '003' }"> 기업은행 </c:when>
+															<c:when test="${sc eq '031' }"> 대구은행 </c:when>
+															<c:when test="${sc eq '045' }"> 새마을금고 </c:when>
+															<c:when test="${sc eq '088' }"> 신한은행 </c:when>
+															<c:when test="${sc eq '048' }"> 신협</c:when>
+															<c:when test="${sc eq '027' }"> 씨티은행 </c:when>
+															<c:when test="${sc eq '020' }"> 우리은행 </c:when>
+															<c:when test="${sc eq '071' }"> 우체국 </c:when>
+															<c:when test="${sc eq '005' }"> 외환은행 </c:when>
+															<c:when test="${sc eq '081' }"> 하나은행 </c:when>
+															<c:otherwise>
+																판매자 등록 후 조회가능.
+																<button id= "add" type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal">판매자 등록</button>
+															</c:otherwise>		
+															</c:choose>
+															</div>
+													</div><br/>
+													<div class="row">
+															<div class="col-md-2"></div>				
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 계좌번호</strong></h5></div>
+															<div class="col-md-6 text-left">${user.accountNo}</div>															
+													</div><br/>
+													<div class="text-center">
+													  	<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >계좌정보 수정</button>
+														<br/>		
+													 </div> 
+											  	</c:if>
+											  	<c:if test="${user.role == 0}">
+													<div class="text-danger text-center">*판매자 등록을 해주세요.</div><br/><br/>
+													<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >판매자 등록</button>
+													<br/>
+												</c:if>
+										</div>
+										</div>
 									</div>
-									<div class="col-xs-8 col-md-8">
-									
-									<c:set var="sc" value ="${user.accountBank}"/>
-									
-									<c:choose>
-									<c:when test="${sc eq '039' }"> 경남은행 </c:when>
-									<c:when test="${sc eq '004' }"> 국민은행 </c:when>
-									<c:when test="${sc eq '034' }"> 광주은행 </c:when>
-									<c:when test="${sc eq '003' }"> 기업은행 </c:when>
-									<c:when test="${sc eq '031' }"> 대구은행 </c:when>
-									<c:when test="${sc eq '045' }"> 새마을금고 </c:when>
-									<c:when test="${sc eq '088' }"> 신한은행 </c:when>
-									<c:when test="${sc eq '048' }"> 신협</c:when>
-									<c:when test="${sc eq '027' }"> 씨티은행 </c:when>
-									<c:when test="${sc eq '020' }"> 우리은행 </c:when>
-									<c:when test="${sc eq '071' }"> 우체국 </c:when>
-									<c:when test="${sc eq '005' }"> 외환은행 </c:when>
-									<c:when test="${sc eq '081' }"> 하나은행 </c:when>
-									<c:otherwise>
-										판매자 등록 후 조회가능.
-										<button id= "add" type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal">판매자 등록</button>
-										</c:otherwise>		
-									</c:choose>
-									
-									</div><hr/>
-									<div id="cc2" class="col-xs-8 col-md-4 "><strong>계좌번호</strong></div>
-									<div class="col-xs-8 col-md-8">${user.accountNo}</div><br/>
-							<div class="text-center">
-							  			<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >계좌정보 수정</button><br>
-							  </div> 
 						</div>
-						</div>
-							</div>
-							</div>
-							</section>
-					</div>		</div>
 					</section>
+					</div>		
 					</div>
-				
+					</section>
 						
 					
 <script src="/resources/javascript/cbpFWTabs.js"></script>
