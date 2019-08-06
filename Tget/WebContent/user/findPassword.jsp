@@ -29,7 +29,7 @@
 	<style>
 
 		body {
-			  background-color: #EBF7FF;
+			  background-color: white;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{

@@ -102,7 +102,7 @@ body {
 	<div class="container">
 	<br>
 		<div class="page-header text-info">
-	       <h3>내 쿠폰 조회</h3>
+	       <h3>사용 가능한 쿠폰 조회</h3>
 	       <h7><span style="color : red;">쿠폰 유효기간은 발급일로 부터 3개월입니다.</span></h7>
 	    </div><br>
 	  
@@ -114,7 +114,7 @@ body {
            <th align="left">No</th>
             <th align="left">쿠폰번호</th>
             <th align="left">쿠폰용도</th>
-            <th align="left">쿠폰사용일자</th>
+          
             <th align="left">쿠폰발급일자</th>
             <th align="left">쿠폰상태</th>
             
@@ -140,7 +140,7 @@ body {
 			 	상단출력</c:if>
 				</td>
 				
-			  <td align="left">${coupon.couponUseDate}
+			
 			  <td align="left">${coupon.couponRegDate}
 			  <td align="left">  <c:set var ="State" value="${coupon.couponStatement}"/>
 			  <c:if test="${State eq '0'}">
