@@ -17,7 +17,6 @@
 		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
 		<meta name="author" content="Codrops" />
     	<title>T-GET</title>
-
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="/resources/css/toolbar.css" />
 		<link rel="shortcut icon" href="../favicon.ico">
@@ -388,7 +387,7 @@
       <!--  table Start /////////////////////////////////////-->
  <div class="col-md-10 text-center">
      		
-     		<div class="card text-center shadow rounded" style="margin-bottom: 10px; height:70px;">
+     		<div style="margin-bottom: 10px; height:70px;">
 		 <div class="card-body">	
 			<div class="row">
 				<div class="col-md-4"><p><strong>글 제목</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        
@@ -602,11 +601,12 @@
 				
 				
 				<span style="color:#020B13;"><strong>신고 사유를 선택해주세요</strong></span>
+				<hr/>
 			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0' ><span style="color:#020B13;">&ensp;부적절한 홍보 게시물</span><br>
-				<input type='checkbox' name='reportReasonCode' value='1'><span style="color:#020B13;">&ensp;음란성 또는 청소년에게 부적합한 내용</span><br>
-				<input type='checkbox' name='reportReasonCode' value='2' ><span style="color:#020B13;">&ensp;특정인 대상의 비방/욕설</span><br>
-				<input type='checkbox' name='reportReasonCode' value='3' ><span style="color:#020B13;">&ensp;명예훼손/사생활 침해 및 저작권침해 등</span><br>
+				<input type='radio' name='reportReasonCode' value='0' ><span style="color:#020B13;">&ensp;부적절한 홍보 게시물</span><br>
+				<input type='radio' name='reportReasonCode' value='1'><span style="color:#020B13;">&ensp;음란성 또는 청소년에게 부적합한 내용</span><br>
+				<input type='radio' name='reportReasonCode' value='2' ><span style="color:#020B13;">&ensp;특정인 대상의 비방/욕설</span><br>
+				<input type='radio' name='reportReasonCode' value='3' ><span style="color:#020B13;">&ensp;명예훼손/사생활 침해 및 저작권침해 등</span><br>
 				</div>
 				
 				</form>		

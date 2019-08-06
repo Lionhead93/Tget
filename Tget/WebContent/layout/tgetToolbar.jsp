@@ -47,7 +47,7 @@ $( function(){
 	$("a:contains('회원관리')").on("click",function(){		
 		self.location = "/user/listUser";
 	});
-	$("a:contains('신고리스트관리')").on("click",function(){		
+	$("a:contains('신고 리스트 관리')").on("click",function(){		
 		self.location = "/community/getReportList";
 	});
 	$("a:contains('거래내역 조회')").on("click",function(){		
@@ -142,7 +142,7 @@ $(function() {
 		});
 	  
 	 $( "a[href='#']:contains('자유게시판')" ).on("click" , function() {
-			self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
+		self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
 		
 		});
 	 
@@ -276,7 +276,7 @@ $(function getSearchWeather(lat, lon) {
 				          <a href="#">회원관리</a>				          
 				          <a href="#">티켓관리</a>
 				          <a href="#">이벤트관리</a>
-				          <a href="#">신고리스트관리</a>
+				          <a href="#">신고 리스트 관리</a>
 					</li> 
 				 </ul>
 				 </c:if>

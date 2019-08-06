@@ -15,15 +15,13 @@
 	<link rel="stylesheet" href="/resources/css/yr.css" />
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">		  	
-	<link rel="stylesheet" href="/resources/css/login.css" />
-	<link rel="stylesheet" href="/resources/css/videoBox.css" />
-	<link rel="stylesheet" href="/resources/css/main.css" />
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -43,7 +41,7 @@
 			$("#reviewTranOrderDate").text("");
 		});
 		
-		$("tr.record").on("click",function(){
+		$("div.record").on("click",function(){
     		$.ajax(
 					{
 						url : "/rnp/rest/getTran",
@@ -61,7 +59,6 @@
 							$("#reviewTranTotalPrice").text(numberWithCommas(JSONData.transaction.totalPrice)+"원");
 							$("#reviewTranOrderDate").text(JSONData.transaction.orderDate);
 // 							$("#").val(JSONData.transaction);
-
 						},
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -78,19 +75,10 @@
 			background-color: #EBF7FF;
 			color: #041625;	
 		}
-		table{
-			background-color : #F8FFFF;   
-			border: 1px solid #193147;	
-			color: #041625;
-		}
 		.container-fluid,td,th{ 
 	 		font-size: 20px;
 	 		color: #041625;    
  		} 
- 		tr.record:hover{
-			color: #041625;
-			background-color : #D9E5FF; 
-		}
 		#footer{
 			background-color: #1B1B1F ;
 		}
@@ -122,45 +110,66 @@
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
 				
-				<table class="table">
-				  <thead>
-				    <tr align="center">
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;">거래번호</h4></th> -->
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용일</h4></th>
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용 내역</h4></th>
-				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">포인트 총 합계</h4></th>				      
-				    </tr>
-				  </thead>
-				  <tbody>
-				  <c:forEach items="${pointHistoryList}"  var="i">
-				    <tr class="record" data-toggle="modal"  data-target="#tranModal" >
-				      <input type="hidden"  value="${i.tranNo }"/>
-<!-- 				      <td> -->
-<!-- 						<div align="center"> -->
-<%-- 							<input type="hidden" name="tranNo" value="${i.tranNo }"/> --%>
+<!-- 				<table class="table"> -->
+<!-- 				  <thead> -->
+<!-- 				    <tr align="center"> -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용일</h4></th> -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용 내역</h4></th> -->
+<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">포인트 총 합계</h4></th>				       -->
+<!-- 				    </tr> -->
+<!-- 				  </thead> -->
+<!-- 				  <tbody> -->
+			<div class="row">
+				<div class="col-md-4" ><strong style="color: #041625;"><p>적립 및 사용일</p></strong></div>  
+				<div class="col-md-4" ><strong style="color: #041625;"><p>적립 및 사용 내역</p></strong></div>  
+				<div class="col-md-4" ><strong style="color: #041625;"><p>포인트 총 합계</p></strong></div>    		
+			</div>
+			<c:forEach items="${pointHistoryList}"  var="i">				  
+				<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:55px;">
+					<div class="card-body" style="padding-top:10px;" >	
+						<div class="row record" data-toggle="modal"  data-target="#tranModal">
+						<input type="hidden"  value="${i.tranNo }"/>
+							<div class="col-md-4" ><p>${i.regDate}</p></div>    			        
+							<div class="col-md-4"><p>
+								<c:if test="${i.pointUpdateCode == 0}">+</c:if>
+								<c:if test="${i.pointUpdateCode == 1}">-</c:if>
+								${i.updatePointStr} point
+							</p></div> 
+							<div class="col-md-4"><p>${i.totalPointStr} point</p></div>		
+						</div>
+					</div>
+				</div>
+							  
+				  
+				  
+<!-- 				    <tr class="record" data-toggle="modal"  data-target="#tranModal" > -->
+<%-- 				      <input type="hidden"  value="${i.tranNo }"/> --%>
+<!-- <!-- 				      <td> --> 
+<!-- <!-- 						<div align="center"> --> 
+<%-- <%-- 							<input type="hidden" name="tranNo" value="${i.tranNo }"/> --%>
+<!-- <!-- 						</div>			 --> 
+<!-- <!-- 				  	  </td> -->
+<!-- 				  	  <td>				  	  	 -->
+<!-- 				  	  	<div align="center" > -->
+<%-- 				  	  		${i.regDate} --%>
+<!-- 				  	  	</div> -->
+<!-- 				  	  </td>				  	   -->
+<!-- 				  	  <td> -->
+<!-- 						<div align="center" > -->
+<%-- 							<c:if test="${i.pointUpdateCode == 0}">+</c:if> --%>
+<%-- 							<c:if test="${i.pointUpdateCode == 1}">-</c:if> --%>
+<%-- 							${i.updatePointStr} point --%>
 <!-- 						</div>			 -->
 <!-- 				  	  </td> -->
-				  	  <td>				  	  	
-				  	  	<div align="center" >
-				  	  		${i.regDate}
-				  	  	</div>
-				  	  </td>				  	  
-				  	  <td>
-						<div align="center" >
-							<c:if test="${i.pointUpdateCode == 0}">+</c:if>
-							<c:if test="${i.pointUpdateCode == 1}">-</c:if>
-							${i.updatePointStr} point
-						</div>			
-				  	  </td>
-				  	  <td>
-				  	  	<div align="center" >
-								${i.totalPointStr} point
-						</div>
-				  	  </td>
-			    </tr>
+<!-- 				  	  <td> -->
+<!-- 				  	  	<div align="center" > -->
+<%-- 								${i.totalPointStr} point --%>
+<!-- 						</div> -->
+<!-- 				  	  </td> -->
+<!-- 			    </tr> -->
 			   </c:forEach>
-		  		 </tbody>
-				</table>
+<!-- 		  		 </tbody> -->
+<!-- 				</table> -->
 			</div>
 			<div class="col-lg-2">
 			
@@ -174,39 +183,35 @@
 aria-labelledby="tranModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="font-size: 20px">
-     <div class="modal-wrap">
-     <div class="modal-html">
       <div class="modal-header">
         <div class="modal-title" id="tranModalTitle"  style="padding:0px;font-weight: bold;">거래 조회</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div style="margin-left:30px;margin-right:30px; ">
         	<ion-icon name="checkmark"></ion-icon>이벤트명 : 			
-        	<span class=""  id="reviewTranEventName"></span><br/>
+        	<span class=""  id="reviewTranEventName"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>가격 :         	
-			<span class=""  id="reviewTranPrice"></span><br/>
+			<span class=""  id="reviewTranPrice"></span><br/><br/>
         	
 			<ion-icon name="checkmark"></ion-icon>수량 : 			
-			<span class=""  id="reviewTranAmount"></span><br/>
+			<span class=""  id="reviewTranAmount"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>실결제액 : 
-			<span class=""  id="reviewTranTotalPrice"></span><br/>
+			<span class=""  id="reviewTranTotalPrice"></span><br/><br/>
 			
 			<ion-icon name="checkmark"></ion-icon>구매일자 : 
 			<span class=""  id="reviewTranOrderDate"></span>
         </div>
       </div>
       <div class="modal-footer">       
-         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-outline-dark" data-dismiss="modal" >닫기</button>
       </div>
     </div>
     </div>
-   </div>
-  </div>
 </div>
 
 

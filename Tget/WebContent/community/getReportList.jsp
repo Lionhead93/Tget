@@ -163,6 +163,36 @@
 				};
 				$(this).css(style);
 			});
+			
+			$( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=0";	
+			
+			});
+		 
+		 $( "a[href='#']:contains('자유게시판 이용 공지')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=1";	
+			
+			});
+		 
+		 $( "a[href='#']:contains('자주묻는질문')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=2";	
+			
+			});
+		 
+		 $( "a[href='#']:contains('삽니다')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=3";	
+			
+			});
+		 
+		 $( "a[href='#']:contains('팝니다')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=4";	
+			
+			});
+		 
+		 $( "a[href='#']:contains('수다방')" ).on("click" , function() {
+				self.location="/community/getContentList?searchCondition=2&searchKeyword=5";	
+			
+			});
 	
 	});	
 		 
@@ -217,7 +247,7 @@
 			 <div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 						  <div class="card-header">
 						 <div>
-		       		<h6><strong>관리자 페이지 > 신고 리스트 </strong></h6>
+		       		<h6><strong>Admin Menu > 신고 리스트 관리 </strong></h6>
 
 			   	 </div>
 			</div>
@@ -287,9 +317,9 @@
 					        </button>
 					      </div>
 					      <div class="modal-body" >
-					      <div class="col" style=color:#020B13;>작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
+					      <div class="col" style=color:#020B13;>작성자 : <span id="reportBlackId">${content.userNickname}</span></div>
 						<hr/>
-						  <div class="col" style=color:#020B13;>내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
+						  <div class="col" style=color:#020B13;>내용 :  <div id="reportContentBody">${content.contentBody}</div></div>
 					    
 						<br>
 						

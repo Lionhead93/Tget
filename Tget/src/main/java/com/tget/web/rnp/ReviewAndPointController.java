@@ -135,29 +135,5 @@ public class ReviewAndPointController {
 //			return "forward:/rnp/addReviewPOST.jsp";
 //		}
 		
-//		@RequestMapping(value="updateReview", method=RequestMethod.GET)
-//		public String updateReview(@RequestParam int tranNo, Model model) throws Exception {
-//			System.out.println("===============updateReview===============");
-//
-//			Review review = rNPService.getReview(tranNo);
-//		
-//			model.addAttribute("tranNo", tranNo);
-//			model.addAttribute("review", review);
-//			
-//			return "forward:/rnp/addReview.jsp";
-//		}
-		
-//		@RequestMapping(value="updateReview", method=RequestMethod.POST)
-//		public String updateReview(@ModelAttribute("review") Review review, Model model) throws Exception {
-//			System.out.println("===============updateReview===============");
-//			System.out.println(review);
-//			
-//			rNPService.updateReview(review);
-//			
-//			model.addAttribute("review", review);
-//			model.addAttribute("tranNo", review.getTranNo());
-//			return "forward:/rnp/addReviewPOST.jsp";
-//		}
-//		
 		
 }

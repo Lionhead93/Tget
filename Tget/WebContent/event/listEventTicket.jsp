@@ -258,7 +258,7 @@
 // 	      }); 
 
 // 		$(".coupon1").attr("class", "flux coupon1");
-		$(".coupon1").attr("style", "color:#002187;font-weight:bold;");
+		$(".coupon1").attr("style", "color:#1245AB;font-weight:bold;");
 		
 		$("button.close").on("click" , function() {
 			$("#inputKeyword").val("");
@@ -324,6 +324,7 @@
         	
 		div.border{ 
 			background-color : white; 
+			margin-bottom: 30px;
 /* 			color: white; */
 			color:  #041625;
  		}		
@@ -335,11 +336,11 @@
         .getSellerEstimation:hover{
         	font-size:25px;
         }
-
-        #player { /**/
-         	padding: 10px 10px; /**/
-				padding: 25px 25px 25px  25px ;
-     	  }
+/*
+        #player {
+         	padding: 10px 10px;
+			padding: 25px 25px 25px  25px ;
+     	  } */
 		.interested{
 			color : red;
 		}
@@ -556,7 +557,7 @@
 													</div>	
 													<div class="list" align="right">
 														<c:if test="${i.seller.userId!=user.userId}">
-															<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+															<button class="btn  btn-outline-primary addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
 														</c:if>					
 													</div>
 												</div><!-- border -->	
@@ -573,7 +574,13 @@
 										<c:if test="${i.amount > 0 }">												
 										<div class="col-lg-6">
 											<div class="text-center">
-												<div class="border "  style="height: 450px;">
+											<c:if test="${i.couponCode == 1}">
+													<div class="border "  style="height: 450px; background-color:#D4F4FA;" >
+											</c:if>
+											<c:if test="${i.couponCode!= 1}">
+													<div class="border "  style="height: 450px; " >
+											</c:if>
+<!-- 												<div class="border "  style="height: 450px;" > -->
 										 			<br/>
 										 			<h5  class="coupon${i.couponCode }"><strong>
 										 				<a  class="getSellerEstimation">
@@ -605,7 +612,7 @@
 													</div>	
 													<div class="list" align="right">
 														<c:if test="${i.seller.userId!=user.userId}">
-															<button class="btn  btn-light addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+															<button class="btn  btn-outline-primary addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
 														</c:if>					
 													</div>
 												</div><!-- border -->	

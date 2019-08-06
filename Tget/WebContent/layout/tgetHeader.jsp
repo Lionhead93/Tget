@@ -29,7 +29,7 @@
 <br/>
 <script>
 $("#inputKeyword").on("keyup",function(){
-	$("#searchKeyword").val($("input[type='text']").val());
+	$("#searchKeyword").val($("#inputKeyword").val());
 });
 
 $("#inputKeyword").on("keypress",function(){
