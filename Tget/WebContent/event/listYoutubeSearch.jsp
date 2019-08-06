@@ -73,7 +73,8 @@
 		});
 		
 		$("#searchYoutubeSubmit").on("click",function(){
-			$("#searchKeyword").val($("#inputKeyword").val());
+			$("#searchKeyword").val(encodeURIComponent($("#inputKeywords").val()));
+// 			alert($("#searchKeyword").val());
 			$.ajax(
 					{
 						url : "/event/rest/getYoutubeSearchList?requestPageToken="+$("#requestPageToken").val(),
@@ -117,7 +118,7 @@
 	<table class="table ">			      
 		<div class="input-group mb-3">
 			<input type="hidden" id="searchKeyword" name="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}"/>
-			<input type="text"  id="inputKeyword" class="form-control"  placeholder="검색어" 
+			<input type="text"  id="inputKeywords" class="form-control"  placeholder="검색어" 
 			 aria-label="searchKeyword" aria-describedby="searchYoutubeSubmit">
 			<div class="input-group-append">
 		 		<button class="btn btn-outline-secondary" type="button" id="searchYoutubeSubmit">검색</button>

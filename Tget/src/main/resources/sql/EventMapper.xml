@@ -28,6 +28,7 @@
 		<result property="videoName" 				column="video_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventName" 				column="recomm_event_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventDetail" 			column="recomm_event_detail" 		jdbcType="VARCHAR" />
+		<result property="koName"  column="ko_name"  jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap id="categorySelectMap" type="category">
@@ -145,9 +146,18 @@
 	 </select>
 	 
 	 <select 	id="selectRecommendedEvent"	parameterType="search"	 resultMap="recommEventSelectMap">
-		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail
-		 FROM recommended_event
-		 <if test="searchCondition == 1" >WHERE recomm_event_no = #{searchKeyno}</if>
+<!-- 		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail -->
+<!-- 		 FROM recommended_event -->
+<!-- 		 <if test="searchCondition == 1" >WHERE recomm_event_no = #{searchKeyno}</if> -->
+<!-- 		 ORDER BY recomm_event_no -->
+		 
+		 SELECT r.recomm_event_no, r.event_name, r.video_name, r.recomm_event_name, r.recomm_event_detail, e.ko_name
+		 FROM recommended_event r, event e
+<!-- 		 WHERE r.event_name = e.event_name -->
+		WHERE
+		 	r.event_name = e.event_name
+		 	<if test="searchCondition == 1" >AND recomm_event_no = #{searchKeyno}</if>
+
 		 ORDER BY recomm_event_no
 	 </select>
 	 
@@ -241,6 +251,12 @@
 	 <select 	id="selectAllLocation"	resultMap="eventSelectMap">
 		 SELECT DISTINCT event_location , ko_location
 		 FROM event
+	 </select>
+	 
+	 <select 	id="selectEventName"	 parameterType="string" 	resultType="string">
+		 SELECT event_name
+		 FROM event
+		 WHERE ko_name LIKE '%'||#{koName}||'%'
 	 </select>
 	 
 </mapper>

@@ -17,10 +17,17 @@
 	</div>
 	<div class="form-group">
 		<label for="recommEventUrl"><ion-icon name="checkmark"></ion-icon>상세조회 url</label>
-			<c:if test="${empty recommEventNo }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
-    			placeholder="추천 이벤트로 등록할 페이지의 url을 입력하세요"></c:if>
-    		<c:if test="${!empty recommEventNo }"><input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl" 
-    			value="http://127.0.0.1:8080/event/getEvent?category=&eventName=${recommEvent.eventName }"></c:if>
+			<c:if test="${empty recommEventNo }">
+<!-- 				<input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl"  -->
+				<input type="text" class="form-control" id="koName" name="koName" 
+    			placeholder="추천 이벤트로 등록할 이벤트의 이름을 입력하세요">
+    		</c:if>
+    		<c:if test="${!empty recommEventNo }">
+<!--     			<input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl"  -->
+    			<input type="text" class="form-control" id="koName" name="koName" 
+    			value="${recommEvent.koName }">
+<%--     			value="http://127.0.0.1:8080/event/getEvent?category=&eventName=${recommEvent.koName }"> --%>
+    		</c:if>
 	</div>
 	<div class="form-group">
 		<label for="videoName"><ion-icon name="checkmark"></ion-icon>동영상</label>

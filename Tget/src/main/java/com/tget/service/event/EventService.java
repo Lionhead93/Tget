@@ -50,5 +50,6 @@ public interface EventService {
 	public Map<String, Object> translate(String sourceLang, String targetLang, List<Event> list) throws Exception;
 	public List<Event> getAllLocation() throws Exception;
 	public void deleteYoutubeVideo(Map<String,Object> map) throws Exception;
+	public String getEventName(String koName) throws Exception;
 //	public List<Ticket> getTicketList(Search search) throws Exception;
 }
