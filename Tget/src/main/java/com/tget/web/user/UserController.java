@@ -65,7 +65,7 @@ public class UserController {
 	
 		System.out.println("/user/addUser : GET");
 		
-		return "redirect:/user/addUserView.jsp";
+		return "redirect:/user/addUser.jsp";
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
@@ -256,7 +256,7 @@ public class UserController {
 	
 
 
-@RequestMapping(value = "oauth")
+@RequestMapping(value = "kakaoLogin")
 public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) throws Exception {
 	
     System.out.println("로그인 할때 임시 코드값");
@@ -305,7 +305,7 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
 			session.setAttribute("user", user);
 		
 				
-		return "forward:/user/kakaoResult.jsp";
+		return "forward:/user/loginResult.jsp";
 	}
 
     	
@@ -316,11 +316,11 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
     	
     	System.out.println("신규 카카오 계정이네 회원가입으로 보내자");
     	
-    	return "forward:/user/kakaoResult.jsp";
+    	return "forward:/user/loginResult.jsp";
     }
     }
     
-  @RequestMapping(value = "callback")
+  @RequestMapping(value = "naverLogin")
   public String naverLogin(@RequestParam("code") String code , Model model,ServletRequest request, HttpSession session) throws Exception {
 	   
 	    System.out.println("코드 값 주냐? 안주지?시벌ㄹ?"+code);
@@ -363,7 +363,7 @@ public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSes
 		session.setAttribute("user", user);
 	
 			
-	return "forward:/user/kakaoResult.jsp";
+	return "forward:/user/loginResult.jsp";
 }
 
 	
@@ -374,7 +374,7 @@ else {
 	
 	System.out.println("신규 네이버 계정이네 회원가입으로~!");
 	
-	return "forward:/user/kakaoResult.jsp";
+	return "forward:/user/loginResult.jsp";
 }
 }
 	    

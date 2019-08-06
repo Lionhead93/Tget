@@ -19,7 +19,6 @@ public interface UserService {
 	public boolean checkDuplication(String userId) throws Exception;
 	public void addBlacklist(User user)throws Exception;
 	public User getBlacklist(String userId)throws Exception;
-	public void addSeller(User user)throws Exception;
 	public void updateSeller(User user)throws Exception;
 	public User getSellerEval(String userId)throws Exception;
 	public User getSalesGrade(String userId)throws Exception;
