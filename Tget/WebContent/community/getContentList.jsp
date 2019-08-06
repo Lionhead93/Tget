@@ -602,11 +602,12 @@
 				
 				
 				<span style="color:#020B13;"><strong>신고 사유를 선택해주세요</strong></span>
+				<hr/>
 			  	<div class='center'>
-				<input type='checkbox' name='reportReasonCode' value='0' ><span style="color:#020B13;">&ensp;부적절한 홍보 게시물</span><br>
-				<input type='checkbox' name='reportReasonCode' value='1'><span style="color:#020B13;">&ensp;음란성 또는 청소년에게 부적합한 내용</span><br>
-				<input type='checkbox' name='reportReasonCode' value='2' ><span style="color:#020B13;">&ensp;특정인 대상의 비방/욕설</span><br>
-				<input type='checkbox' name='reportReasonCode' value='3' ><span style="color:#020B13;">&ensp;명예훼손/사생활 침해 및 저작권침해 등</span><br>
+				<input type='radio' name='reportReasonCode' value='0' ><span style="color:#020B13;">&ensp;부적절한 홍보 게시물</span><br>
+				<input type='radio' name='reportReasonCode' value='1'><span style="color:#020B13;">&ensp;음란성 또는 청소년에게 부적합한 내용</span><br>
+				<input type='radio' name='reportReasonCode' value='2' ><span style="color:#020B13;">&ensp;특정인 대상의 비방/욕설</span><br>
+				<input type='radio' name='reportReasonCode' value='3' ><span style="color:#020B13;">&ensp;명예훼손/사생활 침해 및 저작권침해 등</span><br>
 				</div>
 				
 				</form>		
