@@ -220,7 +220,7 @@ $(function() {
       
         <thead>
           <tr>
-            <th align="center">No</th>
+         
             <th align="left" >회원 ID</th>
             <th align="left">이름</th>
             <th align="left">　닉네임</th>
@@ -233,11 +233,11 @@ $(function() {
        
 		<tbody>
 		
-		  <c:set var="i" value="0" />
+		
 		  <c:forEach var="user" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
+		
 			<tr>
-			  <td align="center">${ i }</td>
+			
 			  <td align="left">
 			  
 			  <c:choose>
@@ -298,7 +298,7 @@ ${user.userId}
       
         <thead>
           <tr>
-            <th align="center">No</th>
+         	
             <th align="left" >회원 ID</th>
             <th align="left">블랙리스트 누적 횟수</th>
            
@@ -311,13 +311,12 @@ ${user.userId}
        
 		<tbody>
 		
-		  <c:set var="i" value="0" />
+		
 		  <c:forEach var="user" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
+		
 			<c:if test="${user.blacklistCode ne null }">
 				<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
+			  <td align="left"  title="Click : 회원정보 확인">   <span style="color: red;">${user.userId}</span></td>
 			 <td align="left">${user.blacklistCode}</td>
 			
 			  <td align="left">${user.blacklistStartDate.toLocaleString()}</td>

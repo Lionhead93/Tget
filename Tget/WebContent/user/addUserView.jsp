@@ -487,7 +487,8 @@
 				<br/><br/><br/>
 					<span style="color: black;"><Strong>휴대전화</Strong> </span>
 						<br/><br/><br/><br/>
-					<span id= "h2" style="color: black;  display: none;" >인증번호<br/><br/><br/><br/></span>
+					<span id= "h2" style="color: black;  display: none;" >
+<br/><br/><br/><br/></span>
 		
 					<span style="color: black;"><Strong>주소</Strong> </span><br/><br/><br/><br/>
 				<span style="color: black;"><Strong>상세주소</Strong> </span><br/><br/><br/>
@@ -520,7 +521,7 @@
 							    
 							     <div class="form-group">
 							     <div class="input-group-prepend">
-							        <div id="divemail" style="display:none;">인증번호
+							        <div id="divemail" style="display:none;">
 							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-outline-primary">확인</button>
 							    </div>
 							  </div>
@@ -591,7 +592,7 @@
 							 <div class="form-group">
 							   <div class="input-group-prepend">
 							    <label for="ssn"></label>
-							   <div id="inj" class="text-center" style="display:none">  인증번호
+							   <div id="inj" class="text-center" style="display:none"> 
 							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">
 							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
 							    </div>

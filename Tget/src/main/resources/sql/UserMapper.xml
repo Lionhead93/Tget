@@ -76,7 +76,7 @@
 	   		
 	   	</set>
 	   	
-	   	WHERE user_id = #{userId}
+	   	WHERE user_id = #{userId:VARCHAR}
 	   	
 	 </update>
 	 

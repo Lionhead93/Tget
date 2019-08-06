@@ -141,12 +141,14 @@ public class UserController {
 
 		System.out.println("/user/updateUser : POST");
 		//Business Logic
-		userService.updateUser(user);
 		
+		System.out.println("user ¹¹µé¿Ô³Ä ¤Ð¤Ð"+user);
 		String sessionId=((User)session.getAttribute("user")).getUserId();
 		if(sessionId.equals(user.getUserId())){
 			session.setAttribute("user", user);
-		} 
+		}
+		System.out.println("user ¹¹µé¿È?2¹ø"+user);
+		userService.updateUser(user);
 		return "redirect:/user/updetaUser.jsp";
 	}
 	
