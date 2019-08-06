@@ -28,7 +28,6 @@
 		<result property="videoName" 				column="video_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventName" 				column="recomm_event_name" 					jdbcType="VARCHAR" />
 		<result property="recommEventDetail" 			column="recomm_event_detail" 		jdbcType="VARCHAR" />
-<!-- 		<result property="recommStatus" 			column="recomm_status" 		jdbcType="CHAR" /> -->
 	</resultMap>
 	
 	<resultMap id="categorySelectMap" type="category">
@@ -37,26 +36,6 @@
 		<result property="categoryTwoName" 				column="category_two_name" 					jdbcType="VARCHAR" />
 		<result property="categoryTwoEng" 				column="category_two_eng" 					jdbcType="VARCHAR" />
 	</resultMap>
-	
-<!-- 	<resultMap id="ticketSelectMap" type="ticket"> -->
-<!-- 		<result property="ticketNo" 			column="TICKET_NO" 			jdbcType="NUMERIC"/> -->
-<!-- 		<result property="amount"	column="TICKET_AMOUNT" 		jdbcType="NUMERIC" /> -->
-<!-- 		<result property="price" 	column="TICKET_PRICE" 		jdbcType="NUMERIC" /> -->
-<!-- 		<result property="type" 	column="TICKET_TYPE" 					jdbcType="CHAR" /> -->
-<!-- 		<result property="code" 		column="TICKET_CODE" 					jdbcType="CHAR" /> -->
-<!-- 		<result property="seat" 		column="TICKET_SEAT" 		jdbcType="VARCHAR" /> -->
-<!-- 		<result property="options" 		column="TICKET_OPTION" 					jdbcType="VARCHAR" /> -->
-<!-- 		<result property="regDate" 			column="REG_DATE" 				jdbcType="DATE"  /> -->
-<!-- 		<result property="ticketImage" 		column="TICKET_IMAGE" 			jdbcType="VARCHAR" /> -->
-<!-- 		<result property="checkCode" 			column="CHECK_YN" 			jdbcType="CHAR"/> -->
-<!-- 		<result property="couponNo" 			column="COUPON_NO" 			jdbcType="NUMERIC"/> -->
-<!-- 		<result property="couponCode" 			column="COUPON_CODE" 			jdbcType="CHAR"/> -->
-<!-- 		<association property="event" column="EVENT_ID" javaType="event" select="EventMapper.selectEventById"/>  -->
-<!--  		<association property="seller" column="SELLER_ID" javaType="user" select="UserMapper.selectUser"/> -->
-<!--   	</resultMap> -->
-  	
-  	
-	
 	
 	<insert 	id="insertEvent"		parameterType="stubhubEvent" >
 	 	INSERT
@@ -86,23 +65,12 @@
 						<if test="searchKeyword == 'eventId'">WHERE event_id = #{eventId}</if>
 		 				<if test="searchKeyword == 'eventName'">WHERE event_name = #{eventName} AND event_date >= SYSDATE</if>)  countTable	
 	 </select>
-<!-- 	 <select 	id="selectListEvent"	parameterType="string"	resultMap="eventSelectMap"> -->
-<!-- 		 SELECT event_id, view_count, category_two_no, event_image, event_name, event_location, event_date, event_time -->
-<!-- 		 FROM event -->
-<!-- 		 WHERE event_name = #{eventName}  -->
-<!-- 	 </select> -->
 	 
 	 <update	id="updateEvent"	parameterType="map" >
 	 	UPDATE event 
 	 	<set>
 	 		<if test="search.searchCondition == 0" >view_count = #{search.searchKeyno:NUMERIC}</if>
 			<if test="search.searchCondition == 1" >event_image = #{search.searchKeyword:VARCHAR}</if>
-<!-- 	 		event_id = #{string:VARCHAR},  -->
-<!-- 	 		category_two_no = #{string:NUMERIC}, -->
-<!-- 	 		event_name = #{string:VARCHAR},  -->
-<!-- 	 		event_location = #{string:VARCHAR},  -->
-<!-- 	 		event_date = #{string:DATE},  -->
-<!-- 	 		event_time = #{string:VARCHAR} -->
 		</set>
 		WHERE event_name = #{eventName}
 	 </update>
@@ -176,11 +144,6 @@
 		 WHERE ROWNUM &lt;= 30 
 	 </select>
 	 
-<!-- 	 <select 	id="selectListRecommendedEvent" 	parameterType="map"	resultMap="recommEvent"> -->
-<!-- 		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail -->
-<!-- 		 FROM recommended_event  -->
-<!-- 	 </select> -->
-	 
 	 <select 	id="selectRecommendedEvent"	parameterType="search"	 resultMap="recommEventSelectMap">
 		 SELECT recomm_event_no, event_name, video_name, recomm_event_name, recomm_event_detail
 		 FROM recommended_event
@@ -214,11 +177,6 @@
 	  	WHERE recomm_event_no = #{recommEventNo}
   	</delete>
   	
-<!--   	<select 	id="selectListCategory"	 resultMap="categorySelectMap"> -->
-<!-- 		 SELECT category_two_no,category_one_code,category_two_name,category_two_eng -->
-<!-- 		 FROM category_two -->
-<!-- 	 </select> -->
-	 
 	 <insert 	id="insertCategoryTwo"		parameterType="category" >
 	 	INSERT
 		INTO category_two( category_two_no,category_one_code,category_two_name,category_two_eng) 
@@ -285,22 +243,4 @@
 		 FROM event
 	 </select>
 	 
-<!-- 	 <select id="selectTicketList" parameterType="search"	 resultType="ticket"> -->
-<!-- 		 SELECT ticket_no, event_id, ticket_amount, seller_id	, ticket_price , ticket_type, TICKET_CODE , TICKET_SEAT , TICKET_OPTION -->
-<!-- 	  	, REG_DATE , TICKET_IMAGE , CHECK_YN , COUPON_NO , COUPON_CODE -->
-<!-- 		FROM ticket -->
-<!-- 		<where>										 -->
-<!-- 			<if test="searchCondition != null">												 -->
-<!-- 				<choose>	 -->
-<!-- 					<when test="searchCondition == 0 and searchKeyword !='' "> -->
-<!-- 						ticket_code = '0' AND event_id = #{searchKeyword} -->
-<!-- 					 </when> -->
-<!-- 					<when test="searchCondition == 1 and searchKeyword !='' "> -->
-<!-- 						ticket_code != '0' AND event_id = #{searchKeyword} -->
-<!-- 					</when> -->
-<!-- 				</choose> -->
-<!-- 			</if>												 -->
-<!-- 		</where> -->
-<!-- 		ORDER BY reg_date DESC -->
-<!-- 	 </select> -->
 </mapper>

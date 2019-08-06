@@ -5,17 +5,6 @@
 
 <form id="editEventImage">
 	<div class="container">
-	
-<!-- 		<div class="input-group mb-3"> -->
-<!-- 		  <div class="input-group-prepend"> -->
-<!-- 		    <span class="input-group-text" id="inputGroupFileAddon01">ÆÄÀÏ¸í</span> -->
-<!-- 		  </div> -->
-<!-- 		  <div class="custom-file"> -->
-<%-- 		    <input type="file" class="custom-file-input" id="file" value="${!empty eventImage? eventImage : ''}"> --%>
-<!-- 		    <label class="custom-file-label" for="inputGroupFile01"></label> -->
-<!-- 		  </div> -->
-<!-- 		</div> -->
-
 		<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
 		<input type="hidden"  id="eventImage" name="eventImage"  value="${!empty eventImage? eventImage : ''}" />
 		<c:if test="${!empty eventImage}">
@@ -23,7 +12,6 @@
 		</c:if>
 		<c:if test="${empty eventImage}">
 			<img  class="main" src="/resources/images/logo.png"  style="width:400px; height=250px;"/>
-<!-- 							<img src = "http://placehold.it/500x280" class="img-rounded"/> -->
 		</c:if><br/><br/>
 						
 		<div class="input-group mb-3">

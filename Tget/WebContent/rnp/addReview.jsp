@@ -3,9 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-<!-- 	<form name="addReviewForm"  style="font-size:20px; margin-top:30px;margin-left: 30px; margin-right: 30px;">		 -->
 		<input type="hidden" id="reviewTranNo" name="tranNo" value="${!empty tranNo? tranNo:'' }">
-<%-- 		<input type="hidden" name="updatePoint" value="${updatePoint}"> --%>
 		<div class="form-group row">
     		<label for="score" class="col-md-3"><ion-icon name="checkmark"></ion-icon><strong>평점</strong> </label>
     		<div class="col-md-9">
@@ -26,5 +24,4 @@
 		    value="${!empty review.reviewBody?review.reviewBody:''}"  rows="3" placeholder="리뷰를 입력하세요">${!empty review.reviewBody? review.reviewBody:''}</textarea>
 		 	</div>
 		 </div>
-<!-- 	</form> -->
 </div>

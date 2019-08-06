@@ -51,22 +51,18 @@
 									},
 						dataType : "json",
 						success : function(JSONData, status){
-// 							alert(status);
 							$("#reviewTranNo").val(JSONData.transaction.tranNo);
 							$("#reviewTranEventName").text(JSONData.transaction.event.koName);
 							$("#reviewTranPrice").text(numberWithCommas(JSONData.transaction.ticket.price)+"원");
 							$("#reviewTranAmount").text(JSONData.transaction.orderAmount);
 							$("#reviewTranTotalPrice").text(numberWithCommas(JSONData.transaction.totalPrice)+"원");
 							$("#reviewTranOrderDate").text(JSONData.transaction.orderDate);
-// 							$("#").val(JSONData.transaction);
 						},
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}			
 				});	
     	});
-		
-		
 	});
 	
 	</script>
@@ -109,16 +105,6 @@
 		<div class="row" >
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
-				
-<!-- 				<table class="table"> -->
-<!-- 				  <thead> -->
-<!-- 				    <tr align="center"> -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용일</h4></th> -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">적립 및 사용 내역</h4></th> -->
-<!-- 				      <th scope="col"><h4 align="center" style="font-weight: bold;margin:0%;color: #041625;">포인트 총 합계</h4></th>				       -->
-<!-- 				    </tr> -->
-<!-- 				  </thead> -->
-<!-- 				  <tbody> -->
 			<div class="row">
 				<div class="col-md-4" ><strong style="color: #041625;"><p>적립 및 사용일</p></strong></div>  
 				<div class="col-md-4" ><strong style="color: #041625;"><p>적립 및 사용 내역</p></strong></div>  
@@ -139,40 +125,9 @@
 						</div>
 					</div>
 				</div>
-							  
-				  
-				  
-<!-- 				    <tr class="record" data-toggle="modal"  data-target="#tranModal" > -->
-<%-- 				      <input type="hidden"  value="${i.tranNo }"/> --%>
-<!-- <!-- 				      <td> --> 
-<!-- <!-- 						<div align="center"> --> 
-<%-- <%-- 							<input type="hidden" name="tranNo" value="${i.tranNo }"/> --%>
-<!-- <!-- 						</div>			 --> 
-<!-- <!-- 				  	  </td> -->
-<!-- 				  	  <td>				  	  	 -->
-<!-- 				  	  	<div align="center" > -->
-<%-- 				  	  		${i.regDate} --%>
-<!-- 				  	  	</div> -->
-<!-- 				  	  </td>				  	   -->
-<!-- 				  	  <td> -->
-<!-- 						<div align="center" > -->
-<%-- 							<c:if test="${i.pointUpdateCode == 0}">+</c:if> --%>
-<%-- 							<c:if test="${i.pointUpdateCode == 1}">-</c:if> --%>
-<%-- 							${i.updatePointStr} point --%>
-<!-- 						</div>			 -->
-<!-- 				  	  </td> -->
-<!-- 				  	  <td> -->
-<!-- 				  	  	<div align="center" > -->
-<%-- 								${i.totalPointStr} point --%>
-<!-- 						</div> -->
-<!-- 				  	  </td> -->
-<!-- 			    </tr> -->
-			   </c:forEach>
-<!-- 		  		 </tbody> -->
-<!-- 				</table> -->
+			 </c:forEach>
 			</div>
-			<div class="col-lg-2">
-			
+			<div class="col-lg-2">		
 			</div>
 		</div>	
 	</div>
