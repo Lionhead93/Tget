@@ -58,12 +58,12 @@
 					
 					$("#h2").show();
 					if (phone == null || phone.length != 11) {
-						alert("올바른 전화번호를 입력하세요.");
+						swal("올바른 전화번호를 입력하세요.", "", "error");
 						return;
 					}
 
-					alert("인증번호 전송");
-					
+
+					swal("인증번호 전송", "", "info");
 					$("#inj").show();
 					
 						$.ajax({ 
@@ -97,8 +97,7 @@
 						
 					   if (rand == code) { 
 				   
-					   alert("인증 성공");
-					   
+					   swal("인증 성공!", "", "success");
 					   $("#inj").hide();
 						phone.style.border = "2px solid olive";
 						phone.readOnly = true;
@@ -109,7 +108,7 @@
 
 				   } else
 				  		 { 
-					   alert("인증 실패"); 
+					   swal("인증 실패!", "", "error");
 				  	 	} 
 				 	   
 				   });
@@ -172,30 +171,30 @@
 						var address1=$("input[name='address']").val();
 						var address2=$("input[name='address2']").val();
 						if(id == null || id.length <1){
-							alert("아이디는 반드시 입력하셔야 합니다.");
+							swal("아이디는 반드시 입력하셔야 합니다.", "", "warning");
 							return;
 						}
 		
 						if(name == null || name.length <1){
-							alert("이름은  반드시 입력하셔야 합니다.");
+							swal("이름은  반드시 입력하셔야 합니다.", "", "warning");
 							return;
 						}
 						
-						if( pw != pw_confirm ) {				
-							alert("비밀번호 확인이 일치하지 않습니다.");
+						if( pw != pw_confirm ) {
+							swal("비밀번호 확인이 일치하지 않습니다.", "", "warning");
 							$("input:text[id='password02']").focus();
 							return;
 						}
 						
 						
 						if(ch !=1 ){
-							alert("반드시 이메일 인증을 해야함.");
+							swal("반드시 이메일 인증을 해야함.", "", "warning");
 							return;
 							
 						}
 						
 						if(cch !=1 ){
-							alert("반드시 휴대전화 인증을 해야함.");
+							swal("반드시 휴대전화 인증을 해야함.", "", "warning");
 							return;
 							
 						}
@@ -203,18 +202,17 @@
 						
 						var userId = id+id2;
 						
-			 			var address = address1+address2;
+			 			var address = address1+"/"+address2;
 						
 						
 						
 					 	$("input[name='address']").val(address); 
 					 	
-					 	swal("가입 성공!<br/> "+ nickName+" 님 환영합니다.", "success")
-					 	.then((value) => {
-						  swal(`The returned value is: ${value}`);
-						});
-						
-						//$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+					 	swal("가입 성공!", nickName+" 님 환영합니다!", "success")
+					 	.then(function(result){
+					 		$("form[name='addUser']").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+					 	});
+					 	
 					}
 			     
 			     
@@ -316,15 +314,14 @@
 													
 													
 													if(Id == null || Id.length <1){
-														alert("아이디는 반드시 입력하셔야 합니다.");
+														swal("아이디는 반드시 입력하셔야 합니다.", "", "warning");
 														return;
 													}	
 													
 													
 													
 													
-													
-													alert("인증번호 발송");
+													swal("인증번호 발송", "", "info");
 													
 													 $("#divemail").show();
 												 	
@@ -347,11 +344,9 @@
 														   success : function(JSONData){
 															console.log(JSONData);
 															 $('#loading').html("");
-															/* alert(JSONData.check); */
 															
 															if(JSONData.msg== "bad"){
-																
-																alert("이미 존재하는 아이디입니다.");
+																swal("이미 존재하는 아이디입니다.", "", "warning");
 															}else
 															check = JSONData.check;
 															} 
@@ -368,7 +363,7 @@
 												var userCheck = $("#emailcode").val();		
 												var userId = document.getElementById("userId01");
 												if(check.trim()==userCheck.trim()){
-													alert("인증성공");
+													swal("인증성공", "", "success");
 													userId.value = id+id2;
 													userId.style.border = "2px solid olive";
 													userId.readOnly = true;
@@ -379,7 +374,7 @@
 													 $("#addon-wrapping").hide();
 													 $("#sm1").show();
 												}else{
-													alert("인증실패");  
+													swal("인증실패", "", "error");
 												}
 												
 												
@@ -395,7 +390,6 @@
 
 											
 									 $(this).val($(this).val().replace(/[^0-9]/g,""));
-									 //alert("숫자만 입력하셔야 합니다.");
 									 
 										});
 									   });
@@ -437,7 +431,7 @@
 	
 	<div class="col-lg-10">
 	<br/><br/><br/><br/>
-	<div class="login-card" style="color:black;">
+	<div class="login-card shadow rounded" style="color:black;">
 	
     <div class="card form" id="form1">
     
@@ -476,7 +470,7 @@
 							
 							
 					
-						<form class="form-horizontal">
+						<form name="addUser" class="form-horizontal">
 						
 						   <div class="form-group" >
 							    <div class="input-group-prepend">
@@ -567,7 +561,7 @@
 							   </div>
 							 <div id="inj" class="form-group" style="display:none">
 							   <div class="input-group-prepend">
-							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요." style="width:73%">&nbsp;&nbsp;&nbsp;&nbsp;
+							      <input type="text" class="form-control col-md-10"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">&nbsp;&nbsp;&nbsp;
 							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
 							  </div>
 							  </div>
@@ -580,9 +574,9 @@
 							      </div><br>
 								<input class="form-control col-md-10"  type="text" id="address2" name="address2" >
 							        <div class="form-group">
-							        <br>
+							        <br/><br/>
 							   
-							    <div style="padding-top: 12px;">
+							    <div style="padding-top: 6px;">
 							     <input type="radio" id= "local" name="local" value="1" checked="checked" /> 동의
 							     <input type="radio" id= "local" name="local" value="2" /> 비동의
 							    </div>
