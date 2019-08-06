@@ -118,8 +118,8 @@
 // 							contentType: 'multipart/form-data', 
 							dataType : "json",
 							beforeSend : function(){
-								alert("추가추가추가");
-								alert(formData);
+// 								alert("추가추가추가");
+// 								alert(formData);
 							},
 							success : function(JSONData,status){
 								$("#recommEventlistSize").val(parseInt($("#recommEventlistSize").val())+1);
