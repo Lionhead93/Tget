@@ -24,17 +24,11 @@
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
 	<script src="/resources/javascript/main.js"></script>
-<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
-<!-- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 	<script type="text/javascript">
 	var str = "";
 	var arr = [];
 	
-	$(function(){
-		
-		
-		
+	$(function(){		
 		$("div.card").on("click",function(){			
 			arr = $(this).children("input.category").val().split(' ');
 			$("#categoryTwo").val(arr[arr.length-1]);
@@ -42,8 +36,6 @@
 			$("#koName").val($(this).children(".kn").val());
 			$("#koLocation").val($(this).children(".el").val());
 			$("#koPerformer").val($(this).children(".kp").val());
-// 			self.location = "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val();
-// 			$("form").attr("method" , "POST").attr("action" , "/event/getEvent?category="+arr[arr.length-1]+"&eventName="+$(this).val()).submit();
 			$("form").attr("method" , "POST").attr("action" , "/event/getEvent").submit();
 		});		
 		
@@ -60,8 +52,6 @@
 									},
 						dataType : "json",
 						success : function(JSONData, status){
-// 							alert(status);
-// 							alert("requestPageToken : \n"+JSONData.requestPageToken);		
 							$("#requestPageToken").val(JSONData.requestPageToken);
 							$("#searchCondition").val(JSONData.search.searchCondition);
 							$("#searchKeyword").val(JSONData.search.searchKeyword);
@@ -103,41 +93,19 @@
 	}
 	a, hr{
 			color: #FBFCFE ;	
-		}
-		
+	}		
 	button.btn-light:hover{
 		background-color: gray;
 		color: #FBFCFE ;
-	}	
-       
-		body{
+	}	       
+	body{
 			background-color: #EBF7FF;
 			color: #041625;
-		}
-		
-/* 		table{
-			background-color : #F8FFFF;   
-			border: 1px solid #193147;	
-			color: #041625;
-		}
-		
-		td:hover{
-			background-color : #D9E5FF; 
-		}
-		
-		th, td{
-			color: #041625;
-			font-size:20px;
-		} */
+	}
 
 @import 'https://fonts.googleapis.com/css?family=Oswald';
 
-
 #loading {
-/*   background: #005C97; */
-/*   background: linear-gradient(to left, #005C97 , #363795); */
-/*   height: 30%; */
-/*   width: 30%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,7 +143,6 @@
 				
 <div class="container" >
 	<form>
-<%-- 	<div align="center"><h4>검색 결과 : 총 ${!empty totalResults? totalResults: 0}건</h4></div><br/> --%>
 	<div class="row eList" >
 			<c:forEach items="${eventList}"  var="i">
 				<div class="card border-primary  mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;">
@@ -196,8 +163,6 @@
 			<input type="hidden"  id="koName" name="koName"  value="" >
 			<input type="hidden"  id="koLocation" name="koLocation"  value="" >
 			<input type="hidden"  id="koPerformer" name="koPerformer"  value="" >
-<!-- 	  		 </tbody> -->
-<!-- 			</table> -->
 	</div>
 	</form>	
 </div><!-- container -->
@@ -206,9 +171,7 @@
 		<button id="addEvent" class="btn btn-primary">더보기</button>
 	</div>
 </div>
-<!-- <div align="center"> -->
-<!-- 		<button id="addEvent" class="btn btn-primary">더보기</button> -->
-<!-- </div> -->
+
 <div align="center" style="margin-left:45%;margin-right:45%;">	
 	<div align="center"  id="loading"  style="display:none;">
 		<svg  align="center" class="loading" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

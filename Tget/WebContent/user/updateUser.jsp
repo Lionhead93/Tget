@@ -31,58 +31,13 @@
    				
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-       body{	
-		      color: #FBFCFE ;		  
-			  background-color: #062038;
-			  margin-top: 50px;				
+
+		body {
+			  background-color: #EBF7FF;
 			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
-			color: #FBFCFE ;	
-		}
-		hr{
-			border: 1px groove white;
-		}
-		.list-group-item{
-			  margin-left:50px;	
-			  color: #FBFCFE ;
-			  border: 1px groove white;		  
-			  background-color: #062038;
-		}
-		.col-2{
-		}	
-		.col-lg-3{			
-			margin-bottom: 20px;
-		}
-		.row.in{
-			margin-left:50px;
-			margin-right: 50px;
-		}
-		.border{
-			padding-top: 20px;
-			background-color: #193147;
-		}
-		section{
-			margin-left: 100px;
-		}
-		#inputGroupSelect01, nav{
-			background: rgba(4, 22, 37, 0.75);
-			color: #c0c5c9;
-		} 
-		#tgetHeader{
-			margin-top:30px;
-		   color: #FBFCFE;	
-	       padding-top: 30px;
-	       padding-bottom: 70px;
-	       margin-bottom: 30px;
-	       		background: url(/resources/images/pic05.jpg) no-repeat center center fixed; 
-				  -webkit-background-size: cover;
-				  -moz-background-size: cover;
-				  -o-background-size: cover;
-				  background-size: cover;	
-       } 
-       #footer{
-			background-color: #1B1B1F;
+			color: #041625;
 		}
     </style>
     
@@ -158,8 +113,8 @@
 		         $("#alert-success").hide();
 		         $("#alert-danger").hide();
 		         $("input").keyup(function(){
-		             var pwd1=$("#password").val();
-		             var pwd2=$("#password2").val();
+		             var pwd1=$("#password01").val();
+		             var pwd2=$("#password02").val();
 		             if(pwd1 != "" || pwd2 != ""){
 		                 if(pwd1 == pwd2){
 		                	 
@@ -276,10 +231,9 @@
 		///////////////////////////////////////////////////////////////////////
 		function fncUpdateUser() {
 		
-			var pwd1=$("#password").val();
-            var pwd2=$("#password2").val();
+			var pwd1=$("#password01").val();
+            var pwd2=$("#password02").val();
         	var address1=$("input[name='address']").val();
-			var address2=$("input[name='address2']").val();
 			
 			
 			if(pwd1 != pwd2){
@@ -288,12 +242,7 @@
 				return;
 			}
 			
-			var address = address1+address2;
-			
-			
-			
-		 	$("input[name='address']").val(address); 
-			
+		
 				
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 		}
@@ -305,15 +254,7 @@
 <body>
 
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	
-		<div class="page-header text-center">
-	       <h3 class=" text-info">회원정보수정</h3>
-	       
-	    </div>
-	    
-	    <!-- form Start /////////////////////////////////////-->
-	    
+
 	     <div class="login-card" style="margin-left:400px; margin-right: 400px; color:black;">
                     <div class="card form" id="form1">
                         <div class="card-header" align="center" style="background-color: Lime;">
@@ -328,7 +269,7 @@
 					<span id= "h1" style="color: black; display: none;" >인증번호<br/><br/><br/><br/></span>
 					
 					<span style="color: black;"><Strong>비밀번호</Strong> </span>
-					<br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/>
 					<span style="color: black;"><Strong>이름</Strong> </span>
 				<br/><br/><br/>
 					<span style="color: black;"><Strong>닉네임</Strong> </span>
@@ -337,7 +278,8 @@
 						<br/><br/><br/><br/>
 					<span id= "h2" style="color: black;  display: none;" >인증번호<br/><br/><br/><br/></span>
 		
-					<span style="color: black;"><Strong>주소</Strong> </span>
+					<span style="color: black;"><Strong>주소</Strong> </span><br><br><br><br><br>
+					
 				</div>
 					
 					<div class="col-md-8">
@@ -346,37 +288,17 @@
 					
 						<form class="form-horizontal">
 						
-						   <div class="form-group" >
-							    <div class="input-group-prepend">
-							<input type="text" class="form-control col-md-5" name="userId" id="userId01" maxlength="15" style="width:23%" > 
-    							<span class="input-group-text" id="addon-wrapping">@</span>
-  
-							 <select class="custom-select col-md-3" name="userId2" id="userId02" style="width:23%" >
-							      <option  id = "ig" value="@naver.com">naver.com</option>
-							      <option  id = "ig" value="@daum.net">daum.net</option>
-							      <option  id = "ig" value="@nate.com">nate.com</option>
-							      <option id = "ig"  value="@gmail.com">gmail.com</option>
-							      <option id = "ih" value="">직접입력</option>							     
-							  </select>
-							     　<button id="injb" type="button" class="btn btn-outline-primary">인 증</button><i id="sm1" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
-							    <div id="loading"></div>
-									</div>
-
+						   	   <div class="form-group" >
+							   
+						    <input type="text" class="form-control col-md-10"  id="userId" name="userId" value="${user.userId}" readOnly/>
+								
 							    </div>
 							    
-							     <div class="form-group">
-							     <div class="input-group-prepend">
-							        <div id="divemail" style="display:none;">인증번호
-							      <input type="text"  class="form-control" id="emailcode" name="emailcode" placeholder="인증번호"><button type="button" class="btn btn-outline-primary">확인</button>
-							    </div>
-							  </div>
-							  </div>
-							    
-							  
+						<br>
 							  	  <div class="form-group">
 							  	  <div class="input-group-prepend">
 					
-							      <input type="password" class="form-control col-md-10"  id="password01" name="password" placeholder="비밀번호">
+							      <input type="password" class="form-control col-md-10" value="${user.password}" id="password01" name="password" placeholder="비밀번호">
 							    </div>
 							  </div>
 							  
@@ -384,7 +306,7 @@
 							  
 							  <div class="form-group">
 						 <div class="input-group-prepend">
-							      <input type="password"  class="form-control col-md-10"   id="password02" name="password2" placeholder="비밀번호 확인">
+							      <input type="password"  class="form-control col-md-10"  value="${user.password}" id="password02" name="password2" placeholder="비밀번호 확인">
 							      
 							  </div>
 							  </div>
@@ -401,23 +323,23 @@
 							</div>
 								
 							    <div class="form-group">
-							      <div class="input-group-prepend">
 							    <label for="userName"></label>
-					
-							      <input type="text" class="form-control col-md-10"  id="userName" name="userName" placeholder="회원이름">
-							   </div>
+							    
+							    <input type="text" class="form-control col-md-10"  id="userName" name="userName" value="${user.userName}" readOnly/>
+								
+							
 							  </div>
-							  
+							  <br>
 							  <div class="form-group">
 							  <div class="input-group-prepend">
 							  
 							  
 							    <label for="nickName"></label>
-							      <input type="text" class="form-control col-md-10"   id="nickName" name="nickName" placeholder="닉네임"><br>
+							      <input type="text" class="form-control col-md-10"  id="nickName" name="nickName" value="${user.nickName}"><br>
 							     
 							
 							  </div>
-							   <span id = "check"><Strong>닉네임을 입력해주세요</Strong>
+							   <span id = "check"><Strong>변경할 닉네임을 입력해주세요</Strong>
 							      </span>
 							    </div>
 						
@@ -428,8 +350,8 @@
 							  <div class="input-group-prepend">
 							
 							    
-					
-							      <input class="form-control col-md-10"   type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요.">　<button id="pij" type="button" class="btn btn-outline-primary">전송</button>
+									<input type="text" class="form-control col-md-10"  id="phone" name="phone" value="${user.phone}" >
+							      <button id="pij" type="button" class="btn btn-outline-primary">전송</button>
 							      <i id="sm2" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
 							  
 							  </div>
@@ -447,10 +369,10 @@
 							  <div>
 							    <label for="ssn"></label>
 					 
-								<input class="form-control col-md-10"  type="text" id="address" name="address" >
+								<input class="form-control col-md-10"  type="text" id="address" name="address" value="${user.address}">
 	<button type="button" class="btn btn-link">주소찾기</button>
-							      </div><br>
-								<input class="form-control col-md-10"  type="text" id="address2" name="address2" >
+							      </div>
+								
 							        <div class="form-group">
 							        <br>
 							        
@@ -465,7 +387,7 @@
 						
 							  <div class="form-group">
 							   <!--  disabled="disabled" -->
-							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">가 입</button>
+							      <button id= "join" type="button" class="btn btn-outline-primary" title="반드시 휴대폰 본인인증을 하세요.">수정</button>
 								  <a class="btn btn-outline-danger btn" href="#" role="button">취 소</a>
 								
 					 			 </div>
