@@ -149,7 +149,7 @@ public class UserController {
 		}
 		System.out.println("user ¹¹µé¿È?2¹ø"+user);
 		userService.updateUser(user);
-		return "redirect:/user/updetaUser.jsp";
+		return "redirect:/user/updateResult.jsp";
 	}
 	
 	@RequestMapping( value="updatePassword", method=RequestMethod.GET )
@@ -247,106 +247,14 @@ public class UserController {
 		
 		return "forward:/user/listUser.jsp";
 	}
-	
-	
-	
-	
-	
-	
+
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	/*@ResponseBody
-	@RequestMapping(value = "/nickNameCheck", method = RequestMethod.POST)
-	public int postIdCheck(HttpServletRequest req) throws Exception {
-	 System.out.println("post nickNameCheck");
-	 
-	 String nickName = req.getParameter("nickName");
-	 User idCheck =  userService.checknickNameDuplication(nickName);
-	 
-	 int result = 0;
-	 
-	 if(idCheck != null) {
-	  result = 1;
-	 } 
-	 
-	 return result;
-	}*/
-	
-	
-	/*@ResponseBody
-	@RequestMapping(value = "sendSms", method = RequestMethod.POST) 
-	public String sendSms(String receiver) { 
-	
-		System.out.println("µé¾î¿Ô´Ï?");
-		int rand = (int) (Math.random() * 899999) + 100000; 
-		
-		     user.setCode(String.valueOf(rand));
-		
-		
-		String hostname = "api.bluehouselab.com";
-	        String url = "https://"+hostname+"/smscenter/v1.0/sendsms";
-	        
-	        CredentialsProvider credsProvider = new BasicCredentialsProvider();
-	        credsProvider.setCredentials(
-	            new AuthScope(hostname, 443, AuthScope.ANY_REALM),
-	            new UsernamePasswordCredentials(Config.appid, Config.apikey)
-	        );
 
-	        // Create AuthCache instance
-	        AuthCache authCache = new BasicAuthCache();
-	        authCache.put(new HttpHost(hostname, 443, "https"), new BasicScheme());
-
-	        // Add AuthCache to the execution context
-	        HttpClientContext context = HttpClientContext.create();
-	        context.setCredentialsProvider(credsProvider);
-	        context.setAuthCache(authCache);
-
-	        DefaultHttpClient client = new DefaultHttpClient();
-
-	        try {
-	            HttpPost httpPost = new HttpPost(url);
-	            httpPost.setHeader("Content-type", "application/json; charset=EUC-KR");
-	            String json = "{\"sender\":\""+Config.sender+"\",\"receivers\":[\""+receiver+"\"],\"content\":\""+rand+"\"}";
-
-
-	            StringEntity se = new StringEntity(json, "EUC-KR");
-	            httpPost.setEntity(se);
-
-	            HttpResponse httpResponse = client.execute(httpPost, context);
-	            System.out.println(httpResponse.getStatusLine().getStatusCode());
-
-	            InputStream inputStream = httpResponse.getEntity().getContent();
-	            if(inputStream != null) {
-	                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-	                String line = "";
-	                while((line = bufferedReader.readLine()) != null)
-	                    System.out.println(line);
-	                inputStream.close();
-	            }
-	        } catch (Exception e) {
-	            System.err.println("Error: "+e.getLocalizedMessage());
-	        } finally {
-	            client.getConnectionManager().shutdown();
-	        }
-	        return "true";
-	}*/
-	
-/*@RequestMapping( value="finduserId", method=RequestMethod.GET )
-public String finduserId( @RequestParam("phone") String phone , Model model ) throws Exception {
-	
-	System.out.println("/user/finduserId : GET");
-	//Business Logic
-	User user = userService.finduserId(phone);
-	// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
-	model.addAttribute("user", user);
-	
-	return "forward:/user/finduserId.jsp";
-}	
-*/
 
 @RequestMapping(value = "oauth")
 public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) throws Exception {

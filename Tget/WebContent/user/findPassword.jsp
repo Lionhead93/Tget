@@ -199,7 +199,7 @@
 					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 					$("button:contains('찾기')").on("click" , function() {
 						
-				//		alert("눌리니");
+			
 				
 						 $.ajax({ 
 							   url: "/user/json/findPassword",
@@ -270,7 +270,7 @@
 
 						
 				 $(this).val($(this).val().replace(/[^0-9]/g,""));
-				 //alert("숫자만 입력하셔야 합니다.");
+			
 				 
 					});
 				   });

@@ -41,38 +41,9 @@ public class CouponController {
 		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("list", map.get("list"));
 		
-		return "forward:/coupon/getCouponList.jsp";
+		return "forward:/coupon/listCoupon.jsp";
 	}
-	
-	/*@RequestMapping( value="addCoupon", method=RequestMethod.POST )
-	public void addCoupon(@ModelAttribute("coupon") Coupon coupon) throws Exception {
 
-		System.out.println("/user/addCoupon : POST");
-		//Business Logic
-		System.out.println(coupon+" ¹¹·Î µé¿È?");
-		if(session.getAttribute("kakaoId")!=null) {
-			System.out.println("Ä«Ä«¿À °èÁ¤ È¸¿ø°¡ÀÔ µé¿È");
-		user.setKakaoId((String) session.getAttribute("kakaoId"));
-		}
-		if(session.getAttribute("naverId")!=null) {
-			System.out.println("³×ÀÌ¹ö °èÁ¤ È¸¿ø°¡ÀÔ µé¿È");
-		user.setNaverId((String) session.getAttribute("naverId"));
-		}
-		
-		
-		userService.addUser(user);
-		
-		String userId = user.getUserId();
-		
-		user= userService.getUser(userId);
-		
-		session.setAttribute("user", user);
-	
-		return "redirect:/";
-		
-	}*/
-	
-	
 	
 	
 	
