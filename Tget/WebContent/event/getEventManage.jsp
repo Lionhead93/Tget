@@ -107,7 +107,7 @@
 			var formData = new FormData($("#editRecommEvent")[0]);			
 			if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
 				if (parseInt($("#recommEventlistSize").val()) < 3) {
-					alert('parseInt($("#recommEventlistSize").val()) < 3');
+// 					alert('parseInt($("#recommEventlistSize").val()) < 3');
 					$.ajax(
 						{
 							url : "/event/rest/addRecommendedEvent",
@@ -134,7 +134,7 @@
 	 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
 				}
 			}else{
-				alert('"#recommEventNo").val()!=""');
+// 				alert('"#recommEventNo").val()!=""');
 				$.ajax(
 						{
 							url : "/event/rest/updateRecommendedEvent",

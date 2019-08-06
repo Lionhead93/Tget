@@ -324,6 +324,7 @@
         	
 		div.border{ 
 			background-color : white; 
+			margin-bottom: 30px;
 /* 			color: white; */
 			color:  #041625;
  		}		
