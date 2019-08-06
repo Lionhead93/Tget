@@ -4,4 +4,6 @@ encoding//WebContent/event/countdown.jsp=EUC-KR
 encoding//WebContent/resources/css/toolbar.css=UTF-8
 encoding//WebContent/resources/javascript/alarm.js=EUC-KR
 encoding//WebContent/user/NewFile.jsp=UTF-8
+encoding//src/main/java/com/tget/service/community=EUC-KR
+encoding//src/main/java/com/tget/service/community/CommunityDao.java=EUC-KR
 encoding//src/main/java/com/tget/web/community/CommunityRestController.java=EUC-KR
