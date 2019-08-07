@@ -73,10 +73,12 @@
 					
 				<div class="content-wrap">
 					<section id="section-topline-1">
+					<div> รั ${totalCount} ธํ</div><br/>
 						<div class="row">			
 							<c:forEach var="user" items="${list}">
-							<div class="col-3">
-							<div class="card text-center shadow rounded" >
+							<c:if test="${user.blacklistCode == null}">
+							<div class="col-3" style="margin-bottom: 10px;">
+							<div class="card text-center shadow rounded-pill" >
 								<c:if test="${user.blacklistCode ne null }">
 								</c:if>						
 								  ${user.userId}
@@ -85,11 +87,26 @@
 								  ${user.blacklistEndDate.toLocaleString()}					
 							</div>	
 							</div>
+							</c:if>
 					        </c:forEach>		       
 						</div>				
 					</section>
 					
 					<section id="section-topline-2">
+					<div> รั ${totalCount} ธํ</div>
+						<div class="row">			
+							<c:forEach var="user" items="${list}">
+							<c:if test="${user.blacklistCode ne null}">
+								<div class="col-3" style="margin-bottom: 10px;">
+								<div class="card text-center shadow rounded-pill" >
+									<c:if test="${user.blacklistCode ne null }">
+									</c:if>						
+									  <div style="padding-bottom: 10px;padding-top: 10px;">${user.userId}</div>				
+								</div>	
+								</div>
+							</c:if>
+					        </c:forEach>		       
+						</div>	
 					</section>							
 					</div><!-- /content -->
 				</div><!-- /tabs -->
