@@ -71,7 +71,7 @@
 							$("input[name='recommEventNo']").val(JSONData.recommEvent.recommEventNo);
 							$("input[name='recommEventName']").val(JSONData.recommEvent.recommEventName);							
 							$("textarea[name='recommEventDetail']").text(JSONData.recommEvent.recommEventDetail);
-							$("input[name='recommEventUrl']").val("http://192.168.0.82:8080/event/getEvent?category=&eventName="+JSONData.recommEvent.eventName);	
+							$("input[name='koName']").val(JSONData.recommEvent.koName);	
 						},
 						error : function(request, status, error ) {   
 						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -81,6 +81,10 @@
 		
 		$("#submit").on("click",function(){	
 			$("#editRecommEvent").attr("method" , "POST").attr("enctype","multipart/form-data");
+// 			var temp = $("#koName").val();
+			$("#koName").val(encodeURIComponent( $("#koName").val()));
+			$("#recommEventName").val(encodeURIComponent( $("#recommEventName").val()));
+			$("#recommEventDetail").val(encodeURIComponent( $("#recommEventDetail").val()));
 				var formData = new FormData($("#editRecommEvent")[0]);			
 				if($("#recommEventNo").val()==""|| $("#recommEventNo").val()==null){
 					if (parseInt($("#recommEventlistSize").val()) < 3) {
@@ -128,7 +132,7 @@
 			$("input[name='recommEventName']").val("");
 			$("input[name='file']").val("");
 			$("textarea[name='recommEventDetail']").text("");
-			$("input[name='recommEventUrl']").val("");	
+			$("input[name='koName']").val("");	
 			$("#categoryTwoNo").val("");
 			$("#categoryOneCode").val("");
 			$("#categoryTwoName").val("");

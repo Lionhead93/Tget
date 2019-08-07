@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,11 +66,7 @@ public class EventRestController {
 	@Autowired
 	@Qualifier("ticketServiceImpl")
 	private TicketService ticketService;
-	
-	@Autowired
-	@Qualifier("userServiceImpl")
-	private UserService userService;
-	
+
 	
 	@Value("#{apiKeyProperties['youtubeKey']}")
 	String youtubeKey;
@@ -313,11 +310,90 @@ public class EventRestController {
 		System.out.println("===============deleteRecommendedEvent===============");
 	
 		eventService.deleteRecommendedEvent(recommEventNo);
-
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("recommEventlist", eventService.getRecommendedEventList());
 		
+		return map;
+	}	
+	
+	@RequestMapping(value="rest/addRecommendedEvent")
+	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
+		System.out.println("===============rest/addRecommendedEvent===============");
+		Map<String,Object> map = new HashMap<String,Object>();		
+		
+		System.out.println(new URLDecoder().decode(recommEvent.getKoName(),"utf-8"));
+		
+		if(recommEvent.getKoName() != null) {
+			recommEvent.setEventName(eventService.getEventName(new URLDecoder().decode(recommEvent.getKoName(),"utf-8")));
+		}
+		recommEvent.setRecommEventName(new URLDecoder().decode(recommEvent.getRecommEventName(),"utf-8"));
+		recommEvent.setRecommEventDetail(new URLDecoder().decode(recommEvent.getRecommEventDetail(),"utf-8"));
+		System.out.println(recommEvent);
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		List<RecommEvent> list = eventService.getRecommendedEventList();
+		if (list != null && list.size() !=0) {
+			for (int i=0; i<list.size(); i++) {
+				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					break;
+				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
+					eventService.addRecommendedEvent(recommEvent);
+				}
+			}	
+		}else {
+			eventService.addRecommendedEvent(recommEvent);
+		}
+		
+		System.out.println("recommEventNo - "+recommEvent.getRecommEventNo());
+		
+//		eventService.addRecommendedEvent(recommEvent);
+		System.out.println(recommEvent);
+		map.put("recommEvent", recommEvent);
+		map.put("videoName", recommEvent.getVideoName());
+//		model.addAttribute("recommEvent",recommEvent);
+//		model.addAttribute("videoName",recommEvent.getVideoName());
+//		model.addAttribute("file",file);
+		return map;
+	}
+	
+	@RequestMapping(value="rest/updateRecommendedEvent")
+	public Map<String,Object> updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
+		System.out.println("===============rest/updateRecommendedEvent===============");
+		System.out.println(new URLDecoder().decode(recommEvent.getKoName(),"utf-8"));
+		
+		if(recommEvent.getKoName() != null) {
+			recommEvent.setEventName(eventService.getEventName(new URLDecoder().decode(recommEvent.getKoName(),"utf-8")));
+		}		
+		recommEvent.setRecommEventName(new URLDecoder().decode(recommEvent.getRecommEventName(),"utf-8"));
+		recommEvent.setRecommEventDetail(new URLDecoder().decode(recommEvent.getRecommEventDetail(),"utf-8"));
+		System.out.println(recommEvent);
+		Map<String,Object> map = new HashMap<String,Object>();
+		System.out.println(multipartFile.getOriginalFilename( ));
+		File file = null;
+				
+		if(!multipartFile.isEmpty()) {
+			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
+					
+			file = new File(videoPath,multipartFile.getOriginalFilename());
+			FileCopyUtils.copy(multipartFile.getBytes(), file);
+			
+		}
+		eventService.updateRecommendedEvent(recommEvent);
+		
+		System.out.println(recommEvent);
+		map.put("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
+//		map.put("recommEventlist", eventService.getRecommendedEventList());
+		map.put("videoName", recommEvent.getVideoName());
+
 		return map;
 	}
 	
@@ -624,84 +700,13 @@ public class EventRestController {
 		return null;
 	}
 	
-	@RequestMapping(value="rest/addRecommendedEvent", method = RequestMethod.POST)
-	public Map<String,Object> addRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
-		System.out.println("===============rest/addRecommendedEvent===============");
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		System.out.println(multipartFile.getOriginalFilename( ));
-		File file = null;
-				
-		if(!multipartFile.isEmpty()) {
-			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
-					
-			file = new File(videoPath,multipartFile.getOriginalFilename());
-			FileCopyUtils.copy(multipartFile.getBytes(), file);
-			
-		}
-		List<RecommEvent> list = eventService.getRecommendedEventList();
-		if (list != null && list.size() !=0) {
-			for (int i=0; i<list.size(); i++) {
-				if(list.get(i).getEventName().equals(recommEvent.getEventName())) {
-					break;
-				}else if( i == (list.size()-1) && ! list.get(i).getEventName().equals(recommEvent.getEventName())) {
-					eventService.addRecommendedEvent(recommEvent);
-				}
-			}	
-		}else {
-			eventService.addRecommendedEvent(recommEvent);
-		}
-		
-		System.out.println("recommEventNo - "+recommEvent.getRecommEventNo());
-		
-//		eventService.addRecommendedEvent(recommEvent);
-		System.out.println(recommEvent);
-		map.put("recommEvent", recommEvent);
-		map.put("videoName", recommEvent.getVideoName());
-//		model.addAttribute("recommEvent",recommEvent);
-//		model.addAttribute("videoName",recommEvent.getVideoName());
-//		model.addAttribute("file",file);
-		return map;
-	}
-	
-//	@RequestMapping(value="rest/updateRecommendedEvent", method=RequestMethod.GET)
-//	public String updateRecommendedEvent(@RequestParam int recommEventNo, Model model) throws Exception {
-//		System.out.println("===============rest/updateRecommendedEvent GET===============");
-//		System.out.println(recommEventNo);
-////		eventService.getRecommendedEvent(recommEventNo);
-//		model.addAttribute("recommEvent",eventService.getRecommendedEvent(recommEventNo));
-//		return "forward:/event/addRecommVideoGET.jsp";
-//	}	
-	
-	@RequestMapping(value="rest/updateRecommendedEvent")
-	public Map<String,Object> updateRecommendedEvent(@RequestParam(value = "file", required = false) MultipartFile multipartFile,@ModelAttribute("recommEvent") RecommEvent recommEvent) throws Exception {
-		System.out.println("===============rest/updateRecommendedEvent===============");
-		System.out.println(recommEvent);
-		Map<String,Object> map = new HashMap<String,Object>();
-		System.out.println(multipartFile.getOriginalFilename( ));
-		File file = null;
-				
-		if(!multipartFile.isEmpty()) {
-			recommEvent.setVideoName(multipartFile.getOriginalFilename( ));
-					
-			file = new File(videoPath,multipartFile.getOriginalFilename());
-			FileCopyUtils.copy(multipartFile.getBytes(), file);
-			
-		}
-		eventService.updateRecommendedEvent(recommEvent);
-		
-		System.out.println(recommEvent);
-		map.put("recommEvent", eventService.getRecommendedEvent(recommEvent.getRecommEventNo()));
-//		map.put("recommEventlist", eventService.getRecommendedEventList());
-		map.put("videoName", recommEvent.getVideoName());
-
-		return map;
-	}
-	
 	
 	@RequestMapping(value="rest/getYoutubeSearchList")
 	public Map<String,Object> getYoutubeSearchList(@RequestParam String requestPageToken,@ModelAttribute("search") Search search,Model model) throws Exception {
 		System.out.println("===============rest/getYoutubeSearchList===============");
+		System.out.println(search);
+		search.setSearchKeyword(new URLDecoder().decode(search.getSearchKeyword(), "utf-8"));
+		System.out.println(search);
 		
 		Map<String,Object> map = eventService.getYoutubeList(search, requestPageToken, youtubeKey);
 		

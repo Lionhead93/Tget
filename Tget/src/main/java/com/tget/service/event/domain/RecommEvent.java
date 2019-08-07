@@ -10,7 +10,8 @@ public class RecommEvent {
 	private String videoName;
 	private String recommEventName;
 	private String recommEventDetail;
-	private String recommEventUrl;
+//	private String recommEventUrl;
+	private String koName;
 	
 	///C
 	public RecommEvent() {
@@ -57,24 +58,32 @@ public class RecommEvent {
 	public void setRecommEventDetail(String recommEventDetail) {
 		this.recommEventDetail = recommEventDetail;
 	}
+//
+//	public String getRecommEventUrl() {
+//		return  recommEventUrl;
+//	}
+//
+//	public void setRecommEventUrl(String  recommEventUrl) {
+//		this.recommEventUrl = recommEventUrl;
+////		this.recommEventUrl = recommEventUrl.replaceAll("%20", " ");
+//		int index = 0;
+//		if ((index = recommEventUrl.lastIndexOf("eventName=")) != -1) {
+//			this.setEventName(recommEventUrl.substring(index).replaceAll("%20", " ").replace("eventName=", ""));
+//		}
+//	}
 
-	public String getRecommEventUrl() {
-		return  recommEventUrl;
+	public String getKoName() {
+		return koName;
 	}
 
-	public void setRecommEventUrl(String  recommEventUrl) {
-		this.recommEventUrl = recommEventUrl;
-//		this.recommEventUrl = recommEventUrl.replaceAll("%20", " ");
-		int index = 0;
-		if ((index = recommEventUrl.lastIndexOf("eventName=")) != -1) {
-			this.setEventName(recommEventUrl.substring(index).replaceAll("%20", " ").replace("eventName=", ""));
-		}
+	public void setKoName(String koName) {
+		this.koName = koName;
 	}
 
 
 	public String toString() {
 		return "[RecommEvent] recommEventNo : "+recommEventNo+", "+"eventName : "+eventName+", " + 
 				"videoName : "+videoName+", " +"recommEventName : "+recommEventName+", "
-				+"recommEventDetail : "+recommEventDetail+", recommEventUrl : "+recommEventUrl;
+				+"recommEventDetail : "+recommEventDetail+", koName : "+koName;
 	}
 }

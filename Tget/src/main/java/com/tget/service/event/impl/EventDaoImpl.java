@@ -515,5 +515,13 @@ public class EventDaoImpl implements EventDao {
 		return returnList;
 	}
 	
+	public String selectEventName(String koName) throws Exception{
+		List<String> list = sqlSession.selectList("EventMapper.selectEventName",koName);
+		if (list != null && list.size() !=0) {
+			return list.get(0);
+		}else {
+			return null;
+		}
+	}
 	
 }

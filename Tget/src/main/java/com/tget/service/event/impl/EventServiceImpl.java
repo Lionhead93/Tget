@@ -208,4 +208,8 @@ public class EventServiceImpl implements EventService{
 		eventDao.deleteYoutubeVideo(map);
 	}
 	
+	public String getEventName(String koName) throws Exception{
+		return eventDao.selectEventName(koName);
+	}
+	
 }
