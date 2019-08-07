@@ -233,16 +233,18 @@
 
 									<!-- Tab 1 -->
 										<div class="tab tab-1 flex flex-3 active">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
 
-											        <div class="col p-4 d-flex flex-column position-static">
-
+											        <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>				
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0"  id="goRecommEvent0" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" id="recommDetail0" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent0" href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail0" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent0"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
 											     
 											        <video controls id="videoName0" autoplay="autoplay"   src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
@@ -261,16 +263,19 @@
 
 									<!-- Tab 2 -->
 									<div class="tab tab-2 flex flex-3">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
+											        <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0" id="goRecommEvent1" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent1" href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail1" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent1"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
-											        <video id="videoName1" style="width:700px;"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <video id="videoName1" autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
 											        	
 <!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
@@ -282,14 +287,17 @@
 										</div>   
 									
 										<div class="tab tab-3 flex flex-3">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
+											       <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0" id="goRecommEvent2" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent2"  href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail2" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent2"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
 											        <video id="videoName2"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">

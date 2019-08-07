@@ -76,7 +76,7 @@ $( function(){
 	
 	$("a[href='#' ]:contains('내 쿠폰 조회')").on("click" , function() {		
 		
-		var popOption = "left=500, top=100, width=800, height=600, resizable=no, location=no;"		
+		var popOption = "left=500, top=100, width=500, height=500, resizable=no, location=no;"		
 			window.open("/coupon/getCouponList?userId=${sessionScope.user.userId}","내 쿠폰 조회",popOption);
 	});
 	
@@ -413,8 +413,7 @@ $(function getSearchWeather(lat, lon) {
 			  		"블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n블랙리스트 종료일자"+JSONData.endDate,
 			  	      "error");
 			  	
-				   } else if (JSONData.msg == "false")
-				  		 { 
+				   } else if (JSONData.msg == "false") { 
 					   		$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				  	 	
 				   }

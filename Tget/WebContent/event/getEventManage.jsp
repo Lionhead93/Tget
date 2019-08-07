@@ -299,7 +299,7 @@
         	border: 1px solid #D9E5FF ;            
 	       	background-color : #F8FFFF ;
         }
-        .card{
+        .categoryCard{
         	padding : 5px 5px 5px 5px;
         	color: #041625;
         	background-color:#D9E5FF;
@@ -345,18 +345,22 @@
   
 				  <div class="row" align="center" >		      	
 						<c:forEach items="${recommEventlist}"  var="i">			
-							<div style="width: 18rem; height: 400px;" id="${i.recommEventNo }">
-								<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 300px; height: 170px;">
+							<div class="card shadow rounded col-lg-4" id="${i.recommEventNo }" >
+							<div style="height: 400px;" >
+								<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 16rem; height: 170px;">
 									<source src="/resources/video/${i.videoName}" type="video/mp4">
 								</video>
-								<div class="card-body" style="height: 220px;" >
+								<div class="card-body">
+								<div style="height: 140px;" >
 									<input type="hidden" name="eventName" value="${i.eventName }"/>
 									<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
-									<p class="card-text">${i.recommEventDetail }</p>
+									<p class="card-text"><small>${i.recommEventDetail }</small></p>
+								</div>	
 									<button class="btn btn-outline-primary"  data-toggle="modal" 						
 										 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
-									<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>
+									<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>							
 								</div>
+							</div>
 							</div>
 						</c:forEach>	
 				  </div>
@@ -370,7 +374,7 @@
 			    </div>
 			    <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >음악공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
@@ -392,7 +396,7 @@
 					
 				 <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >스포츠</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
@@ -414,7 +418,7 @@
 					
 				 <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >기타예술공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">

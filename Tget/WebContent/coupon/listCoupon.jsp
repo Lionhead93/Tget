@@ -97,24 +97,18 @@ body {
 			<body>
 
 <body>
-<form class="form-inline" name="detailForm">
-	<!--  화면구성 div Start /////////////////////////////////////-->
+
 	<div class="container">
-	<br>
-		<div class="page-header text-info">
-	       <h3>사용 가능한 쿠폰 조회</h3>
-	       <h7><span style="color : red;">쿠폰 유효기간은 발급일로 부터 3개월입니다.</span></h7>
+		<div class="text-center">
+	       <h7><span style="color : red;"><strong>*쿠폰 유효기간은 발급일로 부터 3개월입니다.</strong></span></h7>
 	    </div><br>
 	  
       <!--  table Start /////////////////////////////////////-->
-      <table class="table" >
+      <table class="table table-bordered text-center rounded">
       
         <thead>
           <tr>
-           <th align="left">No</th>
-            <th align="left">쿠폰번호</th>
-            <th align="left">쿠폰용도</th>
-          
+            <th align="left">쿠폰용도</th>          
             <th align="left">쿠폰발급일자</th>
             <th align="left">쿠폰상태</th>
             
@@ -125,13 +119,9 @@ body {
 		<tbody>
 				
 			
-			<c:set var="i" value="0" />
 		  <c:forEach var="coupon" items="${list}">
-			<c:set var="i" value="${ i+1 }" />	
 			<tr>
-			 <td align="center">${ i }</td>
-			  <td align="left">${coupon.couponNo}</td>
-			  <td align="left">
+			  <td>
 			  
 			  <c:set var ="Code" value="${coupon.couponCode}"/>
 			  <c:if test="${Code eq '0'}">
@@ -141,20 +131,16 @@ body {
 				</td>
 				
 			
-			  <td align="left">${coupon.couponRegDate}
-			  <td align="left">  <c:set var ="State" value="${coupon.couponStatement}"/>
+			  <td>${coupon.couponRegDate}
+			  <td>  <c:set var ="State" value="${coupon.couponStatement}"/>
 			  <c:if test="${State eq '0'}">
 			   <span style="color:blue;">사용가능</span></c:if>
 			 <c:if test="${State eq '1'}">
 			 	<span style="color:red;">사용됨</span></c:if>
 			<c:if test="${State eq '2'}">
 			 	<span style="color:red;">기간만료</span></c:if>
-			  	<input type="hidden" value="${coupon.userId}">
-			
-			  </td>
-			
-			  	
-			
+			  	<input type="hidden" value="${coupon.userId}">			
+			  </td>		
 			</tr>
 			</c:forEach>
         </tbody>
@@ -166,9 +152,6 @@ body {
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
-</form>	
-
 
 
 </body>

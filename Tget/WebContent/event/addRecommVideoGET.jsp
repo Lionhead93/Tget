@@ -16,7 +16,7 @@
 		    value="${recommEvent.recommEventDetail }"  rows="3" placeholder="추천이벤트에 대한 설명을 입력하세요">${!empty recommEvent.recommEventDetail ? recommEvent.recommEventDetail :''}</textarea>
 	</div>
 	<div class="form-group">
-		<label for="recommEventUrl"><ion-icon name="checkmark"></ion-icon>상세조회 url</label>
+		<label for="recommEventUrl"><ion-icon name="checkmark"></ion-icon>이벤트명</label>
 			<c:if test="${empty recommEventNo }">
 <!-- 				<input type="text" class="form-control" id="recommEventUrl" name="recommEventUrl"  -->
 				<input type="text" class="form-control" id="koName" name="koName" 
