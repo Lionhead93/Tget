@@ -129,12 +129,6 @@ public class UserServiceImpl implements UserService{
 	public User getBlacklist(String userId) throws Exception {
 			return null;
 	}
-
-	@Override
-	public void addSeller(User user) throws Exception {
-		userDao.insertUser(user);
-		
-	}
  
 	@Override
 	public void updateSeller(User user) throws Exception {

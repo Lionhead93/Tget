@@ -17,8 +17,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
 	<link rel="stylesheet" href="/resources/css/toolbar.css" />
-	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -31,7 +30,7 @@
 
 		body {
 			  background-color: #EBF7FF;
-			  font-family: 'Nanum Gothic', sans-serif;
+			  font-family: 'Jua', sans-serif;
 		}
 		a{
 			color: #041625;
@@ -54,9 +53,8 @@
 
 				
 				$("button:contains('전송')").on("click" , function() {
-					var phone = $("input[name='phone']").val();	
+					var phone = $("input[name='phone']").val();						
 					
-					$("#h2").show();
 					if (phone == null || phone.length != 11) {
 						swal("올바른 전화번호를 입력하세요.", "", "error");
 						return;
@@ -65,7 +63,7 @@
 
 					swal("인증번호 전송", "", "info");
 					$("#inj").show();
-					
+					$("#h2").show();
 						$.ajax({ 
 							   url: "/user/json/sendSms",
 							   data: { 
@@ -437,9 +435,9 @@
     
     <div class="card-header" align="center" style="background-color: smokegray;">
     	
-    	<h3><i class="fas fa-user-check"></i> <strong>회원가입</strong><br/></h3>
+    	<h3><i class="fas fa-user-check"></i> 회원가입<br/></h3>
                             
-                 </div>
+    </div>
 			 <div style="background-color: white;">
 			
 			 
@@ -447,22 +445,22 @@
 					<div class="row">	
 					 <div class="col-md-1"></div>
 					<div class="col-md-2" >
-					<span style="color: black;"><Strong>아이디</Strong> </span>
+					<span style="color: black;">아이디 </span>
 					<br/><br/><br/>
-					<span style="color: black;"><Strong>비밀번호</Strong> </span>
+					<span style="color: black;">비밀번호 </span>
 					<br/><br/><br/><br/><br/><br/>
-					<span style="color: black;"><Strong>이름</Strong> </span>
+					<span style="color: black;">이름</span>
 				<br/><br/>
-					<span style="color: black;"><Strong>닉네임</Strong> </span>
+					<span style="color: black;">닉네임 </span>
 				<br/><br/><br/>
-					<span style="color: black;"><Strong>휴대전화</Strong> </span>
+					<span style="color: black;">휴대전화 </span>
 						<br/><br/><br/><br/>
 					<span id= "h2" style="color: black;  display: none;" >
 <br/><br/></span>
 		
-					<span style="color: black;"><Strong>주소</Strong> </span><br/><br/><br/><br/>
-				<span style="color: black;"><Strong>상세주소</Strong> </span><br/><br/><br/>
-				<span style="color: black;"><Strong>위치정보 문의</Strong> </span><br/><br/><br/>
+					<span style="color: black;">주소 </span><br/><br/><br/><br/>
+				<span style="color: black;">상세주소 </span><br/><br/><br/>
+				<span style="color: black;">위치정보 문의 </span><br/><br/><br/>
 				</div>
 			
 					
@@ -542,7 +540,7 @@
 							     
 							
 							  </div>
-							   <span id = "check"><Strong class= "text-danger">닉네임을 입력해주세요</Strong>
+							   <span id = "check"><Strong class= "text-danger">닉네임을 입력해주세요.</Strong>
 							      </span>
 							    </div>
 						
@@ -554,14 +552,14 @@
 							
 							    
 					
-							      <input class="form-control col-md-10"   type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요.">　<button id="pij" type="button" class="btn btn-outline-primary">전송</button>
+							      <input class="form-control"   type="text" id="phone" name="phone" placeholder="'-' 없이 입력해주세요." style="width:73%">　<button id="pij" type="button" class="btn btn-outline-primary">전송</button>
 							      <i id="sm2" class="far fa-grin fa-2x" style="color:Green; display:none;"></i>
 							  
 							  </div>
 							   </div>
 							 <div id="inj" class="form-group" style="display:none">
 							   <div class="input-group-prepend">
-							      <input type="text" class="form-control col-md-10"  id="sms" name="sms" placeholder="인증번호를 입력해주세요.">&nbsp;&nbsp;&nbsp;
+							      <input type="text" class="form-control"  id="sms" name="sms" placeholder="인증번호를 입력해주세요." style="width:73%">&nbsp;&nbsp;&nbsp;
 							      <button id="injb2" type="button" class="btn btn-outline-primary">인증</button>
 							  </div>
 							  </div>

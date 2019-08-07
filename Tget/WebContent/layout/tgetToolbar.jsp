@@ -57,7 +57,7 @@ $( function(){
 $( function(){	
 	$("a:contains('府轰累己')").on("click",function(){
 		popWin = window.open("/rnp/addReview?tranNo=10002","popWin",
-				"left=500, top=100, width=600, height=500, "
+				"left=500, top=100, width=600, height=450, "
 				+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		
 //			self.location = "/rnp/addReview?tranNo=10000";
@@ -336,7 +336,7 @@ $(function getSearchWeather(lat, lon) {
 		//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#forgotId' ]").on("click" , function() {
 		
-			var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
+			var popOption = "left=500, top=100, width=430, height=400, resizable=no, location=no;"		
 				window.open("/user/finduserId","find userId",popOption);
 		});
 	});
