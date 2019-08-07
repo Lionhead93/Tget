@@ -114,21 +114,15 @@ public class UserServiceTest {
 		Assert.assertEquals("1", user.getUserStatement());
 	}*/
 
-	//@Test
+	@Test
 	 public void testUpdateUser() throws Exception{
 		 
-		User user = userService.getUser("buyer");
+		User user = userService.getUser("user012@naver.com");
 		
-
+		user.setBlacklistCode("2");
 		
+		userService.addBlacklist(user);
 		
-		user.setPoint(500000);
-		
-		userService.updateUser(user);
-		
-		user = userService.getUser("buyer");
-		
-		System.out.println(user);
 	
 	 }
 	 
