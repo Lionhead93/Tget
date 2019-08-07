@@ -128,9 +128,7 @@ public class UserController {
 	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
 
 		System.out.println("/user/updateUser : GET");
-		//Business Logic
 		User user = userService.getUser(userId);
-		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		
 		return "forward:/user/updateUser.jsp";
@@ -149,7 +147,7 @@ public class UserController {
 		}
 		System.out.println("user ¹¹µé¿È?2¹ø"+user);
 		userService.updateUser(user);
-		return "redirect:/user/updateResult.jsp";
+		return "redirect:/user/myPage?userId="+user.getUserId();
 	}
 	
 	@RequestMapping( value="updatePassword", method=RequestMethod.GET )

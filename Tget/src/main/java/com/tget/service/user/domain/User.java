@@ -90,7 +90,12 @@ public class User {
 
 
 	public String getAddress() {
-		return address.split("/")[0];
+		
+		if(address != null) {
+			return address.split("/")[0];
+		}else {				
+			return address;
+		}
 	}
 
 
