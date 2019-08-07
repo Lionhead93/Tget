@@ -117,8 +117,9 @@
 							   }, 
 							   type: "post", 
 							   dataType:"json", 
-							   
-							   
+							   error : function(){
+								   swal("입력하신 정보의 회원정보가 없습니다!", "", "error");
+							   },							   
 							   success : function(JSONData){
 									console.log(JSONData);   
 							   
@@ -165,7 +166,7 @@
 		     </script>
 				
 		  <form class="form-horizontal">
-		  <h4 align="center">아이디 찾기</h4>
+		  <h4 align="center">T-GET 아이디 찾기</h4>
 			<br/>
 			
 			<div class="form-group row">	

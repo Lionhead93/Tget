@@ -362,7 +362,6 @@
 							method : "POST",
 							dataType : "json",
 							success : function(JSONData, status){
-		// 							alert(status);
 									recommSize = JSONData.recommEventlistSize;
 									$.each(JSONData.eventNameList, function(index,value){
 										$("#getEvent"+index).val(value);
@@ -374,7 +373,6 @@
 									$.each(JSONData.recommEventNameList, function(index,value){
 										$("#goRecommEvent"+index).text(value);
 										
-		// 								alert(value);
 									 });
 									$.each(JSONData.recommEventDetailList, function(index,value){
 										$("#recommDetail"+index).text(value);
@@ -390,7 +388,6 @@
 							method : "POST",
 							dataType : "json",
 							success : function(JSONData, status){
-		// 							alert(status);
 									recommSize = JSONData.recommEventlistSize;
 									$.each(JSONData.eventNameList, function(index,value){
 										$("#pelink"+index).val(value);
@@ -424,7 +421,6 @@
 				});
 				
 				$(".p-2").on("click",function(){
-		// 			alert($(this).text());
 					$("#searchCondition").val("0");
 					 $.ajax(
 								{
@@ -435,7 +431,6 @@
 												},
 									dataType : "json",
 									success : function(JSONData, status){
-		// 								alert(status);
 										$("#searchKeyword").val(JSONData.categoryTwoEng);
 										$("form").attr("method" , "POST").attr("action" , "/event/getEventList").submit();
 										

@@ -60,7 +60,7 @@ $(function(){
 					    <div class="modal-content" style="background-color:#D9E5FF;">
 					      <div id="addCouponModalBody" class="modal-body" style="background-color:#D9E5FF; color: #041625;">
 					      	<div class="text-center"><h3 style="background-color:#D9E5FF; color: #041625;">ÄíÆù ¹ß±Þ<a href="#" class="close text-dark" data-dismiss="modal">&times;</a></h3></div>
-					        <hr/>
+					        <br/>
 					        <div id="listUserRow" class="row">
 					        
 					        </div>
@@ -70,5 +70,4 @@ $(function(){
 					     
 					      </div>
 					  </div>
-				 </div>
-				 
+				 </div>		 
