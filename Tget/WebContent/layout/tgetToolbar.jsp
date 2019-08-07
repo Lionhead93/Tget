@@ -88,7 +88,7 @@ $( function(){
 		getNoReadAlarmCount("${user.userId}"); 
 	}			
 	//알람리스트 madal 출력
-	$("a:contains('Alarm')").on("click", function(){
+	$("#alarmButton").on("click", function(){
 		getAlarmModal("${user.userId}");				
 	});	
 });
@@ -217,21 +217,18 @@ $(function getSearchWeather(lat, lon) {
 				<h1><a id="brand" href="#" style="color: white;">T-GET <span>by MFC</span></a></h1>
 				
 				
-					<a href="#" style="color: white;"><i class="fas fa-home"></i>&nbsp; Home &nbsp;</a>
-				<c:if test="${empty user}">
-					<a href="#" style="color: white;">Sign Up</a>
-					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
-				</c:if>
-				<c:if test="${!empty user}">
-					<a href="#" style="color: white;">Logout</a>
-					<a href="#" data-target="#alarmModal" data-toggle="modal" style="color: white;">
-							<i class="far fa-bell"></i>&nbsp; Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
+				<a href="/" style="color: white;"><i class="fas fa-home"></i>&nbsp;</a>
+				
+								
+				<c:if test="${!empty user}">	
+					<a href="#" id="alarmButton" data-target="#alarmModal" data-toggle="modal" style="color: white;">
+							<i class="fas fa-bell"></i><span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
 					
 					
 					
 					  <button class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;padding-top:0px;">
-					    <i class="fas fa-user-edit"></i>&nbsp; Community &nbsp;</button>					  	
+					    <i class="fas fa-user-edit"></i></button>					  	
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					    <a class="dropdown-item" href="#">공지사항</a>
 					    <a class="dropdown-item" href="#">자유게시판</a>
@@ -241,7 +238,14 @@ $(function getSearchWeather(lat, lon) {
 
 				</c:if>	
 				<c:if test="${user.role == 2 }">
-				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
+				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon <i class="fas fa-plus"></i></a>
+				</c:if>
+				<c:if test="${empty user}">
+					<a href="#" style="color: white;">Sign Up</a>
+					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
+				</c:if>
+				<c:if test="${!empty user}">
+					<a href="#" style="color: white;">Logout</a>
 				</c:if>
 				<c:if test="${!empty user}">			
 				<a href="#menu" style="color: white;">Menu</a>
