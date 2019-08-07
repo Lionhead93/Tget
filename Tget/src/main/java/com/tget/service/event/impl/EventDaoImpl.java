@@ -265,7 +265,7 @@ public class EventDaoImpl implements EventDao {
 		}
 		
 		if (requestPageToken !=null && requestPageToken !="") {
-			url+="&start="+requestPageToken;
+			url+="&start="+Integer.parseInt(requestPageToken)*10;
 		}
 		
 		url+="&country=KR";
