@@ -37,7 +37,7 @@
 		<style>
 		body {
 			  background-color: #EBF7FF;
-			  font-family: 'Noto Sans KR', sans-serif;
+			  font-family: 'Nanum Gothic', sans-serif;
 		}
 		a{
 			color: #041625;
@@ -99,7 +99,7 @@ $(function() {
 					     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
 							 	<div class="card-header" align="center" style="background-color: smokegray;">
     						
-							    	 <h3 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> ${user.nickName}¥‘ «¡∑Œ« </h3>
+							    	 <h3 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> <strong>${user.nickName}¥‘ «¡∑Œ« </strong></h3>
 							                  
 							    </div>
 							 	<div class="card-body">	       
@@ -151,7 +151,7 @@ $(function() {
 		     			<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
 						 <div class="card-header" align="center" style="background-color: smokegray;">
     						
-							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> ${user.nickName}¥‘ ∆«∏≈¿⁄¡§∫∏</h4>
+							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> <strong>${user.nickName}¥‘ ∆«∏≈¿⁄¡§∫∏</strong></h4>
 							                  
 						 </div>
 						 
@@ -197,7 +197,7 @@ $(function() {
 										<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
 								<div class="card-header" align="center" style="background-color: smokegray;">
     						
-							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-credit-card"></i> ${user.nickName}¥‘ ∞Ë¡¬¡§∫∏</h4>
+							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-credit-card"></i> <strong>${user.nickName}¥‘ ∞Ë¡¬¡§∫∏</strong></h4>
 							                  
 								 </div>
 								
