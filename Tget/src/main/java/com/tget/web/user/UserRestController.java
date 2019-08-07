@@ -234,7 +234,7 @@ public class UserRestController {
 		}
 		
 		System.out.println("뭐가 들어왔니?"+user);
-		
+		map.put("dbPwd",  user.getPassword());
 		Date today = new Date ();
 		Date end = user.getBlacklistEndDate();
 		

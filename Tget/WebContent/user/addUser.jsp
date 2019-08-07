@@ -435,7 +435,7 @@
     
     <div class="card-header" align="center" style="background-color: smokegray;">
     	
-    	<h3><i class="fas fa-user-check"></i> 회원가입<br/></h3>
+    	<h3><i class="fas fa-user-check"></i> T-GET 회원가입<br/></h3>
                             
     </div>
 			 <div style="background-color: white;">

@@ -69,7 +69,6 @@
 	
 		  $(function(){
 		         $("#alert-success").hide();
-		         $("#alert-danger").hide();
 		         $("input").keyup(function(){
 		             var pwd1=$("#password01").val();
 		             var pwd2=$("#password02").val();

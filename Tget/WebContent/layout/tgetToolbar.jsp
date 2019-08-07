@@ -4,6 +4,8 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $( function(){	
 	$("#brand").on("click",function(){
@@ -237,9 +239,6 @@ $(function getSearchWeather(lat, lon) {
 					  </div>
 
 				</c:if>	
-				<c:if test="${user.role == 2 }">
-				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon <i class="fas fa-plus"></i></a>
-				</c:if>
 				<c:if test="${empty user}">
 					<a href="#" style="color: white;">Sign Up</a>
 					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
@@ -330,7 +329,7 @@ $(function getSearchWeather(lat, lon) {
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 
@@ -340,7 +339,7 @@ $(function getSearchWeather(lat, lon) {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#forgotId' ]").on("click" , function() {
 		
-			var popOption = "left=500, top=100, width=430, height=400, resizable=no, location=no;"		
+			var popOption = "left=560, top=200, width=430, height=400, resizable=no, location=no;"		
 				window.open("/user/finduserId","find userId",popOption);
 		});
 	});
@@ -349,7 +348,7 @@ $(function getSearchWeather(lat, lon) {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#forgotPassword' ]").on("click" , function() {
 		
-			var popOption = "left=500, top=100, width=700, height=700, resizable=no, location=no;"		
+			var popOption = "left=560, top=200, width=430, height=420, resizable=no, location=no;"		
 				window.open("/user/findPassword","find password",popOption);
 		});
 	});
@@ -367,7 +366,6 @@ $(function getSearchWeather(lat, lon) {
 		 $("input[name='password']").on("keypress",function(){
 				if (event.keyCode ==13) {
 					$("input[id='signin']").click();
-// 					$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				}
 			});
 		
@@ -376,21 +374,19 @@ $(function getSearchWeather(lat, lon) {
 		
 		$("input[id='signin']").on("click" , function() {
 			
-			//alert("눌리니");
-			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
 			
 			
 			
-			if(id == null || id.length <1) {
-				alert('ID 를 입력하지 않으셨습니다.');
+			if(id == null || id.length <1) {				
+				swal("ID를 입력하지 않으셨습니다.", "", "warning");
 				$("#userId").focus();
 				return;
 			}
 			
 			if(pw == null || pw.length <1) {
-				alert('패스워드를 입력하지 않으셨습니다.');
+				swal("패스워드를 입력하지 않으셨습니다.", "", "warning");
 				$("#password").focus();
 				return;
 			}
@@ -406,24 +402,22 @@ $(function getSearchWeather(lat, lon) {
 				   console.log(JSONData);
 				   
 				   if (JSONData.msg == "no") {
-						  alert("ID/password error");
+					  	  swal("입력하신 회원정보가 없습니다.", "", "warning");	
 						  return;
-			  		 }else if (JSONData.msg == "true") { 
+			  		 }else if(JSONData.dbPwd != pw){
+			  			  swal("비밀번호를 확인해주세요.", "", "warning");	
+			  			  return;			  		 	   
+			   		}else if (JSONData.msg == "true") { 
 			  			
-			  			swal({
-			  	          title: JSONData.nickName,
-			  	          text: "블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n"+
-			  	        "블랙리스트 종료일자"+JSONData.endDate,
-			  	          icon: "error",
-			  	          buttons: true,
-			  	          dangerMode: true,
-			  	        })
+			  			swal(JSONData.nickName,
+			  		"블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n블랙리스트 종료일자"+JSONData.endDate,
+			  	      "error");
 			  	
 				   } else if (JSONData.msg == "false")
 				  		 { 
 					   		$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				  	 	
-				  		 }
+				   }
 				   
 		
 			   }
@@ -510,7 +504,7 @@ $(function getSearchWeather(lat, lon) {
 </div> <!-- ---로그인창--- -->
 </form>	
 
-<jsp:include page="/coupon/addCoupon.jsp"></jsp:include>	
+
 		 
 		 
 
