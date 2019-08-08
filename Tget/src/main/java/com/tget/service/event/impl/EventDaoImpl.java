@@ -140,7 +140,7 @@ public class EventDaoImpl implements EventDao {
 		Search search = new Search();
 		search.setSearchCondition("1");
 		search.setSearchKeyno(recommEventNo);
-		return sqlSession.selectOne("EventMapper.selectRecommendedEvent", search);
+		return (RecommEvent) sqlSession.selectList("EventMapper.selectRecommendedEvent", search).get(0);
 	}	
 	
 	public void insertRecommendedEvent(RecommEvent recommEvent) throws Exception{ 
