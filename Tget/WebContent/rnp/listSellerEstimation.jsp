@@ -50,7 +50,7 @@
 								$("#reviewTranOrderDate").text(JSONData.transaction.orderDate);
 							},
 							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							 	swal("잘못된 접근입니다.","","error");
 							}			
 					});	
 	    	});
@@ -70,7 +70,6 @@
 	</script>
 	<style type="text/css">
 		body{
-			padding-top:30px;
 			background-color: #EBF7FF;
 			color: #041625;		
 		}
@@ -83,12 +82,10 @@
 	 		font-size: 20px;
 	 		color: #041625;    
  		} 
- 		tr.record:hover{
+ 		div.card:hover{
 			color: #041625;
 			background-color : #D9E5FF; 
-		}
-		#footer{
-			background-color: #1B1B1F ;
+			cursor: pointer;
 		}
 		a, hr,th,td{
 				color: #041625;
@@ -116,19 +113,19 @@
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
 				<div class="row">
-					<div class="col-md-3" ><strong style="color: #041625;"><p>구매자</p></strong></div>  
-					<div class="col-md-3" ><strong style="color: #041625;"><p>리뷰</p></strong></div>  
-					<div class="col-md-3" ><strong style="color: #041625;"><p>평점</p></strong></div>    
-					<div class="col-md-3" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
+					<div class="col-md-3" ><strong style="color: #041625;"><p><i class="fas fa-user-circle"></i> 구매자</p></strong></div>  
+					<div class="col-md-3" ><strong style="color: #041625;"><p><i class="fas fa-pen-alt"></i> 리뷰</p></strong></div>  
+					<div class="col-md-3" ><strong style="color: #041625;"><p><i class="far fa-star"></i> 평점</p></strong></div>    
+					<div class="col-md-3" ><strong style="color: #041625;"><p><i class="far fa-calendar-alt"></i> 등록일</p></strong></div>    		
 				</div>
 				  <c:forEach items="${sellerEstimationList}"  var="i">
 				  	<div class="card text-center shadow rounded-pill"   data-toggle="modal"  data-target="#tranModal"   
-				  	style="margin-bottom: 10px; height:55px;">
+				  	style="margin-bottom: 10px; height:65px;">
 				  		<input type="hidden"  value="${i.tranNo }"/>
 						<div class="card-body" style="padding-top:10px;" >	
 							<div class="row record" data-toggle="modal"  data-target="#tranModal">
-								<div class="col-md-3" ><p>${i.buyer.nickName}</p></div>    		
-								<div class="col-md-3" ><p>${i.reviewBody}</p></div>    			        
+								<div class="col-md-3" ><strong>${i.buyer.nickName}</strong></div>    		
+								<div class="col-md-3" ><small>${i.reviewBody}</small></div>    			        
 								<div class="col-md-3" ><p>${i.score}.0</p></div>    		
 								<div class="col-md-3" ><p>${i.regDate}</p></div>    		
 							</div>
@@ -145,13 +142,13 @@
 aria-labelledby="tranModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="font-size: 20px">
-      <div class="modal-header">
-        <div class="modal-title" id="tranModalTitle"  style="padding:0px;font-weight: bold;">거래 조회</div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div class="modal-body">
+        <div class="modal-title text-center" id="tranModalTitle"  style="padding:0px;font-weight: bold;">거래 조회
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+          <span aria-hidden="true">&times;</span>          
+        </button> 
+        </div> 
+        <hr/>    
         <div style="margin-left:30px;margin-right:30px; ">
         	<ion-icon name="checkmark"></ion-icon>이벤트명 : 			
         	<span class=""  id="reviewTranEventName"></span><br/><br/>

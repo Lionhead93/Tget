@@ -117,7 +117,6 @@
 	</script>
 	<style type="text/css">
 		body{
-			padding-top:30px;
 			background-color: #EBF7FF;
 			color:#041625;
 		}
@@ -130,12 +129,10 @@
 	 		font-size: 20px;
 	 		color: #041625;    
  		} 
- 		tr.record:hover{
+ 		div.card:hover{
 			color: #041625;
-			background-color : #D9E5FF;  
-		}
-		#footer{
-			background-color: #1B1B1F ;
+			background-color : #D9E5FF; 
+			cursor: pointer;
 		}
 		a, hr,th,tr{
 				color: #041625;
@@ -162,25 +159,25 @@
 		<div class="row" >
 			<div class="col-lg-2 col-12"></div>
 			<div class="col-lg-8 col-12" align="center">
-				<div class="row">
-					<div class="col-md-2" ><strong style="color: #041625;"><p>판매자</p></strong></div>  
-					<div class="col-md-6" ><strong style="color: #041625;"><p>리뷰</p></strong></div>  
-					<div class="col-md-2" ><strong style="color: #041625;"><p>평점</p></strong></div>    
-					<div class="col-md-2" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
+				<div class="row text-center">
+					<div class="col-md-2" ><strong style="color: #041625;"><p><i class="fas fa-user-circle"></i> 판매자</p></strong></div>  
+					<div class="col-md-6" ><strong style="color: #041625;"><p><i class="fas fa-pen-alt"></i> 리뷰</p></strong></div>  
+					<div class="col-md-2" ><strong style="color: #041625;"><p><i class="far fa-star"></i> 평점</p></strong></div>    
+					<div class="col-md-2" ><strong style="color: #041625;"><p><i class="far fa-calendar-alt"></i> 등록일</p></strong></div>    		
 				</div>
 				  <c:forEach items="${reviewList}"  var="i">
-				  	<div class="card text-center shadow rounded-pill"  style="margin-bottom: 10px; height:55px;">
+				  	<div class="card text-center shadow rounded-pill"  style="margin-bottom: 10px; height:65px;">
 						<div class="card-body" style="padding-top:10px;" >	
 							<div class="row" >
 								<div class="col-md-2 seller"  data-toggle="modal"  data-target="#tranModal" 
-				  			 	align="left"  id="seller${i.tranNo }"  >
+				  			 	 id="seller${i.tranNo }"  >
 				  			 		<input type="hidden"  value="${i.tranNo }"/>
-				  				 	<p>${i.seller.nickName }	</p>
+				  				 	<strong>${i.seller.nickName }	</strong>
 								</div>    		
 								<div class="col-md-6 record"  data-toggle="modal" 						
 								 data-target="#exampleModalCenter"   id="reviewBody${i.tranNo}">
 									  <input type="hidden"  value="${i.tranNo }"/>
-									 <p>${i.reviewBody}</p>
+									 <small>${i.reviewBody}</small>
 								</div>    	
 								<div class="col-md-2 record"  data-toggle="modal" 						
 								 data-target="#exampleModalCenter"  id="score${i.tranNo}">
