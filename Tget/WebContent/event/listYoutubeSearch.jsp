@@ -5,7 +5,10 @@
 
 	<script type="text/javascript">
 	
-	$(function(){
+$(function(){
+$("#addYoutube").on("click",function(){
+			
+		
 		$.ajax(
 			{
 				url : "/event/rest/getYoutubeSearchList?requestPageToken=",
@@ -14,6 +17,9 @@
 					searchKeyword : ""
 				},
 				dataType : "json",
+				error : function(){
+					swal("하루 사용량 초과!","","error");
+				},
 				success : function(JSONData, status){
 					$("#prevPageToken").val(JSONData.prevPageToken);
 					$("#nextPageToken").val(JSONData.nextPageToken);
@@ -28,19 +34,21 @@
 		
 		$("#prevPageToken").on("click",function(){
 			if ($(this).val() == "") {
-				alert("첫번째 페이지 입니다.");
+				swal("첫번째 페이지 입니다.","","warning");
 			}else{
 				$("#requestPageToken").val($(this).val());			
 				$("button:contains('검색')").click();
+				$("#searchYoutubeSubmit").focus();
 			}
 		});
 		
 		$("#nextPageToken").on("click",function(){
 			if ($(this).val() == "") {
-				alert("마지막 페이지 입니다.");
+				swal("마지막 페이지 입니다.","","warning");
 			}else{
 				$("#requestPageToken").val($(this).val());			
 				$("button:contains('검색')").click();
+				$("#searchYoutubeSubmit").focus();
 			}
 		});
 		
@@ -50,6 +58,7 @@
 			$("#getYoutubePlayer").attr("style","display:block;");
 			$("#getYoutubePlayer").children("iframe").attr("src","https://www.youtube.com/embed/"+youtubeId);
 			$("#addThis").val(youtubeId);
+			
 		});
 	
 		$("#back").on("click",function(){
@@ -67,14 +76,13 @@
      					},
      					dataType : "json",
      					success : function(JSONData, status){
-     						alert("등록완료");
+     						swal("등록 완료!","","success");
      					}	    		
      		 });	
 		});
 		
 		$("#searchYoutubeSubmit").on("click",function(){
 			$("#searchKeyword").val(encodeURIComponent($("#inputKeywords").val()));
-// 			alert($("#searchKeyword").val());
 			$.ajax(
 					{
 						url : "/event/rest/getYoutubeSearchList?requestPageToken="+$("#requestPageToken").val(),
@@ -98,6 +106,7 @@
 		});
 		
 	});
+});
 	</script>
 	<style type="text/css">
 		body{

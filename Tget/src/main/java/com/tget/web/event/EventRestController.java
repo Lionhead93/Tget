@@ -529,6 +529,10 @@ public class EventRestController {
 		List<String> eventIdList = null;
 		if (map != null && map.size() != 0) {
 			eventIdList = (List<String>)map.get("interestedEventList");
+		}else {
+			map = new HashMap<String,Object>();
+			map.put("isInterestedEvent", false);
+			return map;			
 		}
 		
 		boolean isInterestedEvent = false;

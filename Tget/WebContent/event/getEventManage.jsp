@@ -52,7 +52,7 @@
 							$("#"+temp).html("");		
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}			
 				});					
 		});
@@ -74,7 +74,7 @@
 							$("input[name='koName']").val(JSONData.recommEvent.koName);	
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}			
 				});	
 		});
@@ -102,11 +102,11 @@
 									location.reload();
 								},
 								error : function(request, status, error ) {   
-								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+									swal("잘못된 접근입니다.","","error");
 								}			
 							});
-					}else{					
-		 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+					}else{
+						swal("추천 이벤트를 더 이상 추가할 수 없습니다.","","warning");
 					}
 				}else{
 					$.ajax(
@@ -122,7 +122,7 @@
 									location.reload();
 								},
 								error : function(request, status, error ) {   
-								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+									swal("잘못된 접근입니다.","","error");
 								}			
 						});				
 				}
@@ -160,7 +160,7 @@
 								
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}
 			});
 		});
@@ -177,14 +177,17 @@
 										categoryTwoEng : $("input[name='categoryTwoEng']").val()
 										},
 							dataType : "json",
-							success : function(JSONData, status){								
-								location.reload();
-								$("#list-category-list").attr("class","list-group-item list-group-item-action active");
-								$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
-								$("button.close").click();			
+							success : function(JSONData, status){
+								swal("등록 성공","","success")
+								.then(function(result){
+									location.reload();
+									$("#list-category-list").attr("class","list-group-item list-group-item-action active");
+									$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
+									$("button.close").click();	
+								});										
 							},
 							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								swal("잘못된 접근입니다.","","error");
 							}
 				});
 			}else{
@@ -205,19 +208,20 @@
 								+'<input type="hidden"  value="'+$("#categoryTwoNo").val()+'">'
 								+JSONData.category.categoryTwoName+'</div>';
 								
-								if (JSONData.existingCode==JSONData.category.categoryOneCode) {
-									alert('JSONData.existingCode==JSONData.category.categoryOneCode');
+								if (JSONData.existingCode==JSONData.category.categoryOneCode) {									
 									$("#div"+JSONData.category.categoryTwoNo).html(tempHtml);
-								} else {
-									alert('JSONData.existingCode!=JSONData.category.categoryOneCode');
+								} else {									
 									$("#div"+JSONData.category.categoryTwoNo).remove();
 									$("#div"+JSONData.category.categoryOneCode).append('<div class="row"  id="div'+JSONData.category.categoryTwoNo+'">'
 											+tempHtml+'</div>');
 								}
-								$("button.close").click();					
+								swal("수정 성공","","success")
+								.then(function(result){
+									$("button.close").click();					
+								});								
 							},
 							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								swal("잘못된 접근입니다.","","error");
 							}
 				});
 			}			
@@ -233,11 +237,14 @@
 									},
 						dataType : "json",
 						success : function(JSONData, status){
-							$("#div"+$("#categoryTwoNo").val()).remove();
-							$("button.close").click();						
+							swal("삭제 성공","","success")
+							.then(function(result){
+								$("#div"+$("#categoryTwoNo").val()).remove();
+								$("button.close").click();		
+							});												
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}
 			});
 		});
@@ -260,7 +267,7 @@
 							
 					},
 					error : function(request, status, error ) {   
-					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						swal("잘못된 접근입니다.","","error");
 					}
 		});
 	}
@@ -294,6 +301,10 @@
 		}
 		div.row{  
 			padding : 10px  10px 10px 20px;
+		}
+		div.category:hover{
+			font-size: 25px;
+			cursor: pointer;
 		}
         .tab-content{
         	border: 1px solid #D9E5FF ;            

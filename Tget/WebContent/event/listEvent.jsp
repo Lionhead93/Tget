@@ -75,7 +75,7 @@
 							$("#addEvent").attr("style","display:block;");
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}			
 				});
 		});						

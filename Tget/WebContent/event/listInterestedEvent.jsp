@@ -22,6 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
     
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -47,7 +48,7 @@
 							content.remove();
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("삭제할 이벤트를 찾지 못했습니다.","","error");
 						}			
 				});	
         });
@@ -63,6 +64,7 @@
  		.getEvent:hover{
  			color: blue;
 			cursor:pointer;
+			font-size:27px;
 		}
 		body{
 			background-color: #EBF7FF;
@@ -96,10 +98,13 @@
 				 		<img src="/resources/images/uploadFiles/${i.eventImage}" class="card-img-top" onerror="this.src='/resources/images/logo.png'" height="200px;">
 				 		<div class="card-body">
 				 		
-					 		<div class="card-text getEvent" style="padding-bottom: 10px;">
-					 			<input type="hidden" value="${i.eventId }"  />
-					 		 <h4>	
-							  <strong>${i.koName}</strong>							  					     				     
+					 		<div class="card-text" style="padding-bottom: 10px;">
+					 			
+					 		 <h4>						 		 
+							  <strong><a class="getEvent">
+							  ${i.koName}
+							  <input type="hidden" value="${i.eventId }"  />
+							  </a></strong>							  					     				     
 					    	 </h4>
 					    	 </div>
 				 			<p class="card-text text-dark">

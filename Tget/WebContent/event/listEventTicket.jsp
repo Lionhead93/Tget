@@ -17,16 +17,16 @@
 	<link rel="shortcut icon" href="/resources/images/logo.png">
 	<link rel="icon" href="/resources/images/logo.png">		
     
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-  	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    
-    <script src="/resources/javascript/common.js" ></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>			
+	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+	
+	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
-	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
@@ -70,7 +70,7 @@
 					}
 		});
 		
-		if ("${!empty user}") {
+		if (${!empty user}) {
 			$.ajax(
 					{
 						url : "/event/rest/getInterestedEventList/"+$("#eventId").val(),
@@ -83,10 +83,7 @@
 								$("div.particletext").append('<span class="particle interestedHeart" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
 
 	 						}								
-						},
-						error : function(request, status, error ) {   
-	 					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}			
+						}		
 				});	
 		}
 		
@@ -101,7 +98,7 @@
      					},
      					dataType : "json",
      					success : function(JSONData, status){
-     						alert("삭제가 완료되었습니다.");
+     						swal("삭제 완료!","","success");
      					}	    		
      		 });
 		});
@@ -109,7 +106,7 @@
 		$("#prevYoutube").on("click",function(){			
 			var temp=parseInt($("#youtubeVideoId").val());
 			if (temp==0) {
-				alert("첫 영상입니다.");
+				swal("첫 영상입니다.","","warning");
 			} else {
 				$("#youtubeVideoId").val(temp-1);
 				$("#youtubeVideoPlayer").attr("src","https://www.youtube.com/embed/"+videoList[temp-1]);
@@ -119,22 +116,24 @@
 		$("#nextYoutube").on("click",function(){
 			var temp=parseInt($("#youtubeVideoId").val());
 			if (temp==videoList.length-1) {
-				alert("마지막 영상입니다.");
+				swal("마지막 영상입니다.","","warning");
 			} else {
 				$("#youtubeVideoId").val(temp+1);
 				$("#youtubeVideoPlayer").attr("src","https://www.youtube.com/embed/"+videoList[temp+1]);
 			}
 		});
 		
-		$("button.addTran").on("click",function(){
-			if ("${empty user}"=="true") {
-				alert("로그인을 해주세요.");
-				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();
+		$("a.addTranByEvent").on("click",function(){
+			if (${empty user}) {
+				swal("로그인을 해주세요.","","warning")
+				.then(function(result){
+					$("#my80sizeCenterModal").modal('show');
+				});
 			} else {
-				$("#ticketNo").val($(this).val());
-				$("form").attr("method" , "GET").attr("action" , "/tran/addTran?ticketNo="+ $(this).val()).submit();
+				$("#ticketNo").val($(this).attr("id").trim());
+				self.location = "/tran/addTran?ticketNo="+$(this).attr("id").trim();
 			}
-		});
+		}); 
 		
 		$(".getSellerEstimation").on("click",function(){
 			$("form").attr("method" , "POST").attr("action" , "/rnp/getSellerEstimationList?sellerId="+$(this).children().val()).submit();
@@ -143,9 +142,11 @@
 		$(".interested").on("click",function(){
 			i = parseInt($("#interestedCount").val());
 			
-			if ("${empty user}"=="true") {
-				alert("로그인을 해주세요.");
-				$("form").attr("method" , "GET").attr("action" , "/user/login").submit();				
+			if (${empty user}) {
+				swal("로그인을 해주세요.","","warning")
+				.then(function(result){
+					$("#my80sizeCenterModal").modal('show');
+				});
 			} else {
 				if($(this).children("input").val() == 'heart-empty') {
 					$(this).html('<input type="hidden"  value="heart">'
@@ -157,8 +158,11 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 등록완료");							
-									$("div.particletext").append('<span class="particle interestedHeart" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
+									swal("관심이벤트 등록완료","","success")
+									.then(function(result){
+										$("div.particletext").append('<span class="particle interestedHeart" style="top:61%; left:26%;width:8px; height:8px;animation-delay: 2.5s;"></span><span class="particle" style="top:31%; left:70%;width:9.6px; height:9.6px;animation-delay: 1.5s;"></span><span class="particle" style="top:32%; left:48%;width:11.6px; height:11.6px;animation-delay: 1.2s;"></span><span class="particle" style="top:61%; left:33%;width:9.2px; height:9.2px;animation-delay: 0.9s;"></span><span class="particle" style="top:75%; left:86%;width:6.4px; height:6.4px;animation-delay: 1.2s;"></span><span class="particle" style="top:43%; left:74%;width:10.5px; height:10.5px;animation-delay: 0.8s;"></span><span class="particle" style="top:25%; left:10%;width:7.9px; height:7.9px;animation-delay: 2.6s;"></span><span class="particle" style="top:39%; left:2%;width:6.9px; height:6.9px;animation-delay: 0s;"></span><span class="particle" style="top:46%; left:73%;width:10.6px; height:10.6px;animation-delay: 3s;"></span><span class="particle" style="top:20%; left:86%;width:9.4px; height:9.4px;animation-delay: 2s;"></span><span class="particle" style="top:35%; left:45%;width:6.8px; height:6.8px;animation-delay: 2.3s;"></span><span class="particle" style="top:62%; left:41%;width:11.7px; height:11.7px;animation-delay: 0.7s;"></span><span class="particle" style="top:23%; left:59%;width:10.2px; height:10.2px;animation-delay: 1.7s;"></span><span class="particle" style="top:42%; left:66%;width:6.9px; height:6.9px;animation-delay: 0.2s;"></span></span>');
+
+									});
 								}		
 						});	
 				}else{
@@ -171,7 +175,7 @@
 								method : "POST",
 								dataType : "json",
 								success : function(JSONData, status){
-									alert("관심이벤트 삭제완료");									
+									swal("관심이벤트 삭제완료","","success");								
 								}	
 						});	
 				}
@@ -181,7 +185,10 @@
 		
 			$("#kakaoSendToMe").on("click",function(){
 				if ("${user.kakaoToken}"==null || "${user.kakaoToken}"=="") {
-					alert("카카오로 로그인 해주세요.");
+					swal("카카오로 로그인 해주세요.","","warning")
+					.then(function(result){
+						$("#my80sizeCenterModal").modal('show');
+					});
 				}
 				$.ajax( 
 						{
@@ -197,8 +204,11 @@
 								"Accept" : "application/json",
 								"Content-Type" : "application/json"
 							},
+							beforeSend : function() {
+								swal("카카오톡 메세지를 전송했습니다.","","success");
+							},
 							success : function(JSONData , status) {
-								alert(JSONData);
+								
 							}
 					});
 			})
@@ -226,24 +236,22 @@
 		body{
 			background-color: #EBF7FF;
 			color: #041625;
-		}	
-		#footer{
-		background-color: #1B1B1F ;
-		}		
+		}			
 		a, hr{
-				color: #FBFCFE ;	
+				color: black ;	
 		}		        	
-		div.border{ 
+		div.card{ 
 			background-color : white; 
 			margin-bottom: 30px;
 			color:  #041625;
  		}		
-		div.border:hover{
+		div.card:hover{
 			background-color : #EBF7FF; 
 			color:  #041625; 
 		}		        
         .getSellerEstimation:hover{
         	font-size:25px;
+        	cursor: pointer;
         }
 		.interested{
 			color : red;
@@ -340,6 +348,7 @@
 					<div class="row" align="center">			
 						<div class="col-lg-5 " >
 							<div class="sticky-top">
+							<br/><br/>
 								<div class="textcontainer">
 									<h1><span id="title">${!empty event.koName? event.koName:event.eventName }</span></h1>
 								</div>
@@ -351,7 +360,7 @@
 								<span style="margin:20px;"   id="prevYoutube"><ion-icon name="arrow-round-back"  size="large"></ion-icon></span>
 								<span style="margin:20px;" id="deleteYoutube"><ion-icon name="remove-circle-outline"  size="large"></ion-icon></span>
 								<span style="margin:20px;"  id="addYoutube" name="addYoutube" data-toggle="modal"  						
-										 data-target="#exampleModalCenter">
+										 data-target="#youtubeSearchModal">
 								<ion-icon name="add-circle-outline"  size="large"></ion-icon>
 								</span>
 								<span style="margin:20px;" id="nextYoutube"><ion-icon name="arrow-round-forward"  size="large"></ion-icon></span>
@@ -365,18 +374,17 @@
 						<div class="col-lg-7 ">
 							<div class="row" align="center">
 								<div class="col-lg-3"></div>
-								<div class="col-lg-6" align="center"><h4>총 ${totalTicketCount}건</h4></div>
+								<div class="col-lg-6" align="center"><h4></h4></div>
 								<div class="col-lg-3"></div>
 							</div><br/>
 											
-							<section id="section-topline-1" align="center">
 								<div class="row" align="center">									
 									<c:forEach var="i" items="${ticketList}" >			
 										<c:if test="${i.couponCode == 0 }">	
 										<c:if test="${i.amount != 0 }">												
 										<div class="col-lg-6">
 											<div class="text-center">
-												<div class="border " style="height: 450px;">
+												<div class="card text-center shadow rounded" style="height: 450px;">
 										 			<br/>
 										 			<h5  class="coupon${i.couponCode }"><strong>
 										 				<a  class="getSellerEstimation">
@@ -408,7 +416,7 @@
 													</div>	
 													<div class="list" align="right">
 														<c:if test="${i.seller.userId!=user.userId}">
-															<button class="btn  btn-outline-primary addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+															<a class="btn  btn-outline-primary addTranByEvent "  id="${i.ticketNo}" style="margin:10px;">구매하기</a> &nbsp; &nbsp;
 														</c:if>					
 													</div>
 												</div><!-- border -->	
@@ -426,10 +434,10 @@
 										<div class="col-lg-6">
 											<div class="text-center">
 											<c:if test="${i.couponCode == 1}">
-													<div class="border "  style="height: 450px; background-color:#D4F4FA;" >
+													<div class="card text-center shadow rounded "  style="height: 450px; background-color:#D4F4FA;" >
 											</c:if>
 											<c:if test="${i.couponCode!= 1}">
-													<div class="border "  style="height: 450px; " >
+													<div class="card text-center shadow rounded "  style="height: 450px; " >
 											</c:if>
 										 			<br/>
 										 			<h5  class="coupon${i.couponCode }"><strong>
@@ -462,7 +470,7 @@
 													</div>	
 													<div class="list" align="right">
 														<c:if test="${i.seller.userId!=user.userId}">
-															<button class="btn  btn-outline-primary addTran "  value="${i.ticketNo}" style="margin:10px;">구매하기</button> &nbsp; &nbsp;
+															<a class="btn  btn-outline-primary addTranByEvent "  id="${i.ticketNo}" style="margin:10px;">구매하기</a> &nbsp; &nbsp;
 														</c:if>					
 													</div>
 												</div><!-- border -->	
@@ -474,8 +482,7 @@
 											</c:if>
 										</c:forEach>
 										
-								</div><!-- row -->
-							</section>					
+								</div><!-- row -->	
 						</div>	<!-- col-lg-6 -->
 					</div><!-- row -->		  
 				</div><!-- container-fluid -->					
@@ -486,7 +493,7 @@
 	</form>
 	
 	<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"  
+<div class="modal fade" id="youtubeSearchModal" tabindex="-1" role="dialog"  
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-top:40px">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content"  style="background-color:#F8FFFF; color: #041625;">

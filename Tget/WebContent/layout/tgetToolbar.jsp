@@ -241,7 +241,7 @@ $(function getSearchWeather(lat, lon) {
 				</c:if>	
 				<c:if test="${empty user}">
 					<a href="#" style="color: white;">Sign Up</a>
-					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
+					<a href="#" id="loginButton" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
 				</c:if>
 				<c:if test="${!empty user}">
 					<a href="#" style="color: white;">Logout</a>
