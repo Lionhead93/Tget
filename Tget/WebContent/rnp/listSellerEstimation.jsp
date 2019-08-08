@@ -101,7 +101,7 @@
 	<div class="container-fluid" align="center">	
 		<div class="row" >
 			<div class="col-lg-3"></div>
-			<div class="col-lg-6">
+			<div class="col-lg-6 col-12">
 				<input type="hidden"  id="sellerId" name="sellerId"  value="${sellerId}" >
 				<h1><span style="font-weight:bold;font-size:30px ; color: #041625;">${sellerNickname}</span><small style="color: #041625;;">님의</small> 
 					<span class="textcontainer" style="font-weight: bold; color: #041625;">
@@ -116,10 +116,10 @@
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8" align="center">
 				<div class="row">
-					<div class="col-md-3" ><strong style="color: #041625;"><p>구매자</p></strong></div>  
-					<div class="col-md-3" ><strong style="color: #041625;"><p>리뷰</p></strong></div>  
-					<div class="col-md-3" ><strong style="color: #041625;"><p>평점</p></strong></div>    
-					<div class="col-md-3" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
+					<div class="col-md-2" ><strong style="color: #041625;"><p>구매자</p></strong></div>  
+					<div class="col-md-6" ><strong style="color: #041625;"><p>리뷰</p></strong></div>  
+					<div class="col-md-2" ><strong style="color: #041625;"><p>평점</p></strong></div>    
+					<div class="col-md-2" ><strong style="color: #041625;"><p>등록일</p></strong></div>    		
 				</div>
 				  <c:forEach items="${sellerEstimationList}"  var="i">
 				  	<div class="card text-center shadow rounded-pill"   data-toggle="modal"  data-target="#tranModal"   
@@ -127,10 +127,10 @@
 				  		<input type="hidden"  value="${i.tranNo }"/>
 						<div class="card-body" style="padding-top:10px;" >	
 							<div class="row record" data-toggle="modal"  data-target="#tranModal">
-								<div class="col-md-3" ><p>${i.buyer.nickName}</p></div>    		
-								<div class="col-md-3" ><p>${i.reviewBody}</p></div>    			        
-								<div class="col-md-3" ><p>${i.score}.0</p></div>    		
-								<div class="col-md-3" ><p>${i.regDate}</p></div>    		
+								<div class="col-md-2" ><p>${i.buyer.nickName}</p></div>    		
+								<div class="col-md-6" ><p>${i.reviewBody}</p></div>    			        
+								<div class="col-md-2" ><p>${i.score}.0</p></div>    		
+								<div class="col-md-2" ><p>${i.regDate}</p></div>    		
 							</div>
 						</div>
 					</div>
