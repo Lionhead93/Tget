@@ -268,14 +268,14 @@
 		  		<div class="form-group row">
 					 <div class="col-3 text-right" style="padding-top: 8px;">비밀번호 </div>		    
 					 <div class="col-6">
-					      <input type="text" class="form-control" id="password" name="password" value="" placeholder="비밀번호"/>
+					      <input type="password" class="form-control" id="password" name="password" value="" placeholder="비밀번호"/>
 					 </div>	
 					 <div class="col-3"></div>		    
 				</div>
 				<div class="form-group row">
 					 <div class="col-3 text-right" style="padding-top: 8px;">확인 </div>		    
 					 <div class="col-6">
-					      <input type="text" class="form-control" id="password2" name="password2" value="" placeholder="비밀번호 확인"/>
+					      <input type="password" class="form-control" id="password2" name="password2" value="" placeholder="비밀번호 확인"/>
 					 </div>	
 					 <div class="col-3"></div>
 					  					  		    
