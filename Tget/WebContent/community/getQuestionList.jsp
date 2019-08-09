@@ -137,18 +137,21 @@
 			
 		 $(function() {
 			
- 			 $( "button.btn.btn-info:contains('등록')" ).on("click" , function() {
+ 			 $( "button.btn.btn-outline-info:contains('등록')" ).on("click" , function() {
  					//self.location="/community/addContent"	
 	 				var contentName= $("input[name='contentName']").val();
 					var contentBody= $("textarea[name='contentBody']").val();
 					
 					if(contentName == null || contentName.length<1){
-						alert("제목을 입력해 주세요.");
+						swal("제목을 입력해 주세요.","","error");
 						return;
 					}
 					
-					alert("등록 되었습니다.")
-					$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
+					swal("등록 완료!","","success")
+					.then(function(r){
+						$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
+
+					});
  				});
 			 
 			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
@@ -244,7 +247,6 @@
 				
 					var contentNo = $(this).attr("id").trim();
 					var badCount = $('a').closest("#"+contentNo+"").text().trim();
-					alert(badCount);
 					var result1 = parseInt(badCount)+1;
 					var content1 = $('a').closest("#"+contentNo+"");
 					
@@ -295,16 +297,15 @@
 	
 	<jsp:include page="/layout/tgetToolbar.jsp" />
 	<jsp:include page="/layout/tgetHeader.jsp" />
-
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="text-right" style="margin-right: 130px; margin-top: 30px;">	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	    	
-		    	
-				<p class="text-dark"><strong>전체  ${totalCount } 건수</strong></p>
-		    	<c:if test="${sessionScope.user.role == '2'}">
-		    	<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
-				</c:if>	
-	</div>
+	
+	<div class="text-right" style="margin-right: 120px; margin-top: 20px;">  		    	
+<!-- 		    	<button type="button" id="currentRegDate" class="btn btn-info">최신순</button> -->
+	<c:if test="${sessionScope.user.role == '2'}">
+		    	<button type="button" id="addContent" class="btn btn-outline-info" data-toggle="modal" data-target="#addContentModal"><i class="fas fa-pen-alt"></i>  게시글 작성</button>
+	</c:if>			
+		
+	</div>	
+	
 	
 	 <div class="row">
 	  <div class="col-md-2 text-center">	  
@@ -343,22 +344,19 @@
 								 <c:forEach var="content" items="${list}" varStatus="j">
 								 <c:if test="${content.contentCode=='8'}">
 								 	<div class="col-lg-3 " >
-								 	<div>
-								 		<div class="border">
-								 		<br/>
+								 		<div class="card shadow rounded" style="height: 300px;">
+								 		<div class="card-body">
+								 		<span class="badge badge-secondary"><i class="fab fa-quora"></i> ${j.index+1}</span>
+								 		<br/><br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
-								 				<div style="text-align: left; padding-left: 30px;">
-								 				<small>작성자: ${content.userNickname}</small>
-								 				<br/>
-								 				<small>작성일: ${content.regDate}</small></div>
-								 				<br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus" style=color:#000000;></i></a>
+								 				<small>${content.regDate}</small>
+								 				<br/><br/>
+								 				<a href="#" class="btn btn-outline-success contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus"></i> 답변 보기</a>
 								 			<hr/>
 								 			
-								 			<br/>
 								 		</div>
-								 	</div>	
+								 		</div>
 								 	</div>
 								 </c:if>	
 								 </c:forEach>
@@ -371,19 +369,19 @@
 								 <c:if test="${content.contentCode=='9'}">
 								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border">
-								 		<br/>
+								 		<div class="card shadow rounded" style="height: 300px;">
+								 		<div class="card-body">
+								 		<span class="badge badge-secondary"><i class="fab fa-quora"></i> ${j.index+1}</span>
+								 		<br/><br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
-								 				<small>작성자: ${content.userNickname}</small>
-								 				<br/>
-								 				<small>작성일: ${content.regDate}</small>
+								 				<small>${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
-								 			<hr/>
+<a href="#" class="btn btn-outline-success contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus"></i> 답변 보기</a>								 			<hr/>
 								 			
 								 			<br/>
 								 		</div>
+								 	</div>
 								 	</div>	
 								 	</div>
 								 </c:if>	
@@ -396,20 +394,19 @@
 								 <c:if test="${content.contentCode=='10'}">
 								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border " >
-								 		<br/>
+								 		<div class="card shadow rounded" style="height: 300px;">
+								 		<div class="card-body">
+								 		<span class="badge badge-secondary"><i class="fab fa-quora"></i> ${j.index+1}</span>
+								 		<br/><br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
-								 				
-								 				<small>작성자: ${content.userNickname}</small>
-								 				<br/>
-								 				<small>작성일: ${content.regDate}</small>
+								 				<small>${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
-								 			<hr/>
+<a href="#" class="btn btn-outline-success contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus"></i> 답변 보기</a>								 			<hr/>
 								 			
 								 			<br/>
 								 		</div>
+								 	</div>
 								 	</div>	
 								 	</div>
 								 </c:if>	
@@ -422,18 +419,18 @@
 								 <c:if test="${content.contentCode=='11'}">
 								 	<div class="col-lg-3">
 								 	<div class="text-center">
-								 		<div class="border">
-								 		<br/>
+								 		<div class="card shadow rounded" style="height: 300px;">
+								 		<div class="card-body">
+								 		<span class="badge badge-secondary"><i class="fab fa-quora"></i> ${j.index+1}</span>
+								 		<br/><br/>
 								 			<h5><strong>${content.contentName}</strong></h5>
 								 				<br/>
-								 				<small>작성자: ${content.userNickname}</small>
-								 				<br/>
-								 				<small>작성일: ${content.regDate}</small>
+								 				<small>${content.regDate}</small>
 								 				<br/><br/>
-								 				<a href="#" class="contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal"><i class="fas fa-search-plus"></i></a>
-								 			<hr/>
+<a href="#" class="btn btn-outline-success contentDetail" id="${content.contentNo}" data-toggle="modal" data-target="#contentDetailModal" ><i class="fas fa-search-plus"></i> 답변 보기</a>								 			<hr/>
 								 			
 								 			<br/>
+								 		</div>
 								 		</div>
 								 	</div>	
 								 	</div>
@@ -458,12 +455,12 @@
 	      <div class="modal-body" id="addContentModalBody">
 	      
 	      <div style="margin-bottom:10px;">
-					<select class="btn btn-outline-dark custom-select" id="boardCode" name="boardCode" style="width:200px;">
+					<select class="btn custom-select" id="boardCode" name="boardCode" style="width:200px;">
 						<option selected>게시판 선택</option>
 			    	   	  <option value="2">고객센터</option>	    
 	  				</select>
 
-		   			<select class="btn btn-outline-dark custom-select" id="contentCode" name="contentCode" style="width:200px;">
+		   			<select class="btn custom-select" id="contentCode" name="contentCode" style="width:200px;">
 							<option selected>게시글 선택</option>
 					    	   <option value="8">회원</option>
 					    	   <option value="9">판매/구매</option>
@@ -471,8 +468,8 @@
 					    	   <option value="11">이벤트/혜택</option>
 			  		</select>
 			  		
-			  		<select class="btn btn-outline-dark custom-select" id="open" name="open" style="width:200px;">
-							<option selected>게시글 선택</option>
+			  		<select class="btn custom-select" id="open" name="open" style="width:200px;">
+							<option selected>공개 여부</option>
 					    	   <option value="0">공개</option>
 					    	   <option value="1">비공개</option>
 			  		</select> 
@@ -507,8 +504,8 @@
 	    
       
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
-	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-outline-info" data-dismiss="modal">등록</button>
+	        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>
@@ -523,7 +520,7 @@
 					  <div class="modal-report">
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="modalCenterTitle"><strong><span style="color:#020B13;">자주 묻는 질문 </span></strong></h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#020B13">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
@@ -532,26 +529,25 @@
 <!-- 			    	<div style='display:table-cell;vertical-align:middle'>신고자ID -->
 <%-- 			      <input id="whiteId" name="whiteId" value="${sessionScope.user.userId}" readonly></div>  --%>
 					
-			    	<div class="col"><strong>작성자 :</strong> <span id="contentUserNickname"></span></div>
+			    	<div class="col"><strong>답변 작성자 </strong> &nbsp;&nbsp;<span id="contentUserNickname"></span></div>
 					<br/>
-					<div class="col"><strong>제목 :</strong> <hr style="background-color:#020B13"/> <span id="getContentName"></span></div>
+					<div class="col"><strong>질문 </strong> <br/><br/> <span id="getContentName"></span></div>
 					<br/>
-					<div class="col"><strong>내용 :</strong> <hr style="background-color:#020B13"/> <span id="getContentBody"></span></div>
+					<div class="col"><strong>답변 </strong> <br/><br/> <div class='card'><div class='card-body' id="getContentBody"></div></div>
 					<br/>
 					
 			    
 				<br>
-				<hr style="background-color:#020B13"/>	
 				   
-				<div class="modal-footer">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">확인</button>
-		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
+				<div class="text-center">
+		        <button type="button" class="btn btn-outline-info" data-dismiss="modal">확인</button>
+		        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
 		      </div>
 				</div></div>	        
 						      </div>
 						    </div>
 						  </div>
-	
+	</div>
 		<script src="/resources/javascript/cbpFWTabs.js"></script>
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script>

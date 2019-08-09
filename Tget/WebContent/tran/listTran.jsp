@@ -129,7 +129,7 @@
 	                var myInvoiceData = "";
 	                
                     if(data.status == false){
-                        myInvoiceData += ('<p class="text-danger">'+data.msg+'<p>');
+                        myInvoiceData += ('<p class="text-danger">배송이 시작되었으나 택배사의 배송현황이 등록되지 않았습니다.<p>');
                     }else{
                     	myInvoiceData += ('<table class="table">');      
                         myInvoiceData += ('<tr>');                
@@ -288,7 +288,7 @@
 		<br/><br/><br/><br/>
 			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 			  <div class="card-header">
-			   <strong>${user.nickName} <i class="far fa-handshake"></i> 거래내역 조회 </strong>
+			   <strong>${user.nickName}<br/> <i class="far fa-handshake"></i> 거래내역 조회 </strong>
 			  </div>
 			  <ul class="list-group list-group-flush">								
 				<c:if test="${user.role=='0'}">

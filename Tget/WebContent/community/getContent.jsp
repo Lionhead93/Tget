@@ -129,8 +129,19 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	  function fncUpdateContent(){
+		  var contentName= $("input[name='contentName']").val();
+			var contentBody= $("textarea[name='contentBody']").val();
 			
-			$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+			if(contentName == null || contentName.length<1){
+				swal("제목을 입력해 주세요.","","error");
+				return;
+			}
+			
+			swal("수정 되었습니다.","","success")
+			.then(function(r){
+				$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+			});
+			
 			}
 
 			$(function() {
@@ -142,7 +153,7 @@
 	 $(function() {
 			
 			
-			$( "button.btn.btn-primary:contains('확 &nbsp;인')" ).on("click" , function() {
+			$( "#ok" ).on("click" , function() {
 			
 				history.go(-1); 
 			});
@@ -193,31 +204,27 @@
 		
 		<div class="col-md-10 text-center">
       <div class="card text-center shadow-lg rounded">
-
+	<br/>
 		 <div class="card-body">
+		 <h3><strong>${content.contentName}</strong></h3>
+		 <br/><br/>
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>작성자</strong></div>
-			<div class="col-xs-8 col-md-4 text-left">${content.userNickname}</div>
+	  		<div class="col-md-3"><strong>작성자</strong></div>
+			<div class="col-md-3 text-left">${content.userNickname}</div>
+			<div class="col-md-3"><strong>작성일</strong></div>
+			<div class="col-md-3 text-left">${content.regDate}</div>
 		</div>
 		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>글 제목 </strong></div>
-			<div class="col-xs-8 col-md-4 text-left">${content.contentName}</div>
+		<br/>
+		<div class="card shadow-sm rounded" style="margin-left: 60px;margin-right: 60px;">
+		<div class="card-body">
+		${content.contentBody}
 		</div>
-		
-		<hr/>
-	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>글 내용</strong></div>
-	  		<div class="col-xs-8 col-md-4 text-left">${content.contentBody}</div>
 		</div>
-		
-		<hr/>
-		<div class="col-xs-8 col-md-4">
-		    <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>
-			<button type="button" id="${content.contentNo}" class="btn btn-warning" data-toggle="modal" data-target="#updateContentModal">수 정</button>
+		<br/>
+		<div class="text-center">
+		    <button type="button" id="ok" class="btn btn-outline-primary"  >확&nbsp;인</button>
+			<button type="button" id="${content.contentNo}" class="btn btn-outline-danger" data-toggle="modal" data-target="#updateContentModal">수 정</button>
 		</div>
 <%--  		<jsp:include page="/community/reply5.jsp"/>  --%>
 		<br/>	
@@ -242,11 +249,11 @@
 		  
 			    <form name="updateContent">
 			
-			    	<div class="col">작성자 : <span id="contentUserNickname"></span>${content.userNickname}</div>
+			    	<div class="col"><strong>작성자</strong>&nbsp;&nbsp;&nbsp; <span id="contentUserNickname"></span>${content.userNickname}</div>
 					<br/>
-					<div class="col">글 제목 :<hr/>  <input class="col" type="text" id="contentName" name="contentName" value="${content.contentName}"></div>
+					<div class="col"><strong>글 제목</strong><br/><br/>  <input class="col" type="text" id="contentName" name="contentName" value="${content.contentName}"></div>
 					<br/>
-					<div class="col">글 내용 :<hr/>  <textarea id="contentBody" name="contentBody">${content.contentBody}</textarea>
+					<div class="col"><strong>글 내용</strong> <hr/>  <textarea id="contentBody" name="contentBody">${content.contentBody}</textarea>
 					<script type="text/javascript">
 					CKEDITOR.replace('contentBody'
 							, {height: 200});
@@ -258,9 +265,9 @@
 				   
 				<div class="modal-footer">
 		       
-		        <button type="button" id="updateSubmit" class="btn btn-info" data-dismiss="modal">수정</button>
+		        <button type="button" id="updateSubmit" class="btn btn-outline-info" data-dismiss="modal">수정</button>
 
-		        <button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
 		      </div>
 				</div></div>	        
 						      </div>

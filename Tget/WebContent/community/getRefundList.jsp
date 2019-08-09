@@ -109,15 +109,14 @@
 		  vertical-align: middle;
 		}
     </style>
-   	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
-		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-				
+   	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>		
+		
 		<script src="/resources/javascript/common.js" ></script>
 		<script src="/resources/javascript/alarm.js" ></script>
-		<script src="/resources/javascript/jquery.min.js"></script>
 		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 		<script src="/resources/javascript/skel.min.js"></script>
 		<script src="/resources/javascript/util.js"></script>
@@ -129,7 +128,7 @@
 		 $(function() {
 				
 			 
- 			 $( "button.btn.btn-primary:contains('등록')" ).on("click" , function() {
+ 			 $( "button.btn.btn-outline-primary:contains('등록')" ).on("click" , function() {
  				
  				 //self.location="/community/addContent"	
 	 				var contentName= $("input[name='contentName']").val();
@@ -137,12 +136,14 @@
 					$(this).val($("#file").val());
 					
 					if(contentName == null || contentName.length<1){
-						alert("제목을 입력해 주세요.");
+						swal("제목을 입력해 주세요.","","error");
 						return;
 					}
+					swal("등록 되었습니다.","","success")
+					 .then(function(r){
+						 $("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/community/addContent").submit();				
+					 });
 					
-					alert("등록 되었습니다.");
-					$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/community/addContent").submit();				
  				}); 
 		 });
 		 
@@ -150,12 +151,25 @@
 			
 			 var contentNo = "";
 			 
-			 $( "button.btn.btn-primary:contains('확인')" ).on("click" , function() {
-				self.location = "/community/updateRefund?contentNo="+contentNo;
+			 $( "button.btn.btn-outline-primary:contains('확인')" ).on("click" , function() {
+				 swal("환불처리 되었습니다.","","success")
+				 .then(function(r){
+					 self.location = "/community/updateRefund?contentNo="+contentNo;	 
+				 });
+				
 			});
 			 
 			 $( ".refundCheck" ).on("click" , function() {
 			 	 contentNo = $(this).attr("id").trim();
+			 	 var refundVideo = '/resources/video/'+$(this).children("#refundVideo").text().trim();			 	
+			 	 var display = "";			 	 
+			 	display += '<video controls autoplay="autoplay" style="width: 500px;">';
+			 	display += '<source id="refundShow" src="'+refundVideo+'" type="video/mp4">';
+			 	display += '</video>';				
+				$('#videoRow').html(display);
+				
+				$('#refundModal').modal('show');
+			 	
 			});			
 	
 	});			  
@@ -172,12 +186,13 @@
 		
       <!--  table Start /////////////////////////////////////-->
 
-		      	<div class="text-right" style="margin-right: 130px; margin-top: 30px;">       	
-		    	<p class="text-dark" ><strong>전체  ${totalCount } 건수</strong></p>
+<div class="text-right" style="margin-right: 120px; margin-top: 20px;">  		    	
 <!-- 		    	<button type="button" id="currentRegDate" class="btn btn-info">최신순</button> -->
-				<button type="button" id="addContent" class="btn btn-info" data-toggle="modal" data-target="#addContentModal">글 쓰기</button>
+
+		    	<button type="button" id="addContent" class="btn btn-outline-info" data-toggle="modal" data-target="#addContentModal"><i class="fas fa-pen-alt"></i>  게시글 작성</button>
+			
 		
-				</div>
+	</div>
 				
 				<br/>
 				<div class="row">
@@ -195,11 +210,12 @@
 				</div></div>
 		      <div class="col-md-10 text-center">
 		       <div class="row">
-		       <c:forEach var="content" items="${list}" varStatus="j" > 
+		       <c:forEach var="content" items="${list}" varStatus="j" >
+		       <c:if test="${content.refundCheck=='1'}">
 		        <div class="col-lg-3">
-		        <div class="text-center">
-		        <div class="border">
-						<video controls id="videoplay"  style="width: 250px;">
+		        <div class="card shadow rounded">
+		        <div class="car-body">
+						<video controls autoplay="autoplay" id="videoplay"  style="width: 250px;">
 							<source src="/resources/video/${content.videoName}" type="video/mp4">
 						</video>      
 			          <div style="text-align: left; padding-left: 30px;">
@@ -207,22 +223,16 @@
 			          <p>작성자 : ${content.userNickname}</p>
 			          <p>글 제목 : ${content.contentName}</p>
 			          <p>작성일 : ${content.regDate}</p></div>
-			          <c:if test="${content.refundCheck=='1'}">
-				          <p class="text-danger">         
-				          	*검증 대기중&ensp;	
-				          	<c:if test="${sessionScope.user.role=='2'}">
-				          	<a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="far fa-check-circle" style="color:#020B13;font-size:20px;"></i></a></c:if>			          
-				          </p>
-				          	</c:if>
-				          <c:if test="${content.refundCheck=='0'}">
-				          <p class="text-success">
-				          	*검증 완료	
-				          </p>
-				          </c:if>
-	    	
+			          <c:if test="${sessionScope.user.role=='2'}">
+				      <a href="#" class="refundCheck" id="${content.contentNo}" data-target="#contentModal" data-toggle="modal" ><i class="far fa-check-circle" style="color:#020B13;font-size:20px;"></i>
+				      <div id="refundVideo" style="display: none;">${content.videoName}</div></a>
+				      </c:if> 
+				      <br/><br/>   	
 			      </div>
+			      
 			      </div>			      
 		        </div><!-- /.col-lg-4 -->
+		        </c:if> 
 		        </c:forEach>
 		        </div>
     </div>
@@ -231,20 +241,25 @@
  	
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
-	 <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-md" role="document">
-					    <div class="modal-content">
+	 <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content text-center">
 					      <div class="modal-header"> 
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body"><strong>환불 처리 하시겠습니까?</strong></div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-					        <button type="button" class="btn btn-primary">확인</button>
+					      <div id='videoRow'>
+					      
+					      </div>
+					      <div class="modal-body text-center"><strong>환불 처리 하시겠습니까?</strong></div>
+					      <br/>
+					      <div class="text-center">
+					        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-outline-primary">확인</button>
 					        
 					      </div>
+					      <br/>
 					    </div>
 					  </div> 
 	</div>
@@ -263,13 +278,13 @@
 	 		
 			<input type="hidden" id="boardCode" name=boardCode value="2" />
 			<input type="hidden" id="contentCode" name=contentCode value="7" />
-   			
+   			<br/>
    			 <select id="open" name="open">
 				<option value="">공개 여부</option>
 					<option value="0">공개</option>
 					<option value="1">비공개</option>
 			</select>	
-			
+			<br/><br/>
 			<div class="form-group">
 		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">작성자</label> 
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${sessionScope.user.nickName}" readonly>
@@ -296,13 +311,13 @@
 	      </div>
 	      
 	      <div class="form-group">
-    		<label for="videoName">동영상 업로드</label>
+    		<label for="videoName" class="col-sm-offset-1 col-sm-3 control-label">동영상 업로드</label>
     		<input type="file" class="form-control" id="videoName" name="file" value="${!empty content.videoName? content.videoName : ''}">
  		 </div>
  		 
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">등록</button>
-	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">등록</button>
+	        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>

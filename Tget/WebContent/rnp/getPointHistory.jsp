@@ -73,11 +73,8 @@
 		}
 		.container-fluid,td,th{ 
 	 		font-size: 20px;
-	 		color: #041625;    
- 		} 
-		#footer{
-			background-color: #1B1B1F ;
-		}
+	 		color: #041625;
+	 	}
 		a, hr,th,td{
 				color: #041625;
 		}	

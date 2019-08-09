@@ -72,10 +72,9 @@ public class CommunityDaoImpl implements CommunityDao{
 	@Override
 	public void updateReport(Report report) throws Exception {
 		sqlSession.update("CommunityMapper.updateReport", report);
+		sqlSession.update("CommunityMapper.updateOpen", report.getContentNo());
 	}
 	
-
-	//// ��� ����
 	@Override
 	public void deleteReply(int replyNo) throws Exception{
 		sqlSession.delete("CommunityMapper.deleteReply", replyNo);

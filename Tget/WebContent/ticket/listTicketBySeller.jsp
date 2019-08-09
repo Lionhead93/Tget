@@ -86,12 +86,11 @@
       <br/><br/><br/><br/>
       	<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 			  <div class="card-header">
-			   <strong>${user.nickName} <i class="far fa-user"></i> My Ticket </strong>
+			   <strong>${user.nickName}<br/> <i class="far fa-user"></i> My Ticket </strong>
 			  </div>
 			  <ul class="list-group list-group-flush">								
 				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
 				<li class="list-group-item"><a href="#">자유게시판<i class="fas fa-check"></i> 삽니다</a></li>
-				<li class="list-group-item"><a href="#">티켓판매 공지</a></li>
 			  </ul>		  
 		</div>
 		</div>    	
