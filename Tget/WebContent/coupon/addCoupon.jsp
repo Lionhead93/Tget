@@ -40,8 +40,10 @@ $(function(){
             					"Content-Type" : "application/json"
             				},            
             	            success:function(data){
-            	            	alert("발급완료");
-            	            	content.remove();
+            	            	swal("발급완료","","success")
+            	            	.then(function(r){
+            	            		content.remove();
+            	            	});            	            	
             	            }
             	    	});
             		}

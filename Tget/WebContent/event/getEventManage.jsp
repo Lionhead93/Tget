@@ -278,12 +278,9 @@
 		body{
 			background-color: #EBF7FF;
 			color: #041625;
-		}	
-		#footer{
-			background-color: #1B1B1F ;
 		}		
 		a, hr{
-			color: #FBFCFE ;	
+			color: black ;	
 		}		
 		button.btn-light:hover{
 			background-color: gray;

@@ -154,12 +154,15 @@
 					var contentBody= $("textarea[name='contentBody']").val();
 					
 					if(contentName == null || contentName.length<1){
-						alert("제목을 입력해 주세요.");
+						swal("제목을 입력해 주세요.","","error");
 						return;
 					}
 					
-					alert("수정 되었습니다.")
-					$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+					swal("수정 되었습니다.","","success")
+					.then(function(r){
+						$("form[name='updateContent']").attr("method" , "POST").attr("action" , "/community/updateContent").submit();
+					});
+					
  											
 				});
 	 });

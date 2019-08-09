@@ -50,6 +50,11 @@
 		a, hr{
 			color: black;	
 		}
+		.card:hover{
+			color: #041625;
+			background-color : #D9E5FF; 
+			cursor: pointer;
+		}
 		table{
 			color: #020B13;
  			border: 1px solid #88e3f7;		   
@@ -141,7 +146,6 @@
 	
 		function fncAddReport(){
 			
-			//alert($("input[name='whiteNickname']").val());
 			$("form[name='addReport']").attr("method" , "POST").attr("action" , "/community/addReport").submit();
 			}
 
@@ -163,15 +167,30 @@
  					//self.location="/community/addContent"	
 	 				var contentName= $("input[name='contentName']").val();
 					var contentBody= $("textarea[name='contentBody']").val();
+					var boardCode = $("#boardCode option:selected").val();
+					var contentCode = $("#contentCode option:selected").val();
 					
-					if(contentName == null || contentName.length<1){
-						alert("제목을 입력해 주세요.");
+					
+					if(boardCode == null || boardCode.length<1){
+						swal("게시판을 선택해 주세요.","","error");
+						return;
+					}
+					if(contentCode == null || contentCode.length<1){
+						swal("머리말을 선택해 주세요.","","error");
 						return;
 					}
 					
-					alert("등록 되었습니다.")
-					$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
- 				});
+					if(contentName == null || contentName.length<1){
+						swal("제목을 입력해 주세요.","","error");
+						return;
+					}
+					
+					swal("등록 되었습니다.","","success")
+					.then(function(r){				
+						$("form[name='addContent']").attr("enctype","multipart/form-data").attr("method" , "POST").attr("action" , "/community/addContent").submit();
+ 				
+					});
+ 			 });
 			 
 			 
 			 $( "a[href='#']:contains('티켓 거래 공지')" ).on("click" , function() {
@@ -206,7 +225,7 @@
 			 
  			 $( ".reportRing" ).on("click" , function() {
  				 	if('${user}'==''){
- 				 		alert("로그인을 해주세요");
+ 				 		swal("로그인을 해주세요","","warning");
  				 		return;
  				 	}
  				 	$(this).attr("data-target","#addReportModal");
@@ -295,7 +314,6 @@
 				
 					var contentNo = $(this).attr("id").trim();
 					var badCount = $('a').closest("#"+contentNo+"").text().trim();
-					alert(badCount);
 					var result1 = parseInt(badCount)+1;
 					var content1 = $('a').closest("#"+contentNo+"");
 					
@@ -392,10 +410,10 @@
 			<div class="row">
 				<div class="col-md-4"><p><strong>글 제목</strong>&ensp;<i class="fas fa-align-justify"></i></p></div>		     			        
 				<div class="col-md-2"><p><strong>작성자</strong>&ensp;<i class="fas fa-user-edit"></i></p></div>	        
-				<div class="col-md-2"><p><strong>작성일</strong>&ensp;<i class="far fa-calendar-alt"></i></p></div>
+				<div class="col-md-3"><p><strong>작성일</strong>&ensp;<i class="far fa-calendar-alt"></i></p></div>
 				<div class="col-md-1"><p><strong>조회수</strong></div>
 				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<div class="col-md-3"></div>		
+				<div class="col-md-2"><p><strong>공감/비공감</strong></p></div>		
 				</c:if>
 		    </div>
 		</div>        
@@ -405,16 +423,16 @@
 		<c:forEach var="content" items="${list}">
 
 	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
-		 <div class="card-body" style="padding-top:10px;">	
+		 <div class="card-body" style="padding-top:20px;">	
 			<div class="row">
 				<div class="col-md-4" ><p>${content.contentName}</p></div>
 				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
 				<div class="col-md-2"><p>${content.userNickname}</p></div>
 				<div id="userId" style="display:none;">${user.userId}</div>	        
-				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-3"><p>${content.regDate}</p></div>
 				<div class="col-md-1"><p>${content.viewCount }</p></div>
 				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<div class="col-md-3">
+				<div class="col-md-2">
 				</div>		
 				</c:if>	
 				</div>
@@ -427,16 +445,16 @@
 	<c:forEach var="content" items="${list}">
 	<c:if test="${content.contentCode=='0' || content.contentCode=='1'}">
 	<div class="card text-center shadow rounded-pill" id="gradient" style="margin-bottom: 10px; height:40px; background-color:#cddefa;">
-		 <div class="card-body" style="padding-top:10px;">	
+		 <div class="card-body" style="padding-top:20px;">	
 			<div class="row">
 				<div class="col-md-4" ><p><span class="text-danger"><strong>[공지]&ensp;</strong></span>${content.contentName}</p></div>
 				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
 				<div class="col-md-2"><p>${content.userNickname}</p></div>
 				<div id="userId" style="display:none;">${user.userId}</div>	        
-				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-3"><p>${content.regDate}</p></div>
 				<div class="col-md-1"><p>${content.viewCount }</p></div>
 				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<div class="col-md-3">
+				<div class="col-md-2">
 				</div>		
 				</c:if>	
 				</div>
@@ -446,24 +464,24 @@
 	</c:forEach>
 	<c:forEach var="content" items="${list}">
 	<c:if test="${content.contentCode!='0' && content.contentCode!='1'}">
-	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:40px;">
-		 <div class="card-body" style="padding-top:10px;">	
+	<div class="card text-center shadow rounded-pill" style="margin-bottom: 10px; height:65px;">
+		 <div class="card-body" style="padding-top:20px;">	
 			<div class="row">
 				<div class="col-md-4" ><p>${content.contentName}</p></div>
 				<div id="contentNo" style="display:none;">${content.contentNo}</div>		     			        
 				<div class="col-md-2"><p>${content.userNickname}</p></div>
 				<div id="userId" style="display:none;">${user.userId}</div>	        
-				<div class="col-md-2"><p>${content.regDate}</p></div>
+				<div class="col-md-3"><p>${content.regDate}</p></div>
 				<div class="col-md-1"><p>${content.viewCount }</p></div>
 				<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-				<div class="col-md-3">
+				<div class="col-md-2">
 				<p>
 				<!-- 공감 -->
-			   	  <a href="#" class="good" id="${content.contentNo}"  style=color:#020B13;><i class="fas fa-thumbs-up"></i></a>
+			   	  <a href="#" class="good text-info" id="${content.contentNo}"  style=color:#020B13;><i class="fas fa-thumbs-up"></i></a>
 			   	  <span name="${content.contentNo}" style=color:#020B13;>${content.goodCount}</span>
 			   	  
 			   	  <!-- 비공감 -->
-			   	  <a href="#" class="bad" id="${content.contentNo}" style=color:#020B13;><i class="fas fa-thumbs-down"></i></a>
+			   	  <a href="#" class="bad text-danger" id="${content.contentNo}" style=color:#020B13;><i class="fas fa-thumbs-down"></i></a>
 			   	  <a id="${content.contentNo}"  style=color:#020B13;>${content.badCount}</a> 
 			   	  
 			   	  <!-- 신고 하기 -->
@@ -490,20 +508,22 @@
 			
 				<div style="margin-bottom:10px;">
 					<select class="btn btn-outline-dark custom-select" id="boardCode" name="boardCode" style="width:200px;">
-						<option selected>게시판 선택</option>
+						<option value="" selected>게시판 선택</option>
 			    	    <c:if test="${sessionScope.user.role == '2'}">	  
 			    		  <option value="0">공지사항</option>
 			    	    </c:if>
-			    	 	<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='3'||search.searchCondition=='2'&&search.searchKeyword=='4'||search.searchCondition=='2'&&search.searchKeyword=='5'}">
-			    		  <option value="1">자유게시판</option>
-			    		</c:if>
-			    		<c:if test="${search.searchCondition=='2'&&search.searchKeyword=='6'||search.searchCondition=='2'&&search.searchKeyword=='7'}">
+			    	 	<c:if test="${search.searchKeyword=='3'||search.searchKeyword=='4'||search.searchKeyword=='5'}">
+			    		  <option value="1" selected="selected">자유게시판</option>
 			    		  <option value="2">고객센터</option>
+			    		</c:if>
+			    		<c:if test="${search.searchKeyword=='6'||search.searchKeyword=='7'}">
+			    		<option value="1">자유게시판</option>
+			    		  <option value="2" selected="selected">고객센터</option>
 			    		</c:if>
 	  				</select>
 	  			
 		  			<select class="btn btn-outline-dark custom-select" id="contentCode" name="contentCode" style="width:200px;">
-						<option selected>게시글 선택</option>
+						<option value="" selected>게시글 선택</option>
 			    	  <c:if test="${sessionScope.user.role == '2'}">	  
 			    		<option value="0">티켓 거래 공지</option>
 			    		<option value="1">자유게시판 이용 공지</option>
@@ -525,8 +545,7 @@
 		  			</select>
 	  			
 		  			<select class="btn btn-outline-dark custom-select" id="open" name="open" style="width:200px;">
-						<option selected>공개 여부</option> 
-			    		<option value="0">공개</option>
+			    		<option value="0" selected="selected">공개</option>
 			    	  	<option value="1">비공개</option>
 		  			</select>
 				</div>
@@ -560,7 +579,7 @@
 	      
       	
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-info" data-dismiss="modal">등록</button>
+	        <button type="button" class="btn btn-info">등록</button>
 	        <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
 	      </div>
 	      </div>

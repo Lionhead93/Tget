@@ -60,11 +60,11 @@
 	 	var result = numberWithOutCommas(price);
 	 	
 		if(result == null || result.length<4){
-			alert("가격은 1,000원 이상으로 반드시 입력하여야 합니다.");
+			swal("가격은 1,000원 이상으로 반드시 입력하여야 합니다.","","error");
 			return false;
 		}
 		if(isNaN(result)==true) {
-			alert("가격에 숫자입력 바랍니다. 입력 값 :"+result);
+			swal("가격에 숫자입력 바랍니다. 입력 값 :"+result,"","error");
 			return false;
 		}
 		
@@ -78,7 +78,10 @@
 						"Content-Type" : "application/json"
 					},
 					success : function(data) {
-						alert("가격등록 성공");							
+						swal("가격등록 성공","","success")
+						.then(function(r){
+							
+						});
 					}
 				});
 		return true;
@@ -274,14 +277,19 @@
 							//Form 유효성 검증
 						 	var file = $("input[name='file']").val();							
 							if(file == null || file.length<1){
-								alert("이미지등록 바람");
+								swal("이미지등록 바람","","error");
+								
 								return;
 							}
-							$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
+							swal("이미지등록 성공","","success")
+							.then(function(r){
+								$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
+							});
+							
 						}						
 						$(function(){
 						    
-						    $("button:contains('요 청')").on("click",function(){
+						    $("button:contains('요 청')").on("click",function(){						    	
 						    	fncAddTicketImage();	    	
 						    });						    
 						    $("#file").change(function(){

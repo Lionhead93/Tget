@@ -119,12 +119,8 @@
 	
 	</script>	
 	<style>
-	
-		#footer{
-			background-color: #1B1B1F ;
-		}
 		a, hr{
-				color: #FBFCFE ;	
+				color: black ;	
 			}		
 		button.btn-light:hover{
 			background-color: gray;

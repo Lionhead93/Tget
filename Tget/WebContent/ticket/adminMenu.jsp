@@ -306,8 +306,11 @@ function ticketModalClick(){
 			},
           	success: function(data){
           		
-          		alert(data.message);
-          		content.remove();         		
+          		swal(data.message,"","success")
+          		.then(function(r){
+          			content.remove();         			
+          		});
+          		
           	}
 		});
 	});
@@ -348,8 +351,11 @@ function getSellerInfo(){
 				"Content-Type" : "application/json"
 			},
           	success: function(data){
-          		alert(data.message);
-          		content.remove();
+          		swal(data.message,"","success")
+          		.then(function(r){
+          			content.remove();	
+          		});
+          		
           	}
 		});		
 	});
@@ -368,8 +374,10 @@ function getSellerInfo(){
 				"Content-Type" : "application/json"
 			},
           	success: function(data){
-          		alert(data.message);
-          		content.remove();
+          		swal(data.message,"","success")
+          		.then(function(r){
+          			content.remove();	
+          		});
           	}
 		});	
 		
@@ -476,11 +484,10 @@ function getSellerInfo(){
 		        var msg = '입금이 완료되었습니다.';			        
 		        var tmp = 0;
 		    } else {
-		        var msg = '입금에 실패하였습니다.';			        
-		        msg += '에러내용 : ' + rsp.error_msg;
+		        var msg = '입금에 실패하였습니다.';		
 		        var tmp = 1;
 		    }		
-		    alert(msg);
+		    swal(msg,"","info");
 		    if(tmp==0){
 		    	$.ajax({
 					url : "/tran/rest/depositSeller/"+tranNo ,
@@ -491,8 +498,10 @@ function getSellerInfo(){
 						"Content-Type" : "application/json"
 					},
 		          	success: function(data){
-		          		alert(data.message);
-		          		history.go(0);
+		          		swal(data.message,"","success")
+		          		.then(function(r){
+		          			history.go(0);
+		          		});
 		          	}
 				});			    	
 		    }

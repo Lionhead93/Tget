@@ -59,17 +59,12 @@
 		//Form 유효성 검증
 	 	var deliveryCompany = $("#deliveryCompany option:selected").val();
 	 	var deliveryNo = $("input[name='deliveryNo']").val();
-	 	/* 
-		if(deliveryNo == null || deliveryNo.length<1){
-			alert("운송장번호는 반드시 입력하여야 합니다.");
-			return;
-		}
-		if(deliveryCompany == null || deliveryCompany.length<1){
-			alert("배송사를 선택해주세요.");
-			return;
-		} */
-		alert("등록 완료!");
-		$("form[name='addDelivery']").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();
+	 	
+		swal("등록 완료!","","success")
+		.then(function(r){
+			$("form[name='addDelivery']").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();	
+		});
+		
 	}	
 	
 	
@@ -87,7 +82,7 @@
 	    	
 	    	var tranCode = $(this).closest("p").attr("id").trim();
 	    	if(tranCode=='0'){
-	    		alert("입금완료 후 채팅을 신청하세요.");
+	    		swal("입금완료 후 채팅을 신청하세요.","","error");
 	    		return;
 	    	}
 	    	var opponentId = $(this).attr("id").trim();
@@ -110,7 +105,7 @@
 	            	console.log(data);                
 	                
                     if(data.status == false){
-                    	alert(data.msg);
+                    	swal(data.msg,"","info");
                     }else{
                     	fncAddDelivery();
                     }
@@ -268,11 +263,11 @@
 						dataType : "json",
 						success : function(JSONData, status){
 							$("#"+$("#reviewTranNo").val()).text("-");
-// 							alert(status);
 							$("button.close").click();
-							alert("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.");
-// 							alert("JSONData : \n"+JSONData.stringify());
-							history.go(0);
+							swal("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.","","success")
+							.then(function(r){
+								history.go(0);
+							});							
 						}			
 				});	
 		});
@@ -404,7 +399,7 @@
 					      	<div class="form-group" >
 							     <br/>
 							     <strong>배송 사</strong> <br/><br/>	
-							        <select id="deliveryCompany" name="deliveryCompany">
+							        <select class="custom-select" id="deliveryCompany" name="deliveryCompany">
 									    <option value="">선택</option>
 									    <option value="04">CJ대한통운</option>									    
 									    <option value="01">우체국택배</option>
@@ -416,7 +411,7 @@
 									    <option value="23">경동택배</option>
 									    <option value="53">농협택배</option>
 									</select><br/><br/>
-							      <strong>운송장 번호</strong><br/><br/><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; border: 1px solid black;"/>
+							      <strong>운송장 번호</strong><br/><br/><input class="form-control" type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; "/>
 							      <br/><br/>
 							      <div class="text-center" id="loading"></div>
 							      <br/><br/>

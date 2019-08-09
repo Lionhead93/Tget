@@ -48,6 +48,10 @@
 			left: 80px;
 			width: 250px;
 		}
+		.getEvent:hover{
+			font-size: 25px;
+			cursor: pointer;
+		}
     </style>
     
 	<script type="text/javascript">
@@ -111,7 +115,7 @@
 				  						
 			      <div class="card-body" id="${ticket.event.eventId}">
 			        <h5 class="card-title">				       
-				   		  <strong><a class="getEvent" href="#">${ticket.event.eventName}</a></strong>
+				   		  <strong><a class="getEvent">${ticket.event.eventName}</a></strong>
 				     </h5>
 			        <p class="card-text">
 			        </p>

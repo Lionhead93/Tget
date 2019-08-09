@@ -50,11 +50,14 @@
 	 	var file = $("input[name='file']").val();
 		
 		if(file == null || file.length<1){
-			alert("이미지등록 바람");
+			swal("이미지등록를 등록해주세요.","","warning");
 			return;
 		}
-		alert("등록성공!");
-		$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();
+		swal("등록성공!","","success")
+		.then(function(r){
+			$("form").attr("method" , "POST").attr("action" , "/ticket/addTicketImage").attr("enctype" , "multipart/form-data").submit();	
+		});
+		
 		
 	}		
 	

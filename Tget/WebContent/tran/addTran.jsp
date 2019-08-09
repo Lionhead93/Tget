@@ -70,23 +70,23 @@
 		var orderAmount = $("input[name='orderAmount']").val();
 		
 		if(orderAmount == null || orderAmount.length<1){
-			alert("수량은 반드시 입력하여야 합니다.");
+			swal("수량은 반드시 입력하여야 합니다.","","error");
 			return "noGood";
 		}
 		if(addrDetail == null || addrDetail.length<1){
-			alert("상세주소는 반드시 입력하여야 합니다.");
+			swal("상세주소는 반드시 입력하여야 합니다.","","error");
 			return "noGood";
 		}
 		if(deliveryAddr == null || deliveryAddr.length<1){
-			alert("주소는 반드시 입력하셔야 합니다.");
+			swal("주소는 반드시 입력하셔야 합니다.","","error");
 			return "noGood";
 		}			
 		if(isNaN(totalPrice)==true) {
-			alert("포인트에 숫자입력 바랍니다.");
+			swal("포인트에 숫자입력 바랍니다.","","error");
 			return "noGood";
 		}
 		if(parseInt(userPoint) < parseInt(usePoint)){			
-			alert("보유 포인트 부족");
+			swal("보유 포인트 부족","","error");
 			return "noGood";
 		}
 		
@@ -106,7 +106,7 @@
 			
 			var totalPrice = numberWithOutCommas($("input[name='totalPrice']").val());
 			if(totalPrice>1000000){
-				  alert("카카오페이는 100만원까지 가능합니다.");
+				  swal("카카오페이는 100만원까지 가능합니다.","","warning");
 				  return;
 			  }
 				$.ajax({
@@ -126,7 +126,7 @@
 	              	  
 	              	},
 	             	 error: function(){              	
-	                  alert('error');                   
+	                  swal("잘못된 접근입니다.","","error");                   
 	              	}              
 	          	});
 	    });
@@ -155,12 +155,11 @@
 			        $("input[name='paymentNo']").val(rsp.imp_uid);			        
 			        var tmp = 0;
 			    } else {
-			        var msg = '결제에 실패하였습니다.';			        
-			        msg += '에러내용 : ' + rsp.error_msg;
+			        var msg = '결제에 실패하였습니다.';		
 			        var tmp = 1;
 			    }
 			
-			    alert(msg);
+			    swal(msg,"","info");
 			    if(tmp==0){
 			    	fncAddTran();
 			    }
