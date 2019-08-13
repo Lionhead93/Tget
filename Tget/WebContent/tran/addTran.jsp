@@ -143,7 +143,7 @@
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '${ticket.event.eventName}',
-			    amount : result,
+			    amount : 150,
 			    buyer_email : '${user.userId}',
 			    buyer_name : '${user.userName}',
 			    buyer_tel : '${user.phone}',

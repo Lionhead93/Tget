@@ -76,7 +76,10 @@ $("#addYoutube").on("click",function(){
      					},
      					dataType : "json",
      					success : function(JSONData, status){
-     						swal("등록 완료!","","success");
+     						swal("등록 완료!","","success")
+     						.then(function(r){
+     							history.go(0);
+     						});
      					}	    		
      		 });	
 		});
