@@ -29,6 +29,10 @@
 	<script type="text/javascript">
 	var str = "";
 	var arr = [];
+
+	function clickEvent(){
+		$("div.card").click();
+	}
 	
 	$(function(){		
 		$("div.card").on("click",function(){			
@@ -59,18 +63,19 @@
 							$("#searchKeyword").val(JSONData.search.searchKeyword);
 							if (JSONData.isTheLast == "true") {
 								$("#addEvent").attr("style","display:none;");
-							}
+							} 
 							$.each(JSONData.eventList, function(index,value){
-								var tempStr = '<div class="card mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;">'
+								var tempStr = '<div class="card mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;" '
+								+'onclick="clickEvent()">'
 									+'<div class="card-header" align="center"><h5  style="color:#193147;">T-GET</h5></div>'
-									+'<div class="card-body text-center"><h5 class="card-title"><strong>'							
+									+'<div class="card-body text-center" ><h5 class="card-title"><strong>'							
 									+value.koName+'</strong></h5><p class="card-text">'
 									+value.koLocation+'<br/></p></div>'
-										'<input type="hidden"  class="kn" value="'+value.koName+'" >'
-										'<input type="hidden"  class="el" value="'+value.koLocation+'" >'
-										'<input type="hidden" class="kp" value="'+value.performersName+'">'
-										'<input type="hidden" class="category" value="'+value.ancestorsCategory+'" >'	
-										'<input type="hidden"  class="getEvent" value="'+value.name+'"></div>';
+										+'<input type="hidden"  class="kn" value="'+value.koName+'" >'
+										+'<input type="hidden"  class="el" value="'+value.koLocation+'" >'
+										+'<input type="hidden" class="kp" value="'+value.performersName+'">'
+										+'<input type="hidden" class="category" value="'+value.ancestorsCategory+'" >'	
+										+'<input type="hidden"  class="getEvent" value="'+value.name+'"></div>';
 								$("div.eList").append(tempStr);
 							});		
 							$("#loading").attr("style","display:none;");
@@ -157,7 +162,7 @@
 						<input type="hidden"  class="getEvent"  value="${i.name }">
 				</div>
 			</c:forEach>			
-			<input type="hidden"  id="categoryTwo" name="category"  value="" >
+			<input type="hidden"  id="categoryTwo" name="category"  value="${!empty category? category:''}" >
 			<input type="hidden"  id="eventName" name="eventName"  value="" >
 			<input type="hidden"  id="koName" name="koName"  value="" >
 			<input type="hidden"  id="koLocation" name="koLocation"  value="" >
@@ -165,11 +170,11 @@
 	</div>
 	</form>	
 </div><!-- container -->
-<div align="center">
-	<div align="center">
-		<button id="addEvent" class="btn btn-primary">더보기</button>
-	</div>
-</div>
+<!-- <div align="center"> -->
+<!-- 	<div align="center"> -->
+<!-- 		<button id="addEvent" class="btn btn-primary">더보기</button> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 <div align="center" style="margin-left:45%;margin-right:45%;">	
 	<div align="center"  id="loading"  style="display:none;">
