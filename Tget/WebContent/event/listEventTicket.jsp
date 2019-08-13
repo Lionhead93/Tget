@@ -98,7 +98,10 @@
      					},
      					dataType : "json",
      					success : function(JSONData, status){
-     						swal("삭제 완료!","","success");
+     						swal("삭제 완료!","","success")
+     						.then(function(r){
+     							history.go(0);
+     						});
      					}	    		
      		 });
 		});

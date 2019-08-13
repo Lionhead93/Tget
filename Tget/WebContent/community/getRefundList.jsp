@@ -163,7 +163,7 @@
 			 	 contentNo = $(this).attr("id").trim();
 			 	 var refundVideo = '/resources/video/'+$(this).children("#refundVideo").text().trim();			 	
 			 	 var display = "";			 	 
-			 	display += '<video controls autoplay="autoplay" style="width: 500px;">';
+			 	display += '<video controls autoplay="autoplay" style="width: 500px; height: 300px;">';
 			 	display += '<source id="refundShow" src="'+refundVideo+'" type="video/mp4">';
 			 	display += '</video>';				
 				$('#videoRow').html(display);
@@ -213,9 +213,9 @@
 		       <c:forEach var="content" items="${list}" varStatus="j" >
 		       <c:if test="${content.refundCheck=='1'}">
 		        <div class="col-lg-3">
-		        <div class="card shadow rounded">
+		        <div class="card shadow rounded" style="height: 400px;">
 		        <div class="car-body">
-						<video controls autoplay="autoplay" id="videoplay"  style="width: 250px;">
+						<video controls autoplay="autoplay" id="videoplay"  style="width: 250px; height: 150px;">
 							<source src="/resources/video/${content.videoName}" type="video/mp4">
 						</video>      
 			          <div style="text-align: left; padding-left: 30px;">

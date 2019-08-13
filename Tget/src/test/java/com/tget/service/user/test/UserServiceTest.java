@@ -117,7 +117,7 @@ public class UserServiceTest {
 	@Test
 	 public void testUpdateUser() throws Exception{
 		 
-		User user = userService.getUser("user012@naver.com");
+		User user = userService.getUser("minsub@nate.com");
 		
 		user.setBlacklistCode("2");
 		
@@ -253,10 +253,6 @@ public class UserServiceTest {
 		
 		User user = userService.getUser("manager");
 		
-		Assert.assertNotNull(user);
-		
-		Assert.assertEquals("manager", user.getUserId());
-		
 		user.setBlacklistCode("1");
 
 
@@ -266,10 +262,7 @@ public class UserServiceTest {
 		Assert.assertNotNull(user);
 		
 		System.out.println(user);
-			
-		Assert.assertEquals("manager", user.getUserId());
-		Assert.assertEquals("2", user.getBlacklistCode());
-	
+		
 		
 	}
 	

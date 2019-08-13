@@ -170,19 +170,19 @@
 						<div class="card-body" style="padding-top:10px;" >	
 							<div class="row" >
 								<div class="col-md-2 seller"  data-toggle="modal"  data-target="#tranModal" 
-				  			 	 id="seller${i.tranNo }"  >
+				  			 	  >
 				  			 		<input type="hidden"  value="${i.tranNo }"/>
-				  				 	<strong>${i.seller.nickName }	</strong>
+				  				 	<strong id="seller${i.tranNo }" >${i.seller.nickName }	</strong>
 								</div>    		
 								<div class="col-md-6 record"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter"   id="reviewBody${i.tranNo}">
+								 data-target="#exampleModalCenter"  >
 									  <input type="hidden"  value="${i.tranNo }"/>
-									 <small>${i.reviewBody}</small>
+									 <small id="reviewBody${i.tranNo}">${i.reviewBody}</small>
 								</div>    	
 								<div class="col-md-2 record"  data-toggle="modal" 						
-								 data-target="#exampleModalCenter"  id="score${i.tranNo}">
+								 data-target="#exampleModalCenter"  >
 									  <input type="hidden"  value="${i.tranNo }"/>
-									 <p>${i.score}.0</p>
+									 <p id="score${i.tranNo}">${i.score}.0</p>
 								</div>    	
 								<div class="col-md-2 record"  data-toggle="modal" 						
 								 data-target="#exampleModalCenter" >

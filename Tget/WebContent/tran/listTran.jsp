@@ -117,10 +117,10 @@
 	    $("a.searchDelivery").on("click", function(){
 	    	tranNo = $(this).attr("id").trim();	    	
 	    	
-	    	var deliveryCompany = ""+$(this).children("#tranDeliveryCompany").text().trim()+"";
-	    	var deliveryNo = ""+$(this).children("#tranDeliveryNo").text().trim()+"";
+	    	var deliveryCompany = ""+$(this).children(".tranDeliveryCompany").text().trim()+"";
+	    	var deliveryNo = ""+$(this).children(".tranDeliveryNo").text().trim()+"";
 	    		    	
-	    	$.ajax({
+	    	 $.ajax({
 	            type:"GET",
 	            dataType : "json",
 	            url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+key+"&t_code="+deliveryCompany+"&t_invoice="+deliveryNo,
@@ -156,7 +156,7 @@
                     header += ('</thead>'); 
                     header += ('<tbody>');
                     $.each(trackingDetails,function(key,value) {
-                        myTracking += ('<tr>');                
+                        myTracking += ('<tr style="background-color: white;">');                
                         myTracking += ('<td>'+value.timeString+'</td>');
                         myTracking += ('<td>'+value.where+'</td>');
                         myTracking += ('<td>'+value.kind+'</td>');
@@ -167,7 +167,7 @@
                     myTracking += ('</table>');
                     $("#searchTracking").html(header+myTracking);
 	            }
-	        });
+	        }); 
 	    	
 	    });
 	    $("a.startDelivery").on("click", function(){
@@ -344,8 +344,9 @@
 					      <c:if test="${tran.tranCode==2}">* 배송 중 
 					      <a class="searchDelivery" id="${tran.tranNo}" href="#" data-toggle="modal" data-target="#searchDeliveryModal">
 					      <i class="fas fa-truck"></i>
-					      <div id="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</div>
-					      <div id="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</div></a>
+					      <span class="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</span>
+					      <span class="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</span>
+					      </a>
 					      </c:if>
 					      <c:if test="${tran.tranCode==3}">* 배송 완료</c:if>
 					      <c:if test="${tran.tranCode==4}">* 환불 및 취소</c:if>
@@ -432,7 +433,7 @@
 					</div>
 	<!-- 배송 조회 모달 -->
 					<div class="modal fade" id="searchDeliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
+					  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h3>

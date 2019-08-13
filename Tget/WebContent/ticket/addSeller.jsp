@@ -34,7 +34,7 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(data) {	
-							swal("등록성공!","","success")
+							swal("등록성공!","첫 판매 기념쿠폰이 발급되었습니다!","success")
 							.then(function(r){
 								history.go(0);	
 							});
