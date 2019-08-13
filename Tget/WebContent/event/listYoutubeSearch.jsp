@@ -7,8 +7,7 @@
 	
 $(function(){
 $("#addYoutube").on("click",function(){
-			
-		
+
 		$.ajax(
 			{
 				url : "/event/rest/getYoutubeSearchList?requestPageToken=",
