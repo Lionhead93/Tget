@@ -77,7 +77,7 @@
 	 </update>
 	 
 	 <select 	id="selectListInterestedEvent"	parameterType="string"	resultMap="eventSelectMap">
-		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time,e.ko_name,e.ko_location
+		 SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_image, e.event_location, e.event_date, e.event_time,e.ko_name,e.ko_location
 		 FROM user_interested u, event e
 		 WHERE u.event_id = e.event_id
 		 AND user_id = #{userId}  AND event_date >= SYSDATE
@@ -86,7 +86,7 @@
 	 
 	 <select 	id="selectListInterestedEventCount"	parameterType="string"	resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_date, e.event_time,e.ko_name,e.ko_location
+	  	FROM( SELECT u.interested_category_no, u.user_id, u.category_two_eng, u.event_id, e.event_name, e.event_location, e.event_image, e.event_date, e.event_time,e.ko_name,e.ko_location
 		 				FROM user_interested u, event e
 		 				WHERE u.event_id = e.event_id  
 						AND user_id = #{userId} AND event_date >= SYSDATE

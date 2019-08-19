@@ -18,14 +18,15 @@
 <!-- 	<link href="https://fonts.googleapis.com/css?family=Cute+Font|Gurajada|Jua|Nanum+Brush+Script|Nanum+Pen+Script|Shadows+Into+Light|Sunflower:300&display=swap&subset=korean" rel="stylesheet"> -->
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		
 	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
-	<script src="/resources/javascript/jquery.min.js"></script>
 	<script src="/resources/javascript/jquery.scrolly.min.js"></script>
 	<script src="/resources/javascript/skel.min.js"></script>
 	<script src="/resources/javascript/util.js"></script>
@@ -54,9 +55,12 @@
 	
 		$(".addTicket").on("click",function(){			
 			var eventId = $(this).val(); 			
-			if ("${empty user}"=="true") {
-				alert("로그인을 해주세요.");
-				$("form[name='main']").attr("method" , "GET").attr("action" , "/user/login").submit();
+			if (${empty user}) {
+				swal("로그인을 해주세요.","","warning")
+				.then(function(result){
+					$("#my80sizeCenterModal").modal('show');
+				});
+				
 			} else {
 				$("#eventId").val($(this).val());
 				$("form[name='main']").attr("method" , "GET").attr("action" , "/ticket/addTicketInfo").submit();
@@ -67,7 +71,9 @@
 			$("#eventId").val($(this).val());
 			$("form[name='main']").attr("method" , "POST").attr("action" , "/event/getEventTicketList?eventIds="+$(this).val()).submit();
 		});				
-
+		$("#file").change(function(){
+	    	readURL(this);
+		});
 		$("#submit").on("click",function(){	
 			var formData = new FormData($("#editEventImage")[0]);			
 			$.ajax(
@@ -79,12 +85,14 @@
 						contentType: false,
 						dataType : "json",
 						success : function(JSONData,status){
-// 							alert(JSONData.eventImage);
 							$("img.main").attr("src","/resources/images/uploadFiles/"+JSONData.eventImage);
-							$("button.close").click();
+							swal("등록 성공!","","success")
+							.then(function(result){
+								$("button.close").click();	
+							});							
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}			
 				});		
 		})	;
@@ -103,20 +111,16 @@
 							$("button.close").click();
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-						}			
+							swal("잘못된 접근입니다.","","error");
+						}							
 				});		
 		})	;
 	});
 	
 	</script>	
 	<style>
-	
-		#footer{
-			background-color: #1B1B1F ;
-		}
 		a, hr{
-				color: #FBFCFE ;	
+				color: black ;	
 			}		
 		button.btn-light:hover{
 			background-color: gray;
@@ -148,6 +152,13 @@
  	 		hieght: 250px; 
 
         }
+        .img_wrap {
+			width: 300px;
+			margin: auto;
+		}
+		.img_wrap img {
+			max-width: 100%;
+		} 
 		.neon {
 		  font-family: neon;
 		  color: #FB4264;
@@ -222,6 +233,7 @@
 							</c:if>
 							<br/>
 							<div >
+							<br/>
 								<div align="right">조회수 : ${viewCount}회<br/></div>							
 								<c:if test="${user.role == 2 }">
 									<button type="button"  id="editImage" data-toggle="modal"  class="btn btn-outline-dark"		style="margin:10px;"			
@@ -235,7 +247,7 @@
 					<section id="section-topline-1" align="center">
 						<div class="row" align="center">
 							<c:forEach var="i" items="${eventListByName}" varStatus="j">
-								<div class="col-lg-6 col shadow p-3 mb-5 bg-white rounded"">
+								<div class="col-lg-5 col shadow p-3 mb-5 bg-white rounded" style="margin-right: 10px;">
 									<div class="text-center">
 										<div class="border">
 									 		<br/>

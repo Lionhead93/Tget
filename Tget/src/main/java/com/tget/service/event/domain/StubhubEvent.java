@@ -221,10 +221,10 @@ public class StubhubEvent {
 		List<Map<String,Object>> categoriesMap = ((List)ancestors.get("categories"));
 		//String tempCategory = (String)((Map<String,Object>)(((List)ancestors.get("categories")).get(1))).get("name");
 		
-		if (temp == 2) {
+		if (temp == 1) {
+			setAncestorsCategory((String)categoriesMap.get(0).get("name"));
+		} else if (temp >= 1){
 			setAncestorsCategory((String)categoriesMap.get(1).get("name"));
-		} else if (temp >= 2){
-			setAncestorsCategory((String)categoriesMap.get(2).get("name"));
 		}
 //		setAncestorsCategory((String)((Map<String,Object>)(((List)ancestors.get("categories")).get(1))).get("name"));		
 	}
@@ -312,7 +312,7 @@ public class StubhubEvent {
 	}
 
 	public String toString() {
-		return "\n "+"[id] " + id+" , [status] "+ status+" , [name] " + name+
+		return "\n "+"[id] " + id+" , [status] "+ status+" , [name] " + name+", [ancestors] "+ancestors+
 				" , [description] "+description+" , [webURI] "+webURI+" , [eventDateLocal] " + eventDateLocal+
 				" , [eventDateUTC] " + eventDateUTC+" , [createdDate] "+ createdDate+
 				" , [lastUpdatedDate] " + lastUpdatedDate+" , [venueId] "+venueId+" , [venueName] " +venueName+

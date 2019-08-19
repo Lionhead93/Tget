@@ -22,6 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
     
     <script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -35,63 +36,41 @@
 
     $(function(){
     	
-    	$("button.btn-outline-primary").on("click", function(){
+    	$("button.btn-outline-danger").on("click", function(){
     		var temp = $(this).val();
+    		var content = $(this).closest(".col-sm-4");
     		$.ajax(
 					{
 						url : "/event/rest/deleteInterestedEvent/"+temp,
 						method : "POST",
 						dataType : "json",
 						success : function(JSONData, status){
-							$("#"+temp).remove();
+							content.remove();
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("삭제할 이벤트를 찾지 못했습니다.","","error");
 						}			
 				});	
         });
     	
-    	$("td.record").on("click",function(){
+    	$(".getEvent").on("click",function(){
     		self.location = "/event/getEventTicketList?eventIds="+$(this).children("input[type='hidden']").val();
     	});
-    	
-    	$("#all").on("click", function(){
-    		$("form").attr("method" , "POST").attr("action" , "/event/deleteInterestedEventAll").submit();
-    	});
-    	
-    	$("#select").on("click",function(){
-    		$("form").attr("method","POST").attr("action","/event/deleteInterestedEvent");
-    	});    	
+    	    	 	
     	initparticles();    	
     });        
 	</script>
 	<style type="text/css">
-		table{
-			background-color : #F8FFFF;   
-			border: 1px solid #193147;	
-			color: #041625;
-		}
- 		tr.record:hover{
- 			color: #041625;
-			background-color : #D9E5FF; 
+ 		.getEvent:hover{
+ 			color: blue;
+			cursor:pointer;
+			font-size:27px;
 		}
 		body{
 			background-color: #EBF7FF;
 			color: #041625;	
 		}
-		#footer{
-			background-color: #1B1B1F ;
-		}
-		a, hr{
-				color: #041625;
-			}	
-		th, td, tr{
-			padding: 20px;
-			color: #041625;
-		}		
-		h1{
-			font-weight: bold; 
-		}
+		
 	</style>
 <body>	
 <jsp:include page="/layout/tgetToolbar.jsp" />
@@ -112,18 +91,41 @@
 		</div>
 
 		<div class="row" >
-			<div class="col-12 col-md-12 col-lg-12" align="center">
-				
-				<table class="table ">
-				  <thead>
-				    <tr align="center">
-				      <th scope="col" ><h4 align="center" style="font-weight: bold;margin:0%;">관심이벤트</h4></th>
-				      <th scope="col" ><h4 align="center" style="font-weight: bold;margin:0%;">바로가기</h4></th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  <c:forEach items="${interestedEventList}"  var="i">
-				  <tr class="record">
+			  <c:forEach items="${interestedEventList}"  var="i">
+				 
+				 <div class="col-sm-4" style="margin-bottom: 20px;">
+				 	<div class="card text-center shadow rounded" >
+				 		<img src="/resources/images/uploadFiles/${i.eventImage}" class="card-img-top" onerror="this.src='/resources/images/logo.png'" height="200px;">
+				 		<div class="card-body">
+				 		
+					 		<div class="card-text" style="padding-bottom: 10px;">
+					 			
+					 		 <h4>						 		 
+							  <strong><a class="getEvent">
+							  ${i.koName}
+							  <input type="hidden" value="${i.eventId }"  />
+							  </a></strong>							  					     				     
+					    	 </h4>
+					    	 </div>
+				 			<p class="card-text text-dark">
+					        <small>${i.koLocation}</small>	
+					        </p>
+				 		 	<p class="card-text text-dark">
+					        <small>${i.eventDate }, ${i.eventTimeStr}</small>	
+					        </p>
+					        <p style="font-size: 15px; font-weight: bold; margin: 10px;">
+					       		<i class="fas fa-chart-bar"></i> 최저가 ${i.ticketLowestPriceStr }원 / 총 ${i.totalTicketCount }건	
+					        </p>
+					        <div class="text-center">
+					        <br/>
+					        <button type="button" class="btn btn-outline-danger"  value="${i.eventId }">삭제</button>				        
+				 			</div>
+				 		</div>
+				 		
+				 	</div>			 
+				 </div>
+				 
+				  <%-- <tr class="record">
 				  	  <td class="record" >
 				  	  	<input type="hidden" value="${i.eventId }"  />
 						<div class="event" align="left" style="padding-left: 60px">
@@ -140,11 +142,8 @@
 							<button type="button" class="btn btn-outline-primary"  value="${i.eventId }">삭제</button>						
 						</div>			
 				  	  </td>
-			    </tr>
+			    </tr> --%>
 			   </c:forEach>
-		  		 </tbody>
-				</table>
-			</div>
 		</div>	
 	</div>
 </form>

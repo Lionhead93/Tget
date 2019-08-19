@@ -40,9 +40,13 @@
 		<script src="/resources/javascript/yr.js" ></script>
 
 		<style type="text/css">
-		a{
-			color: black;
+		body {
+			  background-color: #EBF7FF;
+			  font-family: 'Nanum Gothic', sans-serif;
 		}
+			a{
+				color: black;
+			}
 			img{
 				height: 300px;
 			}
@@ -133,18 +137,10 @@
 						  </div>
 						  <br/>
 						<a href="#main" class="button big alt scrolly">
-<!-- 							<span class="textcontainer"> -->
-<!-- 								<span class="particletext fire" style="font-size: 20px;"> -->
 									인기 이벤트
-<!-- 								<span class="particle" style="top:45%; left:13%;width:12px; height:12px;animation-delay: 0.2s;"></span><span class="particle" style="top:55%; left:87%;width:10px; height:10px;animation-delay: 0.3s;"></span><span class="particle" style="top:53%; left:-5%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:53%; left:77%;width:8px; height:8px;animation-delay: 1.5s;"></span><span class="particle" style="top:69%; left:24%;width:8px; height:8px;animation-delay: 0.3s;"></span><span class="particle" style="top:57%; left:98%;width:9px; height:9px;animation-delay: 1.8s;"></span><span class="particle" style="top:66%; left:70%;width:8px; height:8px;animation-delay: 0.2s;"></span><span class="particle" style="top:64%; left:75%;width:8px; height:8px;animation-delay: 1.3s;"></span><span class="particle" style="top:41%; left:57%;width:11px; height:11px;animation-delay: 0.4s;"></span><span class="particle" style="top:50%; left:5%;width:10px; height:10px;animation-delay: 1.2s;"></span><span class="particle" style="top:48%; left:6%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:60%; left:82%;width:8px; height:8px;animation-delay: 0.7s;"></span><span class="particle" style="top:57%; left:70%;width:8px; height:8px;animation-delay: 1s;"></span><span class="particle" style="top:45%; left:43%;width:9px; height:9px;animation-delay: 0.3s;"></span><span class="particle" style="top:48%; left:3%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:72%;width:8px; height:8px;animation-delay: 0s;"></span><span class="particle" style="top:40%; left:79%;width:11px; height:11px;animation-delay: 1.4s;"></span><span class="particle" style="top:49%; left:54%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:48%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:58%; left:26%;width:8px; height:8px;animation-delay: 2s;"></span><span class="particle" style="top:41%; left:57%;width:10px; height:10px;animation-delay: 0.2s;"></span><span class="particle" style="top:66%; left:15%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:60%; left:22%;width:10px; height:10px;animation-delay: 0.9s;"></span><span class="particle" style="top:40%; left:25%;width:12px; height:12px;animation-delay: 0.6s;"></span><span class="particle" style="top:62%; left:93%;width:8px; height:8px;animation-delay: 0.9s;"></span><span class="particle" style="top:47%; left:9%;width:10px; height:10px;animation-delay: 0.7s;"></span><span class="particle" style="top:43%; left:-2%;width:8px; height:8px;animation-delay: 0.8s;"></span><span class="particle" style="top:69%; left:2%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:9%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:43%; left:22%;width:11px; height:11px;animation-delay: 0.8s;"></span><span class="particle" style="top:64%; left:37%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:70%; left:84%;width:8px; height:8px;animation-delay: 1.1s;"></span></span> -->
-<!-- 							</span> -->
 						</a>
 						<a href="#popular" class="button big alt scrolly">
-<!-- 							<span class="textcontainer"> -->
-<!-- 								<span class="particletext confetti" style="font-size: 20px;"> -->
 									추천 이벤트
-<!-- 								<span class="particle c2" style="top:23%; left:77%;width:8px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:10%; left:17%;width:7px; height:4px;animation-delay: 0.4s;"></span><span class="particle c1" style="top:16%; left:71%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c2" style="top:23%; left:4%;width:7px; height:4px;animation-delay: 0.2s;"></span><span class="particle c1" style="top:35%; left:21%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c1" style="top:36%; left:61%;width:6px; height:3px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:20%; left:76%;width:6px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:10%; left:87%;width:7px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:10%; left:82%;width:7px; height:4px;animation-delay: 2.1s;"></span><span class="particle c1" style="top:26%; left:60%;width:6px; height:3px;animation-delay: 0.1s;"></span><span class="particle c1" style="top:33%; left:82%;width:8px; height:3px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:22%; left:68%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:14%; left:91%;width:7px; height:4px;animation-delay: 1.2s;"></span><span class="particle c2" style="top:46%; left:95%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c2" style="top:40%; left:55%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c2" style="top:34%; left:37%;width:6px; height:3px;animation-delay: 2s;"></span><span class="particle c2" style="top:36%; left:16%;width:7px; height:3px;animation-delay: 0.8s;"></span><span class="particle c2" style="top:45%; left:92%;width:6px; height:3px;animation-delay: 2.3s;"></span><span class="particle c1" style="top:28%; left:49%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c1" style="top:17%; left:79%;width:6px; height:4px;animation-delay: 0.3s;"></span><span class="particle c2" style="top:39%; left:15%;width:6px; height:4px;animation-delay: 1.7s;"></span><span class="particle c1" style="top:20%; left:86%;width:7px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:38%; left:54%;width:6px; height:4px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:25%; left:60%;width:6px; height:4px;animation-delay: 0.4s;"></span><span class="particle c2" style="top:21%; left:29%;width:7px; height:4px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:43%; left:78%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c1" style="top:28%; left:79%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:33%; left:16%;width:8px; height:3px;animation-delay: 3s;"></span><span class="particle c1" style="top:49%; left:79%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c2" style="top:17%; left:9%;width:7px; height:4px;animation-delay: 1.1s;"></span><span class="particle c2" style="top:12%; left:95%;width:6px; height:3px;animation-delay: 1.1s;"></span><span class="particle c1" style="top:15%; left:62%;width:6px; height:3px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:13%; left:58%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:42%; left:39%;width:8px; height:4px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:50%; left:95%;width:6px; height:4px;animation-delay: 0.6s;"></span></span> -->
-<!-- 							</span> -->
 						</a>
 					</div>
 
@@ -156,7 +152,7 @@
 						<header class="align-center">
 							<h2>
 								<span class="textcontainer">
-									<span class="particletext confetti" style="font-family: 'Sunflower', sans-serif; color: #041625;">
+									<span class="particletext confetti" style="color: #041625;">
 										인기 이벤트
 									<span class="particle" style="top:45%; left:13%;width:12px; height:12px;animation-delay: 0.2s;"></span><span class="particle" style="top:55%; left:87%;width:10px; height:10px;animation-delay: 0.3s;"></span><span class="particle" style="top:53%; left:-5%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:53%; left:77%;width:8px; height:8px;animation-delay: 1.5s;"></span><span class="particle" style="top:69%; left:24%;width:8px; height:8px;animation-delay: 0.3s;"></span><span class="particle" style="top:57%; left:98%;width:9px; height:9px;animation-delay: 1.8s;"></span><span class="particle" style="top:66%; left:70%;width:8px; height:8px;animation-delay: 0.2s;"></span><span class="particle" style="top:64%; left:75%;width:8px; height:8px;animation-delay: 1.3s;"></span><span class="particle" style="top:41%; left:57%;width:11px; height:11px;animation-delay: 0.4s;"></span><span class="particle" style="top:50%; left:5%;width:10px; height:10px;animation-delay: 1.2s;"></span><span class="particle" style="top:48%; left:6%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:60%; left:82%;width:8px; height:8px;animation-delay: 0.7s;"></span><span class="particle" style="top:57%; left:70%;width:8px; height:8px;animation-delay: 1s;"></span><span class="particle" style="top:45%; left:43%;width:9px; height:9px;animation-delay: 0.3s;"></span><span class="particle" style="top:48%; left:3%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:72%;width:8px; height:8px;animation-delay: 0s;"></span><span class="particle" style="top:40%; left:79%;width:11px; height:11px;animation-delay: 1.4s;"></span><span class="particle" style="top:49%; left:54%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:49%; left:48%;width:8px; height:8px;animation-delay: 0.1s;"></span><span class="particle" style="top:58%; left:26%;width:8px; height:8px;animation-delay: 2s;"></span><span class="particle" style="top:41%; left:57%;width:10px; height:10px;animation-delay: 0.2s;"></span><span class="particle" style="top:66%; left:15%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:60%; left:22%;width:10px; height:10px;animation-delay: 0.9s;"></span><span class="particle" style="top:40%; left:25%;width:12px; height:12px;animation-delay: 0.6s;"></span><span class="particle" style="top:62%; left:93%;width:8px; height:8px;animation-delay: 0.9s;"></span><span class="particle" style="top:47%; left:9%;width:10px; height:10px;animation-delay: 0.7s;"></span><span class="particle" style="top:43%; left:-2%;width:8px; height:8px;animation-delay: 0.8s;"></span><span class="particle" style="top:69%; left:2%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:65%; left:9%;width:11px; height:11px;animation-delay: 2s;"></span><span class="particle" style="top:43%; left:22%;width:11px; height:11px;animation-delay: 0.8s;"></span><span class="particle" style="top:64%; left:37%;width:11px; height:11px;animation-delay: 1.8s;"></span><span class="particle" style="top:70%; left:84%;width:8px; height:8px;animation-delay: 1.1s;"></span></span>
 								</span>
@@ -218,7 +214,7 @@
 						<header class="text-center">
 							<h2>
 								<span class="textcontainer">
-									<span class="particletext confetti"  style="font-family: 'Sunflower', sans-serif; color: #020B13;">
+									<span class="particletext confetti"  style="color: #020B13;">
 										추천 이벤트
 									<span class="particle c2" style="top:23%; left:77%;width:8px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:10%; left:17%;width:7px; height:4px;animation-delay: 0.4s;"></span><span class="particle c1" style="top:16%; left:71%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c2" style="top:23%; left:4%;width:7px; height:4px;animation-delay: 0.2s;"></span><span class="particle c1" style="top:35%; left:21%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c1" style="top:36%; left:61%;width:6px; height:3px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:20%; left:76%;width:6px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:10%; left:87%;width:7px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:10%; left:82%;width:7px; height:4px;animation-delay: 2.1s;"></span><span class="particle c1" style="top:26%; left:60%;width:6px; height:3px;animation-delay: 0.1s;"></span><span class="particle c1" style="top:33%; left:82%;width:8px; height:3px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:22%; left:68%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c1" style="top:14%; left:91%;width:7px; height:4px;animation-delay: 1.2s;"></span><span class="particle c2" style="top:46%; left:95%;width:7px; height:4px;animation-delay: 2.5s;"></span><span class="particle c2" style="top:40%; left:55%;width:8px; height:4px;animation-delay: 2.2s;"></span><span class="particle c2" style="top:34%; left:37%;width:6px; height:3px;animation-delay: 2s;"></span><span class="particle c2" style="top:36%; left:16%;width:7px; height:3px;animation-delay: 0.8s;"></span><span class="particle c2" style="top:45%; left:92%;width:6px; height:3px;animation-delay: 2.3s;"></span><span class="particle c1" style="top:28%; left:49%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c1" style="top:17%; left:79%;width:6px; height:4px;animation-delay: 0.3s;"></span><span class="particle c2" style="top:39%; left:15%;width:6px; height:4px;animation-delay: 1.7s;"></span><span class="particle c1" style="top:20%; left:86%;width:7px; height:4px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:38%; left:54%;width:6px; height:4px;animation-delay: 2.8s;"></span><span class="particle c2" style="top:25%; left:60%;width:6px; height:4px;animation-delay: 0.4s;"></span><span class="particle c2" style="top:21%; left:29%;width:7px; height:4px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:43%; left:78%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c1" style="top:28%; left:79%;width:7px; height:3px;animation-delay: 1.6s;"></span><span class="particle c2" style="top:33%; left:16%;width:8px; height:3px;animation-delay: 3s;"></span><span class="particle c1" style="top:49%; left:79%;width:6px; height:3px;animation-delay: 0s;"></span><span class="particle c2" style="top:17%; left:9%;width:7px; height:4px;animation-delay: 1.1s;"></span><span class="particle c2" style="top:12%; left:95%;width:6px; height:3px;animation-delay: 1.1s;"></span><span class="particle c1" style="top:15%; left:62%;width:6px; height:3px;animation-delay: 1.9s;"></span><span class="particle c2" style="top:13%; left:58%;width:6px; height:4px;animation-delay: 0.7s;"></span><span class="particle c1" style="top:42%; left:39%;width:8px; height:4px;animation-delay: 1.8s;"></span><span class="particle c1" style="top:50%; left:95%;width:6px; height:4px;animation-delay: 0.6s;"></span></span>
 								</span>
@@ -229,24 +225,26 @@
 						<!-- Tabbed Video Section -->
 							<div class="flex flex-tabs" >
 								<ul class="tab-list" >
-									<li><a id="tab0"  href="#" data-tab="tab-1" class="active text-center" style="display:none;"><span class="recommE" style="color: #062038;"># 1</span></a></li>
-									<li><a id="tab1" href="#" data-tab="tab-2" class="text-center" style="display:none;"><span class="recommE" style="color: #062038;"># 2</span></a></li>
-									<li><a  id="tab2"  href="#" data-tab="tab-3" class="text-center" style="display:none;"><span class="recommE" style="color: #062038;"># 3</span></a></li>
+									<li><a id="tab0"  href="#" data-tab="tab-1" class="active text-center" style="display:none;"><span class="recommE" style="color: #062038;"><i class="fas fa-bookmark"></i> <strong style="color: black">1</strong></span></a></li>
+									<li><a id="tab1" href="#" data-tab="tab-2" class="text-center" style="display:none;"><span class="recommE" style="color: #062038;"><i class="fas fa-bookmark"></i> <strong style="color: black">2</strong></span></a></li>
+									<li><a  id="tab2"  href="#" data-tab="tab-3" class="text-center" style="display:none;"><span class="recommE" style="color: #062038;"><i class="fas fa-bookmark"></i> <strong style="color: black">3</strong></span></a></li>
 								</ul>
 								<div class="tabs" >
 
 									<!-- Tab 1 -->
 										<div class="tab tab-1 flex flex-3 active">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
 
-											        <div class="col p-4 d-flex flex-column position-static">
-
+											        <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>				
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0"  id="goRecommEvent0" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" id="recommDetail0" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent0" href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail0" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent0"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
 											     
 											        <video controls id="videoName0" autoplay="autoplay"   src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
@@ -265,16 +263,19 @@
 
 									<!-- Tab 2 -->
 									<div class="tab tab-2 flex flex-3">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
+											        <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0" id="goRecommEvent1" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent1" href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail1" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent1"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
-											        <video id="videoName1" style="width:700px;"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
+											        <video id="videoName1" autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">
 											        	
 <!-- 											          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"> -->
@@ -286,14 +287,17 @@
 										</div>   
 									
 										<div class="tab tab-3 flex flex-3">
-											<div class="row mb-1" style="padding: 10px; border: 1px solid;">											    
+											<div class="row mb-1">											    
 											    <div class="col-md-12">
-											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-											        <div class="col p-4 d-flex flex-column position-static"  style="width: 900px;">
+											      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-lg h-md-250 position-relative">
+											       <div class="col p-6 d-flex flex-column position-static text-center" style="padding-left: 15px;width: 213px;">
+													<br/><br/><br/><br/>
 											          <strong class="d-inline-block mb-2 text-primary">음악공연</strong>
 											          <h3 class="mb-0" id="goRecommEvent2" style="color:#041625;">EXO Seoul</h3>
-											          <div class="mb-1 text-muted" style="color:#193147;">2019-07-27</div>
-											          <a id="getEvent2"  href="#" class="" style="color:#062038;">상세보기</a>
+											          <div class="mb-1 text-muted" id="recommDetail2" style="color:#193147;">2019-07-27</div><br/><br/>
+											          <div class="text-center">
+											          <a id="getEvent2"  href="#" class="btn btn-outline-secondary" style="color:#062038;width: 100px;">상세보기</a>
+											        	</div>
 											        </div>
 											        <video id="videoName2"  autoplay="autoplay"  controls src="/resources/video/videoplayback.mp4"  type="video/mp4" ></video>
 											        <div class="col-auto d-none d-lg-block">

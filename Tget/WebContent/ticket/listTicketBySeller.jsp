@@ -48,6 +48,10 @@
 			left: 80px;
 			width: 250px;
 		}
+		.getEvent:hover{
+			font-size: 25px;
+			cursor: pointer;
+		}
     </style>
     
 	<script type="text/javascript">
@@ -82,12 +86,11 @@
       <br/><br/><br/><br/>
       	<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 			  <div class="card-header">
-			   <strong>${user.nickName} <i class="far fa-user"></i> My Ticket </strong>
+			   <strong>${user.nickName}<br/> <i class="far fa-user"></i> My Ticket </strong>
 			  </div>
 			  <ul class="list-group list-group-flush">								
 				<li class="list-group-item"><a href="#">거래내역 조회</a></li>
 				<li class="list-group-item"><a href="#">자유게시판<i class="fas fa-check"></i> 삽니다</a></li>
-				<li class="list-group-item"><a href="#">티켓판매 공지</a></li>
 			  </ul>		  
 		</div>
 		</div>    	
@@ -111,7 +114,7 @@
 				  						
 			      <div class="card-body" id="${ticket.event.eventId}">
 			        <h5 class="card-title">				       
-				   		  <strong><a class="getEvent" href="#">${ticket.event.eventName}</a></strong>
+				   		  <strong><a class="getEvent">${ticket.event.eventName}</a></strong>
 				     </h5>
 			        <p class="card-text">
 			        </p>

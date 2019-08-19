@@ -84,7 +84,7 @@
 	<!-- SQL : SELECT ONE -->
 	 <select 	id="selectContent"	parameterType="content"	resultMap="contentSelectMap">
 		SELECT
-		content_no , user_id, user_nickname, content_name, content_body, file_name, video_name, SYSDATE, view_count,
+		content_no , user_id, user_nickname, content_name, content_body, file_name, video_name, reg_date, view_count,
 		board_code, content_code, open, good_count, bad_count, refund_tran_no, refund_check  		
 		FROM content 
 		WHERE content_no = #{value}
@@ -92,7 +92,7 @@
 	 
 	 <select 	id="selectReport"	parameterType="report"	resultMap="reportSelectMap">
 		SELECT
-		report_no, white_id, white_nickname, black_id, content_no, reply_no, report_reason_code, SYSDATE, report_code, '1'
+		report_no, white_id, white_nickname, black_id, content_no, reply_no, report_reason_code, reg_date, report_code, '1'
 		FROM report 
 		WHERE report_no = #{value}
 	 </select>
@@ -134,6 +134,13 @@
 	   		check_yn = #{check}
 	   	</set>
 	   	WHERE report_no = #{reportNo}
+	 </update>
+	 <update	id="updateOpen"	parameterType="int"  >
+	   	UPDATE content
+	   	<set>
+	   		open = '1'
+	   	</set>
+	   	WHERE content_no = #{value}
 	 </update>
 	 
 	 <update	id="updateRefund"	parameterType="content"  >
@@ -200,6 +207,7 @@
 													<if test="searchCondition == 3 ">
 														AND content_code in('8','9','10','11')
 													</if>
+													AND open = '0'	
 <!-- 													<if	test="regDate != null"> -->
 <!-- 														<if test="regDate == 0"> -->
 <!-- 														and reg_date > SYSDATE-30 -->
@@ -233,7 +241,8 @@
 													</if>
 													<if test="searchCondition == 3 ">
 														AND content_code in('8','9','10','11')
-													</if>		
+													</if>
+													AND open = '0'	
 												</where>
 											</if>
 											) countTable
@@ -275,7 +284,7 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	
 	  									SELECT reply_no, user_id, user_nickname
-	  										, content_no, reply_body, SYSDATE
+	  										, content_no, reply_body, reg_date
 											FROM reply
 											
 											) inner_table

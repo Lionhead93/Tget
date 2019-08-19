@@ -238,8 +238,7 @@ public class UserController {
 		System.out.println(resultPage);
 		
 		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
+		model.addAttribute("totalCount", map.get("totalCount"));
 		
 		System.out.println(map.get("list")+"유저 리스트 어떻게 들옴?");
 		

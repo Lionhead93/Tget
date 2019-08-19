@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tget.common.domain.Search;
 import com.tget.service.alarm.AlarmService;
 import com.tget.service.alarm.domain.Alarm;
+import com.tget.service.coupon.CouponService;
+import com.tget.service.coupon.domain.Coupon;
 import com.tget.service.event.EventService;
 import com.tget.service.ticket.TicketService;
 import com.tget.service.ticket.domain.SellProb;
@@ -43,6 +45,9 @@ public class TicketRestController {
 	@Qualifier("alarmServiceImpl")
 	@Autowired
 	private AlarmService alarmService;
+	@Qualifier("couponServiceImpl")
+	@Autowired
+	private CouponService couponService;
 	
 	
 	public TicketRestController() {
@@ -170,6 +175,14 @@ public class TicketRestController {
 		user.setSellerCode("0");
 		user.setRole("1");
 		userService.updateSeller(user);
+		
+		Coupon coupon = new Coupon();
+		coupon.setCouponCode("1");
+		coupon.setUserId(user.getUserId());
+		couponService.addCoupon(coupon);
+		
+		coupon.setCouponCode("0");
+		couponService.addCoupon(coupon);
 		
 		User updateUser = userService.getUser(user.getUserId());
 		
