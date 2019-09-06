@@ -16,7 +16,7 @@
 			
 				
 				$("button:contains('전송')").on("click" , function() {
-					alert("인증번호 전송");
+					swal("인증번호 전송", "", "info");
 					
 			
 					
@@ -52,8 +52,7 @@
 						
 					   if (rand == code) { 
 				   
-					   alert("인증 성공");
-					   
+					   swal("인증 성공", "", "success");
 					   $("#inj").hide();
 						phone.style.border = "3px solid gold";
 						phone.readOnly = true;
@@ -62,7 +61,7 @@
 						
 				   } else
 				  		 { 
-					   alert("인증 실패"); 
+					   swal("인증 실패", "", "error");
 				  	 	} 
 				 	   
 				   });
@@ -70,7 +69,6 @@
 	
 		  $(function(){
 		         $("#alert-success").hide();
-		         $("#alert-danger").hide();
 		         $("input").keyup(function(){
 		             var pwd1=$("#password01").val();
 		             var pwd2=$("#password02").val();
@@ -135,9 +133,6 @@
 										}),
 
 									success : function(JSONData) {
-														//alert(JSONData); 
-														//alert(typeof(JSONData));
-
 										if (JSONData && inputed != "") {
 											$("#check").children("strong")
 												.remove();
@@ -187,13 +182,16 @@
 			
 			if(pwd1 != pwd2){
 				
-				alert("비밀번호가 일치하지 않습니다.");	
+				swal("비밀번호가 일치하지 않습니다.", "", "error");
 				return;
 			}
 			
 		
-				
-			$("form[name=updateUser]").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+			swal("수정 완료!", "", "success")
+		 	.then(function(result){
+		 		$("form[name=updateUser]").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+		 	});	
+			
 		}
 	
 </script>
@@ -201,9 +199,9 @@
 
 	
 <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-					    <div class="modal-content">
-					       <div class="modal-body">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+		<div class="modal-body">
 	
 	     <div class="login-card shadow rounded">
 			 <div class="text-center" style="background-color: white;"><br/><br/>
@@ -216,9 +214,9 @@
 					<span style="color: black;"><Strong>비밀번호</Strong> </span>
 					<br/><br/><br/><br/><br/><br/><br/>
 					<span style="color: black;"><Strong>이름</Strong> </span>
-				<br/><br/><br/>
-					<span style="color: black;"><Strong>닉네임</Strong> </span>
 				<br/><br/><br/><br/>
+					<span style="color: black;"><Strong>닉네임</Strong> </span>
+				<br/><br/><br/>
 					<span style="color: black;"><Strong>휴대전화</Strong> </span>
 						<br/><br/>
 					<span style="color: black;"><Strong>주소</Strong> </span><br><br>
@@ -256,10 +254,12 @@
 							 
 							  <div class="form-group">
 							  <label for="password3"></label>
+							  <div class="text-left">
 							  <span id = "alert-success"><Strong class="text-success">비밀번호가 일치합니다.</Strong>
 							      </span>								
-								<span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
+							   <span id = "alert-danger"><Strong class= "text-danger">비밀번호가 일치하지 않습니다.</Strong>
 							      </span>
+							  </div>    
 							</div>
 								
 							    <div class="form-group">
@@ -279,9 +279,10 @@
 							     
 							
 							  </div>
-							   <span id = "check"><Strong>변경할 닉네임을 입력해주세요</Strong>
-							      </span>
-							    </div>
+							  <div class="text-left">
+							   <span id = "check" class="text-secondary"><Strong>변경할 닉네임을 입력해주세요.</Strong></span>
+							  </div>
+							  </div>
 						
 							  
 							

@@ -115,14 +115,32 @@ public class EventDaoImpl implements EventDao {
 	public List<RecommEvent> selectListRecommendedEvent() throws Exception{ 
 		Search search = new Search();
 		search.setSearchCondition("0");
-		return sqlSession.selectList("EventMapper.selectRecommendedEvent",search);
+		List<RecommEvent> list = sqlSession.selectList("EventMapper.selectRecommendedEvent",search);
+		List<RecommEvent> returnList = new ArrayList<RecommEvent>();
+		
+		if (list != null && list.size() !=0) {
+			for (RecommEvent event : list) {
+				if (returnList.size()==0) {
+					returnList.add(event);
+				}else {
+					for (int i = 0; i < returnList.size(); i++) {
+						if (returnList.get(i).getKoName().equals(event.getKoName())) {
+							break;
+						} else if ((i==returnList.size()-1) &&( ! returnList.get(i).getKoName().equals(event.getKoName()))) {
+							returnList.add(event);
+						}
+					}
+				}
+			}
+		}
+		return returnList;
 	}	
 	
 	public RecommEvent selectRecommendedEvent(int recommEventNo) throws Exception{
 		Search search = new Search();
 		search.setSearchCondition("1");
 		search.setSearchKeyno(recommEventNo);
-		return sqlSession.selectOne("EventMapper.selectRecommendedEvent", search);
+		return (RecommEvent) sqlSession.selectList("EventMapper.selectRecommendedEvent", search).get(0);
 	}	
 	
 	public void insertRecommendedEvent(RecommEvent recommEvent) throws Exception{ 
@@ -247,7 +265,7 @@ public class EventDaoImpl implements EventDao {
 		}
 		
 		if (requestPageToken !=null && requestPageToken !="") {
-			url+="&start="+requestPageToken;
+			url+="&start="+Integer.parseInt(requestPageToken)*10;
 		}
 		
 		url+="&country=KR";

@@ -59,7 +59,7 @@
 							$("#reviewTranOrderDate").text(JSONData.transaction.orderDate);
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}			
 				});	
     	});
@@ -73,11 +73,8 @@
 		}
 		.container-fluid,td,th{ 
 	 		font-size: 20px;
-	 		color: #041625;    
- 		} 
-		#footer{
-			background-color: #1B1B1F ;
-		}
+	 		color: #041625;
+	 	}
 		a, hr,th,td{
 				color: #041625;
 		}	

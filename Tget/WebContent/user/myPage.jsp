@@ -18,9 +18,8 @@
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/resources/css/tabs.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/tabstyles.css" />
-		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
@@ -28,7 +27,7 @@
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
    		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
    		
-				<script src="/resources/javascript/common.js" ></script>
+		<script src="/resources/javascript/common.js" ></script>
 		<script src="/resources/javascript/alarm.js" ></script>
 		<script src="/resources/javascript/jquery.min.js"></script>
 		<script src="/resources/javascript/jquery.scrolly.min.js"></script>
@@ -49,36 +48,13 @@
 			
 <script type="text/javascript">
 
-	window.onload = function(){
-		
-		if(${user.role==0}){
-			
-			document.getElementById("cc").style.display = "none" ;
-			document.getElementById("cc2").style.display = "none" ;
-			
-		}
-	}
-
-
-function fncUpdateUser() {
-	var name=$("input[name='userName']").val();
-	
-	if(name == null || name.length <1){
-		alert("이름은  반드시 입력하셔야 합니다.");
-		return;
-	}
-		
-	$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
-}
-
-
 $(function() {
 	
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button:contains('판매내역 조회')").on("click" , function() {
+	$("button:contains('판매내역 조회')").on("click" , function() {
 
 				
-		window.open("/ticket/getTicketList?menu=seller");
+		self.location="/ticket/getTicketList?menu=seller";
 				
 	});
 });	
@@ -121,32 +97,37 @@ $(function() {
 								<div class="text-center">
 					     		<br/>
 					     		<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
-							 	<div class="card-body">	              
-						        <h3><i class="far fa-user"></i><strong> ${user.nickName}님 프로필</strong></h3><hr/><br/>
+							 	<div class="card-header" align="center" style="background-color: smokegray;">
+    						
+							    	 <h3 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> <strong>${user.nickName}님 프로필</strong></h3>
+							                  
+							    </div>
+							 	<div class="card-body">	       
+						       
 													
 									<div class="row">		
 										<div class="col-md-2"></div>	
-								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 아이디</strong></h5></div>
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 아이디</h5></div>
 										<div class="col-md-6 text-left">${user.userId}</div>
 									</div><br/>
 									<div class="row">	
 									<div class="col-md-2"></div>			
-								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 닉네임</strong></h5></div>
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 닉네임</h5></div>
 										<div class="col-md-6 text-left">${user.nickName}</div>
 									</div><br/>
 									<div class="row">	
 									<div class="col-md-2"></div>			
-								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 이 름</strong></h5></div>
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 이 름</h5></div>
 										<div class="col-md-6 text-left">${user.userName}</div>
 									</div><br/>
 									<div class="row">
 									<div class="col-md-2"></div>				
-								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 주소</strong></h5></div>
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 주소</h5></div>
 										<div class="col-md-6 text-left">${user.address}</div>
 									</div><br/>
 									<div class="row">		
 									<div class="col-md-2"></div>		
-								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 전화번호</strong></h5></div>
+								  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 전화번호</h5></div>
 										<div class="col-md-6 text-left">${ !empty user.phone ? user.phone : ''}</div>
 									</div><br/><br/>
 									
@@ -168,13 +149,18 @@ $(function() {
 				<div class="row">
 				 <div class="col-md-6 text-center">     		
 		     			<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
-						 <div class="card-body">	
-						                      
-									<h4><i class="far fa-user"></i><strong> ${user.nickName}님 판매자정보</strong></h4><hr/><br/>
+						 <div class="card-header" align="center" style="background-color: smokegray;">
+    						
+							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-id-card"></i> <strong>${user.nickName}님 판매자정보</strong></h4>
+							                  
+						 </div>
+						 
+						 <div class="card-body">					                      
+			
 									<c:if test="${user.role != 0}">
 									<div class="row">		
 												<div class="col-md-2"></div>	
-										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 판매자등급</strong></h5></div>
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 판매자등급</h5></div>
 												<div class="col-md-6 text-left">
 													<c:set var="sc" value ="${user.sellerCode}"/>							
 													<c:choose>
@@ -188,21 +174,20 @@ $(function() {
 									</div><br/>
 									<div class="row">
 											<div class="col-md-2"></div>				
-										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 총 판매금액</strong></h5></div>
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 총 판매금액</h5></div>
 												<div class="col-md-6 text-left">${user.salesAmount}</div>
 									</div><br/>
 									<div class="row">
 											<div class="col-md-2"></div>				
-										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 총 판매횟수</strong></h5></div>
+										  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 총 판매횟수</h5></div>
 												<div class="col-md-6 text-left">${user.salesCount}</div>
 									</div><br/>
 									
 									<button id="sb" type="button" class="btn btn-outline-primary" >판매내역 조회</button>	<br>
 									</c:if>
 									<c:if test="${user.role == 0}">
-										<div class="text-danger text-center">*판매자 등록을 해주세요.</div><br/><br/>
-										<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >판매자 등록</button>
-										<br/>
+										<div class="alert alert-danger" role="alert"><a href="#" class="alert-link" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a>을 해주세요.</div>
+										
 									</c:if>
 								</div>									
 							</div>
@@ -210,17 +195,22 @@ $(function() {
 					
 							 <div class="col-md-6 text-center">
 										<div class="card text-center shadow rounded" style="margin-bottom: 10px;">
+								<div class="card-header" align="center" style="background-color: smokegray;">
+    						
+							    	 <h4 style="padding-top: 10px;padding-bottom: 10px;"><i class="far fa-credit-card"></i> <strong>${user.nickName}님 계좌정보</strong></h4>
+							                  
+								 </div>
+								
 								 <div class="card-body">	
-													<h4><i class="far fa-user"></i><strong> ${user.nickName}님 계좌정보</strong></h4><hr/><br/>
 													<c:if test="${user.role != 0}">
 													<div class="row">
 															<div class="col-md-2"></div>				
-														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 예금주명</strong></h5></div>
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 예금주명</h5></div>
 															<div class="col-md-6 text-left">${user.userName}</div>
 													</div><br/>
 													<div class="row">
 															<div class="col-md-2"></div>				
-														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 은행명</strong></h5></div>
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 은행명</h5></div>
 															<div class="col-md-6 text-left">
 															<c:set var="sc" value ="${user.accountBank}"/>													
 															<c:choose>
@@ -246,7 +236,7 @@ $(function() {
 													</div><br/>
 													<div class="row">
 															<div class="col-md-2"></div>				
-														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i><strong> 계좌번호</strong></h5></div>
+														  		<div class="col-md-4 text-left"><h5><i class="fas fa-check"></i> 계좌번호</h5></div>
 															<div class="col-md-6 text-left">${user.accountNo}</div>															
 													</div><br/>
 													<div class="text-center">
@@ -255,9 +245,9 @@ $(function() {
 													 </div> 
 											  	</c:if>
 											  	<c:if test="${user.role == 0}">
-													<div class="text-danger text-center">*판매자 등록을 해주세요.</div><br/><br/>
-													<button type="button" class="btn btn-outline-primary" data-target="#addSellerModal" data-toggle="modal" >판매자 등록</button>
-													<br/>
+											  	
+													<div class="alert alert-danger" role="alert"><a href="#" class="alert-link" data-target="#addSellerModal" data-toggle="modal">판매자 등록</a>을 해주세요.</div>
+													
 												</c:if>
 										</div>
 										</div>

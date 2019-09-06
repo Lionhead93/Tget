@@ -111,9 +111,9 @@ public class CommuityController {
 			communityService.addContent(content);
 			
 			if(content.getContentCode().equals("8")||content.getContentCode().equals("9")||content.getContentCode().equals("10")||content.getContentCode().equals("11")) {
-				return "forward:/community/getContentList?searchCondition=3";
+				return "redirect:/community/getContentList?searchCondition=3";
 			}else {
-				return "forward:/community/getContentList?searchCondition=2&searchKeyword="+content.getContentCode();
+				return "redirect:/community/getContentList?searchCondition=2&searchKeyword="+content.getContentCode();
 		}
 		}
 		
@@ -188,7 +188,7 @@ public class CommuityController {
 			
 			model.addAttribute("content", content);
 			
-			return "forward:/community/getContent?contentNo="+content.getContentNo();
+			return "redirect:/community/getContent?contentNo="+content.getContentNo();
 		}
 	
 		@RequestMapping(value="getContentList")

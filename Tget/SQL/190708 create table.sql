@@ -196,7 +196,7 @@ CREATE TABLE ticket (
 	ticket_option		VARCHAR2(500) ,
 	reg_date			DATE 			DEFAULT		SYSDATE ,
 	ticket_image		VARCHAR2(100)		NOT NULL ,
-	check_yn			CHAR(1)			NOT NULL ,
+	CHECK_YN 		CHAR(1) ,
 	coupon_no		NUMBER(5) 		REFERENCES coupon(coupon_no) ,
 	coupon_code		CHAR(1)	,	
 	PRIMARY KEY(ticket_no)

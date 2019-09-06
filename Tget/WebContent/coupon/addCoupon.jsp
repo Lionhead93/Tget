@@ -40,8 +40,10 @@ $(function(){
             					"Content-Type" : "application/json"
             				},            
             	            success:function(data){
-            	            	alert("발급완료");
-            	            	content.remove();
+            	            	swal("발급완료","","success")
+            	            	.then(function(r){
+            	            		content.remove();
+            	            	});            	            	
             	            }
             	    	});
             		}
@@ -60,7 +62,7 @@ $(function(){
 					    <div class="modal-content" style="background-color:#D9E5FF;">
 					      <div id="addCouponModalBody" class="modal-body" style="background-color:#D9E5FF; color: #041625;">
 					      	<div class="text-center"><h3 style="background-color:#D9E5FF; color: #041625;">쿠폰 발급<a href="#" class="close text-dark" data-dismiss="modal">&times;</a></h3></div>
-					        <hr/>
+					        <br/>
 					        <div id="listUserRow" class="row">
 					        
 					        </div>
@@ -70,5 +72,4 @@ $(function(){
 					     
 					      </div>
 					  </div>
-				 </div>
-				 
+				 </div>		 

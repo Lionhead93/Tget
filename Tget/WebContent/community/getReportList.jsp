@@ -144,8 +144,8 @@
 
 						
 			 $( "button.btn.btn-primary:contains('검증 확인')" ).on("click" , function() {
-					 $("form[name='reportCheck']").attr("method" , "POST").attr("action" , "/community/addBlack").submit();	
-				});
+					self.location = "/community/addBlack?reportNo="+$('input[name="reportNo2"]').val();	
+			 });
 			 
 			$( "td:nth-child(2)" ).css("color" , "black");
 			$("h7").css("color" , "red");
@@ -199,11 +199,12 @@
 		 $(function() {
 			 
 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$("#contentModalButton").on("click" , function() {
+				$(".check").on("click" , function() {
 						
-						var contentNo = $(this).children('input[type="hidden"]').val();
-						var reportNo = $(this).children('div').text().trim();
-						$('input[name="reportNo"]').val(reportNo);
+						var reportNo = $(this).children('input[type="hidden"]').val();
+						var contentNo = $(this).closest('div').attr('id').trim();
+
+						$('input[name="reportNo2"]').val(reportNo);
 						
 						$.ajax( 
 								
@@ -218,8 +219,7 @@
 									success : function(data) {
 										
 										$("#reportBlackId").html(data.userId);
-										$("#reportContentBody").html(data.contentBody);
-										
+										$("#reportContentBody").html(data.contentBody);										
 										$(".modal-body").html(displayValue);
 									}
 							});
@@ -294,12 +294,11 @@
 			  </c:if>
 				</div>
 				<div class="col-md-2"><p>${report.regDate }</p></div>
- 				 <div class="col-md-2"><p>
- 				 <a href="#" class="check" id="contentModalButton" data-toggle="modal" data-target="#contentModal"><i class="far fa-check-circle" style=color:#020B13;font-size:20px;></i>
-<!--  				 <button type="button" id="contentModalButton" class="btn btn-info"  data-toggle="modal" data-target="#contentModal"></button></p> -->
-			  <input type="hidden" name="reportNo" value="${report.contentNo}"/>
+ 				 <div id="${report.contentNo}" class="col-md-2"><p>
+ 			  <a href="#" class="check" id="contentModalButton" data-toggle="modal" data-target="#contentModal"><i class="far fa-check-circle" style=color:#020B13;font-size:20px;></i>
+			  <input type="hidden" name="reportNo1" value="${report.reportNo}"/>
 			  </a>
-			  <div style="display: none;">${report.reportNo}</div>
+			  
 			  </div>		  
 		    </div>
 		</div>        
@@ -309,7 +308,7 @@
  </div>  
  	
 	<div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-md" role="document">
+					  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="modalCenterTitle" style=color:#020B13;><strong>신고 접수 검증</strong></h5>
@@ -318,13 +317,13 @@
 					        </button>
 					      </div>
 					      <div class="modal-body" >
-					      <div class="col" style=color:#020B13;>작성자 : ${content.userNickname}<span id="reportBlackId"></span></div>
+					      <div class="col" style=color:#020B13;><strong>작성자 &nbsp;&nbsp;&nbsp;</strong>  <span id="reportBlackId"></span></div>
 						<hr/>
-						  <div class="col" style=color:#020B13;>내용 :  ${content.contentBody}<div id="reportContentBody"></div></div>
+						  <div class="col" style=color:#020B13;><strong>내용</strong><br/> <br/>  <div class="card"><div id="reportContentBody" style="padding: 10px;"></div></div></div>
 					    
 						<br>
 						
-						<input type='hidden' name='contentNo' value='${content.contentNo}'/>
+						<input type='hidden' name='reportNo2' value=''/>
 						  </div>
 						  
 					      <div class="modal-footer">

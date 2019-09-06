@@ -59,17 +59,12 @@
 		//Form 유효성 검증
 	 	var deliveryCompany = $("#deliveryCompany option:selected").val();
 	 	var deliveryNo = $("input[name='deliveryNo']").val();
-	 	/* 
-		if(deliveryNo == null || deliveryNo.length<1){
-			alert("운송장번호는 반드시 입력하여야 합니다.");
-			return;
-		}
-		if(deliveryCompany == null || deliveryCompany.length<1){
-			alert("배송사를 선택해주세요.");
-			return;
-		} */
-		alert("등록 완료!");
-		$("form[name='addDelivery']").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();
+	 	
+		swal("등록 완료!","","success")
+		.then(function(r){
+			$("form[name='addDelivery']").attr("method" , "POST").attr("action" , "/tran/addDelivery").submit();	
+		});
+		
 	}	
 	
 	
@@ -87,7 +82,7 @@
 	    	
 	    	var tranCode = $(this).closest("p").attr("id").trim();
 	    	if(tranCode=='0'){
-	    		alert("입금완료 후 채팅을 신청하세요.");
+	    		swal("입금완료 후 채팅을 신청하세요.","","error");
 	    		return;
 	    	}
 	    	var opponentId = $(this).attr("id").trim();
@@ -110,7 +105,7 @@
 	            	console.log(data);                
 	                
                     if(data.status == false){
-                    	alert(data.msg);
+                    	swal(data.msg,"","info");
                     }else{
                     	fncAddDelivery();
                     }
@@ -122,10 +117,10 @@
 	    $("a.searchDelivery").on("click", function(){
 	    	tranNo = $(this).attr("id").trim();	    	
 	    	
-	    	var deliveryCompany = ""+$(this).children("#tranDeliveryCompany").text().trim()+"";
-	    	var deliveryNo = ""+$(this).children("#tranDeliveryNo").text().trim()+"";
+	    	var deliveryCompany = ""+$(this).children(".tranDeliveryCompany").text().trim()+"";
+	    	var deliveryNo = ""+$(this).children(".tranDeliveryNo").text().trim()+"";
 	    		    	
-	    	$.ajax({
+	    	 $.ajax({
 	            type:"GET",
 	            dataType : "json",
 	            url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+key+"&t_code="+deliveryCompany+"&t_invoice="+deliveryNo,
@@ -134,7 +129,7 @@
 	                var myInvoiceData = "";
 	                
                     if(data.status == false){
-                        myInvoiceData += ('<p class="text-danger">'+data.msg+'<p>');
+                        myInvoiceData += ('<p class="text-danger">배송이 시작되었으나 택배사의 배송현황이 등록되지 않았습니다.<p>');
                     }else{
                     	myInvoiceData += ('<table class="table">');      
                         myInvoiceData += ('<tr>');                
@@ -161,7 +156,7 @@
                     header += ('</thead>'); 
                     header += ('<tbody>');
                     $.each(trackingDetails,function(key,value) {
-                        myTracking += ('<tr>');                
+                        myTracking += ('<tr style="background-color: white;">');                
                         myTracking += ('<td>'+value.timeString+'</td>');
                         myTracking += ('<td>'+value.where+'</td>');
                         myTracking += ('<td>'+value.kind+'</td>');
@@ -172,7 +167,7 @@
                     myTracking += ('</table>');
                     $("#searchTracking").html(header+myTracking);
 	            }
-	        });
+	        }); 
 	    	
 	    });
 	    $("a.startDelivery").on("click", function(){
@@ -268,11 +263,11 @@
 						dataType : "json",
 						success : function(JSONData, status){
 							$("#"+$("#reviewTranNo").val()).text("-");
-// 							alert(status);
 							$("button.close").click();
-							alert("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.");
-// 							alert("JSONData : \n"+JSONData.stringify());
-							history.go(0);
+							swal("리뷰 작성 완료로 인해 "+JSONData.updatePoint+" 포인트가 적립되었습니다.","","success")
+							.then(function(r){
+								history.go(0);
+							});							
 						}			
 				});	
 		});
@@ -293,7 +288,7 @@
 		<br/><br/><br/><br/>
 			<div class="card text-center shadow-lg rounded" style="width: 15rem; color: #041625;">
 			  <div class="card-header">
-			   <strong>${user.nickName} <i class="far fa-handshake"></i> 거래내역 조회 </strong>
+			   <strong>${user.nickName}<br/> <i class="far fa-handshake"></i> 거래내역 조회 </strong>
 			  </div>
 			  <ul class="list-group list-group-flush">								
 				<c:if test="${user.role=='0'}">
@@ -349,8 +344,9 @@
 					      <c:if test="${tran.tranCode==2}">* 배송 중 
 					      <a class="searchDelivery" id="${tran.tranNo}" href="#" data-toggle="modal" data-target="#searchDeliveryModal">
 					      <i class="fas fa-truck"></i>
-					      <div id="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</div>
-					      <div id="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</div></a>
+					      <span class="tranDeliveryNo" style="display: none;">${tran.deliveryNo}</span>
+					      <span class="tranDeliveryCompany" style="display: none;">${tran.deliveryCompany}</span>
+					      </a>
 					      </c:if>
 					      <c:if test="${tran.tranCode==3}">* 배송 완료</c:if>
 					      <c:if test="${tran.tranCode==4}">* 환불 및 취소</c:if>
@@ -404,7 +400,7 @@
 					      	<div class="form-group" >
 							     <br/>
 							     <strong>배송 사</strong> <br/><br/>	
-							        <select id="deliveryCompany" name="deliveryCompany">
+							        <select class="custom-select" id="deliveryCompany" name="deliveryCompany">
 									    <option value="">선택</option>
 									    <option value="04">CJ대한통운</option>									    
 									    <option value="01">우체국택배</option>
@@ -416,7 +412,7 @@
 									    <option value="23">경동택배</option>
 									    <option value="53">농협택배</option>
 									</select><br/><br/>
-							      <strong>운송장 번호</strong><br/><br/><input type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; border: 1px solid black;"/>
+							      <strong>운송장 번호</strong><br/><br/><input class="form-control" type="text" id="deliveryNo" name="deliveryNo" value="" placeholder="(-) 제외 입력" style="width: 300px !important; "/>
 							      <br/><br/>
 							      <div class="text-center" id="loading"></div>
 							      <br/><br/>
@@ -437,7 +433,7 @@
 					</div>
 	<!-- 배송 조회 모달 -->
 					<div class="modal fade" id="searchDeliveryModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
+					  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h3 class="modal-title" id="modalCenterTitle">배송조회 결과입니다.</h3>

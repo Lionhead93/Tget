@@ -4,6 +4,8 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $( function(){	
 	$("#brand").on("click",function(){
@@ -57,7 +59,7 @@ $( function(){
 $( function(){	
 	$("a:contains('리뷰작성')").on("click",function(){
 		popWin = window.open("/rnp/addReview?tranNo=10002","popWin",
-				"left=500, top=100, width=600, height=500, "
+				"left=500, top=100, width=600, height=450, "
 				+"marginwidth=0, marginheight=0, scrollbars, scrolling, menubar=no, resizable");
 		
 //			self.location = "/rnp/addReview?tranNo=10000";
@@ -74,7 +76,7 @@ $( function(){
 	
 	$("a[href='#' ]:contains('내 쿠폰 조회')").on("click" , function() {		
 		
-		var popOption = "left=500, top=100, width=800, height=600, resizable=no, location=no;"		
+		var popOption = "left=500, top=100, width=500, height=500, resizable=no, location=no;"		
 			window.open("/coupon/getCouponList?userId=${sessionScope.user.userId}","내 쿠폰 조회",popOption);
 	});
 	
@@ -88,7 +90,7 @@ $( function(){
 		getNoReadAlarmCount("${user.userId}"); 
 	}			
 	//알람리스트 madal 출력
-	$("a:contains('Alarm')").on("click", function(){
+	$("#alarmButton").on("click", function(){
 		getAlarmModal("${user.userId}");				
 	});	
 });
@@ -217,21 +219,18 @@ $(function getSearchWeather(lat, lon) {
 				<h1><a id="brand" href="#" style="color: white;">T-GET <span>by MFC</span></a></h1>
 				
 				
-					<a href="#" style="color: white;"><i class="fas fa-home"></i>&nbsp; Home &nbsp;</a>
-				<c:if test="${empty user}">
-					<a href="#" style="color: white;">Sign Up</a>
-					<a href="#" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
-				</c:if>
-				<c:if test="${!empty user}">
-					<a href="#" style="color: white;">Logout</a>
-					<a href="#" data-target="#alarmModal" data-toggle="modal" style="color: white;">
-							<i class="far fa-bell"></i>&nbsp; Alarm &nbsp;<span class="badge badge-info" id="noReadAlarmCount"></span>
+				<a href="/" style="color: white;"><i class="fas fa-home"></i>&nbsp;</a>
+				
+								
+				<c:if test="${!empty user}">	
+					<a href="#" id="alarmButton" data-target="#alarmModal" data-toggle="modal" style="color: white;">
+							<i class="fas fa-bell"></i><span class="badge badge-info" id="noReadAlarmCount"></span>
 					</a>
 					
 					
 					
 					  <button class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;padding-top:0px;">
-					    <i class="fas fa-user-edit"></i>&nbsp; Community &nbsp;</button>					  	
+					    <i class="fas fa-user-edit"></i></button>					  	
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					    <a class="dropdown-item" href="#">공지사항</a>
 					    <a class="dropdown-item" href="#">자유게시판</a>
@@ -240,8 +239,12 @@ $(function getSearchWeather(lat, lon) {
 					  </div>
 
 				</c:if>	
-				<c:if test="${user.role == 2 }">
-				<a href="#" id="getCouponUserList" data-target="#addCouponModal" data-toggle="modal" style="color: white;"> Coupon &nbsp;<i class="fas fa-plus"></i></a>
+				<c:if test="${empty user}">
+					<a href="#" style="color: white;">Sign Up</a>
+					<a href="#" id="loginButton" data-toggle="modal" data-target="#my80sizeCenterModal" style="color: white;" >Login</a>
+				</c:if>
+				<c:if test="${!empty user}">
+					<a href="#" style="color: white;">Logout</a>
 				</c:if>
 				<c:if test="${!empty user}">			
 				<a href="#menu" style="color: white;">Menu</a>
@@ -326,7 +329,7 @@ $(function getSearchWeather(lat, lon) {
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 
@@ -336,7 +339,7 @@ $(function getSearchWeather(lat, lon) {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#forgotId' ]").on("click" , function() {
 		
-			var popOption = "left=500, top=100, width=600, height=600, resizable=no, location=no;"		
+			var popOption = "left=560, top=200, width=430, height=400, resizable=no, location=no;"		
 				window.open("/user/finduserId","find userId",popOption);
 		});
 	});
@@ -345,7 +348,7 @@ $(function getSearchWeather(lat, lon) {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#forgotPassword' ]").on("click" , function() {
 		
-			var popOption = "left=500, top=100, width=700, height=700, resizable=no, location=no;"		
+			var popOption = "left=560, top=200, width=430, height=420, resizable=no, location=no;"		
 				window.open("/user/findPassword","find password",popOption);
 		});
 	});
@@ -363,7 +366,6 @@ $(function getSearchWeather(lat, lon) {
 		 $("input[name='password']").on("keypress",function(){
 				if (event.keyCode ==13) {
 					$("input[id='signin']").click();
-// 					$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				}
 			});
 		
@@ -372,21 +374,19 @@ $(function getSearchWeather(lat, lon) {
 		
 		$("input[id='signin']").on("click" , function() {
 			
-			//alert("눌리니");
-			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
 			
 			
 			
-			if(id == null || id.length <1) {
-				alert('ID 를 입력하지 않으셨습니다.');
+			if(id == null || id.length <1) {				
+				swal("ID를 입력하지 않으셨습니다.", "", "warning");
 				$("#userId").focus();
 				return;
 			}
 			
 			if(pw == null || pw.length <1) {
-				alert('패스워드를 입력하지 않으셨습니다.');
+				swal("패스워드를 입력하지 않으셨습니다.", "", "warning");
 				$("#password").focus();
 				return;
 			}
@@ -402,24 +402,21 @@ $(function getSearchWeather(lat, lon) {
 				   console.log(JSONData);
 				   
 				   if (JSONData.msg == "no") {
-						  alert("ID/password error");
+					  	  swal("입력하신 회원정보가 없습니다.", "", "warning");	
 						  return;
-			  		 }else if (JSONData.msg == "true") { 
+			  		 }else if(JSONData.dbPwd != pw){
+			  			  swal("비밀번호를 확인해주세요.", "", "warning");	
+			  			  return;			  		 	   
+			   		}else if (JSONData.msg == "true") { 
 			  			
-			  			swal({
-			  	          title: JSONData.nickName,
-			  	          text: "블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n"+
-			  	        "블랙리스트 종료일자"+JSONData.endDate,
-			  	          icon: "error",
-			  	          buttons: true,
-			  	          dangerMode: true,
-			  	        })
+			  			swal(JSONData.nickName,
+			  		"블랙리스트 시작일자"+JSONData.startDate+"\n"+"\n블랙리스트 종료일자"+JSONData.endDate,
+			  	      "error");
 			  	
-				   } else if (JSONData.msg == "false")
-				  		 { 
+				   } else if (JSONData.msg == "false") { 
 					   		$("form[name='user-login']").attr("method","POST").attr("action","/user/login").submit();
 				  	 	
-				  		 }
+				   }
 				   
 		
 			   }
@@ -506,7 +503,7 @@ $(function getSearchWeather(lat, lon) {
 </div> <!-- ---로그인창--- -->
 </form>	
 
-<jsp:include page="/coupon/addCoupon.jsp"></jsp:include>	
+
 		 
 		 
 

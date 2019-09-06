@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.HTML;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -234,7 +235,7 @@ public class UserRestController {
 		}
 		
 		System.out.println("뭐가 들어왔니?"+user);
-		
+		map.put("dbPwd",  user.getPassword());
 		Date today = new Date ();
 		Date end = user.getBlacklistEndDate();
 		
@@ -297,9 +298,9 @@ public class UserRestController {
 		String check = buffer.toString();
 		// 메일 내용 
 		String recipient = Email;
-		//받는 사람의 메일주소를 입력해주세요. 
+		//받는 사람의 메일주소를 입력해주세요.		
 		String subject = "T-GET 인증번호 확인 메일입니다."; //메일 제목 입력해주세요. 
-		String body = "T-GET 이메일 인증번호 ["+check+"]"; //메일 내용 입력해주세요. 
+		String body = "<img src=\"/resources/images/logo.png\">"+"<hr/> T-GET 이메일 인증번호 ["+check+"]"; //메일 내용 입력해주세요. 
 		Properties props = System.getProperties(); // 정보를 담기 위한 객체 생성
 		// SMTP 서버 정보 설정 
 		props.put("mail.smtp.host", host); 

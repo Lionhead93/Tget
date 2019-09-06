@@ -8,10 +8,14 @@
 		<input type="hidden"  id="eventName" name="eventName"  value="${eventName}" >
 		<input type="hidden"  id="eventImage" name="eventImage"  value="${!empty eventImage? eventImage : ''}" />
 		<c:if test="${!empty eventImage}">
-			<img class="main" src="/resources/images/uploadFiles/${eventImage}" style="" />
+		<div class="img_wrap">
+									<img id="preview" class="main" src="/resources/images/uploadFiles/${eventImage}" />	
+		</div>
 		</c:if>
 		<c:if test="${empty eventImage}">
-			<img  class="main" src="/resources/images/logo.png"  style="width:400px; height=250px;"/>
+		<div class="img_wrap">
+									<img id="preview" class="main" src="/resources/images/logo.png"/>	
+		</div>
 		</c:if><br/><br/>
 						
 		<div class="input-group mb-3">

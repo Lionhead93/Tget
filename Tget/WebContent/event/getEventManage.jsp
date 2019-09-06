@@ -52,7 +52,7 @@
 							$("#"+temp).html("");		
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}			
 				});					
 		});
@@ -74,7 +74,7 @@
 							$("input[name='koName']").val(JSONData.recommEvent.koName);	
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}			
 				});	
 		});
@@ -102,11 +102,11 @@
 									location.reload();
 								},
 								error : function(request, status, error ) {   
-								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+									swal("잘못된 접근입니다.","","error");
 								}			
 							});
-					}else{					
-		 				alert("추천 이벤트를 더 이상 추가할 수 없습니다.");
+					}else{
+						swal("추천 이벤트를 더 이상 추가할 수 없습니다.","","warning");
 					}
 				}else{
 					$.ajax(
@@ -122,7 +122,7 @@
 									location.reload();
 								},
 								error : function(request, status, error ) {   
-								 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+									swal("잘못된 접근입니다.","","error");
 								}			
 						});				
 				}
@@ -160,7 +160,7 @@
 								
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							swal("잘못된 접근입니다.","","error");
 						}
 			});
 		});
@@ -177,14 +177,17 @@
 										categoryTwoEng : $("input[name='categoryTwoEng']").val()
 										},
 							dataType : "json",
-							success : function(JSONData, status){								
-								location.reload();
-								$("#list-category-list").attr("class","list-group-item list-group-item-action active");
-								$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
-								$("button.close").click();			
+							success : function(JSONData, status){
+								swal("등록 성공","","success")
+								.then(function(result){
+									location.reload();
+									$("#list-category-list").attr("class","list-group-item list-group-item-action active");
+									$("#list-recomm-list").attr("class","list-group-item list-group-item-action");
+									$("button.close").click();	
+								});										
 							},
 							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								swal("잘못된 접근입니다.","","error");
 							}
 				});
 			}else{
@@ -205,19 +208,20 @@
 								+'<input type="hidden"  value="'+$("#categoryTwoNo").val()+'">'
 								+JSONData.category.categoryTwoName+'</div>';
 								
-								if (JSONData.existingCode==JSONData.category.categoryOneCode) {
-									alert('JSONData.existingCode==JSONData.category.categoryOneCode');
+								if (JSONData.existingCode==JSONData.category.categoryOneCode) {									
 									$("#div"+JSONData.category.categoryTwoNo).html(tempHtml);
-								} else {
-									alert('JSONData.existingCode!=JSONData.category.categoryOneCode');
+								} else {									
 									$("#div"+JSONData.category.categoryTwoNo).remove();
 									$("#div"+JSONData.category.categoryOneCode).append('<div class="row"  id="div'+JSONData.category.categoryTwoNo+'">'
 											+tempHtml+'</div>');
 								}
-								$("button.close").click();					
+								swal("수정 성공","","success")
+								.then(function(result){
+									$("button.close").click();					
+								});								
 							},
 							error : function(request, status, error ) {   
-							 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								swal("잘못된 접근입니다.","","error");
 							}
 				});
 			}			
@@ -233,11 +237,14 @@
 									},
 						dataType : "json",
 						success : function(JSONData, status){
-							$("#div"+$("#categoryTwoNo").val()).remove();
-							$("button.close").click();						
+							swal("삭제 성공","","success")
+							.then(function(result){
+								$("#div"+$("#categoryTwoNo").val()).remove();
+								$("button.close").click();		
+							});												
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}
 			});
 		});
@@ -260,7 +267,7 @@
 							
 					},
 					error : function(request, status, error ) {   
-					 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						swal("잘못된 접근입니다.","","error");
 					}
 		});
 	}
@@ -271,12 +278,9 @@
 		body{
 			background-color: #EBF7FF;
 			color: #041625;
-		}	
-		#footer{
-			background-color: #1B1B1F ;
 		}		
 		a, hr{
-			color: #FBFCFE ;	
+			color: black ;	
 		}		
 		button.btn-light:hover{
 			background-color: gray;
@@ -295,11 +299,15 @@
 		div.row{  
 			padding : 10px  10px 10px 20px;
 		}
+		div.category:hover{
+			font-size: 25px;
+			cursor: pointer;
+		}
         .tab-content{
         	border: 1px solid #D9E5FF ;            
 	       	background-color : #F8FFFF ;
         }
-        .card{
+        .categoryCard{
         	padding : 5px 5px 5px 5px;
         	color: #041625;
         	background-color:#D9E5FF;
@@ -345,18 +353,22 @@
   
 				  <div class="row" align="center" >		      	
 						<c:forEach items="${recommEventlist}"  var="i">			
-							<div style="width: 18rem; height: 400px;" id="${i.recommEventNo }">
-								<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 300px; height: 170px;">
+							<div class="card shadow rounded col-lg-4" id="${i.recommEventNo }" >
+							<div style="height: 400px;" >
+								<video controls id="videoplay"  name="${i.recommEventNo }"  value="video" style="width: 16rem; height: 170px;">
 									<source src="/resources/video/${i.videoName}" type="video/mp4">
 								</video>
-								<div class="card-body" style="height: 220px;" >
+								<div class="card-body">
+								<div style="height: 140px;" >
 									<input type="hidden" name="eventName" value="${i.eventName }"/>
 									<h5 class="card-title" style="font-weight: bold;">${i.recommEventName }</h5>
-									<p class="card-text">${i.recommEventDetail }</p>
+									<p class="card-text"><small>${i.recommEventDetail }</small></p>
+								</div>	
 									<button class="btn btn-outline-primary"  data-toggle="modal" 						
 										 data-target="#exampleModalCenter" value="${i.recommEventNo }" >수정하기</button>
-									<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>
+									<button class="btn btn-outline-primary" value="${i.recommEventNo }">삭제하기</button>							
 								</div>
+							</div>
 							</div>
 						</c:forEach>	
 				  </div>
@@ -370,7 +382,7 @@
 			    </div>
 			    <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >음악공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
@@ -392,7 +404,7 @@
 					
 				 <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >스포츠</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">
@@ -414,7 +426,7 @@
 					
 				 <div class="row ">
 		      		<div class="col-1"></div>
-			      	<div class="card col-10">
+			      	<div class="card col-10 categoryCard">
 					  <h5 class="card-header" >기타예술공연</h5>
 					  <div class="card-bodys">
 					  	<h5 class="card-title">

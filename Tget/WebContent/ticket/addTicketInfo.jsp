@@ -25,6 +25,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 				   
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
@@ -60,23 +61,24 @@
 		}
 		
 		if(amount == null || amount.length<1){
-			alert("수량은 반드시 입력하여야 합니다.");
+			swal("수량은 반드시 입력하여야 합니다.","","error");
 			return;
 		}
 		if(amount.length>2){
-			alert("수량은 최대 99장까지 밖에 등록할 수 없습니다.");
+			swal("수량은 최대 99장까지 밖에 등록할 수 없습니다.","","error");
 			return;
 		}
 		if(isNaN(amount)==true || amount < 1) {
-			alert("수량에 1이상 숫자입력 바랍니다.");
+			swal("수량에 1이상 숫자입력 바랍니다.","","error");
+			
 			return;
 		}
 		if(type == null || type.length<1){
-			alert("형태는 반드시 입력하여야 합니다.");
+			swal("형태는 반드시 입력하여야 합니다.","","error");
 			return;
 		}
 		if(seat == null || seat.length<1){
-			alert("좌석 반드시 입력하셔야 합니다.");
+			swal("좌석 반드시 입력하셔야 합니다.","","error");
 			return;
 		}
 	
@@ -203,8 +205,10 @@
 					 	 $(function(){
 					 		
 						 	if(${user.role=='0'}){
-								alert("첫 판매는 판매자등록 후 진행합니다.")
-								$('#addSellerModal').modal('show');
+								swal("첫 판매는 판매자등록 후 진행합니다.","","info")
+								.then(function(r){
+									$('#addSellerModal').modal('show');	
+								});								
 							}	
 							
 					 	});
@@ -231,7 +235,7 @@
 					          	success: function(data){
 					          		var displayValue = "";	
 					          		if(data.list==""){
-					          			alert("쿠폰이 없습니다.");
+					          			swal("보유 쿠폰이 없습니다.","","warning");
 					          			return;
 					          		}else{
 					          			$(".addCoupon").html("");
@@ -249,14 +253,14 @@
 								    	var couponNo = $(this).attr("id").trim();
 								    	$("input[name='couponNo']").val(couponNo);
 								    	$("input[name='couponCode']").val("0");
-								    	alert("상단출력 쿠폰적용");
+								    	swal("상단출력 쿠폰적용","","success");
 								    	$(".addCoupon").html("<p><strong> 적용 쿠폰 :</strong> 상단출력  </p>");
 								    });
 								    $(".useCouponB").on("click",function(){
 								    	var couponNo = $(this).attr("id").trim();	
 								    	$("input[name='couponNo']").val(couponNo);
 								    	$("input[name='couponCode']").val("1");
-								    	alert("강조권 쿠폰적용");
+								    	swal("강조권 쿠폰적용","","success");
 								    	$(".addCoupon").html("<p><strong> 적용 쿠폰 :</strong> 강조권 </p>");
 								    });
 					          	}

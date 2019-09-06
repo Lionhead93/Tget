@@ -17,6 +17,8 @@
     
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	
 	<script src="/resources/javascript/common.js" ></script>
 	<script src="/resources/javascript/alarm.js" ></script>
 	<script src="/resources/javascript/jquery.min.js"></script>
@@ -27,6 +29,10 @@
 	<script type="text/javascript">
 	var str = "";
 	var arr = [];
+
+	function clickEvent(){
+		$("div.card").click();
+	}
 	
 	$(function(){		
 		$("div.card").on("click",function(){			
@@ -57,25 +63,26 @@
 							$("#searchKeyword").val(JSONData.search.searchKeyword);
 							if (JSONData.isTheLast == "true") {
 								$("#addEvent").attr("style","display:none;");
-							}
+							} 
 							$.each(JSONData.eventList, function(index,value){
-								var tempStr = '<div class="card border-primary  mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;">'
-									+'<div class="card-header border-primary " align="center"><h5  style="color:#193147;">T-GET</h5></div>'
-									+'<div class="card-body text-primary"><h5 class="card-title"><strong>'							
+								var tempStr = '<div class="card mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;" '
+								+'onclick="clickEvent()">'
+									+'<div class="card-header" align="center"><h5  style="color:#193147;">T-GET</h5></div>'
+									+'<div class="card-body text-center" ><h5 class="card-title"><strong>'							
 									+value.koName+'</strong></h5><p class="card-text">'
 									+value.koLocation+'<br/></p></div>'
-										'<input type="hidden"  class="kn" value="'+value.koName+'" >'
-										'<input type="hidden"  class="el" value="'+value.koLocation+'" >'
-										'<input type="hidden" class="kp" value="'+value.performersName+'">'
-										'<input type="hidden" class="category" value="'+value.ancestorsCategory+'" >'	
-										'<input type="hidden"  class="getEvent" value="'+value.name+'"></div>';
+										+'<input type="hidden"  class="kn" value="'+value.koName+'" >'
+										+'<input type="hidden"  class="el" value="'+value.koLocation+'" >'
+										+'<input type="hidden" class="kp" value="'+value.performersName+'">'
+										+'<input type="hidden" class="category" value="'+value.ancestorsCategory+'" >'	
+										+'<input type="hidden"  class="getEvent" value="'+value.name+'"></div>';
 								$("div.eList").append(tempStr);
 							});		
 							$("#loading").attr("style","display:none;");
 							$("#addEvent").attr("style","display:block;");
 						},
 						error : function(request, status, error ) {   
-						 	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						 	swal("잘못된 접근입니다.","","error");
 						}			
 				});
 		});						
@@ -88,11 +95,8 @@
 		height:50px;
 		font-weight:bold;
 	}
-	#footer{
-		background-color: #1B1B1F ;
-	}
 	a, hr{
-			color: #FBFCFE ;	
+			color: black ;	
 	}		
 	button.btn-light:hover{
 		background-color: gray;
@@ -145,9 +149,9 @@
 	<form>
 	<div class="row eList" >
 			<c:forEach items="${eventList}"  var="i">
-				<div class="card border-primary  mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;">
-					<div class="card-header border-primary " align="center"><h5  style="color:#193147;">T-GET</h5></div>
-					<div class="card-body text-primary">
+				<div class="card mb-3 shadow rounded" style="width: 21rem;height: 14rem;margin:15px;">
+					<div class="card-header" align="center"><h5  style="color:#193147;">T-GET</h5></div>
+					<div class="card-body text-dark text-center">
 						<h5 class="card-title"><strong>${!empty i.koName? i.koName:i.name}</strong></h5>
 						<p class="card-text">${!empty i.koLocation? i.koLocation:i.venueName }<br/></p>
 					</div>	
@@ -157,8 +161,8 @@
 						<input type="hidden" class="category"  value="${i.ancestorsCategory}" >	
 						<input type="hidden"  class="getEvent"  value="${i.name }">
 				</div>
-			</c:forEach>
-			<input type="hidden"  id="categoryTwo" name="category"  value="" >
+			</c:forEach>			
+			<input type="hidden"  id="categoryTwo" name="category"  value="${!empty category? category:''}" >
 			<input type="hidden"  id="eventName" name="eventName"  value="" >
 			<input type="hidden"  id="koName" name="koName"  value="" >
 			<input type="hidden"  id="koLocation" name="koLocation"  value="" >
@@ -166,11 +170,11 @@
 	</div>
 	</form>	
 </div><!-- container -->
-<div align="center">
-	<div align="center">
-		<button id="addEvent" class="btn btn-primary">더보기</button>
-	</div>
-</div>
+<!-- <div align="center"> -->
+<!-- 	<div align="center"> -->
+<!-- 		<button id="addEvent" class="btn btn-primary">더보기</button> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 <div align="center" style="margin-left:45%;margin-right:45%;">	
 	<div align="center"  id="loading"  style="display:none;">

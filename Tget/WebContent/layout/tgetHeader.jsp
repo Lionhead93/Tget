@@ -8,7 +8,10 @@
 <form name="searchEvent">
 
 				<div id="tgetHeader" class="text-center">
-				<br/><br/><br/>
+				<br/><br/>
+				<div class="text-center text-light" style="padding-bottom: 5px;">
+				<h3><strong>T-GET 이벤트 검색</strong></h3>
+				</div>
 				<input type="hidden"  id="category" name="category"  value="${!empty category? category : ''}" >
 				<input type="hidden"  id="searchKeyword" name="searchKeyword"  placeholder="searchKeyword" value="${!empty search.searchKeyword? search.searchKeyword : ''}" >
 				<input type="hidden"  id="searchCondition" name="searchCondition"  placeholder="searchCondition" value="${!empty search.searchCondition? search.searchCondition : ''}" >

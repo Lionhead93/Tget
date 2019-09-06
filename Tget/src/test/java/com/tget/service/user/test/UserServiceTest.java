@@ -114,21 +114,15 @@ public class UserServiceTest {
 		Assert.assertEquals("1", user.getUserStatement());
 	}*/
 
-	//@Test
+	@Test
 	 public void testUpdateUser() throws Exception{
 		 
-		User user = userService.getUser("buyer");
+		User user = userService.getUser("minsub@nate.com");
 		
-
+		user.setBlacklistCode("2");
 		
+		userService.addBlacklist(user);
 		
-		user.setPoint(500000);
-		
-		userService.updateUser(user);
-		
-		user = userService.getUser("buyer");
-		
-		System.out.println(user);
 	
 	 }
 	 
@@ -259,10 +253,6 @@ public class UserServiceTest {
 		
 		User user = userService.getUser("manager");
 		
-		Assert.assertNotNull(user);
-		
-		Assert.assertEquals("manager", user.getUserId());
-		
 		user.setBlacklistCode("1");
 
 
@@ -272,10 +262,7 @@ public class UserServiceTest {
 		Assert.assertNotNull(user);
 		
 		System.out.println(user);
-			
-		Assert.assertEquals("manager", user.getUserId());
-		Assert.assertEquals("2", user.getBlacklistCode());
-	
+		
 		
 	}
 	
