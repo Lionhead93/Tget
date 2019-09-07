@@ -2,9 +2,6 @@
 Ticket resale platform  
 ![Alt text](/tgetmain.gif "Optional title")
 
-## [참고링크]
-* [유튜브 - 발표 및 앱 시현 영상](https://www.youtube.com/watch?v=6gp4n4FbjIg)
-
 ## Stacks
 ### Client 
 frontend technologies used in this project:
@@ -33,3 +30,6 @@ open api(REST) used in this project:
 * Google Translate, Vision, Youtube
 * I'mport 결제
 * SweetTracker 배송조회 
+
+## Reference
+* [유튜브 - 발표 및 앱 시현 영상](https://www.youtube.com/watch?v=6gp4n4FbjIg)
