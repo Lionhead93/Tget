@@ -1,6 +1,6 @@
 # T-GET 
 Ticket resale platform  
-![Alt text](/tgetmain.png "Optional title")
+![Alt text](/tgetmain.gif "Optional title")
 ## Stacks
 ### Client 
 frontend technologies used in this project:
