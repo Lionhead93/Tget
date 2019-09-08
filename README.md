@@ -18,6 +18,7 @@ backend technologies used in this project:
 * Spring, Apache Tomcat, REST API
 * node.js, socket.io
 * Oracle DB, MyBatis, JDBC, Log4jdbc
+* JUnit
 * JSON-simple, Jackson
 * Javax(Mail)
 
