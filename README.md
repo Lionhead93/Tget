@@ -1,5 +1,5 @@
 # T-GET 
-Ticket resale platform  
+### Ticket resale platform    
 ![Alt text](/tgetmain.gif "Optional title")
 
 ## Stacks
